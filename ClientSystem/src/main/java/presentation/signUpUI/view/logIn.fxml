@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="mainPane" prefHeight="625.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.signUpUI.controller.LogInViewController">
+   <children>
+      <Label layoutX="302.0" layoutY="71.0" prefHeight="68.0" prefWidth="396.0" text="互联网酒店预定系统">
+         <font>
+            <Font size="44.0" />
+         </font>
+      </Label>
+      <AnchorPane prefHeight="625.0" prefWidth="1000.0">
+         <children>
+            <Button fx:id="registerWindow" focusTraversable="false" layoutX="500.0" layoutY="211.0" mnemonicParsing="false" onMouseClicked="#openRegister" prefHeight="23.0" prefWidth="102.0" text="注册" AnchorPane.bottomAnchor="384.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="398.0" AnchorPane.topAnchor="211.0" />
+            <Button fx:id="logInWindow" focusTraversable="false" layoutX="398.0" layoutY="211.0" mnemonicParsing="false" onMouseClicked="#openLogIn" prefHeight="23.0" prefWidth="102.0" text="登录" AnchorPane.bottomAnchor="384.0" AnchorPane.leftAnchor="398.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="211.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffbfb" height="210.0" layoutX="335.0" layoutY="241.0" stroke="BLACK" strokeType="INSIDE" width="330.0" AnchorPane.bottomAnchor="174.0" AnchorPane.leftAnchor="335.0" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="241.0" />
+         </children>
+      </AnchorPane>
+      <Pane fx:id="registerPane" focusTraversable="true" layoutX="335.0" layoutY="240.0" prefHeight="210.0" prefWidth="330.0" visible="false">
+         <children>
+            <Button fx:id="register" layoutX="140.0" layoutY="158.0" mnemonicParsing="false" onMouseClicked="#register" text="注册" />
+            <GridPane layoutX="61.0" layoutY="29.0" prefHeight="111.0" prefWidth="222.0">
+               <children>
+                  <Label prefHeight="19.0" prefWidth="91.0" text="姓      名：" GridPane.rowIndex="1" />
+                  <Label text="密      码：" />
+                  <Label text="昵      称：" GridPane.rowIndex="2" />
+                  <Label text="联系方式：" GridPane.rowIndex="3" />
+                  <TextField fx:id="password2" prefHeight="23.0" prefWidth="178.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="name" prefHeight="23.0" prefWidth="178.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="nickName" prefHeight="30.0" prefWidth="311.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="phone" prefHeight="23.0" prefWidth="178.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="136.0" minWidth="10.0" prefWidth="83.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0" minWidth="10.0" prefWidth="125.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+      </Pane>
+      <Pane fx:id="logInPane" focusTraversable="true" layoutX="335.0" layoutY="240.0" prefHeight="210.0" prefWidth="330.0">
+         <children>
+            <Label layoutX="54.0" layoutY="55.0" text="编号：" />
+            <TextField fx:id="ID" focusTraversable="false" layoutX="112.0" layoutY="50.0" prefHeight="23.0" prefWidth="178.0" />
+            <Label layoutX="54.0" layoutY="111.0" text="密码：" />
+            <TextField fx:id="password" focusTraversable="false" layoutX="112.0" layoutY="106.0" prefHeight="23.0" prefWidth="178.0" />
+            <Button fx:id="logIn" defaultButton="true" focusTraversable="false" layoutX="140.0" layoutY="159.0" mnemonicParsing="false" onAction="#logIn" text="登录" />
+         </children>
+      </Pane>
+   </children>
+</Pane>
