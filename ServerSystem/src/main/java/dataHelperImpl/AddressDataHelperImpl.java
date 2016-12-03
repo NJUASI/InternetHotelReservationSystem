@@ -70,13 +70,11 @@ public class AddressDataHelperImpl implements AddressDataHelper {
 	 */
 	public List<String> getCircle(String city) {
 		
-		System.out.println("enter");
 		
 		sql = "select cycle from address where city = ?";
 		final List<String> result = new ArrayList<String>();
 
 		try {
-			System.out.println("this function");
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, city); //对应问号的位置
 			rs = ps.executeQuery();
@@ -86,7 +84,6 @@ public class AddressDataHelperImpl implements AddressDataHelper {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("this function so innormal");
 		}
 		JDBCUtil.close(rs, ps);
 		return result;
