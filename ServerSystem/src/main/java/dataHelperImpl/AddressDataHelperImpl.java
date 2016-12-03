@@ -33,7 +33,7 @@ public class AddressDataHelperImpl implements AddressDataHelper {
 	 * @updateTime 2016/11/30 构造函数，初始化成员变量conn
 	 */
 	public AddressDataHelperImpl() {
-		this.conn = JDBCUtil.getConnection();
+		this.conn = JDBCUtil.getGongConnection();
 	}
 
 	/**
@@ -68,19 +68,21 @@ public class AddressDataHelperImpl implements AddressDataHelper {
 	 * @param city 城市
 	 * @return List<String> 指定城市的所有商圈
 	 */
-	public List<String> getCycle(final String city) {
-		sql = "SELECT * FROM address WHERE address.city = ?";
+	public List<String> getCircle(String city) {
+		
+		System.out.println("enter");
+		
+		sql = "select cycle from address where city = ?";
 		final List<String> result = new ArrayList<String>();
 
 		try {
 			System.out.println("this function");
 			ps = conn.prepareStatement(sql);
-			ps.setObject(1, city); //对应问号的位置
+			ps.setString(1, city); //对应问号的位置
 			rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				System.out.println(rs.getString(2));
-				result.add(rs.getString(2)); //对应表项的位置
+				result.add(rs.getString(1)); //对应表项的位置
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
