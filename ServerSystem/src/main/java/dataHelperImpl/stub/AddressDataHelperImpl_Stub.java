@@ -55,7 +55,7 @@ public class AddressDataHelperImpl_Stub implements AddressDataHelper {
 	 *            城市
 	 * @return List<String> 指定城市的所有商圈
 	 */
-	public List<String> getCycle(final String city) {
+	public List<String> getCircle(final String city) {
 		List<String> list = new ArrayList<String>();
 		list.add("新街口");
 		list.add("仙林");
@@ -140,4 +140,5 @@ public class AddressDataHelperImpl_Stub implements AddressDataHelper {
 		// TODO 自动生成的方法存根
 		return null;
 	}
+
 }
