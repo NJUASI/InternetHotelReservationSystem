@@ -36,12 +36,12 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="enterprise" layoutX="52.0" layoutY="62.0" text="人寿保险公司" textAlignment="CENTER" wrapText="true">
+                              <Label fx:id="enterprise" alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="62.0" textAlignment="CENTER" wrapText="true">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="market" layoutX="82.0" layoutY="173.0" text="Lv1" textAlignment="CENTER" wrapText="true">
+                              <Label fx:id="market" layoutX="82.0" layoutY="173.0" textAlignment="CENTER" wrapText="true">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -62,7 +62,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="birthday" layoutX="85.0" layoutY="63.0" text="2/29" textAlignment="CENTER" wrapText="true">
+                                    <Label fx:id="birthday" alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="63.0" textAlignment="CENTER" wrapText="true">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -73,7 +73,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="market2" layoutX="92.0" layoutY="173.0" text="Lv1" textAlignment="CENTER" wrapText="true">
+                                    <Label fx:id="market2" layoutX="92.0" layoutY="173.0" textAlignment="CENTER" wrapText="true">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -106,7 +106,7 @@
                               <Label layoutX="14.0" layoutY="14.0" text="企业名称：" />
                               <Label layoutX="22.0" layoutY="111.0" />
                               <Button focusTraversable="false" layoutX="317.0" layoutY="35.0" mnemonicParsing="false" onAction="#registerEnterprise" text="提交" />
-                              <TextField layoutX="44.0" layoutY="35.0" prefHeight="23.0" prefWidth="244.0" text="人寿保险公司" />
+                              <TextField fx:id="enterpriseText" layoutX="44.0" layoutY="35.0" prefHeight="23.0" prefWidth="244.0" text="人寿保险公司" />
                            </children>
                         </Pane>
                      </content>
@@ -121,7 +121,7 @@
                                  </children>
                               </Pane>
                               <Button focusTraversable="false" layoutX="315.0" layoutY="29.0" mnemonicParsing="false" onAction="#registerCommon" text="提交" />
-                              <DatePicker layoutX="55.0" layoutY="29.0" prefHeight="23.0" prefWidth="226.0" />
+                              <DatePicker fx:id="birthdayPicker" layoutX="55.0" layoutY="29.0" prefHeight="23.0" prefWidth="226.0" />
                            </children>
                         </AnchorPane>
                      </content>

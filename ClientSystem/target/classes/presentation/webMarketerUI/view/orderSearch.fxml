@@ -46,7 +46,7 @@
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Pane fx:id="detail_message" layoutY="74.0" prefHeight="504.0" prefWidth="895.0">
+                  <Pane layoutY="74.0" prefHeight="504.0" prefWidth="895.0">
                      <children>
                         <Label layoutX="567.0" layoutY="131.0" text="价格：" />
                         <Label fx:id="detail_price" layoutX="616.0" layoutY="131.0" text="610" />
@@ -111,7 +111,7 @@
                            </rowConstraints>
                         </GridPane>
                         <Label layoutX="174.0" layoutY="384.0" text="特别要求：" />
-                        <Label fx:id="message" layoutX="263.0" layoutY="386.0" maxHeight="299.0" prefWidth="299.0" text="三个孩子，不要窗户ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss" wrapText="true" />
+                        <Label fx:id="detail_message" layoutX="263.0" layoutY="386.0" maxHeight="299.0" prefWidth="299.0" text="三个孩子，不要窗户ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss" wrapText="true" />
                         <Pane fx:id="cancelOrderPane" layoutX="569.0" layoutY="154.0" prefHeight="54.0" prefWidth="167.0">
                            <children>
                               <ComboBox fx:id="cancelPercent" focusTraversable="false" layoutY="11.0" prefHeight="31.0" prefWidth="97.0" />
