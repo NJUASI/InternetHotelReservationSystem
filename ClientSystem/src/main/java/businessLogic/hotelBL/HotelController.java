@@ -22,9 +22,21 @@ public class HotelController implements HotelBLService {
 	private static HotelController hotelController = new HotelController();
 	private Hotel hotel;
 	private HotelScan hotelScan;
+	private String guestID;
 	
 	private HotelController() {
 		
+	}
+	
+	/**
+	 * @Description:顾客或网站管理人员浏览酒店时，使用此构造方法
+	 * @param guestID
+	 * @author: Harvey Gong
+	 * lastChangedBy: Harvey Gong
+	 * @time:2016年12月4日 下午10:11:57
+	 */
+	private HotelController(String guestID) {
+		this.guestID = guestID;
 	}
 	
 	public void initHotel(String hotelID){
@@ -36,7 +48,7 @@ public class HotelController implements HotelBLService {
 	 * @param addressVO
 	 */
 	public void inithotelsScan(){
-		hotelScan = new HotelScan();
+		hotelScan = new HotelScan(guestID);
 	}
 
 	public static HotelController getInstance(){

@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.hotelBL.hotel.Hotel;
+import businessLogic.orderBL.Order;
 import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelPO;
@@ -20,20 +21,23 @@ import vo.HotelVO;
  */
 public class HotelScan {
 
-	HotelDataService hotelDataService;
+	private HotelDataService hotelDataService;
 	
 	//用以保存处于当前城市商圈的所有酒店概况
-	List<HotelPO> hotelPOList;
+	private List<HotelPO> hotelPOList;
 	
 	//用以保存符合当前搜索条件的所有酒店概况
-	List<HotelPO> currentPOList;
+	private List<HotelPO> currentPOList;
 	
 	//各个搜索器的工厂
-	SortComparatorFactory sortComparatorFactory; 
+	private SortComparatorFactory sortComparatorFactory; 
 	
-	public HotelScan() {
+	private String guestID;
+	
+	public HotelScan(String guestID) {
 		hotelDataService = new HotelDataService_Stub();
 		sortComparatorFactory = new SortComparatorFactory();
+		this.guestID = guestID;
 	}
 
 	/**
@@ -88,14 +92,12 @@ public class HotelScan {
 		return hotelVOList.iterator();
 	}
 	
-	
-	
 	private List<HotelVO> convertPOListToVOList(List<HotelPO> POList){
 		List<HotelVO> hotelVOList = new ArrayList<HotelVO>();
-		for(HotelPO hotelGeneralPO:currentPOList){
-			double minPrice = new Hotel(hotelGeneralPO.getHotelID()).getLowestPrice();
-			OrderState orderState = null;
-			hotelVOList.add(new HotelVO(hotelGeneralPO,minPrice,orderState));
+		for(HotelPO hotelPO:currentPOList){
+			double minPrice = new Hotel(hotelPO.getHotelID()).getLowestPrice();
+			OrderState orderState = new Order().getOrderState(guestID, hotelPO.getHotelID());
+			hotelVOList.add(new HotelVO(hotelPO,minPrice,orderState));
 		}
 		return hotelVOList;
 	}
