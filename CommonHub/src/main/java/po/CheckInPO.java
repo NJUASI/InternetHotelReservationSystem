@@ -2,7 +2,6 @@ package po;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import vo.CheckInVO;
 
@@ -16,8 +15,8 @@ public class CheckInPO implements Serializable{
 	//	订单编号
 	private String orderID;
 	
-	//	房间号的集合
-	private List<String> roomNumberList;
+	//	房间号
+	private String roomNumber;
 	
 	//	入住时间
 	private LocalDateTime checkInTime;	
@@ -25,9 +24,9 @@ public class CheckInPO implements Serializable{
 	//	预计离开时间
 	private LocalDateTime expectLeaveTime;
 	
-	public CheckInPO(String orderID, List<String> roomNumberList, LocalDateTime checkInTime, LocalDateTime expectLeaveTime) {
+	public CheckInPO(String orderID, String roomNumber, LocalDateTime checkInTime, LocalDateTime expectLeaveTime) {
 		this.orderID = orderID;
-		this.roomNumberList = roomNumberList;
+		this.roomNumber = roomNumber;
 		this.checkInTime = checkInTime;
 		this.expectLeaveTime = expectLeaveTime;
 	}
@@ -36,7 +35,7 @@ public class CheckInPO implements Serializable{
 		this.checkInTime = checkInVO.checkInTime;
 		this.expectLeaveTime = checkInVO.expectLeaveTime;
 		this.orderID = checkInVO.orderID;
-		this.roomNumberList = checkInVO.roomNumberList;
+		this.roomNumber = checkInVO.roomNumber;
 	}
 
 	public String getOrderID() {
@@ -45,11 +44,11 @@ public class CheckInPO implements Serializable{
 	public void setOrderID(String orderID) {
 		this.orderID = orderID;
 	}
-	public List<String> getRoomNumber() {
-		return roomNumberList;
+	public String getRoomNumber() {
+		return roomNumber;
 	}
-	public void setRoomNumber(List<String> roomNumberList) {
-		this.roomNumberList = roomNumberList;
+	public void setRoomNumber(String roomNumber) {
+		this.roomNumber = roomNumber;
 	}
 	public LocalDateTime getCheckInTime() {
 		return checkInTime;

@@ -18,10 +18,10 @@ public interface HotelInfoGetAndUpdate {
 	 * @Description:更新酒店评分
 	 * @param score
 	 * @return
-	 * ResultMessage
+	 * ResultMessage ResultMessage.HOTEL_SCORE_UPDATE_FAILURE/ResultMessage.HOTEL_SCORE_UPDATE_SUCCESS
 	 * @author: Harvey Gong
-	 * lastChangedBy: Harvey Gong
-	 * @time:2016年12月4日 下午9:52:56
+	 * lastChangedBy: charles
+	 * @time:2016年12月4日 22:55:56
 	 */
 	public ResultMessage scoreUpdate(double score);
 	
