@@ -5,10 +5,13 @@ import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import dataHelper.OrderDataHelper;
 import dataHelperImpl.DataFactoryImpl;
 import dataService.orderDataService.OrderDataService;
+import po.CheckInPO;
+import po.CheckOutPO;
 import po.GuestEvaluationPO;
 import po.HotelEvaluationPO;
 import po.OrderGeneralPO;
@@ -65,6 +68,10 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	 */
 	@Override
 	public ResultMessage createOrder(final OrderPO order) throws RemoteException {
+		String random = formateRandomNumber((int)(Math.random()*10000));
+		String date = formateDate(order.getCreateTime().toLocalDate());
+		
+		order.setOrderID(random + date);
 		return orderDataHelper.add(order);
 	}
 
@@ -229,6 +236,28 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/4
+	 * @param checkInVO 酒店工作人员更新订单入住信息
+	 * @return 是否成功更新
+	 */
+	public ResultMessage updateCheckIn (CheckInPO checkInPO) throws RemoteException {
+		return ResultMessage.SUCCESS;
+	}
+
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param checkInVO 酒店工作人员更新订单退房信息
+	 * @return 是否成功更新
+	 */
+	public ResultMessage updateCheckOut (CheckOutPO checkOutPO) throws RemoteException {
+		return ResultMessage.SUCCESS;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
 	 * @param evaluationVO 客户评价单个订单时产生的订单
 	 * @return 客户是否成功评价该订单
 	 * @throws RemoteException RMI
@@ -294,4 +323,34 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 		return result;
 	}
 
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/11/27
+	 * @param randomNumber 随机生成的4位数，便于验证
+	 * @return 标准格式化此4位数之后的String
+	 */
+	private String formateRandomNumber(int randomNumber) {
+		if (randomNumber >= 1000 && randomNumber <= 9999) {
+			return String.valueOf(randomNumber);
+		}else if (randomNumber > 100 && randomNumber <= 999) {
+			return "0" + String.valueOf(randomNumber);
+		}else if (randomNumber > 10 && randomNumber <= 99) {
+			return "00" + String.valueOf(randomNumber);
+		}else {
+			return "000" + String.valueOf(randomNumber);
+		}
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/11/27
+	 * @param localDate 订单的createDate
+	 * @return 标准格式化此时间之后的String
+	 */
+	private String formateDate(LocalDate localDate) {
+		String temp = localDate.toString();
+		return temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8);
+	}
 }

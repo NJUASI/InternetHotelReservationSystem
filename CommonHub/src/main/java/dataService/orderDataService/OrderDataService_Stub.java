@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import po.CheckInPO;
+import po.CheckOutPO;
 import po.GuestEvaluationPO;
 import po.HotelEvaluationPO;
 import po.OrderGeneralPO;
@@ -179,6 +181,29 @@ public class OrderDataService_Stub implements OrderDataService {
 		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200,
 				LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), OrderState.EXECUTED));
 		return orderGenerals;
+	}
+	
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param checkInVO 酒店工作人员更新订单入住信息
+	 * @return 是否成功更新
+	 */
+	public ResultMessage updateCheckIn (CheckInPO checkInPO) throws RemoteException {
+		return ResultMessage.SUCCESS;
+	}
+
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param checkInVO 酒店工作人员更新订单退房信息
+	 * @return 是否成功更新
+	 */
+	public ResultMessage updateCheckOut (CheckOutPO checkOutPO) throws RemoteException {
+		return ResultMessage.SUCCESS;
 	}
 	
 	

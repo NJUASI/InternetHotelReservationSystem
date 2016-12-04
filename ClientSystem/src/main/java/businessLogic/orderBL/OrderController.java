@@ -5,6 +5,8 @@ import java.util.List;
 
 import businessLogicService.orderBLService.OrderBLService;
 import utilities.ResultMessage;
+import vo.CheckInVO;
+import vo.CheckOutVO;
 import vo.GuestEvaluationVO;
 import vo.HotelEvaluationVO;
 import vo.OrderGeneralVO;
@@ -45,6 +47,19 @@ public final class OrderController implements OrderBLService {
 			orderController = new OrderController();
 		}
 		return orderController;
+	}
+	
+	/**
+	 * 
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param orderVO 从客户界面层传下来的Order载体
+	 * @return 若客户创建此订单，需要付的款项
+	 */
+	@Override
+	public double getTempPrice(OrderVO orderVO) {
+		return order.getTempPrice(orderVO);
 	}
 	
 	/**
@@ -164,6 +179,28 @@ public final class OrderController implements OrderBLService {
 	@Override
 	public List<OrderGeneralVO> getAllUnexecutedOrderGeneral(final LocalDate date) {
 		return order.getAllUnexecutedOrderGeneral(date);
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param checkInVO 酒店工作人员更新订单入住信息
+	 * @return 是否成功更新
+	 */
+	public ResultMessage updateCheckIn (CheckInVO checkInVO) {
+		return order.updateCheckIn(checkInVO);
+	}
+
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param checkInVO 酒店工作人员更新订单退房信息
+	 * @return 是否成功更新
+	 */
+	public ResultMessage updateCheckOut (CheckOutVO checkOutVO) {
+		return order.updateCheckOut(checkOutVO);
 	}
 	
 	/**

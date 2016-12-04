@@ -5,6 +5,8 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.List;
 
+import po.CheckInPO;
+import po.CheckOutPO;
 import po.GuestEvaluationPO;
 import po.HotelEvaluationPO;
 import po.OrderGeneralPO;
@@ -119,6 +121,24 @@ public interface OrderDataService extends Remote {
 	 * @throws RemoteException RMI
 	 */
 	List<OrderGeneralPO> getAllUnexecutedOrderGeneral(LocalDate date) throws RemoteException;
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param checkInVO 酒店工作人员更新订单入住信息
+	 * @return 是否成功更新
+	 */
+	ResultMessage updateCheckIn (CheckInPO checkInPO) throws RemoteException;
+
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param checkInVO 酒店工作人员更新订单退房信息
+	 * @return 是否成功更新
+	 */
+	ResultMessage updateCheckOut (CheckOutPO checkOutPO) throws RemoteException;
 	
 	/**
 	 * @author charles

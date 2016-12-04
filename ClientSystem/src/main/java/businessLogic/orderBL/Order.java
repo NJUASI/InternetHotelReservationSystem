@@ -15,6 +15,8 @@ import po.OrderPO;
 import rmi.RemoteHelper;
 import utilities.PreOrder;
 import utilities.ResultMessage;
+import vo.CheckInVO;
+import vo.CheckOutVO;
 import vo.GuestEvaluationVO;
 import vo.HotelEvaluationVO;
 import vo.OrderGeneralVO;
@@ -45,24 +47,35 @@ public class Order {
 	}
 
 	/**
+	 * 
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
+	 * @updateTime 2016/12/4
+	 * @param orderVO 从客户界面层传下来的Order载体
+	 * @return 若客户创建此订单，需要付的款项
+	 */
+	public double getTempPrice(OrderVO orderVO) {
+		Iterator<Double> discountsInSpan = discountCalculator.getDiscountInSpan(new PreOrder(orderVO));
+		return orderVO.previousPrice * discountsInSpan.next();
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
 	 * @param orderVO 从客户界面层传下来的Order载体
 	 * @return 客户是否成功创建此订单
 	 */
 	public ResultMessage createOrder(final OrderVO orderVO) {
 		ResultMessage resultMessage = ResultMessage.ORDER_CREATE_FAILURE;
 		
-		if (orderVO.orderGeneralVO.orderID != null || orderVO.orderGeneralVO.price != 0
-				|| orderVO.createTime != null || orderVO.checkOutTime != null
-				|| orderVO.score != 0 || orderVO.comment != null) {
+		if (orderVO.orderGeneralVO.orderID != null || orderVO.orderGeneralVO.price != -1
+				|| orderVO.checkInTime != null || orderVO.checkOutTime != null 
+				|| orderVO.roomNumber != null || orderVO.score != -1 || orderVO.comment != null) {
 			return resultMessage;
 		}else {
 			try {
-				Iterator<Double> discountsInSpan = discountCalculator.getDiscountInSpan(new PreOrder(orderVO));
-				orderVO.orderGeneralVO.price = orderVO.previousPrice * discountsInSpan.next();
-				
+				orderVO.orderGeneralVO.price = getTempPrice(orderVO);
 				resultMessage = orderDataService.createOrder(new OrderPO(orderVO));
 			} catch (RemoteException e) {
 				e.printStackTrace();
@@ -271,6 +284,28 @@ public class Order {
 		}
 		
 		return result;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param checkInVO 酒店工作人员更新订单入住信息
+	 * @return 是否成功更新
+	 */
+	ResultMessage updateCheckIn (CheckInVO checkInVO) {
+		return null;
+	}
+
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param checkInVO 酒店工作人员更新订单退房信息
+	 * @return 是否成功更新
+	 */
+	ResultMessage updateCheckOut (CheckOutVO checkOutVO) {
+		return null;
 	}
 	
 	/**
