@@ -29,7 +29,6 @@ import utilities.RoomType;
 import vo.HotelVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
-import vo.RemainRoomInfoVO;
 
 /**
  * @author 61990
@@ -159,7 +158,7 @@ public class HotelSearchController {
 	@FXML
 	private Label hotelNameInDetail, hotelIDInDetail, cityInDetail, LevelInDetail, ScoreInDetail, cycleInDetail,
 			introductionInDetail, equipmentInDetail, hotelAddressInDetail;
-	List<RemainRoomInfoVO> roomList;
+//	List<RemainRoomInfoVO> roomList;
 
 	/**
 	 * @author 61990
@@ -175,14 +174,14 @@ public class HotelSearchController {
 		hotelVO = new HotelVO("12345", "hantingjiudiansss", "xinjiekou", "xinjiekou", "malianhedadao", "5xinji", 4.5,
 				198, "shoooo", "sdaf");
 
-		roomList = new LinkedList<>();
-		roomList.add(new RemainRoomInfoVO("123456", RoomType.AMBASSADOR, 23, 259));
-		roomList.add(new RemainRoomInfoVO("12123456", RoomType.DELUXE, 23, 259));
-		roomList.add(new RemainRoomInfoVO("1232456", RoomType.AMBASSADOR, 23, 2159));
-		roomList.add(new RemainRoomInfoVO("1234136", RoomType.AMBASSADOR, 223, 259));
-		initRoomTable(roomList);
-		System.out.println(hotelVO.hotelID);
-		initHotelDetail(hotelVO);
+//		roomList = new LinkedList<>();
+//		roomList.add(new RemainRoomInfoVO("123456", RoomType.AMBASSADOR, 23, 259));
+//		roomList.add(new RemainRoomInfoVO("12123456", RoomType.DELUXE, 23, 259));
+//		roomList.add(new RemainRoomInfoVO("1232456", RoomType.AMBASSADOR, 23, 2159));
+//		roomList.add(new RemainRoomInfoVO("1234136", RoomType.AMBASSADOR, 223, 259));
+//		initRoomTable(roomList);
+//		System.out.println(hotelVO.hotelID);
+//		initHotelDetail(hotelVO);
 	}
 
 	HotelVO hotelVO;
@@ -213,35 +212,35 @@ public class HotelSearchController {
 	 * @param orderVO
 	 * @describe 初始化房间详情界面
 	 */
-	private void initRoomTable(List<RemainRoomInfoVO> roomList) {
-		roomTable.getItems().clear();
-		List<TypeTable> dataList = new LinkedList<TypeTable>();
-		for (int i = 0; i < roomList.size(); i++) {
-			RemainRoomInfoVO temp = roomList.get(i);
-			dataList.add(new TypeTable(temp.roomType.toString(), temp.roomNumCount + "", Double.toString(temp.price)));
-		}
-
-		ObservableList<TypeTable> data = FXCollections.observableArrayList();
-		for (int i = 0; i < dataList.size(); i++) {
-			data.add(dataList.get(i));
-		}
-		typeColumn.setCellValueFactory(cellData -> cellData.getValue().roomType);
-		remainRoomColumn.setCellValueFactory(cellData -> cellData.getValue().remainRoomNum);
-		priceColumn.setCellValueFactory(cellData -> cellData.getValue().price);
-
-		roomTable.setItems(data);
-	}
+//	private void initRoomTable(List<RemainRoomInfoVO> roomList) {
+//		roomTable.getItems().clear();
+//		List<TypeTable> dataList = new LinkedList<TypeTable>();
+//		for (int i = 0; i < roomList.size(); i++) {
+//			RemainRoomInfoVO temp = roomList.get(i);
+//			dataList.add(new TypeTable(temp.roomType.toString(), temp.roomNumCount + "", Double.toString(temp.price)));
+//		}
+//
+//		ObservableList<TypeTable> data = FXCollections.observableArrayList();
+//		for (int i = 0; i < dataList.size(); i++) {
+//			data.add(dataList.get(i));
+//		}
+//		typeColumn.setCellValueFactory(cellData -> cellData.getValue().roomType);
+//		remainRoomColumn.setCellValueFactory(cellData -> cellData.getValue().remainRoomNum);
+//		priceColumn.setCellValueFactory(cellData -> cellData.getValue().price);
+//
+//		roomTable.setItems(data);
+//	}
 
 	private void initHotelDetail(HotelVO hotelVO) {
 		
 		System.out.println(hotelVO.hotelID);
-		
-		hotelNameInDetail.setText(hotelVO.hotelGeneralVO.hotelName);
-		hotelIDInDetail.setText(hotelVO.hotelGeneralVO.hotelID);
-		hotelAddressInDetail.setText(hotelVO.hotelAddress);
-		cityInDetail.setText(hotelVO.hotelGeneralVO.city);
-		cycleInDetail.setText(hotelVO.hotelGeneralVO.cycle);
-		LevelInDetail.setText(hotelVO.hotelGeneralVO.level);
+//		
+//		hotelNameInDetail.setText(hotelVO.hotelGeneralVO.hotelName);
+//		hotelIDInDetail.setText(hotelVO.hotelGeneralVO.hotelID);
+//		hotelAddressInDetail.setText(hotelVO.hotelAddress);
+//		cityInDetail.setText(hotelVO.hotelGeneralVO.city);
+//		cycleInDetail.setText(hotelVO.hotelGeneralVO.cycle);
+//		LevelInDetail.setText(hotelVO.hotelGeneralVO.level);
 		ScoreInDetail.setText(Double.toString(hotelVO.score));
 		equipmentInDetail.setText(hotelVO.equipment);
 		introductionInDetail.setText(hotelVO.introduction);
@@ -270,16 +269,16 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void openCreateOrder() {
-		 for (int i = 0; i < roomList.size(); i++) {
-		 roomTypeInOrder.getItems().add(roomList.get(i).roomType);
-		 }
-		roomTypeInOrder.setValue(roomTable.getSelectionModel().getSelectedItem().getRoomType());
-		previousPriceInOrder.setText(roomTable.getSelectionModel().getSelectedItem().getPrice());
-		
-
-		hotelNameInOrder.setText(hotelVO.hotelGeneralVO.hotelName);
-		hotelIDInOrder.setText(hotelVO.hotelGeneralVO.hotelID);
-		hotelAddressInOrder.setText(hotelVO.hotelAddress);
+//		 for (int i = 0; i < roomList.size(); i++) {
+//		 roomTypeInOrder.getItems().add(roomList.get(i).roomType);
+//		 }
+//		roomTypeInOrder.setValue(roomTable.getSelectionModel().getSelectedItem().getRoomType());
+//		previousPriceInOrder.setText(roomTable.getSelectionModel().getSelectedItem().getPrice());
+//		
+//
+//		hotelNameInOrder.setText(hotelVO.hotelGeneralVO.hotelName);
+//		hotelIDInOrder.setText(hotelVO.hotelGeneralVO.hotelID);
+//		hotelAddressInOrder.setText(hotelVO.hotelAddress);
 
 		hotelDetail.setVisible(false);
 		createPane.setVisible(true);
@@ -296,19 +295,19 @@ public class HotelSearchController {
 
 	@FXML
 	protected void commitOrder() {
-		orderVO = new OrderVO(
-				new OrderGeneralVO("", Main.userID, hotelIDInOrder.getText(), hotelNameInOrder.getText(),
-						hotelAddressInOrder.getText(), Double.parseDouble(priceOfOrder.getText()),
-						LocalDateTime.of(expectExecuteDateInOrder.getValue(),
-								LocalTime.of(Integer.parseInt(hourInOrder.getText()),
-										Integer.parseInt(minuteInOrder.getText()))),
-						LocalDateTime.of(expectLeaveDateInOrder.getValue(),
-								LocalTime.of(Integer.parseInt(hourInOrder.getText()),
-										Integer.parseInt(minuteInOrder.getText()))),
-						null),
-				Double.parseDouble(previousPriceInOrder.getText()), LocalDateTime.now(), RoomType.DELUXE,
-				Integer.parseInt(roomCountInOrder.getText()), Integer.parseInt(guestNumInOrder.getText()),
-				nameInOrder.getText(), phoneInOrder.getText(), messageInOrder.getText());
+//		orderVO = new OrderVO(
+//				new OrderGeneralVO("", Main.userID, hotelIDInOrder.getText(), hotelNameInOrder.getText(),
+//						hotelAddressInOrder.getText(), Double.parseDouble(priceOfOrder.getText()),
+//						LocalDateTime.of(expectExecuteDateInOrder.getValue(),
+//								LocalTime.of(Integer.parseInt(hourInOrder.getText()),
+//										Integer.parseInt(minuteInOrder.getText()))),
+//						LocalDateTime.of(expectLeaveDateInOrder.getValue(),
+//								LocalTime.of(Integer.parseInt(hourInOrder.getText()),
+//										Integer.parseInt(minuteInOrder.getText()))),
+//						null),
+//				Double.parseDouble(previousPriceInOrder.getText()), LocalDateTime.now(), RoomType.DELUXE,
+//				Integer.parseInt(roomCountInOrder.getText()), Integer.parseInt(guestNumInOrder.getText()),
+//				nameInOrder.getText(), phoneInOrder.getText(), messageInOrder.getText());
 		// 传VO
 		System.out.println("生成成功");
 
