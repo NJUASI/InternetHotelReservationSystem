@@ -3,10 +3,12 @@ package businessLogic.orderBL.stub;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import businessLogicService.orderBLService.OrderBLService;
 import utilities.OrderState;
+import utilities.PreOrder;
 import utilities.ResultMessage;
 import utilities.RoomType;
 import vo.GuestEvaluationVO;
@@ -31,6 +33,18 @@ public class OrderBLService_Stub implements OrderBLService {
 	 */
 	public OrderBLService_Stub() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	/**
+	 * 
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param orderVO 从客户界面层传下来的Order载体
+	 * @return 若客户创建此订单，需要付的款项
+	 */
+	public double getTempPrice(OrderVO orderVO) {
+		return 200;
 	}
 	
 	/**
