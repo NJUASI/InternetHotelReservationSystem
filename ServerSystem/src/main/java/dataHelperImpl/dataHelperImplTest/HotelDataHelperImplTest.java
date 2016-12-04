@@ -1,8 +1,7 @@
-package dataHelperImpl;
+package dataHelperImpl.dataHelperImplTest;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
@@ -10,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import dataHelper.HotelDataHelper;
+import dataHelperImpl.HotelDataHelperImpl;
 import po.HotelGeneralPO;
 
 public class HotelDataHelperImplTest {

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,7 +118,7 @@ public class GuestDataHelperImpl implements GuestDataHelper {
 				guestPO = new GuestPO();
 
 				guestPO.setGuestID(guestID);
-				guestPO.setBirthday((LocalDate) rs.getObject(2)); // 此处硬编码2-8对应sql语句中元素
+				guestPO.setBirthday(rs.getDate(2).toLocalDate()); // 此处硬编码2-8对应sql语句中元素
 				guestPO.setEnterprise(rs.getString(3));
 				guestPO.setName(rs.getString(4));
 				guestPO.setNickName(rs.getString(5));
@@ -154,7 +153,7 @@ public class GuestDataHelperImpl implements GuestDataHelper {
 			while (rs.next()) {
 				final GuestPO result = new GuestPO(); // 封装一条数据
 				result.setGuestID(String.valueOf(rs.getObject(1))); // 1-8的硬编码对应表中的表项
-				result.setBirthday((LocalDate) rs.getObject(2));
+				result.setBirthday(rs.getDate(2).toLocalDate());
 				result.setEnterprise(rs.getString(3));
 				result.setName(rs.getString(4));
 				result.setNickName(rs.getString(5));
