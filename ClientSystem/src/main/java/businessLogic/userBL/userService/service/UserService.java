@@ -16,5 +16,5 @@ public interface UserService {
 	public List<UserVO> getAll();
 	
 	public String getLogInInfo(String userID);
-
+	
 }

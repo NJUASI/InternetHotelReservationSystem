@@ -15,8 +15,8 @@ import vo.UserVO;
 
 /**
  * 
- * @author 董金玉
- * lastChangedBy 董金玉
+ * @author Byron Dong
+ * lastChangedBy Byron Dong
  * updateTime 2016/11/28
  *
  */
@@ -30,8 +30,8 @@ public class HotelWorker implements UserService{
 	private HotelWorkerDataService hotelWorkerDataService;
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * 构造函数，初始化成员变量
 	 */
@@ -40,8 +40,8 @@ public class HotelWorker implements UserService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param newUserVO 从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加酒店工作人员信息
@@ -49,6 +49,8 @@ public class HotelWorker implements UserService{
 	public ResultMessage add(UserVO newUserVO) {
 
 		ResultMessage msg = ResultMessage.USER_ADD_FAILURE;
+		
+		if(this.hasHotelWorker(newUserVO.userID)){return msg;} //存在ID对应项
 
 		try {
 			HotelWorkerPO hotelWorkerPO = this.convert(newUserVO);
@@ -60,8 +62,8 @@ public class HotelWorker implements UserService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param newUserVO 从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功修改酒店工作人员信息
@@ -69,6 +71,8 @@ public class HotelWorker implements UserService{
 	public ResultMessage modify(UserVO userVO) {
 
 		ResultMessage msg = ResultMessage.USER_INFO_UPDATE_FAILURE;
+		
+		if(!this.hasHotelWorker(userVO.userID)){return msg;} //不存在ID对应项
 
 		try {
 			HotelWorkerPO hotelWorkerPO = this.convert(userVO);
@@ -80,8 +84,8 @@ public class HotelWorker implements UserService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param userVO 从userDoMain传下来的用户ID
 	 * @return UserVO 单一hotelWorkerInfo载体
@@ -93,12 +97,12 @@ public class HotelWorker implements UserService{
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return null; //若不存在ID对应项，就返回null
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param  
 	 * @return List<UserVO> 指定用户类型的所有hotelWorkerInfo载体
@@ -110,29 +114,31 @@ public class HotelWorker implements UserService{
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return null; //若不存在ID对应项，就返回null
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param  userID 从userDoMain传下来的指定用户ID
 	 * @return String 指定用户 的登录信息
 	 */
 	public String getLogInInfo(String userID) {
 
+		if(!this.hasHotelWorker(userID)){return null;} //不存在ID对应项，返回值后期细化
+		
 		try {
 			return hotelWorkerDataService.getSingleHotelWorker(userID).getPassword();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return null; //需要后期处理，是决定继续采用null，还是换其他
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param  IDLength 用户ID长度
 	 * @return boolean 判断指定用户是否为酒店工作人员类型
@@ -146,8 +152,8 @@ public class HotelWorker implements UserService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param  type 用户类型
 	 * @return boolean 判断指定用户是否为酒店工作人员类型
@@ -161,30 +167,32 @@ public class HotelWorker implements UserService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param  hotelWorkerPO 来自本类hotelWorkerInfo载体
 	 * @return UserVO userInfo载体
 	 */
 	private UserVO convert(HotelWorkerPO hotelWorkerPO) {
+		if(hotelWorkerPO ==null){return null;}
 		return new HotelWorkerVO(hotelWorkerPO);
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param  userPO 来自本类userInfo载体
 	 * @return HotelWorkerVO hotelWorkerInfo载体
 	 */
 	private HotelWorkerPO convert(UserVO userVO) {
+		if(userVO ==null){return null;}
 		return new HotelWorkerPO((HotelWorkerVO) userVO);
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param  List<HotelWorkerPO> 来自本类所有hotelWorkerInfo载体
 	 * @return List<UserVO> 所有对应的userInfo载体
@@ -195,6 +203,17 @@ public class HotelWorker implements UserService{
 			result.add(new HotelWorkerVO(list.get(i)));
 		}
 		return result;
+	}
+	
+	private boolean hasHotelWorker(String hotelWorkerID) {
+		UserVO hotelWorkerVO = this.getSingle(hotelWorkerID);
+		
+		if(hotelWorkerVO==null){
+			return false;
+		}
+		else{
+			return true;
+		}
 	}
 
 }

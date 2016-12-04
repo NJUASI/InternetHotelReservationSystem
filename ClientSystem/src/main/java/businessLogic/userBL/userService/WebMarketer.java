@@ -15,8 +15,8 @@ import vo.UserVO;
 
 /**
  * 
- * @author 董金玉
- * lastChangedBy 董金玉
+ * @author Byron Dong
+ * lastChangedBy Byron Dong
  * updateTime 2016/11/28
  *
  */
@@ -30,8 +30,8 @@ public class WebMarketer implements UserService{
 	private WebMarketerDataService webMarketerDataService;
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * 构造函数，初始化成员变量
 	 */
@@ -40,8 +40,8 @@ public class WebMarketer implements UserService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param newUserVO 从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加网站营销人员信息
@@ -49,6 +49,8 @@ public class WebMarketer implements UserService{
 	public ResultMessage add(UserVO newUserVO) {
 
 		ResultMessage msg = ResultMessage.USER_ADD_FAILURE;
+		
+		if(this.hasWebMarketer(newUserVO.userID)){return msg;} //存在ID对应项
 
 		try {
 			WebMarketerPO webMarketerPO = this.convert(newUserVO);
@@ -60,8 +62,8 @@ public class WebMarketer implements UserService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param newUserVO 从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功修改网站营销人员信息
@@ -69,6 +71,8 @@ public class WebMarketer implements UserService{
 	public ResultMessage modify(UserVO userVO) {
 
 		ResultMessage msg = ResultMessage.USER_INFO_UPDATE_FAILURE;
+		
+		if(!this.hasWebMarketer(userVO.userID)){return msg;} //不存在ID对应项
 
 		try {
 			WebMarketerPO webMarketerPO = this.convert(userVO);
@@ -80,8 +84,8 @@ public class WebMarketer implements UserService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param userVO 从userDoMain传下来的用户ID
 	 * @return UserVO 单一webMarketerInfo载体
@@ -97,8 +101,8 @@ public class WebMarketer implements UserService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param userVO 从userDoMain传下来的用户ID
 	 * @return UserVO 单一webMarketerInfo载体
@@ -114,14 +118,16 @@ public class WebMarketer implements UserService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param  userID 从userDoMain传下来的指定用户ID
 	 * @return String 指定用户 的登录信息
 	 */
 	public String getLogInInfo(String userID) {
 
+		if(!this.hasWebMarketer(userID)){return null;} //不存在ID对应项,后期细化
+		
 		try {
 			return webMarketerDataService.getSingleWebMarketer(userID).getPassword();
 		} catch (RemoteException e) {
@@ -131,8 +137,8 @@ public class WebMarketer implements UserService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param  IDLength 用户ID长度
 	 * @return boolean 判断指定用户是否为网站营销人员类型
@@ -146,8 +152,8 @@ public class WebMarketer implements UserService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param  type 用户类型
 	 * @return boolean 判断指定用户是否为网站营销人员类型
@@ -161,30 +167,32 @@ public class WebMarketer implements UserService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param  webMarketerPO 来自本类webMarketerInfo载体
 	 * @return UserVO userInfo载体
 	 */
 	private UserVO convert(WebMarketerPO webMarketerPO) {
+		if(webMarketerPO==null){return null;}
 		return new WebMarketerVO(webMarketerPO);
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param  userPO 来自本类userInfo载体
 	 * @return WebMarketerPO webMarketerInfo载体
 	 */
 	private WebMarketerPO convert(UserVO userVO) {
+		if(userVO==null){return null;}
 		return new WebMarketerPO((WebMarketerVO) userVO);
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param  List<WebMarketerPO> 来自本类所有webMarketerInfo载体
 	 * @return List<UserVO> 所有对应的userInfo载体
@@ -195,6 +203,17 @@ public class WebMarketer implements UserService{
 			result.add(new WebMarketerVO(list.get(i)));
 		}
 		return result;
+	}
+	
+	private boolean hasWebMarketer(String webMarketerID) {
+		UserVO webMarketerVO = this.getSingle(webMarketerID);
+		
+		if(webMarketerVO==null){
+			return false;
+		}
+		else{
+			return true;
+		}
 	}
 
 }

@@ -17,8 +17,8 @@ import vo.UserVO;
 
 /**
  * 
- * @author 董金玉
- * lastChangedBy 董金玉
+ * @author Byron Dong
+ * lastChangedBy Byron Dong
  * updateTime 2016/11/27
  *
  */
@@ -28,8 +28,8 @@ public class User {
 	private CreditService guest;//在构造中new一次
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * 构造函数，根据成员变量注释初始化成员变量
 	 */
@@ -38,8 +38,8 @@ public class User {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param userVO 从客户界面层传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加用户信息
@@ -48,6 +48,8 @@ public class User {
 
 		ResultMessage msg = ResultMessage.USER_INEXISTENCE;
 		this.initial(newUserVO.userID.length());
+		
+		if(user==null){return msg;}
 
 		msg = user.add(newUserVO);
 
@@ -55,8 +57,8 @@ public class User {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param userVO 从客户界面层传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功修改用户信息
@@ -65,6 +67,8 @@ public class User {
 
 		ResultMessage msg = ResultMessage.USER_INEXISTENCE;
 		this.initial(userVO.userID.length());
+		
+		if(user==null){return msg;}
 
 		msg = user.modify(userVO);
 
@@ -72,23 +76,25 @@ public class User {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param userVO，userType 从客户界面层传下来的userInfo载体和指定用户类型
 	 * @return UserVO 单一userInfo载体
 	 */
 	public UserVO getSingle(String userID, UserType userType) {
 
-		this.initial(userType);
+		this.initial(userID.length());
+		
+		if(user==null){return null;} //没有对应ID长度的用户，返回null
 
 		return user.getSingle(userID);
 
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param newHotelVO，hotelID 从客户界面层传下来的hotelInfo载体和指定酒店ID
 	 * @return ResultMessage 酒店是否添加成功
@@ -106,8 +112,8 @@ public class User {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param guestID, creditNum从客户界面层传下来的指定客户ID和需修改的信用值
 	 * @return ResultMessage 信用值是否添加成功
@@ -117,8 +123,8 @@ public class User {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param  userType 从客户界面层传下来的指定用户类型
 	 * @return List<UserVO> 指定用户类型的所有userInfo载体
@@ -132,31 +138,40 @@ public class User {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param  guestID 从客户界面层传下来的指定用户ID
 	 * @return List<CreditVO> 指定客户的所有creditInfo载体
 	 */
 	public List<CreditVO> getAllCreditDetail(String guestID) {
-		return guest.getAllCreditDetail(guestID);
+		List<CreditVO> creditVOList = guest.getAllCreditDetail(guestID);
+		
+		if(creditVOList.isEmpty()){return null;}
+		
+		return creditVOList;
+		
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param  guestID, userType 从客户界面层传下来的指定用户ID和指定用户类型
 	 * @return String 指定用户 的登录信息
 	 */
 	public String getLogInInfo(String userID, UserType userType) {
-		this.initial(userType);
+		
+		this.initial(userID.length());
+		
+		if(user==null){return null;} //如果对应ID长度不在范围，返回null
+		
 		return user.getLogInInfo(userID);
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param  IDLength 从本类传下来的指定用户ID长度
 	 * @return  根据ID长度初始化user对象
@@ -183,8 +198,8 @@ public class User {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param  userType 从本类传下来的指定用户类型
 	 * @return  根据用户类型初始化user对象
