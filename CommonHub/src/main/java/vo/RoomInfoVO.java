@@ -1,7 +1,6 @@
 package vo;
 
 import po.RoomInfoPO;
-import utilities.RoomType;
 
 public class RoomInfoVO {
 	
@@ -20,10 +19,11 @@ public class RoomInfoVO {
 	// 价格
 	public double price;
 	
-	public RoomInfoVO(String hotelID, String roomType, int roomNum, double price, int i) {
+	public RoomInfoVO(String hotelID, String roomType, int roomNum, int remainNum ,double price) {
 		this.hotelID = hotelID;
 		this.roomType = roomType;
 		this.roomNum = roomNum;
+		this.remainNum = remainNum;
 		this.price = price;
 	}
 
@@ -31,6 +31,7 @@ public class RoomInfoVO {
 		this.hotelID = roomInfoPO.getHotelID();
 		this.roomType = roomInfoPO.getRoomType();
 		this.roomNum = roomInfoPO.getRoomNum();
+		this.remainNum = roomInfoPO.getRemainNum();
 		this.price = roomInfoPO.getPrice();
 	}
 }

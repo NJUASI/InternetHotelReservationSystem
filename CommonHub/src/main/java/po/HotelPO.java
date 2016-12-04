@@ -21,6 +21,9 @@ public final class HotelPO implements Serializable{
 
 	//	酒店商圈
 	private String circle;
+	
+	//  酒店地址
+	private String address;
 
 	//	酒店星级
 	private String level;
@@ -33,6 +36,9 @@ public final class HotelPO implements Serializable{
 
 	//	设施服务
 	private String equipment;
+	
+	//  已评分的人数
+	private int commentsNum;
 
 	public HotelPO(String hotelID, String hotelName, String city, String cycle, String hotelAddress, 
 			String level, double score, String introduction, String equipment) {
@@ -42,7 +48,14 @@ public final class HotelPO implements Serializable{
 	}
 
 	public HotelPO(HotelVO hotelVO) {
-		
+		this.hotelID = hotelVO.hotelID;
+		this.hotelName = hotelVO.hotelName;
+		this.city = hotelVO.city;
+		this.circle = hotelVO.circle;
+		this.level = hotelVO.level;
+		this.score = hotelVO.score;
+		this.introduction = hotelVO.introduction;
+		this.equipment = hotelVO.equipment;
 	}
 
 	public HotelPO() {
@@ -54,6 +67,7 @@ public final class HotelPO implements Serializable{
 		score = 0;
 		introduction = "";
 		equipment = "";
+		commentsNum = 0;
 	}
 
 	public String getHotelID() {
@@ -119,5 +133,22 @@ public final class HotelPO implements Serializable{
 	public void setEquipment(String equipment) {
 		this.equipment = equipment;
 	}
+
+	public int getCommentsNum() {
+		return commentsNum;
+	}
+
+	public void setCommentsNum(int commentsNum) {
+		this.commentsNum = commentsNum;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
 
 }

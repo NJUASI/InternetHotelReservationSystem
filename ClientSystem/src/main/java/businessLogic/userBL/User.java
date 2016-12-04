@@ -101,7 +101,7 @@ public class User {
 	 */
 	public ResultMessage addHotel(HotelVO newHotelVO, String hotelID) {
 
-		Hotel hotel = new Hotel();
+		Hotel hotel = new Hotel(hotelID);
 		ResultMessage msg = ResultMessage.HOTEL_EXIST;
 
 		if (hotel.getHotelInfo(hotelID) == null) {

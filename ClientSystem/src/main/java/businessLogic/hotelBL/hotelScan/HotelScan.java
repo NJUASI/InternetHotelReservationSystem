@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import businessLogic.hotelBL.hotel.Rooms;
+import businessLogic.hotelBL.hotel.Hotel;
+import businessLogic.orderBL.Order;
 import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelPO;
+import utilities.OrderState;
 import utilities.SortStrategy;
 import vo.HotelVO;
 
@@ -19,20 +21,23 @@ import vo.HotelVO;
  */
 public class HotelScan {
 
-	HotelDataService hotelDataService;
+	private HotelDataService hotelDataService;
 	
 	//用以保存处于当前城市商圈的所有酒店概况
-	List<HotelPO> hotelPOList;
+	private List<HotelPO> hotelPOList;
 	
 	//用以保存符合当前搜索条件的所有酒店概况
-	List<HotelPO> currentPOList;
+	private List<HotelPO> currentPOList;
 	
 	//各个搜索器的工厂
-	SortComparatorFactory sortComparatorFactory; 
+	private SortComparatorFactory sortComparatorFactory; 
 	
-	public HotelScan() {
+	private String guestID;
+	
+	public HotelScan(String guestID) {
 		hotelDataService = new HotelDataService_Stub();
 		sortComparatorFactory = new SortComparatorFactory();
+		this.guestID = guestID;
 	}
 
 	/**
@@ -64,11 +69,13 @@ public class HotelScan {
 	public Iterator<HotelVO> sortHotels(SortStrategy sortStrategy){
 		List<HotelVO> hotelVOList = convertPOListToVOList(currentPOList);
 		hotelVOList.sort(sortComparatorFactory.createComparator(sortStrategy));
+		//保存当前的顺序
+		currentPOList = convertVOListToPOList(hotelVOList);
 		return hotelVOList.iterator();
 	}
 	
 	/**
-	 * @Description:根据传入的搜索标准对当前currentGeneralPOList进行筛选
+	 * @Description:根据传入的搜索标准对当前该城市商圈内的hotelPOList进行筛选
 	 * @param searchCriteria
 	 * @return
 	 * Iterator<HotelGeneralVO>
@@ -76,27 +83,31 @@ public class HotelScan {
 	 * @time:2016年11月29日 下午8:33:25
 	 */
 	public Iterator<HotelVO> searchHotels(List<SearchCriteria> searchCriteria) {
+		List<HotelVO> hotelVOList = convertPOListToVOList(hotelPOList);
 		for(int i = 0;i < searchCriteria.size();i++){
-			currentPOList = searchCriteria.get(i).meetCriteria(currentPOList);
+			hotelVOList = searchCriteria.get(i).meetCriteria(hotelVOList);
 		}
-		return convertPOListToVOList(currentPOList).iterator();
+		//保存当前的搜索条件
+		currentPOList = convertVOListToPOList(hotelVOList);
+		return hotelVOList.iterator();
 	}
 	
-	/**
-	 * @Description:因为几乎所有方法都会将poList转换为voList的Iterator，就将该方法提取出来
-	 * @param generalPOList
-	 * @return
-	 * Iterator<HotelGeneralVO>
-	 * @author: Harvey Gong
-	 * @time:2016年11月29日 下午8:44:07
-	 */
 	private List<HotelVO> convertPOListToVOList(List<HotelPO> POList){
 		List<HotelVO> hotelVOList = new ArrayList<HotelVO>();
-		for(HotelPO hotelGeneralPO:currentPOList){
-			double minPrice = new Rooms(hotelGeneralPO.getHotelID()).getLowestPrice();
-			hotelVOList.add(new HotelVO(hotelGeneralPO,minPrice));
+		for(HotelPO hotelPO:currentPOList){
+			double minPrice = new Hotel(hotelPO.getHotelID()).getLowestPrice();
+			OrderState orderState = new Order().getOrderState(guestID, hotelPO.getHotelID());
+			hotelVOList.add(new HotelVO(hotelPO,minPrice,orderState));
 		}
 		return hotelVOList;
+	}
+	
+	private List<HotelPO> convertVOListToPOList(List<HotelVO> VOList){
+		List<HotelPO> hotelPOList = new ArrayList<HotelPO>();
+		for(HotelVO hotelGeneralVO:VOList){
+			hotelPOList.add(new HotelPO(hotelGeneralVO));
+		}
+		return hotelPOList;
 	}
 	
 }

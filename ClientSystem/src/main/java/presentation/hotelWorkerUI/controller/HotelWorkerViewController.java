@@ -6,8 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 
 public class HotelWorkerViewController {
 	Parent hotelInfo ,orderInfo, offline,remainRoom,promotion,roomInfo;	

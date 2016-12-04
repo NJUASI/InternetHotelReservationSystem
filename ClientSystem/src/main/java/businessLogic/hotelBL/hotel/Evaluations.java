@@ -8,7 +8,6 @@ import java.util.List;
 import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelEvaluationPO;
-import utilities.ResultMessage;
 import vo.HotelEvaluationVO;
 
 public class Evaluations {

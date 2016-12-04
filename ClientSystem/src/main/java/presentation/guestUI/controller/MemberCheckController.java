@@ -1,6 +1,5 @@
 package presentation.guestUI.controller;
 
-import java.io.IOException;
 import java.time.LocalDate;
 
 import javafx.fxml.FXML;
@@ -8,7 +7,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import presentation.Main;
 import vo.MarketVO;
 import vo.MemberVO;
 

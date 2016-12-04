@@ -21,7 +21,7 @@ public class HotelBLService_DriverTest {
 		assertEquals("12345678", hotelVO.hotelID);
 		assertEquals("thisHotel", hotelVO.hotelName);
 		assertEquals("NanJing", hotelVO.city);
-		assertEquals("center", hotelVO.cycle);
+		assertEquals("center", hotelVO.circle);
 		assertEquals("4", hotelVO.level);
 		assertEquals(5, hotelVO.score, 0);
 		assertEquals("good", hotelVO.introduction);

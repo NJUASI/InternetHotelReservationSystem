@@ -8,24 +8,32 @@ import java.util.List;
 import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
 import po.RoomInfoPO;
+import utilities.Operation;
 import utilities.ResultMessage;
 import vo.RoomInfoVO;
 
-public class Rooms {
+/**
+ * @Description:TODO
+ * @author:Harvey Gong
+ * @time:2016年12月4日 下午7:17:05
+ */
+class Rooms {
 
+	List<RoomInfoPO> roomInfoPOList;
 	private String hotelID;
 	private HotelDataService hotelDataService;
 
 	public Rooms(String hotelID) {
 		this.hotelDataService = new HotelDataService_Stub();
 		this.hotelID = hotelID;
+		initRoomInfoPO();
 	}
 	
-	private List<RoomInfoPO> getRoomInfoList(){
+	private void initRoomInfoPO(){
 		try {
-			return hotelDataService.getRoomInfo(hotelID);
+			hotelDataService.getRoomInfo(hotelID);
 		} catch (RemoteException e) {
-			return null;
+			e.printStackTrace();
 		}
 	}
 
@@ -40,7 +48,7 @@ public class Rooms {
 	public Iterator<RoomInfoVO> getRoomInfo(){
 		List<RoomInfoVO> roomInfoVOList = new ArrayList<RoomInfoVO>();
 
-		for(RoomInfoPO roomInfoPO:getRoomInfoList()){
+		for(RoomInfoPO roomInfoPO:roomInfoPOList){
 			roomInfoVOList.add(new RoomInfoVO(roomInfoPO));
 		}
 		return roomInfoVOList.iterator();
@@ -58,9 +66,9 @@ public class Rooms {
 	public ResultMessage addRoomInfo(RoomInfoVO roomInfoVO){
 		
 		try {
-			RoomInfoPO po = new RoomInfoPO(roomInfoVO);
-			hotelDataService.addRoomInfo(po);
-			return hotelDataService.addRoomInfo(po);
+			hotelDataService.addRoomInfo(new RoomInfoPO(roomInfoVO));
+			initRoomInfoPO();
+			return ResultMessage.SUCCESS;
 		} catch (RemoteException e) {
 			return ResultMessage.FAIL;
 		}
@@ -76,8 +84,11 @@ public class Rooms {
 	 * @time:2016年12月4日 上午11:21:31
 	 */
 	public ResultMessage deleteRoomInfo(String roomType){
+		
 		try {
-			return hotelDataService.deleteRoomInfo(hotelID,roomType);
+			hotelDataService.deleteRoomInfo(hotelID,roomType);
+			initRoomInfoPO();
+			return ResultMessage.SUCCESS;
 		} catch (RemoteException e) {
 			return ResultMessage.FAIL;
 		}
@@ -95,7 +106,9 @@ public class Rooms {
 	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO,String oldRoomType) {
 
 		try {
-			return hotelDataService.updateRoomInfo(new RoomInfoPO(roomInfoVO),oldRoomType);
+			hotelDataService.updateRoomInfo(new RoomInfoPO(roomInfoVO),oldRoomType);
+			initRoomInfoPO();
+			return ResultMessage.SUCCESS;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.FAIL;
@@ -103,7 +116,40 @@ public class Rooms {
 	}
 	
 	/**
-	 * @Description:
+	 * @Description:当入住或退房时，调用此方法，更新该房型的剩余房间数量，线上线下均调用此方法
+	 * @param roomType
+	 * @param operationedNum
+	 * @param operation
+	 * @return
+	 * ResultMessage
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月4日 下午8:05:19
+	 */
+	public ResultMessage updateRemainRoomNum(String roomType,int operationedNum,Operation operation){
+		RoomInfoPO po = roomInfoPOList.get(findPO(roomType));
+		if(operation == Operation.CHECK_IN){
+			po.setRemainNum(po.getRemainNum()- operationedNum);
+		}
+		else
+		{
+			po.setRemainNum(po.getRemainNum()+ operationedNum);
+		}
+		return updateHotelRoomInfo(new RoomInfoVO(po),roomType);
+	}
+	
+	
+	private int findPO(String roomType){
+		for(int i = 0;i<roomInfoPOList.size();i++){
+			if(roomInfoPOList.get(i).getRoomType().equals(roomType)){
+				return i;
+			}
+		}
+		return -1;
+		
+	}
+	/**
+	 * @Description:获得该酒店所有房间类型
 	 * @return
 	 * Iterator<String>
 	 * @exception:
@@ -111,13 +157,32 @@ public class Rooms {
 	 * @time:2016年12月4日 下午6:53:53
 	 */
 	public Iterator<String> getRoomType(){
-		List<RoomInfoPO> list = getRoomInfoList();
 		List<String> allRoomType = new ArrayList<String>();
-		for(RoomInfoPO po : list){
+		for(RoomInfoPO po : roomInfoPOList){
 			allRoomType.add(po.getRoomType());
 		}
 		return allRoomType.iterator();
 	}
+	
+	
+	/**
+	 * @Description:获取当前所选房间类型的剩余房间数量
+	 * @param roomType
+	 * @return
+	 * int
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月4日 下午7:20:02
+	 */
+	public int getRemainNumOfSpecificType(String roomType){
+		for(int i = 0;i<roomInfoPOList.size();i++){
+			if(roomInfoPOList.get(i).getRoomType().equals(roomType)){
+				return roomInfoPOList.get(i).getRemainNum();
+			}
+		}
+		return 0;
+	}
+	
 	
 	/**
 	 * @Description:获取该酒店最低价格
@@ -128,13 +193,13 @@ public class Rooms {
 	 * @time:2016年12月4日 下午2:11:12
 	 */
 	public double getLowestPrice(){
-		List<RoomInfoPO> list = getRoomInfoList();
-		double min = list.get(0).getPrice();
-		for(int i = 1;i<list.size();i++){
-			if(min>list.get(i).getPrice()){
-				min = list.get(i).getPrice();
+		double min = roomInfoPOList.get(0).getPrice();
+		for(int i = 1;i<roomInfoPOList.size();i++){
+			if(min>roomInfoPOList.get(i).getPrice()){
+				min = roomInfoPOList.get(i).getPrice();
 			}
 		}
 		return min;
 	}
+	
 }

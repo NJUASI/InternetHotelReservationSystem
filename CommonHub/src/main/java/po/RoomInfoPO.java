@@ -26,11 +26,12 @@ public class RoomInfoPO implements Serializable{
 	// 价格
 	private double price;
 	
-	public RoomInfoPO(String hotelID, String roomType, int roomNumCount, double price) {
+	public RoomInfoPO(String hotelID, String roomType, int roomNumCount, int remainNum, double price) {
 		super();
 		this.hotelID = hotelID;
 		this.roomType = roomType;	
 		this.roomNum = roomNumCount;
+		this.remainNum = remainNum;
 		this.price = price;
 	}
 	

@@ -7,10 +7,8 @@ import businessLogic.marketBL.stub.MarketBLService_Stub;
 import businessLogicService.marketBLService.MarketBLService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import po.MarketPO;
 import utilities.ResultMessage;
 import vo.MarketVO;
 

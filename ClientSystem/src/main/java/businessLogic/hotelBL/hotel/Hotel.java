@@ -3,41 +3,26 @@ package businessLogic.hotelBL.hotel;
 import java.rmi.RemoteException;
 import java.util.Iterator;
 
-
 import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
-import po.CheckInPO;
-import po.CheckOutPO;
 import po.HotelPO;
 import utilities.Address;
 import utilities.ResultMessage;
-import vo.CheckInVO;
-import vo.CheckOutVO;
-import vo.HotelEvaluationVO;
 import vo.HotelVO;
 import vo.RoomInfoVO;
 
-/**
- * @Description:TODO
- * @author:Harvey Gong
- * @time:2016年12月3日 下午9:52:08
- */
+
 /**
  * @Description:TODO
  * @author:Harvey Gong
  * @time:2016年12月3日 下午9:52:10
  */
-public class Hotel{
+public class Hotel implements HotelInfoGetAndUpdate{
 
 	private HotelDataService hotelDataService;
 	private HotelPO hotelPO;
 	private String hotelID;
 	private Rooms rooms;
-	private Evaluations evaluations;
-
-	public Hotel() {
-
-	}
 
 	public Hotel(String hotelWorkerID) {
 		this.hotelID = hotelWorkerID;
@@ -48,11 +33,6 @@ public class Hotel{
 		initHotelDataService();
 		initHotelPO();
 		initRooms();
-		initEvaluations();
-	}
-
-	private void initEvaluations() {
-		evaluations = new Evaluations(hotelID);
 	}
 
 	private void initRooms() {
@@ -115,6 +95,7 @@ public class Hotel{
 	 * @time:2016年12月3日 下午9:49:40
 	 */
 	public ResultMessage addHotelInfo(HotelVO hotelVO){
+		
 		hotelPO = new HotelPO(hotelVO);
 
 		try {
@@ -177,78 +158,43 @@ public class Hotel{
 	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO,String oldRoomType) {
 		return rooms.updateHotelRoomInfo(roomInfoVO,oldRoomType);
 	}
-
-
+	
 	/**
-	 * @Description:更新入住信息
-	 * @param checkInVO
+	 * @Description:委托给Rooms，获取该酒店房间的最低价格
 	 * @return
-	 * ResultMessage
+	 * double
 	 * @exception:
 	 * @author: Harvey Gong
-	 * @time:2016年12月3日 下午9:51:02
+	 * @time:2016年12月4日 下午7:25:02
 	 */
-	public ResultMessage updateCheckIn(CheckInVO checkInVO) {
-		// TODO
-		CheckInPO checkInPO = new CheckInPO(checkInVO);
-		try {
-			return hotelDataService.updateCheckInInfo(checkInPO);
-		} catch (RemoteException e) {
-			return ResultMessage.FAIL;
-		}
+	public double getLowestPrice(){
+		return rooms.getLowestPrice();
 	}
 
 	/**
-	 * @Description:更新退房信息
-	 * @param checkOutVO
+	 * @Description:委托给Rooms，获取该酒店的所有房间类型
 	 * @return
-	 * ResultMessage
+	 * Iterator<String>
 	 * @exception:
 	 * @author: Harvey Gong
-	 * @time:2016年12月3日 下午9:51:13
+	 * @time:2016年12月4日 下午7:27:47
 	 */
-	public ResultMessage updateCheckOut(CheckOutVO checkOutVO) {
-		// TODO
-		CheckOutPO checkOutPO = new CheckOutPO(checkOutVO);
-		try {
-			return hotelDataService.updateCheckOutInfo(checkOutPO);
-		} catch (RemoteException e) {
-			return ResultMessage.FAIL;
-		}
+	public Iterator<String> getRoomType(){
+		return rooms.getRoomType();
 	}
-
-
+	
 	/**
-	 * @Description:委托给evaluations，获取对该酒店的所有评价
+	 * @Description:获取当前所选房型的
+	 * @param roomType
 	 * @return
-	 * Iterator<HotelEvaluationVO>
+	 * int
 	 * @exception:
 	 * @author: Harvey Gong
-	 * @time:2016年12月3日 下午9:53:05
+	 * @time:2016年12月4日 下午7:31:07
 	 */
-	public Iterator<HotelEvaluationVO> getEvaluations(){
-		return evaluations.getEvaluations();
+	public int getRemainNumOfSpecificType(String roomType){
+		return rooms.getRemainNumOfSpecificType(roomType);
 	}
-
-	//	public ResultMessage updateEvaluation(EvaluationVO evaluationVO) {
-	//		return evaluations.addEvaluation(evaluationVO);
-	//	}
-
-	/**
-	 * @Description:对外的接口，能够通过酒店的id获取酒店所在的城市商圈
-	 * @param hotelID
-	 * @return
-	 * Address
-	 * @exception:
-	 * @author: Harvey Gong
-	 * @time:2016年12月3日 下午9:54:07
-	 */
-	public Address getHotelAddress(String hotelID){
-		this.hotelID = hotelID;
-		initHotelPO();
-		return new Address(hotelPO.getCity(), hotelPO.getCircle());
-	}
-
 
 	/**
 	 * 方便测试用，严格来说不能暴露，后期删除
@@ -256,5 +202,16 @@ public class Hotel{
 	 */
 	public HotelPO getHotelPO(){
 		return hotelPO;
+	}
+	
+	@Override
+	public Address getHotelAddress(){
+		return new Address(hotelPO.getCity(), hotelPO.getCircle());
+	}
+	
+	@Override
+	public ResultMessage scoreUpdate(double score) {
+		// TODO 自动生成的方法存根
+		return null;
 	}
 }
