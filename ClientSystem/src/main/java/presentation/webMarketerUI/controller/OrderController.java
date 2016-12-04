@@ -53,10 +53,10 @@ public class OrderController {
 			detail_price, detail_personName, detail_phone, detail_createTime, detail_expectTime,detail_message;
 	// 概况界面内容
 	@FXML
-	private TableView<MarketerOrderTable> table;
+	private TableView<OrderTable> table;
 	@FXML
-	private TableColumn<MarketerOrderTable, String> orderIDColumn, hotelNameColumn, addressColumn, priceColumn,
-			checkInTimeColumn, stateColumn;
+	private TableColumn<OrderTable, String> orderIDColumn, hotelNameColumn, addressColumn, priceColumn,
+			checkInTimeColumn, stateColumn,checkOutTimeColumn;
 
 	/**
 	 * @author 61990
@@ -100,7 +100,7 @@ public class OrderController {
 
 		orderVO = new OrderVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 250, 200, createTime,
 				checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, roomType, 2, "301  302", 2,
-				"zhangsan", "13554321234", "no", 4.3, "good");
+				"zhangsan", "13554321234", "no", "good");
 		//
 		if (orderVO.orderGeneralVO.state == OrderState.ABNORMAL) {
 			cancelOrderPane.setDisable(false);
@@ -204,7 +204,7 @@ public class OrderController {
 
 		orderVO = new OrderVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 250, 200, createTime,
 				checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, roomType, 2, "301  302", 2,
-				"zhangsan", "13554321234", "no", 4.3, "good");
+				"zhangsan", "13554321234", "no", "good");
 		//
 		if (orderVO.orderGeneralVO.state == OrderState.ABNORMAL) {
 			cancelOrderPane.setDisable(false);
@@ -221,36 +221,33 @@ public class OrderController {
 	@FXML
 	protected void searchAbnormalOrder() {
 		// 获得输入的内容
-				// LocalDate date = searchDate.getValue();
+				
 				orderVOlist=new LinkedList<>();
-				orderVOlist.add(new OrderGeneralVO("123456677", "1234567", "1233444", "1如家", "七里河十里店希望小学", 400, LocalDateTime.of(2005, 3, 2, 22, 10), null,OrderState.ABNORMAL ));
-				orderVOlist.add(new OrderGeneralVO("123456677", "1234567", "1233444", "1如家", "七里河十里店希望小学", 400, LocalDateTime.of(2005, 3, 2, 22, 10), null,OrderState.ABNORMAL ));
-				orderVOlist.add(new OrderGeneralVO("123456677", "1234567", "1233444", "1如家", "七里河十里店希望小学", 400, LocalDateTime.of(2005, 3, 2, 22, 10), null,OrderState.ABNORMAL ));
-				orderVOlist.add(new OrderGeneralVO("123456677", "1234567", "1233444", "1如家", "七里河十里店希望小学", 400, LocalDateTime.of(2005, 3, 2, 22, 10), null,OrderState.ABNORMAL ));
+				orderVOlist.add(new OrderGeneralVO("123456677", "1234567", "1233444", "1如家", "七里河十里店希望小学", 400, LocalDateTime.of(2005, 3, 2, 22, 10), LocalDateTime.of(2005, 3, 2, 22, 10),OrderState.UNEXECUTED ));
+				orderVOlist.add(new OrderGeneralVO("123456677", "1234567", "1233444", "1如家", "七里22河十里店希望小学", 400, LocalDateTime.of(2005, 3, 2, 22, 10), LocalDateTime.of(2005, 3, 2, 22, 10),OrderState.UNEXECUTED ));
+				orderVOlist.add(new OrderGeneralVO("123456677", "1234567", "1233444", "1如家", "七里河十里店希望小学", 400, LocalDateTime.of(2005, 3, 2, 22, 10), LocalDateTime.of(2005, 3, 2, 22, 10),OrderState.UNEXECUTED ));
+				orderVOlist.add(new OrderGeneralVO("123456677", "1234567", "1233444", "1如家", "七里3河十里店希望小学", 400, LocalDateTime.of(2005, 3, 2, 22, 10), LocalDateTime.of(2005, 3, 2, 22, 10),OrderState.UNEXECUTED ));
 
 				initOrderCheck(orderVOlist);
 			
 				cancelOrderPaneInCheck.setDisable(false);
 				
-				orderCheck.setVisible(true);
-				searchPane.setVisible(false);
+				 
 	}
 
 	@FXML
 	protected void searchUnexecutedOrder() {
 	
 				orderVOlist=new LinkedList<>();
-				orderVOlist.add(new OrderGeneralVO("123456677", "1234567", "1233444", "1如家", "七里河十里店希望小学", 400, LocalDateTime.of(2005, 3, 2, 22, 10), null,OrderState.UNEXECUTED ));
-				orderVOlist.add(new OrderGeneralVO("123456677", "1234567", "1233444", "1如家", "七里22河十里店希望小学", 400, LocalDateTime.of(2005, 3, 2, 22, 10), null,OrderState.UNEXECUTED ));
-				orderVOlist.add(new OrderGeneralVO("123456677", "1234567", "1233444", "1如家", "七里河十里店希望小学", 400, LocalDateTime.of(2005, 3, 2, 22, 10), null,OrderState.UNEXECUTED ));
-				orderVOlist.add(new OrderGeneralVO("123456677", "1234567", "1233444", "1如家", "七里3河十里店希望小学", 400, LocalDateTime.of(2005, 3, 2, 22, 10), null,OrderState.UNEXECUTED ));
+				orderVOlist.add(new OrderGeneralVO("123456677", "1234567", "1233444", "1如家", "七里河十里店希望小学", 400, LocalDateTime.of(2005, 3, 2, 22, 10), LocalDateTime.of(2005, 3, 2, 22, 10),OrderState.UNEXECUTED ));
+				orderVOlist.add(new OrderGeneralVO("123456677", "1234567", "1233444", "1如家", "七里22河十里店希望小学", 400, LocalDateTime.of(2005, 3, 2, 22, 10), LocalDateTime.of(2005, 3, 2, 22, 10),OrderState.UNEXECUTED ));
+				orderVOlist.add(new OrderGeneralVO("123456677", "1234567", "1233444", "1如家", "七里河十里店希望小学", 400, LocalDateTime.of(2005, 3, 2, 22, 10), LocalDateTime.of(2005, 3, 2, 22, 10),OrderState.UNEXECUTED ));
+				orderVOlist.add(new OrderGeneralVO("123456677", "1234567", "1233444", "1如家", "七里3河十里店希望小学", 400, LocalDateTime.of(2005, 3, 2, 22, 10), LocalDateTime.of(2005, 3, 2, 22, 10),OrderState.UNEXECUTED ));
 
 				initOrderCheck(orderVOlist);
 			
 				cancelOrderPaneInCheck.setDisable(true);
-
-				orderCheck.setVisible(true);
-				searchPane.setVisible(false);
+ 
 	}
 	@FXML
 	protected void cancelAbnormalOrderInCheck() {
@@ -295,14 +292,14 @@ public class OrderController {
 	 */
 	private void initOrderCheck(List<OrderGeneralVO> orderVOlist) {
 		table.getItems().clear();
-		List<MarketerOrderTable> orderList = new LinkedList<MarketerOrderTable>();
+		List<OrderTable> orderList = new LinkedList<OrderTable>();
 		for (int i = 0; i < orderVOlist.size(); i++) {
 			OrderGeneralVO temp = orderVOlist.get(i);
-			orderList.add(new MarketerOrderTable(temp.orderID, temp.hotelName, temp.hotelAddress,
-					temp.expectExecuteTime.toString(), temp.price + "", temp.state.toString()));
+			orderList.add(new OrderTable(temp.orderID, temp.hotelName, temp.hotelAddress,
+					temp.expectExecuteTime.toString(),temp.expectLeaveTime.toString(),temp.price + "", temp.state.toString()));
 		}
 
-		ObservableList<MarketerOrderTable> data = FXCollections.observableArrayList();
+		ObservableList<OrderTable> data = FXCollections.observableArrayList();
 		for (int i = 0; i < orderList.size(); i++) {
 			data.add(orderList.get(i));
 		}
@@ -310,6 +307,7 @@ public class OrderController {
 		hotelNameColumn.setCellValueFactory(cellData -> cellData.getValue().hotelName);
 		addressColumn.setCellValueFactory(cellData -> cellData.getValue().address);
 		checkInTimeColumn.setCellValueFactory(cellData -> cellData.getValue().checkInTime);
+		checkOutTimeColumn.setCellValueFactory(cellData -> cellData.getValue().checkOutTime);
 		priceColumn.setCellValueFactory(cellData -> cellData.getValue().price);
 		stateColumn.setCellValueFactory(cellData -> cellData.getValue().state);
 
