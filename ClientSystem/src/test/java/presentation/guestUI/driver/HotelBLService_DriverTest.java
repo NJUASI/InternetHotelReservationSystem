@@ -20,6 +20,7 @@ import vo.HotelVO;
  */
 public class HotelBLService_DriverTest {
 
+	@Ignore
 	@Test
 	public void test1() {
 		//test interface getHotelList
