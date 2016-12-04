@@ -3,6 +3,7 @@ package businessLogicService.orderBLService;
 import java.time.LocalDate;
 import java.util.List;
 
+import utilities.OrderState;
 import utilities.ResultMessage;
 import vo.CheckInVO;
 import vo.CheckOutVO;
@@ -156,6 +157,12 @@ public interface OrderBLService {
 	 */
 	public List<HotelEvaluationVO> getEvaluations(String hotelID);
 	
+	
+	
+	
+	/*
+	 * 提供给Hotel的接口
+	 */
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
@@ -165,5 +172,14 @@ public interface OrderBLService {
 	 */
 	List<String> getBookedHotels(String guestID);
 	
-
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param guestID 此客户的客户编号
+	 * @param hotelID 此客户相对的酒店编号
+	 * @return 此客户在此相应酒店预定过的订单状态
+	 */
+	OrderState getOrderState(String guestID, String hotelID);
+	
 }
