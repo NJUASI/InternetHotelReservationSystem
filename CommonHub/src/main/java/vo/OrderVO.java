@@ -25,7 +25,7 @@ public class OrderVO {
 	//	订单生成时间(create时无)
 	public LocalDateTime createTime;
 	
-	//	入住时间
+	//	入住时间(create时无)
 	public LocalDateTime checkInTime;
 	
 	//	退房时间（实际离开时间）(create时无)
