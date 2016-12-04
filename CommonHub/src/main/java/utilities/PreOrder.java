@@ -27,9 +27,12 @@ public class PreOrder {
 	
 	public PreOrder(OrderVO orderVO){
 		this.guestID = orderVO.orderGeneralVO.guestID;
-		this.hotelID=orderVO.orderGeneralVO.hotelID;
-		this.checkInTime =orderVO.checkInTime;
+		this.hotelID = orderVO.orderGeneralVO.hotelID;
+		this.checkInTime = orderVO.checkInTime;
+		this.checkInDate = orderVO.checkInTime.toLocalDate(); 
 		this.roomNum=orderVO.roomNumCount;
+		this.lastDays = orderVO.orderGeneralVO.expectLeaveTime.toLocalDate().getDayOfYear()
+				- orderVO.orderGeneralVO.expectExecuteTime.toLocalDate().getDayOfYear();
 		
 	}
 
