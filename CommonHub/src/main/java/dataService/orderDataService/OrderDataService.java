@@ -126,25 +126,27 @@ public interface OrderDataService extends Remote {
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/4
-	 * @param checkInVO 酒店工作人员更新订单入住信息
+	 * @param checkInPO 酒店工作人员更新订单入住信息
 	 * @return 是否成功更新
+	 * @throws RemoteException RMI
 	 */
-	ResultMessage updateCheckIn (CheckInPO checkInPO) throws RemoteException;
+	ResultMessage updateCheckIn(CheckInPO checkInPO) throws RemoteException;
 
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/4
-	 * @param checkInVO 酒店工作人员更新订单退房信息
+	 * @param checkOutPO 酒店工作人员更新订单退房信息
 	 * @return 是否成功更新
+	 * @throws RemoteException RMI
 	 */
-	ResultMessage updateCheckOut (CheckOutPO checkOutPO) throws RemoteException;
+	ResultMessage updateCheckOut(CheckOutPO checkOutPO) throws RemoteException;
 	
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/4
-	 * @param evaluationVO 客户评价单个订单时产生的订单
+	 * @param guestEvaluationPO 客户评价单个订单时产生的订单
 	 * @return 客户是否成功评价该订单
 	 * @throws RemoteException RMI
 	 */

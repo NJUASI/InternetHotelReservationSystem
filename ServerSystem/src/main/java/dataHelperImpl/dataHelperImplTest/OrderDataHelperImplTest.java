@@ -53,7 +53,7 @@ public class OrderDataHelperImplTest {
 	@Ignore
 	@Test
 	public void testSetComment() {
-		assertEquals(ResultMessage.SUCCESS,helper.setComment("13342016112", "notGood"));
+		assertEquals(ResultMessage.SUCCESS,helper.setEvaluation("13342016112", 3, "notGood"));
 	}
 
 	@Ignore

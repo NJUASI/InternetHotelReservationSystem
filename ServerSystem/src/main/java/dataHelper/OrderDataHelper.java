@@ -1,5 +1,6 @@
 package dataHelper;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import po.OrderPO;
@@ -36,13 +37,35 @@ public interface OrderDataHelper {
 	
 	/**
 	 * @author 董金玉
-	 * @lastChangedBy 董金玉
-	 * @updateTime 2016/11/29
-	 * @param orderID  
-	 * @param comment  需要修改的评论
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param orderID 此次订单评价的订单编号
+	 * @param score 此次订单评价的评分
+	 * @param comment 此次订单评价的评论
 	 * @return ResultMessage 是否成功修改orderInfo
 	 */
-	ResultMessage setComment(String orderID, String comment);
+	ResultMessage setEvaluation(String orderID, double score, String comment);
+	
+	/**
+	 * @author 董金玉
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param orderID 此次入住的订单编号
+	 * @param roomNumber 房间号
+	 * @param checkInTime 入住时间
+	 * @return ResultMessage 是否成功修改orderInfo
+	 */
+	ResultMessage setCheckIn(String orderID, String roomNumber, LocalDateTime checkInTime);
+	
+	/**
+	 * @author 董金玉
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param orderID 此次退房的订单编号
+	 * @param checkOutTime 退房时间
+	 * @return ResultMessage 是否成功修改orderInfo
+	 */
+	ResultMessage setCheckOut(String orderID, LocalDateTime checkOutTime);
 	
 	/**
 	 * @author 董金玉
@@ -83,7 +106,6 @@ public interface OrderDataHelper {
 	 * @author 董金玉
 	 * @lastChangedBy 董金玉
 	 * @updateTime 2016/11/29
-	 * @param date  需要查询的日期  
 	 * @return List<OrderPO> 据date获得的所有未执行orderInfo载体
 	 */
 	List<OrderPO> getUnexecuted();

@@ -21,19 +21,20 @@ public class OrderPO implements Serializable{
 	 */
 	private static final long serialVersionUID = 6528720659331679661L;
 
-	//	订单编号 客户编号 酒店编号 酒店名 酒店地址 最后预定价格 最晚订单执行时间 预计离开时间 订单状态
+	//	订单编号(create时无) 客户编号 酒店编号 酒店名 酒店地址 最后预定价格(create时无) 
+	//	最晚订单执行时间 预计离开时间 订单状态
 	private OrderGeneralPO orderGeneralPO;
 	
 	//	原价
 	private double previousPrice;
 	
-	//	订单生成时间
+	//	订单生成时间(create时无)
 	private LocalDateTime createTime;
 	
-	//	入住时间
+	//	入住时间(create时无)
 	private LocalDateTime checkInTime;
 	
-	//	退房时间（实际离开时间）
+	//	退房时间（实际离开时间）(create时无)
 	private LocalDateTime checkOutTime;
 
 	//	房间类型
@@ -57,10 +58,10 @@ public class OrderPO implements Serializable{
 	//	特别要求
 	private String message;
 	
-	// 评分
+	//	评分(create时无)
 	private double score;
 		
-	//	评论
+	//	评论(create时无)
 	private String comment;
 	
 	public OrderPO(){

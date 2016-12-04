@@ -52,10 +52,10 @@ public class OrderVO {
 	//	特别要求
 	public String message;
 	
-	//	评分
+	//	评分(create时无)
 	public double score;
 	
-	//	评价
+	//	评价(create时无)
 	public String comment;
 	
 

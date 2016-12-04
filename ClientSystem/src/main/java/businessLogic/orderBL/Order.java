@@ -14,6 +14,7 @@ import dataService.orderDataService.OrderDataService;
 import po.CheckInPO;
 import po.CheckOutPO;
 import po.GuestEvaluationPO;
+import po.HotelEvaluationPO;
 import po.OrderGeneralPO;
 import po.OrderPO;
 import rmi.RemoteHelper;
@@ -379,8 +380,22 @@ public class Order {
 	 * @return 此酒店的所有评价
 	 */
 	public List<HotelEvaluationVO> getEvaluations(String hotelID) {
-		// TODO Auto-generated method stub
-		return null;
+		final List<HotelEvaluationVO> result = new ArrayList<HotelEvaluationVO>();
+		
+		List<HotelEvaluationPO> hotelEvaluationPOs = null;
+		try {
+			hotelEvaluationPOs = orderDataService.getEvaluations(hotelID);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
+		if (hotelEvaluationPOs != null) {
+			for (int i = 0; i < hotelEvaluationPOs.size(); i++) {
+				result.add(new HotelEvaluationVO(hotelEvaluationPOs.get(i)));
+			}
+		}
+		
+		return result;
 	}
 	
 	/**

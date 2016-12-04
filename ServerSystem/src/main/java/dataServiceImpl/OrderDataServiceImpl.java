@@ -235,36 +235,37 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/4
-	 * @param checkInVO 酒店工作人员更新订单入住信息
+	 * @param checkInPO 酒店工作人员更新订单入住信息
 	 * @return 是否成功更新
 	 */
+	@Override
 	public ResultMessage updateCheckIn (CheckInPO checkInPO) throws RemoteException {
-		return ResultMessage.SUCCESS;
+		return orderDataHelper.setCheckIn(checkInPO.getOrderID(), checkInPO.getRoomNumber(), checkInPO.getCheckInTime());
 	}
 
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/4
-	 * @param checkInVO 酒店工作人员更新订单退房信息
+	 * @param checkOutPO 酒店工作人员更新订单退房信息
 	 * @return 是否成功更新
 	 */
+	@Override
 	public ResultMessage updateCheckOut (CheckOutPO checkOutPO) throws RemoteException {
-		return ResultMessage.SUCCESS;
+		return orderDataHelper.setCheckOut(checkOutPO.getOrderID(), checkOutPO.getCheckOutTime());
 	}
 	
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/4
-	 * @param evaluationVO 客户评价单个订单时产生的订单
+	 * @param guestEvaluationPO 客户评价单个订单时产生的订单
 	 * @return 客户是否成功评价该订单
 	 * @throws RemoteException RMI
 	 */
 	@Override
 	public ResultMessage addEvaluation(GuestEvaluationPO guestEvaluationPO) throws RemoteException {
-		//！！！有问题
-		return orderDataHelper.setComment(guestEvaluationPO.getOrderID(), guestEvaluationPO.getComment());
+		return orderDataHelper.setEvaluation(guestEvaluationPO.getOrderID(), guestEvaluationPO.getScore(), guestEvaluationPO.getComment());
 	}
 
 	/**
