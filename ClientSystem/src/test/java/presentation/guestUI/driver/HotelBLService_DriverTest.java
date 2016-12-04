@@ -32,13 +32,13 @@ public class HotelBLService_DriverTest {
 		
 		assertEquals("thisHotel", hotelGeneralVO1.hotelName);
 		assertEquals("NanJing", hotelGeneralVO1.city);
-		assertEquals("center", hotelGeneralVO1.cycle);
+		assertEquals("center", hotelGeneralVO1.circle);
 		assertEquals("4", hotelGeneralVO1.level);
 		assertEquals(5, hotelGeneralVO1.score, 0);
 		
 		assertEquals("thisHotel", hotelGeneralVO2.hotelName);
 		assertEquals("NanJing", hotelGeneralVO2.city);
-		assertEquals("center", hotelGeneralVO2.cycle);
+		assertEquals("center", hotelGeneralVO2.circle);
 		assertEquals("4", hotelGeneralVO2.level);
 		assertEquals(5, hotelGeneralVO2.score, 0);
 	}
@@ -54,7 +54,7 @@ public class HotelBLService_DriverTest {
 		assertEquals("12345678", hotelVO.hotelID);
 		assertEquals("thisHotel", hotelVO.hotelName);
 		assertEquals("NanJing", hotelVO.city);
-		assertEquals("center", hotelVO.cycle);
+		assertEquals("center", hotelVO.circle);
 		assertEquals("4", hotelVO.level);
 		assertEquals(5, hotelVO.score, 0);
 		assertEquals("good", hotelVO.introduction);

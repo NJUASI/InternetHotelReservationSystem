@@ -18,8 +18,8 @@ import vo.UserVO;
 
 /**
  * 
- * @author 董金玉
- * lastChangedBy 董金玉
+ * @author Byron Dong
+ * lastChangedBy Byron Dong
  * updateTime 2016/11/27
  *
  */
@@ -33,8 +33,8 @@ public class Guest implements UserService ,CreditService{
 	private GuestDataService guestDataService;
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * 构造函数，初始化成员变量
 	 */
@@ -43,8 +43,8 @@ public class Guest implements UserService ,CreditService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param newUserVO 从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加客户信息
@@ -53,6 +53,8 @@ public class Guest implements UserService ,CreditService{
 
 		ResultMessage msg = ResultMessage.USER_ADD_FAILURE;
 
+		if(this.hasGuest(newUserVO.userID)){return msg;} //存在ID对应项
+		
 		try {
 			GuestPO guestPO = this.convert(newUserVO);
 			msg = guestDataService.add(guestPO);
@@ -63,8 +65,8 @@ public class Guest implements UserService ,CreditService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param newUserVO 从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功修改客户信息
@@ -72,6 +74,8 @@ public class Guest implements UserService ,CreditService{
 	public ResultMessage modify(UserVO userVO) {
 
 		ResultMessage msg = ResultMessage.USER_INFO_UPDATE_FAILURE;
+		
+		if(!this.hasGuest(userVO.userID)){return msg;} //不存在ID对应项
 
 		try {
 			GuestPO guestPO = this.convert(userVO);
@@ -83,8 +87,8 @@ public class Guest implements UserService ,CreditService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param userVO 从userDoMain传下来的用户ID
 	 * @return UserVO 单一guestInfo载体
@@ -100,8 +104,8 @@ public class Guest implements UserService ,CreditService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param  
 	 * @return List<UserVO> 指定用户类型的所有guestInfo载体
@@ -117,13 +121,15 @@ public class Guest implements UserService ,CreditService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param  userID 从userDoMain传下来的指定用户ID
 	 * @return String 指定用户 的登录信息
 	 */
 	public String getLogInInfo(String userID) {
+		
+		if(!this.hasGuest(userID)){return null;} //后期需要详细化
 
 		try {
 			return guestDataService.getSingleGuest(userID).getPassword();
@@ -134,15 +140,19 @@ public class Guest implements UserService ,CreditService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param guestID, creditNum从userDoMain传下来的指定客户ID和需修改的信用值
 	 * @return ResultMessage 信用值是否添加成功
 	 */
 	public ResultMessage modifyCredit(String guestID, double creditNum) {
-
+		
 		ResultMessage msg = ResultMessage.FAIL;
+		
+		if(!Guest.isGuest(guestID.length())){return msg;} //判断不是guest类型
+		
+		if(!this.hasGuest(guestID)){return msg;} //不存在ID对应项
 
 		try {
 			GuestPO guestPO = guestDataService.getSingleGuest(guestID);
@@ -155,8 +165,8 @@ public class Guest implements UserService ,CreditService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param  guestID 从userDoMain传下来的指定用户ID
 	 * @return List<CreditVO> 指定客户的所有creditInfo载体
@@ -164,22 +174,23 @@ public class Guest implements UserService ,CreditService{
 	public List<CreditVO> getAllCreditDetail(String guestID) {
 
 		List<CreditVO> result = new ArrayList<CreditVO>();
+		
+		if(!Guest.isGuest(guestID.length())){return result;} //若不符合对应ID长度，返回空list
 
 		try {
 			List<CreditPO> list = guestDataService.getAllCreditDetail(guestID);
 			for (int i = 0; i < list.size(); i++) {
 				result.add(new CreditVO(list.get(i)));
 			}
-			return result;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return result;  //如果没有指定ID对应项，返回空list
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param  IDLength 用户ID长度
 	 * @return boolean 判断指定用户是否为客户类型
@@ -193,8 +204,8 @@ public class Guest implements UserService ,CreditService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param  type 用户类型
 	 * @return boolean 判断指定用户是否为客户类型
@@ -208,30 +219,32 @@ public class Guest implements UserService ,CreditService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param  guestPO 来自本类guestInfo载体
 	 * @return UserVO userInfo载体
 	 */
 	private UserVO convert(GuestPO guestPO) {
+		if(guestPO==null){return null;}
 		return new GuestVO(guestPO);
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param  userPO 来自本类userInfo载体
 	 * @return GuestVO guestInfo载体
 	 */
 	private GuestPO convert(UserVO userVO) {
+		if(userVO==null){return null;}
 		return new GuestPO((GuestVO) userVO);
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param  List<GuestPO> 来自本类所有guestInfo载体
 	 * @return List<UserVO> 所有对应的userInfo载体
@@ -242,6 +255,17 @@ public class Guest implements UserService ,CreditService{
 			result.add(new GuestVO(list.get(i)));
 		}
 		return result;
+	}
+
+	public boolean hasGuest(String guestID) { //放在后面，该方法一般只在本类使用，可以等同private,只有member会用到
+		UserVO guestVO = this.getSingle(guestID);
+		
+		if(guestVO==null){
+			return false;
+		}
+		else{
+			return true;
+		}
 	}
 
 }

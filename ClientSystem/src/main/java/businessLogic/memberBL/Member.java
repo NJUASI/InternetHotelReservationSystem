@@ -2,6 +2,7 @@ package businessLogic.memberBL;
 
 import java.rmi.RemoteException;
 
+import businessLogic.userBL.userService.Guest;
 import dataService.guestDataService.GuestDataService;
 import dataService.guestDataService.GuestDataService_Stub;
 import po.MemberPO;
@@ -65,6 +66,9 @@ public class Member {
 	 * @return memberVO MemberInfo载体
 	 */
 	public MemberVO getMemberInfo(String userID, MemberType memberType) {
+		
+		if(!this.isQualified(userID)){return null;}
+		
 		try {
 			GuestVO guestVO = new GuestVO(guestDataService.getSingleGuest(userID));
 			return new MemberVO(guestVO);
@@ -112,6 +116,9 @@ public class Member {
 	 * @return MemberType 指定用户的会员类型
 	 */
 	public MemberType getMemberType(String userID) {
+		
+		if(!this.isQualified(userID)){return null;}
+		
 		try {
 			GuestVO guestVO = new GuestVO(guestDataService.getSingleGuest(userID));
 			MemberVO memberVO = new MemberVO(guestVO);
@@ -131,6 +138,11 @@ public class Member {
 	 * @return ResultMessage 添加会员信息是否成功
 	 */
 	private ResultMessage addMemberInfo(MemberVO memberVO) {
+		
+		if(!this.isQualified(memberVO.guestID)){
+			return ResultMessage.FAIL;
+		}
+		
 		try {
 			MemberPO memberPO = new MemberPO(memberVO);
 			return guestDataService.modifyMember(memberPO);
@@ -138,5 +150,13 @@ public class Member {
 			e.printStackTrace();
 			return ResultMessage.FAIL;
 		}
+	}
+	
+	private boolean isQualified(String userID){
+		Guest tempGuest = new Guest();
+		if(!Guest.isGuest(userID.length())||!tempGuest.hasGuest(userID)){
+			return false;
+		}
+		return true;
 	}
 }

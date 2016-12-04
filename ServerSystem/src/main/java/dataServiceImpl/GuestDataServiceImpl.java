@@ -144,5 +144,4 @@ public class GuestDataServiceImpl extends UnicastRemoteObject implements GuestDa
 		
 		return this.guestHelper.modify(guestPO);
 	}
-
 }

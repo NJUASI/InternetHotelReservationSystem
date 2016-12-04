@@ -14,7 +14,7 @@ import utilities.ResultMessage;
 
 /**
  * 
- * @author 董金玉 lastChangedBy 董金玉 updateTime 2016/11/30
+ * @author Byron Dong lastChangedBy Byron Dong updateTime 2016/11/30
  *
  */
 public class AddressDataHelperImpl implements AddressDataHelper {
@@ -28,8 +28,8 @@ public class AddressDataHelperImpl implements AddressDataHelper {
 	private String sql;
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/30 构造函数，初始化成员变量conn
 	 */
 	public AddressDataHelperImpl() {
@@ -37,8 +37,8 @@ public class AddressDataHelperImpl implements AddressDataHelper {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/30
 	 * @return List<String> 所有城市
 	 */
@@ -62,8 +62,8 @@ public class AddressDataHelperImpl implements AddressDataHelper {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/30
 	 * @param city 城市
 	 * @return List<String> 指定城市的所有商圈
@@ -84,14 +84,15 @@ public class AddressDataHelperImpl implements AddressDataHelper {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println("enter");
 		}
 		JDBCUtil.close(rs, ps);
-		return result;
+		return result;  //若未找到对应项，返回空list
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/30
 	 * @param city 城市
 	 * @param cycle 商圈
@@ -114,13 +115,13 @@ public class AddressDataHelperImpl implements AddressDataHelper {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return discout;
+		return discout; //若未找到对应项，返回空0
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy Harvey Gong
-	 * @updateTime 2016/12/2
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/4
 	 * @return List<AddressPO> 对应城市的商圈及其折扣
 	 */
 	public List<AddressPO> getAll(String city) {
@@ -141,11 +142,11 @@ public class AddressDataHelperImpl implements AddressDataHelper {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return result;
+		return result; //若未找到对应项，返回空list
 	}
 
 	/**
-	 * @author 董金玉
+	 * @author Byron Dong
 	 * @lastChangedBy Harvey Gong
 	 * @updateTime 2016/12/2
 	 * @param addressPO 需要修改的一条记录
@@ -172,8 +173,8 @@ public class AddressDataHelperImpl implements AddressDataHelper {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/30
 	 * @param
 	 * @return
@@ -184,15 +185,15 @@ public class AddressDataHelperImpl implements AddressDataHelper {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/30
 	 * @param list 含有重复字符串的list
 	 * @return List<String> 去除重复字符串的list
 	 */
 	private List<String> deletDuplicate(List<String> list) {
 
-		//判断相邻元素是否重复，重复则删除
+		//删除重复元素
 		for (int i = 0; i < list.size();i++) {
 			for(int j = i+1;j<list.size();){
 				if(list.get(i).equals(list.get(j))){

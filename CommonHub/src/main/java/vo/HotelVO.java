@@ -15,7 +15,7 @@ public final class HotelVO {
 	public String city;
 
 	//	酒店商圈
-	public String cycle;
+	public String circle;
 
 	//	酒店星级
 	public String level;
@@ -46,7 +46,7 @@ public final class HotelVO {
 		this.hotelID = hotelPO.getHotelID();
 		this.hotelName = hotelPO.getHotelName();
 		this.city = hotelPO.getCity();
-		this.cycle = hotelPO.getCity();
+		this.circle = hotelPO.getCity();
 		this.level = hotelPO.getLevel();
 		this.score = hotelPO.getScore();
 		this.introduction = hotelPO.getIntroduction();

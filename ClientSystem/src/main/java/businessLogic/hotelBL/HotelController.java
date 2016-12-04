@@ -64,21 +64,9 @@ public class HotelController implements HotelBLService {
 		return hotel.updateHotelRoomInfo(roomInfoVO,oldRoomType);
 	}
 
-	public ResultMessage updateCheckIn(CheckInVO checkInVO) {
-		return hotel.updateCheckIn(checkInVO);
-	}
-
-	public ResultMessage updateCheckOut(CheckOutVO checkOutVO) {
-		return hotel.updateCheckOut(checkOutVO);
-	}
-
 	public ResultMessage addHotel(HotelVO hotelVO) {
 		return hotel.addHotelInfo(hotelVO);
 	}
-
-//	public ResultMessage updateEvaluation(EvaluationVO evaluationVO) {
-//		return hotel.updateEvaluation(evaluationVO);
-//	}
 
 	public Iterator<HotelEvaluationVO> getEvaluations(String hotelID) {
 		return hotel.getEvaluations();
