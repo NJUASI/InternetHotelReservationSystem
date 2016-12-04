@@ -36,6 +36,7 @@ public class HotelTest {
 		
 	}
 
+	@Ignore
 	@Test
 	public void testGetHotelInfo() {
 		HotelVO hotelInfo = hotel.getHotelInfo(hotelWorkerID);
@@ -47,12 +48,14 @@ public class HotelTest {
 		assertEquals(hotel.updateHotelInfo(new HotelVO(hotel.getHotelPO())), ResultMessage.SUCCESS);
 	}
 
+	@Ignore
 	@Test
 	public void testGetHotelRoomInfo() {
 		Iterator<RoomInfoVO> itr = hotel.getHotelRoomInfo(hotelWorkerID);
 		assertEquals(itr.next().hotelID, "123");
 	}
 
+	@Ignore
 	@Test
 	public void testUpdateHotelRoomInfo() {
 		RoomInfoVO vo = new RoomInfoVO("12345678","高级大床房",10,5,100);

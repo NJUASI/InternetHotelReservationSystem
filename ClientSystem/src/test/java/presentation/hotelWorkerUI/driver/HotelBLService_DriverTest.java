@@ -1,7 +1,8 @@
 package presentation.hotelWorkerUI.driver;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import businessLogic.hotelBL.stub.HotelBLService_Stub;
@@ -9,6 +10,7 @@ import vo.HotelVO;
 
 public class HotelBLService_DriverTest {
 
+	@Ignore
 	@Test
 	public void test1() {
 		//test interface getHotelDetail

@@ -1,11 +1,12 @@
 package businessLogic.userBL;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import utilities.ResultMessage;
@@ -91,6 +92,7 @@ public class UserTest {
 	
 	}
 	
+	@Ignore
 	@Test
 	public void testAddHotel() {
 		//test the method addHotel
