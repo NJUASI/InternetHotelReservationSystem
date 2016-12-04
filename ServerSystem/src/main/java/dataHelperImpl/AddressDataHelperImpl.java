@@ -33,7 +33,7 @@ public class AddressDataHelperImpl implements AddressDataHelper {
 	 * @updateTime 2016/11/30 构造函数，初始化成员变量conn
 	 */
 	public AddressDataHelperImpl() {
-		this.conn = JDBCUtil.getGongConnection();
+		this.conn = JDBCUtil.getConnection();
 	}
 
 	/**
