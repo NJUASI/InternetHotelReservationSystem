@@ -7,7 +7,6 @@ import po.AddressPO;
 import po.HotelFixedPromotionPO;
 import po.SpecialSpanPromotionPO;
 import utilities.ResultMessage;
-import vo.AddressVO;
 
 public class PromotionDataService_Stub implements PromotionDataService {
 

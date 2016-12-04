@@ -15,6 +15,6 @@ public List<SpecialSpanPromotionPO> getHotelSpecialSpanPromotion(String hotelID)
 	
 	public ResultMessage updateSpecialSpanPromotion(SpecialSpanPromotionPO specialSpanPromotionPO);
 	
-	public ResultMessage deleteSpecialSpanPromotion(SpecialSpanPromotionPO specialSpanPromotionPO);
-	
+	public ResultMessage deleteSpecialSpanPromotion(String userID, String promotionName);
+
 }

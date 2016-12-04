@@ -75,4 +75,12 @@ public class SpecialSpanPromotionPO {
 		this.endDate = endDate;
 	}
 
+	@Override
+	public String toString() {
+		return "SpecialSpanPromotionPO [userID=" + userID + ", promotionName=" + promotionName + ", discount="
+				+ discount + "]";
+	}
+	
+	
+
 }

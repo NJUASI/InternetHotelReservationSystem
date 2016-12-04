@@ -12,7 +12,6 @@ import utilities.Operation;
 import utilities.ResultMessage;
 import utilities.RoomType;
 import utilities.SortStrategy;
-import vo.AddressVO;
 import vo.CheckInVO;
 import vo.CheckOutVO;
 import vo.HotelEvaluationVO;
@@ -89,7 +88,7 @@ public class HotelBLService_Stub implements HotelBLService{
 	
 	
 	@Override
-	public Iterator<HotelGeneralVO> getHotels(AddressVO addressVO) {
+	public Iterator<HotelGeneralVO> getHotels(String city,String circle) {
 		List<HotelGeneralVO> list = new ArrayList<HotelGeneralVO>();
 		list.add(new HotelGeneralVO("12345678", "thisHotel", "NanJing", "center", "4", 5, 123));
 		list.add(new HotelGeneralVO("12345678", "thisHotel", "NanJing", "center", "4", 5, 123));
@@ -98,12 +97,6 @@ public class HotelBLService_Stub implements HotelBLService{
 
 	@Override
 	public Iterator<HotelGeneralVO> sortHotels(SortStrategy sortStrategy) {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-	
-	@Override
-	public Iterator<HotelGeneralVO> getBookedHotels() {
 		// TODO 自动生成的方法存根
 		return null;
 	}

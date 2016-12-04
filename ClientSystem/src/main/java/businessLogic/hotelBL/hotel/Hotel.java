@@ -23,6 +23,16 @@ import vo.HotelVO;
 import vo.RemainRoomInfoVO;
 import vo.RoomInfoVO;
 
+/**
+ * @Description:TODO
+ * @author:Harvey Gong
+ * @time:2016年12月3日 下午9:52:08
+ */
+/**
+ * @Description:TODO
+ * @author:Harvey Gong
+ * @time:2016年12月3日 下午9:52:10
+ */
 public class Hotel{
 
 	private HotelDataService hotelDataService;
@@ -69,7 +79,14 @@ public class Hotel{
 
 	
 	
-	// 对hotelInfo的操作，get、update、add
+	/**
+	 * @Description:根据酒店工作人员id获取酒店的基本信息
+	 * @param hotelWorkerID
+	 * @return
+	 * HotelVO
+	 * @author: Harvey Gong
+	 * @time:2016年12月3日 下午9:44:37
+	 */
 	public HotelVO getHotelInfo(String hotelWorkerID) {
 		if(hotelPO == null){
 			return null;
@@ -77,9 +94,17 @@ public class Hotel{
 		else{
 			return new HotelVO(hotelPO);
 		}
-		
 	}
 
+	/**
+	 * @Description:更新酒店基本信息
+	 * @param hotelVO
+	 * @return
+	 * ResultMessage
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月3日 下午9:49:19
+	 */
 	public ResultMessage updateHotelInfo(HotelVO hotelVO) {
 
 		hotelPO = new HotelPO(hotelVO);
@@ -92,60 +117,125 @@ public class Hotel{
 
 	}
 	
+	/**
+	 * @Description:添加新的酒店
+	 * @param hotelVO
+	 * @return
+	 * ResultMessage
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月3日 下午9:49:40
+	 */
 	public ResultMessage addHotel(HotelVO hotelVO){
 		// TODO
 		return ResultMessage.SUCCESS;
 	}
 
-	//对roomInfo的操作，get、update
+	
+	/**
+	 * @Description:委托给room，获取客房信息
+	 * @param hotelWorkerID
+	 * @return
+	 * Iterator<RoomInfoVO>
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月3日 下午9:49:59
+	 */
 	public Iterator<RoomInfoVO> getHotelRoomInfo(String hotelWorkerID) {
 		return rooms.getRoomInfo();
 	}
 
+	/**
+	 * @Description:委托给room，更新客房信息
+	 * @param roomInfoVOList
+	 * @return
+	 * ResultMessage
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月3日 下午9:50:41
+	 */
 	public ResultMessage updateHotelRoomInfo(List<RoomInfoVO> roomInfoVOList) {
 		return rooms.updateHotelRoomInfo(roomInfoVOList);
 	}
 
 	
-	// 对checkIn、checkOut的操作，update
+	/**
+	 * @Description:更新入住信息
+	 * @param checkInVO
+	 * @return
+	 * ResultMessage
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月3日 下午9:51:02
+	 */
 	public ResultMessage updateCheckIn(CheckInVO checkInVO) {
 		// TODO
 		CheckInPO checkInPO = new CheckInPO(checkInVO);
-		ResultMessage msg = null;
 		try {
-			msg = hotelDataService.updateCheckInInfo(checkInPO);
+			return hotelDataService.updateCheckInInfo(checkInPO);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			return ResultMessage.FAIL;
 		}
-		return msg;
 	}
 
+	/**
+	 * @Description:更新退房信息
+	 * @param checkOutVO
+	 * @return
+	 * ResultMessage
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月3日 下午9:51:13
+	 */
 	public ResultMessage updateCheckOut(CheckOutVO checkOutVO) {
 		// TODO
 		CheckOutPO checkOutPO = new CheckOutPO(checkOutVO);
-		ResultMessage msg = null;
 		try {
-			msg = hotelDataService.updateCheckOutInfo(checkOutPO);
+			return hotelDataService.updateCheckOutInfo(checkOutPO);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			return ResultMessage.FAIL;
 		}
-		return msg;
 	}
 
 	
-	// 对remainRoomInfo的操作，get、update
+	/**
+	 * @Description:委托room，获取剩余客房信息
+	 * @param hotelWorkerID
+	 * @return
+	 * Iterator<RemainRoomInfoVO>
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月3日 下午9:52:12
+	 */
 	public Iterator<RemainRoomInfoVO> getRemainRoomInfo(String hotelWorkerID) {
 		return rooms.getRemainRooms();
 	}
 
 
+	/**
+	 * @Description:委托给room，更新剩余客房信息
+	 * @param hotelID
+	 * @param operation
+	 * @param roomInfo
+	 * @return
+	 * ResultMessage
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月3日 下午9:52:38
+	 */
 	public ResultMessage updateRemainRoomInfo(String hotelID, Operation operation, Map<RoomType, Integer> roomInfo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	
-	// 对evaluations的操作，get
+	/**
+	 * @Description:委托给evaluations，获取对该酒店的所有评价
+	 * @return
+	 * Iterator<HotelEvaluationVO>
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月3日 下午9:53:05
+	 */
 	public Iterator<HotelEvaluationVO> getEvaluations(){
 		return evaluations.getEvaluations();
 	}
@@ -154,6 +244,15 @@ public class Hotel{
 //		return evaluations.addEvaluation(evaluationVO);
 //	}
 	
+	/**
+	 * @Description:对外的接口，能够通过酒店的id获取酒店所在的城市商圈
+	 * @param hotelID
+	 * @return
+	 * Address
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月3日 下午9:54:07
+	 */
 	public Address getHotelAddress(String hotelID){
 		this.hotelID = hotelID;
 		initHotelPO();

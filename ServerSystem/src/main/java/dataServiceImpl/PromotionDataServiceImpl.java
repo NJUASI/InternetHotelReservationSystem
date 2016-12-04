@@ -67,12 +67,12 @@ public class PromotionDataServiceImpl extends UnicastRemoteObject implements Pro
 		return specialSpanPromotion.updateSpecialSpanPromotion(specialSpanPromotionPO);
 	}
 
-
 	@Override
-	public ResultMessage deleteSpecialSpanPromotion(SpecialSpanPromotionPO specialSpanPromotionPO) throws RemoteException {
-		return specialSpanPromotion.deleteSpecialSpanPromotion(specialSpanPromotionPO);
+	public ResultMessage deleteSpecialSpanPromotion(SpecialSpanPromotionPO specialSpanPromotionPO)
+			throws RemoteException {
+		// TODO 自动生成的方法存根
+		return null;
 	}
-
 
 	@Override
 	public List<AddressPO> getSpecialCirclePromotion(String city) throws RemoteException {
@@ -90,6 +90,5 @@ public class PromotionDataServiceImpl extends UnicastRemoteObject implements Pro
 	public double getSpecialCircleDiscount(String city, String cycle) throws RemoteException {
 		return specialCirclePromotion.getDiscout(city, cycle);
 	}
-
 
 }

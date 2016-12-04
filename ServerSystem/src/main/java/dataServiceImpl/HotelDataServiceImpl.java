@@ -89,7 +89,7 @@ public class HotelDataServiceImpl extends UnicastRemoteObject implements HotelDa
 	}
 	
 	@Override
-	public List<HotelGeneralPO> getHotelGeneralList(AddressVO addressVO) throws RemoteException {
+	public List<HotelGeneralPO> getHotelGenerals(String city, String circle) throws RemoteException {
 		// TODO 自动生成的方法存根
 		return null;
 	}

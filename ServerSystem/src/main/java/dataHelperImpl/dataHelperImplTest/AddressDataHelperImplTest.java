@@ -2,14 +2,22 @@ package dataHelperImpl.dataHelperImplTest;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import dataHelper.AddressDataHelper;
+import dataHelperImpl.AddressDataHelperImpl;
+
 public class AddressDataHelperImplTest {
 
+	AddressDataHelper helper;
+	
 	@Before
 	public void setUp() throws Exception {
+		 helper = new AddressDataHelperImpl();
 	}
 
 	@After
@@ -28,7 +36,10 @@ public class AddressDataHelperImplTest {
 
 	@Test
 	public void testGetCircle() {
-		fail("尚未实现");
+		List<String> list = helper.getCircle("南京");
+		assertEquals("新街口",list.get(0));
+		assertEquals("仙林中心",list.get(1));
+		
 	}
 
 	@Test

@@ -42,6 +42,10 @@ public class HotelGeneralPO implements Serializable{
 		this.minPrice = minPrice;
 	}
 	
+	public HotelGeneralPO() {
+		// TODO 自动生成的构造函数存根
+	}
+
 	public String getHotelID() {
 		return hotelID;
 	}
