@@ -54,15 +54,21 @@ public class Order {
 	public ResultMessage createOrder(final OrderVO orderVO) {
 		ResultMessage resultMessage = ResultMessage.ORDER_CREATE_FAILURE;
 		
-		try {
-			Iterator<Double> discountsInSpan = discountCalculator.getDiscountInSpan(new PreOrder(orderVO));
-			orderVO.orderGeneralVO.price = orderVO.previousPrice * discountsInSpan.next();
-			
-			resultMessage = orderDataService.createOrder(new OrderPO(orderVO));
-		} catch (RemoteException e) {
-			e.printStackTrace();
+		if (orderVO.orderGeneralVO.orderID != null || orderVO.orderGeneralVO.price != 0
+				|| orderVO.createTime != null || orderVO.checkOutTime != null
+				|| orderVO.score != 0 || orderVO.comment != null) {
+			return resultMessage;
+		}else {
+			try {
+				Iterator<Double> discountsInSpan = discountCalculator.getDiscountInSpan(new PreOrder(orderVO));
+				orderVO.orderGeneralVO.price = orderVO.previousPrice * discountsInSpan.next();
+				
+				resultMessage = orderDataService.createOrder(new OrderPO(orderVO));
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+			return resultMessage;
 		}
-		return resultMessage;
 	}
 
 	/**
