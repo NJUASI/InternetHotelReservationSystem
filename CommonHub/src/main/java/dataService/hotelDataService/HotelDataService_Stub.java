@@ -14,7 +14,6 @@ import po.RemainRoomInfoPO;
 import po.RoomInfoPO;
 import utilities.ResultMessage;
 import utilities.RoomType;
-import vo.AddressVO;
 
 public class HotelDataService_Stub implements HotelDataService  {
 	
@@ -84,7 +83,7 @@ public class HotelDataService_Stub implements HotelDataService  {
 
 
 	@Override
-	public List<HotelGeneralPO> getHotelGeneralList(AddressVO addressVO) {
+	public List<HotelGeneralPO> getHotelGenerals(String city,String circle) {
 		List<HotelGeneralPO> list = new ArrayList<HotelGeneralPO>();
 		list.add(new HotelGeneralPO("12345678","rujia","Nanjing","xianlin","4",5,123));
 		list.add(new HotelGeneralPO("12345678","ruji","Nanjing","xianlin","3",4,124));

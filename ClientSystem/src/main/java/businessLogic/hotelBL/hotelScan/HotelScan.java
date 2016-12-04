@@ -9,7 +9,6 @@ import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelGeneralPO;
 import utilities.SortStrategy;
-import vo.AddressVO;
 import vo.HotelGeneralVO;
 
 /**
@@ -43,9 +42,9 @@ public class HotelScan {
 	 * @author: Harvey Gong
 	 * @time:2016年11月29日 下午9:01:13
 	 */
-	public Iterator<HotelGeneralVO> getHotels(AddressVO addressVO){
+	public Iterator<HotelGeneralVO> getHotels(String city,String circle){
 		try {
-			hotelGeneralPOList = hotelDataService.getHotelGeneralList(addressVO);
+			hotelGeneralPOList = hotelDataService.getHotelGenerals(city,circle);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -81,14 +80,6 @@ public class HotelScan {
 			currentGeneralPOList = searchCriteria.get(i).meetCriteria(currentGeneralPOList);
 		}
 		return convertPOListToVOList(currentGeneralPOList).iterator();
-	}
-	
-	
-	public Iterator<HotelGeneralVO> getBookedList(){
-		
-		//TODO
-		
-		return null;
 	}
 	
 	/**

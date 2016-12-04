@@ -1,9 +1,7 @@
 package businessLogicService.promotionBLService;
 
 import java.util.Iterator;
-import java.util.List;
 
-import utilities.PreOrder;
 import utilities.ResultMessage;
 import vo.AddressVO;
 import vo.HotelFixedPromotionVO;

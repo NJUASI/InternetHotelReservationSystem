@@ -2,11 +2,15 @@ package presentation.guestUI.driver;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
 import businessLogic.hotelBL.stub.HotelBLService_Stub;
-import vo.AddressVO;
+import po.HotelGeneralPO;
 import vo.HotelGeneralVO;
 import vo.HotelVO;
 
@@ -25,9 +29,9 @@ public class HotelBLService_DriverTest {
 		//test interface getHotelList
 		HotelBLService_Stub stub = new HotelBLService_Stub();
 		HotelBLService_Driver driver = new HotelBLService_Driver(stub);
-		AddressVO addressVO = new AddressVO("Nanjing","Xianlin", 0.5);
-		HotelGeneralVO hotelGeneralVO1 = driver.hotelBLService.getHotels(addressVO).next();
-		HotelGeneralVO hotelGeneralVO2 = driver.hotelBLService.getHotels(addressVO).next();
+		Iterator<HotelGeneralVO> list = driver.hotelBLService.getHotels("南京", "仙林");
+		HotelGeneralVO hotelGeneralVO1 = list.next();
+		HotelGeneralVO hotelGeneralVO2 = list.next();
 		
 		assertEquals("thisHotel", hotelGeneralVO1.hotelName);
 		assertEquals("NanJing", hotelGeneralVO1.city);

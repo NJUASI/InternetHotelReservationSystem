@@ -8,7 +8,6 @@ import po.AddressPO;
 import po.HotelFixedPromotionPO;
 import po.SpecialSpanPromotionPO;
 import utilities.ResultMessage;
-import vo.AddressVO;
 
 public interface PromotionDataService extends Remote{
 	
@@ -17,7 +16,7 @@ public interface PromotionDataService extends Remote{
 	public ResultMessage updateHotelFixedPromotion(HotelFixedPromotionPO hotelFixedPromotionPO) throws RemoteException;
 
 	// 对特定期间策略的操作，get、add、update、delete
-	
+
 	public List<SpecialSpanPromotionPO> getHotelSpecialSpanPromotion(String hotelID) throws RemoteException;
 	
 	public List<SpecialSpanPromotionPO> getWebSpecialSpanPromotion() throws RemoteException;

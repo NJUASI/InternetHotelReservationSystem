@@ -11,7 +11,6 @@ import utilities.Operation;
 import utilities.ResultMessage;
 import utilities.RoomType;
 import utilities.SortStrategy;
-import vo.AddressVO;
 import vo.CheckInVO;
 import vo.CheckOutVO;
 import vo.HotelEvaluationVO;
@@ -100,8 +99,8 @@ public class HotelController implements HotelBLService {
 	
 	
 	// 浏览概况时的操作
-	public Iterator<HotelGeneralVO> getHotels(AddressVO addressVO) {
-		return hotelScan.getHotels(addressVO);
+	public Iterator<HotelGeneralVO> getHotels(String city,String circle) {
+		return hotelScan.getHotels(city,circle);
 	}
 	
 	public Iterator<HotelGeneralVO> sortHotels(SortStrategy sortStrategy) {

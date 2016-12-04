@@ -12,7 +12,6 @@ import po.HotelPO;
 import po.RemainRoomInfoPO;
 import po.RoomInfoPO;
 import utilities.ResultMessage;
-import vo.AddressVO;
 
 public interface HotelDataService extends Remote{
 
@@ -38,6 +37,6 @@ public interface HotelDataService extends Remote{
 	
 //	public ResultMessage updateEvaluation (EvaluationPO evaluationPO) throws RemoteException;
 
-	public List<HotelGeneralPO> getHotelGeneralList(AddressVO addressVO) throws RemoteException;
+	public List<HotelGeneralPO> getHotelGenerals(String city, String circle) throws RemoteException;
 
 }
