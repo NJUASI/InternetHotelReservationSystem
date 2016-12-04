@@ -15,19 +15,20 @@ import utilities.RoomType;
  */
 public class OrderVO {
 	
-	//	订单编号 客户编号 酒店编号 酒店名 酒店地址 最后预定价格 最晚订单执行时间 预计离开时间 订单状态
+	//	订单编号(create时无) 客户编号 酒店编号 酒店名 酒店地址 最后预定价格(create时无) 
+	//	最晚订单执行时间 预计离开时间 订单状态
 	public OrderGeneralVO orderGeneralVO;
 	
 	//	原价
 	public double previousPrice;
 	
-	//	订单生成时间
+	//	订单生成时间(create时无)
 	public LocalDateTime createTime;
 	
 	//	入住时间
 	public LocalDateTime checkInTime;
 	
-	//	退房时间（实际离开时间）
+	//	退房时间（实际离开时间）(create时无)
 	public LocalDateTime checkOutTime;
 
 	//	房间类型
