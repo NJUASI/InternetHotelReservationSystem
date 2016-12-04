@@ -7,6 +7,13 @@ import utilities.OrderState;
 import utilities.RoomType;
 import vo.OrderVO;
 
+/**
+ * 
+ * @author 61990
+ * lastChangedBy charles
+ * updateTime 2016/12/4
+ *
+ */
 public class OrderPO implements Serializable{
 	
 	/**
@@ -50,11 +57,11 @@ public class OrderPO implements Serializable{
 	//	特别要求
 	private String message;
 	
-	//	评论
-	private String comment;
-	
 	// 评分
 	private double score;
+		
+	//	评论
+	private String comment;
 	
 	public OrderPO(){
 		this.orderGeneralPO = new OrderGeneralPO();
@@ -73,6 +80,7 @@ public class OrderPO implements Serializable{
 		this.name = orderVO.name;
 		this.phone = orderVO.phone;
 		this.message = orderVO.message;
+		this.score = orderVO.score;
 	}
 
 	public OrderPO(String orderID, String guestID, String hotelID, String hotelName, String hotelAddress, 

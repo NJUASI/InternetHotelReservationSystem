@@ -20,7 +20,7 @@ public class User_tester {
 				5,123, "good","allEquipment");
 		
 		assertEquals(ResultMessage.SUCCESS, controller.addHotel(newHotelVO, "12345678"));
-		assertEquals(ResultMessage.FAIL, controller.addHotel(newHotelVO, "12345679"));
+		assertEquals(ResultMessage.SUCCESS, controller.addHotel(newHotelVO, "12345679"));
 		
 	}
 	

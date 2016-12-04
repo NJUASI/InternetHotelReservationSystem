@@ -9,6 +9,8 @@ import java.util.List;
 import dataHelper.OrderDataHelper;
 import dataHelperImpl.DataFactoryImpl;
 import dataService.orderDataService.OrderDataService;
+import po.GuestEvaluationPO;
+import po.HotelEvaluationPO;
 import po.OrderGeneralPO;
 import po.OrderPO;
 import utilities.OrderState;
@@ -220,6 +222,41 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 			}
 		}
 		
+		return result;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param evaluationVO 客户评价单个订单时产生的订单
+	 * @return 客户是否成功评价该订单
+	 * @throws RemoteException RMI
+	 */
+	@Override
+	public ResultMessage addEvaluation(GuestEvaluationPO guestEvaluationPO) throws RemoteException {
+		//！！！有问题
+		return orderDataHelper.setComment(guestEvaluationPO.getOrderID(), guestEvaluationPO.getComment());
+	}
+
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param hotelID 酒店工作人员／客户查看酒店的评论
+	 * @return 此酒店的所有评价
+	 * @throws RemoteException RMI
+	 */
+	@Override
+	public List<HotelEvaluationPO> getEvaluations(String hotelID) throws RemoteException {
+		List<OrderPO> hotelPOs = orderDataHelper.getAllOrderOfHotel(hotelID);
+		List<HotelEvaluationPO> result = new ArrayList<HotelEvaluationPO>();
+		
+		for (int i = 0; i < hotelPOs.size(); i++) {
+			OrderPO thisOrder = hotelPOs.get(i);
+			result.add(new HotelEvaluationPO(thisOrder.getGuestID(), thisOrder.getCheckInTime().toLocalDate(), 
+					thisOrder.getScore(), thisOrder.getComment()));
+		}
 		return result;
 	}
 	

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,12 +63,12 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			ps.setDouble(6, orderPO.getPrice());
 			ps.setObject(7, orderPO.getExpectExecuteTime());
 			ps.setObject(8, orderPO.getExpectLeaveTime());
-			ps.setObject(9, orderPO.getState());
+			ps.setString(9, orderPO.getState().toString());
 			ps.setDouble(10, orderPO.getPreviousPrice());
 			ps.setObject(11, orderPO.getCreateTime());
 			ps.setObject(12, orderPO.getCheckInTime());
 			ps.setObject(13, orderPO.getCheckOutTime());
-			ps.setObject(14, orderPO.getRoomType());
+			ps.setString(14, orderPO.getRoomType().toString());
 			ps.setInt(15, orderPO.getRoomNumCount());
 			ps.setString(16, orderPO.getRoomNumber());
 			ps.setInt(17, orderPO.getExpectGuestNumCount());
@@ -100,8 +99,8 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setObject(1, state); //此处硬编码1-2对应sql语句中问号的位置
-			ps.setInt(2, Integer.parseInt(orderID));
+			ps.setString(1, state.toString()); //此处硬编码1-2对应sql语句中问号的位置
+			ps.setObject(2, orderID);
 			
 			ps.execute();
 		} catch (SQLException e) {
@@ -125,7 +124,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setObject(1, comment);
-			ps.setInt(2, Integer.parseInt(orderID));
+			ps.setObject(2, orderID);
 			
 			ps.execute();
 		} catch (SQLException e) {
@@ -148,7 +147,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, Integer.parseInt(orderID));
+			ps.setObject(1, orderID);
 			rs = ps.executeQuery();
 			
 			if (rs.next()) {
@@ -291,20 +290,20 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	private OrderPO convert() {  //当ResultSet被赋值后使用
 		final OrderPO orderPO = new OrderPO();
 		try {
-			orderPO.setOrderID(String.valueOf(rs.getInt(1)));
-			orderPO.setGuestID(String.valueOf(rs.getInt(2)));
-			orderPO.setHotelID(String.valueOf(rs.getInt(3)));
+			orderPO.setOrderID(String.valueOf(rs.getObject(1)));
+			orderPO.setGuestID(String.valueOf(rs.getObject(2)));
+			orderPO.setHotelID(String.valueOf(rs.getObject(3)));
 			orderPO.setHotelName(rs.getString(4));
 			orderPO.setHotelAddress(String.valueOf(rs.getObject(5)));
 			orderPO.setPrice(rs.getDouble(6));
-			orderPO.setExpectExecuteTime((LocalDateTime) rs.getObject(7));
-			orderPO.setExpectLeaveTime((LocalDateTime) rs.getObject(8));
-			orderPO.setState((OrderState)rs.getObject(9));
+			orderPO.setExpectExecuteTime(rs.getTimestamp(7).toLocalDateTime());
+			orderPO.setExpectLeaveTime(rs.getTimestamp(8).toLocalDateTime());
+			orderPO.setState(OrderState.valueOf(rs.getString(9)));
 			orderPO.setPreviousPrice(rs.getDouble(10));
-			orderPO.setCreateTime((LocalDateTime) rs.getObject(11));
-			orderPO.setCheckInTime((LocalDateTime) rs.getObject(12));
-			orderPO.setCheckOutTime((LocalDateTime) rs.getObject(13));
-			orderPO.setRoomType((RoomType) rs.getObject(14));
+			orderPO.setCreateTime(rs.getTimestamp(11).toLocalDateTime());
+			orderPO.setCheckInTime(rs.getTimestamp(12).toLocalDateTime());
+			orderPO.setCheckOutTime(rs.getTimestamp(13).toLocalDateTime());
+			orderPO.setRoomType(RoomType.valueOf(rs.getString(14)));
 			orderPO.setRoomNumCount(rs.getInt(15));
 			orderPO.setRoomNumber(rs.getString(16));
 			orderPO.setExpectGuestNumCount(rs.getInt(17));

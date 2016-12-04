@@ -2,38 +2,43 @@ package dataHelperImpl.dataHelperImplTest;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import dataHelper.CreditDataHelper;
+import dataHelperImpl.CreditDataHelperImpl;
+import po.CreditPO;
+import utilities.ResultMessage;
+
 public class CreditDataHelperImplTest {
 
+	CreditDataHelper helper = null;
+	
 	@Before
 	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
-	@Test
-	public void testCreditDataHelperImpl() {
-		fail("尚未实现");
+		helper = new CreditDataHelperImpl();
 	}
 
 	@Test
 	public void testGetAll() {
-		fail("尚未实现");
+		
+		List<CreditPO>  list = helper.getAll("1000000001");	
+		
+		
+		assertEquals(LocalDateTime.of(2016, 12, 03, 02, 14,21),list.get(0).getTime());
+		assertEquals("345620161209",list.get(1).getOrderID());
+		assertEquals(222,list.get(0).getPreCredit(),0);
+		assertEquals(233,list.get(1).getCredit(),0);
+		assertEquals("executed",list.get(0).getReason());
 	}
 
 	@Test
 	public void testAdd() {
-		fail("尚未实现");
+		CreditPO creditPO = new CreditPO("1000000002",LocalDateTime.of(2016, 12, 07, 18, 14,21),"445620161212",111,444,"executed");
+		
+		assertEquals(ResultMessage.SUCCESS,helper.add(creditPO));
 	}
-
-	@Test
-	public void testClose() {
-		fail("尚未实现");
-	}
-
 }

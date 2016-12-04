@@ -2,53 +2,55 @@ package dataHelperImpl.dataHelperImplTest;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import dataHelper.HotelWorkerDataHelper;
+import dataHelperImpl.HotelWorkerDataHelperImpl;
+import po.HotelWorkerPO;
+import utilities.ResultMessage;
+
 public class HotelWorkerDataHelperImplTest {
 
+	HotelWorkerDataHelper helper = null;
+	
 	@Before
 	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
-	@Test
-	public void testHotelWorkerDataHelperImpl() {
-		fail("尚未实现");
+		helper  = new HotelWorkerDataHelperImpl();
 	}
 
 	@Test
 	public void testAdd() {
-		fail("尚未实现");
+		HotelWorkerPO hotelWorkerPO  = new HotelWorkerPO("11110000", "123456","金鹰"); 
+		assertEquals(ResultMessage.SUCCESS,helper.add(hotelWorkerPO));
 	}
 
 	@Test
 	public void testModify() {
-		fail("尚未实现");
+		HotelWorkerPO hotelWorkerPO  = new HotelWorkerPO("12345678", "111111","centerOfNanJing");
+		assertEquals(ResultMessage.SUCCESS,helper.modify(hotelWorkerPO));
+		
 	}
 
 	@Test
 	public void testDelete() {
-		fail("尚未实现");
+		assertEquals(ResultMessage.SUCCESS,helper.delete("11110000"));
 	}
 
 	@Test
 	public void testGetSingle() {
-		fail("尚未实现");
+		HotelWorkerPO hotelWorkerPO  = helper.getSingle("98765432");
+		assertEquals("000000",hotelWorkerPO.getPassword());
+		assertEquals("如家",hotelWorkerPO.getHotelName());
 	}
 
 	@Test
 	public void testGetAll() {
-		fail("尚未实现");
+		List<HotelWorkerPO> list = helper.getAll();
+		
+		assertEquals("000000",list.get(2).getPassword());
+		assertEquals("如家",list.get(2).getHotelName());
 	}
-
-	@Test
-	public void testClose() {
-		fail("尚未实现");
-	}
-
 }

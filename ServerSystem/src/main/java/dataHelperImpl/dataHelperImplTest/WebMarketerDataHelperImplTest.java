@@ -2,53 +2,52 @@ package dataHelperImpl.dataHelperImplTest;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import dataHelper.WebMarketerDataHelper;
+import dataHelperImpl.WebMarketerDataHelperImpl;
+import po.WebMarketerPO;
+import utilities.ResultMessage;
+
 public class WebMarketerDataHelperImplTest {
 
+	WebMarketerDataHelper helper = null;
+	
 	@Before
 	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
-	@Test
-	public void testWebMarketerDataHelperImpl() {
-		fail("尚未实现");
+	
+		helper = new WebMarketerDataHelperImpl();
 	}
 
 	@Test
 	public void testAdd() {
-		fail("尚未实现");
+		WebMarketerPO webMarketerPO = new WebMarketerPO("100002", "123456");
+		assertEquals(ResultMessage.SUCCESS,helper.add(webMarketerPO));
 	}
 
 	@Test
 	public void testModify() {
-		fail("尚未实现");
+		WebMarketerPO webMarketerPO = new WebMarketerPO("100001", "111111");
+		assertEquals(ResultMessage.SUCCESS,helper.modify(webMarketerPO));
 	}
 
 	@Test
 	public void testDelete() {
-		fail("尚未实现");
+		assertEquals(ResultMessage.SUCCESS,helper.delete("100002"));
 	}
 
 	@Test
 	public void testGetSingle() {
-		fail("尚未实现");
+		WebMarketerPO webMarketerPO = helper.getSingle("100000");
+		assertEquals("123456",webMarketerPO.getPassword());
 	}
 
 	@Test
 	public void testGetAll() {
-		fail("尚未实现");
+		List<WebMarketerPO> list = helper.getAll();
+		assertEquals("111111",list.get(1).getPassword());
 	}
-
-	@Test
-	public void testClose() {
-		fail("尚未实现");
-	}
-
 }

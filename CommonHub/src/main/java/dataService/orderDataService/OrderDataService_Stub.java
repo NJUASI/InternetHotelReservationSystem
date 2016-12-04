@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import po.GuestEvaluationPO;
+import po.HotelEvaluationPO;
 import po.OrderGeneralPO;
 import po.OrderPO;
 import utilities.OrderState;
@@ -16,7 +18,7 @@ import utilities.RoomType;
  * 
  * @author cuihua
  * lastChangedBy charles
- * updateTime 2016/11/29
+ * updateTime 2016/12/4
  *
  */
 public class OrderDataService_Stub implements OrderDataService {
@@ -177,6 +179,36 @@ public class OrderDataService_Stub implements OrderDataService {
 		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200,
 				LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), OrderState.EXECUTED));
 		return orderGenerals;
+	}
+	
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param evaluationVO 客户评价单个订单时产生的订单
+	 * @return 客户是否成功评价该订单
+	 * @throws RemoteException RMI
+	 */
+	public ResultMessage addEvaluation(GuestEvaluationPO guestEvaluationPO) throws RemoteException {
+		return ResultMessage.UPDATE_EVALUATION_SUCCESS;
+	}
+	
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param hotelID 酒店工作人员／客户查看酒店的评论
+	 * @return 此酒店的所有评价
+	 * @throws RemoteException RMI
+	 */
+	public List<HotelEvaluationPO> getEvaluations(String hotelID) throws RemoteException {
+		List<HotelEvaluationPO> result = new ArrayList<HotelEvaluationPO>();
+		result.add(new HotelEvaluationPO("1234567890", LocalDate.of(2016, 11, 21), 4.5, "very good"));
+		result.add(new HotelEvaluationPO("1234567891", LocalDate.of(2016, 11, 21), 4.5, "good"));
+		result.add(new HotelEvaluationPO("1234567891", LocalDate.of(2016, 11, 23), 4.5, "ok"));
+		return result;
 	}
 	
 	

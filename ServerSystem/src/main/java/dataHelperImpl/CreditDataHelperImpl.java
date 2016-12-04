@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,11 +56,11 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 			while (rs.next()) {
 				final CreditPO creditPO = new CreditPO();
 				creditPO.setGuestID(guestID);
-				creditPO.setTime((LocalDateTime) rs.getObject(2)); //此处硬编码2-6对应表项中元素的位置，已确定
-				creditPO.setOrderID(String.valueOf(rs.getInt(3)));
+				creditPO.setTime(rs.getTimestamp(2).toLocalDateTime()); //此处硬编码2-6对应表项中元素的位置，已确定
+				creditPO.setOrderID(String.valueOf(rs.getObject(3)));
 				creditPO.setPreCredit(rs.getDouble(4));
 				creditPO.setCredit(rs.getDouble(5));
-				creditPO.setReason((String)rs.getObject(6));
+				creditPO.setReason(String.valueOf(rs.getObject(6)));
 				
 				result.add(creditPO);
 			}
@@ -85,8 +84,8 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, Integer.parseInt(creditPO.getGuestID())); //此处硬编码1-6对应语句中元素的位置，已确定
-			ps.setInt(2, Integer.parseInt(creditPO.getOrderID()));
+			ps.setObject(1, creditPO.getGuestID()); //此处硬编码1-6对应语句中元素的位置，已确定
+			ps.setObject(2, creditPO.getOrderID());
 			ps.setObject(3, creditPO.getTime());
 			ps.setDouble(4, creditPO.getPreCredit()); 
 			ps.setDouble(5, creditPO.getCredit());
