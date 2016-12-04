@@ -12,21 +12,20 @@ import utilities.ResultMessage;
 import vo.RoomInfoVO;
 
 public class Rooms {
-	private List<RoomInfoPO> roomInfoPOList;
+
 	private String hotelID;
 	private HotelDataService hotelDataService;
 
 	public Rooms(String hotelID) {
 		this.hotelDataService = new HotelDataService_Stub();
 		this.hotelID = hotelID;
-		initRooms();
 	}
-
-	private void initRooms() {
+	
+	private List<RoomInfoPO> getRoomInfoList(){
 		try {
-			roomInfoPOList = hotelDataService.getRoomInfo(hotelID);
+			return hotelDataService.getRoomInfo(hotelID);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			return null;
 		}
 	}
 
@@ -41,7 +40,7 @@ public class Rooms {
 	public Iterator<RoomInfoVO> getRoomInfo(){
 		List<RoomInfoVO> roomInfoVOList = new ArrayList<RoomInfoVO>();
 
-		for(RoomInfoPO roomInfoPO:roomInfoPOList){
+		for(RoomInfoPO roomInfoPO:getRoomInfoList()){
 			roomInfoVOList.add(new RoomInfoVO(roomInfoPO));
 		}
 		return roomInfoVOList.iterator();
@@ -59,7 +58,9 @@ public class Rooms {
 	public ResultMessage addRoomInfo(RoomInfoVO roomInfoVO){
 		
 		try {
-			return hotelDataService.addRoomInfo(new RoomInfoPO(roomInfoVO));
+			RoomInfoPO po = new RoomInfoPO(roomInfoVO);
+			hotelDataService.addRoomInfo(po);
+			return hotelDataService.addRoomInfo(po);
 		} catch (RemoteException e) {
 			return ResultMessage.FAIL;
 		}
@@ -102,6 +103,23 @@ public class Rooms {
 	}
 	
 	/**
+	 * @Description:
+	 * @return
+	 * Iterator<String>
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月4日 下午6:53:53
+	 */
+	public Iterator<String> getRoomType(){
+		List<RoomInfoPO> list = getRoomInfoList();
+		List<String> allRoomType = new ArrayList<String>();
+		for(RoomInfoPO po : list){
+			allRoomType.add(po.getRoomType());
+		}
+		return allRoomType.iterator();
+	}
+	
+	/**
 	 * @Description:获取该酒店最低价格
 	 * @return
 	 * double
@@ -110,11 +128,11 @@ public class Rooms {
 	 * @time:2016年12月4日 下午2:11:12
 	 */
 	public double getLowestPrice(){
-		initRooms();
-		double min = roomInfoPOList.get(0).getPrice();
-		for(int i = 1;i<roomInfoPOList.size();i++){
-			if(min>roomInfoPOList.get(i).getPrice()){
-				min = roomInfoPOList.get(i).getPrice();
+		List<RoomInfoPO> list = getRoomInfoList();
+		double min = list.get(0).getPrice();
+		for(int i = 1;i<list.size();i++){
+			if(min>list.get(i).getPrice()){
+				min = list.get(i).getPrice();
 			}
 		}
 		return min;
