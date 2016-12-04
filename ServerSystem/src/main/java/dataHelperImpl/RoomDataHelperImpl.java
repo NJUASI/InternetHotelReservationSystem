@@ -32,9 +32,17 @@ public class RoomDataHelperImpl implements RoomDataHelper {
 		conn = JDBCUtil.getGongConnection();
 	}	
 
+	/**
+	 * @Description:根据酒店id获取该酒店的客房信息
+	 * @param hotelID
+	 * @return
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月4日 下午1:23:50
+	 */
 	@Override
 	public List<RoomInfoPO> getRoomInfo(String hotelID) {
-		sql = "select * from room where hotelID = ?";
+		sql = "select * from roomInfo where hotelID = ?";
 		List<RoomInfoPO> list = new ArrayList<RoomInfoPO>();
 		RoomInfoPO po;
 		try {
@@ -45,30 +53,106 @@ public class RoomDataHelperImpl implements RoomDataHelper {
 				po = new RoomInfoPO();
 				po.setHotelID(hotelID);
 				po.setRoomType(rs.getString(2));
+				po.setRoomNum(rs.getInt(3));
+				po.setRemainNum(rs.getInt(4));
+				po.setPrice(rs.getDouble(5));
+				list.add(po);
 			}
-			
+
+			return list;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
+	/**
+	 * @Description:根据新的客房信息和该信息修改前的客房类型，在数据库中找到旧数据并更新
+	 * @param roomInfoPO
+	 * @param oldRoomType
+	 * @return
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月4日 下午1:34:10
+	 */
 	@Override
-	public ResultMessage updateRoomInfo(RoomInfoPO roomInfoPO, String oldName) {
-		// TODO 自动生成的方法存根
-		return null;
+	public ResultMessage updateRoomInfo(RoomInfoPO roomInfoPO, String oldRoomType) {
+		sql = "update roomInfo set "
+				+ "roomType = ? , roomNum = ? , remainNum = ? , price = ?"
+				+ "where hotelID = ? and roomType = ?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setString(1, roomInfoPO.getRoomType());
+			ps.setInt(2, roomInfoPO.getRoomNum());
+			ps.setInt(3, roomInfoPO.getRemainNum());
+			ps.setDouble(4, roomInfoPO.getPrice());
+			ps.setString(5, roomInfoPO.getHotelID());
+			ps.setString(6, oldRoomType);
+
+			ps.execute();
+			return ResultMessage.SUCCESS;
+		} catch (SQLException e) {
+			return ResultMessage.FAIL;
+		}
 	}
 
+	/**
+	 * @Description:根据新增的传入的po，在数据库中插入一条数据
+	 * @param roomInfoPO
+	 * @return
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月4日 下午1:39:21
+	 */
 	@Override
 	public ResultMessage addRoomInfo(RoomInfoPO roomInfoPO) {
-		// TODO 自动生成的方法存根
-		return null;
+		sql = "insert into roominfo(hotelID,roomType,roomNum,remainNum,price)"
+				+"values(?,?,?,?,?)";
+
+		try {
+
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, roomInfoPO.getHotelID());
+			ps.setString(2, roomInfoPO.getRoomType());
+			ps.setInt(3, roomInfoPO.getRoomNum());
+			ps.setInt(4, roomInfoPO.getRemainNum());
+			ps.setDouble(5, roomInfoPO.getPrice());
+			ps.execute();
+
+			return ResultMessage.SUCCESS;
+		} catch (SQLException e) {
+			return ResultMessage.FAIL;
+		}
 	}
 
+	
+	/**
+	 * @Description:根据hotelID和roomType，删除一条具体的客房信息
+	 * @param hotelID
+	 * @param roomType
+	 * @return
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月4日 下午1:45:29
+	 */
 	@Override
 	public ResultMessage deleteRoomInfo(String hotelID, String roomType) {
-		// TODO 自动生成的方法存根
-		return null;
+		sql = "delete from roominfo where hotelID = ? and roomType = ?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setString(1, hotelID);
+			ps.setString(2, roomType);
+			
+			ps.execute();
+			return ResultMessage.SUCCESS;
+		} catch (SQLException e) {
+			return ResultMessage.FAIL;
+		}
 	}
 
 }

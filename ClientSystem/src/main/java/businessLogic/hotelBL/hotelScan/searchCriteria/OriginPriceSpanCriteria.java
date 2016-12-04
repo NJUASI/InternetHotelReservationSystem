@@ -3,7 +3,7 @@ package businessLogic.hotelBL.hotelScan.searchCriteria;
 import java.util.List;
 
 import businessLogic.hotelBL.hotelScan.SearchCriteria;
-import po.HotelGeneralPO;
+import po.HotelPO;
 
 public class OriginPriceSpanCriteria implements SearchCriteria {
 
@@ -25,8 +25,8 @@ public class OriginPriceSpanCriteria implements SearchCriteria {
 	 * @time:2016年11月29日 下午7:13:42
 	 */
 	@Override
-	public List<HotelGeneralPO> meetCriteria(List<HotelGeneralPO> hotelGeneralVOList) {
-		for(int i = 0;i<hotelGeneralVOList.size();i++){
+	public List<HotelPO> meetCriteria(List<HotelPO> hotelVOList) {
+		for(int i = 0;i<hotelVOList.size();i++){
 			
 		}
 		return null;

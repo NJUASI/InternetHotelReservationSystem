@@ -2,7 +2,6 @@ package po;
 
 import java.io.Serializable;
 
-import utilities.RoomType;
 import vo.RoomInfoVO;
 
 public class RoomInfoPO implements Serializable{
@@ -19,7 +18,7 @@ public class RoomInfoPO implements Serializable{
 	private String roomType;
 	
 	// 房间数
-	private int roomNumCount;
+	private int roomNum;
 	
 	// 剩余房间数量
 	private int remainNum;
@@ -31,14 +30,14 @@ public class RoomInfoPO implements Serializable{
 		super();
 		this.hotelID = hotelID;
 		this.roomType = roomType;	
-		this.roomNumCount = roomNumCount;
+		this.roomNum = roomNumCount;
 		this.price = price;
 	}
 	
 	public RoomInfoPO(RoomInfoVO roomInfoVO) {
 		this.hotelID = roomInfoVO.hotelID;
 		this.roomType = roomInfoVO.roomType;
-		this.roomNumCount = roomInfoVO.roomNumCount;
+		this.roomNum = roomInfoVO.roomNum;
 		this.price = roomInfoVO.price;
 	}
 	public RoomInfoPO() {
@@ -57,17 +56,25 @@ public class RoomInfoPO implements Serializable{
 	public void setRoomType(String roomType) {
 		this.roomType = roomType;
 	}
-	public int getRoomNumCount() {
-		return roomNumCount;
+	public int getRoomNum() {
+		return roomNum;
 	}
-	public void setRoomNumCount(int roomNumCount) {
-		this.roomNumCount = roomNumCount;
+	public void setRoomNum(int roomNumCount) {
+		this.roomNum = roomNumCount;
 	}
 	public double getPrice() {			
 		return price;
 	}
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public int getRemainNum() {
+		return remainNum;
+	}
+
+	public void setRemainNum(int remainNum) {
+		this.remainNum = remainNum;
 	}
 	
 }

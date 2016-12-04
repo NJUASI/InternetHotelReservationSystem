@@ -1,4 +1,4 @@
-package businessLogic.hotelBL.hotel.hotelComponents;
+package businessLogic.hotelBL.hotel;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import dataService.hotelDataService.HotelDataService;
+import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelEvaluationPO;
 import utilities.ResultMessage;
 import vo.HotelEvaluationVO;
@@ -16,9 +17,9 @@ public class Evaluations {
 	private HotelDataService hotelDataService;
 	private List<HotelEvaluationPO> evaluationList;
 	
-	public Evaluations(String hotelID, HotelDataService hotelDataService) {
+	public Evaluations(String hotelID) {
 		this.hotelID = hotelID;
-		this.hotelDataService = hotelDataService;
+		this.hotelDataService = new HotelDataService_Stub();
 		initEvaluations();
 	}
 

@@ -99,7 +99,7 @@ public class User {
 		ResultMessage msg = ResultMessage.HOTEL_EXIST;
 
 		if (hotel.getHotelInfo(hotelID) == null) {
-			msg = hotel.addHotel(newHotelVO);
+			msg = hotel.addHotelInfo(newHotelVO);
 		}
 
 		return msg;

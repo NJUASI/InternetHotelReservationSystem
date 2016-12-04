@@ -1,12 +1,12 @@
-package businessLogic.hotelBL.hotel.hotelComponents;
+package businessLogic.hotelBL.hotel;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import dataService.roomInfoDataService.RoomInfoDataService;
-import dataService.roomInfoDataService.RoomInfoDataService_stub;
+import dataService.hotelDataService.HotelDataService;
+import dataService.hotelDataService.HotelDataService_Stub;
 import po.RoomInfoPO;
 import utilities.ResultMessage;
 import vo.RoomInfoVO;
@@ -14,21 +14,17 @@ import vo.RoomInfoVO;
 public class Rooms {
 	private List<RoomInfoPO> roomInfoPOList;
 	private String hotelID;
-	private RoomInfoDataService roomInfoDataService;
+	private HotelDataService hotelDataService;
 
 	public Rooms(String hotelID) {
-		this.roomInfoDataService = new RoomInfoDataService_stub();;
+		this.hotelDataService = new HotelDataService_Stub();
 		this.hotelID = hotelID;
 		initRooms();
 	}
 
 	private void initRooms() {
-		initRoomInfoPoList();
-	}
-
-	private void initRoomInfoPoList() {
 		try {
-			roomInfoPOList = roomInfoDataService.getRoomInfo(hotelID);
+			roomInfoPOList = hotelDataService.getRoomInfo(hotelID);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -63,7 +59,7 @@ public class Rooms {
 	public ResultMessage addRoomInfo(RoomInfoVO roomInfoVO){
 		
 		try {
-			return roomInfoDataService.addRoomInfo(new RoomInfoPO(roomInfoVO));
+			return hotelDataService.addRoomInfo(new RoomInfoPO(roomInfoVO));
 		} catch (RemoteException e) {
 			return ResultMessage.FAIL;
 		}
@@ -80,14 +76,14 @@ public class Rooms {
 	 */
 	public ResultMessage deleteRoomInfo(String roomType){
 		try {
-			return roomInfoDataService.deleteRoomInfo(hotelID,roomType);
+			return hotelDataService.deleteRoomInfo(hotelID,roomType);
 		} catch (RemoteException e) {
 			return ResultMessage.FAIL;
 		}
 	}
 	
 	/**
-	 * @Description:更新hotel的客房信息,更新一条
+	 * @Description:更新一条hotel的客房信息
 	 * @param roomInfoVO
 	 * @return
 	 * ResultMessage
@@ -98,10 +94,29 @@ public class Rooms {
 	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO,String oldRoomType) {
 
 		try {
-			return roomInfoDataService.updateRoomInfo(new RoomInfoPO(roomInfoVO),oldRoomType);
+			return hotelDataService.updateRoomInfo(new RoomInfoPO(roomInfoVO),oldRoomType);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.FAIL;
 		}
+	}
+	
+	/**
+	 * @Description:获取该酒店最低价格
+	 * @return
+	 * double
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月4日 下午2:11:12
+	 */
+	public double getLowestPrice(){
+		initRooms();
+		double min = roomInfoPOList.get(0).getPrice();
+		for(int i = 1;i<roomInfoPOList.size();i++){
+			if(min>roomInfoPOList.get(i).getPrice()){
+				min = roomInfoPOList.get(i).getPrice();
+			}
+		}
+		return min;
 	}
 }

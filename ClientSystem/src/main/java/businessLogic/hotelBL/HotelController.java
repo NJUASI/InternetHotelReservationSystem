@@ -1,20 +1,16 @@
 package businessLogic.hotelBL;
  import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import businessLogic.hotelBL.hotel.Hotel;
 import businessLogic.hotelBL.hotelScan.HotelScan;
 import businessLogic.hotelBL.hotelScan.SearchCriteria;
 import businessLogicService.hotelBLService.HotelBLService;
-import utilities.Operation;
 import utilities.ResultMessage;
-import utilities.RoomType;
 import utilities.SortStrategy;
 import vo.CheckInVO;
 import vo.CheckOutVO;
 import vo.HotelEvaluationVO;
-import vo.HotelGeneralVO;
 import vo.HotelVO;
 import vo.RoomInfoVO;
 
@@ -77,7 +73,7 @@ public class HotelController implements HotelBLService {
 	}
 
 	public ResultMessage addHotel(HotelVO hotelVO) {
-		return hotel.addHotel(hotelVO);
+		return hotel.addHotelInfo(hotelVO);
 	}
 
 //	public ResultMessage updateEvaluation(EvaluationVO evaluationVO) {
@@ -90,15 +86,15 @@ public class HotelController implements HotelBLService {
 	
 	
 	// 浏览概况时的操作
-	public Iterator<HotelGeneralVO> getHotels(String city,String circle) {
+	public Iterator<HotelVO> getHotels(String city,String circle) {
 		return hotelScan.getHotels(city,circle);
 	}
 	
-	public Iterator<HotelGeneralVO> sortHotels(SortStrategy sortStrategy) {
+	public Iterator<HotelVO> sortHotels(SortStrategy sortStrategy) {
 		return hotelScan.sortHotels(sortStrategy);
 	}
 	
-	public Iterator<HotelGeneralVO> searchHotels(List<SearchCriteria> searchCriteria) {
+	public Iterator<HotelVO> searchHotels(List<SearchCriteria> searchCriteria) {
 		return hotelScan.searchHotels(searchCriteria);
 	}
 	

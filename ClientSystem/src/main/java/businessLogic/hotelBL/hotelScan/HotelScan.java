@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import businessLogic.hotelBL.hotel.Rooms;
 import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
-import po.HotelGeneralPO;
+import po.HotelPO;
 import utilities.SortStrategy;
-import vo.HotelGeneralVO;
+import vo.HotelVO;
 
 /**
  * @Description:浏览酒店的类，为酒店浏览及搜索提供排序及范围搜索的功能
@@ -21,10 +22,10 @@ public class HotelScan {
 	HotelDataService hotelDataService;
 	
 	//用以保存处于当前城市商圈的所有酒店概况
-	List<HotelGeneralPO> hotelGeneralPOList;
+	List<HotelPO> hotelPOList;
 	
 	//用以保存符合当前搜索条件的所有酒店概况
-	List<HotelGeneralPO> currentGeneralPOList;
+	List<HotelPO> currentPOList;
 	
 	//各个搜索器的工厂
 	SortComparatorFactory sortComparatorFactory; 
@@ -38,18 +39,18 @@ public class HotelScan {
 	 * @Description:根据城市商圈的信息查找所有位于该城市商圈的酒店
 	 * @param addressVO
 	 * @return
-	 * Iterator<HotelGeneralVO>
+	 * Iterator<HotelVO>
 	 * @author: Harvey Gong
 	 * @time:2016年11月29日 下午9:01:13
 	 */
-	public Iterator<HotelGeneralVO> getHotels(String city,String circle){
+	public Iterator<HotelVO> getHotels(String city,String circle){
 		try {
-			hotelGeneralPOList = hotelDataService.getHotelGenerals(city,circle);
+			hotelPOList = hotelDataService.getHotels(city,circle);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		currentGeneralPOList = hotelGeneralPOList;
-		return convertPOListToVOList(currentGeneralPOList).iterator();
+		currentPOList = hotelPOList;
+		return convertPOListToVOList(currentPOList).iterator();
 	}
 	
 	/**
@@ -60,12 +61,11 @@ public class HotelScan {
 	 * @author: Harvey Gong
 	 * @time:2016年11月29日 下午9:24:12
 	 */
-	public Iterator<HotelGeneralVO> sortHotels(SortStrategy sortStrategy){
-		List<HotelGeneralVO> hotelGeneralVOList = convertPOListToVOList(currentGeneralPOList);
-		hotelGeneralVOList.sort(sortComparatorFactory.createComparator(sortStrategy));
-		return hotelGeneralVOList.iterator();
+	public Iterator<HotelVO> sortHotels(SortStrategy sortStrategy){
+		List<HotelVO> hotelVOList = convertPOListToVOList(currentPOList);
+		hotelVOList.sort(sortComparatorFactory.createComparator(sortStrategy));
+		return hotelVOList.iterator();
 	}
-	
 	
 	/**
 	 * @Description:根据传入的搜索标准对当前currentGeneralPOList进行筛选
@@ -75,11 +75,11 @@ public class HotelScan {
 	 * @author: Harvey Gong
 	 * @time:2016年11月29日 下午8:33:25
 	 */
-	public Iterator<HotelGeneralVO> searchHotels(List<SearchCriteria> searchCriteria) {
+	public Iterator<HotelVO> searchHotels(List<SearchCriteria> searchCriteria) {
 		for(int i = 0;i < searchCriteria.size();i++){
-			currentGeneralPOList = searchCriteria.get(i).meetCriteria(currentGeneralPOList);
+			currentPOList = searchCriteria.get(i).meetCriteria(currentPOList);
 		}
-		return convertPOListToVOList(currentGeneralPOList).iterator();
+		return convertPOListToVOList(currentPOList).iterator();
 	}
 	
 	/**
@@ -90,12 +90,13 @@ public class HotelScan {
 	 * @author: Harvey Gong
 	 * @time:2016年11月29日 下午8:44:07
 	 */
-	private List<HotelGeneralVO> convertPOListToVOList(List<HotelGeneralPO> generalPOList){
-		List<HotelGeneralVO> hotelGeneralVOList = new ArrayList<HotelGeneralVO>();
-		for(HotelGeneralPO hotelGeneralPO:currentGeneralPOList){
-			hotelGeneralVOList.add(new HotelGeneralVO(hotelGeneralPO));
+	private List<HotelVO> convertPOListToVOList(List<HotelPO> POList){
+		List<HotelVO> hotelVOList = new ArrayList<HotelVO>();
+		for(HotelPO hotelGeneralPO:currentPOList){
+			double minPrice = new Rooms(hotelGeneralPO.getHotelID()).getLowestPrice();
+			hotelVOList.add(new HotelVO(hotelGeneralPO,minPrice));
 		}
-		return hotelGeneralVOList;
+		return hotelVOList;
 	}
 	
 }

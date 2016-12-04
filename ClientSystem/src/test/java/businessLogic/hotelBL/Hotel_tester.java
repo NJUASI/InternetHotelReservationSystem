@@ -9,7 +9,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import vo.HotelEvaluationVO;
-import vo.HotelGeneralVO;
 
 public class Hotel_tester {
 	

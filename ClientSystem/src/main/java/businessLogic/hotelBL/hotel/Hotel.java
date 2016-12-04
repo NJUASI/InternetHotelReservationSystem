@@ -2,20 +2,15 @@ package businessLogic.hotelBL.hotel;
 
 import java.rmi.RemoteException;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import businessLogic.hotelBL.hotel.hotelComponents.Evaluations;
-import businessLogic.hotelBL.hotel.hotelComponents.Rooms;
+
 import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
 import po.CheckInPO;
 import po.CheckOutPO;
 import po.HotelPO;
 import utilities.Address;
-import utilities.Operation;
 import utilities.ResultMessage;
-import utilities.RoomType;
 import vo.CheckInVO;
 import vo.CheckOutVO;
 import vo.HotelEvaluationVO;
@@ -57,7 +52,7 @@ public class Hotel{
 	}
 
 	private void initEvaluations() {
-		evaluations = new Evaluations(hotelID,hotelDataService);
+		evaluations = new Evaluations(hotelID);
 	}
 
 	private void initRooms() {
@@ -76,8 +71,7 @@ public class Hotel{
 		hotelDataService = new HotelDataService_Stub();
 	}
 
-	
-	
+
 	/**
 	 * @Description:根据酒店工作人员id获取酒店的基本信息
 	 * @param hotelWorkerID
@@ -87,12 +81,7 @@ public class Hotel{
 	 * @time:2016年12月3日 下午9:44:37
 	 */
 	public HotelVO getHotelInfo(String hotelWorkerID) {
-		if(hotelPO == null){
-			return null;
-		}
-		else{
-			return new HotelVO(hotelPO);
-		}
+		return new HotelVO(hotelPO);
 	}
 
 	/**
@@ -115,7 +104,7 @@ public class Hotel{
 		return ResultMessage.FAIL;
 
 	}
-	
+
 	/**
 	 * @Description:添加新的酒店
 	 * @param hotelVO
@@ -125,12 +114,18 @@ public class Hotel{
 	 * @author: Harvey Gong
 	 * @time:2016年12月3日 下午9:49:40
 	 */
-	public ResultMessage addHotel(HotelVO hotelVO){
-		// TODO
-		return ResultMessage.SUCCESS;
+	public ResultMessage addHotelInfo(HotelVO hotelVO){
+		hotelPO = new HotelPO(hotelVO);
+
+		try {
+			return hotelDataService.addHotelInfo(hotelPO);
+		} catch (RemoteException e) {
+			return ResultMessage.FAIL;
+		}
+
 	}
 
-	
+
 	/**
 	 * @Description:委托给room，获取客房信息
 	 * @param hotelWorkerID
@@ -142,6 +137,32 @@ public class Hotel{
 	 */
 	public Iterator<RoomInfoVO> getHotelRoomInfo(String hotelWorkerID) {
 		return rooms.getRoomInfo();
+	}
+	
+	/**
+	 * @Description:委托给room，增加一条客房信息
+	 * @param roomInfoVO
+	 * @return
+	 * ResultMessage
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月4日 下午3:13:09
+	 */
+	public ResultMessage addRoomInfo(RoomInfoVO roomInfoVO){
+		return rooms.addRoomInfo(roomInfoVO);
+	}
+	
+	/**
+	 * @Description:委托给room，删除一条客房信息
+	 * @param roomType
+	 * @return
+	 * ResultMessage
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月4日 下午3:14:25
+	 */
+	public ResultMessage deleteRoomInfo(String roomType){
+		return rooms.deleteRoomInfo(roomType);
 	}
 
 	/**
@@ -157,7 +178,7 @@ public class Hotel{
 		return rooms.updateHotelRoomInfo(roomInfoVO,oldRoomType);
 	}
 
-	
+
 	/**
 	 * @Description:更新入住信息
 	 * @param checkInVO
@@ -196,7 +217,7 @@ public class Hotel{
 		}
 	}
 
-	
+
 	/**
 	 * @Description:委托给evaluations，获取对该酒店的所有评价
 	 * @return
@@ -209,10 +230,10 @@ public class Hotel{
 		return evaluations.getEvaluations();
 	}
 
-//	public ResultMessage updateEvaluation(EvaluationVO evaluationVO) {
-//		return evaluations.addEvaluation(evaluationVO);
-//	}
-	
+	//	public ResultMessage updateEvaluation(EvaluationVO evaluationVO) {
+	//		return evaluations.addEvaluation(evaluationVO);
+	//	}
+
 	/**
 	 * @Description:对外的接口，能够通过酒店的id获取酒店所在的城市商圈
 	 * @param hotelID
@@ -227,8 +248,8 @@ public class Hotel{
 		initHotelPO();
 		return new Address(hotelPO.getCity(), hotelPO.getCircle());
 	}
-	
-	
+
+
 	/**
 	 * 方便测试用，严格来说不能暴露，后期删除
 	 * @return

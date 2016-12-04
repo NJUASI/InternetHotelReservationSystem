@@ -8,7 +8,6 @@ import java.util.List;
 import po.CheckInPO;
 import po.CheckOutPO;
 import po.HotelEvaluationPO;
-import po.HotelGeneralPO;
 import po.HotelPO;
 import po.RoomInfoPO;
 import utilities.ResultMessage;
@@ -19,7 +18,7 @@ public class HotelDataService_Stub implements HotelDataService  {
 	
 	public HotelPO getHotelInfo(String hotelID) {
 		return new HotelPO("12345678", "thisHotel", "NanJing", "center", "address", "4",
-				5,123,"good", "allEquipment");
+				5,"good", "allEquipment");
 	}
 
 	
@@ -27,14 +26,6 @@ public class HotelDataService_Stub implements HotelDataService  {
 		return ResultMessage.SUCCESS;
 	}
 
-	
-	public List<RoomInfoPO> getHotelRoomInfo(String hotelID) {
-		List<RoomInfoPO> list = new ArrayList<RoomInfoPO>();
-		list.add(new RoomInfoPO("123", "单人套房", 1, 100));
-		return list;
-	}
-
-	
 	public ResultMessage updateHotelRoomInfo(List<RoomInfoPO> list) {
 		return ResultMessage.SUCCESS;
 	}
@@ -51,7 +42,7 @@ public class HotelDataService_Stub implements HotelDataService  {
 
 	public HotelPO getHotelDetail(String hotelID) {
 		return new HotelPO("12345678", "thisHotel", "NanJing", "center", "address", "4",
-				5,123,"good", "allEquipment");
+				5,"good", "allEquipment");
 	}
 	
 //	public ResultMessage addEvaluation(EvaluationPO evaluationPO) {
@@ -71,12 +62,50 @@ public class HotelDataService_Stub implements HotelDataService  {
 
 
 	@Override
-	public List<HotelGeneralPO> getHotelGenerals(String city,String circle) {
-		List<HotelGeneralPO> list = new ArrayList<HotelGeneralPO>();
-		list.add(new HotelGeneralPO("12345678","rujia","Nanjing","xianlin","4",5,123));
-		list.add(new HotelGeneralPO("12345678","ruji","Nanjing","xianlin","3",4,124));
-		list.add(new HotelGeneralPO("12345679","ruja","Nanjing","xianlin","2",3,125));
+	public List<HotelPO> getHotels(String city,String circle) {
+		List<HotelPO> list = new ArrayList<HotelPO>();
+		list.add(new HotelPO("12345678", "thisHotel", "NanJing", "center", "address", "4",
+				5,"good", "allEquipment"));
+		list.add(new HotelPO("12345678", "thisHotel", "NanJing", "center", "address", "4",
+				5,"good", "allEquipment"));
+		list.add(new HotelPO("12345678", "thisHotel", "NanJing", "center", "address", "4",
+				5,"good", "allEquipment"));
 		return list;
+	}
+
+
+	@Override
+	public List<RoomInfoPO> getRoomInfo(String hotelID) throws RemoteException {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
+
+	@Override
+	public ResultMessage updateRoomInfo(RoomInfoPO roomInfoPO, String oldRoomType) throws RemoteException {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
+
+	@Override
+	public ResultMessage addRoomInfo(RoomInfoPO roomInfoPO) throws RemoteException {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
+
+	@Override
+	public ResultMessage deleteRoomInfo(String hotelID, String roomType) throws RemoteException {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
+
+	@Override
+	public ResultMessage addHotelInfo(HotelPO hotelPO) throws RemoteException {
+		// TODO 自动生成的方法存根
+		return null;
 	}
 
 }

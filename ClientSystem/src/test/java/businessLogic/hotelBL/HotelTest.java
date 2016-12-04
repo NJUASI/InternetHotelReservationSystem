@@ -79,7 +79,7 @@ public class HotelTest {
 
 	@Test
 	public void testAddHotel() {
-		assertEquals(hotel.addHotel(new HotelVO(hotel.getHotelPO())), ResultMessage.SUCCESS);
+		assertEquals(hotel.addHotelInfo(new HotelVO(hotel.getHotelPO())), ResultMessage.SUCCESS);
 	}
 
 //	@Test
