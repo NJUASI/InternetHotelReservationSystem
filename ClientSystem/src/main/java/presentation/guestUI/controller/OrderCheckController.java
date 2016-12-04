@@ -78,7 +78,7 @@ public class OrderCheckController {
 
 				orderVO = new OrderVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 250, 200, createTime,
 						checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, roomType, 2, "301  302", 2,
-						"zhangsan", "13554321234", "no", null);
+						"zhangsan", "13554321234", "no", 0, null);
 				//
 				if (orderVO.orderGeneralVO.state == OrderState.EXECUTED) {
 					if(orderVO.comment != null){

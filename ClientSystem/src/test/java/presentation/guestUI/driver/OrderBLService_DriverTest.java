@@ -19,7 +19,7 @@ import vo.OrderVO;
  * 
  * @author cuihua
  * lastChangedBy charles
- * updateTime 2016/12/2
+ * updateTime 2016/12/4
  * 
  * 添加addEvaluation测试
  */
@@ -28,7 +28,7 @@ public class OrderBLService_DriverTest {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
+	 * @updateTime 2016/12/4
 	 * 
 	 * test interface createOrder
 	 */
@@ -48,7 +48,7 @@ public class OrderBLService_DriverTest {
 		
 		final OrderVO orderVO = new OrderVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
 				250, 200, createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, 
-				orderState, roomType, 2, "301  302", 2, "zhangsan", "13554321234", "no","good");
+				orderState, roomType, 2, "301  302", 2, "zhangsan", "13554321234", "no", 4.3, "good");
 		
 		assertEquals(ResultMessage.SUCCESS, driver.orderBLService.createOrder(orderVO));
 	}

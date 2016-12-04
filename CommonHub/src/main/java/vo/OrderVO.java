@@ -6,6 +6,13 @@ import po.OrderPO;
 import utilities.OrderState;
 import utilities.RoomType;
 
+/**
+ * 
+ * @author 61990
+ * lastChangedBy charles
+ * updateTime 2016/12/4
+ *
+ */
 public class OrderVO {
 	
 	//	订单编号 客户编号 酒店编号 酒店名 酒店地址 最后预定价格 最晚订单执行时间 预计离开时间 订单状态
@@ -44,15 +51,18 @@ public class OrderVO {
 	//	特别要求
 	public String message;
 	
-	//评价
-	public  String comment;
+	//	评分
+	public double score;
+	
+	//	评价
+	public String comment;
 	
 
 	public OrderVO(String orderID, String guestID, String hotelID, String hotelName, String hotelAddress, 
 			double previousPrice, double price, LocalDateTime createTime, LocalDateTime checkInTime,
 			LocalDateTime checkOutTime, LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime, 
 			OrderState state, RoomType roomType, int roomNumCount, String roomNumber, 
-			int expectGuestNumCount, String name, String phone, String message,String comment) {
+			int expectGuestNumCount, String name, String phone, String message, double score, String comment) {
 		super();
 		this.orderGeneralVO = new OrderGeneralVO(orderID, guestID, hotelID, hotelName, hotelAddress,
 				price, expectExecuteTime, expectLeaveTime, state);
@@ -68,12 +78,13 @@ public class OrderVO {
 		this.name = name;
 		this.phone = phone;
 		this.message = message;
+		this.score = score;
 		this.comment = comment;
 	}
 
 	public OrderVO(OrderGeneralVO orderGeneralVO, double previousPrice, LocalDateTime createTime, LocalDateTime checkInTime, 
 			LocalDateTime checkOutTime, RoomType roomType, int roomNumCount, String roomNumber, String name, 
-			String phone, String message,String comment) {
+			String phone, String message, double score, String comment) {
 		super();
 		this.orderGeneralVO = orderGeneralVO;
 		
@@ -87,6 +98,7 @@ public class OrderVO {
 		this.name = name;
 		this.phone = phone;
 		this.message = message;
+		this.score = score;
 		this.comment = comment;
 	}
 	
@@ -103,6 +115,7 @@ public class OrderVO {
 		this.name = orderPO.getName();
 		this.phone = orderPO.getPhone();
 		this.message = orderPO.getMessage();
+		this.score = orderPO.getScore();
 		this.comment = orderPO.getComment();
 	}
 }

@@ -9,6 +9,7 @@ import java.util.List;
 import businessLogic.promotionBL.DiscountInSpan;
 import businessLogic.promotionBL.discountCalculation.DiscountCalculator;
 import dataService.orderDataService.OrderDataService;
+import po.GuestEvaluationPO;
 import po.OrderGeneralPO;
 import po.OrderPO;
 import rmi.RemoteHelper;
@@ -23,7 +24,7 @@ import vo.OrderVO;
  * 
  * @author charles
  * lastChangedBy charles
- * updateTime 2016/11/27
+ * updateTime 2016/12/4
  *
  */
 public class Order {
@@ -273,8 +274,23 @@ public class Order {
 	 * @param evaluationVO 客户评价单个订单时产生的订单
 	 * @return 客户是否成功评价该订单
 	 */
-	public ResultMessage addEvaluation(GuestEvaluationVO evaluationVO){
-		return null;
+	public ResultMessage addEvaluation(GuestEvaluationVO evaluationVO) {
+		ResultMessage msg1 = ResultMessage.UPDATE_EVALUATION_FAILURE;
+
+		//理应为hotel.scoreUpdate_Fail  酒店那边应该提供一个更新评分的接口
+		ResultMessage msg2 = ResultMessage.UPDATE_EVALUATION_SUCCESS;
+		try {
+			msg1 = orderDataService.addEvaluation(new GuestEvaluationPO(evaluationVO));
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
+		//理应为hotel.scoreUpdate_Fail  酒店那边应该提供一个更新评分的接口
+		if (msg1 == ResultMessage.UPDATE_EVALUATION_SUCCESS && msg2 == ResultMessage.UPDATE_EVALUATION_SUCCESS) {
+			return ResultMessage.UPDATE_EVALUATION_SUCCESS;
+		}else {
+			return ResultMessage.UPDATE_EVALUATION_FAILURE;
+		}
 		
 	}
 	

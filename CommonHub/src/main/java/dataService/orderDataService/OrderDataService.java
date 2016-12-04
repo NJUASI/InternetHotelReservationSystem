@@ -5,6 +5,8 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.List;
 
+import po.GuestEvaluationPO;
+import po.HotelEvaluationPO;
 import po.OrderGeneralPO;
 import po.OrderPO;
 import utilities.ResultMessage;
@@ -117,6 +119,26 @@ public interface OrderDataService extends Remote {
 	 * @throws RemoteException RMI
 	 */
 	List<OrderGeneralPO> getAllUnexecutedOrderGeneral(LocalDate date) throws RemoteException;
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param evaluationVO 客户评价单个订单时产生的订单
+	 * @return 客户是否成功评价该订单
+	 * @throws RemoteException RMI
+	 */
+	ResultMessage addEvaluation(GuestEvaluationPO guestEvaluationPO) throws RemoteException;
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param hotelID 酒店工作人员／客户查看酒店的评论
+	 * @return 此酒店的所有评价
+	 * @throws RemoteException RMI
+	 */
+	List<HotelEvaluationPO> getEvaluations(String hotelID) throws RemoteException;
 	
 	/**
 	 * @author charles
