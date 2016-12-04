@@ -88,4 +88,10 @@ public class HotelBLService_Stub implements HotelBLService{
 		return null;
 	}
 
+	@Override
+	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO, String roomType) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
 }

@@ -1,13 +1,12 @@
 package businessLogic.promotionBL.stub;
 
 import java.util.Iterator;
-import java.util.List;
 
 import businessLogicService.promotionBLService.PromotionBLService;
-import vo.AddressVO;
-import vo.HotelFixedPromotionVO;
 import utilities.PreOrder;
 import utilities.ResultMessage;
+import vo.AddressVO;
+import vo.HotelFixedPromotionVO;
 import vo.SpecialSpanPromotionVO;
 
 public class PromotionBLService_Stub implements PromotionBLService{

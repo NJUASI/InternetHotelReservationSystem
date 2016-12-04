@@ -3,6 +3,14 @@ package vo;
 import po.HotelPO;
 import utilities.OrderState;
 
+/**
+ * @Description:hotelVO中存有酒店的基本信息：
+ * 编号、名称、城市、商圈、地址、星级、评分、最低价格、简介、设施服务
+ * 订单状态（对于当前查看酒店）
+ * @author:Harvey Gong
+ * lastChangedBy:Harvey Gong
+ * @time:2016年12月4日 下午9:44:56
+ */
 public final class HotelVO {
 
 	//	酒店编号
@@ -16,6 +24,9 @@ public final class HotelVO {
 
 	//	酒店商圈
 	public String circle;
+	
+	//  酒店地址
+	public String address;
 
 	//	酒店星级
 	public String level;
@@ -23,7 +34,7 @@ public final class HotelVO {
 	//	评分
 	public double score;
 
-	// 最低价格
+	//  最低价格
 	public double minPrice;
 
 	//	简介
@@ -42,17 +53,34 @@ public final class HotelVO {
 		
 	}
 
+	/**
+	 * @Description:酒店工作人员浏览时，调用此构造方法
+	 * @param hotelPO
+	 * @author: Harvey Gong
+	 * lastChangedBy: Harvey Gong
+	 * @time:2016年12月4日 下午9:48:28
+	 */
 	public HotelVO(HotelPO hotelPO) {
 		this.hotelID = hotelPO.getHotelID();
 		this.hotelName = hotelPO.getHotelName();
 		this.city = hotelPO.getCity();
 		this.circle = hotelPO.getCity();
+		this.address = hotelPO.getAddress();
 		this.level = hotelPO.getLevel();
 		this.score = hotelPO.getScore();
 		this.introduction = hotelPO.getIntroduction();
 		this.equipment = hotelPO.getEquipment();
 	}
 	
+	/**
+	 * @Description:酒店浏览时，调用此构造方法
+	 * @param hotelPO
+	 * @param minPrice
+	 * @param orderState
+	 * @author: Harvey Gong
+	 * lastChangedBy: Harvey Gong
+	 * @time:2016年12月4日 下午9:48:04
+	 */
 	public HotelVO(HotelPO hotelPO, double minPrice,OrderState orderState) {
 		this(hotelPO);
 		this.minPrice = minPrice;

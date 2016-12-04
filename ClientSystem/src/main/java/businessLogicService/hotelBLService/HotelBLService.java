@@ -6,7 +6,6 @@ import java.util.List;
 import businessLogic.hotelBL.hotelScan.SearchCriteria;
 import utilities.ResultMessage;
 import utilities.SortStrategy;
-import vo.HotelEvaluationVO;
 import vo.HotelVO;
 import vo.RoomInfoVO;
 
@@ -18,9 +17,7 @@ public interface HotelBLService {
 
 	public Iterator<RoomInfoVO> getHotelRoomInfo (String hotelWorkerID);
 
-	public ResultMessage updateHotelRoomInfo (RoomInfoVO roomInfoVO);
-
-	public Iterator<HotelEvaluationVO> getEvaluations (String hotelID);
+	public ResultMessage updateHotelRoomInfo (RoomInfoVO roomInfoVO,String roomType);
 
 	public Iterator<HotelVO> getHotels(String city,String circle);
 	

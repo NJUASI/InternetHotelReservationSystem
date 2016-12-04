@@ -10,9 +10,7 @@ import businessLogic.promotionBL.discountCalculation.CalculateDiscount;
 import businessLogic.promotionBL.discountCalculation.discountOfPromotions.SpecialSpanDiscount;
 import dataService.promotionDataService.PromotionDataService;
 import dataService.promotionDataService.PromotionDataService_Stub;
-import javafx.scene.control.Separator;
 import po.SpecialSpanPromotionPO;
-import utilities.PreOrder;
 import utilities.ResultMessage;
 import vo.SpecialSpanPromotionVO;
 

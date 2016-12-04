@@ -11,7 +11,6 @@ import po.HotelEvaluationPO;
 import po.HotelPO;
 import po.RoomInfoPO;
 import utilities.ResultMessage;
-import utilities.RoomType;
 
 public class HotelDataService_Stub implements HotelDataService  {
 	

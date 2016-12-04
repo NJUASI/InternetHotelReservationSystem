@@ -8,15 +8,12 @@ import businessLogic.hotelBL.hotelScan.SearchCriteria;
 import businessLogicService.hotelBLService.HotelBLService;
 import utilities.ResultMessage;
 import utilities.SortStrategy;
-import vo.CheckInVO;
-import vo.CheckOutVO;
-import vo.HotelEvaluationVO;
 import vo.HotelVO;
 import vo.RoomInfoVO;
 
 
 /**
- * @Description:TODO
+ * @Description:对一个具体酒店的操作
  * @author:Harvey Gong
  * @time:2016年11月29日 下午6:43:08
  */
@@ -68,11 +65,6 @@ public class HotelController implements HotelBLService {
 		return hotel.addHotelInfo(hotelVO);
 	}
 
-	public Iterator<HotelEvaluationVO> getEvaluations(String hotelID) {
-		return hotel.getEvaluations();
-	}
-	
-	
 	// 浏览概况时的操作
 	public Iterator<HotelVO> getHotels(String city,String circle) {
 		return hotelScan.getHotels(city,circle);
@@ -86,12 +78,4 @@ public class HotelController implements HotelBLService {
 		return hotelScan.searchHotels(searchCriteria);
 	}
 	
-	@Override
-	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO) {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-
-	
-
 }

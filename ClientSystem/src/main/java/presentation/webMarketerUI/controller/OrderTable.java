@@ -1,7 +1,5 @@
 package presentation.webMarketerUI.controller;
 
-import java.time.LocalDate;
-
 import javafx.beans.property.SimpleStringProperty;
 
 public class OrderTable {
