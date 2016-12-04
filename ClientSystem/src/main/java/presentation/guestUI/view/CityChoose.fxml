@@ -20,24 +20,22 @@
 
 <StackPane fx:id="right" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.guestUI.controller.HotelSearchController">
    <children>
-      <Pane fx:id="cityAndCircle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
+      <Pane fx:id="cityAndCircle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" visible="false">
          <children>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
                <children>
-                  <Label layoutX="401.0" layoutY="14.0" prefHeight="39.0" prefWidth="91.0" text="输入城市">
+                  <Label layoutX="382.0" layoutY="71.0" prefHeight="39.0" text="选择城市商圈">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="163.0" layoutY="172.0" text="输入城市：" />
-                  <Separator layoutX="141.0" layoutY="122.0" prefHeight="3.0" prefWidth="586.0" />
-                  <Button layoutX="659.0" layoutY="182.0" mnemonicParsing="false" onMouseClicked="#openHotelCheck" prefHeight="3.0" text="搜索" />
-                  <Separator layoutX="211.0" layoutY="271.0" prefHeight="3.0" prefWidth="458.0" />
-                  <TextField fx:id="cityChoose" layoutX="252.0" layoutY="167.0" prefHeight="30.0" prefWidth="137.0" />
-                  <ComboBox fx:id="cycleChoose" layoutX="507.0" layoutY="182.0" prefHeight="30.0" prefWidth="137.0" />
-                  <Label layoutX="417.0" layoutY="187.0" text="选择商圈：" />
-                  <ComboBox layoutX="252.0" layoutY="212.0" prefHeight="30.0" prefWidth="137.0" />
-                  <Label layoutX="163.0" layoutY="217.0" text="选择城市：" />
+                  <Separator layoutX="141.0" layoutY="142.0" prefHeight="3.0" prefWidth="586.0" />
+                  <Button layoutX="688.0" layoutY="192.0" mnemonicParsing="false" onAction="#openHotelCheck" prefHeight="3.0" text="搜索" />
+                  <Separator layoutX="205.0" layoutY="263.0" prefHeight="3.0" prefWidth="458.0" />
+                  <ComboBox fx:id="cycleChoose" layoutX="508.0" layoutY="192.0" prefHeight="30.0" prefWidth="137.0" />
+                  <Label layoutX="417.0" layoutY="197.0" text="选择商圈：" />
+                  <ComboBox fx:id="cityChoose" layoutX="252.0" layoutY="192.0" prefHeight="30.0" prefWidth="137.0" />
+                  <Label layoutX="168.0" layoutY="197.0" text="选择城市：" />
                </children>
             </AnchorPane>
          </children>
@@ -268,219 +266,33 @@
             </AnchorPane>
          </children>
       </Pane>
-      <Pane fx:id="hotelDetail" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" visible="false">
+      <Pane fx:id="hotelDetail" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
          <children>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
                <children>
                   <Separator layoutY="60.0" prefWidth="895.0" />
-                  <Label layoutX="360.0" layoutY="14.0" prefHeight="39.0" prefWidth="176.0" text="南京仙林中心酒店">
+                  <Label fx:id="hotelNameInDetail" layoutX="360.0" layoutY="14.0" prefHeight="39.0">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <TabPane layoutY="152.0" prefHeight="449.0" prefWidth="895.0" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane layoutY="200.0" prefHeight="401.0" prefWidth="895.0" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab text="房型列表">
                            <content>
                               <Pane prefHeight="349.0" prefWidth="895.0">
                                  <children>
-                                    <Pane layoutY="32.0" prefHeight="76.0" prefWidth="895.0">
-                                       <children>
-                                          <Label layoutX="90.0" layoutY="14.0" text="单人床">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="563.0" layoutY="34.0" text="￥298">
-                                             <font>
-                                                <Font size="20.0" />
-                                             </font>
-                                          </Label>
-                                          <Button layoutX="756.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#openCreateOrder" text="预定" />
-                                          <GridPane layoutX="272.0" layoutY="32.0">
-                                             <children>
-                                                <Label text="剩余数量：" />
-                                                <Label text="5" GridPane.columnIndex="1" />
-                                             </children>
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <Separator layoutY="76.0" prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                       </children>
-                                    </Pane>
-                                    <Button layoutX="800.0" layoutY="1.0" mnemonicParsing="false" text="下一页" />
-                                    <Button layoutX="709.0" layoutY="1.0" mnemonicParsing="false" text="上一页" />
-                                    <Pane layoutY="107.0" prefHeight="76.0" prefWidth="895.0">
-                                       <children>
-                                          <Label layoutX="90.0" layoutY="14.0" text="单人床">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="563.0" layoutY="34.0" text="￥298">
-                                             <font>
-                                                <Font size="20.0" />
-                                             </font>
-                                          </Label>
-                                          <Button layoutX="756.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#openCreateOrder" text="预定" />
-                                          <GridPane layoutX="272.0" layoutY="32.0">
-                                             <children>
-                                                <Label text="剩余数量：" />
-                                                <Label text="5" GridPane.columnIndex="1" />
-                                             </children>
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <Separator layoutY="76.0" prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                       </children>
-                                    </Pane>
-                                    <Pane layoutY="183.0" prefHeight="75.0" prefWidth="895.0">
-                                       <children>
-                                          <Label layoutX="90.0" layoutY="14.0" text="单人床">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="563.0" layoutY="34.0" text="￥298">
-                                             <font>
-                                                <Font size="20.0" />
-                                             </font>
-                                          </Label>
-                                          <Button layoutX="756.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#openCreateOrder" text="预定" />
-                                          <GridPane layoutX="272.0" layoutY="32.0">
-                                             <children>
-                                                <Label text="剩余数量：" />
-                                                <Label text="5" GridPane.columnIndex="1" />
-                                             </children>
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <Separator layoutY="76.0" prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                       </children>
-                                    </Pane>
-                                    <Pane layoutY="259.0" prefHeight="76.0" prefWidth="895.0">
-                                       <children>
-                                          <Label layoutX="90.0" layoutY="14.0" text="单人床">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="563.0" layoutY="34.0" text="￥298">
-                                             <font>
-                                                <Font size="20.0" />
-                                             </font>
-                                          </Label>
-                                          <Button layoutX="756.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#openCreateOrder" text="预定" />
-                                          <GridPane layoutX="272.0" layoutY="32.0">
-                                             <children>
-                                                <Label text="剩余数量：" />
-                                                <Label text="5" GridPane.columnIndex="1" />
-                                             </children>
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <Separator layoutY="76.0" prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                       </children>
-                                    </Pane>
-                                    <Pane layoutY="335.0" prefHeight="76.0" prefWidth="895.0">
-                                       <children>
-                                          <Label layoutX="90.0" layoutY="14.0" text="单人床">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="563.0" layoutY="34.0" text="￥298">
-                                             <font>
-                                                <Font size="20.0" />
-                                             </font>
-                                          </Label>
-                                          <Button layoutX="756.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#openCreateOrder" text="预定" />
-                                          <GridPane layoutX="272.0" layoutY="32.0">
-                                             <children>
-                                                <Label text="剩余数量：" />
-                                                <Label text="5" GridPane.columnIndex="1" />
-                                             </children>
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <Separator layoutY="76.0" prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                       </children>
-                                    </Pane>
-                                 </children>
-                              </Pane>
-                           </content>
-                        </Tab>
-                        <Tab text="促销策略">
-                           <content>
-                              <Pane prefHeight="349.0" prefWidth="895.0">
-                                 <children>
-                                    <GridPane layoutX="141.0" layoutY="65.0" prefHeight="201.0" prefWidth="614.0">
-                                       <children>
-                                          <Label alignment="CENTER" prefHeight="27.0" prefWidth="189.0" text="策略类型" />
-                                          <Label alignment="CENTER" prefHeight="27.0" prefWidth="170.0" text="折扣" GridPane.columnIndex="1" />
-                                          <Label alignment="CENTER" prefHeight="27.0" prefWidth="183.0" text="开始时间" GridPane.columnIndex="2" />
-                                          <Label alignment="CENTER" prefHeight="27.0" prefWidth="164.0" text="结束时间" GridPane.columnIndex="3" />
-                                          <Label alignment="CENTER" prefHeight="27.0" prefWidth="186.0" text="普通会员" GridPane.rowIndex="2" />
-                                          <Label alignment="CENTER" prefHeight="27.0" prefWidth="197.0" text="企业会员" GridPane.rowIndex="3" />
-                                          <Label alignment="CENTER" prefHeight="27.0" prefWidth="184.0" text="双十一" GridPane.rowIndex="1" />
-                                          <Label alignment="CENTER" prefHeight="27.0" prefWidth="156.0" text="9" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <Label alignment="CENTER" prefHeight="27.0" prefWidth="178.0" text="9" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <Label alignment="CENTER" prefHeight="27.0" prefWidth="152.0" text="9" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <Label alignment="CENTER" prefHeight="27.0" prefWidth="216.0" text="2016-1-1" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <Label alignment="CENTER" prefHeight="27.0" prefWidth="169.0" text="2016-1-1" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                          <Label alignment="CENTER" prefHeight="27.0" prefWidth="162.0" text="2016-1-1" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                          <Label alignment="CENTER" prefHeight="27.0" prefWidth="202.0" text="2016-1-1" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <Label alignment="CENTER" prefHeight="27.0" prefWidth="176.0" text="2016-1-1" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                          <Label alignment="CENTER" prefHeight="27.0" prefWidth="173.0" text="2016-1-1" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                       </children>
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                    </GridPane>
+                                    <TableView fx:id="roomTable" editable="true" focusTraversable="false" prefHeight="362.0" prefWidth="688.0" tableMenuButtonVisible="true">
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                       <columns>
+                                          <TableColumn fx:id="typeColumn" prefWidth="287.0" text="房间类型" />
+                                          <TableColumn fx:id="remainRoomColumn" prefWidth="309.0" text="剩余数量" />
+                                          <TableColumn fx:id="priceColumn" prefWidth="75.0" text="价格" />
+                                       </columns>
+                                    </TableView>
+                                    <Button layoutX="765.0" layoutY="171.0" mnemonicParsing="false" onAction="#openCreateOrder" text="预定" />
                                  </children>
                               </Pane>
                            </content>
@@ -489,168 +301,55 @@
                            <content>
                               <Pane prefHeight="349.0" prefWidth="895.0">
                                  <children>
-                                    <Pane layoutY="32.0" prefHeight="76.0" prefWidth="895.0">
-                                       <children>
-                                          <Label layoutX="31.0" layoutY="3.0" text="客户ID：">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <GridPane layoutX="272.0" layoutY="32.0">
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <Separator layoutY="76.0" prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                          <Label layoutX="19.0" layoutY="22.0" text="1234567891" />
-                                          <Label layoutX="134.0" layoutY="12.0" text="评价：" />
-                                          <Label layoutX="189.0" layoutY="10.0" prefHeight="57.0" prefWidth="668.0" text="sdfsdfsdfasdfasdfsdfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" wrapText="true" />
-                                       </children>
-                                    </Pane>
-                                    <Button layoutX="800.0" layoutY="1.0" mnemonicParsing="false" text="下一页" />
-                                    <Button layoutX="709.0" layoutY="1.0" mnemonicParsing="false" text="上一页" />
-                                    <Pane layoutY="108.0" prefHeight="76.0" prefWidth="895.0">
-                                       <children>
-                                          <Label layoutX="31.0" layoutY="3.0" text="客户ID：">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <GridPane layoutX="272.0" layoutY="32.0">
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <Separator layoutY="76.0" prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                          <Label layoutX="19.0" layoutY="22.0" text="1234567891" />
-                                          <Label layoutX="134.0" layoutY="12.0" text="评价：" />
-                                          <Label layoutX="189.0" layoutY="10.0" prefHeight="57.0" prefWidth="668.0" text="sdfsdfsdfasdfasdfsdfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" wrapText="true" />
-                                       </children>
-                                    </Pane>
-                                    <Pane layoutY="184.0" prefHeight="76.0" prefWidth="895.0">
-                                       <children>
-                                          <Label layoutX="31.0" layoutY="3.0" text="客户ID：">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <GridPane layoutX="272.0" layoutY="32.0">
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <Separator layoutY="76.0" prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                          <Label layoutX="19.0" layoutY="22.0" text="1234567891" />
-                                          <Label layoutX="134.0" layoutY="12.0" text="评价：" />
-                                          <Label layoutX="189.0" layoutY="10.0" prefHeight="57.0" prefWidth="668.0" text="sdfsdfsdfasdfasdfsdfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" wrapText="true" />
-                                       </children>
-                                    </Pane>
-                                    <Pane layoutY="260.0" prefHeight="76.0" prefWidth="895.0">
-                                       <children>
-                                          <Label layoutX="31.0" layoutY="3.0" text="客户ID：">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <GridPane layoutX="272.0" layoutY="32.0">
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <Separator layoutY="76.0" prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                          <Label layoutX="19.0" layoutY="22.0" text="1234567891" />
-                                          <Label layoutX="134.0" layoutY="12.0" text="评价：" />
-                                          <Label layoutX="189.0" layoutY="10.0" prefHeight="57.0" prefWidth="668.0" text="sdfsdfsdfasdfasdfsdfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" wrapText="true" />
-                                       </children>
-                                    </Pane>
-                                    <Pane layoutY="336.0" prefHeight="76.0" prefWidth="895.0">
-                                       <children>
-                                          <Label layoutX="31.0" layoutY="3.0" text="客户ID：">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <GridPane layoutX="272.0" layoutY="32.0">
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <Separator layoutY="76.0" prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                          <Separator prefWidth="895.0" />
-                                          <Label layoutX="19.0" layoutY="22.0" text="1234567891" />
-                                          <Label layoutX="134.0" layoutY="12.0" text="评价：" />
-                                          <Label layoutX="189.0" layoutY="10.0" prefHeight="57.0" prefWidth="668.0" text="sdfsdfsdfasdfasdfsdfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" wrapText="true" />
-                                       </children>
-                                    </Pane>
+                                    <TableView fx:id="evaluationTable" editable="true" focusTraversable="false" prefHeight="363.0" prefWidth="895.0" tableMenuButtonVisible="true">
+                                       <columns>
+                                          <TableColumn fx:id="guestIDColumn" prefWidth="167.0" text="客户ID" />
+                                          <TableColumn fx:id="commentColumn" prefWidth="726.0" text="评价" />
+                                       </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
                                  </children>
                               </Pane>
                            </content>
                         </Tab>
                      </tabs>
                   </TabPane>
-                  <GridPane layoutX="39.0" layoutY="97.0" prefHeight="51.0" prefWidth="286.0">
+                  <GridPane layoutX="39.0" layoutY="116.0" prefHeight="68.0" prefWidth="286.0">
                      <children>
                         <Label text="城市： " />
-                        <Label text="南京" GridPane.columnIndex="1" />
+                        <Label fx:id="cityInDetail" GridPane.columnIndex="1" />
                         <Label text="商圈：" GridPane.columnIndex="2" />
-                        <Label text="仙林中心" GridPane.columnIndex="3" />
+                        <Label fx:id="cycleInDetail" GridPane.columnIndex="3" />
                         <Label text="星级：  " GridPane.rowIndex="1" />
-                        <Label text="五星" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="LevelInDetail" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="评分：" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <Label text="4.3" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <Label fx:id="ScoreInDetail" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                      </children>
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="87.0" minWidth="10.0" prefWidth="66.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="81.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="67.0" minWidth="10.0" prefWidth="57.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="89.0" minWidth="10.0" prefWidth="86.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <GridPane layoutX="360.0" layoutY="69.0" prefHeight="79.0" prefWidth="466.0">
+                  <GridPane layoutX="324.0" layoutY="77.0" prefHeight="110.0" prefWidth="445.0">
                      <children>
                         <Label text="简介：" />
-                        <Label prefHeight="15.0" prefWidth="272.0" text="你的家" GridPane.columnIndex="1" />
-                        <Label text="设施服务：" GridPane.rowIndex="1" />
-                        <Label text="独立卫浴，宽带" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="introductionInDetail" prefHeight="20.0" prefWidth="353.0" GridPane.columnIndex="1" />
+                        <Label text="设施：" GridPane.rowIndex="1" />
+                        <Label fx:id="equipmentInDetail" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="地址：" GridPane.rowIndex="2" />
-                        <Label text="南京市栖霞区仙隐南路1号" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="hotelAddressInDetail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="0.0" prefWidth="0.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="381.0" minWidth="10.0" prefWidth="381.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="0.0" prefWidth="54.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="397.0" minWidth="10.0" prefWidth="346.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -658,9 +357,9 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <Button layoutX="826.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#returnHotelCheck" prefHeight="32.0" prefWidth="50.0" text="返回" />
-                  <Label layoutX="39.0" layoutY="73.0" text="编号：" />
-                  <Label layoutX="111.0" layoutY="73.0" text="21311223" />
+                  <Button layoutX="791.0" layoutY="146.0" mnemonicParsing="false" onAction="#returnHotelCheck" prefHeight="32.0" prefWidth="50.0" text="返回" />
+                  <Label layoutX="39.0" layoutY="83.0" text="编号：" />
+                  <Label fx:id="hotelIDInDetail" layoutX="111.0" layoutY="85.0" />
                </children>
             </AnchorPane>
          </children>
@@ -770,45 +469,41 @@
                   </Label>
                   <Pane layoutY="62.0" prefHeight="541.0" prefWidth="895.0">
                      <children>
-                        <Label layoutX="532.0" layoutY="50.0" text="房间价格：">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="633.0" layoutY="50.0" text="610">
+                        <Label layoutX="469.0" layoutY="88.0" text="房间价格：" />
+                        <Label fx:id="previousPriceInOrder" layoutX="547.0" layoutY="87.0">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
                         <VBox layoutX="10.0" layoutY="50.0" prefHeight="110.0" prefWidth="116.0" spacing="30.0" />
-                        <Label layoutX="313.0" layoutY="261.0" text="优惠促销策略：" />
                         <Label layoutX="212.0" layoutY="302.0" text="特殊需求：" />
-                        <TextArea layoutX="313.0" layoutY="302.0" prefHeight="87.0" prefWidth="386.0" text="需要无烟房，有儿童" wrapText="true" />
-                        <GridPane layoutX="155.0" layoutY="99.0" prefHeight="144.0" prefWidth="586.0">
+                        <TextArea fx:id="messageInOrder" layoutX="313.0" layoutY="302.0" prefHeight="87.0" prefWidth="386.0" wrapText="true" />
+                        <GridPane layoutX="175.0" layoutY="117.0" prefHeight="154.0" prefWidth="251.0">
                            <children>
-                              <Label text="房间类型：" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                              <Label text="房间数量：" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                              <Label text="预计入住人数：" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                              <Label text="入住人姓名：" GridPane.rowIndex="1" />
-                              <Label text="联系电话：" GridPane.rowIndex="2" />
-                              <Label text="最晚订单执行时间：" GridPane.rowIndex="3" />
-                              <TextField text="王二" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField text="123456" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <TextField prefHeight="15.0" prefWidth="108.0" text="1" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                              <TextField prefHeight="22.0" prefWidth="128.0" text="1" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                              <Label text="预计离开时间：" GridPane.rowIndex="3" />
+                              <Label text="最晚执行时间：" GridPane.rowIndex="1" />
                               <Label text="入住日期：" />
-                              <Label text="离店日期：" GridPane.columnIndex="3" />
-                              <DatePicker GridPane.columnIndex="1" />
-                              <DatePicker GridPane.columnIndex="4" />
-                              <Label text="单人房" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                              <Label text="离店日期：" GridPane.rowIndex="2" />
+                              <DatePicker fx:id="expectExecuteDateInOrder" GridPane.columnIndex="1" />
+                              <DatePicker fx:id="expectLeaveDateInOrder" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <HBox prefHeight="23.0" prefWidth="142.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <children>
+                                    <TextField fx:id="hourInOrder" prefHeight="41.0" prefWidth="38.0" />
+                                    <Label prefHeight="30.0" prefWidth="33.0" text="  ：" />
+                                    <TextField fx:id="minuteInOrder" prefHeight="50.0" prefWidth="38.0" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="61.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <children>
+                                    <TextField fx:id="hourInOrder2" prefHeight="41.0" prefWidth="38.0" />
+                                    <Label prefHeight="30.0" prefWidth="33.0" text="  ：" />
+                                    <TextField fx:id="minuteInOrder2" prefHeight="55.0" prefWidth="38.0" />
+                                 </children>
+                              </HBox>
                            </children>
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="139.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="131.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="99.0" minWidth="6.0" prefWidth="8.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0" minWidth="10.0" prefWidth="113.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="156.0" minWidth="10.0" prefWidth="156.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="365.0" minWidth="10.0" prefWidth="113.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="332.0" minWidth="0.0" prefWidth="146.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -817,13 +512,45 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                         </GridPane>
-                        <Label layoutX="249.0" layoutY="50.0" text="南京仙林金鹰酒店">
+                        <Label fx:id="hotelNameInOrder" layoutX="98.0" layoutY="14.0">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="358.0" layoutY="435.0" mnemonicParsing="false" onAction="#returnHotelCheck" text="返回" />
+                        <Button layoutX="481.0" layoutY="435.0" mnemonicParsing="false" onAction="#commitOrder" text="提交" />
+                        <GridPane layoutX="499.0" layoutY="118.0" prefHeight="162.0" prefWidth="251.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="128.0" minWidth="10.0" prefWidth="120.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="103.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <TextField fx:id="phoneInOrder" prefHeight="30.0" prefWidth="105.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label text="联系电话：" GridPane.rowIndex="1" />
+                              <Label text="入住人姓名：" />
+                              <Label text="预计入住人数：" GridPane.rowIndex="2" />
+                              <Label text="房间数量：" GridPane.rowIndex="3" />
+                              <TextField fx:id="nameInOrder" prefHeight="30.0" prefWidth="105.0" GridPane.columnIndex="1" />
+                              <TextField fx:id="guestNumInOrder" prefHeight="30.0" prefWidth="105.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="roomCountInOrder" prefHeight="30.0" prefWidth="105.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                           </children>
+                        </GridPane>
+                        <Label layoutX="175.0" layoutY="88.0" text="房间类型：" />
+                        <Label fx:id="hotelIDInOrder" layoutX="126.0" layoutY="50.0" />
+                        <Label fx:id="hotelAddressInOrder" layoutX="244.0" layoutY="50.0" />
+                        <Label layoutX="624.0" layoutY="60.0" text="订单价格：" />
+                        <Label fx:id="priceOfOrder" layoutX="715.0" layoutY="59.0">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Button layoutX="358.0" layoutY="435.0" mnemonicParsing="false" onMouseClicked="#returnHotelCheck" text="返回" />
-                        <Button layoutX="481.0" layoutY="435.0" mnemonicParsing="false" text="提交" />
+                        <ChoiceBox fx:id="roomTypeInOrder" layoutX="283.0" layoutY="83.0" prefHeight="30.0" prefWidth="142.0" />
                      </children>
                   </Pane>
                </children>

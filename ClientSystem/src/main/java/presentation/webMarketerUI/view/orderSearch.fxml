@@ -20,7 +20,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.webMarketerUI.controller.OrderController">
    <children>
-      <AnchorPane fx:id="searchPane" minHeight="0.0" minWidth="0.0" prefHeight="601.0" prefWidth="895.0">
+      <AnchorPane fx:id="searchPane" minHeight="0.0" minWidth="0.0" prefHeight="601.0" prefWidth="895.0" visible="false">
          <children>
             <Label layoutX="404.0" layoutY="14.0" prefHeight="39.0" text="异常订单" AnchorPane.topAnchor="14.0">
                <font>
@@ -127,21 +127,11 @@
             </AnchorPane>
          </children>
       </Pane>
-      <AnchorPane fx:id="orderCheck" prefHeight="601.0" prefWidth="895.0" visible="false">
+      <AnchorPane fx:id="orderCheck" prefHeight="601.0" prefWidth="895.0">
          <children>
             <Button focusTraversable="false" layoutX="786.0" layoutY="70.0" mnemonicParsing="false" onAction="#OrderDetail" text="查看详情" />
             <Separator layoutY="60.0" prefHeight="3.0" prefWidth="895.0" />
             <Button layoutX="172.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchAbnormalOrder" text="异常订单" />
-            <TableView fx:id="table" focusTraversable="false" layoutY="107.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="494.0" prefWidth="895.0" tableMenuButtonVisible="true">
-               <columns>
-                  <TableColumn fx:id="orderIDColumn" prefWidth="124.0" text="订单编号" />
-                  <TableColumn fx:id="hotelNameColumn" prefWidth="146.0" text="酒店名" />
-                  <TableColumn fx:id="addressColumn" prefWidth="214.0" text="地址" />
-                  <TableColumn fx:id="checkInTimeColumn" prefWidth="160.0" text="预计入住时间" />
-                  <TableColumn fx:id="priceColumn" prefWidth="96.0" text="价格" />
-                  <TableColumn fx:id="stateColumn" prefWidth="139.0" text="订单状态" />
-               </columns>
-            </TableView>
             <Button layoutX="43.0" layoutY="70.0" mnemonicParsing="false" onAction="#cancelCheck" text="返回" />
             <Label alignment="CENTER" layoutX="403.0" layoutY="14.0" prefHeight="39.0" prefWidth="90.0" text="订单列表">
                <font>
@@ -155,6 +145,17 @@
                   <Button focusTraversable="false" layoutX="117.0" layoutY="12.0" mnemonicParsing="false" onAction="#cancelAbnormalOrderInCheck" text="撤销" />
                </children>
             </Pane>
+            <TableView fx:id="table" focusTraversable="false" layoutY="112.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="491.0" prefWidth="895.0" tableMenuButtonVisible="true">
+               <columns>
+                  <TableColumn fx:id="orderIDColumn" prefWidth="113.0" text="订单编号" />
+                  <TableColumn fx:id="hotelNameColumn" prefWidth="122.0" text="酒店名" />
+                  <TableColumn fx:id="addressColumn" prefWidth="170.0" text="地址" />
+                  <TableColumn fx:id="checkInTimeColumn" prefWidth="153.0" text="预计入住时间" />
+                  <TableColumn fx:id="checkOutTimeColumn" prefWidth="150.0" text="预计离开时间" />
+                  <TableColumn fx:id="priceColumn" prefWidth="83.0" resizable="false" text="价格" />
+                  <TableColumn fx:id="stateColumn" prefWidth="98.0" text="订单状态" />
+               </columns>
+            </TableView>
          </children>
       </AnchorPane>
    </children>
