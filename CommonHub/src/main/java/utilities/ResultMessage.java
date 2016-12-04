@@ -68,6 +68,14 @@ public enum ResultMessage implements Serializable{
 	
 	
 	
+	//	客户：评价成功
+	HOTEL_SCORE_UPDATE_SUCCESS,
+	
+	//	客户：评价失败
+	HOTEL_SCORE_UPDATE_FAILURE,
+
+	
+	
 	//	所有用户：登录成功
 	LOG_IN_SUCCESS,
 	
