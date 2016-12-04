@@ -59,6 +59,12 @@ public class OrderVO {
 	public String comment;
 	
 
+	/**
+	 * 
+	 * @author 61990
+	 * lastChangedBy 61990
+	 * updateTime 2016/11/27
+	 */
 	public OrderVO(String orderID, String guestID, String hotelID, String hotelName, String hotelAddress, 
 			double previousPrice, double price, LocalDateTime createTime, LocalDateTime checkInTime,
 			LocalDateTime checkOutTime, LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime, 
@@ -83,6 +89,12 @@ public class OrderVO {
 		this.comment = comment;
 	}
 
+	/**
+	 * 
+	 * @author 61990
+	 * lastChangedBy 61990
+	 * updateTime 2016/11/27
+	 */
 	public OrderVO(OrderGeneralVO orderGeneralVO, double previousPrice, LocalDateTime createTime, LocalDateTime checkInTime, 
 			LocalDateTime checkOutTime, RoomType roomType, int roomNumCount, String roomNumber, String name, 
 			String phone, String message, double score, String comment) {
@@ -103,6 +115,39 @@ public class OrderVO {
 		this.comment = comment;
 	}
 	
+	/**
+	 * 
+	 * @author 61990
+	 * lastChangedBy charles
+	 * updateTime 2016/12/4
+	 * 
+	 * 因为订单的入住时间、退房时间、房间号还未生成，不能从界面层直接得到，客户还未进行评论
+	 * 所以order create的时候，提供一个专门的构造器
+	 */
+	public OrderVO (OrderGeneralVO orderGeneralVO, double previousPrice, RoomType roomType,
+			int roomNumCount, int expectGuestNumCount, String name, String phone, String message) {
+		this.createTime = LocalDateTime.now();
+		this.checkInTime = null;
+		this.checkOutTime = null;
+		this.roomNumber = null;
+		this.score = -1;
+		this.comment = null;
+		
+		this.orderGeneralVO = orderGeneralVO;
+		this.previousPrice = previousPrice;
+		this.roomType = roomType;
+		this.roomNumCount = roomNumCount;
+		this.name = name;
+		this.phone = phone;
+		this.message = message;
+	}
+	
+	/**
+	 * 
+	 * @author 61990
+	 * lastChangedBy 61990
+	 * updateTime 2016/11/27
+	 */
 	public OrderVO(OrderPO orderPO) {
 		this.orderGeneralVO = new OrderGeneralVO(orderPO.getOrderGeneralPO());
 		
