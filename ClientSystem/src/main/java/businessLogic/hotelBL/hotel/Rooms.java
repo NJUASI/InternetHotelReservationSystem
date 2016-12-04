@@ -156,12 +156,12 @@ class Rooms {
 	 * @author: Harvey Gong
 	 * @time:2016年12月4日 下午6:53:53
 	 */
-	public Iterator<String> getRoomType(){
+	public List<String> getRoomType(){
 		List<String> allRoomType = new ArrayList<String>();
 		for(RoomInfoPO po : roomInfoPOList){
 			allRoomType.add(po.getRoomType());
 		}
-		return allRoomType.iterator();
+		return allRoomType;
 	}
 	
 	
