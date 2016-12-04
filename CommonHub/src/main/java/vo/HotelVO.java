@@ -46,6 +46,9 @@ public final class HotelVO {
 	//  订单的状态
 	public OrderState orderState;
 
+	//  酒店被评论次数
+	public int commentsNum;
+
 
 	public HotelVO(String hotelID, String hotelName, String city, String cycle, String hotelAddress, 
 			String level, double score, double minPrice, String introduction, String equipment) {

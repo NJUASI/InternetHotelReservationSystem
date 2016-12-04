@@ -1,41 +1,38 @@
 package dataHelperImpl.stub;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class HotelDataHelperImpl_Stub{
+import dataHelper.HotelDataHelper;
+import po.HotelPO;
+import utilities.ResultMessage;
 
-	public Object delete(Object object) {
-		// TODO Auto-generated method stub
-		return null;
+public class HotelDataHelperImpl_Stub implements HotelDataHelper{
+
+	@Override
+	public List<HotelPO> getHotels(String city, String circle) {
+		List<HotelPO> list = new ArrayList<HotelPO>();
+		list.add(new HotelPO("12345678", "Hotel1", "NanJing", "center1", "address1", "4",
+				5,"good", "allEquipment",5));
+		list.add(new HotelPO("12345679", "Hotel2", "NanJing", "center2", "address2", "4",
+				5,"good", "allEquipment",5));
+		return list;
 	}
 
-	public Object getAll(Object object) {
-		// TODO Auto-generated method stub
-		return null;
+	@Override
+	public HotelPO getHotelInfo(String hotelID) {
+		return new HotelPO("12345670", "Hotel1", "NanJing", "center1", "address1", "4",
+				5,"good", "allEquipment",5);
 	}
 
-	public Object add(Object object) {
-		// TODO Auto-generated method stub
-		return null;
+	@Override
+	public ResultMessage updateHotelInfo(HotelPO hotelPO) {
+		return ResultMessage.SUCCESS;
 	}
 
-	public Object modify(Object object) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Object getSingle(Object object) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Object getAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void close() {
-		// TODO Auto-generated method stub
-		
+	@Override
+	public ResultMessage addHotelInfo(HotelPO hotelPO) {
+		return ResultMessage.SUCCESS;
 	}
 
 }

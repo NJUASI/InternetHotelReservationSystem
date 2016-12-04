@@ -89,5 +89,5 @@ public class HotelController implements HotelBLService {
 	public Iterator<HotelVO> searchHotels(List<SearchCriteria> searchCriteria) {
 		return hotelScan.searchHotels(searchCriteria);
 	}
-	
+
 }

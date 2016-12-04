@@ -94,4 +94,10 @@ public class HotelBLService_Stub implements HotelBLService{
 		return null;
 	}
 
+	@Override
+	public ResultMessage addHotel(HotelVO hotelVO) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
 }
