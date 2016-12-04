@@ -76,7 +76,7 @@ public class AddressDataHelperImpl implements AddressDataHelper {
 		final List<String> result = new ArrayList<String>();
 
 		try {
-			System.out.println("this function");
+
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, city); //对应问号的位置
 			rs = ps.executeQuery();

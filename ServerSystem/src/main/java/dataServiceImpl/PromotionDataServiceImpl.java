@@ -69,8 +69,8 @@ public class PromotionDataServiceImpl extends UnicastRemoteObject implements Pro
 
 
 	@Override
-	public ResultMessage deleteSpecialSpanPromotion(SpecialSpanPromotionPO specialSpanPromotionPO) throws RemoteException {
-		return specialSpanPromotion.deleteSpecialSpanPromotion(specialSpanPromotionPO);
+	public ResultMessage deleteSpecialSpanPromotion(String userID,String promotionName) throws RemoteException {
+		return specialSpanPromotion.deleteSpecialSpanPromotion(userID,promotionName);
 	}
 
 

@@ -2,14 +2,27 @@ package dataHelperImpl.dataHelperImplTest;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import dataHelper.HotelFixedPromotionDataHelper;
+import dataHelperImpl.HotelFixedPromotionDataHelperImpl;
+import po.HotelFixedPromotionPO;
+import utilities.PromotionType;
+
 public class HotelFixedPromotionDataHelperImplTest {
 
+	List<HotelFixedPromotionPO> list;
+	HotelFixedPromotionDataHelper helper;
+	
 	@Before
 	public void setUp() throws Exception {
+		list = new ArrayList<HotelFixedPromotionPO>();
+		helper = new HotelFixedPromotionDataHelperImpl();
 	}
 
 	@After
@@ -17,18 +30,22 @@ public class HotelFixedPromotionDataHelperImplTest {
 	}
 
 	@Test
-	public void testHotelFixedPromotionDataHelperImpl() {
-		fail("尚未实现");
-	}
-
-	@Test
 	public void testGetHotelFixedPromotion() {
-		fail("尚未实现");
+		list = helper.getHotelFixedPromotion("12345678");
+		assertEquals(PromotionType.HOTEL__BIRTHDAY,list.get(0).getPromotionType());
+		assertEquals(PromotionType.HOTEL__ENTERPRISE, list.get(1).getPromotionType());
 	}
 
 	@Test
 	public void testUpdateHotelFixedPromotion() {
-		fail("尚未实现");
+		HotelFixedPromotionPO po = new HotelFixedPromotionPO();
+		po.setHotelID("12345678");
+		po.setDiscount(0.6);
+		po.setPromotionType(PromotionType.HOTEL__ENTERPRISE);
+		helper.updateHotelFixedPromotion(po);
+		
+		list = helper.getHotelFixedPromotion("12345678");
+		assertEquals(0.6, list.get(1).getDiscount(),0.1);
 	}
 
 }

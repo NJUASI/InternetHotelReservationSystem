@@ -45,15 +45,16 @@ public class HotelFixedPromotionDataHelperImpl implements HotelFixedPromotionDat
 		
 		List<HotelFixedPromotionPO> hotelFixedPromotionPOList = new ArrayList<HotelFixedPromotionPO>();
 		sql = "select * from hotelfixedpromotion where hotelID = ?";
-		HotelFixedPromotionPO hotelFixedPromotionPO = new HotelFixedPromotionPO();
+		HotelFixedPromotionPO hotelFixedPromotionPO;
 		
 		try {
+			
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, hotelWorkerID);
 			rs = ps.executeQuery();
 			
-			if(rs.next()){
-				
+			while(rs.next()){
+				hotelFixedPromotionPO = new HotelFixedPromotionPO();
 				hotelFixedPromotionPO.setHotelID(rs.getString(1));
 				hotelFixedPromotionPO.setPromotionType(stringToPromotionType(rs.getString(2)));
 				hotelFixedPromotionPO.setDiscount(rs.getDouble(3));
@@ -67,7 +68,7 @@ public class HotelFixedPromotionDataHelperImpl implements HotelFixedPromotionDat
 	}
 
 	/**
-	 * @Description:更新酒店固定
+	 * @Description:更新一条酒店固定策略的折扣
 	 * @param hotelFixedPromotionPO
 	 * @return
 	 * @exception:

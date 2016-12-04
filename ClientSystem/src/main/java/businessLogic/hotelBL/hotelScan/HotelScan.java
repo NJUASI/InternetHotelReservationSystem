@@ -12,6 +12,11 @@ import utilities.SortStrategy;
 import vo.AddressVO;
 import vo.HotelGeneralVO;
 
+/**
+ * @Description:浏览酒店的类，为酒店浏览及搜索提供排序及范围搜索的功能
+ * @author:Harvey Gong
+ * @time:2016年12月3日 下午9:55:35
+ */
 public class HotelScan {
 
 	HotelDataService hotelDataService;
@@ -77,6 +82,7 @@ public class HotelScan {
 		}
 		return convertPOListToVOList(currentGeneralPOList).iterator();
 	}
+	
 	
 	public Iterator<HotelGeneralVO> getBookedList(){
 		

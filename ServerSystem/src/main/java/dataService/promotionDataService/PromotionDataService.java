@@ -25,7 +25,7 @@ public interface PromotionDataService extends Remote{
 	
 	public ResultMessage updateSpecialSpanPromotion(SpecialSpanPromotionPO specialSpanPromotionPO) throws RemoteException;
 	
-	public ResultMessage deleteSpecialSpanPromotion(SpecialSpanPromotionPO specialSpanPromotionPO) throws RemoteException;
+	public ResultMessage deleteSpecialSpanPromotion(String userID, String promotionName) throws RemoteException;
 	
 	// 对会员专属商圈策略的操作，get、update、根据城市、商圈直接获得相应的折扣
 	
