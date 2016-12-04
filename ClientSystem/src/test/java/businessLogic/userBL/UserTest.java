@@ -40,10 +40,10 @@ public class UserTest {
 		UserVO hotelWorkerVO = new HotelWorkerVO("00001111", "123456","school");
 		UserVO webMarketerVO = new WebMarketerVO("000001", "123456");
 		UserVO webManagerVO = new WebManagerVO("0001", "123456");
-		assertEquals(user.add(guestVO),ResultMessage.SUCCESS);
-		assertEquals(user.add(hotelWorkerVO),ResultMessage.SUCCESS);
-		assertEquals(user.add(webMarketerVO),ResultMessage.SUCCESS);
-		assertEquals(user.add(webManagerVO),ResultMessage.SUCCESS);
+		assertEquals(user.add(guestVO),ResultMessage.USER_ADD_FAILURE);
+		assertEquals(user.add(hotelWorkerVO),ResultMessage.USER_ADD_FAILURE);
+		assertEquals(user.add(webMarketerVO),ResultMessage.USER_ADD_FAILURE);
+		assertEquals(user.add(webManagerVO),ResultMessage.USER_ADD_FAILURE);
 	}
 
 	@Test
