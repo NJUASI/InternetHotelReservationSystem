@@ -5,6 +5,13 @@ import java.time.LocalDateTime;
 
 import vo.CheckOutVO;
 
+/**
+ * 
+ * @author 61990
+ * lastChangedBy charles
+ * updateTime 2016/12/4
+ *
+ */
 public class CheckOutPO implements Serializable{
 
 	/**

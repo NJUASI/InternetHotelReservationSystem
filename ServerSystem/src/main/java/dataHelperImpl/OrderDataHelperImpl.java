@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,15 +111,19 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 		return ResultMessage.SUCCESS;
 	}
 
+	/*
+	 * ！！！修改！！！
+	 */
 	/**
 	 * @author 董金玉
-	 * @lastChangedBy 董金玉
-	 * @updateTime 2016/11/30
-	 * @param orderID 订单编号
-	 * @param comment 需要被修改的评论
-	 * @return ResultMessage 是否成功修改订单的评论
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param orderID 此次订单评价的订单编号
+	 * @param score 此次订单评价的评分
+	 * @param comment 此次订单评价的评论
+	 * @return ResultMessage 是否成功修改orderInfo
 	 */
-	public ResultMessage setComment(final String orderID, final String comment) {
+	public ResultMessage setEvaluation(final String orderID, final double score, final String comment) {
 		sql = "UPDATE `order` SET `order`.`comment` = ? WHERE `order`.orderID = ?";
 		
 		try {
@@ -134,6 +139,38 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 		return ResultMessage.SUCCESS;
 	}
 
+	/*
+	 * ！！！修改！！！
+	 */
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param orderID 此次入住的订单编号
+	 * @param roomNumber 房间号
+	 * @param checkInTime 入住时间
+	 * @return ResultMessage 是否成功修改orderInfo
+	 */
+	public ResultMessage setCheckIn(final String orderID, final String roomNumber, 
+			final LocalDateTime checkInTime) {
+		return ResultMessage.CHECK_IN_SUCCESS;
+	}
+	
+	/*
+	 * ！！！修改！！！
+	 */
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param orderID 此次退房的订单编号
+	 * @param checkOutTime 退房时间
+	 * @return ResultMessage 是否成功修改orderInfo
+	 */
+	public ResultMessage setCheckOut(final String orderID, final LocalDateTime checkOutTime) {
+		return ResultMessage.CHECK_OUT_SUCCESS;
+	}
+	
 	/**
 	 * @author 董金玉
 	 * @lastChangedBy 董金玉
@@ -247,7 +284,6 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	 * @author 董金玉
 	 * @lastChangedBy 董金玉
 	 * @updateTime 2016/11/30
-	 * @param date 需要查询的日期
 	 * @return List<OrderPO> 指定日期的所有未执行orderInfo载体
 	 */
 	public List<OrderPO> getUnexecuted() {

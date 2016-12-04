@@ -5,6 +5,13 @@ import java.time.LocalDateTime;
 
 import vo.CheckInVO;
 
+/**
+ * 
+ * @author 61990
+ * lastChangedBy charles
+ * updateTime 2016/12/4
+ *
+ */
 public class CheckInPO implements Serializable{
 
 	/**
@@ -21,21 +28,16 @@ public class CheckInPO implements Serializable{
 	//	入住时间
 	private LocalDateTime checkInTime;	
 	
-	//	预计离开时间
-	private LocalDateTime expectLeaveTime;
-	
-	public CheckInPO(String orderID, String roomNumber, LocalDateTime checkInTime, LocalDateTime expectLeaveTime) {
+	public CheckInPO(String orderID, String roomNumber, LocalDateTime checkInTime) {
 		this.orderID = orderID;
 		this.roomNumber = roomNumber;
 		this.checkInTime = checkInTime;
-		this.expectLeaveTime = expectLeaveTime;
 	}
 	
 	public CheckInPO(CheckInVO checkInVO) {
-		this.checkInTime = checkInVO.checkInTime;
-		this.expectLeaveTime = checkInVO.expectLeaveTime;
 		this.orderID = checkInVO.orderID;
 		this.roomNumber = checkInVO.roomNumber;
+		this.checkInTime = checkInVO.checkInTime;
 	}
 
 	public String getOrderID() {
@@ -55,12 +57,6 @@ public class CheckInPO implements Serializable{
 	}
 	public void setCheckInTime(LocalDateTime checkInTime) {
 		this.checkInTime = checkInTime;
-	}
-	public LocalDateTime getExpectLeaveTime() {
-		return expectLeaveTime;
-	}
-	public void setExpectLeaveTime(LocalDateTime expectLeaveTime) {
-		this.expectLeaveTime = expectLeaveTime;
 	}
 	
 	
