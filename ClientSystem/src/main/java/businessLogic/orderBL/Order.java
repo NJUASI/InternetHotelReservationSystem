@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import businessLogic.hotelBL.hotel.Hotel;
+import businessLogic.hotelBL.hotel.HotelInfoGetAndUpdate;
 import businessLogic.promotionBL.DiscountInSpan;
 import businessLogic.promotionBL.discountCalculation.DiscountCalculator;
 import dataService.orderDataService.OrderDataService;
@@ -36,6 +38,7 @@ public class Order {
 	
 	private OrderDataService orderDataService;
 	
+	private HotelInfoGetAndUpdate hotelInterface;
 	private DiscountInSpan discountCalculator;
 	
 	/**
@@ -349,17 +352,18 @@ public class Order {
 	 */
 	public ResultMessage addEvaluation(GuestEvaluationVO evaluationVO) {
 		ResultMessage msg1 = ResultMessage.UPDATE_EVALUATION_FAILURE;
-
-		//理应为hotel.scoreUpdate_Fail  酒店那边应该提供一个更新评分的接口
-		ResultMessage msg2 = ResultMessage.UPDATE_EVALUATION_SUCCESS;
+		
+		ResultMessage msg2 = ResultMessage.HOTEL_SCORE_UPDATE_FAILURE;
 		try {
 			msg1 = orderDataService.addEvaluation(new GuestEvaluationPO(evaluationVO));
+			
+			hotelInterface = new Hotel(orderDataService.getOrderDetail(evaluationVO.orderID).getHotelID());
+			msg2 = hotelInterface.scoreUpdate(evaluationVO.score);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		
-		//理应为hotel.scoreUpdate_Fail  酒店那边应该提供一个更新评分的接口
-		if (msg1 == ResultMessage.UPDATE_EVALUATION_SUCCESS && msg2 == ResultMessage.UPDATE_EVALUATION_SUCCESS) {
+		if (msg1 == ResultMessage.UPDATE_EVALUATION_SUCCESS && msg2 == ResultMessage.HOTEL_SCORE_UPDATE_SUCCESS) {
 			return ResultMessage.UPDATE_EVALUATION_SUCCESS;
 		}else {
 			return ResultMessage.UPDATE_EVALUATION_FAILURE;
