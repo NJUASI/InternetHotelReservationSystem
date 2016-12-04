@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import businessLogicService.orderBLService.OrderBLService;
+import utilities.OrderState;
 import utilities.ResultMessage;
 import vo.CheckInVO;
 import vo.CheckOutVO;
@@ -237,6 +238,18 @@ public final class OrderController implements OrderBLService {
 	@Override
 	public List<String> getBookedHotels(final String guestID) {
 		return order.getBookedHotels(guestID);
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param guestID 此客户的客户编号
+	 * @param hotelID 此客户相对的酒店编号
+	 * @return 此客户在此相应酒店预定过的订单状态
+	 */
+	public OrderState getOrderState(String guestID, String hotelID) {
+		return order.getOrderState(guestID, hotelID);
 	}
 
 }

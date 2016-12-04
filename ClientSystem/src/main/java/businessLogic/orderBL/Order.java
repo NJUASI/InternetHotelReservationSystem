@@ -9,10 +9,13 @@ import java.util.List;
 import businessLogic.promotionBL.DiscountInSpan;
 import businessLogic.promotionBL.discountCalculation.DiscountCalculator;
 import dataService.orderDataService.OrderDataService;
+import po.CheckInPO;
+import po.CheckOutPO;
 import po.GuestEvaluationPO;
 import po.OrderGeneralPO;
 import po.OrderPO;
 import rmi.RemoteHelper;
+import utilities.OrderState;
 import utilities.PreOrder;
 import utilities.ResultMessage;
 import vo.CheckInVO;
@@ -69,9 +72,9 @@ public class Order {
 	public ResultMessage createOrder(final OrderVO orderVO) {
 		ResultMessage resultMessage = ResultMessage.ORDER_CREATE_FAILURE;
 		
-		if (orderVO.orderGeneralVO.orderID != null || orderVO.orderGeneralVO.price != -1
-				|| orderVO.checkInTime != null || orderVO.checkOutTime != null 
-				|| orderVO.roomNumber != null || orderVO.score != -1 || orderVO.comment != null) {
+		if (orderVO.orderGeneralVO.orderID != null && orderVO.orderGeneralVO.price != -1
+				&& orderVO.checkInTime != null && orderVO.checkOutTime != null 
+				&& orderVO.roomNumber != null && orderVO.score != -1 && orderVO.comment != null) {
 			return resultMessage;
 		}else {
 			try {
@@ -94,12 +97,17 @@ public class Order {
 	public ResultMessage executeOrder(final String orderID) {
 		ResultMessage resultMessage = ResultMessage.ORDER_EXECUTE_FAILURE;
 		
-		try {
-			resultMessage = orderDataService.executeOrder(orderID);
-		} catch (RemoteException e) {
-			e.printStackTrace();
+		OrderState thisOrderState = getOrderDetail(orderID).orderGeneralVO.state;
+		if (thisOrderState != OrderState.UNEXECUTED && thisOrderState != OrderState.ABNORMAL) {
+			return resultMessage;
+		}else {
+			try {
+				resultMessage = orderDataService.executeOrder(orderID);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+			return resultMessage;
 		}
-		return resultMessage;
 	}
 
 	/**
@@ -112,12 +120,17 @@ public class Order {
 	public ResultMessage undoAbnormalOrder(final String orderID) {
 		ResultMessage resultMessage = ResultMessage.ABNORMAL_ORDER_UNDO_FAILURE;
 		
-		try {
-			resultMessage = orderDataService.undoAbnormalOrder(orderID);
-		} catch (RemoteException e) {
-			e.printStackTrace();
+		OrderState thisOrderState = getOrderDetail(orderID).orderGeneralVO.state;
+		if (thisOrderState != OrderState.ABNORMAL) {
+			return resultMessage;
+		}else {
+			try {
+				resultMessage = orderDataService.undoAbnormalOrder(orderID);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+			return resultMessage;
 		}
-		return resultMessage;
 	}
 
 	/**
@@ -130,12 +143,17 @@ public class Order {
 	public ResultMessage undoNormalOrder(final String orderID) {
 		ResultMessage resultMessage = ResultMessage.NORMAL_ORDER_UNDO_FAILURE;
 		
-		try {
-			resultMessage = orderDataService.undoNormalOrder(orderID);
-		} catch (RemoteException e) {
-			e.printStackTrace();
+		OrderState thisOrderState = getOrderDetail(orderID).orderGeneralVO.state;
+		if (thisOrderState != OrderState.UNEXECUTED) {
+			return resultMessage;
+		}else {
+			try {
+				resultMessage = orderDataService.undoNormalOrder(orderID);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+			return resultMessage;
 		}
-		return resultMessage;
 	}
 
 	/**
@@ -293,8 +311,15 @@ public class Order {
 	 * @param checkInVO 酒店工作人员更新订单入住信息
 	 * @return 是否成功更新
 	 */
-	ResultMessage updateCheckIn (CheckInVO checkInVO) {
-		return null;
+	public ResultMessage updateCheckIn (CheckInVO checkInVO) {
+		ResultMessage resultMessage = ResultMessage.CHECK_IN_FAILURE;
+		
+		try {
+			resultMessage = orderDataService.updateCheckIn(new CheckInPO(checkInVO));
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return resultMessage;
 	}
 
 	/**
@@ -304,8 +329,15 @@ public class Order {
 	 * @param checkInVO 酒店工作人员更新订单退房信息
 	 * @return 是否成功更新
 	 */
-	ResultMessage updateCheckOut (CheckOutVO checkOutVO) {
-		return null;
+	public ResultMessage updateCheckOut (CheckOutVO checkOutVO) {
+		ResultMessage resultMessage = ResultMessage.CHECK_OUT_FAILURE;
+		
+		try {
+			resultMessage = orderDataService.updateCheckOut((new CheckOutPO(checkOutVO)));
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return resultMessage;
 	}
 	
 	/**
@@ -364,6 +396,58 @@ public class Order {
 		}
 		
 		return result;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param guestID 此客户的客户编号
+	 * @param hotelID 此客户相对的酒店编号
+	 * @return 此客户在此相应酒店预定过的订单状态
+	 */
+	public OrderState getOrderState(String guestID, String hotelID) {
+		List<OrderGeneralPO> guestOrders = null;
+		
+		try {
+			guestOrders = orderDataService.getAllGuestOrderGeneral(guestID);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
+		List<OrderState> states = new ArrayList<OrderState>();
+		if (guestOrders != null) {
+			for (int i = 0; i < guestOrders.size(); i++) {
+				OrderGeneralPO thisOrderGeneral = guestOrders.get(i);
+				if (thisOrderGeneral.getHotelID().equals(hotelID)) {
+					states.add(thisOrderGeneral.getState());
+				}
+			}
+		}
+		
+		return getMaxOrderState(states);
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param states 此客户在此相应酒店预定过的所有订单状态
+	 * @return 优先级最高的订单状态（已评论 > 已执行 > 未执行 > 异常 > 已取消）
+	 */
+	private OrderState getMaxOrderState(List<OrderState> states) {
+		List<Integer> integers = new ArrayList<Integer>();
+		for (int i = 0; i < states.size(); i++) {
+			integers.add(states.get(i).ordinal());
+		}
+		
+		int indexOfMax = 0;
+		for (int i = 0; i < integers.size(); i++) {
+			if (integers.get(i) > integers.get(indexOfMax)) {
+				indexOfMax = i;
+			}
+		}
+		return OrderState.values()[indexOfMax];
 	}
 	
 }
