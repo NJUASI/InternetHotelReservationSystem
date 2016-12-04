@@ -17,11 +17,7 @@ import vo.HotelEvaluationVO;
 import vo.HotelVO;
 import vo.RoomInfoVO;
 
-/**
- * @Description:TODO
- * @author:Harvey Gong
- * @time:2016年12月3日 下午9:52:08
- */
+
 /**
  * @Description:TODO
  * @author:Harvey Gong
@@ -34,10 +30,6 @@ public class Hotel{
 	private String hotelID;
 	private Rooms rooms;
 	private Evaluations evaluations;
-
-	public Hotel() {
-
-	}
 
 	public Hotel(String hotelWorkerID) {
 		this.hotelID = hotelWorkerID;
@@ -115,6 +107,7 @@ public class Hotel{
 	 * @time:2016年12月3日 下午9:49:40
 	 */
 	public ResultMessage addHotelInfo(HotelVO hotelVO){
+		
 		hotelPO = new HotelPO(hotelVO);
 
 		try {
@@ -177,7 +170,43 @@ public class Hotel{
 	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO,String oldRoomType) {
 		return rooms.updateHotelRoomInfo(roomInfoVO,oldRoomType);
 	}
+	
+	/**
+	 * @Description:委托给Rooms，获取该酒店房间的最低价格
+	 * @return
+	 * double
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月4日 下午7:25:02
+	 */
+	public double getLowestPrice(){
+		return rooms.getLowestPrice();
+	}
 
+	/**
+	 * @Description:委托给Rooms，获取该酒店的所有房间类型
+	 * @return
+	 * Iterator<String>
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月4日 下午7:27:47
+	 */
+	public Iterator<String> getRoomType(){
+		return rooms.getRoomType();
+	}
+	
+	/**
+	 * @Description:获取当前所选房型的
+	 * @param roomType
+	 * @return
+	 * int
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @time:2016年12月4日 下午7:31:07
+	 */
+	public int getRemainNumOfSpecificType(String roomType){
+		return rooms.getRemainNumOfSpecificType(roomType);
+	}
 
 	/**
 	 * @Description:更新入住信息
@@ -230,21 +259,16 @@ public class Hotel{
 		return evaluations.getEvaluations();
 	}
 
-	//	public ResultMessage updateEvaluation(EvaluationVO evaluationVO) {
-	//		return evaluations.addEvaluation(evaluationVO);
-	//	}
 
 	/**
 	 * @Description:对外的接口，能够通过酒店的id获取酒店所在的城市商圈
-	 * @param hotelID
 	 * @return
 	 * Address
 	 * @exception:
 	 * @author: Harvey Gong
 	 * @time:2016年12月3日 下午9:54:07
 	 */
-	public Address getHotelAddress(String hotelID){
-		this.hotelID = hotelID;
+	public Address getHotelAddress(){
 		initHotelPO();
 		return new Address(hotelPO.getCity(), hotelPO.getCircle());
 	}

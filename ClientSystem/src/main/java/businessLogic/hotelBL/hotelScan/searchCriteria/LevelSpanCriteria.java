@@ -3,7 +3,7 @@ package businessLogic.hotelBL.hotelScan.searchCriteria;
 import java.util.List;
 
 import businessLogic.hotelBL.hotelScan.SearchCriteria;
-import po.HotelPO;
+import vo.HotelVO;
 
 public class LevelSpanCriteria implements SearchCriteria {
 
@@ -16,9 +16,9 @@ public class LevelSpanCriteria implements SearchCriteria {
 	}
 	
 	@Override
-	public List<HotelPO> meetCriteria(List<HotelPO> hotelVOList) {
+	public List<HotelVO> meetCriteria(List<HotelVO> hotelVOList) {
 		for(int i = 0;i<hotelVOList.size();i++){
-			if(notInLevelSpan(new Integer(hotelVOList.get(i).getLevel()))){
+			if(notInLevelSpan(new Integer(hotelVOList.get(i).level))){
 				hotelVOList.remove(i);
 			}
 		}

@@ -1,6 +1,7 @@
 package vo;
 
 import po.HotelPO;
+import utilities.OrderState;
 
 public final class HotelVO {
 
@@ -30,13 +31,15 @@ public final class HotelVO {
 
 	//	设施服务
 	public String equipment;
+	
+	//  订单的状态
+	public OrderState orderState;
 
 
 	public HotelVO(String hotelID, String hotelName, String city, String cycle, String hotelAddress, 
 			String level, double score, double minPrice, String introduction, String equipment) {
 
-		this.introduction = introduction;
-		this.equipment = equipment;
+		
 	}
 
 	public HotelVO(HotelPO hotelPO) {
@@ -50,16 +53,10 @@ public final class HotelVO {
 		this.equipment = hotelPO.getEquipment();
 	}
 	
-	public HotelVO(HotelPO hotelPO, double minPrice) {
-		this.hotelID = hotelPO.getHotelID();
-		this.hotelName = hotelPO.getHotelName();
-		this.city = hotelPO.getCity();
-		this.cycle = hotelPO.getCity();
-		this.level = hotelPO.getLevel();
-		this.score = hotelPO.getScore();
-		this.introduction = hotelPO.getIntroduction();
-		this.equipment = hotelPO.getEquipment();
+	public HotelVO(HotelPO hotelPO, double minPrice,OrderState orderState) {
+		this(hotelPO);
 		this.minPrice = minPrice;
+		this.orderState = orderState;
 	}
 
 }
