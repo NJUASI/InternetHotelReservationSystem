@@ -3,7 +3,7 @@ package businessLogic.hotelBL.hotelScan.searchCriteria;
 import java.util.List;
 
 import businessLogic.hotelBL.hotelScan.SearchCriteria;
-import po.HotelGeneralPO;
+import po.HotelPO;
 
 public class NullCriteria implements SearchCriteria {
 
@@ -15,8 +15,8 @@ public class NullCriteria implements SearchCriteria {
 	 * @author: Harvey Gong
 	 * @time:2016年11月29日 下午7:00:16
 	 */
-	public List<HotelGeneralPO> meetCriteria(List<HotelGeneralPO> hotelGeneralVOList) {
-		return hotelGeneralVOList;
+	public List<HotelPO> meetCriteria(List<HotelPO> hotelVOList) {
+		return hotelVOList;
 	}
 	
 	public void print(){

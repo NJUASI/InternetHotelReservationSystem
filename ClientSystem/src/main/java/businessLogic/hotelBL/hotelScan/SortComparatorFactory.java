@@ -8,16 +8,16 @@ import businessLogic.hotelBL.hotelScan.sortComparator.DescLevelComparator;
 import businessLogic.hotelBL.hotelScan.sortComparator.DescPriceComparator;
 import businessLogic.hotelBL.hotelScan.sortComparator.DescScoreComparator;
 import utilities.SortStrategy;
-import vo.HotelGeneralVO;
+import vo.HotelVO;
 
 public class SortComparatorFactory {
-	Comparator<HotelGeneralVO> comparator;
+	Comparator<HotelVO> comparator;
 	
 	public SortComparatorFactory() {
 		// TODO 自动生成的构造函数存根
 	}
 	
-	public Comparator<HotelGeneralVO> createComparator(SortStrategy sortStrategy){
+	public Comparator<HotelVO> createComparator(SortStrategy sortStrategy){
 		if(sortStrategy == SortStrategy.ASCLEVEL){
 			comparator = new AscLevelComparator();
 		}

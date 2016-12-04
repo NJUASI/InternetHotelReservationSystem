@@ -2,7 +2,7 @@ package businessLogic.hotelBL.hotelScan;
 
 import java.util.List;
 
-import po.HotelGeneralPO;
+import po.HotelPO;
 
 /**
  * @Description:搜索标准接口
@@ -20,5 +20,5 @@ public interface SearchCriteria {
 	 * @author: Harvey Gong
 	 * @time:2016年12月3日 下午9:58:19
 	 */
-	public List<HotelGeneralPO> meetCriteria(List<HotelGeneralPO> hotelGeneralVOList);
+	public List<HotelPO> meetCriteria(List<HotelPO> hotelGeneralVOList);
 }

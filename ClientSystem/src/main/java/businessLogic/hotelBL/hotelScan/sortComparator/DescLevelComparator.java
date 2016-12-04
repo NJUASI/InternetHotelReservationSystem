@@ -2,12 +2,12 @@ package businessLogic.hotelBL.hotelScan.sortComparator;
 
 import java.util.Comparator;
 
-import vo.HotelGeneralVO;
+import vo.HotelVO;
 
-public class DescLevelComparator implements Comparator<HotelGeneralVO> {
+public class DescLevelComparator implements Comparator<HotelVO> {
 
 	@Override
-	public int compare(HotelGeneralVO o1, HotelGeneralVO o2) {
+	public int compare(HotelVO o1, HotelVO o2) {
 		return new Integer(o2.level)-new Integer(o1.level);
 	}
 	

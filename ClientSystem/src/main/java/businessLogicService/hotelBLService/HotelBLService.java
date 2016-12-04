@@ -9,9 +9,7 @@ import utilities.SortStrategy;
 import vo.CheckInVO;
 import vo.CheckOutVO;
 import vo.HotelEvaluationVO;
-import vo.HotelGeneralVO;
 import vo.HotelVO;
-import vo.RemainRoomInfoVO;
 import vo.RoomInfoVO;
 
 public interface HotelBLService {
@@ -22,22 +20,20 @@ public interface HotelBLService {
 
 	public Iterator<RoomInfoVO> getHotelRoomInfo (String hotelWorkerID);
 
-	public ResultMessage updateHotelRoomInfo (List<RoomInfoVO> list);
+	public ResultMessage updateHotelRoomInfo (RoomInfoVO roomInfoVO);
 
 	public ResultMessage updateCheckIn (CheckInVO checkInVO);
 
 	public ResultMessage updateCheckOut (CheckOutVO checkOutVO);
 
-	public Iterator<RemainRoomInfoVO> getRemainRoomInfo (String hotelWorkerID);
-	
 	public Iterator<HotelEvaluationVO> getEvaluations (String hotelID);
 
 //	public ResultMessage updateEvaluation (EvaluationVO evaluationVO);	
 
-	public Iterator<HotelGeneralVO>	getHotels(String city,String circle);
+	public Iterator<HotelVO> getHotels(String city,String circle);
 	
-	public Iterator<HotelGeneralVO> sortHotels(SortStrategy sortStategy);
+	public Iterator<HotelVO> sortHotels(SortStrategy sortStategy);
 	
-	public Iterator<HotelGeneralVO> searchHotels(List<SearchCriteria> searchCriteria);
+	public Iterator<HotelVO> searchHotels(List<SearchCriteria> searchCriteria);
 	
 }

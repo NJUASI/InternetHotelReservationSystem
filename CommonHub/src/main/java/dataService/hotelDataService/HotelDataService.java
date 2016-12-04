@@ -7,9 +7,7 @@ import java.util.List;
 import po.CheckInPO;
 import po.CheckOutPO;
 import po.HotelEvaluationPO;
-import po.HotelGeneralPO;
 import po.HotelPO;
-import po.RemainRoomInfoPO;
 import po.RoomInfoPO;
 import utilities.ResultMessage;
 
@@ -17,26 +15,35 @@ public interface HotelDataService extends Remote{
 
 	public HotelPO getHotelInfo (String hotelID) throws RemoteException;
 	
+	public List<HotelPO> getHotels(String city, String circle) throws RemoteException;
+	
 	public ResultMessage updateHotelInfo(HotelPO hotelPO) throws RemoteException;
 	
-	public List<RoomInfoPO> getHotelRoomInfo(String hotelID) throws RemoteException;
-	
-	public ResultMessage updateHotelRoomInfo(List<RoomInfoPO> list) throws RemoteException;
-	
+	public ResultMessage addHotelInfo(HotelPO hotelPO) throws RemoteException;
+
 	public ResultMessage updateCheckInInfo (CheckInPO checkInPO) throws RemoteException;
 	
 	public ResultMessage updateCheckOutInfo (CheckOutPO checkOutPO) throws RemoteException;
 	
-	public List<RemainRoomInfoPO> getRemainRoomInfo(String hotelID) throws RemoteException;
-	
-	public ResultMessage updateRemainRoomInfo(RemainRoomInfoPO remainRoomPO) throws RemoteException;
-	
-	public HotelPO getHotelDetail(String hotelID) throws RemoteException;
-
 	public List<HotelEvaluationPO> getEvaluations(String hotelID) throws RemoteException;
 	
 //	public ResultMessage updateEvaluation (EvaluationPO evaluationPO) throws RemoteException;
 
-	public List<HotelGeneralPO> getHotelGenerals(String city, String circle) throws RemoteException;
+	
+	
+	
+	/**
+	 * @Description:提供修改roomInfo数据的方法，add、delete、update、get
+	 * @author: Harvey Gong
+	 * @time:2016年12月4日 下午1:57:07
+	 */
+	public List<RoomInfoPO> getRoomInfo(String hotelID) throws RemoteException;
+
+	//因为可能会修改名字，为了能够找到数据并修改，必须传入原名字的参数
+	public ResultMessage updateRoomInfo(RoomInfoPO roomInfoPO,String oldRoomType) throws RemoteException;
+
+	public ResultMessage addRoomInfo(RoomInfoPO roomInfoPO) throws RemoteException;
+
+	public ResultMessage deleteRoomInfo(String hotelID, String roomType) throws RemoteException;
 
 }
