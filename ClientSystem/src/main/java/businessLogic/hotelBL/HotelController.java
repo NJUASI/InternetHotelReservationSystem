@@ -16,7 +16,6 @@ import vo.CheckOutVO;
 import vo.HotelEvaluationVO;
 import vo.HotelGeneralVO;
 import vo.HotelVO;
-import vo.RemainRoomInfoVO;
 import vo.RoomInfoVO;
 
 
@@ -65,8 +64,8 @@ public class HotelController implements HotelBLService {
 		return hotel.getHotelRoomInfo(hotelWorkerID);
 	}
 
-	public ResultMessage updateHotelRoomInfo(List<RoomInfoVO> list) {
-		return hotel.updateHotelRoomInfo(list);
+	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO,String oldRoomType) {
+		return hotel.updateHotelRoomInfo(roomInfoVO,oldRoomType);
 	}
 
 	public ResultMessage updateCheckIn(CheckInVO checkInVO) {
@@ -75,14 +74,6 @@ public class HotelController implements HotelBLService {
 
 	public ResultMessage updateCheckOut(CheckOutVO checkOutVO) {
 		return hotel.updateCheckOut(checkOutVO);
-	}
-
-	public Iterator<RemainRoomInfoVO> getRemainRoomInfo(String hotelWorkerID) {
-		return hotel.getRemainRoomInfo(hotelWorkerID);
-	}
-
-	public ResultMessage updateRemainRoomInfo(String hotelID, Operation operation, Map<RoomType, Integer> roomInfo) {
-		return hotel.updateRemainRoomInfo(hotelID, operation, roomInfo);
 	}
 
 	public ResultMessage addHotel(HotelVO hotelVO) {
@@ -111,7 +102,8 @@ public class HotelController implements HotelBLService {
 		return hotelScan.searchHotels(searchCriteria);
 	}
 	
-	public Iterator<HotelGeneralVO> getBookedHotels() {
+	@Override
+	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO) {
 		// TODO 自动生成的方法存根
 		return null;
 	}

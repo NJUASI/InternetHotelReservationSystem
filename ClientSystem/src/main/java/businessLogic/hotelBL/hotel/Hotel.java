@@ -20,7 +20,6 @@ import vo.CheckInVO;
 import vo.CheckOutVO;
 import vo.HotelEvaluationVO;
 import vo.HotelVO;
-import vo.RemainRoomInfoVO;
 import vo.RoomInfoVO;
 
 /**
@@ -62,7 +61,7 @@ public class Hotel{
 	}
 
 	private void initRooms() {
-		rooms = new Rooms(hotelID,hotelDataService);
+		rooms = new Rooms(hotelID);
 	}
 
 	private void initHotelPO() {
@@ -154,8 +153,8 @@ public class Hotel{
 	 * @author: Harvey Gong
 	 * @time:2016年12月3日 下午9:50:41
 	 */
-	public ResultMessage updateHotelRoomInfo(List<RoomInfoVO> roomInfoVOList) {
-		return rooms.updateHotelRoomInfo(roomInfoVOList);
+	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO,String oldRoomType) {
+		return rooms.updateHotelRoomInfo(roomInfoVO,oldRoomType);
 	}
 
 	
@@ -197,36 +196,6 @@ public class Hotel{
 		}
 	}
 
-	
-	/**
-	 * @Description:委托room，获取剩余客房信息
-	 * @param hotelWorkerID
-	 * @return
-	 * Iterator<RemainRoomInfoVO>
-	 * @exception:
-	 * @author: Harvey Gong
-	 * @time:2016年12月3日 下午9:52:12
-	 */
-	public Iterator<RemainRoomInfoVO> getRemainRoomInfo(String hotelWorkerID) {
-		return rooms.getRemainRooms();
-	}
-
-
-	/**
-	 * @Description:委托给room，更新剩余客房信息
-	 * @param hotelID
-	 * @param operation
-	 * @param roomInfo
-	 * @return
-	 * ResultMessage
-	 * @exception:
-	 * @author: Harvey Gong
-	 * @time:2016年12月3日 下午9:52:38
-	 */
-	public ResultMessage updateRemainRoomInfo(String hotelID, Operation operation, Map<RoomType, Integer> roomInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	/**
 	 * @Description:委托给evaluations，获取对该酒店的所有评价

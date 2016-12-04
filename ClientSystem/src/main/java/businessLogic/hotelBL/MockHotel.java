@@ -15,11 +15,6 @@ public class MockHotel extends Hotel {
 	}
 
 	@Override
-	public ResultMessage updateRemainRoomInfo(String hotelID, Operation operation, Map<RoomType, Integer> roomInfo) {
-		return ResultMessage.SUCCESS;
-	}
-
-	@Override
 	public ResultMessage addHotel(HotelVO hotelVO) {
 		return ResultMessage.SUCCESS;
 	}

@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelPO;
-import po.RemainRoomInfoPO;
 import utilities.RoomType;
 
 public class HotelDataService_DriverTest {
@@ -34,22 +33,6 @@ public class HotelDataService_DriverTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	
-	@Test
-	public void test2() {
-		//test interface getRemainRoomInfo
-		HotelDataService_Stub stub = new HotelDataService_Stub();
-		HotelDataService_Driver driver = new HotelDataService_Driver(stub);
-		try {
-			RemainRoomInfoPO remainRoomInfoPO = driver.hotelDataService.getRemainRoomInfo("12345678").get(0);
-			assertEquals(RoomType.AMBASSADOR, remainRoomInfoPO.getRoomType());
-			assertEquals(2, remainRoomInfoPO.getRoomNumCount());
-			assertEquals(200, remainRoomInfoPO.getPrice(), 0);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		
 	}
 	
 }

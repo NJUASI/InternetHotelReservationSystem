@@ -16,15 +16,18 @@ public class RoomInfoPO implements Serializable{
 	private String hotelID;
 	
 	// 房间类型
-	private RoomType roomType;
+	private String roomType;
 	
 	// 房间数
 	private int roomNumCount;
 	
+	// 剩余房间数量
+	private int remainNum;
+	
 	// 价格
 	private double price;
 	
-	public RoomInfoPO(String hotelID, RoomType roomType, int roomNumCount, double price) {
+	public RoomInfoPO(String hotelID, String roomType, int roomNumCount, double price) {
 		super();
 		this.hotelID = hotelID;
 		this.roomType = roomType;	
@@ -38,16 +41,20 @@ public class RoomInfoPO implements Serializable{
 		this.roomNumCount = roomInfoVO.roomNumCount;
 		this.price = roomInfoVO.price;
 	}
+	public RoomInfoPO() {
+		// TODO 自动生成的构造函数存根
+	}
+
 	public String getHotelID() {
 		return hotelID;
 	}
 	public void setHotelID(String hotelID) {
 		this.hotelID = hotelID;	
 	}
-	public RoomType getRoomType() {
+	public String getRoomType() {
 		return roomType;
 	}
-	public void setRoomType(RoomType roomType) {
+	public void setRoomType(String roomType) {
 		this.roomType = roomType;
 	}
 	public int getRoomNumCount() {

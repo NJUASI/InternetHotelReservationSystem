@@ -10,7 +10,6 @@ import po.CheckOutPO;
 import po.HotelEvaluationPO;
 import po.HotelGeneralPO;
 import po.HotelPO;
-import po.RemainRoomInfoPO;
 import po.RoomInfoPO;
 import utilities.ResultMessage;
 import utilities.RoomType;
@@ -31,7 +30,7 @@ public class HotelDataService_Stub implements HotelDataService  {
 	
 	public List<RoomInfoPO> getHotelRoomInfo(String hotelID) {
 		List<RoomInfoPO> list = new ArrayList<RoomInfoPO>();
-		list.add(new RoomInfoPO("123", RoomType.AMBASSADOR, 1, 100));
+		list.add(new RoomInfoPO("123", "单人套房", 1, 100));
 		return list;
 	}
 
@@ -49,17 +48,6 @@ public class HotelDataService_Stub implements HotelDataService  {
 	public ResultMessage updateCheckOutInfo(CheckOutPO checkOutInfo) {
 		return ResultMessage.SUCCESS;
 	}
-
-	
-	public List<RemainRoomInfoPO> getRemainRoomInfo(String hotelID) {
-		List<RemainRoomInfoPO> list = new ArrayList<RemainRoomInfoPO>();
-		list.add(new RemainRoomInfoPO("12345678", RoomType.AMBASSADOR, 2, 200));
-		return list;
-	}
-
-	public ResultMessage updateRemainRoomInfo(RemainRoomInfoPO remainRoomPO) throws RemoteException {
-		return null;
-	}	
 
 	public HotelPO getHotelDetail(String hotelID) {
 		return new HotelPO("12345678", "thisHotel", "NanJing", "center", "address", "4",

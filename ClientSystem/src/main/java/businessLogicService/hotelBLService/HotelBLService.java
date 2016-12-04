@@ -11,7 +11,6 @@ import vo.CheckOutVO;
 import vo.HotelEvaluationVO;
 import vo.HotelGeneralVO;
 import vo.HotelVO;
-import vo.RemainRoomInfoVO;
 import vo.RoomInfoVO;
 
 public interface HotelBLService {
@@ -22,14 +21,12 @@ public interface HotelBLService {
 
 	public Iterator<RoomInfoVO> getHotelRoomInfo (String hotelWorkerID);
 
-	public ResultMessage updateHotelRoomInfo (List<RoomInfoVO> list);
+	public ResultMessage updateHotelRoomInfo (RoomInfoVO roomInfoVO);
 
 	public ResultMessage updateCheckIn (CheckInVO checkInVO);
 
 	public ResultMessage updateCheckOut (CheckOutVO checkOutVO);
 
-	public Iterator<RemainRoomInfoVO> getRemainRoomInfo (String hotelWorkerID);
-	
 	public Iterator<HotelEvaluationVO> getEvaluations (String hotelID);
 
 //	public ResultMessage updateEvaluation (EvaluationVO evaluationVO);	

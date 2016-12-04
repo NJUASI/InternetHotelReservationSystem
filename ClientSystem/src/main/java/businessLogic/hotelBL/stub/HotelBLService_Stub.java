@@ -17,7 +17,6 @@ import vo.CheckOutVO;
 import vo.HotelEvaluationVO;
 import vo.HotelGeneralVO;
 import vo.HotelVO;
-import vo.RemainRoomInfoVO;
 import vo.RoomInfoVO;
 
 public class HotelBLService_Stub implements HotelBLService{
@@ -48,8 +47,7 @@ public class HotelBLService_Stub implements HotelBLService{
 		return null;
 	}
 
-
-	public ResultMessage updateHotelRoomInfo(List<RoomInfoVO> list) {
+	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -62,20 +60,6 @@ public class HotelBLService_Stub implements HotelBLService{
 
 
 	public ResultMessage updateCheckOut(CheckOutVO checkOutVO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public Iterator<RemainRoomInfoVO> getRemainRoomInfo(String userID) {
-		List<RemainRoomInfoVO> list = new LinkedList<RemainRoomInfoVO>();
-		list.add(new RemainRoomInfoVO("12345678", RoomType.SINGLE_BED, 13, 200));
-		list.add(new RemainRoomInfoVO("12345678", RoomType.DOUBLE_BED, 6, 300));
-		return list.iterator();
-	}
-
-
-	public ResultMessage updateRemainRoomInfo(String hotelID, Operation operation, Map<RoomType, Integer> roomInfo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

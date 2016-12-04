@@ -10,7 +10,6 @@ import po.CheckOutPO;
 import po.HotelEvaluationPO;
 import po.HotelGeneralPO;
 import po.HotelPO;
-import po.RemainRoomInfoPO;
 import po.RoomInfoPO;
 import utilities.ResultMessage;
 import vo.AddressVO;
@@ -74,20 +73,6 @@ public class HotelDataServiceImpl extends UnicastRemoteObject implements HotelDa
 //		// TODO 自动生成的方法存根
 //		return null;
 //	}
-
-	@Override
-	public List<RemainRoomInfoPO> getRemainRoomInfo(String hotelID) throws RemoteException {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-
-
-	@Override
-	public ResultMessage updateRemainRoomInfo(RemainRoomInfoPO remainRoomPO) throws RemoteException {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-	
 	@Override
 	public List<HotelGeneralPO> getHotelGenerals(String city, String circle) throws RemoteException {
 		// TODO 自动生成的方法存根

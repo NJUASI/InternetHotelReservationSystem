@@ -14,10 +14,10 @@ import org.junit.Test;
 
 import businessLogic.hotelBL.hotel.Hotel;
 import utilities.ResultMessage;
+import utilities.RoomType;
 import vo.CheckInVO;
 import vo.CheckOutVO;
 import vo.HotelVO;
-import vo.RemainRoomInfoVO;
 import vo.RoomInfoVO;
 
 public class HotelTest {
@@ -55,8 +55,8 @@ public class HotelTest {
 
 	@Test
 	public void testUpdateHotelRoomInfo() {
-		List<RoomInfoVO> list = new ArrayList<RoomInfoVO>();
-		assertEquals(hotel.updateHotelRoomInfo(list), ResultMessage.SUCCESS);
+		RoomInfoVO vo = new RoomInfoVO("12345678","高级大床房",10,5,100);
+		assertEquals(hotel.updateHotelRoomInfo(vo,"高级大床房"), ResultMessage.SUCCESS);
 	}
 
 	@Test
@@ -69,12 +69,6 @@ public class HotelTest {
 	public void testUpdateCheckOut() {
 		CheckOutVO checkOutVO = new CheckOutVO("123", LocalDateTime.now());
 		assertEquals(hotel.updateCheckOut(checkOutVO), ResultMessage.SUCCESS);
-	}
-
-	@Test
-	public void testGetRemainRoomInfo() {
-		Iterator<RemainRoomInfoVO> itr = hotel.getRemainRoomInfo(hotelWorkerID);
-		assertEquals(itr.next().hotelID, "12345678");
 	}
 
 	@Ignore
