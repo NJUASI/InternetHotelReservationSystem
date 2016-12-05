@@ -31,33 +31,6 @@ import vo.OrderVO;
  */
 public class OrderDataService_DriverTest {
 
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/5
-	 * 
-	 * test interface getTempPrice
-	 */
-	@Test
-	public void test1() {
-		final OrderDataService_Stub stub = new OrderDataService_Stub();
-		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
-		
-		final LocalDateTime expectExecuteTime = LocalDateTime.of(2016, 2, 3, 14, 00);
-		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
-		final RoomType roomType = RoomType.AMBASSADOR;
-		
-		final OrderGeneralVO createOrderGeneralVO = new OrderGeneralVO("1234567890", "12345678", "thisHotel", 
-				"nanjing", expectExecuteTime, expectLeaveTime);
-		final OrderVO createOrderVO = new OrderVO(createOrderGeneralVO, 250, roomType, 1, 2, "charles", "15012345678", "no");
-		double result = 0;
-		try {
-			result = driver.orderDataService.getTempPrice(new OrderPO(createOrderVO));
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		assertEquals(200, result, 0);
-	}
 	
 	/**
 	 * @author charles

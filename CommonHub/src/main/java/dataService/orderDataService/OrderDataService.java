@@ -27,16 +27,6 @@ public interface OrderDataService extends Remote {
 	 * 
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/4
-	 * @param orderPO 从客户界面层传下来的Order载体
-	 * @return 若客户创建此订单，需要付的款项
-	 */
-	double getTempPrice(OrderPO orderPO) throws RemoteException;
-	
-	/**
-	 * 
-	 * @author charles
-	 * @lastChangedBy charles
 	 * @updateTime 2016/11/27
 	 * @param order 从逻辑层层传下来的Order载体
 	 * @return 客户是否成功创建此订单
