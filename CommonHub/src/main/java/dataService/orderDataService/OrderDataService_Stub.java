@@ -20,11 +20,24 @@ import utilities.RoomType;
  * 
  * @author cuihua
  * lastChangedBy charles
- * updateTime 2016/12/4
+ * updateTime 2016/12/5
  *
  */
 public class OrderDataService_Stub implements OrderDataService {
 
+	
+	/**
+	 * 
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param orderPO 从客户界面层传下来的Order载体
+	 * @return 若客户创建此订单，需要付的款项
+	 * @throws RemoteException RMI
+	 */
+	public double getTempPrice(OrderPO orderPO) throws RemoteException {
+		return 200;
+	}
 	
 	/**
 	 * 
@@ -35,7 +48,7 @@ public class OrderDataService_Stub implements OrderDataService {
 	 * @return 客户是否成功创建此订单
 	 * @throws RemoteException RMI
 	 */
-	public ResultMessage createOrder(final OrderPO order) {
+	public ResultMessage createOrder(final OrderPO order) throws RemoteException {
 		return ResultMessage.SUCCESS;
 	}
 
@@ -48,7 +61,7 @@ public class OrderDataService_Stub implements OrderDataService {
 	 * @return 酒店工作人员是否成功执行此订单
 	 * @throws RemoteException RMI
 	 */
-	public ResultMessage executeOrder(final String orderID) {
+	public ResultMessage executeOrder(final String orderID) throws RemoteException {
 		return ResultMessage.SUCCESS;
 	}
 
@@ -61,7 +74,7 @@ public class OrderDataService_Stub implements OrderDataService {
 	 * @return 网站营销人员是否成功撤销此异常订单
 	 * @throws RemoteException RMI
 	 */
-	public ResultMessage undoAbnormalOrder(final String orderID) {
+	public ResultMessage undoAbnormalOrder(final String orderID) throws RemoteException {
 		return ResultMessage.SUCCESS;
 	}
 
@@ -74,7 +87,7 @@ public class OrderDataService_Stub implements OrderDataService {
 	 * @return 客户是否成功撤销此正常订单
 	 * @throws RemoteException RMI
 	 */
-	public ResultMessage undoNormalOrder(final String orderID) {
+	public ResultMessage undoNormalOrder(final String orderID) throws RemoteException {
 		return ResultMessage.SUCCESS;
 	}
 	
@@ -87,7 +100,7 @@ public class OrderDataService_Stub implements OrderDataService {
 	 * @return 此被需要订单的详情载体
 	 * @throws RemoteException RMI
 	 */
-	public OrderPO getOrderDetail(final String orderID) {
+	public OrderPO getOrderDetail(final String orderID) throws RemoteException {
 		final LocalDateTime createTime = LocalDateTime.of(2016, 2, 2, 18, 20);
 		final LocalDateTime checkInTime = LocalDateTime.of(2016, 2, 3, 11, 23);
 		final LocalDateTime checkOutTime = LocalDateTime.of(2016, 2, 4, 10, 58);
@@ -112,7 +125,7 @@ public class OrderDataService_Stub implements OrderDataService {
 	 * @return 客户个人所有订单
 	 * @throws RemoteException RMI
 	 */
-	public List<OrderGeneralPO> getAllGuestOrderGeneral(final String guestID) {
+	public List<OrderGeneralPO> getAllGuestOrderGeneral(final String guestID) throws RemoteException {
 		final List<OrderGeneralPO> orderGenerals = new ArrayList<OrderGeneralPO>();
 		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200,
 				LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), OrderState.EXECUTED));
@@ -128,7 +141,7 @@ public class OrderDataService_Stub implements OrderDataService {
 	 * @return 此酒店所有的所有订单
 	 * @throws RemoteException RMI
 	 */
-	public List<OrderGeneralPO> getAllHotelOrderGeneral(final String hotelID) {
+	public List<OrderGeneralPO> getAllHotelOrderGeneral(final String hotelID) throws RemoteException {
 		final List<OrderGeneralPO> orderGenerals = new ArrayList<OrderGeneralPO>();
 		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200,
 				LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), OrderState.EXECUTED));
@@ -144,7 +157,7 @@ public class OrderDataService_Stub implements OrderDataService {
 	 * @return 网站营销人员需要查看的当天所有的异常订单
 	 * @throws RemoteException RMI
 	 */
-	public List<OrderGeneralPO> getAllAbnormalOrderGeneral(final LocalDate date) {
+	public List<OrderGeneralPO> getAllAbnormalOrderGeneral(final LocalDate date) throws RemoteException {
 		final List<OrderGeneralPO> orderGenerals = new ArrayList<OrderGeneralPO>();
 		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200,
 				LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), OrderState.EXECUTED));
@@ -159,7 +172,7 @@ public class OrderDataService_Stub implements OrderDataService {
 	 * @return 网站营销人员需要查看的所有的异常订单，按倒序排列
 	 * @throws RemoteException RMI
 	 */
-	public List<OrderGeneralPO> getAllAbnormalOrderGeneral() {
+	public List<OrderGeneralPO> getAllAbnormalOrderGeneral() throws RemoteException {
 		final List<OrderGeneralPO> orderGenerals = new ArrayList<OrderGeneralPO>();
 		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200,
 				LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), OrderState.EXECUTED));
@@ -170,7 +183,7 @@ public class OrderDataService_Stub implements OrderDataService {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/29
+	 * @updateTime 2016/12/5
 	 * @param date 网站营销人员查看未执行订单时输入的指定日期
 	 * @return 网站营销人员需要查看的当天所有的未执行订单
 	 * @throws RemoteException RMI
@@ -179,7 +192,7 @@ public class OrderDataService_Stub implements OrderDataService {
 	public List<OrderGeneralPO> getAllUnexecutedOrderGeneral(final LocalDate date) throws RemoteException {
 		final List<OrderGeneralPO> orderGenerals = new ArrayList<OrderGeneralPO>();
 		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200,
-				LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), OrderState.EXECUTED));
+				LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), OrderState.UNEXECUTED));
 		return orderGenerals;
 	}
 	
@@ -188,22 +201,24 @@ public class OrderDataService_Stub implements OrderDataService {
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/4
-	 * @param checkInVO 酒店工作人员更新订单入住信息
+	 * @param checkInPO 酒店工作人员更新订单入住信息
 	 * @return 是否成功更新
+	 * @throws RemoteException RMI
 	 */
-	public ResultMessage updateCheckIn (CheckInPO checkInPO) throws RemoteException {
-		return ResultMessage.SUCCESS;
+	public ResultMessage updateCheckIn(CheckInPO checkInPO) throws RemoteException {
+		return ResultMessage.CHECK_IN_SUCCESS;
 	}
 
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/4
-	 * @param checkInVO 酒店工作人员更新订单退房信息
+	 * @param checkInPO 酒店工作人员更新订单退房信息
 	 * @return 是否成功更新
+	 * @throws RemoteException RMI
 	 */
 	public ResultMessage updateCheckOut (CheckOutPO checkOutPO) throws RemoteException {
-		return ResultMessage.SUCCESS;
+		return ResultMessage.CHECK_OUT_SUCCESS;
 	}
 	
 	
@@ -211,7 +226,7 @@ public class OrderDataService_Stub implements OrderDataService {
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/4
-	 * @param evaluationVO 客户评价单个订单时产生的订单
+	 * @param evaluationPO 客户评价单个订单时产生的订单
 	 * @return 客户是否成功评价该订单
 	 * @throws RemoteException RMI
 	 */
@@ -232,7 +247,7 @@ public class OrderDataService_Stub implements OrderDataService {
 		List<HotelEvaluationPO> result = new ArrayList<HotelEvaluationPO>();
 		result.add(new HotelEvaluationPO("1234567890", LocalDate.of(2016, 11, 21), 4.5, "very good"));
 		result.add(new HotelEvaluationPO("1234567891", LocalDate.of(2016, 11, 21), 4.5, "good"));
-		result.add(new HotelEvaluationPO("1234567891", LocalDate.of(2016, 11, 23), 4.5, "ok"));
+		result.add(new HotelEvaluationPO("1234567891", LocalDate.of(2016, 11, 23), 4.3, "ok"));
 		return result;
 	}
 	
@@ -253,4 +268,16 @@ public class OrderDataService_Stub implements OrderDataService {
 		return bookedHotels;
 	}
 
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/5
+	 * @param guestID 此客户的客户编号
+	 * @param hotelID 此客户相对的酒店编号
+	 * @return 此客户在此相应酒店预定过的订单状态
+	 * @throws RemoteException RMI
+	 */
+	public OrderState getOrderState(String guestID, String hotelID) throws RemoteException {
+		return OrderState.COMMENTED;
+	}
 }
