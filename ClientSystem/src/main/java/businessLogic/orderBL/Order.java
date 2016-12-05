@@ -11,6 +11,7 @@ import businessLogic.hotelBL.hotel.Hotel;
 import businessLogic.promotionBL.DiscountInSpan;
 import businessLogic.promotionBL.discountCalculation.DiscountCalculator;
 import dataService.orderDataService.OrderDataService;
+import dataService.orderDataService.OrderDataService_Stub;
 import po.CheckInPO;
 import po.CheckOutPO;
 import po.GuestEvaluationPO;
@@ -49,7 +50,12 @@ public class Order {
 	 * 构造函数，初始化成员变量
 	 */
 	public Order() {
-		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
+//		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
+		try {
+			orderDataService = new OrderDataService_Stub();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		discountCalculator = new DiscountCalculator();
 	}
 

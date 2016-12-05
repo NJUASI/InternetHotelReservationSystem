@@ -60,8 +60,8 @@ public class PromotionController implements PromotionBLService {
 	}
 
 	@Override
-	public ResultMessage deleteSpecialSpanPromotion(SpecialSpanPromotionVO specialSpanPromotionVO) {
-		return specialSpanPromotion.deleteSpecialSpanPromotion(specialSpanPromotionVO);
+	public ResultMessage deleteSpecialSpanPromotion(String userID,String promotionName) {
+		return specialSpanPromotion.deleteSpecialSpanPromotion(userID,promotionName);
 	}
 	
 	@Override

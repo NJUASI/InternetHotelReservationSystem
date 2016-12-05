@@ -4,11 +4,9 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-import dataHelper.CreditDataHelper;
 import dataHelper.GuestDataHelper;
-import dataHelperImpl.stub.DataFactoryImpl_Stub;
+import dataHelperImpl.stub.GuestDataHelperImpl_Stub;
 import dataService.guestDataService.GuestDataService;
-import po.CreditPO;
 import po.GuestPO;
 import po.MemberPO;
 import utilities.ResultMessage;
@@ -22,11 +20,7 @@ public class GuestDataServiceImpl extends UnicastRemoteObject implements GuestDa
 
 	private static final long serialVersionUID = 3434060152387200042L;
 	
-	private DataFactoryImpl_Stub factory;
-	
 	private GuestDataHelper guestHelper;
-	
-	private CreditDataHelper creditHelper;
 	
 	/**
 	 * @author 董金玉
@@ -34,10 +28,8 @@ public class GuestDataServiceImpl extends UnicastRemoteObject implements GuestDa
 	 * @updateTime 2016/12/1 构造函数，从工厂中获取guestDataHelper,creditDataHlper对象
 	 */
 	public GuestDataServiceImpl() throws RemoteException {
-//		this.factory = DataFactoryImpl.getInstance();
-		this.factory = DataFactoryImpl_Stub.getInstance();
-		this.guestHelper = this.factory.getGuestDataHelper();
-		this.creditHelper = this.factory.getCreditDataHelper();
+//		guestHelper = new GuestDataHelperImpl();
+		guestHelper = new GuestDataHelperImpl_Stub();
 	}
 
 	/**
@@ -69,24 +61,6 @@ public class GuestDataServiceImpl extends UnicastRemoteObject implements GuestDa
 		
 		return list;
 		}
-
-	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
-	 * @updateTime 2016/12/1
-	 * @param guestID 客户ID
-	 * @return List<CreditPO> 指定客户ID的所有creditInfo载体
-	 */
-	public List<CreditPO> getAllCreditDetail(String guestID) throws RemoteException {
-		
-		if(guestID==null||guestID==""||guestID.length()!=10){return null;} //传入的ID无效，返回空
-		
-		List<CreditPO> list = this.creditHelper.getAllCreditDetail(guestID);
-		// 从数据库中得到所有creditPO，若不存在则为空
-		if(list.isEmpty()){return null;}
-		
-		return list;
-	}
 
 	/**
 	 * @author 董金玉

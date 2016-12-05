@@ -6,15 +6,15 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
-import dataService.creditDataService.CreditDataService_Stub;
-import dataService.guestDataService.GuestDataService_Stub;
-import dataService.hotelDataService.HotelDataService_Stub;
-import dataService.hotelWorkerDataService.HotelWorkerDataService_Stub;
-import dataService.marketDataService.MarketDataService_Stub;
-import dataService.orderDataService.OrderDataService_Stub;
-import dataService.promotionDataService.PromotionDataService_Stub;
-import dataService.webManagerDataService.WebManagerDataService_Stub;
-import dataService.webMarketerDataService.WebMarketerDataService_Stub;
+import dataServiceImpl.CreditDataServiceImpl;
+import dataServiceImpl.GuestDataServiceImpl;
+import dataServiceImpl.HotelDataServiceImpl;
+import dataServiceImpl.HotelWorkerDataServiceImpl;
+import dataServiceImpl.MarketDataServiceImpl;
+import dataServiceImpl.OrderDataServiceImpl;
+import dataServiceImpl.PromotionDataServiceImpl;
+import dataServiceImpl.WebManagerDataServiceImpl;
+import dataServiceImpl.WebMarketerDataServiceImpl;
 
 
 
@@ -31,15 +31,15 @@ public class ServerRemoteHelper {
 	public void initServer(){
 		try {
 			LocateRegistry.createRegistry(8889);
-			Naming.bind(url+"GuestDataService", new GuestDataService_Stub());
-			Naming.bind(url+"HotelDataService", new HotelDataService_Stub());
-			Naming.bind(url+"HotelWorkerDataService", new HotelWorkerDataService_Stub());
-			Naming.bind(url+"MarketDataService", new MarketDataService_Stub());
-			Naming.bind(url+"OrderDataService", new OrderDataService_Stub());
-			Naming.bind(url+"PromotionDataService", new PromotionDataService_Stub());
-			Naming.bind(url+"WebManagerDataService", new WebManagerDataService_Stub());
-			Naming.bind(url+"WebMarketerDataService", new WebMarketerDataService_Stub());
-			Naming.bind(url+"CreditDataService", new CreditDataService_Stub());
+			Naming.bind(url+"GuestDataService", new GuestDataServiceImpl());
+			Naming.bind(url+"HotelDataService", new HotelDataServiceImpl());
+			Naming.bind(url+"HotelWorkerDataService", new HotelWorkerDataServiceImpl());
+			Naming.bind(url+"MarketDataService", new MarketDataServiceImpl());
+			Naming.bind(url+"OrderDataService", new OrderDataServiceImpl());
+			Naming.bind(url+"PromotionDataService", new PromotionDataServiceImpl());
+			Naming.bind(url+"WebManagerDataService", new WebManagerDataServiceImpl());
+			Naming.bind(url+"WebMarketerDataService", new WebMarketerDataServiceImpl());
+			Naming.bind(url+"CreditDataService", new CreditDataServiceImpl());
 			System.out.println("link");
 		} catch (RemoteException e) {
 			e.printStackTrace();

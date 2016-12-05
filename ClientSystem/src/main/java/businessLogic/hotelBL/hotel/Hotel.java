@@ -50,6 +50,7 @@ public class Hotel implements HotelInfoOperation{
 	}
 
 	private void initHotelDataService() {
+//		hotelDataService = ClientRemoteHelper.getInstance().getHotelDataService();
 		try {
 			hotelDataService = new HotelDataService_Stub();
 		} catch (RemoteException e) {
@@ -101,7 +102,7 @@ public class Hotel implements HotelInfoOperation{
 	 * @time:2016年12月3日 下午9:49:40
 	 */
 	public ResultMessage addHotelInfo(HotelVO hotelVO){
-		
+
 		hotelPO = new HotelPO(hotelVO);
 
 		try {
@@ -124,7 +125,7 @@ public class Hotel implements HotelInfoOperation{
 	public Iterator<RoomInfoVO> getHotelRoomInfo(String hotelWorkerID) {
 		return rooms.getRoomInfo();
 	}
-	
+
 	/**
 	 * @Description:委托给room，增加一条客房信息
 	 * @param roomInfoVO
@@ -137,7 +138,7 @@ public class Hotel implements HotelInfoOperation{
 	public ResultMessage addRoomInfo(RoomInfoVO roomInfoVO){
 		return rooms.addRoomInfo(roomInfoVO);
 	}
-	
+
 	/**
 	 * @Description:委托给room，删除一条客房信息
 	 * @param roomType
@@ -163,7 +164,7 @@ public class Hotel implements HotelInfoOperation{
 	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO,String oldRoomType) {
 		return rooms.updateHotelRoomInfo(roomInfoVO,oldRoomType);
 	}
-	
+
 	/**
 	 * @Description:委托给Rooms，获取该酒店房间的最低价格
 	 * @return
@@ -196,19 +197,19 @@ public class Hotel implements HotelInfoOperation{
 	public HotelPO getHotelPO(){
 		return hotelPO;
 	}
-	
+
 	@Override
 	public Address getHotelAddress(){
 		return new Address(hotelPO.getCity(), hotelPO.getCircle());
 	}
-	
+
 	@Override
 	public ResultMessage scoreUpdate(double score) {
 		int commentsNum = hotelPO.getCommentsNum();
 		hotelPO.setScore((commentsNum*hotelPO.getScore()+score)/commentsNum+1);
 		return updateHotelInfo(new HotelVO(hotelPO));
 	}
-	
+
 	@Override
 	public List<String> getRoomType(){
 		return rooms.getRoomType();

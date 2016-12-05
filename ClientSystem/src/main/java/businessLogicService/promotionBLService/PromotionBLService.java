@@ -23,7 +23,7 @@ public interface PromotionBLService {
 
 	public ResultMessage updateSpecialSpanPromotions(SpecialSpanPromotionVO specialSpanPromotionVO);
 	
-	public ResultMessage deleteSpecialSpanPromotion(SpecialSpanPromotionVO	specialSpanPromotionVO);
+	public ResultMessage deleteSpecialSpanPromotion(String userID,String promotionName);
 
 	//对vip会员商圈专属折扣的操作，get,update
 	public Iterator<AddressVO> getSpecialCirclePromotions(String city);

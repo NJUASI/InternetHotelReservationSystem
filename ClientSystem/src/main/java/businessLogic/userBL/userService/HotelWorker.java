@@ -8,6 +8,7 @@ import businessLogic.userBL.userService.service.UserService;
 import dataService.hotelWorkerDataService.HotelWorkerDataService;
 import dataService.hotelWorkerDataService.HotelWorkerDataService_Stub;
 import po.HotelWorkerPO;
+import rmi.ClientRemoteHelper;
 import utilities.ResultMessage;
 import vo.HotelWorkerVO;
 import vo.UserVO;
@@ -21,7 +22,7 @@ import vo.UserVO;
  */
 public class HotelWorker implements UserService{
 
-	
+
 	static int IDLength = 8; // 酒店工作人员的ID长度为8
 
 	private HotelWorkerDataService hotelWorkerDataService;
@@ -33,6 +34,7 @@ public class HotelWorker implements UserService{
 	 * 构造函数，初始化成员变量
 	 */
 	public HotelWorker() {
+//		hotelWorkerDataService = ClientRemoteHelper.getInstance().getHotelWorkerDataService();
 		try {
 			hotelWorkerDataService = new HotelWorkerDataService_Stub();
 		} catch (RemoteException e) {
@@ -49,7 +51,7 @@ public class HotelWorker implements UserService{
 	 */
 	public UserVO add(UserVO newUserVO) {
 
-		
+
 		if(this.hasHotelWorker(newUserVO.userID)){return null;} //存在ID对应项
 
 		try {
@@ -71,7 +73,7 @@ public class HotelWorker implements UserService{
 	public ResultMessage modify(UserVO userVO) {
 
 		ResultMessage msg = ResultMessage.USER_INFO_UPDATE_FAILURE;
-		
+
 		if(!this.hasHotelWorker(userVO.userID)){return msg;} //不存在ID对应项
 
 		try {
@@ -127,7 +129,7 @@ public class HotelWorker implements UserService{
 	public String getLogInInfo(String userID) {
 
 		if(!this.hasHotelWorker(userID)){return null;} //不存在ID对应项，返回值后期细化
-		
+
 		try {
 			return hotelWorkerDataService.getSingleHotelWorker(userID).getPassword();
 		} catch (RemoteException e) {
@@ -174,10 +176,10 @@ public class HotelWorker implements UserService{
 		}
 		return result;
 	}
-	
+
 	private boolean hasHotelWorker(String hotelWorkerID) {
 		UserVO hotelWorkerVO = this.getSingle(hotelWorkerID);
-		
+
 		if(hotelWorkerVO==null){
 			return false;
 		}

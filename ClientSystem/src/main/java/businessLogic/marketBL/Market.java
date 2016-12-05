@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import businessLogicService.marketBLService.MarketBLService;
 import dataService.marketDataService.MarketDataService;
 import dataService.marketDataService.MarketDataService_Stub;
 import po.MarketPO;
@@ -15,7 +16,7 @@ import vo.MarketVO;
  * @author 61990
  *
  */
-public class Market {
+public class Market implements MarketBLService{
 	private MarketDataService marketDataService;
 
 	/**

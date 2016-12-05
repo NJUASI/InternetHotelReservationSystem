@@ -10,15 +10,17 @@ import utilities.ResultMessage;
 
 /**
  * 
- * @author 董金玉 lastChangedBy 董金玉 updateTime 2016/11/30
+ * @author 董金玉 
+ * @lastChangedBy Harvey
+ * @updateTime 2016/12/5
  *
  */
 public class CreditDataHelperImpl_Stub implements CreditDataHelper {
 
 	/**
 	 * @author 董金玉
-	 * @lastChangedBy 董金玉
-	 * @updateTime 2016/11/30
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/5
 	 * @param guestID
 	 *            客户ID
 	 * @return List<CreditPO> 所有creditInfo载体
@@ -40,16 +42,19 @@ public class CreditDataHelperImpl_Stub implements CreditDataHelper {
 	 *            creditInfo载体
 	 * @return ResultMessage 是否成功添加creditInfo
 	 */
-	public ResultMessage add(final CreditPO creditPO) {
-
-		return ResultMessage.SUCCESS;
-	}
-
 	@Override
 	public ResultMessage addCredit(CreditPO creditPO) {
 		return ResultMessage.CREDIT_CHARGE_SUCCESS;
 	}
 
+	/**
+	 * @Description:获取一个订单的所有信用变化记录
+	 * @param guestID
+	 * @return
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月6日 上午2:21:22
+	 */
 	@Override
 	public List<CreditPO> getCreditOfOneOrder(String guestID) {
 		List<CreditPO> list = new ArrayList<CreditPO>();

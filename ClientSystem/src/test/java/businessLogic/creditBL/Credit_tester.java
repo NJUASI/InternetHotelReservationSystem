@@ -13,8 +13,6 @@ public class Credit_tester {
 
 	@Test
 	public void test3() {
-		//test cooperation with class User
-		//test interface getAllCreditDetail(String guestID)
 		CreditController controller = CreditController.getInstance();
 		Iterator<CreditVO> list = controller.getAllCreditDetail("1234567890");
 		CreditVO creditVO1 = list.next();

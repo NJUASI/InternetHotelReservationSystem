@@ -35,6 +35,7 @@ public class HotelScan {
 	private String guestID;
 	
 	public HotelScan(String guestID) {
+//		hotelDataService = ClientRemoteHelper.getInstance().getHotelDataService();
 		try {
 			hotelDataService = new HotelDataService_Stub();
 		} catch (RemoteException e) {

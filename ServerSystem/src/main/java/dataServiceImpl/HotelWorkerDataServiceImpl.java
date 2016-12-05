@@ -5,7 +5,9 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import dataHelper.HotelWorkerDataHelper;
+import dataHelperImpl.HotelWorkerDataHelperImpl;
 import dataHelperImpl.stub.DataFactoryImpl_Stub;
+import dataHelperImpl.stub.HotelWorkerDataHelperImpl_Stub;
 import dataService.hotelWorkerDataService.HotelWorkerDataService;
 import po.HotelWorkerPO;
 import utilities.ResultMessage;
@@ -19,8 +21,6 @@ public class HotelWorkerDataServiceImpl extends UnicastRemoteObject implements H
 
 	private static final long serialVersionUID = 3434060152387200042L;
 
-	private DataFactoryImpl_Stub factory;
-
 	private HotelWorkerDataHelper hotelWorkerHelper;
 
 	/**
@@ -29,9 +29,8 @@ public class HotelWorkerDataServiceImpl extends UnicastRemoteObject implements H
 	 * @updateTime 2016/12/1 构造函数，从工厂中获取hotelWorkerDataHlper对象
 	 */
 	public HotelWorkerDataServiceImpl() throws RemoteException {
-//		this.factory = DataFactoryImpl.getInstance();
-		this.factory = DataFactoryImpl_Stub.getInstance();
-		this.hotelWorkerHelper = this.factory.getHotelWorkerDataHelper();
+//		hotelWorkerHelper = new HotelWorkerDataHelperImpl();
+		hotelWorkerHelper = new HotelWorkerDataHelperImpl_Stub();
 	}
 
 	/**

@@ -5,7 +5,9 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import dataHelper.WebManagerDataHelper;
+import dataHelperImpl.WebManagerDataHelperImpl;
 import dataHelperImpl.stub.DataFactoryImpl_Stub;
+import dataHelperImpl.stub.WebManagerDataHelperImpl_Stub;
 import dataService.webManagerDataService.WebManagerDataService;
 import po.WebManagerPO;
 import utilities.ResultMessage;
@@ -19,8 +21,6 @@ public class WebManagerDataServiceImpl extends UnicastRemoteObject implements We
 
 	private static final long serialVersionUID = 3434060152387200042L;
 	
-	private DataFactoryImpl_Stub factory;
-	
 	private WebManagerDataHelper webManagerHelper;
 	
 	/**
@@ -29,10 +29,8 @@ public class WebManagerDataServiceImpl extends UnicastRemoteObject implements We
 	 * @updateTime 2016/12/1 构造函数，从工厂中获取webManagerDataHlper对象
 	 */
 	public WebManagerDataServiceImpl() throws RemoteException {
-//		this.factory = DataFactoryImpl.getInstance();
-		this.factory = DataFactoryImpl_Stub.getInstance();
-		this.webManagerHelper = factory.getWebManagerDataHelper();
-	
+//		webManagerHelper = new WebManagerDataHelperImpl();
+		webManagerHelper = new WebManagerDataHelperImpl_Stub();
 	}
 
 	/**

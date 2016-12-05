@@ -3,9 +3,11 @@ package businessLogic.memberBL;
 import java.rmi.RemoteException;
 
 import businessLogic.userBL.userService.Guest;
+import businessLogicService.memberBLService.MemberBLService;
 import dataService.guestDataService.GuestDataService;
 import dataService.guestDataService.GuestDataService_Stub;
 import po.MemberPO;
+import rmi.ClientRemoteHelper;
 import utilities.MemberType;
 import utilities.ResultMessage;
 import vo.GuestVO;
@@ -18,9 +20,9 @@ import vo.MemberVO;
  * updateTime 2016/11/27
  *
  */
-public class Member {
+public class Member implements MemberBLService{
 
-	
+
 	private GuestDataService guestDataService;
 
 	private MemberInfo member;
@@ -32,6 +34,7 @@ public class Member {
 	 * 构造函数，初始化成员变量
 	 */
 	public Member() {
+//		guestDataService = ClientRemoteHelper.getInstance().getGuestDataService();
 		try {
 			guestDataService = new GuestDataService_Stub();
 		} catch (RemoteException e) {
@@ -59,7 +62,7 @@ public class Member {
 	 * @return 客户是否成功修改会员信息
 	 */
 	public ResultMessage modify(MemberVO memberVO) {
-		return this.addMemberInfo(memberVO);
+		return addMemberInfo(memberVO);
 	}
 
 	/**
@@ -70,9 +73,9 @@ public class Member {
 	 * @return memberVO MemberInfo载体
 	 */
 	public MemberVO getMemberInfo(String userID, MemberType memberType) {
-		
+
 		if(!this.isQualified(userID)){return null;}
-		
+
 		try {
 			GuestVO guestVO = new GuestVO(guestDataService.getSingleGuest(userID));
 			return new MemberVO(guestVO);
@@ -120,9 +123,9 @@ public class Member {
 	 * @return MemberType 指定用户的会员类型
 	 */
 	public MemberType getMemberType(String userID) {
-		
+
 		if(!this.isQualified(userID)){return null;}
-		
+
 		try {
 			GuestVO guestVO = new GuestVO(guestDataService.getSingleGuest(userID));
 			MemberVO memberVO = new MemberVO(guestVO);
@@ -133,7 +136,7 @@ public class Member {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * @author 董金玉
 	 * @lastChangedBy 董金玉
@@ -142,11 +145,11 @@ public class Member {
 	 * @return ResultMessage 添加会员信息是否成功
 	 */
 	private ResultMessage addMemberInfo(MemberVO memberVO) {
-		
+
 		if(!this.isQualified(memberVO.guestID)){
 			return ResultMessage.FAIL;
 		}
-		
+
 		try {
 			MemberPO memberPO = new MemberPO(memberVO);
 			return guestDataService.modifyMember(memberPO);
@@ -155,7 +158,7 @@ public class Member {
 			return ResultMessage.FAIL;
 		}
 	}
-	
+
 	private boolean isQualified(String userID){
 		Guest tempGuest = new Guest();
 		if(!tempGuest.isGuest(userID.length())||!tempGuest.hasGuest(userID)){

@@ -15,6 +15,13 @@ public class HotelFixedPromotionPO {
 		this.discount = hotelFixedPromotionVO.discount;
 	}
 
+	public HotelFixedPromotionPO(String hotelID, PromotionType promotionType, double discount) {
+		super();
+		this.hotelID = hotelID;
+		this.promotionType = promotionType;
+		this.discount = discount;
+	}
+
 	public HotelFixedPromotionPO() {
 		// TODO 自动生成的构造函数存根
 	}
