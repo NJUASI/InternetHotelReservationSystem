@@ -240,7 +240,7 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	 */
 	@Override
 	public ResultMessage updateCheckIn (CheckInPO checkInPO) throws RemoteException {
-		return orderDataHelper.setCheckIn(checkInPO.getOrderID(), checkInPO.getRoomNumber(), checkInPO.getCheckInTime());
+		return orderDataHelper.setCheckIn(checkInPO.getOrderID(), checkInPO.getRoomNumber(), checkInPO.getCheckInTime(), checkInPO.getExpectLeaveTime());
 	}
 
 	/**
