@@ -14,6 +14,8 @@ import vo.MarketVO;
 /**
  * 
  * @author 61990
+ * lastChangedBy charles
+ * updateTime 2016/12/5
  *
  */
 public class Credit {
@@ -80,6 +82,21 @@ public class Credit {
 		return user.getAllCreditDetail(guestID);
 	}
 
+	/*
+	 * ！！！修改！！！
+	 */
+	/**
+	 * 
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/5
+	 * @param creditVO 此次信用记录的载体
+	 * @return 添加此条信用记录的结果
+	 */
+	public ResultMessage addCreditRecord(final CreditVO creditVO) {
+		return null;
+	}
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990

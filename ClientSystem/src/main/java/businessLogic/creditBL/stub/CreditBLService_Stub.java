@@ -34,6 +34,19 @@ public class CreditBLService_Stub implements CreditBLService {
 	}
 
 	
+	/**
+	 * 
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/5
+	 * @param creditVO 此次信用记录的载体
+	 * @return 添加此条信用记录的结果
+	 */
+	public ResultMessage addCreditRecord(final CreditVO creditVO) {
+		return ResultMessage.RECORE_CREDIT_SUCCESS;
+	}
+	
+	
 	public List<MarketVO> getMemberFormulation() {
 		// TODO Auto-generated method stub
 		return null;

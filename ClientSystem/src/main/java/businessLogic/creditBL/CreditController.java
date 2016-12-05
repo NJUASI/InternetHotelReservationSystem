@@ -11,7 +11,7 @@ import vo.MarketVO;
 /**
  * 
  * @author 61990
- * @lastChangedBy: Harvey Gong
+ * @lastChangedBy charles
  * @updateTime 2016/12/5
  */
 public final class CreditController implements CreditBLService {
@@ -78,6 +78,18 @@ public final class CreditController implements CreditBLService {
 	 */
 	public List<CreditVO> getAllCreditDetail(final String guestID) {
 		return credit.getAllCreditDetail(guestID);
+	}
+	
+	/**
+	 * 
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/5
+	 * @param creditVO 此次信用记录的载体
+	 * @return 添加此条信用记录的结果
+	 */
+	public ResultMessage addCreditRecord(CreditVO creditVO) {
+		return credit.addCreditRecord(creditVO);
 	}
 	
 	/**
