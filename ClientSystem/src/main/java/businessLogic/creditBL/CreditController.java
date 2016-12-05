@@ -12,7 +12,7 @@ import vo.MarketVO;
 /**
  * 
  * @author 61990
- * @lastChangedBy: Harvey Gong
+ * @lastChangedBy Harvey Gong
  * @updateTime 2016/12/5
  */
 public final class CreditController implements CreditBLService {
@@ -67,7 +67,6 @@ public final class CreditController implements CreditBLService {
 		return credit.getAllCreditDetail(guestID);
 	}
 	
-	
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -76,6 +75,18 @@ public final class CreditController implements CreditBLService {
 	 */
 	public List<MarketVO> getMemberFormulation() {
 		return credit.getMemberFormulation();
+	}
+
+	@Override
+	public Iterator<CreditVO> getCreditOfOneOrder(String orderID) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
+	@Override
+	public ResultMessage addCredit(CreditVO creditVO) {
+		// TODO 自动生成的方法存根
+		return null;
 	}
 
 }

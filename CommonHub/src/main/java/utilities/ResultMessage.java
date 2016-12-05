@@ -20,6 +20,14 @@ public enum ResultMessage implements Serializable{
 	
 	
 	
+	//	用户：信用值改变并记录成功
+	RECORE_CREDIT_SUCCESS,
+	
+	//	用户：信用值改变并记录失败
+	RECORE_CREDIT_FAILURE,
+	
+	
+	
 	//	酒店工作人员：酒店信息更新成功
 	HOTEL_INFO_UPDATE_SUCCESS,
 	

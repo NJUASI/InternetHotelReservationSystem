@@ -49,13 +49,13 @@ public interface OrderDataHelper {
 	/**
 	 * @author 董金玉
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/4
+	 * @updateTime 2016/12/5
 	 * @param orderID 此次入住的订单编号
 	 * @param roomNumber 房间号
 	 * @param checkInTime 入住时间
 	 * @return ResultMessage 是否成功修改orderInfo
 	 */
-	ResultMessage setCheckIn(String orderID, String roomNumber, LocalDateTime checkInTime);
+	ResultMessage setCheckIn(String orderID, String roomNumber, LocalDateTime checkInTime, LocalDateTime expectLeaveTime);
 	
 	/**
 	 * @author 董金玉

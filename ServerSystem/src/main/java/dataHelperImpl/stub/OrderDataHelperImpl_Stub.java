@@ -56,14 +56,14 @@ public class OrderDataHelperImpl_Stub implements OrderDataHelper {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/4
+	 * @updateTime 2016/12/5
 	 * @param orderID 此次入住的订单编号
 	 * @param roomNumber 房间号
 	 * @param checkInTime 入住时间
 	 * @return ResultMessage 是否成功修改orderInfo
 	 */
 	public ResultMessage setCheckIn(final String orderID, final String roomNumber, 
-			final LocalDateTime checkInTime) {
+			final LocalDateTime checkInTime, LocalDateTime expectLeaveTime) {
 		return ResultMessage.CHECK_IN_SUCCESS;
 	}
 	

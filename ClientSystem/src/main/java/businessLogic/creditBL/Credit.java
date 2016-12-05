@@ -23,6 +23,8 @@ import vo.MarketVO;
 /**
  * 
  * @author 61990
+ * lastChangedBy charles
+ * updateTime 2016/12/5
  *
  */
 public class Credit implements CreditBLService{
@@ -118,7 +120,7 @@ public class Credit implements CreditBLService{
 		}
 		return new BasicInfoVO(guestVO, memberFormulationList.get(memberFormulationList.size() - 1).marketName);
 	}
-
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990

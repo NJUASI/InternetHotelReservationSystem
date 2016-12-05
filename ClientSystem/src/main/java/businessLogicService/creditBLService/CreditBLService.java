@@ -13,6 +13,10 @@ public interface CreditBLService {
 	public BasicInfoVO getBasicInfo (String guestID);
 	
 	public Iterator<CreditVO> getAllCreditDetail(String guestID);
+
+	public Iterator<CreditVO> getCreditOfOneOrder(String orderID);
+	
+	public ResultMessage addCredit(CreditVO creditVO);
 	
 	public List<MarketVO> getMemberFormulation();
 	

@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
  * 
  * @author 61990
  * lastChangedBy charles
- * updateTime 2016/12/4
+ * updateTime 2016/12/5
  *
  */
 public class CheckInVO {
@@ -20,15 +20,18 @@ public class CheckInVO {
 	//	入住时间
 	public LocalDateTime checkInTime;	
 	
+	//	预计离开时间
+	public LocalDateTime expectLeaveTime;
 	/**
 	 * 
 	 * @author 61990
 	 * lastChangedBy charles
-	 * updateTime 2016/12/4
+	 * updateTime 2016/12/5
 	 */
-	public CheckInVO(String orderID, String roomNumber, LocalDateTime checkInTime) {
+	public CheckInVO(String orderID, String roomNumber, LocalDateTime checkInTime, LocalDateTime expectLeaveTime) {
 		this.orderID = orderID;
 		this.roomNumber = roomNumber;
 		this.checkInTime = checkInTime;
+		this.expectLeaveTime = expectLeaveTime;
 	}
 }

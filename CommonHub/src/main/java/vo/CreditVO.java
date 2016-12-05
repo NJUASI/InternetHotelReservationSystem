@@ -26,7 +26,6 @@ public class CreditVO {
 	
 	public CreditVO(String guestID, LocalDateTime time, String orderID, double previousCredit, double afterCredit, String reason) {
 		this.guestID = guestID;
-		
 		this.time = time;
 		this.orderID = orderID;
 		this.previousCredit = previousCredit;
@@ -36,7 +35,6 @@ public class CreditVO {
 	
 	public CreditVO(CreditPO creditPO) {
 		this.guestID = creditPO.getGuestID();
-		
 		this.time = creditPO.getTime();
 		this.orderID = creditPO.getOrderID();
 		this.previousCredit = creditPO.getPreCredit();
