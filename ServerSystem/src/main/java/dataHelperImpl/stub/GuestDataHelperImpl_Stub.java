@@ -25,8 +25,9 @@ public class GuestDataHelperImpl_Stub implements GuestDataHelper {
 	 * @param guestPO guestInfo载体
 	 * @return guestPO 是否成功添加到数据库中
 	 */
-	public ResultMessage add(final GuestPO guestPO) {
-		return ResultMessage.SUCCESS;
+	public GuestPO add(GuestPO guestPO) {
+		LocalDate birthday = LocalDate.of(1995, 1, 1);
+		return new GuestPO("1234567890", birthday, "school", "zhangsan", "xiaosan", "000000", "13523456789", 100);
 	}
 
 	/**

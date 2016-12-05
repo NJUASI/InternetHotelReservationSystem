@@ -23,8 +23,8 @@ public class WebMarketerDataHelperImpl_Stub implements WebMarketerDataHelper {
 	 * @param webMarketerPO webMarketerInfo载体
 	 * @return ResultMessage 是否成功添加到数据库中
 	 */
-	public ResultMessage add(final WebMarketerPO webMarketerPO) {
-		return ResultMessage.SUCCESS;
+	public WebMarketerPO add(WebMarketerPO webMarketerPO) {
+		return  new WebMarketerPO("000001", "123456");
 	}
 
 	/**

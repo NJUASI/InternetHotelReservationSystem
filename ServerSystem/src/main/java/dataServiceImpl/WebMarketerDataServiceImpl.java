@@ -71,7 +71,7 @@ public class WebMarketerDataServiceImpl extends UnicastRemoteObject implements W
 	 * @param newWebMarketerPO webMarketerInfo载体
 	 * @return ResultMessage 是否成功添加webMarketerInfo
 	 */
-	public ResultMessage add(WebMarketerPO newWebMarketerPO) throws RemoteException {
+	public WebMarketerPO add(WebMarketerPO newWebMarketerPO) throws RemoteException {
 		return this.webMarketerHelper.add(newWebMarketerPO);
 	}
 

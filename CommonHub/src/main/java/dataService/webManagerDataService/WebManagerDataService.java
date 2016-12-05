@@ -13,7 +13,7 @@ public interface WebManagerDataService extends Remote{
 	
 	public List<WebManagerPO> getAllWebManager() throws RemoteException;
 
-	public ResultMessage add(WebManagerPO newWebManagerPO) throws RemoteException;
+	public WebManagerPO add(WebManagerPO newWebManagerPO) throws RemoteException;
 
 	public ResultMessage modify(WebManagerPO webManagerPO) throws RemoteException;
 

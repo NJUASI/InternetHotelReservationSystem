@@ -57,8 +57,7 @@ public class Market {
 	 * @author 61990
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/11/27
-	 * @param marketVOList
-	 *            从会员等级界面层传下来的list
+	 * @param marketVOList 从会员等级界面层传下来的list
 	 * @return 是否保存等级制度成功
 	 */
 	public ResultMessage setMemberFormulation(final List<MarketVO> marketVOList) {

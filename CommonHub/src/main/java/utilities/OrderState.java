@@ -13,4 +13,14 @@ import java.io.Serializable;
 public enum OrderState implements Serializable{
 	
 	CANCELLED, ABNORMAL, UNEXECUTED, EXECUTED, COMMENTED;
+	
+	
+	@Override
+	public String toString() {
+		if (this == CANCELLED) {
+			return "已撤销";
+		}
+		return super.toString();
+	}
+	
 }

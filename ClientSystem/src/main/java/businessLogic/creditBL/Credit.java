@@ -41,8 +41,7 @@ public class Credit implements CreditBLService{
 	 * @author 61990
 	 * @lastChangedBy Harvey Gong
 	 * @updateTime 2016/12/5
-	 * @param guestID
-	 *            从登录界面层传下来的ID
+	 * @param guestID 从登录界面层传下来的ID
 	 * @return 客户个人所有信用记录
 	 */
 	public Iterator<CreditVO> getAllCreditDetail(final String guestID) {
@@ -55,11 +54,10 @@ public class Credit implements CreditBLService{
 	}
 	
 	/**
-	 * @Description:查看关于某一订单的所有信用变化
+	 * @Description 查看关于某一订单的所有信用变化
 	 * @param guestID
 	 * @param orderID
-	 * @return
-	 * Iterator<CreditVO>
+	 * @return Iterator<CreditVO>
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月5日 下午1:37:49
@@ -76,8 +74,7 @@ public class Credit implements CreditBLService{
 	/**
 	 * @Description:添加一条信用数据
 	 * @param creditVO
-	 * @return
-	 * ResultMessage
+	 * @return ResultMessage
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月5日 下午1:09:56
@@ -89,7 +86,7 @@ public class Credit implements CreditBLService{
 			guest.modifyCredit(creditVO.guestID, creditVO.afterCredit);
 			return creditDataService.addCredit(new CreditPO(creditVO));
 		} catch (RemoteException e) {
-			return ResultMessage.FAIL;
+			return ResultMessage.RECORE_CREDIT_FAILURE;
 		}
 	}
 	

@@ -51,7 +51,7 @@ public class UserController implements UserBLService{
 	 * @param userVO 从客户界面层传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加用户信息
 	 */
-	public ResultMessage add(UserVO newUserVO) {
+	public UserVO add(UserVO newUserVO) {
 		// TODO Auto-generated method stub
 		return user.add(newUserVO);
 	}

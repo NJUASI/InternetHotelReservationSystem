@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import dataService.hotelWorkerDataService.HotelWorkerDataService_Stub;
 import po.HotelWorkerPO;
-import utilities.ResultMessage;
 
 public class HotelWorkerDataService_DriverTest {
 
@@ -44,9 +43,11 @@ public class HotelWorkerDataService_DriverTest {
 			e1.printStackTrace();
 		}
 		HotelWorkerDataService_Driver driver = new HotelWorkerDataService_Driver(stub);
+		HotelWorkerPO hotelWorkerPO;
 		
 		try {	
-			assertEquals(ResultMessage.SUCCESS, driver.hotelWorkerDataService.add(new HotelWorkerPO("00001111", "123456")));
+			hotelWorkerPO = driver.hotelWorkerDataService.add(new HotelWorkerPO("00001111", "123456"));
+			assertEquals("123456", hotelWorkerPO.getPassword());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

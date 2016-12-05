@@ -51,19 +51,18 @@ public class WebManager implements UserService{
 	 * @param newUserVO 从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加网站管理人员信息
 	 */
-	public ResultMessage add(UserVO newUserVO) {
+	public UserVO add(UserVO newUserVO) {
 
-		ResultMessage msg = ResultMessage.USER_ADD_FAILURE;
 		
-		if(this.hasWebManager(newUserVO.userID)){return msg;} //存在ID对应项
+		if(this.hasWebManager(newUserVO.userID)){return null;} //存在ID对应项
 
 		try {
 			WebManagerPO webManagerPO = this.convert(newUserVO);
-			msg = webManagerDataService.add(webManagerPO);
+			return this.convert(webManagerDataService.add(webManagerPO));
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return msg;
 	}
 
 	/**
@@ -139,21 +138,6 @@ public class WebManager implements UserService{
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	/**
-	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/27
-	 * @param  IDLength 用户ID长度
-	 * @return boolean 判断指定用户是否为网站管理人员类型
-	 */
-	public static boolean isWebManager(int length) {
-		if (WebManager.IDLength == length) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	/**

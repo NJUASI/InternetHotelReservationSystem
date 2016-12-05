@@ -128,7 +128,7 @@ public interface OrderBLService {
 	 * @param checkInVO 酒店工作人员更新订单入住信息
 	 * @return 是否成功更新
 	 */
-	ResultMessage updateCheckIn (CheckInVO checkInVO);
+	ResultMessage updateCheckIn(CheckInVO checkInVO);
 
 	/**
 	 * @author charles
@@ -137,7 +137,7 @@ public interface OrderBLService {
 	 * @param checkInVO 酒店工作人员更新订单退房信息
 	 * @return 是否成功更新
 	 */
-	ResultMessage updateCheckOut (CheckOutVO checkOutVO);
+	ResultMessage updateCheckOut(CheckOutVO checkOutVO);
 	
 	/**
 	 * @author charles

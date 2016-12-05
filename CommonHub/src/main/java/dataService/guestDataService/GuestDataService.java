@@ -14,7 +14,7 @@ public interface GuestDataService extends Remote {
 
 	public List<GuestPO> getAllGuest() throws RemoteException;
 
-	public ResultMessage add(GuestPO newGuestPO) throws RemoteException;
+	public GuestPO add(GuestPO newGuestPO) throws RemoteException;
 
 	public ResultMessage modifyMember(MemberPO memberPO) throws RemoteException;
 

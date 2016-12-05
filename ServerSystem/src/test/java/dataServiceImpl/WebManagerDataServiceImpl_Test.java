@@ -47,9 +47,10 @@ public class WebManagerDataServiceImpl_Test {
 		//test the method Add
 		try {
 			WebManagerDataService webManager = new WebManagerDataServiceImpl();
-			WebManagerPO webManagerPO = new WebManagerPO("0001", "123456");
+			WebManagerPO webManagerPO = webManager.getSingleWebManager("0001");
 
-			assertEquals(webManager.add(webManagerPO), ResultMessage.SUCCESS);
+			assertEquals(webManagerPO.getWebManagerID(), "0001");
+			assertEquals(webManagerPO.getPassword(), "123456");
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

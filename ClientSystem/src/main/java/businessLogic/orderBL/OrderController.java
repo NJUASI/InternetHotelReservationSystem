@@ -34,7 +34,7 @@ public final class OrderController implements OrderBLService {
 	 */
 	private OrderController() {
 		//new the mock object
-		order = new MockOrder();
+		order = new Order();
 	}
 	
 	/**

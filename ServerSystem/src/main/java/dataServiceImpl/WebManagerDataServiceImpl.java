@@ -69,7 +69,7 @@ public class WebManagerDataServiceImpl extends UnicastRemoteObject implements We
 	 * @param newWebManagerPO webManagerInfo载体
 	 * @return ResultMessage 是否成功添加webManagerInfo
 	 */
-	public ResultMessage add(WebManagerPO newWebManagerPO) throws RemoteException {
+	public WebManagerPO add(WebManagerPO newWebManagerPO) throws RemoteException {
 		return this.webManagerHelper.add(newWebManagerPO);
 	}
 

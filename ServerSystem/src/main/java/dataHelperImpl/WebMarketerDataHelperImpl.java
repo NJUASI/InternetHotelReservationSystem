@@ -43,7 +43,7 @@ public class WebMarketerDataHelperImpl implements WebMarketerDataHelper {
 	 * @param webMarketerPO webMarketerInfo载体
 	 * @return ResultMessage 是否成功添加到数据库中
 	 */
-	public ResultMessage add(final WebMarketerPO webMarketerPO) {
+	public WebMarketerPO add(WebMarketerPO webMarketerPO) {
 		sql = "INSERT INTO webmarketer(webmarketer.webMarketerID,webmarketer.`password`) VALUES(?,?)";
 
 		try {
@@ -55,9 +55,10 @@ public class WebMarketerDataHelperImpl implements WebMarketerDataHelper {
 			ps.execute(); // 执行sql语句，返回值为boolean
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return ResultMessage.FAIL;
+			return null;
 		}
-		return ResultMessage.SUCCESS;
+		webMarketerPO.setWebMarketerID(this.getTheLastID());
+		return webMarketerPO;
 	}
 
 	/**
@@ -167,5 +168,24 @@ public class WebMarketerDataHelperImpl implements WebMarketerDataHelper {
 	public void close() { // 当决定抛弃该对象的时候，调用该方法
 		JDBCUtil.close(rs, ps, conn);
 		this.sql = null;
+	}
+	
+	private String getTheLastID(){
+		
+		sql = "SELECT LAST_INSERT_ID() from webmarketer";
+		
+		try {
+			ps  = conn.prepareStatement(sql);
+			rs  = ps.executeQuery();
+			
+			if(rs.next()){
+				return String.valueOf(rs.getObject(1));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return null;
 	}
 }

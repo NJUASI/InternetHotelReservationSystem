@@ -326,6 +326,19 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
+	 * @updateTime 2016/12/4
+	 * @param guestID 此客户的客户编号
+	 * @param hotelID 此客户相对的酒店编号
+	 * @return 此客户在此相应酒店预定过的订单状态
+	 */
+	@Override
+	public OrderState getOrderState(String guestID, String hotelID) throws RemoteException {
+		return null;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
 	 * @updateTime 2016/11/27
 	 * @param randomNumber 随机生成的4位数，便于验证
 	 * @return 标准格式化此4位数之后的String

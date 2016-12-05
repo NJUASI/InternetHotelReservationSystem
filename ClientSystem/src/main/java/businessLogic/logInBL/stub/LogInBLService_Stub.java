@@ -4,6 +4,7 @@ import businessLogicService.logInBLService.LogInBLService;
 import utilities.ResultMessage;
 import utilities.UserType;
 import vo.GuestVO;
+import vo.UserVO;
 
 /**
  * 
@@ -98,6 +99,12 @@ public class LogInBLService_Stub implements LogInBLService {
 	@Override
 	public ResultMessage logIn(String webManager, String password,UserType userType) {
 		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public GuestVO guestSignUp(UserVO guestVO) {
+		// TODO 自动生成的方法存根
+		return null;
 	}
 
 }

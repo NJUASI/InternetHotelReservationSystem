@@ -50,19 +50,18 @@ public class WebMarketer implements UserService{
 	 * @param newUserVO 从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加网站营销人员信息
 	 */
-	public ResultMessage add(UserVO newUserVO) {
+	public UserVO add(UserVO newUserVO) {
 
-		ResultMessage msg = ResultMessage.USER_ADD_FAILURE;
 		
-		if(this.hasWebMarketer(newUserVO.userID)){return msg;} //存在ID对应项
+		if(this.hasWebMarketer(newUserVO.userID)){return null;} //存在ID对应项
 
 		try {
 			WebMarketerPO webMarketerPO = this.convert(newUserVO);
-			msg = webMarketerDataService.add(webMarketerPO);
+			return this.convert(webMarketerDataService.add(webMarketerPO));
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return msg;
 	}
 
 	/**
@@ -138,21 +137,6 @@ public class WebMarketer implements UserService{
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	/**
-	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/27
-	 * @param  IDLength 用户ID长度
-	 * @return boolean 判断指定用户是否为网站营销人员类型
-	 */
-	public static boolean isWebMarketer(int length) {
-		if (WebMarketer.IDLength == length) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	/**

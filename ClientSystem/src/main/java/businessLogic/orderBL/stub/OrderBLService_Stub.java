@@ -226,8 +226,11 @@ public class OrderBLService_Stub implements OrderBLService {
 	 */
 	@Override
 	public List<HotelEvaluationVO> getEvaluations(String hotelID) {
-		// TODO Auto-generated method stub
-		return null;
+		final List<HotelEvaluationVO> hotelEvaluations = new ArrayList<HotelEvaluationVO>();
+		final LocalDate checkInTime = LocalDateTime.of(2016, 2, 3, 11, 23).toLocalDate();
+		
+		hotelEvaluations.add(new HotelEvaluationVO("1234567890", checkInTime, 4.5, "good"));
+		return hotelEvaluations;
 	}
 	
 	/**

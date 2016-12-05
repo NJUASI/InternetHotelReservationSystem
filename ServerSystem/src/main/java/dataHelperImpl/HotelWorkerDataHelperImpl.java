@@ -43,7 +43,7 @@ public class HotelWorkerDataHelperImpl implements HotelWorkerDataHelper {
 	 * @param hotelWorkerPO hotelWorkerInfo载体
 	 * @return ResultMessage 是否成功添加到数据库中
 	 */
-	public ResultMessage add(final HotelWorkerPO hotelWorkerPO) {
+	public HotelWorkerPO add(HotelWorkerPO hotelWorkerPO) {
 		sql = "INSERT INTO hotelworker(hotelworker.hotelWorkerID,hotelworker.hotelName,hotelworker.`password`) "
 				+ "values (?,?,?)";
 
@@ -56,9 +56,10 @@ public class HotelWorkerDataHelperImpl implements HotelWorkerDataHelper {
 			ps.execute(); // 执行sql语句，返回值为boolean
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return ResultMessage.FAIL;
+			return null;
 		}
-		return ResultMessage.SUCCESS;
+		hotelWorkerPO.setHotelWorkerID(this.getTheLastID());
+		return hotelWorkerPO;
 	}
 
 	/**
@@ -178,5 +179,24 @@ public class HotelWorkerDataHelperImpl implements HotelWorkerDataHelper {
 	public void close() { // 当决定抛弃该对象的时候，调用该方法
 		JDBCUtil.close(rs, ps, conn);
 		this.sql = null;
+	}
+	
+	private String getTheLastID(){
+		
+		sql = "SELECT LAST_INSERT_ID() from hotelWorker";
+		
+		try {
+			ps  = conn.prepareStatement(sql);
+			rs  = ps.executeQuery();
+			
+			if(rs.next()){
+				return String.valueOf(rs.getObject(1));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return null;
 	}
 }

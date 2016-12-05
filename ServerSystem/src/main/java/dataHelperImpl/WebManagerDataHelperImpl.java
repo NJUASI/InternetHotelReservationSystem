@@ -43,7 +43,7 @@ public class WebManagerDataHelperImpl implements WebManagerDataHelper {
 	 * @param webManagerPO webManagerInfo载体
 	 * @return ResultMessage 是否成功添加到数据库中
 	 */
-	public ResultMessage add(final WebManagerPO webManagerPO) {
+	public WebManagerPO add(WebManagerPO webManagerPO) {
 		sql = "INSERT INTO webmanager(webmanager.webManagerID,webmanager.`password`) VALUES(?,?)";
 
 		try {
@@ -54,9 +54,10 @@ public class WebManagerDataHelperImpl implements WebManagerDataHelper {
 			ps.execute(); // 执行sql语句，返回值为boolean
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return ResultMessage.FAIL;
+			return null;
 		}
-		return ResultMessage.SUCCESS;
+		webManagerPO.setWebManagerID(this.getTheLastID());
+		return webManagerPO;
 	}
 
 	/**
@@ -144,5 +145,24 @@ public class WebManagerDataHelperImpl implements WebManagerDataHelper {
 	public void close() { // 当决定抛弃该对象的时候，调用该方法
 		JDBCUtil.close(rs, ps, conn);
 		this.sql = null;
+	}
+	
+	private String getTheLastID(){
+		
+		sql = "SELECT LAST_INSERT_ID() from webmanager";
+		
+		try {
+			ps  = conn.prepareStatement(sql);
+			rs  = ps.executeQuery();
+			
+			if(rs.next()){
+				return String.valueOf(rs.getObject(1));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return null;
 	}
 }

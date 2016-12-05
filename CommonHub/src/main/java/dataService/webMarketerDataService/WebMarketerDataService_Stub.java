@@ -30,8 +30,8 @@ public class WebMarketerDataService_Stub extends UnicastRemoteObject implements 
 	}
 	
 	
-	public ResultMessage add(WebMarketerPO newWebMarketerPO) {
-		return ResultMessage.SUCCESS;
+	public WebMarketerPO add(WebMarketerPO newWebMarketerPO) {
+		return new WebMarketerPO("000001", "123456");
 	}
 
 	

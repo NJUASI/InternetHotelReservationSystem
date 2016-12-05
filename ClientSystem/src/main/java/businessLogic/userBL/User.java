@@ -38,19 +38,19 @@ public class User {
 
 	/**
 	 * @author Byron Dong
-	 * @lastChangedBy Harvey Gong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/12/5
 	 * @param userVO 从客户界面层传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加用户信息
 	 */
-	public ResultMessage add(UserVO newUserVO) {
+	public UserVO add(UserVO newUserVO) {
 
 		user = lengthFactory.createUser(newUserVO.userID.length());
 		if(isExistence(user))
 		{
 			return user.add(newUserVO);
 		}
-		return ResultMessage.USER_UNEXISTENCE;
+		return null;
 	}
 
 	/**

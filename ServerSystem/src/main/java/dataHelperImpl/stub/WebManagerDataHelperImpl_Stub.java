@@ -23,8 +23,8 @@ public class WebManagerDataHelperImpl_Stub implements WebManagerDataHelper {
 	 * @param webManagerPO webManagerInfo载体
 	 * @return ResultMessage 是否成功添加到数据库中
 	 */
-	public ResultMessage add(final WebManagerPO webManagerPO) {
-		return ResultMessage.SUCCESS;
+	public WebManagerPO add(WebManagerPO webManagerPO) {
+		return new WebManagerPO("0001", "123456");
 	}
 
 	/**

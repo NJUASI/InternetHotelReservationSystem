@@ -21,7 +21,7 @@ public interface GuestDataHelper {
 	 * @param guestPO guestInfo载体
 	 * @return ResultMessage guestPO是否成功添加到数据库中
 	 */
-	ResultMessage add(GuestPO guestPO);
+	GuestPO add(GuestPO guestPO);
 	
 	/**
 	 * @author 董金玉

@@ -30,8 +30,8 @@ public class WebManagerDataService_Stub extends UnicastRemoteObject implements W
 	}
 
 	
-	public ResultMessage add(WebManagerPO newWebManagerPO) {
-		return ResultMessage.SUCCESS;
+	public WebManagerPO add(WebManagerPO newWebManagerPO) {
+		return new WebManagerPO("0001", "123456");
 	}
 
 	

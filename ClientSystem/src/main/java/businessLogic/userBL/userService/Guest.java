@@ -48,19 +48,18 @@ public class Guest implements UserService ,CreditService{
 	 * @param newUserVO 从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加客户信息
 	 */
-	public ResultMessage add(UserVO newUserVO) {
+	public UserVO add(UserVO newUserVO) {
 
-		ResultMessage msg = ResultMessage.USER_ADD_FAILURE;
 
-		if(this.hasGuest(newUserVO.userID)){return msg;} //存在ID对应项
+		if(this.hasGuest(newUserVO.userID)){return null;} //存在ID对应项
 
 		try {
 			GuestPO guestPO = this.convert(newUserVO);
-			msg = guestDataService.add(guestPO);
+			  return this.convert(guestDataService.add(guestPO));
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return msg;
 	}
 
 	/**
@@ -164,7 +163,7 @@ public class Guest implements UserService ,CreditService{
 	 * @param  IDLength 用户ID长度
 	 * @return boolean 判断指定用户是否为客户类型
 	 */
-	public static boolean isGuest(int length) {
+	public boolean isGuest(int length) {
 		if (Guest.IDLength == length) {
 			return true;
 		} else {

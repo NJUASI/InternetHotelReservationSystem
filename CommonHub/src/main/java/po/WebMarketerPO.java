@@ -31,6 +31,10 @@ public class WebMarketerPO implements Serializable{
 		return webMarketerID;
 	}
 	
+	public void setWebMarketerID(String webMarketerID) {
+		this.webMarketerID = webMarketerID;
+	}
+	
 	public String getPassword() {
 		return password;
 	}

@@ -17,7 +17,7 @@ import utilities.RoomType;
 
 /**
  * 
- * @author 董金玉 lastChangedBy 董金玉 updateTime 2016/11/30
+ * @author Byron Dong lastChangedBy Byron Dong updateTime 2016/11/30
  *
  */
 public class OrderDataHelperImpl implements OrderDataHelper {
@@ -31,8 +31,8 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	private String sql;
 	
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/30 构造函数，初始化成员变量conn
 	 */
 	public OrderDataHelperImpl() {
@@ -40,8 +40,8 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	}
 	
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/30
 	 * @param orderPO orderInfo载体
 	 * @return ResultMessage 是否成功添加到数据库中
@@ -88,8 +88,8 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author  Byron Dong
+	 * @lastChangedBy  Byron Dong
 	 * @updateTime 2016/11/30
 	 * @param orderID 订单编号
 	 * @param state 需要被修改的状态
@@ -111,12 +111,9 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 		return ResultMessage.SUCCESS;
 	}
 
-	/*
-	 * ！！！修改！！！
-	 */
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy charles
+	 * @author  Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/12/4
 	 * @param orderID 此次订单评价的订单编号
 	 * @param score 此次订单评价的评分
@@ -124,12 +121,13 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	 * @return ResultMessage 是否成功修改orderInfo
 	 */
 	public ResultMessage setEvaluation(final String orderID, final double score, final String comment) {
-		sql = "UPDATE `order` SET `order`.`comment` = ? WHERE `order`.orderID = ?";
+		sql = "UPDATE `order` SET `order`.`comment` = ?,score = ? WHERE `order`.orderID = ?";
 		
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setObject(1, comment);
-			ps.setObject(2, orderID);
+			ps.setDouble(1, score);
+			ps.setObject(3, orderID);
 			
 			ps.execute();
 		} catch (SQLException e) {
@@ -139,12 +137,9 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 		return ResultMessage.SUCCESS;
 	}
 
-	/*
-	 * ！！！修改！！！
-	 */
 	/**
 	 * @author charles
-	 * @lastChangedBy charles
+	 * @lastChangedBy  Byron Dong
 	 * @updateTime 2016/12/5
 	 * @param orderID 此次入住的订单编号
 	 * @param roomNumber 房间号
@@ -153,27 +148,54 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	 */
 	public ResultMessage setCheckIn(final String orderID, final String roomNumber, 
 			final LocalDateTime checkInTime, LocalDateTime expectLeaveTime) {
+		
+		sql = "update order set roomNumber = ?,checkInTime = ?,expectLeaveTime = ? where orderID = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, roomNumber);
+			ps.setObject(2, checkInTime);
+			ps.setObject(3, expectLeaveTime);
+			
+			ps.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return ResultMessage.CHECK_IN_FAILURE;
+		}
+		
+		
 		return ResultMessage.CHECK_IN_SUCCESS;
 	}
 	
-	/*
-	 * ！！！修改！！！
-	 */
 	/**
 	 * @author charles
-	 * @lastChangedBy charles
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/12/4
 	 * @param orderID 此次退房的订单编号
 	 * @param checkOutTime 退房时间
 	 * @return ResultMessage 是否成功修改orderInfo
 	 */
 	public ResultMessage setCheckOut(final String orderID, final LocalDateTime checkOutTime) {
+		
+		sql = "update order set checkOutTime = ? where orderID = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setObject(1, checkOutTime);
+			ps.setObject(2, orderID);
+			
+			ps.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return ResultMessage.CHECK_OUT_FAILURE;
+		}
+		
 		return ResultMessage.CHECK_OUT_SUCCESS;
 	}
 	
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/30
 	 * @param orderID 订单编号
 	 * @return OrderPO orderInfo载体
@@ -201,8 +223,8 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/30
 	 * @param guestID 客户ID
 	 * @return List<OrderPO> 指定客户的所有orderInfo载体
@@ -228,8 +250,8 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/30
 	 * @param hotelID 酒店ID
 	 * @return List<OrderPO> 指定酒店的所有orderInfo载体
@@ -255,8 +277,8 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/30
 	 * @param date 需要查询的日期
 	 * @return List<OrderPO> 指定日期的所有异常orderInfo载体
@@ -281,8 +303,8 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/30
 	 * @return List<OrderPO> 指定日期的所有未执行orderInfo载体
 	 */
@@ -306,8 +328,8 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/30
 	 * @param
 	 * @return
@@ -318,8 +340,8 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	}
 	
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/30
 	 * @return OrderPO orderInfo载体
 	 */
