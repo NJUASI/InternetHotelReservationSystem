@@ -77,8 +77,8 @@ public class OrderBLService_DriverTest {
 		assertEquals(RoomType.AMBASSADOR, orderVO.roomType);
 		assertEquals(2, orderVO.roomNumCount);
 		assertEquals("301  302", orderVO.roomNumber);
-		assertEquals("zhangsan", orderVO.name);
-		assertEquals("13554321234", orderVO.phone);
+		assertEquals("zhangsan", orderVO.orderGeneralVO.name);
+		assertEquals("13554321234", orderVO.orderGeneralVO.phone);
 		assertEquals("no", orderVO.message);
 	}
 

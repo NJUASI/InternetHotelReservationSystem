@@ -51,6 +51,12 @@ public class OrderDataService_DriverTest {
 		final OrderState orderState = OrderState.EXECUTED;
 		final RoomType roomType = RoomType.AMBASSADOR;
 		
+<<<<<<< Updated upstream
+=======
+		final OrderGeneralVO createOrderGeneralVO = new OrderGeneralVO("1234567890", "12345678", "thisHotel", 
+				"nanjing", expectExecuteTime, expectLeaveTime, "zhangsan", "15012345678");
+		final OrderVO createOrderVO = new OrderVO(createOrderGeneralVO, 250, roomType, 1, 2, "charles", "15012345678", "no");
+>>>>>>> Stashed changes
 		
 		final OrderPO orderPO = new OrderPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
 				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, 
@@ -289,7 +295,7 @@ public class OrderDataService_DriverTest {
 			assertEquals(200, orderGeneralPO.getPrice(), 0);
 			assertEquals(LocalDateTime.of(2016, 2, 3, 14, 0), orderGeneralPO.getExpectExecuteTime());
 			assertEquals(LocalDateTime.of(2016, 2, 4, 12, 0), orderGeneralPO.getExpectLeaveTime());
-			assertEquals(OrderState.EXECUTED, orderGeneralPO.getState());
+			assertEquals(OrderState.ABNORMAL, orderGeneralPO.getState());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -326,7 +332,7 @@ public class OrderDataService_DriverTest {
 			assertEquals(200, orderGeneralPO.getPrice(), 0);
 			assertEquals(LocalDateTime.of(2016, 2, 3, 14, 0), orderGeneralPO.getExpectExecuteTime());
 			assertEquals(LocalDateTime.of(2016, 2, 4, 12, 0), orderGeneralPO.getExpectLeaveTime());
-			assertEquals(OrderState.EXECUTED, orderGeneralPO.getState());
+			assertEquals(OrderState.ABNORMAL, orderGeneralPO.getState());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

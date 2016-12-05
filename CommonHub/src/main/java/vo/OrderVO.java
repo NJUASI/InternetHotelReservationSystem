@@ -10,13 +10,13 @@ import utilities.RoomType;
  * 
  * @author 61990
  * lastChangedBy charles
- * updateTime 2016/12/4
+ * updateTime 2016/12/5
  *
  */
 public class OrderVO {
 	
 	//	订单编号(create时无) 客户编号 酒店编号 酒店名 酒店地址 最后预定价格(create时无) 
-	//	最晚订单执行时间／预计入住时间 预计离开时间 订单状态
+	//	最晚订单执行时间／预计入住时间 预计离开时间 订单状态 已评论 入住人姓名 联系方式
 	public OrderGeneralVO orderGeneralVO;
 	
 	//	原价
@@ -43,12 +43,6 @@ public class OrderVO {
 	//	预计入住人数
 	public int expectGuestNumCount;
 	
-	//	入住人姓名
-	public String name;
-	
-	//	联系方式
-	public String phone;
-	
 	//	特别要求
 	public String message;
 	
@@ -62,17 +56,17 @@ public class OrderVO {
 	/**
 	 * 
 	 * @author 61990
-	 * lastChangedBy 61990
-	 * updateTime 2016/11/27
+	 * lastChangedBy charles
+	 * updateTime 2016/12/5
 	 */
 	public OrderVO(String orderID, String guestID, String hotelID, String hotelName, String hotelAddress, 
 			double previousPrice, double price, LocalDateTime createTime, LocalDateTime checkInTime,
 			LocalDateTime checkOutTime, LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime, 
-			OrderState state, RoomType roomType, int roomNumCount, String roomNumber, 
+			OrderState state, boolean hasCommented, RoomType roomType, int roomNumCount, String roomNumber, 
 			int expectGuestNumCount, String name, String phone, String message, double score, String comment) {
 		super();
 		this.orderGeneralVO = new OrderGeneralVO(orderID, guestID, hotelID, hotelName, hotelAddress,
-				price, expectExecuteTime, expectLeaveTime, state);
+				price, expectExecuteTime, expectLeaveTime, state, hasCommented, name, phone);
 		
 		this.previousPrice = previousPrice;
 		this.createTime = createTime;
@@ -82,8 +76,6 @@ public class OrderVO {
 		this.roomNumCount = roomNumCount;
 		this.roomNumber = roomNumber;
 		this.expectGuestNumCount = expectGuestNumCount;
-		this.name = name;
-		this.phone = phone;
 		this.message = message;
 		this.score = score;
 		this.comment = comment;
@@ -92,12 +84,12 @@ public class OrderVO {
 	/**
 	 * 
 	 * @author 61990
-	 * lastChangedBy 61990
-	 * updateTime 2016/11/27
+	 * lastChangedBy charles
+	 * updateTime 2016/12/5
 	 */
-	public OrderVO(OrderGeneralVO orderGeneralVO, double previousPrice, LocalDateTime createTime, LocalDateTime checkInTime, 
-			LocalDateTime checkOutTime, RoomType roomType, int roomNumCount, String roomNumber, String name, 
-			String phone, String message, double score, String comment) {
+	public OrderVO(OrderGeneralVO orderGeneralVO, double previousPrice, LocalDateTime createTime, 
+			LocalDateTime checkInTime, LocalDateTime checkOutTime, RoomType roomType, int roomNumCount, 
+			String roomNumber, int expectGuestNumCount, String message, double score, String comment) {
 		super();
 		this.orderGeneralVO = orderGeneralVO;
 		
@@ -108,8 +100,7 @@ public class OrderVO {
 		this.roomType = roomType;
 		this.roomNumCount = roomNumCount;
 		this.roomNumber = roomNumber;
-		this.name = name;
-		this.phone = phone;
+		this.expectGuestNumCount = expectGuestNumCount;
 		this.message = message;
 		this.score = score;
 		this.comment = comment;
@@ -119,13 +110,15 @@ public class OrderVO {
 	 * 
 	 * @author 61990
 	 * lastChangedBy charles
-	 * updateTime 2016/12/4
+	 * updateTime 2016/12/5
 	 * 
-	 * 因为订单的入住时间、退房时间、房间号还未生成，不能从界面层直接得到，客户还未进行评论
+	 * 因为订单的创建时间、入住时间、退房时间、房间号还未生成，不能从界面层直接得到，客户还未进行评论（评分、评价）
 	 * 所以order create的时候，提供一个专门的构造器
 	 */
 	public OrderVO (OrderGeneralVO orderGeneralVO, double previousPrice, RoomType roomType,
 			int roomNumCount, int expectGuestNumCount, String name, String phone, String message) {
+		this.orderGeneralVO = orderGeneralVO;
+		
 		this.createTime = LocalDateTime.now();
 		this.checkInTime = null;
 		this.checkOutTime = null;
@@ -133,20 +126,18 @@ public class OrderVO {
 		this.score = -1;
 		this.comment = null;
 		
-		this.orderGeneralVO = orderGeneralVO;
 		this.previousPrice = previousPrice;
 		this.roomType = roomType;
 		this.roomNumCount = roomNumCount;
-		this.name = name;
-		this.phone = phone;
+		this.expectGuestNumCount = expectGuestNumCount;
 		this.message = message;
 	}
 	
 	/**
 	 * 
 	 * @author 61990
-	 * lastChangedBy 61990
-	 * updateTime 2016/11/27
+	 * lastChangedBy charles
+	 * updateTime 2016/11/5
 	 */
 	public OrderVO(OrderPO orderPO) {
 		this.orderGeneralVO = new OrderGeneralVO(orderPO.getOrderGeneralPO());
@@ -158,8 +149,7 @@ public class OrderVO {
 		this.roomType = orderPO.getRoomType();
 		this.roomNumCount = orderPO.getRoomNumCount();
 		this.roomNumber = orderPO.getRoomNumber();
-		this.name = orderPO.getName();
-		this.phone = orderPO.getPhone();
+		this.expectGuestNumCount = orderPO.getExpectGuestNumCount();
 		this.message = orderPO.getMessage();
 		this.score = orderPO.getScore();
 		this.comment = orderPO.getComment();
