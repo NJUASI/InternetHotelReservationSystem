@@ -97,8 +97,7 @@ public class LogInBLService_Stub implements LogInBLService {
 
 	@Override
 	public ResultMessage logIn(String webManager, String password,UserType userType) {
-		// TODO 自动生成的方法存根
-		return null;
+		return ResultMessage.SUCCESS;
 	}
 
 }

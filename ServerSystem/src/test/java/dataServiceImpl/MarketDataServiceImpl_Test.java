@@ -22,8 +22,8 @@ public class MarketDataServiceImpl_Test {
 			List<MarketPO> list = market.getMemberFormulation();
 			MarketPO marketPO = list.get(0);
 			
-			assertEquals(marketPO.getMarketName(),"aa");
-			assertEquals(marketPO.getMarketCredit(),0,0);
+			assertEquals(marketPO.getMarketName(),"Lv1");
+			assertEquals(marketPO.getMarketCredit(),100,0);
 			assertEquals(marketPO.getMarketBenefit(),0.9,0);
 			} catch (RemoteException e) {
 			e.printStackTrace();
