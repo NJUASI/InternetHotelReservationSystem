@@ -32,7 +32,11 @@ public class Member {
 	 * 构造函数，初始化成员变量
 	 */
 	public Member() {
-		guestDataService = new GuestDataService_Stub();
+		try {
+			guestDataService = new GuestDataService_Stub();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		member = new MemberInfo();
 	}
 

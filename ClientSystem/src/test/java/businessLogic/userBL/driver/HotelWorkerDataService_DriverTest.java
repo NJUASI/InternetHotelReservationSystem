@@ -14,7 +14,12 @@ public class HotelWorkerDataService_DriverTest {
 	@Test
 	public void test1() {
 		//test interface getSingle
-		HotelWorkerDataService_Stub stub = new HotelWorkerDataService_Stub();
+		HotelWorkerDataService_Stub stub = null;
+		try {
+			stub = new HotelWorkerDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		HotelWorkerDataService_Driver driver = new HotelWorkerDataService_Driver(stub);
 		
 		try {
@@ -31,7 +36,12 @@ public class HotelWorkerDataService_DriverTest {
 	@Test
 	public void test2() {
 		//test interface add
-		HotelWorkerDataService_Stub stub = new HotelWorkerDataService_Stub();
+		HotelWorkerDataService_Stub stub = null;
+		try {
+			stub = new HotelWorkerDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		HotelWorkerDataService_Driver driver = new HotelWorkerDataService_Driver(stub);
 		HotelWorkerPO hotelWorkerPO;
 		

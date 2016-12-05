@@ -25,7 +25,7 @@ public class CreditDataHelperImplTest {
 	@Test
 	public void testGetAll() {
 		
-		List<CreditPO>  list = helper.getAll("1000000001");	
+		List<CreditPO>  list = helper.getAllCreditDetail("1000000001");	
 		
 		
 		assertEquals(LocalDateTime.of(2016, 12, 03, 02, 14,21),list.get(0).getTime());
@@ -39,6 +39,6 @@ public class CreditDataHelperImplTest {
 	public void testAdd() {
 		CreditPO creditPO = new CreditPO("1000000002",LocalDateTime.of(2016, 12, 07, 18, 14,21),"445620161212",111,444,"executed");
 		
-		assertEquals(ResultMessage.SUCCESS,helper.add(creditPO));
+		assertEquals(ResultMessage.SUCCESS,helper.addCredit(creditPO));
 	}
 }

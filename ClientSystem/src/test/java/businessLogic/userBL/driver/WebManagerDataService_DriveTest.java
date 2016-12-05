@@ -14,7 +14,12 @@ public class WebManagerDataService_DriveTest {
 	@Test
 	public void test1() {
 		//test interface getSingle
-		WebManagerDataService_Stub stub = new WebManagerDataService_Stub();
+		WebManagerDataService_Stub stub = null;
+		try {
+			stub = new WebManagerDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		WebManagerDataService_Driver driver = new WebManagerDataService_Driver(stub);
 		
 		try {
@@ -27,7 +32,12 @@ public class WebManagerDataService_DriveTest {
 	@Test
 	public void test2() {
 		//test interface getSingle
-		WebManagerDataService_Stub stub = new WebManagerDataService_Stub();
+		WebManagerDataService_Stub stub = null;
+		try {
+			stub = new WebManagerDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		WebManagerDataService_Driver driver = new WebManagerDataService_Driver(stub);
 		WebManagerPO webManagerPO;
 		try {

@@ -25,7 +25,11 @@ public class SpecialSpanPromotion {
 	List<SpecialSpanPromotionPO> specialSpanPromotions;
 
 	public SpecialSpanPromotion() {
-		promotionDataService = new PromotionDataService_Stub();
+		try {
+			promotionDataService = new PromotionDataService_Stub();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

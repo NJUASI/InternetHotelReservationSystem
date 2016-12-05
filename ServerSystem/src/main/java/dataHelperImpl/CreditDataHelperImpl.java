@@ -24,9 +24,9 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 	private PreparedStatement ps;
 
 	private ResultSet rs;
-	
+
 	private String sql;
-	
+
 
 	/**
 	 * @author 董金玉
@@ -36,23 +36,25 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 	public CreditDataHelperImpl() {
 		this.conn = JDBCUtil.getConnection();
 	}
-	
+
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
-	 * @updateTime 2016/11/30
-	 * @param guestID 客户ID
-	 * @return List<CreditPO> 所有creditInfo载体
+	 * @Description:获取该客户所有的信用变化记录
+	 * @param guestID
+	 * @return
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月5日 下午4:11:57
 	 */
-	public List<CreditPO> getAll(final String guestID) {
+	@Override
+	public List<CreditPO> getAllCreditDetail(String guestID) {
 		sql = "SELECT * FROM credit WHERE credit.guestID = ?";
 		final List<CreditPO> result = new ArrayList<CreditPO>();
-		
+
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, guestID);
 			rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
 				final CreditPO creditPO = new CreditPO();
 				creditPO.setGuestID(guestID);
@@ -61,7 +63,7 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 				creditPO.setPreCredit(rs.getDouble(4));
 				creditPO.setCredit(rs.getDouble(5));
 				creditPO.setReason(String.valueOf(rs.getObject(6)));
-				
+
 				result.add(creditPO);
 			}
 		} catch (SQLException e) {
@@ -71,18 +73,21 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
-	 * @updateTime 2016/11/30
-	 * @param creditPO creditInfo载体
-	 * @return ResultMessage 是否成功添加creditInfo
+	 * @Description:添加一条信用变化记录
+	 * @param creditPO
+	 * @return
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月5日 下午4:12:24
 	 */
-	public ResultMessage add(final CreditPO creditPO) {
+	@Override
+	public ResultMessage addCredit(CreditPO creditPO) {
 		sql = "INSERT INTO credit(credit.guestID,credit.orderID,credit.time,"
 				+ "credit.previousCredit,credit.afterCredit,credit.reason) "
 				+ "VALUES(?,?,?,?,?,?)";
-		
+
 		try {
+
 			ps = conn.prepareStatement(sql);
 			ps.setObject(1, creditPO.getGuestID()); //此处硬编码1-6对应语句中元素的位置，已确定
 			ps.setObject(2, creditPO.getOrderID());
@@ -90,13 +95,40 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 			ps.setDouble(4, creditPO.getPreCredit()); 
 			ps.setDouble(5, creditPO.getCredit());
 			ps.setObject(6, creditPO.getReason());
-			
+
 			ps.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return ResultMessage.FAIL;
 		}
 		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public List<CreditPO> getCreditOfOneOrder(String orderID) {
+		sql = "SELECT * FROM credit WHERE credit.guestID = ?";
+		final List<CreditPO> result = new ArrayList<CreditPO>();
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, orderID);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				final CreditPO creditPO = new CreditPO();
+				creditPO.setGuestID(orderID);
+				creditPO.setTime(rs.getTimestamp(2).toLocalDateTime()); //此处硬编码2-6对应表项中元素的位置，已确定
+				creditPO.setOrderID(String.valueOf(rs.getObject(3)));
+				creditPO.setPreCredit(rs.getDouble(4));
+				creditPO.setCredit(rs.getDouble(5));
+				creditPO.setReason(String.valueOf(rs.getObject(6)));
+
+				result.add(creditPO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	/**
@@ -111,5 +143,4 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 		this.sql = null;
 	}
 
-	
 }

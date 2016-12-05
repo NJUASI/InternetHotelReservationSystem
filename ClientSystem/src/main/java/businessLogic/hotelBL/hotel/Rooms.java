@@ -24,7 +24,11 @@ class Rooms {
 	private HotelDataService hotelDataService;
 
 	public Rooms(String hotelID) {
-		this.hotelDataService = new HotelDataService_Stub();
+		try {
+			this.hotelDataService = new HotelDataService_Stub();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		this.hotelID = hotelID;
 		initRoomInfoPO();
 	}

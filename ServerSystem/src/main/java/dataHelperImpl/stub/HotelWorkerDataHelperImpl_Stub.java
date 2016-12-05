@@ -9,7 +9,9 @@ import utilities.ResultMessage;
 
 /**
  * 
- * @author 董金玉 lastChangedBy 董金玉 updateTime 2016/12/1
+ * @author 董金玉 
+ * @lastChangedBy Harvey Gong
+ * @ updateTime 2016/12/5
  *
  */
 public class HotelWorkerDataHelperImpl_Stub implements HotelWorkerDataHelper {
@@ -68,8 +70,9 @@ public class HotelWorkerDataHelperImpl_Stub implements HotelWorkerDataHelper {
 	 */
 	public List<HotelWorkerPO> getAll() {
 		List<HotelWorkerPO>  list= new ArrayList<HotelWorkerPO>();
-		HotelWorkerPO b= new HotelWorkerPO("00001111", "123456","school");
-		list.add(b);
+		list.add(new HotelWorkerPO("00001111", "123456","school"));
+		list.add(new HotelWorkerPO("00001112", "123456","school1"));
+		list.add(new HotelWorkerPO("00001113", "123456","school2"));
 		return list;
 	}
 

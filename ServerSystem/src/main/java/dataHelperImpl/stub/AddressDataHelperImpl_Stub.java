@@ -7,21 +7,7 @@ import dataHelper.AddressDataHelper;
 import po.AddressPO;
 import utilities.ResultMessage;
 
-/**
- * 
- * @author 董金玉 lastChangedBy 董金玉 updateTime 2016/11/30
- *
- */
-/**
- * @Description:TODO
- * @author:Harvey Gong
- * @time:2016年12月2日 下午9:03:00
- */
-/**
- * @Description:TODO
- * @author:Harvey Gong
- * @time:2016年12月2日 下午9:03:01
- */
+
 /**
  * @Description:TODO
  * @author:Harvey Gong
@@ -59,10 +45,8 @@ public class AddressDataHelperImpl_Stub implements AddressDataHelper {
 		List<String> list = new ArrayList<String>();
 		list.add("新街口");
 		list.add("仙林");
-		list.add("玄武");
-		list.add("汉庭");
-		list.add("九龙");
 		list.add("浦口");
+		list.add("大行宫");
 
 		return list;
 	}
@@ -123,8 +107,12 @@ public class AddressDataHelperImpl_Stub implements AddressDataHelper {
 	 */
 	@Override
 	public List<AddressPO> getAll(String city) {
-		// TODO 自动生成的方法存根
-		return null;
+		List<AddressPO> list = new ArrayList<AddressPO>();
+		list.add(new AddressPO("南京","新街口",0.5));
+		list.add(new AddressPO("南京","大行宫",0.8));
+		list.add(new AddressPO("上海","浦东",0.5));
+		list.add(new AddressPO("上海","浦西",0.7));
+		return list;
 	}
 
 	/**
@@ -137,8 +125,7 @@ public class AddressDataHelperImpl_Stub implements AddressDataHelper {
 	 */
 	@Override
 	public ResultMessage modifyDiscout(AddressPO addressPO) {
-		// TODO 自动生成的方法存根
-		return null;
+		return ResultMessage.SUCCESS;
 	}
 
 }

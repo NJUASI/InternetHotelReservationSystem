@@ -35,7 +35,11 @@ public class HotelScan {
 	private String guestID;
 	
 	public HotelScan(String guestID) {
-		hotelDataService = new HotelDataService_Stub();
+		try {
+			hotelDataService = new HotelDataService_Stub();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		sortComparatorFactory = new SortComparatorFactory();
 		this.guestID = guestID;
 	}

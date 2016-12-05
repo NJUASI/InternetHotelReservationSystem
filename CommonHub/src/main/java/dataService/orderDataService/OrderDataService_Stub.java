@@ -1,6 +1,7 @@
 package dataService.orderDataService;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -23,9 +24,15 @@ import utilities.RoomType;
  * updateTime 2016/12/5
  *
  */
-public class OrderDataService_Stub implements OrderDataService {
+public class OrderDataService_Stub extends UnicastRemoteObject implements OrderDataService {
 
 	
+	public OrderDataService_Stub() throws RemoteException {
+		super();
+		// TODO 自动生成的构造函数存根
+	}
+
+
 	/**
 	 * 
 	 * @author charles

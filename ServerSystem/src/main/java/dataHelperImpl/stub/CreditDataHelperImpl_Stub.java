@@ -23,13 +23,12 @@ public class CreditDataHelperImpl_Stub implements CreditDataHelper {
 	 *            客户ID
 	 * @return List<CreditPO> 所有creditInfo载体
 	 */
-	public List<CreditPO> getAll(final String guestID) {
+	public List<CreditPO> getAllCreditDetail(final String guestID) {
 		List<CreditPO> list = new ArrayList<CreditPO>();
-
-		list.add(new CreditPO("1234567890", LocalDateTime.of(2016, 10, 2, 18, 12), "123420161002", 100, 100, "undo"));
-		list.add(new CreditPO("1234567890", LocalDateTime.of(2016, 10, 3, 13, 14), "124520161003", 100, 100, "create"));
-		list.add(new CreditPO("1234567890", LocalDateTime.of(2016, 10, 4, 15, 22), "244520161004", 100, 300,
-				"executed"));
+		list.add(new CreditPO("1234567891", LocalDateTime.of(2016, 10, 2, 18, 12), "123420161002", 100, 0, "abnormal"));
+		list.add(new CreditPO("1234567891", LocalDateTime.of(2016, 10, 2, 18, 12), "123420161002", 0, 100, "undo"));
+		list.add(new CreditPO("1234567891", LocalDateTime.of(2016, 10, 3, 13, 14), "124520161003", 100, 200, "executed"));
+		list.add(new CreditPO("1234567892", LocalDateTime.of(2016, 10, 4, 15, 22), "244520161004", 100, 300, "executed"));
 		return list;
 	}
 
@@ -46,6 +45,19 @@ public class CreditDataHelperImpl_Stub implements CreditDataHelper {
 		return ResultMessage.SUCCESS;
 	}
 
+	@Override
+	public ResultMessage addCredit(CreditPO creditPO) {
+		return ResultMessage.CREDIT_CHARGE_SUCCESS;
+	}
+
+	@Override
+	public List<CreditPO> getCreditOfOneOrder(String guestID) {
+		List<CreditPO> list = new ArrayList<CreditPO>();
+		list.add(new CreditPO("1234567891", LocalDateTime.of(2016, 10, 2, 18, 12), "123420161002", 100, 0, "abnormal"));
+		list.add(new CreditPO("1234567891", LocalDateTime.of(2016, 10, 2, 18, 12), "123420161002", 0, 100, "undo"));
+		return list;
+	}
+	
 	/**
 	 * @author 董金玉
 	 * @lastChangedBy 董金玉

@@ -34,7 +34,11 @@ public class Guest implements UserService ,CreditService{
 	 * 构造函数，初始化成员变量
 	 */
 	public Guest() {
-		guestDataService = new GuestDataService_Stub();
+		try {
+			guestDataService = new GuestDataService_Stub();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

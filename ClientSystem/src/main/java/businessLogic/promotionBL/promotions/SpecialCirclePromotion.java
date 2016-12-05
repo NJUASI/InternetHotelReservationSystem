@@ -26,7 +26,11 @@ public class SpecialCirclePromotion {
 	private List<AddressPO> specialCirclePromotions;
 
 	public SpecialCirclePromotion() {
-		promotionDataService = new PromotionDataService_Stub();
+		try {
+			promotionDataService = new PromotionDataService_Stub();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

@@ -9,7 +9,9 @@ import utilities.ResultMessage;
 
 /**
  * 
- * @author 董金玉 lastChangedBy 董金玉 updateTime 2016/12/1
+ * @author 董金玉 
+ * @lastChangedBy Harvey
+ * @updateTime 2016/12/5
  *
  */
 public class WebManagerDataHelperImpl_Stub implements WebManagerDataHelper {
@@ -49,14 +51,14 @@ public class WebManagerDataHelperImpl_Stub implements WebManagerDataHelper {
 
 	/**
 	 * @author 董金玉
-	 * @lastChangedBy 董金玉
-	 * @updateTime 2016/12/1
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/5
 	 * @return List<WebManagerPO> 获取所有webManagerInfo载体
 	 */
 	public List<WebManagerPO> getAll() {
 		List<WebManagerPO> list = new  ArrayList<WebManagerPO>();
-		 WebManagerPO a= new WebManagerPO("0001", "123456");
-		 list.add(a);
+		 list.add(new WebManagerPO("0001", "123456"));
+		 list.add(new WebManagerPO("0002", "123457"));
 		return list;
 	}
 

@@ -33,7 +33,11 @@ public class HotelWorker implements UserService{
 	 * 构造函数，初始化成员变量
 	 */
 	public HotelWorker() {
-		hotelWorkerDataService = new HotelWorkerDataService_Stub();
+		try {
+			hotelWorkerDataService = new HotelWorkerDataService_Stub();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

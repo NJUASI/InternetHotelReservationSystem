@@ -16,7 +16,12 @@ public class HotelDataService_DriverTest {
 	@Test
 	public void test1() {
 		//test interface getHotelDetail
-		HotelDataService_Stub stub = new HotelDataService_Stub();
+		HotelDataService_Stub stub = null;
+		try {
+			stub = new HotelDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		HotelDataService_Driver driver = new HotelDataService_Driver(stub);
 		
 		try {

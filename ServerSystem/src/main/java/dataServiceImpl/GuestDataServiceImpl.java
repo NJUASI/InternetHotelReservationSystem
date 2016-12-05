@@ -81,7 +81,7 @@ public class GuestDataServiceImpl extends UnicastRemoteObject implements GuestDa
 		
 		if(guestID==null||guestID==""||guestID.length()!=10){return null;} //传入的ID无效，返回空
 		
-		List<CreditPO> list = this.creditHelper.getAll(guestID);
+		List<CreditPO> list = this.creditHelper.getAllCreditDetail(guestID);
 		// 从数据库中得到所有creditPO，若不存在则为空
 		if(list.isEmpty()){return null;}
 		

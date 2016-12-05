@@ -12,7 +12,9 @@ import utilities.RoomType;
 
 /**
  * 
- * @author 董金玉 lastChangedBy 董金玉 updateTime 2016/12/1
+ * @author 董金玉 
+ * @lastChangedBy Harvey
+ * @updateTime 2016/12/5
  *
  */
 public class OrderDataHelperImpl_Stub implements OrderDataHelper {
@@ -104,8 +106,8 @@ public class OrderDataHelperImpl_Stub implements OrderDataHelper {
 
 	/**
 	 * @author 董金玉
-	 * @lastChangedBy 董金玉
-	 * @updateTime 2016/12/1
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/5
 	 * @param guestID 客户ID
 	 * @return List<OrderPO> 指定客户的所有orderInfo载体
 	 */
@@ -122,6 +124,9 @@ public class OrderDataHelperImpl_Stub implements OrderDataHelper {
 		
 		
 		list.add(new OrderPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
+				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, 
+				roomType, 2, "301  302", 2, "zhangsan","13554321234", "no","good"));
+		list.add(new OrderPO("123456789013", "1234567890", "12345678", "thisHotel", "address", 200, 200,
 				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, 
 				roomType, 2, "301  302", 2, "zhangsan","13554321234", "no","good"));
 		return list;

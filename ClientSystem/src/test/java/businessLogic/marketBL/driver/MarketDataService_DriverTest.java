@@ -13,7 +13,12 @@ public class MarketDataService_DriverTest {
 
 	@Test
 	public void test() {
-		MarketDataService_Stub stub = new MarketDataService_Stub();
+		MarketDataService_Stub stub = null;
+		try {
+			stub = new MarketDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		MarketDataService_Driver driver = new MarketDataService_Driver(stub);
 		
 		try {

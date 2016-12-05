@@ -1,6 +1,7 @@
 package dataService.hotelDataService;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +9,13 @@ import po.HotelPO;
 import po.RoomInfoPO;
 import utilities.ResultMessage;
 
-public class HotelDataService_Stub implements HotelDataService  {
+public class HotelDataService_Stub extends UnicastRemoteObject implements HotelDataService  {
 	
+	public HotelDataService_Stub() throws RemoteException {
+		super();
+		// TODO 自动生成的构造函数存根
+	}
+
 	@Override
 	public List<HotelPO> getHotels(String city,String circle) {
 		List<HotelPO> list = new ArrayList<HotelPO>();

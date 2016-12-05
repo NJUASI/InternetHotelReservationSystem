@@ -9,7 +9,9 @@ import utilities.ResultMessage;
 
 /**
  * 
- * @author 董金玉 lastChangedBy 董金玉 updateTime 2016/12/1
+ * @author 董金玉 
+ * @lastChangedBy Harvey
+ * @updateTime 2016/12/5
  *
  */
 public class WebMarketerDataHelperImpl_Stub implements WebMarketerDataHelper {
@@ -60,15 +62,15 @@ public class WebMarketerDataHelperImpl_Stub implements WebMarketerDataHelper {
 
 	/**
 	 * @author 董金玉
-	 * @lastChangedBy 董金玉
-	 * @updateTime 2016/12/1
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/5
 	 * @param
 	 * @return List<WebMarketerPO> 获取所有webMarketerInfo载体
 	 */
 	public List<WebMarketerPO> getAll() {
 		List<WebMarketerPO> list= new ArrayList<WebMarketerPO>();
-		WebMarketerPO a= new WebMarketerPO("000001", "123456");
-		list.add(a);
+		list.add(new WebMarketerPO("000001", "123456"));
+		list.add(new WebMarketerPO("000002", "123457"));
 		return list;
 	}
 

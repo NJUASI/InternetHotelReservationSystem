@@ -25,7 +25,11 @@ public class Market {
 	 * @构造函数，初始化成员变量
 	 */
 	public Market() {
-		marketDataService = new MarketDataService_Stub();
+		try {
+			marketDataService = new MarketDataService_Stub();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
