@@ -10,7 +10,9 @@ import utilities.ResultMessage;
 
 /**
  * 
- * @author 董金玉 lastChangedBy 董金玉 updateTime 2016/12/1
+ * @author 董金玉
+ * @lastChangedBy Harvey Gong
+ * @ updateTime 2016/12/5
  *
  */
 public class GuestDataHelperImpl_Stub implements GuestDataHelper {
@@ -46,6 +48,7 @@ public class GuestDataHelperImpl_Stub implements GuestDataHelper {
 	 * @return GuestPO 数据库中的指定guestInfo载体
 	 */
 	public GuestPO getSingle(final String guestID) {
+		
 		LocalDate birthday = LocalDate.of(1995, 1, 1);
 		
 		return new GuestPO("1234567890", birthday, "school", "zhangsan", "xiaosan", "000000", "13523456789", 100);
@@ -60,9 +63,13 @@ public class GuestDataHelperImpl_Stub implements GuestDataHelper {
 	 */
 	public List<GuestPO> getAll() {
 		List<GuestPO> list = new ArrayList<GuestPO>();
-		GuestPO a= new GuestPO("1234567890", LocalDate.of(1995, 1, 1), "school", "zhangsan", "xiaosan",
-				"000000", "13523456789",100);
-		list.add(a);
+		
+		list.add(new GuestPO("1234567890", LocalDate.of(1995, 1, 1), "school", "zhangsan", "xiaosan",
+				"000000", "13523456789",100));
+		list.add(new GuestPO("1234567891", LocalDate.of(1995, 1, 2), "school1", "zhangsan1", "xiaosan1",
+				"000001", "13523456788",100));
+		list.add(new GuestPO("1234567892", LocalDate.of(1995, 1, 3), "school2", "zhangsan2", "xiaosan2",
+				"000002", "13523456787",100));
 		return list;
 	}
 

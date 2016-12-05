@@ -1,5 +1,7 @@
 package dataService.guestDataService;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,9 +13,15 @@ import po.GuestPO;
 import po.MemberPO;
 import utilities.ResultMessage;
 
-public class GuestDataService_Stub implements GuestDataService{
+public class GuestDataService_Stub extends UnicastRemoteObject implements GuestDataService{
 
 	
+	public GuestDataService_Stub() throws RemoteException {
+		super();
+		// TODO 自动生成的构造函数存根
+	}
+
+
 	public GuestPO getSingleGuest(String guestID) {
 		LocalDate birthday = LocalDate.of(1995, 1, 1);
 		

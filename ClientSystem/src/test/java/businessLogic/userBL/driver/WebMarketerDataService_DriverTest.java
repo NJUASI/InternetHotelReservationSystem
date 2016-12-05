@@ -15,7 +15,12 @@ public class WebMarketerDataService_DriverTest {
 	@Test
 	public void test1() {
 		//test interface getSingle
-		WebMarketerDataService_Stub stub = new WebMarketerDataService_Stub();
+		WebMarketerDataService_Stub stub = null;
+		try {
+			stub = new WebMarketerDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		WebMarketerDataService_Driver driver = new WebMarketerDataService_Driver(stub);
 		
 		try {
@@ -28,7 +33,12 @@ public class WebMarketerDataService_DriverTest {
 	@Test
 	public void test2() {
 		//test interface getSingle
-		WebMarketerDataService_Stub stub = new WebMarketerDataService_Stub();
+		WebMarketerDataService_Stub stub = null;
+		try {
+			stub = new WebMarketerDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		WebMarketerDataService_Driver driver = new WebMarketerDataService_Driver(stub);
 		WebMarketerPO webMarketerPO;
 		try {

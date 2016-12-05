@@ -16,7 +16,12 @@ public class GuestDataService_DriverTest {
 	@Test
 	public void test1() {
 		//test interface getSingle
-		GuestDataService_Stub stub = new GuestDataService_Stub();
+		GuestDataService_Stub stub = null;
+		try {
+			stub = new GuestDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		GuestDataService_Driver driver = new GuestDataService_Driver(stub);
 		try {
 			GuestPO guestPO = driver.guestDataService.getSingleGuest("1234567890");
@@ -37,7 +42,12 @@ public class GuestDataService_DriverTest {
 	@Test
 	public void test2() {
 		//test interface add
-		GuestDataService_Stub stub = new GuestDataService_Stub();
+		GuestDataService_Stub stub = null;
+		try {
+			stub = new GuestDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		GuestDataService_Driver driver = new GuestDataService_Driver(stub);
 		
 		try {

@@ -175,4 +175,5 @@ public enum ResultMessage implements Serializable{
 	
 	// 用户： 用户不存在
 	USER_UNEXISTENCE,
+	
 }

@@ -27,7 +27,11 @@ public class HotelFixedPromotion {
 	private List<HotelFixedPromotionPO> hotelFixedPromotions;
 
 	public HotelFixedPromotion() {
-		promotionDataService = new PromotionDataService_Stub();
+		try {
+			promotionDataService = new PromotionDataService_Stub();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

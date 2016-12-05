@@ -3,7 +3,7 @@ package rmi;
 public class ServerRunner {
 
 	public ServerRunner() {
-		new RemoteHelper();
+		new ServerRemoteHelper();
 	}
 	
 	public static void main(String[] args) {

@@ -7,6 +7,12 @@ import dataHelper.RoomDataHelper;
 import po.RoomInfoPO;
 import utilities.ResultMessage;
 
+/**
+ * @Description:RoomInfoDataHelperImpl的桩，供测试使用
+ * @author:Harvey Gong
+ * @lastChangedBy:Harvey Gong
+ * @time:2016年12月5日 下午10:54:07
+ */
 public class RoomInfoDataHelperImpl_Stub implements RoomDataHelper{
 
 	@Override

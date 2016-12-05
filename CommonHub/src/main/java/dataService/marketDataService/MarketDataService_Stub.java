@@ -1,12 +1,20 @@
 package dataService.marketDataService;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
 import po.MarketPO;
 import utilities.ResultMessage;
 
-public class MarketDataService_Stub implements MarketDataService {
+public class MarketDataService_Stub extends UnicastRemoteObject implements MarketDataService {
+
+
+	public MarketDataService_Stub() throws RemoteException {
+		super();
+		// TODO 自动生成的构造函数存根
+	}
 
 
 	public List<MarketPO> getMemberFormulation() {

@@ -17,7 +17,7 @@ import po.GuestEvaluationPO;
 import po.HotelEvaluationPO;
 import po.OrderGeneralPO;
 import po.OrderPO;
-import rmi.RemoteHelper;
+import rmi.ClientRemoteHelper;
 import utilities.OrderState;
 import utilities.PreOrder;
 import utilities.ResultMessage;
@@ -49,7 +49,7 @@ public class Order {
 	 * 构造函数，初始化成员变量
 	 */
 	public Order() {
-		orderDataService = RemoteHelper.getInstance().getOrderDataService();
+		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
 		discountCalculator = new DiscountCalculator();
 	}
 

@@ -34,7 +34,12 @@ public class OrderDataService_DriverTest {
 	 */
 	@Test
 	public void test1() {
-		final OrderDataService_Stub stub = new OrderDataService_Stub();
+		OrderDataService_Stub stub = null;
+		try {
+			stub = new OrderDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		
 		final LocalDateTime createTime = LocalDateTime.of(2016, 2, 2, 18, 20);
@@ -67,7 +72,12 @@ public class OrderDataService_DriverTest {
 	 */
 	@Test
 	public void test2() {
-		final OrderDataService_Stub stub = new OrderDataService_Stub();
+		OrderDataService_Stub stub = null;
+		try {
+			stub = new OrderDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		
 		try {
@@ -87,7 +97,12 @@ public class OrderDataService_DriverTest {
 	 */
 	@Test
 	public void test3() {
-		final OrderDataService_Stub stub = new OrderDataService_Stub();
+		OrderDataService_Stub stub = null;
+		try {
+			stub = new OrderDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		
 		try {
@@ -107,7 +122,12 @@ public class OrderDataService_DriverTest {
 	 */
 	@Test
 	public void test4() {
-		final OrderDataService_Stub stub = new OrderDataService_Stub();
+		OrderDataService_Stub stub = null;
+		try {
+			stub = new OrderDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		
 		try {
@@ -127,7 +147,12 @@ public class OrderDataService_DriverTest {
 	 */
 	@Test
 	public void test5() {
-		final OrderDataService_Stub stub = new OrderDataService_Stub();
+		OrderDataService_Stub stub = null;
+		try {
+			stub = new OrderDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		final OrderPO orderPO;
 		try {
@@ -169,7 +194,12 @@ public class OrderDataService_DriverTest {
 	 */
 	@Test
 	public void test6() {
-		final OrderDataService_Stub stub = new OrderDataService_Stub();
+		OrderDataService_Stub stub = null;
+		try {
+			stub = new OrderDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		
 		final List<OrderGeneralPO> orderGeneralPOs;
@@ -201,7 +231,12 @@ public class OrderDataService_DriverTest {
 	 */
 	@Test
 	public void test7() {
-		final OrderDataService_Stub stub = new OrderDataService_Stub();
+		OrderDataService_Stub stub = null;
+		try {
+			stub = new OrderDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		
 		final List<OrderGeneralPO> orderGeneralPOs;
@@ -233,7 +268,12 @@ public class OrderDataService_DriverTest {
 	 */
 	@Test
 	public void test8() {
-		final OrderDataService_Stub stub = new OrderDataService_Stub();
+		OrderDataService_Stub stub = null;
+		try {
+			stub = new OrderDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		
 		final List<OrderGeneralPO> orderGeneralPOs;
@@ -265,7 +305,12 @@ public class OrderDataService_DriverTest {
 	 */
 	@Test
 	public void test9() {
-		final OrderDataService_Stub stub = new OrderDataService_Stub();
+		OrderDataService_Stub stub = null;
+		try {
+			stub = new OrderDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		
 		final List<OrderGeneralPO> orderGeneralPOs;
@@ -297,7 +342,12 @@ public class OrderDataService_DriverTest {
 	 */
 	@Test
 	public void test10() {
-		final OrderDataService_Stub stub = new OrderDataService_Stub();
+		OrderDataService_Stub stub = null;
+		try {
+			stub = new OrderDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		
 		final List<String> bookedHotels;

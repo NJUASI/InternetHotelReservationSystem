@@ -50,7 +50,11 @@ public class Hotel implements HotelInfoOperation{
 	}
 
 	private void initHotelDataService() {
-		hotelDataService = new HotelDataService_Stub();
+		try {
+			hotelDataService = new HotelDataService_Stub();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 

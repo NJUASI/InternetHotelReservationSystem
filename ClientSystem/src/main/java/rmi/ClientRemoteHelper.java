@@ -5,6 +5,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import dataService.creditDataService.CreditDataService;
 import dataService.guestDataService.GuestDataService;
 import dataService.hotelDataService.HotelDataService;
 import dataService.hotelWorkerDataService.HotelWorkerDataService;
@@ -14,9 +15,10 @@ import dataService.promotionDataService.PromotionDataService;
 import dataService.webManagerDataService.WebManagerDataService;
 import dataService.webMarketerDataService.WebMarketerDataService;
 
-public class RemoteHelper {
+public class ClientRemoteHelper {
 
-	String url = "rmi://localhost:8888/";
+	String url = "rmi://localhost:8889/";
+
 	GuestDataService guestDataService;
 	HotelDataService hotelDataService;
 	HotelWorkerDataService hotelWorkerDataService;
@@ -25,25 +27,21 @@ public class RemoteHelper {
 	PromotionDataService promotionDataService;
 	WebManagerDataService webManagerDataService;
 	WebMarketerDataService webMarketerDataService;
+	CreditDataService creditDataService;
 
-	private static RemoteHelper remoteHelper;
+	private static ClientRemoteHelper remoteHelper = new ClientRemoteHelper();
 
-	public static RemoteHelper getInstance(){
-		if(remoteHelper == null){
-			remoteHelper = new RemoteHelper();
-		}
+	public static ClientRemoteHelper getInstance(){
 		return remoteHelper;
 	}
 
-	private RemoteHelper() {
-		
+	private ClientRemoteHelper() {
+
 	}
 
 	public void init(){
 		try {
 
-			System.out.println("connect");
-			
 			guestDataService = (GuestDataService) 
 					Naming.lookup(url+"GuestDataService");
 
@@ -67,6 +65,11 @@ public class RemoteHelper {
 
 			webMarketerDataService = (WebMarketerDataService) 
 					Naming.lookup(url+"WebMarketerDataService");
+
+			creditDataService = (CreditDataService)
+					Naming.lookup(url+"CreditDataService");
+
+			System.out.println("connect");
 
 		} catch (MalformedURLException e) {
 			// TODO 自动生成的 catch 块
@@ -110,5 +113,9 @@ public class RemoteHelper {
 
 	public WebMarketerDataService getWebMarketerDataService(){
 		return webMarketerDataService;
+	}
+
+	public CreditDataService getCreditDataService(){
+		return creditDataService;
 	}
 }
