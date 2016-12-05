@@ -16,7 +16,7 @@ public class LogInBLService_DriverTest {
 		//test interface guestSignUp
 		LogInBLService_Stub stub = new LogInBLService_Stub();
 		LogInBLService_Driver driver = new LogInBLService_Driver(stub);
-		assertEquals("1234567890", driver.logInBLService.guestSignUp(new GuestVO("1234567890", 
-				LocalDate.of(1995, 4, 1), "school","zhangsan", "xiaosan", "000000", "13568792345", 100)).userID);
+		assertEquals(null, driver.logInBLService.guestSignUp(new GuestVO("1234567890", 
+				LocalDate.of(1995, 4, 1), "school","zhangsan", "xiaosan", "000000", "13568792345", 100)));
 	}
 }
