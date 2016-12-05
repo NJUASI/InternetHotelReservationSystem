@@ -139,21 +139,6 @@ public class WebMarketer implements UserService{
 	/**
 	 * @author Byron Dong
 	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/27
-	 * @param  IDLength 用户ID长度
-	 * @return boolean 判断指定用户是否为网站营销人员类型
-	 */
-	public static boolean isWebMarketer(int length) {
-		if (WebMarketer.IDLength == length) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param  type 用户类型
 	 * @return boolean 判断指定用户是否为网站营销人员类型

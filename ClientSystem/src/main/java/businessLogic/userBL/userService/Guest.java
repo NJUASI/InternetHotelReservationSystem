@@ -160,7 +160,7 @@ public class Guest implements UserService ,CreditService{
 	 * @param  IDLength 用户ID长度
 	 * @return boolean 判断指定用户是否为客户类型
 	 */
-	public static boolean isGuest(int length) {
+	public boolean isGuest(int length) {
 		if (Guest.IDLength == length) {
 			return true;
 		} else {

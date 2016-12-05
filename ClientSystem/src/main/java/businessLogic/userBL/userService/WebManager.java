@@ -140,21 +140,6 @@ public class WebManager implements UserService{
 	/**
 	 * @author Byron Dong
 	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/27
-	 * @param  IDLength 用户ID长度
-	 * @return boolean 判断指定用户是否为网站管理人员类型
-	 */
-	public static boolean isWebManager(int length) {
-		if (WebManager.IDLength == length) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param  type 用户类型
 	 * @return boolean 判断指定用户是否为网站管理人员类型

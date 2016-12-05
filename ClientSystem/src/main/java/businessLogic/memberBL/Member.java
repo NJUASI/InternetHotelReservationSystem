@@ -154,7 +154,7 @@ public class Member {
 	
 	private boolean isQualified(String userID){
 		Guest tempGuest = new Guest();
-		if(!Guest.isGuest(userID.length())||!tempGuest.hasGuest(userID)){
+		if(!tempGuest.isGuest(userID.length())||!tempGuest.hasGuest(userID)){
 			return false;
 		}
 		return true;

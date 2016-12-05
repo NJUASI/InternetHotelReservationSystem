@@ -136,21 +136,6 @@ public class HotelWorker implements UserService{
 	/**
 	 * @author Byron Dong
 	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/27
-	 * @param  IDLength 用户ID长度
-	 * @return boolean 判断指定用户是否为酒店工作人员类型
-	 */
-	public static boolean isHotelWorker(int length) {
-		if (HotelWorker.IDLength == length) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
 	 * @param  hotelWorkerPO 来自本类hotelWorkerInfo载体
 	 * @return UserVO userInfo载体
