@@ -43,7 +43,7 @@ public class DiscountCalculator implements DiscountInSpan{
 	@Override
 	public Iterator<Double> getDiscountInSpan(PreOrder preOrder) {
 		List<Double> discountsInSpan = new ArrayList<Double>();
-		LocalDate today = preOrder.checkInDate;
+		LocalDate today = preOrder.expectExecuteDate;
 		String guestID = preOrder.guestID;
 		String hotelID = preOrder.hotelID;
 		for(int i = 0;i<preOrder.lastDays;i++){

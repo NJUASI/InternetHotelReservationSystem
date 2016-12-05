@@ -13,11 +13,11 @@ public class PreOrder {
 	// 酒店编号
 	public String hotelID;
 	
-	// 入住时间
-	public LocalDateTime checkInTime;
+	// 预计入住时间
+//	public LocalDateTime expectExecuteTime;
 	
-	// 入住日期
-	public LocalDate checkInDate;
+	// 预计入住日期
+	public LocalDate expectExecuteDate;
 
 	// 房间数
 	public int roomNum;
@@ -28,8 +28,8 @@ public class PreOrder {
 	public PreOrder(OrderVO orderVO){
 		this.guestID = orderVO.orderGeneralVO.guestID;
 		this.hotelID = orderVO.orderGeneralVO.hotelID;
-		this.checkInTime = orderVO.checkInTime;
-		this.checkInDate = orderVO.checkInTime.toLocalDate(); 
+//		this.expectExecuteTime = orderVO.orderGeneralVO.expectExecuteTime;
+		this.expectExecuteDate = orderVO.orderGeneralVO.expectExecuteTime.toLocalDate();
 		this.roomNum=orderVO.roomNumCount;
 		this.lastDays = orderVO.orderGeneralVO.expectLeaveTime.toLocalDate().getDayOfYear()
 				- orderVO.orderGeneralVO.expectExecuteTime.toLocalDate().getDayOfYear();

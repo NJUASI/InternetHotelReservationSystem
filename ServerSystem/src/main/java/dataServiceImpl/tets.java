@@ -3,6 +3,8 @@ package dataServiceImpl;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import utilities.OrderState;
+
 public class tets {
 
 	public static void main(String[] args) {
@@ -10,7 +12,7 @@ public class tets {
 		LocalDateTime thisTime = LocalDateTime.of(2016, 01, 01, 13, 43);
 		System.out.println(thisTime.toLocalDate().toString());
 		System.out.println(formateDate(thisTime.toLocalDate()));
-
+		System.out.println(OrderState.CANCELLED.toString());
 	}
 	
 	private static String formateDate(LocalDate localDate) {
