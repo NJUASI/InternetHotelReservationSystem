@@ -24,7 +24,7 @@ import vo.UserVO;
  */
 public class Guest implements UserService ,CreditService{
 
-	
+
 	public static int IDLength = 10; // 客户的ID长度为10
 
 	private GuestDataService guestDataService;
@@ -51,7 +51,7 @@ public class Guest implements UserService ,CreditService{
 		ResultMessage msg = ResultMessage.USER_ADD_FAILURE;
 
 		if(this.hasGuest(newUserVO.userID)){return msg;} //存在ID对应项
-		
+
 		try {
 			GuestPO guestPO = this.convert(newUserVO);
 			msg = guestDataService.add(guestPO);
@@ -71,7 +71,7 @@ public class Guest implements UserService ,CreditService{
 	public ResultMessage modify(UserVO userVO) {
 
 		ResultMessage msg = ResultMessage.USER_INFO_UPDATE_FAILURE;
-		
+
 		if(!this.hasGuest(userVO.userID)){return msg;} //不存在ID对应项
 
 		try {
@@ -125,7 +125,7 @@ public class Guest implements UserService ,CreditService{
 	 * @return String 指定用户 的登录信息
 	 */
 	public String getLogInInfo(String userID) {
-		
+
 		if(!this.hasGuest(userID)){return null;} //后期需要详细化
 
 		try {
@@ -138,27 +138,21 @@ public class Guest implements UserService ,CreditService{
 
 	/**
 	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/27
+	 * @lastChangedBy Harvey Gong
+	 * @updateTime 2016/12/5
 	 * @param guestID, creditNum从userDoMain传下来的指定客户ID和需修改的信用值
 	 * @return ResultMessage 信用值是否添加成功
 	 */
 	public ResultMessage modifyCredit(String guestID, double creditNum) {
-		
-		ResultMessage msg = ResultMessage.FAIL;
-		
-		if(!Guest.isGuest(guestID.length())){return msg;} //判断不是guest类型
-		
-		if(!this.hasGuest(guestID)){return msg;} //不存在ID对应项
 
+		GuestPO guestPO;
 		try {
-			GuestPO guestPO = guestDataService.getSingleGuest(guestID);
+			guestPO = guestDataService.getSingleGuest(guestID);
 			guestPO.setCredit(creditNum);
-			msg = guestDataService.modify(guestPO);
+			return guestDataService.modify(guestPO);
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			return ResultMessage.FAIL;
 		}
-		return msg;
 	}
 
 	/**
@@ -171,7 +165,7 @@ public class Guest implements UserService ,CreditService{
 	public List<CreditVO> getAllCreditDetail(String guestID) {
 
 		List<CreditVO> result = new ArrayList<CreditVO>();
-		
+
 		if(!Guest.isGuest(guestID.length())){return result;} //若不符合对应ID长度，返回空list
 
 		try {
@@ -241,7 +235,7 @@ public class Guest implements UserService ,CreditService{
 
 	public boolean hasGuest(String guestID) { //放在后面，该方法一般只在本类使用，可以等同private,只有member会用到
 		UserVO guestVO = this.getSingle(guestID);
-		
+
 		if(guestVO==null){
 			return false;
 		}

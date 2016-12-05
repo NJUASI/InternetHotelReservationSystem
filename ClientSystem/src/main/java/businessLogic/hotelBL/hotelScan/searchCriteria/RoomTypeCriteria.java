@@ -1,6 +1,5 @@
 package businessLogic.hotelBL.hotelScan.searchCriteria;
 
-import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.hotelBL.HotelInfoOperation;

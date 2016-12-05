@@ -1,6 +1,7 @@
 package businessLogic.creditBL.stub;
 
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.List;
 
 import businessLogicService.creditBLService.CreditBLService;
@@ -22,7 +23,7 @@ public class CreditBLService_Stub implements CreditBLService {
 	}
 
 	
-	public List<CreditVO> getAllCreditDetail(String guestID) {
+	public Iterator<CreditVO> getAllCreditDetail(String guestID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -49,6 +50,18 @@ public class CreditBLService_Stub implements CreditBLService {
 	
 	public List<MarketVO> getMemberFormulation() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Iterator<CreditVO> getCreditOfOneOrder(String orderID) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
+	@Override
+	public ResultMessage addCredit(CreditVO creditVO) {
+		// TODO 自动生成的方法存根
 		return null;
 	}
 

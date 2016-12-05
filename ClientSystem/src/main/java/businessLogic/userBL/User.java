@@ -1,5 +1,6 @@
 package businessLogic.userBL;
 
+import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.hotelBL.hotel.Hotel;
@@ -137,18 +138,15 @@ public class User {
 
 	/**
 	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
+	 * @lastChangedBy Harvey Gong
 	 * @updateTime 2016/11/27
 	 * @param  guestID 从客户界面层传下来的指定用户ID
 	 * @return List<CreditVO> 指定客户的所有creditInfo载体
 	 */
-	public List<CreditVO> getAllCreditDetail(String guestID) {
+	public Iterator<CreditVO> getAllCreditDetail(String guestID) {
 		List<CreditVO> creditVOList = guest.getAllCreditDetail(guestID);
-		
 		if(creditVOList.isEmpty()){return null;}
-		
-		return creditVOList;
-		
+		return creditVOList.iterator();
 	}
 
 	/**

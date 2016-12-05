@@ -1,6 +1,7 @@
 package businessLogic.userBL.stub;
 
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.List;
 
 import businessLogicService.userBLService.UserBLService;
@@ -27,7 +28,7 @@ public class UserBLService_Stub implements UserBLService {
 	}
 
 	
-	public List<CreditVO> getAllCreditDetail(String guestID) {
+	public Iterator<CreditVO> getAllCreditDetail(String guestID) {
 		// TODO Auto-generated method stub
 		return null;
 	}

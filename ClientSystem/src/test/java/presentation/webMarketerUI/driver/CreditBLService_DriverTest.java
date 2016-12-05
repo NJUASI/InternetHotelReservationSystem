@@ -13,15 +13,6 @@ import vo.GuestVO;
 public class CreditBLService_DriverTest {
 
 	@Test
-	public void test1() {
-		//test interface charge
-		CreditBLService_Stub stub = new CreditBLService_Stub();
-		CreditBLService_Driver driver = new CreditBLService_Driver(stub);
-		assertEquals(ResultMessage.SUCCESS, driver.creditBLService.charge("1234567890", 100));
-	
-	}
-	
-	@Test
 	public void test2() {
 		//test interface getBasicInfo
 		CreditBLService_Stub stub = new CreditBLService_Stub();
