@@ -1,12 +1,10 @@
 package businessLogic.userBL;
 
-import java.util.Iterator;
 import java.util.List;
 
 import businessLogicService.userBLService.UserBLService;
 import utilities.ResultMessage;
 import utilities.UserType;
-import vo.CreditVO;
 import vo.HotelVO;
 import vo.UserVO;
 
@@ -41,7 +39,7 @@ public class UserController implements UserBLService{
 	 * @param 
 	 * @return 唯一userController对象
 	 */
-	public static UserController getInstance(){ //采用单粒模式
+	public static UserController getInstance(){ //采用单例模式
 		if(userController == null) userController = new UserController();
 		return userController;
 	}
@@ -91,16 +89,6 @@ public class UserController implements UserBLService{
 		return user.addHotel(newHotelVO, hotelID);
 	}
 
-	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
-	 * @updateTime 2016/11/27
-	 * @param guestID, creditNum从客户界面层传下来的指定客户ID和需修改的信用值
-	 * @return ResultMessage 信用值是否添加成功
-	 */
-	public ResultMessage modifyCredit(String guestID, double creditNum) {
-		return user.modifyCredit(guestID, creditNum);
-	}
 
 	/**
 	 * @author 董金玉
@@ -112,18 +100,6 @@ public class UserController implements UserBLService{
 	public List<UserVO> getAll(UserType userType) {
 		return user.getAll(userType);
 	}
-
-	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
-	 * @updateTime 2016/11/27
-	 * @param  guestID 从客户界面层传下来的指定用户ID
-	 * @return List<CreditVO> 指定客户的所有creditInfo载体
-	 */
-	public Iterator<CreditVO> getAllCreditDetail(String guestID) {
-		return user.getAllCreditDetail(guestID);
-	}
-
 
 	/**
 	 * @author 董金玉

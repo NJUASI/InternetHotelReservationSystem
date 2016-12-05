@@ -3,16 +3,15 @@ package businessLogic.userBL;
 import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
+import businessLogic.userBL.userService.Guest;
+import businessLogic.userBL.userService.service.CreditService;
 import utilities.ResultMessage;
 import utilities.UserType;
-import vo.CreditVO;
 import vo.GuestVO;
 import vo.HotelVO;
 import vo.HotelWorkerVO;
@@ -107,9 +106,9 @@ public class UserTest {
 	@Test
 	public void testModifyCredit() {
 		//test the method modifyCredit
-		User user= new User();
+		CreditService creditService = new Guest();
 		
-		assertEquals(user.modifyCredit("1234567890", 100),ResultMessage.SUCCESS);
+		assertEquals(creditService.modifyCredit("1234567890", 100),ResultMessage.SUCCESS);
 	}
 	
 	@Test
@@ -127,22 +126,6 @@ public class UserTest {
 		assertEquals(guestVO.password,"000000");
 		assertEquals(guestVO.phone,"13523456789");
 		assertEquals(guestVO.userID,"1234567890");
-	}
-	
-
-	@Test
-	public void testGetAllCreditDetail() {
-		//test the method getAllCreditDetail
-		User user= new User();
-		
-		Iterator<CreditVO> credit = user.getAllCreditDetail("1234567890");
-		CreditVO creditVO = credit.next();
-		assertEquals("1234567890", creditVO.guestID);
-	    assertEquals(LocalDateTime.of(2016, 10, 2, 18, 12), creditVO.time);
-	    assertEquals("123420161002", creditVO.orderID);
-	    assertEquals(100, creditVO.previousCredit, 0);
-	    assertEquals(100, creditVO.afterCredit, 0);
-	    assertEquals("undo", creditVO.reason);
 	}
 	
 	@Test

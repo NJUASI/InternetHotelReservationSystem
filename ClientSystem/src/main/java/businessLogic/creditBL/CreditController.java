@@ -1,13 +1,10 @@
 package businessLogic.creditBL;
 
 import java.util.Iterator;
-import java.util.List;
 
 import businessLogicService.creditBLService.CreditBLService;
 import utilities.ResultMessage;
-import vo.BasicInfoVO;
 import vo.CreditVO;
-import vo.MarketVO;
 
 /**
  * 
@@ -49,34 +46,12 @@ public final class CreditController implements CreditBLService {
 	 * @updateTime 2016/11/27
 	 * @param guestID
 	 *            从登录界面层传下来的ID
-	 * @return 客户的基本信息
-	 */
-	public BasicInfoVO getBasicInfo(final String guestID) {
-		return credit.getBasicInfo(guestID);
-	}
-	
-	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
-	 * @param guestID
-	 *            从登录界面层传下来的ID
 	 * @return 客户个人所有信用记录
 	 */
 	public Iterator<CreditVO> getAllCreditDetail(final String guestID) {
 		return credit.getAllCreditDetail(guestID);
 	}
 	
-	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
-	 * @return 会员等级
-	 */
-	public List<MarketVO> getMemberFormulation() {
-		return credit.getMemberFormulation();
-	}
-
 	@Override
 	public Iterator<CreditVO> getCreditOfOneOrder(String orderID) {
 		// TODO 自动生成的方法存根

@@ -3,6 +3,8 @@ package presentation.webMarketerUI.controller;
 import java.io.IOException;
 
 import businessLogic.userBL.stub.UserBLService_Stub;
+import businessLogic.userBL.userService.Guest;
+import businessLogic.userBL.userService.service.CreditService;
 import businessLogicService.userBLService.UserBLService;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -21,6 +23,7 @@ import vo.GuestVO;
 public class ChargeController {
 
 	private UserBLService userBLService;
+	private CreditService creditService;
 	
 	GuestVO guestVO;
 	
@@ -67,8 +70,9 @@ public class ChargeController {
 	 */
 	@FXML
 	protected void saveCharge() throws IOException {
+		creditService = new Guest();
 		if (credit.getText() != null) {
-			userBLService.modifyCredit(searchGuestID.getText(),
+			creditService.modifyCredit(searchGuestID.getText(),
 					Double.parseDouble(chargeNum.getText()) + Double.parseDouble(credit.getText()));
 			showResult();
 		}

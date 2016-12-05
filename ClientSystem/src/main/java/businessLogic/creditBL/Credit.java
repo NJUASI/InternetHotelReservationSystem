@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import businessLogic.marketBL.Market;
-import businessLogic.userBL.User;
 import businessLogic.userBL.userService.Guest;
 import businessLogic.userBL.userService.service.CreditService;
 import businessLogicService.creditBLService.CreditBLService;
@@ -14,25 +12,18 @@ import businessLogicService.creditBLService.CreditDataService_Stub;
 import dataService.creditDataService.CreditDataService;
 import po.CreditPO;
 import utilities.ResultMessage;
-import utilities.UserType;
-import vo.BasicInfoVO;
 import vo.CreditVO;
-import vo.GuestVO;
-import vo.MarketVO;
 
 /**
  * 
  * @author 61990
- * lastChangedBy charles
+ * lastChangedBy Harvey Gong
  * updateTime 2016/12/5
  *
  */
 public class Credit implements CreditBLService{
 
 	private CreditService guest;
-	private User user;
-	
-	private Market market;
 	
 	private CreditDataService creditDataService;
 
@@ -42,9 +33,7 @@ public class Credit implements CreditBLService{
 	 * @updateTime 2016/11/27 构造函数，初始化成员变量
 	 */
 	public Credit() {
-		user = new User();
 		guest = new Guest();
-		market = new Market();
 		creditDataService = new CreditDataService_Stub();
 	}
 
@@ -60,12 +49,13 @@ public class Credit implements CreditBLService{
 		try {
 			return convertPOListToItr(creditDataService.getAllCreditDetail(guestID));
 		} catch (RemoteException e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
 	
 	/**
-	 * @Description:查看关于某一订单的所有
+	 * @Description:查看关于某一订单的所有信用变化
 	 * @param guestID
 	 * @param orderID
 	 * @return
@@ -78,6 +68,7 @@ public class Credit implements CreditBLService{
 		try {
 			return convertPOListToItr(creditDataService.getCreditOfOneOrder(orderID));
 		} catch (RemoteException e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -92,43 +83,14 @@ public class Credit implements CreditBLService{
 	 * @time:2016年12月5日 下午1:09:56
 	 */
 	public ResultMessage addCredit(CreditVO creditVO){
+		guest = new Guest();
 		try {
+			//调用guest的方法，改变该客户的总信用值
 			guest.modifyCredit(creditVO.guestID, creditVO.afterCredit);
 			return creditDataService.addCredit(new CreditPO(creditVO));
 		} catch (RemoteException e) {
 			return ResultMessage.FAIL;
 		}
-	}
-	
-	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
-	 * @param guestID
-	 *            从登录界面层传下来的ID
-	 * @return 客户的基本信息
-	 */
-	public BasicInfoVO getBasicInfo(final String guestID) {
-	
-		final GuestVO guestVO = (GuestVO) user.getSingle(guestID, UserType.GUEST);
-
-		final List<MarketVO> memberFormulationList = market.getMemberFormulation();
-		for (int i = 0; i < memberFormulationList.size(); i++) {
-			if (guestVO.credit < memberFormulationList.get(i).marketCredit) {
-				return new BasicInfoVO(guestVO, memberFormulationList.get(i).marketName);
-			}
-		}
-		return new BasicInfoVO(guestVO, memberFormulationList.get(memberFormulationList.size() - 1).marketName);
-	}
-	
-	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
-	 * @return 会员等级
-	 */
-	public List<MarketVO> getMemberFormulation() {
-		return market.getMemberFormulation();
 	}
 	
 	private Iterator<CreditVO> convertPOListToItr(List<CreditPO> list){

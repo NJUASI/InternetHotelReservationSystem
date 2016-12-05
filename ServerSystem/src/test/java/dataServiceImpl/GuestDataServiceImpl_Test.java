@@ -1,16 +1,14 @@
 package dataServiceImpl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.rmi.RemoteException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.Test;
 
 import dataService.guestDataService.GuestDataService;
-import po.CreditPO;
 import po.GuestPO;
 import po.MemberPO;
 import utilities.ResultMessage;
@@ -36,7 +34,7 @@ public class GuestDataServiceImpl_Test {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	public void testGetAllGuest() {
 		//test the method GetAllGuest
@@ -57,25 +55,7 @@ public class GuestDataServiceImpl_Test {
 			e.printStackTrace();
 		}
 	}
-	
-	@Test
-	public void testGetAllCreditDetail() {
-		//test the method GetAllCreditDetail
-		try {
-			GuestDataService guest = new GuestDataServiceImpl();
-			List<CreditPO> list = guest.getAllCreditDetail("1234567890");
-			CreditPO creditPO  = list.get(0);
-			assertEquals(creditPO.getGuestID(),"1234567890");
-			assertEquals(creditPO.getTime(),LocalDateTime.of(2016, 10, 2, 18, 12));
-			assertEquals(creditPO.getOrderID(),"123420161002");
-			assertEquals(creditPO.getCredit(),100,0);
-			assertEquals(creditPO.getPreCredit(),100,0);
-			assertEquals(creditPO.getReason(),"undo");
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-	}
-	
+
 	@Test
 	public void testAdd() {
 		//test the method Add
@@ -88,7 +68,7 @@ public class GuestDataServiceImpl_Test {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	public void testModifyMember() {
 		//test the method ModifyMember
@@ -101,7 +81,7 @@ public class GuestDataServiceImpl_Test {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	public void testModify() {
 		//test the method Modify

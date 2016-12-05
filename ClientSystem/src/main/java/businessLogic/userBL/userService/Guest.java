@@ -8,10 +8,8 @@ import businessLogic.userBL.userService.service.CreditService;
 import businessLogic.userBL.userService.service.UserService;
 import dataService.guestDataService.GuestDataService;
 import dataService.guestDataService.GuestDataService_Stub;
-import po.CreditPO;
 import po.GuestPO;
 import utilities.ResultMessage;
-import vo.CreditVO;
 import vo.GuestVO;
 import vo.UserVO;
 
@@ -153,30 +151,6 @@ public class Guest implements UserService ,CreditService{
 		} catch (RemoteException e) {
 			return ResultMessage.FAIL;
 		}
-	}
-
-	/**
-	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/27
-	 * @param  guestID 从userDoMain传下来的指定用户ID
-	 * @return List<CreditVO> 指定客户的所有creditInfo载体
-	 */
-	public List<CreditVO> getAllCreditDetail(String guestID) {
-
-		List<CreditVO> result = new ArrayList<CreditVO>();
-
-		if(!Guest.isGuest(guestID.length())){return result;} //若不符合对应ID长度，返回空list
-
-		try {
-			List<CreditPO> list = guestDataService.getAllCreditDetail(guestID);
-			for (int i = 0; i < list.size(); i++) {
-				result.add(new CreditVO(list.get(i)));
-			}
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return result;  //如果没有指定ID对应项，返回空list
 	}
 
 	/**

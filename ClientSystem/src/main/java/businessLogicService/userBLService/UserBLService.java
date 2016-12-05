@@ -1,11 +1,9 @@
 package businessLogicService.userBLService;
 
-import java.util.Iterator;
 import java.util.List;
 
 import utilities.ResultMessage;
 import utilities.UserType;
-import vo.CreditVO;
 import vo.HotelVO;
 import vo.UserVO;
 
@@ -19,11 +17,7 @@ public interface UserBLService {
 	
 	public ResultMessage addHotel(HotelVO newHotelVO, String hotelID);
 	
-	public ResultMessage modifyCredit (String guestID, double creditNum);
-		
 	public List<UserVO> getAll(UserType userType);
-	
-	public Iterator<CreditVO> getAllCreditDetail(String guestID);
 	
 	public String getLogInInfo(String userID, UserType userType);
 	
