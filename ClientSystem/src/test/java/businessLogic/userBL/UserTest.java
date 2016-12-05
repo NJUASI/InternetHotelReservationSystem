@@ -3,16 +3,15 @@ package businessLogic.userBL;
 import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
+import businessLogic.userBL.userService.Guest;
+import businessLogic.userBL.userService.service.CreditService;
 import utilities.ResultMessage;
 import utilities.UserType;
-import vo.CreditVO;
 import vo.GuestVO;
 import vo.HotelVO;
 import vo.HotelWorkerVO;
@@ -68,7 +67,7 @@ public class UserTest {
 		//test the method getSingle
 		User user= new User();
 		
-		GuestVO guestVO = (GuestVO)user.getSingle("1234567890", UserType.GUEST);
+		GuestVO guestVO = (GuestVO)user.getSingle("1234567890");
 		assertEquals(guestVO.birthday,LocalDate.of(1995, 1, 1));
 		assertEquals(guestVO.credit,100,0);
 		assertEquals(guestVO.enterprise,"school");
@@ -78,16 +77,16 @@ public class UserTest {
 		assertEquals(guestVO.phone,"13523456789");
 		assertEquals(guestVO.userID,"1234567890");
 		
-		HotelWorkerVO hotelWorkerVO = (HotelWorkerVO)user.getSingle("00001111", UserType.HOTEL_WORKER);
+		HotelWorkerVO hotelWorkerVO = (HotelWorkerVO)user.getSingle("00001111");
 		assertEquals(hotelWorkerVO.hotelName,"school");
 		assertEquals(hotelWorkerVO.password,"123456");
 		assertEquals(hotelWorkerVO.userID,"00001111");
 		
-		WebMarketerVO webMarketerVO = (WebMarketerVO)user.getSingle("000001", UserType.WEB_MARKETER);
+		WebMarketerVO webMarketerVO = (WebMarketerVO)user.getSingle("000001");
 		assertEquals(webMarketerVO.password,"123456");
 		assertEquals(webMarketerVO.userID,"000001");
 		
-		WebManagerVO webManagerVO = (WebManagerVO)user.getSingle("0001", UserType.WEB_MANAGER);
+		WebManagerVO webManagerVO = (WebManagerVO)user.getSingle("0001");
 		assertEquals(webManagerVO.password,"123456");
 		assertEquals(webManagerVO.userID,"0001");
 	
@@ -107,9 +106,9 @@ public class UserTest {
 	@Test
 	public void testModifyCredit() {
 		//test the method modifyCredit
-		User user= new User();
+		CreditService creditService = new Guest();
 		
-		assertEquals(user.modifyCredit("1234567890", 100),ResultMessage.SUCCESS);
+		assertEquals(creditService.modifyCredit("1234567890", 100),ResultMessage.SUCCESS);
 	}
 	
 	@Test
@@ -129,31 +128,15 @@ public class UserTest {
 		assertEquals(guestVO.userID,"1234567890");
 	}
 	
-
-	@Test
-	public void testGetAllCreditDetail() {
-		//test the method getAllCreditDetail
-		User user= new User();
-		
-		Iterator<CreditVO> credit = user.getAllCreditDetail("1234567890");
-		CreditVO creditVO = credit.next();
-		assertEquals("1234567890", creditVO.guestID);
-	    assertEquals(LocalDateTime.of(2016, 10, 2, 18, 12), creditVO.time);
-	    assertEquals("123420161002", creditVO.orderID);
-	    assertEquals(100, creditVO.previousCredit, 0);
-	    assertEquals(100, creditVO.afterCredit, 0);
-	    assertEquals("undo", creditVO.reason);
-	}
-	
 	@Test
 	public void testGetLogInInfo() {
 		//test the method getLoginInfo
 		User user= new User();
 		
-		assertEquals(user.getLogInInfo("1234567890", UserType.GUEST),"000000");
-		assertEquals(user.getLogInInfo("00001111", UserType.HOTEL_WORKER),"123456");
-		assertEquals(user.getLogInInfo("000001", UserType.WEB_MARKETER),"123456");
-		assertEquals(user.getLogInInfo("0001", UserType.WEB_MANAGER),"123456");
+		assertEquals(user.getLogInInfo("1234567890",UserType.GUEST),"000000");
+		assertEquals(user.getLogInInfo("00001111",UserType.HOTEL_WORKER),"123456");
+		assertEquals(user.getLogInInfo("000001",UserType.WEB_MARKETER),"123456");
+		assertEquals(user.getLogInInfo("0001",UserType.WEB_MANAGER),"123456");
 		
 	}
 }

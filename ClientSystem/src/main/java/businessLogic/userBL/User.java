@@ -1,17 +1,13 @@
 package businessLogic.userBL;
 
-import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.hotelBL.hotel.Hotel;
-import businessLogic.userBL.userService.Guest;
 import businessLogic.userBL.userService.UserFactory;
 import businessLogic.userBL.userService.UserLengthFactory;
-import businessLogic.userBL.userService.service.CreditService;
 import businessLogic.userBL.userService.service.UserService;
 import utilities.ResultMessage;
 import utilities.UserType;
-import vo.CreditVO;
 import vo.HotelVO;
 import vo.UserVO;
 
@@ -25,7 +21,6 @@ import vo.UserVO;
 public class User {
 
 	private UserService user;//该变量在方法中实时修改
-	private CreditService guest;//在构造中new一次
 	
 	private UserFactory factory; //根据用户类型创建用户的工厂
 	private UserLengthFactory lengthFactory; //根据用户id的长度创建用户的工厂
@@ -39,7 +34,6 @@ public class User {
 	public User() {
 		factory = new UserFactory();
 		lengthFactory = new UserLengthFactory();
-		guest = new Guest();
 	}
 
 	/**
@@ -70,7 +64,7 @@ public class User {
 
 		user = lengthFactory.createUser(userVO.userID.length());
 		if(isExistence(user)){
-			return user.add(userVO);
+			return user.modify(userVO);
 		}
 		return ResultMessage.USER_UNEXISTENCE;
 	}
@@ -82,7 +76,7 @@ public class User {
 	 * @param userVO，userType 从客户界面层传下来的userInfo载体和指定用户类型
 	 * @return UserVO 单一userInfo载体
 	 */
-	public UserVO getSingle(String userID, UserType userType) {
+	public UserVO getSingle(String userID) {
 
 		user = lengthFactory.createUser(userID.length());
 		
@@ -114,17 +108,6 @@ public class User {
 	 * @author Byron Dong
 	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
-	 * @param guestID, creditNum从客户界面层传下来的指定客户ID和需修改的信用值
-	 * @return ResultMessage 信用值是否添加成功
-	 */
-	public ResultMessage modifyCredit(String guestID, double creditNum) {
-		return guest.modifyCredit(guestID, creditNum);
-	}
-
-	/**
-	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/27
 	 * @param  userType 从客户界面层传下来的指定用户类型
 	 * @return List<UserVO> 指定用户类型的所有userInfo载体
 	 */
@@ -138,19 +121,7 @@ public class User {
 
 	/**
 	 * @author Byron Dong
-	 * @lastChangedBy Harvey Gong
-	 * @updateTime 2016/11/27
-	 * @param  guestID 从客户界面层传下来的指定用户ID
-	 * @return List<CreditVO> 指定客户的所有creditInfo载体
-	 */
-	public Iterator<CreditVO> getAllCreditDetail(String guestID) {
-		List<CreditVO> creditVOList = guest.getAllCreditDetail(guestID);
-		if(creditVOList.isEmpty()){return null;}
-		return creditVOList.iterator();
-	}
-
-	/**
-	 * @author Byron Dong
+	 * @param userType 
 	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param  guestID, userType 从客户界面层传下来的指定用户ID和指定用户类型

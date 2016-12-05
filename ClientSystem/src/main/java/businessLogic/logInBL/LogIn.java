@@ -1,6 +1,7 @@
 package businessLogic.logInBL;
 
 import businessLogic.userBL.User;
+import businessLogicService.logInBLService.LogInBLService;
 import utilities.ResultMessage;
 import utilities.UserType;
 import vo.GuestVO;
@@ -8,9 +9,10 @@ import vo.GuestVO;
 /**
  * 
  * @author 61990
+ * @lastChangedBy Harvey Gong
  *
  */
-public class LogIn {
+public class LogIn implements LogInBLService{
 
 	private User user;
 
@@ -23,75 +25,23 @@ public class LogIn {
 	public LogIn() {
 		user = new User();
 	}
-	
-	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
-	 * @param guest
-	 *            从登录界面层传下来的ID
-	 * @param password
-	 *            从登录界面层传下来的密码
-	 * @return 客户是否成功登录
-	 */
-	public ResultMessage guestLogIn(final String guest, final String password) {
-		if (password == user.getLogInInfo(guest, UserType.GUEST)) {
-			return ResultMessage.SUCCESS;
-		} else {
-			return ResultMessage.FAIL;
-		}
-	}
 
 	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
-	 * @param hotelWorker
-	 *            从登录界面层传下来的ID
+	 * @Description:根据用户id获取用户的密码，并验证登录
+	 * @param userID
 	 * @param password
-	 *            从登录界面层传下来的密码
-	 * @return 酒店是否成功登录
+	 * @return
+	 * ResultMessage
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月5日 下午3:06:55
 	 */
-	public ResultMessage hotelWorkerLogIn(final String hotelWorker, final String password) {
-		if (password == user.getLogInInfo(hotelWorker, UserType.HOTEL_WORKER)) {
+	public ResultMessage logIn(String userID,String password,UserType userType){
+		if(password == user.getLogInInfo(userID,userType)){
 			return ResultMessage.SUCCESS;
-		} else {
-			return ResultMessage.FAIL;
 		}
-	}
-
-	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
-	 * @param webMarketer
-	 *            从登录界面层传下来的ID
-	 * @param password
-	 *            从登录界面层传下来的密码
-	 * @return 营销人员是否成功登录
-	 */
-	public ResultMessage webMarketerLogIn(final String webMarketer, final String password) {
-		if (password == user.getLogInInfo(webMarketer, UserType.WEB_MARKETER)) {
-			return ResultMessage.SUCCESS;
-		} else {
-			return ResultMessage.FAIL;
-		}
-	}
-
-	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
-	 * @param webManager
-	 *            从登录界面层传下来的ID
-	 * @param password
-	 *            从登录界面层传下来的密码
-	 * @return 管理人员是否成功登录
-	 */
-	public ResultMessage webManagerLogIn(final String webManager, final String password) {
-		if (password == user.getLogInInfo(webManager, UserType.WEB_MANAGER)) {
-			return ResultMessage.SUCCESS;
-		} else {
+		else
+		{
 			return ResultMessage.FAIL;
 		}
 	}
@@ -107,5 +57,4 @@ public class LogIn {
 	public ResultMessage guestSignUp(final GuestVO guestVO) {
 		return user.add(guestVO);
 	}
-
 }

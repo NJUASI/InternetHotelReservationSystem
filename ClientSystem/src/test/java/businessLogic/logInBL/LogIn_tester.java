@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import org.junit.Test;
 
 import utilities.ResultMessage;
+import utilities.UserType;
 import vo.GuestVO;
 
 public class LogIn_tester {
@@ -17,8 +18,8 @@ public class LogIn_tester {
 		//test interface guestLogIn(String guest, String password)
 		LogInController controller = LogInController.getInstance();
 			
-		assertEquals(ResultMessage.SUCCESS, controller.guestLogIn("1234567890", "123456"));
-		assertEquals(ResultMessage.FAIL, controller.guestLogIn("1234567890", "000000"));
+		assertEquals(ResultMessage.SUCCESS, controller.logIn("1234567890", "123456", UserType.GUEST));
+		assertEquals(ResultMessage.FAIL, controller.logIn("1234567890", "000000", UserType.GUEST));
 	}
 	
 	@Test
@@ -27,8 +28,8 @@ public class LogIn_tester {
 		//test interface hotelWorkerLogIn(String hotelWorker, String password)
 		LogInController controller = LogInController.getInstance();
 			
-		assertEquals(ResultMessage.SUCCESS, controller.hotelWorkerLogIn("12345678", "123456"));
-		assertEquals(ResultMessage.FAIL, controller.hotelWorkerLogIn("12345678", "000000"));
+		assertEquals(ResultMessage.SUCCESS, controller.logIn("12345678", "123456", UserType.HOTEL_WORKER));
+		assertEquals(ResultMessage.FAIL, controller.logIn("12345678", "000000", UserType.HOTEL_WORKER));
 	}
 	
 	@Test
@@ -37,8 +38,8 @@ public class LogIn_tester {
 		//test interface webMarketerLogIn(String webMarketer, String password)
 		LogInController controller = LogInController.getInstance();
 			
-		assertEquals(ResultMessage.SUCCESS, controller.webMarketerLogIn("123456", "123456"));
-		assertEquals(ResultMessage.FAIL, controller.webMarketerLogIn("123456", "000000"));
+		assertEquals(ResultMessage.SUCCESS, controller.logIn("123456", "123456", UserType.WEB_MARKETER));
+		assertEquals(ResultMessage.FAIL, controller.logIn("123456", "000000", UserType.WEB_MARKETER));
 	}
 	
 	@Test
@@ -47,8 +48,8 @@ public class LogIn_tester {
 		//test interface webManagerLogIn(String webManager, String password)
 		LogInController controller = LogInController.getInstance();
 			
-		assertEquals(ResultMessage.SUCCESS, controller.webManagerLogIn("1234", "123456"));
-		assertEquals(ResultMessage.FAIL, controller.webManagerLogIn("1234", "000000"));
+		assertEquals(ResultMessage.SUCCESS, controller.logIn("1234", "123456", UserType.WEB_MANAGER));
+		assertEquals(ResultMessage.FAIL, controller.logIn("1234", "000000", UserType.WEB_MANAGER));
 	}
 	
 	@Test

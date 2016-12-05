@@ -7,8 +7,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import businessLogic.hotelBL.MockHotel;
-import businessLogic.hotelBL.hotel.Hotel;
 import utilities.ResultMessage;
 import utilities.UserType;
 import vo.CreditVO;
@@ -17,10 +15,8 @@ import vo.UserVO;
 
 public class MockUser extends User{
 	
-	private Hotel hotel;
 	
 	public MockUser() {
-		hotel = new MockHotel("12345678");
 	}
 	
 	public ResultMessage add(UserVO newUserVO) {
