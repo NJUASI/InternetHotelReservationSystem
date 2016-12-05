@@ -13,12 +13,12 @@ public interface UserBLService {
 
 	public ResultMessage modify(UserVO userVO);
 	
-	public UserVO getSingle(String userID, UserType userType);
+	public UserVO getSingle(String userID,UserType userType);
 	
 	public ResultMessage addHotel(HotelVO newHotelVO, String hotelID);
 	
 	public List<UserVO> getAll(UserType userType);
 	
-	public String getLogInInfo(String userID, UserType userType);
+	public String getPassword(String userID,UserType userType);
 	
 }

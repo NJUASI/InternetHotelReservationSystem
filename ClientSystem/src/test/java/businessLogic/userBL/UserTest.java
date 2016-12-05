@@ -67,7 +67,7 @@ public class UserTest {
 		//test the method getSingle
 		User user= new User();
 		
-		GuestVO guestVO = (GuestVO)user.getSingle("1234567890", UserType.GUEST);
+		GuestVO guestVO = (GuestVO)user.getSingle("1234567890");
 		assertEquals(guestVO.birthday,LocalDate.of(1995, 1, 1));
 		assertEquals(guestVO.credit,100,0);
 		assertEquals(guestVO.enterprise,"school");
@@ -77,16 +77,16 @@ public class UserTest {
 		assertEquals(guestVO.phone,"13523456789");
 		assertEquals(guestVO.userID,"1234567890");
 		
-		HotelWorkerVO hotelWorkerVO = (HotelWorkerVO)user.getSingle("00001111", UserType.HOTEL_WORKER);
+		HotelWorkerVO hotelWorkerVO = (HotelWorkerVO)user.getSingle("00001111");
 		assertEquals(hotelWorkerVO.hotelName,"school");
 		assertEquals(hotelWorkerVO.password,"123456");
 		assertEquals(hotelWorkerVO.userID,"00001111");
 		
-		WebMarketerVO webMarketerVO = (WebMarketerVO)user.getSingle("000001", UserType.WEB_MARKETER);
+		WebMarketerVO webMarketerVO = (WebMarketerVO)user.getSingle("000001");
 		assertEquals(webMarketerVO.password,"123456");
 		assertEquals(webMarketerVO.userID,"000001");
 		
-		WebManagerVO webManagerVO = (WebManagerVO)user.getSingle("0001", UserType.WEB_MANAGER);
+		WebManagerVO webManagerVO = (WebManagerVO)user.getSingle("0001");
 		assertEquals(webManagerVO.password,"123456");
 		assertEquals(webManagerVO.userID,"0001");
 	
@@ -133,10 +133,10 @@ public class UserTest {
 		//test the method getLoginInfo
 		User user= new User();
 		
-		assertEquals(user.getLogInInfo("1234567890", UserType.GUEST),"000000");
-		assertEquals(user.getLogInInfo("00001111", UserType.HOTEL_WORKER),"123456");
-		assertEquals(user.getLogInInfo("000001", UserType.WEB_MARKETER),"123456");
-		assertEquals(user.getLogInInfo("0001", UserType.WEB_MANAGER),"123456");
+		assertEquals(user.getLogInInfo("1234567890",UserType.GUEST),"000000");
+		assertEquals(user.getLogInInfo("00001111",UserType.HOTEL_WORKER),"123456");
+		assertEquals(user.getLogInInfo("000001",UserType.WEB_MARKETER),"123456");
+		assertEquals(user.getLogInInfo("0001",UserType.WEB_MANAGER),"123456");
 		
 	}
 }

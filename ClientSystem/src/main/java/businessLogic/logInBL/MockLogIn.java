@@ -35,8 +35,8 @@ public class MockLogIn extends LogIn {
 	 *            从登录界面层传下来的密码
 	 * @return 客户是否成功登录
 	 */
-	public ResultMessage guestLogIn(final String guest, final String password) {
-		final String realPassword = user.getLogInInfo(guest, UserType.GUEST);
+	public ResultMessage guestLogIn(final String guest, final String password,UserType userType) {
+		final String realPassword = user.getLogInInfo(guest, userType);
 		if (realPassword.equals(password)) {
 			return ResultMessage.SUCCESS;
 		} else {
@@ -54,8 +54,8 @@ public class MockLogIn extends LogIn {
 	 *            从登录界面层传下来的密码
 	 * @return 酒店是否成功登录
 	 */
-	public ResultMessage hotelWorkerLogIn(final String hotelWorker, final String password) {
-		final String realPassword = user.getLogInInfo(hotelWorker, UserType.HOTEL_WORKER);
+	public ResultMessage hotelWorkerLogIn(final String hotelWorker, final String password,UserType userType) {
+		final String realPassword = user.getLogInInfo(hotelWorker,userType);
 		if (realPassword.equals(password)) {
 			return ResultMessage.SUCCESS;
 		} else {
@@ -73,8 +73,8 @@ public class MockLogIn extends LogIn {
 	 *            从登录界面层传下来的密码
 	 * @return 营销人员是否成功登录
 	 */
-	public ResultMessage webMarketerLogIn(final String webMarketer, final String password) {
-		final String realPassword = user.getLogInInfo(webMarketer, UserType.WEB_MARKETER);
+	public ResultMessage webMarketerLogIn(final String webMarketer, final String password,UserType userType) {
+		final String realPassword = user.getLogInInfo(webMarketer,userType);
 		if (realPassword.equals(password)) {
 			return ResultMessage.SUCCESS;
 		} else {
@@ -92,8 +92,8 @@ public class MockLogIn extends LogIn {
 	 *            从登录界面层传下来的密码
 	 * @return 管理人员是否成功登录
 	 */
-	public ResultMessage webManagerLogIn(final String webManager, final String password) {
-		final String realPassword = user.getLogInInfo(webManager, UserType.WEB_MANAGER);
+	public ResultMessage webManagerLogIn(final String webManager, final String password,UserType userType) {
+		final String realPassword = user.getLogInInfo(webManager,userType);
 		if (realPassword.equals(password)) {
 			return ResultMessage.SUCCESS;
 		} else {

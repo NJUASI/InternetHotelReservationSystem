@@ -74,8 +74,8 @@ public class UserController implements UserBLService{
 	 * @param userVO，userType 从客户界面层传下来的userInfo载体和指定用户类型
 	 * @return UserVO 单一userInfo载体
 	 */
-	public UserVO getSingle(String userID, UserType userType) {
-		return user.getSingle(userID, userType);
+	public UserVO getSingle(String userID) {
+		return user.getSingle(userID);
 	}
 
 	/**
@@ -108,8 +108,19 @@ public class UserController implements UserBLService{
 	 * @param  guestID, userType 从客户界面层传下来的指定用户ID和指定用户类型
 	 * @return String 指定用户 的登录信息
 	 */
-	public String getLogInInfo(String userID, UserType userType) {
-		return user.getLogInInfo(userID, userType);
+	public String getLogInInfo(String userID,UserType userType) {
+		return user.getLogInInfo(userID,userType);
 	}
 
+	@Override
+	public UserVO getSingle(String userID, UserType userType) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
+	@Override
+	public String getPassword(String userID, UserType userType) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
 }

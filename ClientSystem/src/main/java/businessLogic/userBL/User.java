@@ -76,7 +76,7 @@ public class User {
 	 * @param userVO，userType 从客户界面层传下来的userInfo载体和指定用户类型
 	 * @return UserVO 单一userInfo载体
 	 */
-	public UserVO getSingle(String userID, UserType userType) {
+	public UserVO getSingle(String userID) {
 
 		user = lengthFactory.createUser(userID.length());
 		
@@ -121,6 +121,7 @@ public class User {
 
 	/**
 	 * @author Byron Dong
+	 * @param userType 
 	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param  guestID, userType 从客户界面层传下来的指定用户ID和指定用户类型

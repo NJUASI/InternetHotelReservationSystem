@@ -1,17 +1,12 @@
 package businessLogicService.logInBLService;
 
 import utilities.ResultMessage;
+import utilities.UserType;
 import vo.GuestVO;
 
 public interface LogInBLService {
 
-	public ResultMessage guestLogIn (String guest, String password);
-	
-	public ResultMessage hotelWorkerLogIn (String hotelWorker, String password);
-	
-	public ResultMessage webMarketerLogIn (String webMarketer, String password);
-	
-	public ResultMessage webManagerLogIn (String webManager, String password);
+	public ResultMessage logIn (String webManager, String password,UserType userType);
 	
 	public ResultMessage guestSignUp (GuestVO guestVO);
 	

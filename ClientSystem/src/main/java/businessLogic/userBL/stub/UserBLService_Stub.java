@@ -21,19 +21,12 @@ public class UserBLService_Stub implements UserBLService {
 	}
 
 	
-	public UserVO getSingle(String userID, UserType userType) {
+	public UserVO getSingle(String userID) {
 		LocalDate s  = LocalDate.parse("2014-02-28"); 
 		UserVO userVO = new GuestVO("123456", s, "人寿保险", "gaoy", "s", "123456", "1908486942", 50);
 		return userVO;
 	}
 
-	
-	public Iterator<CreditVO> getAllCreditDetail(String guestID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
 	public ResultMessage add(UserVO newUserVO) {
 		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
@@ -51,15 +44,22 @@ public class UserBLService_Stub implements UserBLService {
 		return ResultMessage.SUCCESS;
 	}
 
-	
-	public ResultMessage modifyCredit(String guestID, double creditNum) {
-		// TODO Auto-generated method stub
-		return ResultMessage.SUCCESS;
-	}
-
-	
-	public String getLogInInfo(String userID, UserType userType) {
+	public String getLogInInfo(String userID) {
 		// TODO Auto-generated method stub
 		return "000000";
+	}
+
+
+	@Override
+	public UserVO getSingle(String userID, UserType userType) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
+
+	@Override
+	public String getPassword(String userID, UserType userType) {
+		// TODO 自动生成的方法存根
+		return null;
 	}
 }

@@ -2,6 +2,7 @@ package businessLogic.logInBL.stub;
 
 import businessLogicService.logInBLService.LogInBLService;
 import utilities.ResultMessage;
+import utilities.UserType;
 import vo.GuestVO;
 
 /**
@@ -92,6 +93,12 @@ public class LogInBLService_Stub implements LogInBLService {
 	 */
 	public ResultMessage guestSignUp(final GuestVO guestVO) {
 		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public ResultMessage logIn(String webManager, String password,UserType userType) {
+		// TODO 自动生成的方法存根
+		return null;
 	}
 
 }
