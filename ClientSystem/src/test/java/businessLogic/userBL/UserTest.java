@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Ignore;
@@ -134,8 +135,8 @@ public class UserTest {
 		//test the method getAllCreditDetail
 		User user= new User();
 		
-		List<CreditVO> credit = user.getAllCreditDetail("1234567890");
-		CreditVO creditVO = credit.get(0);
+		Iterator<CreditVO> credit = user.getAllCreditDetail("1234567890");
+		CreditVO creditVO = credit.next();
 		assertEquals("1234567890", creditVO.guestID);
 	    assertEquals(LocalDateTime.of(2016, 10, 2, 18, 12), creditVO.time);
 	    assertEquals("123420161002", creditVO.orderID);

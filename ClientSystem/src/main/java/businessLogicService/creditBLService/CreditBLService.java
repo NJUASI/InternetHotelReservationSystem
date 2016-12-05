@@ -1,5 +1,6 @@
 package businessLogicService.creditBLService;
 
+import java.util.Iterator;
 import java.util.List;
 
 import utilities.ResultMessage;
@@ -9,11 +10,9 @@ import vo.MarketVO;
 
 public interface CreditBLService {
 
-	public ResultMessage charge(String guestID, float chargeNum);
-	
 	public BasicInfoVO getBasicInfo (String guestID);
 	
-	public List<CreditVO> getAllCreditDetail(String guestID);
+	public Iterator<CreditVO> getAllCreditDetail(String guestID);
 	
 	public List<MarketVO> getMemberFormulation();
 	

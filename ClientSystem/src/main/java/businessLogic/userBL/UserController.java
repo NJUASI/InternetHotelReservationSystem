@@ -1,5 +1,6 @@
 package businessLogic.userBL;
 
+import java.util.Iterator;
 import java.util.List;
 
 import businessLogicService.userBLService.UserBLService;
@@ -119,7 +120,7 @@ public class UserController implements UserBLService{
 	 * @param  guestID 从客户界面层传下来的指定用户ID
 	 * @return List<CreditVO> 指定客户的所有creditInfo载体
 	 */
-	public List<CreditVO> getAllCreditDetail(String guestID) {
+	public Iterator<CreditVO> getAllCreditDetail(String guestID) {
 		return user.getAllCreditDetail(guestID);
 	}
 

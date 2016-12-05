@@ -3,6 +3,8 @@ package po;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import vo.CreditVO;
+
 public class CreditPO implements Serializable{
     
 	/**
@@ -37,6 +39,15 @@ public class CreditPO implements Serializable{
 		this.previousCredit = previousCredit;
 		this.afterCredit = afterCredit;
 		this.reason = reason;
+	}
+
+	public CreditPO(CreditVO creditVO) {
+		this.guestID = creditVO.guestID;
+		this.orderID = creditVO.orderID;
+		this.time = creditVO.time;
+		this.previousCredit = creditVO.previousCredit;
+		this.afterCredit = creditVO.afterCredit;
+		this.reason = creditVO.reason;
 	}
 
 	public String getGuestID() {

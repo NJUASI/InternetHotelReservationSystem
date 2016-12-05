@@ -1,9 +1,10 @@
 package businessLogic.creditBL;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Test;
@@ -38,23 +39,14 @@ public class Credit_tester {
 	}
 	
 	@Test
-	public void test2() {
-		//test cooperation with class User
-		//test interface charge(String guestID, int chargeNum)
-		CreditController controller = CreditController.getInstance();
-	    
-	    assertEquals(ResultMessage.SUCCESS, controller.charge("1234567890", 100));
-	}
-	
-	@Test
 	public void test3() {
 		//test cooperation with class User
 		//test interface getAllCreditDetail(String guestID)
 		CreditController controller = CreditController.getInstance();
-		List<CreditVO> list = controller.getAllCreditDetail("1234567890");
-		CreditVO creditVO1 = list.get(0);
-		CreditVO creditVO2 = list.get(1);
-		CreditVO creditVO3 = list.get(2);
+		Iterator<CreditVO> list = controller.getAllCreditDetail("1234567890");
+		CreditVO creditVO1 = list.next();
+		CreditVO creditVO2 = list.next();
+		CreditVO creditVO3 = list.next();
 	
 	    assertEquals("1234567890", creditVO1.guestID);
 	    assertEquals(LocalDateTime.of(2016, 10, 2, 18, 12), creditVO1.time);
