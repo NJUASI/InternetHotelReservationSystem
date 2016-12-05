@@ -353,4 +353,16 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 		String temp = localDate.toString();
 		return temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8);
 	}
+
+	@Override
+	public double getTempPrice(OrderPO orderPO) throws RemoteException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public OrderState getOrderState(String guestID, String hotelID) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
