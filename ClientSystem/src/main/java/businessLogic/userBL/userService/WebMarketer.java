@@ -23,7 +23,7 @@ import vo.UserVO;
 public class WebMarketer implements UserService{
 
 	
-	private static int IDLength = 6; // 营销人员的ID长度为6
+	static int IDLength = 6; // 营销人员的ID长度为6
 
 	private static UserType type = UserType.WEB_MARKETER;
 

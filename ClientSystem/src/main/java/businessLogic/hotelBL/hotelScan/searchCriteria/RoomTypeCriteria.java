@@ -3,8 +3,8 @@ package businessLogic.hotelBL.hotelScan.searchCriteria;
 import java.util.Iterator;
 import java.util.List;
 
+import businessLogic.hotelBL.HotelInfoOperation;
 import businessLogic.hotelBL.hotel.Hotel;
-import businessLogic.hotelBL.hotel.HotelInfoGetAndUpdate;
 import businessLogic.hotelBL.hotelScan.SearchCriteria;
 import vo.HotelVO;
 
@@ -26,7 +26,7 @@ public class RoomTypeCriteria implements SearchCriteria {
 	 * @time:2016年11月29日 下午7:07:01
 	 */
 	public List<HotelVO> meetCriteria(List<HotelVO> hotelVOList) {
-		HotelInfoGetAndUpdate hotel;
+		HotelInfoOperation hotel;
 		for(int i = 0;i<hotelVOList.size();i++){
 			hotel = new Hotel(hotelVOList.get(i).hotelID);
 			List<String> roomTypes = hotel.getRoomType();

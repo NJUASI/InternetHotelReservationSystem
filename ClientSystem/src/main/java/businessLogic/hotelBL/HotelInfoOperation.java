@@ -1,4 +1,4 @@
-package businessLogic.hotelBL.hotel;
+package businessLogic.hotelBL;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import utilities.ResultMessage;
  * lastChangedBy:Harvey Gong
  * @time:2016年12月4日 下午9:52:00
  */
-public interface HotelInfoGetAndUpdate {
+public interface HotelInfoOperation {
 	
 	
 	/**
@@ -44,4 +44,5 @@ public interface HotelInfoGetAndUpdate {
 	 * @time:2016年12月4日 下午11:08:42
 	 */
 	public List<String> getRoomType();
+	
 }

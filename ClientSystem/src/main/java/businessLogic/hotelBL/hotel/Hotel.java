@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.List;
 
+import businessLogic.hotelBL.HotelInfoOperation;
 import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelPO;
@@ -18,7 +19,7 @@ import vo.RoomInfoVO;
  * @author:Harvey Gong
  * @time:2016年12月3日 下午9:52:10
  */
-public class Hotel implements HotelInfoGetAndUpdate{
+public class Hotel implements HotelInfoOperation{
 
 	private HotelDataService hotelDataService;
 	private HotelPO hotelPO;

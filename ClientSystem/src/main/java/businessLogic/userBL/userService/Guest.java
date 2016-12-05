@@ -11,7 +11,6 @@ import dataService.guestDataService.GuestDataService_Stub;
 import po.CreditPO;
 import po.GuestPO;
 import utilities.ResultMessage;
-import utilities.UserType;
 import vo.CreditVO;
 import vo.GuestVO;
 import vo.UserVO;
@@ -26,9 +25,7 @@ import vo.UserVO;
 public class Guest implements UserService ,CreditService{
 
 	
-	private static int IDLength = 10; // 客户的ID长度为10
-
-	private static UserType type = UserType.GUEST;
+	public static int IDLength = 10; // 客户的ID长度为10
 
 	private GuestDataService guestDataService;
 
@@ -197,21 +194,6 @@ public class Guest implements UserService ,CreditService{
 	 */
 	public static boolean isGuest(int length) {
 		if (Guest.IDLength == length) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/28
-	 * @param  type 用户类型
-	 * @return boolean 判断指定用户是否为客户类型
-	 */
-	public static boolean isGuest(UserType type) {
-		if (Guest.type == type) {
 			return true;
 		} else {
 			return false;

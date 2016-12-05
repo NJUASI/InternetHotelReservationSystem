@@ -24,7 +24,7 @@ import vo.WebManagerVO;
 public class WebManager implements UserService{
 
 	
-	private static int IDLength = 4; // 网站管理人员的ID长度为4
+	static int IDLength = 4; // 网站管理人员的ID长度为4
 
 	private static UserType type = UserType.WEB_MANAGER;
 
