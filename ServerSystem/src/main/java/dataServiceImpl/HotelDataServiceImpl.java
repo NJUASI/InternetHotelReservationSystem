@@ -9,13 +9,18 @@ import dataHelper.RoomDataHelper;
 import dataHelperImpl.HotelDataHelperImpl;
 import dataHelperImpl.RoomDataHelperImpl;
 import dataService.hotelDataService.HotelDataService;
-import po.CheckInPO;
-import po.CheckOutPO;
-import po.HotelEvaluationPO;
 import po.HotelPO;
 import po.RoomInfoPO;
 import utilities.ResultMessage;
 
+/**
+ * @Description：关于酒店信息的相关操作包括：
+ * 获取酒店基本信息、更新酒店基本信息、添加酒店基本信息、获取所有位于指定城市商圈的酒店
+ * 以及增删改查客房信息
+ * @author:Harvey Gong
+ * @lastChangedBy:Harvey Gong
+ * @time:2016年12月5日 上午12:42:53
+ */
 public class HotelDataServiceImpl extends UnicastRemoteObject implements HotelDataService{
 
 	private static final long serialVersionUID = 3434060152387200042L;
@@ -31,49 +36,22 @@ public class HotelDataServiceImpl extends UnicastRemoteObject implements HotelDa
 
 	@Override
 	public HotelPO getHotelInfo(String hotelID) throws RemoteException {
-		return null;
+		return hotelDataHelper.getHotelInfo(hotelID);
 	}
 
 	@Override
 	public ResultMessage updateHotelInfo(HotelPO hotelPO) throws RemoteException {
-		// TODO 自动生成的方法存根
-		return null;
+		return hotelDataHelper.updateHotelInfo(hotelPO);
 	}
 	
 	@Override
 	public ResultMessage addHotelInfo(HotelPO hotelPO) throws RemoteException {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-	
-
-	@Override
-	public ResultMessage updateCheckInInfo(CheckInPO checkInPO) throws RemoteException {
-		// TODO 自动生成的方法存根
-		return null;
+		return hotelDataHelper.addHotelInfo(hotelPO);
 	}
 
-	@Override
-	public ResultMessage updateCheckOutInfo(CheckOutPO checkOutPO) throws RemoteException {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-
-	@Override
-	public List<HotelEvaluationPO> getEvaluations(String hotelID) throws RemoteException {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-
-//	@Override
-//	public ResultMessage updateEvaluation(EvaluationPO evaluationPO) throws RemoteException {
-//		// TODO 自动生成的方法存根
-//		return null;
-//	}
 	@Override
 	public List<HotelPO> getHotels(String city, String circle) throws RemoteException {
-		// TODO 自动生成的方法存根
-		return null;
+		return hotelDataHelper.getHotels(city, circle);
 	}
 	
 	/**

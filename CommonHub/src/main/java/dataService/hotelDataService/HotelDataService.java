@@ -4,9 +4,6 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.CheckInPO;
-import po.CheckOutPO;
-import po.HotelEvaluationPO;
 import po.HotelPO;
 import po.RoomInfoPO;
 import utilities.ResultMessage;
@@ -21,13 +18,6 @@ public interface HotelDataService extends Remote{
 	
 	public ResultMessage addHotelInfo(HotelPO hotelPO) throws RemoteException;
 
-	public ResultMessage updateCheckInInfo (CheckInPO checkInPO) throws RemoteException;
-	
-	public ResultMessage updateCheckOutInfo (CheckOutPO checkOutPO) throws RemoteException;
-	
-	public List<HotelEvaluationPO> getEvaluations(String hotelID) throws RemoteException;
-	
-//	public ResultMessage updateEvaluation (EvaluationPO evaluationPO) throws RemoteException;
 
 	
 	

@@ -2,6 +2,7 @@ package businessLogic.hotelBL.hotel;
 
 import java.rmi.RemoteException;
 import java.util.Iterator;
+import java.util.List;
 
 import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
@@ -103,7 +104,6 @@ public class Hotel implements HotelInfoGetAndUpdate{
 		} catch (RemoteException e) {
 			return ResultMessage.FAIL;
 		}
-
 	}
 
 
@@ -172,19 +172,7 @@ public class Hotel implements HotelInfoGetAndUpdate{
 	}
 
 	/**
-	 * @Description:委托给Rooms，获取该酒店的所有房间类型
-	 * @return
-	 * Iterator<String>
-	 * @exception:
-	 * @author: Harvey Gong
-	 * @time:2016年12月4日 下午7:27:47
-	 */
-	public Iterator<String> getRoomType(){
-		return rooms.getRoomType();
-	}
-	
-	/**
-	 * @Description:获取当前所选房型的
+	 * @Description:获取当前所选房型的剩余房间数量
 	 * @param roomType
 	 * @return
 	 * int
@@ -211,7 +199,13 @@ public class Hotel implements HotelInfoGetAndUpdate{
 	
 	@Override
 	public ResultMessage scoreUpdate(double score) {
-		// TODO 自动生成的方法存根
-		return null;
+		int commentsNum = hotelPO.getCommentsNum();
+		hotelPO.setScore((commentsNum*hotelPO.getScore()+score)/commentsNum+1);
+		return updateHotelInfo(new HotelVO(hotelPO));
+	}
+	
+	@Override
+	public List<String> getRoomType(){
+		return rooms.getRoomType();
 	}
 }

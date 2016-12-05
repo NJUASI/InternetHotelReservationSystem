@@ -1,34 +1,35 @@
 package dataHelperImpl.stub;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class RoomInfoDataHelperImpl_Stub {
+import dataHelper.RoomDataHelper;
+import po.RoomInfoPO;
+import utilities.ResultMessage;
 
-	public Object delete(Object object) {
-		return null;
+public class RoomInfoDataHelperImpl_Stub implements RoomDataHelper{
+
+	@Override
+	public List<RoomInfoPO> getRoomInfo(String hotelID) {
+		List<RoomInfoPO> list = new ArrayList<RoomInfoPO>();
+		list.add(new RoomInfoPO("12345678", "大床房", 10, 10, 100));
+		list.add(new RoomInfoPO("12345678", "双床房", 10, 10, 150));
+		return list;
 	}
 
-	public Object getAll(Object object) {
-		return null;
+	@Override
+	public ResultMessage updateRoomInfo(RoomInfoPO roomInfoPO, String oldName) {
+		return ResultMessage.SUCCESS;
 	}
 
-	public Object add(Object object) {
-		return null;
+	@Override
+	public ResultMessage addRoomInfo(RoomInfoPO roomInfoPO) {
+		return ResultMessage.SUCCESS;
 	}
 
-	public Object modify(Object object) {
-		return null;
-	}
-
-	public Object getSingle(Object object) {
-		return null;
-	}
-
-	public Object getAll() {
-		return null;
-	}
-
-	public void close() {
-		
+	@Override
+	public ResultMessage deleteRoomInfo(String hotelID, String roomType) {
+		return ResultMessage.SUCCESS;
 	}
 
 }

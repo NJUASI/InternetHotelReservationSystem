@@ -46,12 +46,12 @@ public class HotelDataHelperImplTest {
 	public void testUpdateHotelInfo() {
 		HotelPO po = new HotelPO();
 		po.setHotelID("12345679");
-		po.setHotelName("桔子水晶");
+		po.setHotelName("桔子");
 		po.setCity("南京");
 		po.setCircle("马群");
 		helper.updateHotelInfo(po);
 		po = helper.getHotelInfo("12345679");
-		assertEquals("桔子水晶", po.getHotelName());
+		assertEquals("桔子", po.getHotelName());
 	}
 
 	@Ignore //避免重复添加

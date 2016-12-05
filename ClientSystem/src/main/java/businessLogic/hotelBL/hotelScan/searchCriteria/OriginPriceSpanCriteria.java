@@ -7,8 +7,8 @@ import vo.HotelVO;
 
 public class OriginPriceSpanCriteria implements SearchCriteria {
 
-	int minPrice;
-	int maxPrice;
+	double minPrice;
+	double maxPrice;
 	
 	public OriginPriceSpanCriteria(int minPrice,int maxPrice) {
 		this.minPrice = minPrice;
@@ -17,7 +17,7 @@ public class OriginPriceSpanCriteria implements SearchCriteria {
 	
 	
 	/**
-	 * @Description:TODO  HotelGeneralVO 里面没有最大原始价格
+	 * @Description:筛选出位在价格区间内的hotel
 	 * @param hotelGeneralVOList
 	 * @return
 	 * @exception:
@@ -27,12 +27,14 @@ public class OriginPriceSpanCriteria implements SearchCriteria {
 	@Override
 	public List<HotelVO> meetCriteria(List<HotelVO> hotelVOList) {
 		for(int i = 0;i<hotelVOList.size();i++){
-			
+			if(notInPriceSpan(hotelVOList.get(i).minPrice)){
+				hotelVOList.remove(i);
+			}
 		}
-		return null;
+		return hotelVOList;
 	}
 	
-	private boolean notInPriceSpan(int price) {
+	private boolean notInPriceSpan(double price) {
 		if(price<minPrice||price>maxPrice){
 			return true;
 		}

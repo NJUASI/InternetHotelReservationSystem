@@ -27,6 +27,15 @@ public class HotelDataHelperImpl implements HotelDataHelper{
 		conn = JDBCUtil.getGongConnection();
 	}
 
+	/**
+	 * @Description:根据城市商圈信息，获取在该城市商圈内的所有酒店
+	 * @param city
+	 * @param circle
+	 * @return
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月5日 上午12:08:43
+	 */
 	@Override
 	public List<HotelPO> getHotels(String city, String circle) {
 
@@ -42,15 +51,7 @@ public class HotelDataHelperImpl implements HotelDataHelper{
 			rs = ps.executeQuery();
 
 			while(rs.next()){
-				generalPO = new HotelPO();
-
-				generalPO.setHotelID(rs.getString(1));
-				generalPO.setHotelName(rs.getString(2));
-				generalPO.setCity(city);
-				generalPO.setCircle(circle);
-				generalPO.setLevel(rs.getString(5));
-				generalPO.setScore(rs.getDouble(6));
-
+				generalPO = setHotelPO(rs);
 				list.add(generalPO);
 			}
 
@@ -74,21 +75,13 @@ public class HotelDataHelperImpl implements HotelDataHelper{
 	public HotelPO getHotelInfo(String hotelID){
 		sql = "select * from hotel where hotelID = ?";
 
-		HotelPO hotelPO = new HotelPO();
+		HotelPO hotelPO = null;
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, hotelID);
 			rs = ps.executeQuery();
 			if(rs.next()){
-
-				hotelPO.setHotelID(hotelID);
-				hotelPO.setHotelName(rs.getString(2));
-				hotelPO.setCity(rs.getString(3));
-				hotelPO.setCircle(rs.getString(4));
-				hotelPO.setLevel(rs.getString(5));
-				hotelPO.setScore(rs.getDouble(6));
-				hotelPO.setIntroduction(rs.getString(7));
-				hotelPO.setEquipment(rs.getString(8));
+				hotelPO = setHotelPO(rs);
 			}
 		} catch (SQLException e) {
 		}
@@ -107,7 +100,8 @@ public class HotelDataHelperImpl implements HotelDataHelper{
 	 */
 	@Override
 	public ResultMessage updateHotelInfo(HotelPO hotelPO){
-		sql = "update hotel set hotelName = ?,city = ?,circle = ?, level = ?,score = ?, introduction = ?,equipment = ?"
+		sql = "update hotel set hotelName = ?,city = ?,circle = ?,address = ?, "
+				+ "level = ?,score = ?, introduction = ?,equipment = ?,commentsNum = ?"
 				+ "where hotelID = ?";
 				
 
@@ -117,12 +111,14 @@ public class HotelDataHelperImpl implements HotelDataHelper{
 			ps.setString(1, hotelPO.getHotelName());
 			ps.setString(2, hotelPO.getCity());
 			ps.setString(3, hotelPO.getCircle());
-			ps.setString(4, hotelPO.getLevel());
-			ps.setDouble(5, hotelPO.getScore());
-			ps.setString(6, hotelPO.getIntroduction());
-			ps.setString(7, hotelPO.getEquipment());
-			ps.setString(8, hotelPO.getHotelID());
-			
+			ps.setString(4, hotelPO.getAddress());
+			ps.setString(5, hotelPO.getLevel());
+			ps.setDouble(6, hotelPO.getScore());
+			ps.setString(7, hotelPO.getIntroduction());
+			ps.setString(8, hotelPO.getEquipment());
+			ps.setInt(9, hotelPO.getCommentsNum());
+			ps.setString(10, hotelPO.getHotelID());
+
 			ps.execute();
 			return ResultMessage.SUCCESS;
 		}
@@ -147,21 +143,48 @@ public class HotelDataHelperImpl implements HotelDataHelper{
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			
-			ps.setString(1, hotelPO.getHotelID());
-			ps.setString(2, hotelPO.getHotelName());
-			ps.setString(3, hotelPO.getCity());
-			ps.setString(4, hotelPO.getCircle());
-			ps.setString(5, hotelPO.getLevel());
-			ps.setDouble(6, hotelPO.getScore());
-			ps.setString(7, hotelPO.getIntroduction());
-			ps.setString(8, hotelPO.getEquipment());
-			
+			setPreparedStatement(hotelPO);
 			ps.execute();
 			return ResultMessage.SUCCESS;
 		} catch (SQLException e) {
 			return ResultMessage.FAIL;
 		}
 	}
-
+	
+	private void setPreparedStatement(HotelPO hotelPO){
+		try {
+			ps.setString(1, hotelPO.getHotelID());
+			ps.setString(2, hotelPO.getHotelName());
+			ps.setString(3, hotelPO.getCity());
+			ps.setString(4, hotelPO.getCircle());
+			ps.setString(5, hotelPO.getAddress());
+			ps.setString(6, hotelPO.getLevel());
+			ps.setDouble(7, hotelPO.getScore());
+			ps.setString(8, hotelPO.getIntroduction());
+			ps.setString(9, hotelPO.getEquipment());
+			ps.setInt(10, hotelPO.getCommentsNum());
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+	}
+	
+	private HotelPO setHotelPO(ResultSet rs){
+		HotelPO po = new HotelPO();
+		try {
+			po.setHotelID(rs.getString(1));
+			po.setHotelName(rs.getString(2));
+			po.setCity(rs.getString(3));
+			po.setCircle(rs.getString(4));
+			po.setAddress(rs.getString(5));
+			po.setLevel(rs.getString(6));
+			po.setScore(rs.getDouble(7));
+			po.setIntroduction(rs.getString(8));
+			po.setEquipment(rs.getString(9));
+			po.setCommentsNum(rs.getInt(10));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return po;
+	}
 }

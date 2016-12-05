@@ -1,5 +1,7 @@
 package businessLogic.hotelBL.hotel;
 
+import java.util.List;
+
 import utilities.Address;
 import utilities.ResultMessage;
 
@@ -32,4 +34,14 @@ public interface HotelInfoGetAndUpdate {
 	 * @time:2016年12月4日 下午9:56:21
 	 */
 	public Address getHotelAddress();
+	
+	/**
+	 * @Description:委托给Rooms，获取该酒店的所有房间类型
+	 * @return
+	 * Iterator<String>
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月4日 下午11:08:42
+	 */
+	public List<String> getRoomType();
 }

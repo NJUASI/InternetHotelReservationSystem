@@ -1,21 +1,23 @@
 package businessLogic.hotelBL.hotelScan.searchCriteria;
 
+import java.util.Iterator;
 import java.util.List;
 
+import businessLogic.hotelBL.hotel.Hotel;
+import businessLogic.hotelBL.hotel.HotelInfoGetAndUpdate;
 import businessLogic.hotelBL.hotelScan.SearchCriteria;
-import utilities.RoomType;
 import vo.HotelVO;
 
 public class RoomTypeCriteria implements SearchCriteria {
 
-	RoomType roomType;
-	
-	public RoomTypeCriteria(RoomType roomType) {
+	String roomType;
+
+	public RoomTypeCriteria(String roomType) {
 		this.roomType = roomType;
 	}
-	
+
 	/**
-	 * @Description:TODO   HotelGeneralVO中没有roomtype
+	 * @Description:根据
 	 * @param hotelGeneralVOList
 	 * @return
 	 * List<HotelGeneralVO>
@@ -24,10 +26,15 @@ public class RoomTypeCriteria implements SearchCriteria {
 	 * @time:2016年11月29日 下午7:07:01
 	 */
 	public List<HotelVO> meetCriteria(List<HotelVO> hotelVOList) {
+		HotelInfoGetAndUpdate hotel;
 		for(int i = 0;i<hotelVOList.size();i++){
-			
+			hotel = new Hotel(hotelVOList.get(i).hotelID);
+			List<String> roomTypes = hotel.getRoomType();
+			if(!roomTypes.contains(roomTypes)){
+				hotelVOList.remove(i);
+			}
 		}
-		return null;
+		return hotelVOList;
 	}
-
+	
 }

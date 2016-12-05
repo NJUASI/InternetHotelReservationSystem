@@ -40,11 +40,33 @@ public final class HotelPO implements Serializable{
 	//  已评分的人数
 	private int commentsNum;
 
-	public HotelPO(String hotelID, String hotelName, String city, String cycle, String hotelAddress, 
-			String level, double score, String introduction, String equipment) {
-
+	/**
+	 * @Description：为测试而生的辣鸡构造器，请依次添加参数
+	 * @param hotelID
+	 * @param hotelName
+	 * @param city
+	 * @param circle
+	 * @param hotelAddress
+	 * @param level
+	 * @param score
+	 * @param introduction
+	 * @param equipment
+	 * @param commentsNum
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月5日 上午12:54:24
+	 */
+	public HotelPO(String hotelID, String hotelName, String city, String circle, String hotelAddress, 
+			String level, double score, String introduction, String equipment, int commentsNum) {
+		this.hotelID = hotelID;
+		this.hotelName = hotelName;
+		this.city = city;
+		this.circle = circle;
+		this.level = level;
+		this.score = score;
 		this.introduction = introduction;
 		this.equipment = equipment;
+		this.commentsNum = commentsNum;
 	}
 
 	public HotelPO(HotelVO hotelVO) {
@@ -56,6 +78,7 @@ public final class HotelPO implements Serializable{
 		this.score = hotelVO.score;
 		this.introduction = hotelVO.introduction;
 		this.equipment = hotelVO.equipment;
+		this.commentsNum = hotelVO.commentsNum;
 	}
 
 	public HotelPO() {
