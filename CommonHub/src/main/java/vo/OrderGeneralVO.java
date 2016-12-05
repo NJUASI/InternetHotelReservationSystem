@@ -9,11 +9,11 @@ import utilities.OrderState;
  * 
  * @author 61990
  * lastChangedBy charles
- * updateTime 2016/12/4
+ * updateTime 2016/12/5
  */
 public class OrderGeneralVO {
 	
-	// 订单编号
+	//	订单编号
 	public String orderID;
 	
 	//	客户编号
@@ -31,7 +31,7 @@ public class OrderGeneralVO {
 	//	最后预定价格
 	public double price;
 
-	//	最晚订单执行时间
+	//	最晚订单执行时间／预计入住时间
 	public LocalDateTime expectExecuteTime;
 
 	//	预计离开时间
@@ -39,15 +39,25 @@ public class OrderGeneralVO {
 
 	//	订单状态
 	public OrderState state;
+	
+	//	已评论
+	public boolean hasCommented;
 
+	//	入住人姓名
+	public String name;
+	
+	//	联系方式
+	public String phone;
+	
 	/**
 	 * 
 	 * @author 61990
-	 * lastChangedBy 61990
-	 * updateTime 2016/11/27
+	 * lastChangedBy charles
+	 * updateTime 2016/12/5
 	 */
-	public OrderGeneralVO(String orderID, String guestID, String hotelID, String hotelName, String hotelAddress,
-			double price, LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime, OrderState state) {
+	public OrderGeneralVO(String orderID, String guestID, String hotelID, String hotelName, 
+			String hotelAddress, double price, LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime, 
+			OrderState state, boolean hasCommented, String name, String phone) {
 		this.orderID = orderID;
 		this.guestID = guestID;
 		this.hotelID = hotelID;
@@ -57,22 +67,26 @@ public class OrderGeneralVO {
 		this.expectExecuteTime = expectExecuteTime;
 		this.expectLeaveTime = expectLeaveTime;
 		this.state = state;
+		this.hasCommented = hasCommented;
+		this.name = name;
+		this.phone = phone;
 	}
 	
 	/**
 	 * 
 	 * @author 61990
 	 * lastChangedBy charles
-	 * updateTime 2016/12/4
+	 * updateTime 2016/12/5
 	 * 
-	 * 因为订单编号、价格、状态不能从界面层直接得到
+	 * 因为订单编号、价格、状态、已评论不能从界面层直接得到
 	 * 所以order create的时候，提供一个专门的构造器
 	 */
 	public OrderGeneralVO(String guestID, String hotelID, String hotelName, String hotelAddress,
-			LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime) {
+			LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime, String name, String phone) {
 		this.orderID = null;
 		this.price = -1;
 		this.state = OrderState.UNEXECUTED;
+		this.hasCommented = false;
 		
 		this.guestID = guestID;
 		this.hotelID = hotelID;
@@ -80,13 +94,15 @@ public class OrderGeneralVO {
 		this.hotelAddress = hotelAddress;
 		this.expectExecuteTime = expectExecuteTime;
 		this.expectLeaveTime = expectLeaveTime;
+		this.name = name;
+		this.phone = phone;
 	}
 	
 	/**
 	 * 
 	 * @author 61990
-	 * lastChangedBy 61990
-	 * updateTime 2016/11/27
+	 * lastChangedBy charles
+	 * updateTime 2016/12/5
 	 */
 	public OrderGeneralVO(OrderGeneralPO orderGeneralPO) {
 		this.orderID = orderGeneralPO.getOrderID();
@@ -98,5 +114,8 @@ public class OrderGeneralVO {
 		this.expectExecuteTime = orderGeneralPO.getExpectExecuteTime();
 		this.expectLeaveTime = orderGeneralPO.getExpectLeaveTime();
 		this.state = orderGeneralPO.getState();
+		this.hasCommented = orderGeneralPO.getHasCommented();
+		this.name = orderGeneralPO.getName();
+		this.phone = orderGeneralPO.getPhone();
 	}
 }

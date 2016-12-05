@@ -11,7 +11,7 @@ import vo.OrderVO;
  * 
  * @author 61990
  * lastChangedBy charles
- * updateTime 2016/12/4
+ * updateTime 2016/12/5
  *
  */
 public class OrderPO implements Serializable{
@@ -22,7 +22,7 @@ public class OrderPO implements Serializable{
 	private static final long serialVersionUID = 6528720659331679661L;
 
 	//	订单编号(create时无) 客户编号 酒店编号 酒店名 酒店地址 最后预定价格(create时无) 
-	//	最晚订单执行时间 预计离开时间 订单状态
+	//	最晚订单执行时间／预计入住时间 预计离开时间 订单状态 已评论 入住人姓名 联系方式
 	private OrderGeneralPO orderGeneralPO;
 	
 	//	原价
@@ -49,12 +49,6 @@ public class OrderPO implements Serializable{
 	//	预计入住人数
 	private int expectGuestNumCount;
 	
-	//	入住人姓名
-	private String name;
-	
-	//	联系方式
-	private String phone;
-	
 	//	特别要求
 	private String message;
 	
@@ -78,20 +72,20 @@ public class OrderPO implements Serializable{
 		this.roomType = orderVO.roomType;
 		this.roomNumCount = orderVO.roomNumCount;
 		this.roomNumber = orderVO.roomNumber;
-		this.name = orderVO.name;
-		this.phone = orderVO.phone;
+		this.expectGuestNumCount = orderVO.expectGuestNumCount;
 		this.message = orderVO.message;
 		this.score = orderVO.score;
+		this.comment = orderVO.comment;
 	}
 
 	public OrderPO(String orderID, String guestID, String hotelID, String hotelName, String hotelAddress, 
 			double previousPrice, double price, LocalDateTime createTime, LocalDateTime checkInTime,
 			LocalDateTime checkOutTime, LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime, 
-			OrderState state, RoomType roomType, int roomNumCount, String roomNumber, 
-			int expectGuestNumCount, String name, String phone, String message,String comment) {
+			OrderState state, boolean hasCommented, RoomType roomType, int roomNumCount, String roomNumber, 
+			int expectGuestNumCount, String name, String phone, String message, double score, String comment) {
 		super();
 		this.orderGeneralPO = new OrderGeneralPO(orderID, guestID, hotelID, hotelName, hotelAddress,
-				price, expectExecuteTime, expectLeaveTime, state);
+				price, expectExecuteTime, expectLeaveTime, state, hasCommented, name, phone);
 		
 		this.previousPrice = previousPrice;
 		this.createTime = createTime;
@@ -101,15 +95,14 @@ public class OrderPO implements Serializable{
 		this.roomNumCount = roomNumCount;
 		this.roomNumber = roomNumber;
 		this.expectGuestNumCount = expectGuestNumCount;
-		this.name = name;
-		this.phone = phone;
 		this.message = message;
+		this.score = score;
 		this.comment = comment;
 	}
 
-	public OrderPO(OrderGeneralPO orderGeneralPO, double previousPrice, LocalDateTime createTime, LocalDateTime checkInTime, 
-			LocalDateTime checkOutTime, RoomType roomType, int roomNumCount, String roomNumber, String name, 
-			String phone, String message,String comment,double score) {
+	public OrderPO(OrderGeneralPO orderGeneralPO, double previousPrice, LocalDateTime createTime, 
+			LocalDateTime checkInTime, LocalDateTime checkOutTime, RoomType roomType, int roomNumCount, 
+			String roomNumber, int expectGuestNumCount, String message, double score, String comment) {
 		super();
 		this.orderGeneralPO = orderGeneralPO;
 		
@@ -120,11 +113,10 @@ public class OrderPO implements Serializable{
 		this.roomType = roomType;
 		this.roomNumCount = roomNumCount;
 		this.roomNumber = roomNumber;
-		this.name = name;
-		this.phone = phone;
+		this.expectGuestNumCount = expectGuestNumCount;
 		this.message = message;
-		this.comment = comment;
 		this.score = score;
+		this.comment = comment;
 	}
 	
 	public String getOrderID() {
@@ -206,6 +198,14 @@ public class OrderPO implements Serializable{
 	public void setState(OrderState state) {
 		orderGeneralPO.setState(state);
 	}
+
+	public boolean getHasCommented() {
+		return orderGeneralPO.getHasCommented();
+	}
+
+	public void setHasCommented(boolean hasCommented) {
+		orderGeneralPO.setHasCommented(hasCommented);
+	}
 	
 	public LocalDateTime getExpectLeaveTime() {
 		return orderGeneralPO.getExpectLeaveTime();
@@ -280,19 +280,19 @@ public class OrderPO implements Serializable{
 	}
 	
 	public String getName() {
-		return name;
+		return orderGeneralPO.getName();
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.orderGeneralPO.setName(name);
 	}
 
 	public String getPhone() {
-		return phone;
+		return this.orderGeneralPO.getPhone();
 	}
 
 	public void setPhone(String phone) {
-		this.phone = phone;
+		this.orderGeneralPO.setPhone(phone);
 	}
 
 	public String getMessage() {

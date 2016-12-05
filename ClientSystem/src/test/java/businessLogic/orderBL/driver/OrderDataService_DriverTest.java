@@ -51,13 +51,15 @@ public class OrderDataService_DriverTest {
 		final OrderState orderState = OrderState.EXECUTED;
 		final RoomType roomType = RoomType.AMBASSADOR;
 		
-		
-		final OrderPO orderPO = new OrderPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
-				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, 
-				roomType, 2, "301", 2, "zhangsan", "13554321234", "no","good");
+
+		final OrderGeneralPO createOrderGeneralVO = new OrderGeneralPO("123456789012", "1234567890", 
+				"12345678", "thisHotel", "nanjing", 200, expectExecuteTime, expectLeaveTime, orderState, 
+				false, "zhangsan", "15012345678");
+		final OrderPO createOrderVO = new OrderPO(createOrderGeneralVO, 250, createTime, checkInTime, checkOutTime, 
+				roomType, 1, "305", 2, "no", 4.5, "good");
 		
 		try {
-			assertEquals(ResultMessage.SUCCESS, driver.orderDataService.createOrder(orderPO));
+			assertEquals(ResultMessage.SUCCESS, driver.orderDataService.createOrder(createOrderVO));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -289,7 +291,7 @@ public class OrderDataService_DriverTest {
 			assertEquals(200, orderGeneralPO.getPrice(), 0);
 			assertEquals(LocalDateTime.of(2016, 2, 3, 14, 0), orderGeneralPO.getExpectExecuteTime());
 			assertEquals(LocalDateTime.of(2016, 2, 4, 12, 0), orderGeneralPO.getExpectLeaveTime());
-			assertEquals(OrderState.EXECUTED, orderGeneralPO.getState());
+			assertEquals(OrderState.ABNORMAL, orderGeneralPO.getState());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -326,7 +328,7 @@ public class OrderDataService_DriverTest {
 			assertEquals(200, orderGeneralPO.getPrice(), 0);
 			assertEquals(LocalDateTime.of(2016, 2, 3, 14, 0), orderGeneralPO.getExpectExecuteTime());
 			assertEquals(LocalDateTime.of(2016, 2, 4, 12, 0), orderGeneralPO.getExpectLeaveTime());
-			assertEquals(OrderState.EXECUTED, orderGeneralPO.getState());
+			assertEquals(OrderState.ABNORMAL, orderGeneralPO.getState());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

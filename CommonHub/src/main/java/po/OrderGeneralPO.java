@@ -32,7 +32,7 @@ public class OrderGeneralPO implements Serializable{
 	// 最后预定价格
 	private double price;
 	
-	// 最晚订单执行时间
+	// 最晚订单执行时间／预计入住时间
 	private LocalDateTime expectExecuteTime;
 	
 	// 预计离开时间
@@ -41,10 +41,20 @@ public class OrderGeneralPO implements Serializable{
 	// 订单状态
 	private OrderState state;
 	
+	//	已评论
+	private boolean hasCommented;
+	
+	//	入住人姓名
+	private String name;
+	
+	//	联系方式
+	private String phone;
+	
 	public OrderGeneralPO(){}
 
-	public OrderGeneralPO(String orderID, String guestID, String hotelID, String hotelName, String hotelAddress,
-			double price, LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime, OrderState state) {
+	public OrderGeneralPO(String orderID, String guestID, String hotelID, String hotelName, 
+			String hotelAddress, double price, LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime, 
+			OrderState state, boolean hasCommented, String name, String phone) {
 		super();
 		this.orderID = orderID;
 		this.guestID = guestID;
@@ -55,6 +65,9 @@ public class OrderGeneralPO implements Serializable{
 		this.expectExecuteTime = expectExecuteTime;
 		this.expectLeaveTime = expectLeaveTime;
 		this.state = state;
+		this.hasCommented = hasCommented;
+		this.name = name;
+		this.phone = phone;
 	}
 
 	public OrderGeneralPO(OrderGeneralVO orderGeneralVO) {
@@ -67,6 +80,9 @@ public class OrderGeneralPO implements Serializable{
 		this.expectExecuteTime = orderGeneralVO.expectExecuteTime;
 		this.expectLeaveTime = orderGeneralVO.expectLeaveTime;
 		this.state = orderGeneralVO.state;
+		this.hasCommented = orderGeneralVO.hasCommented;
+		this.name = orderGeneralVO.name;
+		this.phone = orderGeneralVO.phone;
 	}
 	
 	public OrderGeneralPO(OrderPO orderPO) {
@@ -79,6 +95,9 @@ public class OrderGeneralPO implements Serializable{
 		this.expectExecuteTime = orderPO.getExpectExecuteTime();
 		this.expectLeaveTime = orderPO.getExpectLeaveTime();
 		this.state = orderPO.getState();
+		this.hasCommented = orderPO.getHasCommented();
+		this.name = orderPO.getName();
+		this.phone = orderPO.getPhone();
 	}
 	
 	public String getOrderID() {
@@ -151,6 +170,30 @@ public class OrderGeneralPO implements Serializable{
 
 	public void setState(OrderState state) {
 		this.state = state;
+	}
+
+	public boolean getHasCommented() {
+		return hasCommented;
+	}
+
+	public void setHasCommented(boolean hasCommented) {
+		this.hasCommented = hasCommented;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 }
