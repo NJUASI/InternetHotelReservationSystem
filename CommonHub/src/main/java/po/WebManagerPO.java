@@ -31,6 +31,10 @@ public class WebManagerPO implements Serializable{
 	public String getWebManagerID() {
 		return webManagerID;
 	}
+	
+	public void setWebManagerID(String webManagerID) {
+		this.webManagerID = webManagerID;
+	}
 
 	public String getPassword() {
 		return password;

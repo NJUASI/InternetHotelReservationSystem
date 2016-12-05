@@ -21,8 +21,8 @@ public class HotelWorkerDataHelperImpl_Stub implements HotelWorkerDataHelper {
 	 * @param hotelWorkerPO hotelWorkerInfo载体
 	 * @return ResultMessage 是否成功添加到数据库中
 	 */
-	public ResultMessage add(final HotelWorkerPO hotelWorkerPO) {
-		return ResultMessage.SUCCESS;
+	public HotelWorkerPO add(HotelWorkerPO hotelWorkerPO) {
+		return new HotelWorkerPO("00001111", "123456","school");
 	}
 
 	/**

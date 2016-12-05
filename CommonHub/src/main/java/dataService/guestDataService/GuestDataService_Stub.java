@@ -40,8 +40,11 @@ public class GuestDataService_Stub implements GuestDataService{
 	}
 
 
-	public ResultMessage add(GuestPO newGuestPO) {
-		return ResultMessage.SUCCESS;
+	public GuestPO add(GuestPO newGuestPO) {
+		LocalDate birthday = LocalDate.of(1995, 1, 1);
+		
+		return new GuestPO("1234567890", birthday, "school", "zhangsan", "xiaosan",
+				"000000", "13523456789",100);
 	}
 
 

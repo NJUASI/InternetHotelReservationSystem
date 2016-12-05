@@ -21,7 +21,7 @@ public interface WebMarketerDataHelper {
 	 * @param webMarketerPO webMarketerInfo载体
 	 * @return ResultMessage webMarketerPO是否成功添加到数据库中
 	 */
-	ResultMessage add(WebMarketerPO webMarketerPO);
+	WebMarketerPO add(WebMarketerPO webMarketerPO);
 	
 	/**
 	 * @author 董金玉

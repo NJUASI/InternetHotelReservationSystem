@@ -13,7 +13,7 @@ public interface WebMarketerDataService extends Remote{
 	
 	public List<WebMarketerPO> getAllWebMarketer () throws RemoteException;
 
-	public ResultMessage add(WebMarketerPO newWebMarketerPO) throws RemoteException;
+	public WebMarketerPO add(WebMarketerPO newWebMarketerPO) throws RemoteException;
 
 	public ResultMessage modify (WebMarketerPO webMarketerPO) throws RemoteException;
 

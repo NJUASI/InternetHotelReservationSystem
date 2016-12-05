@@ -43,28 +43,30 @@ public class GuestDataHelperImpl implements GuestDataHelper {
 	 * @param guestPO guestInfo载体
 	 * @return guestPO 是否成功添加到数据库中
 	 */
-	public ResultMessage add(final GuestPO guestPO) {
-		sql = "INSERT INTO guest(guest.guestID,guest.birthday,guest.enterprise,"
+	public GuestPO add(GuestPO guestPO) {
+		sql = "INSERT INTO guest(guest.birthday,guest.enterprise,"
 				+ "guest.`name`,guest.nickName,guest.`password`,guest.credit,guest.phone)"
-				+ "values(?,?,?,?,?,?,?,?)";
+				+ "values(?,?,?,?,?,?,?)";
 
 		try {
 			ps = conn.prepareStatement(sql); // 插入数据的准备工作，1-8对应sql语句中问号的顺序
-			ps.setInt(1, Integer.parseInt(guestPO.getGuestID()));
-			ps.setObject(2, guestPO.getBirthday()); // 在使用setObject方法是必须注意，
-			ps.setString(3, guestPO.getEnterprise()); // 我们应该使用对应数据类型
-			ps.setString(4, guestPO.getName()); // 虽然Object可以替代所有该set方法，但会影响效率
-			ps.setString(5, guestPO.getNickName()); // 所以尽量使用对应数据类型的set方法
-			ps.setString(6, guestPO.getPassword());
-			ps.setDouble(7, guestPO.getCredit());
-			ps.setString(8, guestPO.getPhone());
+			ps.setObject(1, guestPO.getBirthday()); // 在使用setObject方法是必须注意，
+			ps.setString(2, guestPO.getEnterprise()); // 我们应该使用对应数据类型
+			ps.setString(3, guestPO.getName()); // 虽然Object可以替代所有该set方法，但会影响效率
+			ps.setString(4, guestPO.getNickName()); // 所以尽量使用对应数据类型的set方法
+			ps.setString(5, guestPO.getPassword());
+			ps.setDouble(6, guestPO.getCredit());
+			ps.setString(7, guestPO.getPhone());
 
 			ps.execute(); // 执行sql语句，返回值为boolean
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return ResultMessage.FAIL;
+			return null;
 		}
-		return ResultMessage.SUCCESS;
+		guestPO.setGuestID(this.getTheLastID());
+		guestPO.setCredit(1000);
+		return guestPO;
 	}
 
 	/**
@@ -180,5 +182,21 @@ public class GuestDataHelperImpl implements GuestDataHelper {
 	public void close() { // 当决定抛弃该对象的时候，调用该方法
 		JDBCUtil.close(rs, ps, conn);
 		this.sql = null;
+	}
+	
+	private String getTheLastID(){
+		
+		sql = "SELECT LAST_INSERT_ID() from guest";
+		try {
+			ps  = conn.prepareStatement(sql);
+			rs  = ps.executeQuery();
+			if(rs.next()){
+				return String.valueOf(rs.getObject(1));
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return null;
 	}
 }

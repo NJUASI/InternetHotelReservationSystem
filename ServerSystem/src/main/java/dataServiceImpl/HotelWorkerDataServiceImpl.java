@@ -70,7 +70,7 @@ public class HotelWorkerDataServiceImpl extends UnicastRemoteObject implements H
 	 * @param newHotelWorkerID 酒店工作人员ID
 	 * @return ResultMessage 是否成功添加hotelWorkerInfo
 	 */
-	public ResultMessage add(HotelWorkerPO newHotelWorkerPO) throws RemoteException {
+	public HotelWorkerPO add(HotelWorkerPO newHotelWorkerPO) throws RemoteException {
 		return this.hotelWorkerHelper.add(newHotelWorkerPO);
 	}
 

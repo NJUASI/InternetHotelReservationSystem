@@ -13,7 +13,7 @@ public interface HotelWorkerDataService extends Remote{
 	
 	public List<HotelWorkerPO> getAllHotelWorker() throws RemoteException;
 	
-	public ResultMessage add(HotelWorkerPO newHotelWorkerPO) throws RemoteException;
+	public HotelWorkerPO add(HotelWorkerPO newHotelWorkerPO) throws RemoteException;
 
 	public ResultMessage modify(HotelWorkerPO hotelWorkerPO) throws RemoteException;
 	

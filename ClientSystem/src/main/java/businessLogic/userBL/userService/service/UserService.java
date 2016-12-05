@@ -7,7 +7,7 @@ import vo.UserVO;
 
 public interface UserService {
 	
-	public ResultMessage add(UserVO newUserVO);
+	public UserVO add(UserVO newUserVO);
 
 	public ResultMessage modify(UserVO userVO);
 	

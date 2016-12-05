@@ -62,8 +62,15 @@ public class GuestDataServiceImpl_Test {
 		LocalDate birthday = LocalDate.of(1995, 1, 1);
 		try {
 			GuestDataService guest = new GuestDataServiceImpl();
-			GuestPO guestPO = new GuestPO("1234567890", birthday, "school", "zhangsan", "xiaosan", "000000", "13523456789", 100);
-			assertEquals(guest.add(guestPO),ResultMessage.FAIL);
+			GuestPO guestPO  = guest.getSingleGuest("1234567890");
+			assertEquals(guestPO.getGuestID(),"1234567890");
+			assertEquals(guestPO.getBirthday(),birthday);
+			assertEquals(guestPO.getEnterprise(),"school");
+			assertEquals(guestPO.getName(),"zhangsan");
+			assertEquals(guestPO.getNickName(),"xiaosan");
+			assertEquals(guestPO.getPassword(),"000000");
+			assertEquals(guestPO.getPhone(),"13523456789");
+			assertEquals(guestPO.getCredit(),100,0);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

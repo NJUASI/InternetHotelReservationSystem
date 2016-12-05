@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import dataService.webManagerDataService.WebManagerDataService_Stub;
 import po.WebManagerPO;
-import utilities.ResultMessage;
 
 public class WebManagerDataService_DriveTest {
 
@@ -19,7 +18,7 @@ public class WebManagerDataService_DriveTest {
 		WebManagerDataService_Driver driver = new WebManagerDataService_Driver(stub);
 		
 		try {
-			assertEquals(ResultMessage.SUCCESS, driver.webManagerDataService.add(new WebManagerPO("0001", "123456")));
+			assertEquals("0001", driver.webManagerDataService.add(new WebManagerPO("0001", "123456")).getWebManagerID());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

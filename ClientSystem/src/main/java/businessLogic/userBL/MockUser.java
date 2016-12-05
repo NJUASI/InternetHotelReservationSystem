@@ -19,8 +19,10 @@ public class MockUser extends User{
 	public MockUser() {
 	}
 	
-	public ResultMessage add(UserVO newUserVO) {
-		return ResultMessage.SUCCESS;
+	public UserVO add(UserVO newUserVO) {
+		UserVO guestVO= new GuestVO("1234567890", LocalDate.of(1996, 4, 1), "school", "zhangsan", "xiaosan",
+				"000000", "13523456789", 100 );
+		return guestVO;
 	}
 	
 

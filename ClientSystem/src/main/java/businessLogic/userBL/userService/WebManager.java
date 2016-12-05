@@ -47,19 +47,18 @@ public class WebManager implements UserService{
 	 * @param newUserVO 从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加网站管理人员信息
 	 */
-	public ResultMessage add(UserVO newUserVO) {
+	public UserVO add(UserVO newUserVO) {
 
-		ResultMessage msg = ResultMessage.USER_ADD_FAILURE;
 		
-		if(this.hasWebManager(newUserVO.userID)){return msg;} //存在ID对应项
+		if(this.hasWebManager(newUserVO.userID)){return null;} //存在ID对应项
 
 		try {
 			WebManagerPO webManagerPO = this.convert(newUserVO);
-			msg = webManagerDataService.add(webManagerPO);
+			return this.convert(webManagerDataService.add(webManagerPO));
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return msg;
 	}
 
 	/**

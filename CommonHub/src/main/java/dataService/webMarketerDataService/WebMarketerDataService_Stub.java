@@ -22,8 +22,8 @@ public class WebMarketerDataService_Stub implements WebMarketerDataService{
 	}
 	
 	
-	public ResultMessage add(WebMarketerPO newWebMarketerPO) {
-		return ResultMessage.SUCCESS;
+	public WebMarketerPO add(WebMarketerPO newWebMarketerPO) {
+		return new WebMarketerPO("000001", "123456");
 	}
 
 	

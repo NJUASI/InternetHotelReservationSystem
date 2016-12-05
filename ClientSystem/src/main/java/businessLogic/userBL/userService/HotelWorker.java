@@ -43,19 +43,18 @@ public class HotelWorker implements UserService{
 	 * @param newUserVO 从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加酒店工作人员信息
 	 */
-	public ResultMessage add(UserVO newUserVO) {
+	public UserVO add(UserVO newUserVO) {
 
-		ResultMessage msg = ResultMessage.USER_ADD_FAILURE;
 		
-		if(this.hasHotelWorker(newUserVO.userID)){return msg;} //存在ID对应项
+		if(this.hasHotelWorker(newUserVO.userID)){return null;} //存在ID对应项
 
 		try {
 			HotelWorkerPO hotelWorkerPO = this.convert(newUserVO);
-			msg = hotelWorkerDataService.add(hotelWorkerPO);
+			return this.convert( hotelWorkerDataService.add(hotelWorkerPO));
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return msg;
 	}
 
 	/**

@@ -24,8 +24,8 @@ public class GuestDataHelperImplTest {
 
 	@Test
 	public void testAdd() {
-		GuestPO guestPO = new GuestPO("1234567890", LocalDate.of(2016, 3, 2), "school", 
-				"DJY", "FFFD", "000001", "13523456789", 107);
+		GuestPO guestPO = new GuestPO("", LocalDate.of(2016, 8, 2), "school", 
+				"DJ", "FFD", "000002", "13523456789", 107);
 		assertEquals(ResultMessage.SUCCESS,helper.add(guestPO));
 	}
 

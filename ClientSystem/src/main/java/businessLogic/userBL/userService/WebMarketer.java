@@ -46,19 +46,18 @@ public class WebMarketer implements UserService{
 	 * @param newUserVO 从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加网站营销人员信息
 	 */
-	public ResultMessage add(UserVO newUserVO) {
+	public UserVO add(UserVO newUserVO) {
 
-		ResultMessage msg = ResultMessage.USER_ADD_FAILURE;
 		
-		if(this.hasWebMarketer(newUserVO.userID)){return msg;} //存在ID对应项
+		if(this.hasWebMarketer(newUserVO.userID)){return null;} //存在ID对应项
 
 		try {
 			WebMarketerPO webMarketerPO = this.convert(newUserVO);
-			msg = webMarketerDataService.add(webMarketerPO);
+			return this.convert(webMarketerDataService.add(webMarketerPO));
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return msg;
 	}
 
 	/**

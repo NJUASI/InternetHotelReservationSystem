@@ -49,8 +49,11 @@ public class HotelWorkerDataServiceImpl_Test {
 		// test the method Add
 		try {
 			HotelWorkerDataService hotelWorker = new HotelWorkerDataServiceImpl();
-			HotelWorkerPO hotelWorkerPO = new HotelWorkerPO("00001111", "123456", "school");
-			assertEquals(hotelWorker.add(hotelWorkerPO), ResultMessage.SUCCESS);
+			HotelWorkerPO hotelWorkerPO = hotelWorker.getSingleHotelWorker("00001111");
+
+			assertEquals(hotelWorkerPO.getHotelWorkerID(), "00001111");
+			assertEquals(hotelWorkerPO.getPassword(), "123456");
+			assertEquals(hotelWorkerPO.getHotelName(), "school");
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

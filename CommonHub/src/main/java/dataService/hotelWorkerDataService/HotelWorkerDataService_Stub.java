@@ -22,9 +22,9 @@ public class HotelWorkerDataService_Stub implements HotelWorkerDataService{
 	}
 	
 	
-	public ResultMessage add(HotelWorkerPO newHotelWorkerPO) {
+	public HotelWorkerPO add(HotelWorkerPO newHotelWorkerPO) {
 		// TODO Auto-generated method stub
-		return ResultMessage.SUCCESS;
+		return new HotelWorkerPO("00001111", "123456","school");
 	}
 
 	

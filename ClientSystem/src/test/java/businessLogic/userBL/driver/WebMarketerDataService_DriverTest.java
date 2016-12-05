@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import dataService.webMarketerDataService.WebMarketerDataService_Stub;
 import po.WebMarketerPO;
-import utilities.ResultMessage;
 
 public class WebMarketerDataService_DriverTest {
 
@@ -19,7 +18,7 @@ public class WebMarketerDataService_DriverTest {
 		WebMarketerDataService_Driver driver = new WebMarketerDataService_Driver(stub);
 		
 		try {
-			assertEquals(ResultMessage.SUCCESS, driver.webMarketerDataService.add(new WebMarketerPO("000001", "123456")));
+			assertEquals("000001", driver.webMarketerDataService.add(new WebMarketerPO("000001", "123456")).getWebMarketerID());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

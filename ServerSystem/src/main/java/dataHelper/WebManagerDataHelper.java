@@ -21,7 +21,7 @@ public interface WebManagerDataHelper {
 	 * @param webManagerPO webManagerInfo载体
 	 * @return ResultMessage webManagerPO是否成功添加到数据库中
 	 */
-	ResultMessage add(WebManagerPO webManagerPO);
+	WebManagerPO add(WebManagerPO webManagerPO);
 	
 	/**
 	 * @author 董金玉

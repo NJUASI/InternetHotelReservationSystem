@@ -47,9 +47,10 @@ public class WebMarekterDataServiceImpl_Test {
 		// test the method Add
 		try {
 			WebMarketerDataService webMarketer = new WebMarketerDataServiceImpl();
-			WebMarketerPO webMarketerPO = new WebMarketerPO("000001", "123456");
+			WebMarketerPO webMarketerPO = webMarketer.getSingleWebMarketer("000001");
 
-			assertEquals(webMarketer.add(webMarketerPO), ResultMessage.SUCCESS);
+			assertEquals(webMarketerPO.getWebMarketerID(), "000001");
+			assertEquals(webMarketerPO.getPassword(), "123456");
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

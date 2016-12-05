@@ -21,7 +21,7 @@ public interface HotelWorkerDataHelper {
 	 * @param hotelWorkerPO hotelWorkerInfo载体
 	 * @return ResultMessage hotelWorkerPO是否成功添加到数据库中
 	 */
-	ResultMessage add(HotelWorkerPO hotelWorkerPO);
+	HotelWorkerPO add(HotelWorkerPO hotelWorkerPO);
 	
 	/**
 	 * @author 董金玉

@@ -5,6 +5,7 @@ import businessLogicService.logInBLService.LogInBLService;
 import utilities.ResultMessage;
 import utilities.UserType;
 import vo.GuestVO;
+import vo.UserVO;
 
 /**
  * 
@@ -54,7 +55,7 @@ public class LogIn implements LogInBLService{
 	 *           从注册界面层传下来的guestVO
 	 * @return 客户是否成功注册
 	 */
-	public ResultMessage guestSignUp(final GuestVO guestVO) {
-		return user.add(guestVO);
+	public GuestVO guestSignUp(UserVO guestVO) {
+		return (GuestVO)user.add(guestVO);
 	}
 }

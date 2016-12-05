@@ -95,13 +95,13 @@ public class GuestDataServiceImpl extends UnicastRemoteObject implements GuestDa
 	 * @param newGuestPO 需要添加的guestInfo载体
 	 * @return List<CreditPO> 指定客户ID的所有creditInfo载体
 	 */
-	public ResultMessage add(GuestPO newGuestPO) throws RemoteException {
+	public GuestPO add(GuestPO newGuestPO) throws RemoteException {
 		
-		if(newGuestPO==null){return ResultMessage.FAIL;} //传入的参数为空，返回失败
+		if(newGuestPO==null){return null;} //传入的参数为空，返回失败
 		
 		GuestPO guestPO = this.guestHelper.getSingle(newGuestPO.getGuestID());
 		//从数据库中得到guestPO，若不存在则为空
-		if(guestPO!=null){return ResultMessage.FAIL;} //根据ID索引找到对应ID指定项，则不能添加
+		if(guestPO!=null){return null;} //根据ID索引找到对应ID指定项，则不能添加
 		
 		return this.guestHelper.add(newGuestPO);
 	}

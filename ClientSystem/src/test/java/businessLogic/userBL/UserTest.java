@@ -35,15 +35,10 @@ public class UserTest {
 		//test the method add
 		User user= new User();
 		
-		UserVO guestVO = new GuestVO("1234567890", LocalDate.of(1995, 1, 1), "school", "zhangsan", "xiaosan",
-				"000000", "13523456789",100);
-		UserVO hotelWorkerVO = new HotelWorkerVO("00001111", "123456","school");
-		UserVO webMarketerVO = new WebMarketerVO("000001", "123456");
-		UserVO webManagerVO = new WebManagerVO("0001", "123456");
-		assertEquals(user.add(guestVO),ResultMessage.USER_ADD_FAILURE);
-		assertEquals(user.add(hotelWorkerVO),ResultMessage.USER_ADD_FAILURE);
-		assertEquals(user.add(webMarketerVO),ResultMessage.USER_ADD_FAILURE);
-		assertEquals(user.add(webManagerVO),ResultMessage.USER_ADD_FAILURE);
+		LocalDate birthday = LocalDate.of(1995, 1, 1);
+		GuestVO guestVO = (GuestVO)user.add(new GuestVO("1234567890", birthday, "school", "zhangsan", "xiaosan",
+				"000000", "13523456789",100));
+		assertEquals(guestVO,null);
 	}
 
 	@Test
