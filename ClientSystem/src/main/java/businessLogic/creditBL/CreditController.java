@@ -11,14 +11,15 @@ import vo.MarketVO;
 /**
  * 
  * @author 61990
- *
+ * @lastChangedBy: Harvey Gong
+ * @updateTime 2016/12/5
  */
 public final class CreditController implements CreditBLService {
 
 	
 	private Credit credit;
 	
-	private static CreditController creditController;
+	private static CreditController creditController = new CreditController();;
 
 	/**
 	 * @author 61990
@@ -35,12 +36,9 @@ public final class CreditController implements CreditBLService {
 	 * @author 61990
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/11/27
-	 * @return login controller的实例，单例化
+	 * @return creditController的实例，单例化
 	 */
 	public static CreditController getInstance() {
-		if (creditController == null) {
-			creditController = new CreditController();
-		}
 		return creditController;
 	}
 	

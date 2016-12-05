@@ -4,9 +4,8 @@ import java.util.List;
 
 import businessLogic.hotelBL.hotel.Hotel;
 import businessLogic.userBL.userService.Guest;
-import businessLogic.userBL.userService.HotelWorker;
-import businessLogic.userBL.userService.WebManager;
-import businessLogic.userBL.userService.WebMarketer;
+import businessLogic.userBL.userService.UserFactory;
+import businessLogic.userBL.userService.UserLengthFactory;
 import businessLogic.userBL.userService.service.CreditService;
 import businessLogic.userBL.userService.service.UserService;
 import utilities.ResultMessage;
@@ -18,78 +17,78 @@ import vo.UserVO;
 /**
  * 
  * @author Byron Dong
- * lastChangedBy Byron Dong
- * updateTime 2016/11/27
+ * lastChangedBy Harvey Gong
+ * updateTime 2016/12/5
  *
  */
 public class User {
 
 	private UserService user;//该变量在方法中实时修改
 	private CreditService guest;//在构造中new一次
+	
+	private UserFactory factory; //根据用户类型创建用户的工厂
+	private UserLengthFactory lengthFactory; //根据用户id的长度创建用户的工厂
 
 	/**
 	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/27
+	 * @lastChangedBy Harvey Gong
+	 * @updateTime 2016/12/5
 	 * 构造函数，根据成员变量注释初始化成员变量
 	 */
 	public User() {
+		factory = new UserFactory();
+		lengthFactory = new UserLengthFactory();
 		guest = new Guest();
 	}
 
 	/**
 	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/27
+	 * @lastChangedBy Harvey Gong
+	 * @updateTime 2016/12/5
 	 * @param userVO 从客户界面层传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加用户信息
 	 */
 	public ResultMessage add(UserVO newUserVO) {
 
-		ResultMessage msg = ResultMessage.USER_INEXISTENCE;
-		this.initial(newUserVO.userID.length());
-		
-		if(user==null){return msg;}
-
-		msg = user.add(newUserVO);
-
-		return msg;
+		user = lengthFactory.createUser(newUserVO.userID.length());
+		if(isExistence(user))
+		{
+			return user.add(newUserVO);
+		}
+		return ResultMessage.USER_UNEXISTENCE;
 	}
 
 	/**
 	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/27
+	 * @lastChangedBy Harvey Gong
+	 * @updateTime 2016/12/5
 	 * @param userVO 从客户界面层传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功修改用户信息
 	 */
 	public ResultMessage modify(UserVO userVO) {
 
-		ResultMessage msg = ResultMessage.USER_INEXISTENCE;
-		this.initial(userVO.userID.length());
-		
-		if(user==null){return msg;}
-
-		msg = user.modify(userVO);
-
-		return msg;
+		user = lengthFactory.createUser(userVO.userID.length());
+		if(isExistence(user)){
+			return user.add(userVO);
+		}
+		return ResultMessage.USER_UNEXISTENCE;
 	}
 
 	/**
 	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
+	 * @lastChangedBy Harvey Gong
 	 * @updateTime 2016/11/27
 	 * @param userVO，userType 从客户界面层传下来的userInfo载体和指定用户类型
 	 * @return UserVO 单一userInfo载体
 	 */
 	public UserVO getSingle(String userID, UserType userType) {
 
-		this.initial(userID.length());
+		user = lengthFactory.createUser(userID.length());
 		
-		if(user==null){return null;} //没有对应ID长度的用户，返回null
-
-		return user.getSingle(userID);
-
+		if(isExistence(user)){
+			return user.getSingle(userID);
+		}
+		return null;
 	}
 
 	/**
@@ -102,13 +101,12 @@ public class User {
 	public ResultMessage addHotel(HotelVO newHotelVO, String hotelID) {
 
 		Hotel hotel = new Hotel(hotelID);
-		ResultMessage msg = ResultMessage.HOTEL_EXIST;
 
 		if (hotel.getHotelInfo(hotelID) == null) {
-			msg = hotel.addHotelInfo(newHotelVO);
+			return hotel.addHotelInfo(newHotelVO);
 		}
 
-		return msg;
+		return ResultMessage.HOTEL_EXIST;
 	}
 
 	/**
@@ -131,7 +129,7 @@ public class User {
 	 */
 	public List<UserVO> getAll(UserType userType) {
 
-		this.initial(userType);
+		user = factory.createUser(userType);
 
 		return user.getAll();
 
@@ -162,66 +160,28 @@ public class User {
 	 */
 	public String getLogInInfo(String userID, UserType userType) {
 		
-		this.initial(userID.length());
+		user = lengthFactory.createUser(userID.length());
 		
-		if(user==null){return null;} //如果对应ID长度不在范围，返回null
-		
-		return user.getLogInInfo(userID);
+		if(isExistence(user))
+		{
+			return user.getLogInInfo(userID); 
+		}
+		return null;
 	}
-
+	
 	/**
-	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/27
-	 * @param  IDLength 从本类传下来的指定用户ID长度
-	 * @return  根据ID长度初始化user对象
+	 * @Description:判断user是否被初始化成功
+	 * @param user
+	 * @return
+	 * boolean
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月5日 上午11:17:45
 	 */
-	private void initial(int IDLength) {
-		if (Guest.isGuest(IDLength)) {
-			user = new Guest();
-			return;
+	private boolean isExistence(UserService user){
+		if(user == null){
+			return false;
 		}
-
-		if (HotelWorker.isHotelWorker(IDLength)) {
-			user = new HotelWorker();
-			return;
-		}
-
-		if (WebMarketer.isWebMarketer(IDLength)) {
-			user = new WebMarketer();
-			return;
-		}
-
-		if (WebManager.isWebManager(IDLength)) {
-			user = new WebManager();
-		}
-	}
-
-	/**
-	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/27
-	 * @param  userType 从本类传下来的指定用户类型
-	 * @return  根据用户类型初始化user对象
-	 */
-	private void initial(UserType userType) {
-		if (Guest.isGuest(userType)) {
-			user = new Guest();
-			return;
-		}
-
-		if (HotelWorker.isHotelWorker(userType)) {
-			user = new HotelWorker();
-			return;
-		}
-
-		if (WebMarketer.isWebMarketer(userType)) {
-			user = new WebMarketer();
-			return;
-		}
-
-		if (WebManager.isWebManager(userType)) {
-			user = new WebManager();
-		}
+		return true;
 	}
 }

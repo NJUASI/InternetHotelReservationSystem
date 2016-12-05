@@ -21,323 +21,6 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.guestUI.controller.OrderCheckController">
    <children>
-      <Pane fx:id="orderCheck" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
-         <children>
-            <TabPane cache="true" layoutY="60.0" prefHeight="541.0" prefWidth="895.0" tabClosingPolicy="UNAVAILABLE">
-               <tabs>
-                  <Tab text="已执行订单">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="512.0" prefWidth="895.0">
-                           <children>
-                              <Pane layoutY="42.0" prefHeight="462.0" prefWidth="895.0">
-                                 <children>
-                                    <Pane prefHeight="92.0" prefWidth="895.0">
-                                       <children>
-                                          <Label layoutX="127.0" layoutY="39.0" />
-                                          <Label layoutX="88.0" layoutY="39.0" />
-                                          <Label layoutX="648.0" layoutY="61.0" text="价格：" />
-                                          <Label layoutX="700.0" layoutY="61.0" text="610" />
-                                          <Button layoutX="753.0" layoutY="7.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="33.0" prefWidth="72.0" text="未执行" />
-                                          <Separator layoutY="92.0" prefHeight="0.0" prefWidth="895.0" />
-                                          <GridPane layoutX="66.0" layoutY="18.0" prefHeight="46.0" prefWidth="405.0">
-                                             <children>
-                                                <Label text="酒店：" />
-                                                <Label text="地址：" GridPane.rowIndex="1" />
-                                                <Label text="新街口三里步汉庭" GridPane.columnIndex="1" />
-                                                <Label text="南京市玄武区新街口三里巷" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                             </children>
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="70.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="335.0" minWidth="10.0" prefWidth="335.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <GridPane layoutX="403.0" layoutY="16.0" prefHeight="46.0" prefWidth="274.0">
-                                             <children>
-                                                <Label text="最晚执行时间：" />
-                                                <Label text="离店时间：" GridPane.rowIndex="1" />
-                                                <Label text="2016-10-2 14：00" GridPane.columnIndex="1" />
-                                                <Label GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="2016-10-2 14：00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                             </children>
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="127.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="147.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <Separator prefHeight="0.0" prefWidth="895.0" />
-                                       </children>
-                                    </Pane>
-                                    <Pane layoutY="92.0" prefHeight="92.0" prefWidth="895.0">
-                                       <children>
-                                          <Label layoutX="127.0" layoutY="39.0" />
-                                          <Label layoutX="88.0" layoutY="39.0" />
-                                          <Label layoutX="648.0" layoutY="61.0" text="价格：" />
-                                          <Label layoutX="700.0" layoutY="61.0" text="610" />
-                                          <Button layoutX="753.0" layoutY="7.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="33.0" prefWidth="72.0" text="未执行" />
-                                          <Separator layoutY="92.0" prefHeight="0.0" prefWidth="895.0" />
-                                          <Button layoutX="749.0" layoutY="49.0" mnemonicParsing="false" text="查看详情" />
-                                          <GridPane layoutX="66.0" layoutY="18.0" prefHeight="46.0" prefWidth="405.0">
-                                             <children>
-                                                <Label text="酒店：" />
-                                                <Label text="地址：" GridPane.rowIndex="1" />
-                                                <Label text="新街口三里步汉庭" GridPane.columnIndex="1" />
-                                                <Label text="南京市玄武区新街口三里巷" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                             </children>
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="70.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="335.0" minWidth="10.0" prefWidth="335.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <GridPane layoutX="403.0" layoutY="16.0" prefHeight="46.0" prefWidth="274.0">
-                                             <children>
-                                                <Label text="最晚执行时间：" />
-                                                <Label text="离店时间：" GridPane.rowIndex="1" />
-                                                <Label text="2016-10-2 14：00" GridPane.columnIndex="1" />
-                                                <Label GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="2016-10-2 14：00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                             </children>
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="127.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="147.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <Separator prefHeight="0.0" prefWidth="895.0" />
-                                       </children>
-                                    </Pane>
-                                    <Pane layoutY="184.0" prefHeight="92.0" prefWidth="895.0">
-                                       <children>
-                                          <Label layoutX="127.0" layoutY="39.0" />
-                                          <Label layoutX="88.0" layoutY="39.0" />
-                                          <Label layoutX="648.0" layoutY="61.0" text="价格：" />
-                                          <Label layoutX="700.0" layoutY="61.0" text="610" />
-                                          <Button layoutX="753.0" layoutY="7.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="33.0" prefWidth="72.0" text="未执行" />
-                                          <Separator layoutY="92.0" prefHeight="0.0" prefWidth="895.0" />
-                                          <Button layoutX="749.0" layoutY="49.0" mnemonicParsing="false" text="查看详情" />
-                                          <GridPane layoutX="66.0" layoutY="18.0" prefHeight="46.0" prefWidth="405.0">
-                                             <children>
-                                                <Label text="酒店：" />
-                                                <Label text="地址：" GridPane.rowIndex="1" />
-                                                <Label text="新街口三里步汉庭" GridPane.columnIndex="1" />
-                                                <Label text="南京市玄武区新街口三里巷" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                             </children>
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="70.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="335.0" minWidth="10.0" prefWidth="335.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <GridPane layoutX="403.0" layoutY="16.0" prefHeight="46.0" prefWidth="274.0">
-                                             <children>
-                                                <Label text="最晚执行时间：" />
-                                                <Label text="离店时间：" GridPane.rowIndex="1" />
-                                                <Label text="2016-10-2 14：00" GridPane.columnIndex="1" />
-                                                <Label GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="2016-10-2 14：00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                             </children>
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="127.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="147.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <Separator prefHeight="0.0" prefWidth="895.0" />
-                                       </children>
-                                    </Pane>
-                                    <Pane layoutY="276.0" prefHeight="92.0" prefWidth="895.0">
-                                       <children>
-                                          <Label layoutX="127.0" layoutY="39.0" />
-                                          <Label layoutX="88.0" layoutY="39.0" />
-                                          <Label layoutX="648.0" layoutY="61.0" text="价格：" />
-                                          <Label layoutX="700.0" layoutY="61.0" text="610" />
-                                          <Button layoutX="753.0" layoutY="7.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="33.0" prefWidth="72.0" text="未执行" />
-                                          <Separator layoutY="92.0" prefHeight="0.0" prefWidth="895.0" />
-                                          <Button layoutX="749.0" layoutY="49.0" mnemonicParsing="false" text="查看详情" />
-                                          <GridPane layoutX="66.0" layoutY="18.0" prefHeight="46.0" prefWidth="405.0">
-                                             <children>
-                                                <Label text="酒店：" />
-                                                <Label text="地址：" GridPane.rowIndex="1" />
-                                                <Label text="新街口三里步汉庭" GridPane.columnIndex="1" />
-                                                <Label text="南京市玄武区新街口三里巷" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                             </children>
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="70.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="335.0" minWidth="10.0" prefWidth="335.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <GridPane layoutX="403.0" layoutY="16.0" prefHeight="46.0" prefWidth="274.0">
-                                             <children>
-                                                <Label text="最晚执行时间：" />
-                                                <Label text="离店时间：" GridPane.rowIndex="1" />
-                                                <Label text="2016-10-2 14：00" GridPane.columnIndex="1" />
-                                                <Label GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="2016-10-2 14：00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                             </children>
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="127.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="147.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <Separator prefHeight="0.0" prefWidth="895.0" />
-                                       </children>
-                                    </Pane>
-                                    <Pane layoutY="368.0" prefHeight="92.0" prefWidth="895.0">
-                                       <children>
-                                          <Label layoutX="127.0" layoutY="39.0" />
-                                          <Label layoutX="88.0" layoutY="39.0" />
-                                          <Label layoutX="648.0" layoutY="61.0" text="价格：" />
-                                          <Label layoutX="700.0" layoutY="61.0" text="610" />
-                                          <Button layoutX="753.0" layoutY="7.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="33.0" prefWidth="72.0" text="未执行" />
-                                          <Separator layoutY="92.0" prefHeight="0.0" prefWidth="895.0" />
-                                          <Button layoutX="749.0" layoutY="49.0" mnemonicParsing="false" text="查看详情" />
-                                          <GridPane layoutX="66.0" layoutY="18.0" prefHeight="46.0" prefWidth="405.0">
-                                             <children>
-                                                <Label text="酒店：" />
-                                                <Label text="地址：" GridPane.rowIndex="1" />
-                                                <Label text="新街口三里步汉庭" GridPane.columnIndex="1" />
-                                                <Label text="南京市玄武区新街口三里巷" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                             </children>
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="70.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="335.0" minWidth="10.0" prefWidth="335.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <GridPane layoutX="403.0" layoutY="16.0" prefHeight="46.0" prefWidth="274.0">
-                                             <children>
-                                                <Label text="最晚执行时间：" />
-                                                <Label text="离店时间：" GridPane.rowIndex="1" />
-                                                <Label text="2016-10-2 14：00" GridPane.columnIndex="1" />
-                                                <Label GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="2016-10-2 14：00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                             </children>
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="127.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="147.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                          </GridPane>
-                                          <Separator prefHeight="0.0" prefWidth="895.0" />
-                                       </children>
-                                    </Pane>
-                                 </children>
-                              </Pane>
-                              <Button layoutX="712.0" layoutY="6.0" mnemonicParsing="false" text="上一页" />
-                              <Button layoutX="807.0" layoutY="6.0" mnemonicParsing="false" text="下一页" />
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-                  <Tab text="未执行订单">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <ScrollPane hbarPolicy="NEVER" prefHeight="514.0" prefWidth="895.0" vbarPolicy="ALWAYS">
-                                 <content>
-                                    <Pane prefWidth="979.0" />
-                                 </content>
-                              </ScrollPane>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-                  <Tab text="已撤销订单">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <ScrollPane hbarPolicy="NEVER" prefHeight="514.0" prefWidth="895.0" vbarPolicy="ALWAYS">
-                                 <content>
-                                    <Pane prefWidth="979.0" />
-                                 </content>
-                              </ScrollPane>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-                  <Tab text="未评论订单">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <ScrollPane hbarPolicy="NEVER" prefHeight="514.0" prefWidth="895.0" vbarPolicy="ALWAYS">
-                                 <content>
-                                    <Pane prefWidth="979.0" />
-                                 </content>
-                              </ScrollPane>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-                  <Tab text="已评论订单">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <ScrollPane hbarPolicy="NEVER" prefHeight="514.0" prefWidth="895.0" vbarPolicy="ALWAYS">
-                                 <content>
-                                    <Pane prefWidth="979.0" />
-                                 </content>
-                              </ScrollPane>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-                  <Tab text="异常订单">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <ScrollPane hbarPolicy="NEVER" prefHeight="514.0" prefWidth="895.0" vbarPolicy="ALWAYS">
-                                 <content>
-                                    <Pane prefWidth="979.0" />
-                                 </content>
-                              </ScrollPane>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-               </tabs>
-            </TabPane>
-            <Label alignment="CENTER" layoutX="401.0" layoutY="15.0" prefHeight="39.0" prefWidth="90.0" text="订单列表">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
-            <Button layoutX="745.0" layoutY="24.0" mnemonicParsing="false" onAction="#orderDetail" text="查看详情" />
-         </children>
-      </Pane>
       <Pane fx:id="orderDetail" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" visible="false">
          <children>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="386.0" prefWidth="454.0">
@@ -353,7 +36,7 @@
                                           <Label layoutX="567.0" layoutY="131.0" text="价格：" />
                                           <Label fx:id="detail_price" layoutX="616.0" layoutY="131.0" text="610" />
                                           <Button fx:id="detail_state" alignment="CENTER" focusTraversable="false" layoutX="529.0" layoutY="57.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="54.0" prefWidth="167.0" text="未执行" />
-                                          <GridPane layoutX="448.0" layoutY="234.0" prefHeight="118.0" prefWidth="328.0">
+                                          <GridPane layoutX="478.0" layoutY="235.0" prefHeight="118.0" prefWidth="328.0">
                                              <children>
                                                 <Label text="最晚执行时间：" GridPane.rowIndex="1" />
                                                 <Label fx:id="detail_expectTime" text="2016-10-2 14：00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -468,5 +151,33 @@
             </AnchorPane>
          </children>
       </Pane>
+      <AnchorPane fx:id="orderCheck" prefHeight="601.0" prefWidth="895.0">
+         <children>
+            <Button focusTraversable="false" layoutX="786.0" layoutY="70.0" mnemonicParsing="false" onAction="#orderDetail" text="查看详情" />
+            <Separator layoutY="60.0" prefHeight="3.0" prefWidth="895.0" />
+            <Button layoutX="576.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchAbnormalOrder" text="异常订单" />
+            <TableView fx:id="table" focusTraversable="false" layoutY="110.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="491.0" prefWidth="895.0" tableMenuButtonVisible="true">
+               <columns>
+                  <TableColumn fx:id="orderIDColumn" prefWidth="113.0" text="订单编号" />
+                  <TableColumn fx:id="hotelNameColumn" prefWidth="122.0" text="酒店名" />
+                  <TableColumn fx:id="addressColumn" prefWidth="170.0" text="地址" />
+                  <TableColumn fx:id="checkInTimeColumn" prefWidth="153.0" text="预计入住时间" />
+                  <TableColumn fx:id="checkOutTimeColumn" prefWidth="150.0" text="预计离开时间" />
+                  <TableColumn fx:id="priceColumn" prefWidth="83.0" resizable="false" text="价格" />
+                  <TableColumn fx:id="stateColumn" prefWidth="98.0" text="订单状态" />
+               </columns>
+            </TableView>
+            <Label alignment="CENTER" layoutX="403.0" layoutY="14.0" prefHeight="39.0" prefWidth="90.0" text="订单列表">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Button layoutX="361.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchUnexecutedOrder" text="未执行订单" />
+            <Button layoutX="252.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchUncommentedOrder" text="未评论订单" />
+            <Button layoutX="469.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchCancelledOrder" text="已撤销订单" />
+            <Button layoutX="145.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchCommentedOrder" text="已评论订单" />
+            <Button layoutX="34.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchExecutedOrder" text="已执行订单" />
+         </children>
+      </AnchorPane>
    </children>
 </StackPane>

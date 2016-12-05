@@ -9,7 +9,6 @@ import dataService.hotelWorkerDataService.HotelWorkerDataService;
 import dataService.hotelWorkerDataService.HotelWorkerDataService_Stub;
 import po.HotelWorkerPO;
 import utilities.ResultMessage;
-import utilities.UserType;
 import vo.HotelWorkerVO;
 import vo.UserVO;
 
@@ -23,9 +22,7 @@ import vo.UserVO;
 public class HotelWorker implements UserService{
 
 	
-	private static int IDLength = 8; // 酒店工作人员的ID长度为8
-
-	private static UserType type = UserType.HOTEL_WORKER;
+	static int IDLength = 8; // 酒店工作人员的ID长度为8
 
 	private HotelWorkerDataService hotelWorkerDataService;
 
@@ -145,21 +142,6 @@ public class HotelWorker implements UserService{
 	 */
 	public static boolean isHotelWorker(int length) {
 		if (HotelWorker.IDLength == length) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/28
-	 * @param  type 用户类型
-	 * @return boolean 判断指定用户是否为酒店工作人员类型
-	 */
-	public static boolean isHotelWorker(UserType type) {
-		if (HotelWorker.type == type) {
 			return true;
 		} else {
 			return false;

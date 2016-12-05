@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import businessLogic.hotelBL.HotelInfoOperation;
 import businessLogic.hotelBL.hotel.Hotel;
-import businessLogic.hotelBL.hotel.HotelInfoGetAndUpdate;
 import businessLogic.promotionBL.DiscountInSpan;
 import businessLogic.promotionBL.discountCalculation.DiscountCalculator;
 import dataService.orderDataService.OrderDataService;
@@ -39,7 +39,7 @@ public class Order {
 	
 	private OrderDataService orderDataService;
 	
-	private HotelInfoGetAndUpdate hotelInterface;
+	private HotelInfoOperation hotelInterface;
 	private DiscountInSpan discountCalculator;
 	
 	/**
