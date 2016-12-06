@@ -39,6 +39,9 @@ public class SearchCriteriaVO {
 	// 房间类型列表
 	public List<RoomType> roomTypes;
 
+	// 剩余房间数量
+	public int remainRoomNum;
+
 	// TODO 有空房期间怎么做
 	
 	public SearchCriteriaVO() {
@@ -46,7 +49,7 @@ public class SearchCriteriaVO {
 	}
 
 	public SearchCriteriaVO(String keyHotelName, boolean bookedOnly, int minLevel, int maxLevel, double minPrice,
-			double maxPrice, double minScore, double maxScore, List<RoomType> roomTypes) {
+			double maxPrice, double minScore, double maxScore, List<RoomType> roomTypes, int remainRoomNum) {
 		super();
 		this.keyHotelName = keyHotelName;
 		this.bookedOnly = bookedOnly;
@@ -57,6 +60,7 @@ public class SearchCriteriaVO {
 		this.minScore = minScore;
 		this.maxScore = maxScore;
 		this.roomTypes = roomTypes;
+		this.remainRoomNum = remainRoomNum;
 	}
 	
 	

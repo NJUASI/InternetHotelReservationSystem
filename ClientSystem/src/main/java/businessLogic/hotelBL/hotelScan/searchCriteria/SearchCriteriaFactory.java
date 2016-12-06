@@ -4,6 +4,8 @@ import businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl.HotelNa
 import businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl.LevelSpanCriteria;
 import businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl.NullCriteria;
 import businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl.OriginPriceSpanCriteria;
+import businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl.RemainRoomNumCriteria;
+import businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl.RoomTypeCriteria;
 import businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl.ScoreSpanCriteria;
 import utilities.SearchCriteriaType;
 import vo.SearchCriteriaVO;
@@ -25,7 +27,10 @@ public class SearchCriteriaFactory {
 			return new ScoreSpanCriteria(vo.minScore, vo.maxPrice);
 		}
 		else if(searchCriteriaType == SearchCriteriaType.ROOM_TYPE){
-			//TODO 返回根据房间类型搜索的类，构造函数需要改
+			return new RoomTypeCriteria(vo.roomTypes);
+		}
+		else if(searchCriteriaType == SearchCriteriaType.REMAIN_ROOM_NUM){
+			return new RemainRoomNumCriteria(vo.remainRoomNum);
 		}
 		return new NullCriteria();
 	}

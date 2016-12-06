@@ -1,9 +1,10 @@
 package businessLogic.hotelBL;
 
-import java.util.List;
+import java.util.Iterator;
 
 import utilities.Address;
 import utilities.ResultMessage;
+import utilities.RoomType;
 
 /**
  * @Description:对外提供的更新和获取酒店相关信息的接口
@@ -43,6 +44,17 @@ public interface HotelInfoOperation {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月4日 下午11:08:42
 	 */
-	public List<String> getRoomType();
+	public Iterator<RoomType> getRoomType();
+	
+	/**
+	 * @Description:根据酒店id获取该酒店剩余的房间总数量
+	 * @param hotelID
+	 * @return
+	 * int
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月6日 下午5:32:46
+	 */
+	public int getRemainRoomNum(String hotelID);
 	
 }

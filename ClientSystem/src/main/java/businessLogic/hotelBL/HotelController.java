@@ -3,8 +3,10 @@ package businessLogic.hotelBL;
 import java.util.List;
 
 import businessLogic.hotelBL.hotel.Hotel;
+import businessLogic.hotelBL.hotel.RMILinkFailedException;
 import businessLogic.hotelBL.hotelScan.HotelScan;
 import businessLogicService.hotelBLService.HotelBLService;
+import exception.operationFailedException.GetFailedException;
 import utilities.ResultMessage;
 import utilities.SearchCriteriaType;
 import utilities.SortStrategy;
@@ -30,17 +32,16 @@ public class HotelController implements HotelBLService {
 	}
 	
 	/**
-	 * @Description:顾客或网站管理人员浏览酒店时，使用此构造方法
-	 * @param guestID
+	 * @Description:当酒店工作人员登录时调用此方法
+	 * @param hotelID
+	 * void
 	 * @author: Harvey Gong
-	 * lastChangedBy: Harvey Gong
-	 * @time:2016年12月4日 下午10:11:57
+	 * @throws GetFailedException 
+	 * @throws RMILinkFailedException 
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月6日 下午5:08:48
 	 */
-	private HotelController(String guestID) {
-		this.guestID = guestID;
-	}
-	
-	public void initHotel(String hotelID){
+	public void initHotel(String hotelID) throws RMILinkFailedException, GetFailedException{
 		hotel = new Hotel(hotelID);
 	}
 	
@@ -48,7 +49,7 @@ public class HotelController implements HotelBLService {
 	 * 当用户或者网站管理人员登陆时，则调用此初始化方法
 	 * @param addressVO
 	 */
-	public void inithotelsScan(){
+	public void initHotelsScan(){
 		hotelScan = new HotelScan(guestID);
 	}
 
