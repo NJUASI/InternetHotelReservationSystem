@@ -20,14 +20,14 @@ import vo.SearchCriteriaVO;
  * @author:Harvey Gong
  * @time:2016年11月29日 下午6:43:08
  */
-public class HotelController implements HotelBLService {
+public class HotelBLController implements HotelBLService {
 
-	private static HotelController hotelController = new HotelController();
+	private static HotelBLController hotelController = new HotelBLController();
 	private Hotel hotel;
 	private HotelScan hotelScan;
 	private String guestID;
 	
-	private HotelController() {
+	private HotelBLController() {
 		
 	}
 	
@@ -53,7 +53,7 @@ public class HotelController implements HotelBLService {
 		hotelScan = new HotelScan(guestID);
 	}
 
-	public static HotelController getInstance(){
+	public static HotelBLController getInstance(){
 		return hotelController;
 	}
 

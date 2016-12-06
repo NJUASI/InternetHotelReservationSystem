@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.Main;
+import utilities.IDReserve;
 	
 public class LogInViewController {
 	public static String userID;
@@ -75,7 +76,7 @@ public class LogInViewController {
 	protected void logIn() {
 //		 System.out.println(ID.getText()+" "+password.getText());
 		try {
-			Main.userID=ID.getText();
+			IDReserve.getInstance().setUserID(ID.getText());
 			Parent root = null;
 			if (ID.getText().length() == 1) {
 				root = FXMLLoader.load(getClass().getResource("/presentation/GuestUI/view/Guest.fxml"));
