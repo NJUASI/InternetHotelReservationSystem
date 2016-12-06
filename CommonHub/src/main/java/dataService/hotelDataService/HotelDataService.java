@@ -18,10 +18,6 @@ public interface HotelDataService extends Remote{
 	
 	public ResultMessage addHotelInfo(HotelPO hotelPO) throws RemoteException;
 
-
-	
-	
-	
 	/**
 	 * @Description:提供修改roomInfo数据的方法，add、delete、update、get
 	 * @author: Harvey Gong

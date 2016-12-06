@@ -33,7 +33,7 @@ public class Hotel implements HotelInfoOperation{
 	}
 	
 	public Hotel() {
-		// TODO 自动生成的构造函数存根
+		initHotelDataService();
 	}
 
 	private void initHotel() {
@@ -73,7 +73,12 @@ public class Hotel implements HotelInfoOperation{
 	 * @time:2016年12月3日 下午9:44:37
 	 */
 	public HotelVO getHotelInfo(String hotelWorkerID) {
-		return new HotelVO(hotelPO);
+		try {
+			HotelPO hotelPO = hotelDataService.getHotelInfo(hotelID);
+			return new HotelVO(hotelPO);
+		} catch (RemoteException e) {
+			return null;
+		}
 	}
 
 	/**
