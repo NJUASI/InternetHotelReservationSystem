@@ -1,4 +1,4 @@
-package businessLogic.promotionBL.promotions;
+package businessLogic.promotionBL.promotions.promotionTest;
 
 import static org.junit.Assert.*;
 
@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 
+import businessLogic.promotionBL.promotions.HotelFixedPromotion;
 import utilities.PreOrder;
 
 public class HotelFixedPromotionTest {

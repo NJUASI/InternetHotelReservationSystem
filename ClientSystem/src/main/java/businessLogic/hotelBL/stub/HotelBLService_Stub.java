@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import businessLogic.hotelBL.hotelScan.SearchCriteria;
+import businessLogic.hotelBL.hotelScan.searchCriteria.SearchCriteria;
 import businessLogicService.hotelBLService.HotelBLService;
 import utilities.ResultMessage;
+import utilities.SearchCriteriaType;
 import utilities.SortStrategy;
 import vo.CheckInVO;
 import vo.CheckOutVO;
 import vo.HotelEvaluationVO;
 import vo.HotelVO;
 import vo.RoomInfoVO;
+import vo.SearchCriteriaVO;
 
 public class HotelBLService_Stub implements HotelBLService{
 
@@ -83,11 +85,11 @@ public class HotelBLService_Stub implements HotelBLService{
 	}
 	
 	@Override
-	public Iterator<HotelVO> searchHotels(List<SearchCriteria> searchCriteria) {
+	public Iterator<HotelVO> searchHotels(List<SearchCriteriaType> searchCriteriaTypes, SearchCriteriaVO vo) {
 		// TODO 自动生成的方法存根
 		return null;
 	}
-
+	
 	@Override
 	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO, String roomType) {
 		// TODO 自动生成的方法存根
@@ -99,5 +101,6 @@ public class HotelBLService_Stub implements HotelBLService{
 		// TODO 自动生成的方法存根
 		return null;
 	}
+
 
 }

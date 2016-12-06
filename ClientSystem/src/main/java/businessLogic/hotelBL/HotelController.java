@@ -4,12 +4,13 @@ import java.util.List;
 
 import businessLogic.hotelBL.hotel.Hotel;
 import businessLogic.hotelBL.hotelScan.HotelScan;
-import businessLogic.hotelBL.hotelScan.SearchCriteria;
 import businessLogicService.hotelBLService.HotelBLService;
 import utilities.ResultMessage;
+import utilities.SearchCriteriaType;
 import utilities.SortStrategy;
 import vo.HotelVO;
 import vo.RoomInfoVO;
+import vo.SearchCriteriaVO;
 
 
 /**
@@ -86,8 +87,8 @@ public class HotelController implements HotelBLService {
 		return hotelScan.sortHotels(sortStrategy);
 	}
 	
-	public Iterator<HotelVO> searchHotels(List<SearchCriteria> searchCriteria) {
-		return hotelScan.searchHotels(searchCriteria);
+	public Iterator<HotelVO> searchHotels(List<SearchCriteriaType> searchCriteriaTypes,SearchCriteriaVO vo) {
+		return hotelScan.searchHotels(searchCriteriaTypes,vo);
 	}
 
 }

@@ -1,8 +1,8 @@
-package businessLogic.hotelBL.hotelScan.searchCriteria;
+package businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl;
 
 import java.util.List;
 
-import businessLogic.hotelBL.hotelScan.SearchCriteria;
+import businessLogic.hotelBL.hotelScan.searchCriteria.SearchCriteria;
 import vo.HotelVO;
 
 public class OriginPriceSpanCriteria implements SearchCriteria {
@@ -10,9 +10,9 @@ public class OriginPriceSpanCriteria implements SearchCriteria {
 	double minPrice;
 	double maxPrice;
 	
-	public OriginPriceSpanCriteria(int minPrice,int maxPrice) {
-		this.minPrice = minPrice;
-		this.maxPrice = maxPrice;
+	public OriginPriceSpanCriteria(double minPrice2,double maxPrice2) {
+		this.minPrice = minPrice2;
+		this.maxPrice = maxPrice2;
 	}
 	
 	

@@ -2,6 +2,7 @@ package businessLogic.hotelBL;
 
 
 import businessLogic.hotelBL.hotel.Hotel;
+import utilities.Address;
 import utilities.ResultMessage;
 import vo.HotelVO;
 
@@ -20,10 +21,12 @@ public class MockHotel extends Hotel {
 	public double getLowestPrice() {
 		return 100;
 	}
-	
-	
 
 	public ResultMessage scoreUpdate(double score) {
 		return ResultMessage.HOTEL_SCORE_UPDATE_SUCCESS;
+	}
+	
+	public Address getHotelAddress(String hotelID){
+		return new Address("南京","仙林");
 	}
 }

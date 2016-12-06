@@ -96,7 +96,7 @@ public class OrderDataHelperImpl_Stub implements OrderDataHelper {
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
 
 		final OrderState orderState = OrderState.EXECUTED;
-		final RoomType roomType = RoomType.AMBASSADOR;
+		final RoomType roomType = RoomType.商务套房;
 		
 		
 		return new OrderPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
@@ -120,7 +120,7 @@ public class OrderDataHelperImpl_Stub implements OrderDataHelper {
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
 
 		final OrderState orderState = OrderState.EXECUTED;
-		final RoomType roomType = RoomType.AMBASSADOR;
+		final RoomType roomType = RoomType.商务套房;
 		
 		
 		list.add(new OrderPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
@@ -148,7 +148,7 @@ public class OrderDataHelperImpl_Stub implements OrderDataHelper {
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
 
 		final OrderState orderState = OrderState.EXECUTED;
-		final RoomType roomType = RoomType.AMBASSADOR;
+		final RoomType roomType = RoomType.商务套房;
 		
 		
 		list.add(new OrderPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
@@ -173,7 +173,7 @@ public class OrderDataHelperImpl_Stub implements OrderDataHelper {
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
 
 		final OrderState orderState = OrderState.ABNORMAL;
-		final RoomType roomType = RoomType.AMBASSADOR;
+		final RoomType roomType = RoomType.商务套房;
 		
 		
 		list.add(new OrderPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
@@ -198,7 +198,7 @@ public class OrderDataHelperImpl_Stub implements OrderDataHelper {
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
 
 		final OrderState orderState = OrderState.UNEXECUTED;
-		final RoomType roomType = RoomType.AMBASSADOR;
+		final RoomType roomType = RoomType.商务套房;
 		
 		
 		list.add(new OrderPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,

@@ -13,7 +13,7 @@ import utilities.ResultMessage;
 import vo.RoomInfoVO;
 
 /**
- * @Description:TODO
+ * @Description:对于一个酒店里面客房信息的基本操作，由Hotel委托，Rooms具体实现
  * @author:Harvey Gong
  * @time:2016年12月4日 下午7:17:05
  */
@@ -161,9 +161,7 @@ class Rooms {
 	 */
 	public List<String> getRoomType(){
 		List<String> allRoomType = new ArrayList<String>();
-		for(RoomInfoPO po : roomInfoPOList){
-			allRoomType.add(po.getRoomType());
-		}
+		//TODO
 		return allRoomType;
 	}
 

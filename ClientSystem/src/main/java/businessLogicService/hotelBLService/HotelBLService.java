@@ -3,11 +3,12 @@ package businessLogicService.hotelBLService;
 import java.util.Iterator;
 import java.util.List;
 
-import businessLogic.hotelBL.hotelScan.SearchCriteria;
 import utilities.ResultMessage;
+import utilities.SearchCriteriaType;
 import utilities.SortStrategy;
 import vo.HotelVO;
 import vo.RoomInfoVO;
+import vo.SearchCriteriaVO;
 
 public interface HotelBLService {
 
@@ -25,6 +26,6 @@ public interface HotelBLService {
 	
 	public Iterator<HotelVO> sortHotels(SortStrategy sortStategy);
 	
-	public Iterator<HotelVO> searchHotels(List<SearchCriteria> searchCriteria);
+	public Iterator<HotelVO> searchHotels(List<SearchCriteriaType> searchCriteriaTypes,SearchCriteriaVO vo);
 	
 }

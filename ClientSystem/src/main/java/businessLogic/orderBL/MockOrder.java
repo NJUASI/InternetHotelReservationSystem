@@ -86,7 +86,7 @@ public class MockOrder extends Order {
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
 		
 		final OrderState orderState = OrderState.EXECUTED;
-		final RoomType roomType = RoomType.AMBASSADOR;
+		final RoomType roomType = RoomType.单人间;
 		
 		final OrderVO orderVO = new OrderVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
 				200, 200, createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, 

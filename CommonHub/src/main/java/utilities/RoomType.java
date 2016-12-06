@@ -3,5 +3,5 @@ package utilities;
 import java.io.Serializable;
 
 public enum RoomType implements Serializable{
-	SINGLE_BED, DOUBLE_BED, TRIPLE_BED, DELUXE, PREMIER, AMBASSADOR, IMPERIAL;
+	单人间, 双人间, 三人间, 豪华套房, 总统套房, 商务套房;
 }

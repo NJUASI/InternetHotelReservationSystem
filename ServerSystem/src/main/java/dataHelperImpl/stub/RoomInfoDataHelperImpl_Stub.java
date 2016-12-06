@@ -6,6 +6,7 @@ import java.util.List;
 import dataHelper.RoomDataHelper;
 import po.RoomInfoPO;
 import utilities.ResultMessage;
+import utilities.RoomType;
 
 /**
  * @Description:RoomInfoDataHelperImpl的桩，供测试使用
@@ -18,8 +19,8 @@ public class RoomInfoDataHelperImpl_Stub implements RoomDataHelper{
 	@Override
 	public List<RoomInfoPO> getRoomInfo(String hotelID) {
 		List<RoomInfoPO> list = new ArrayList<RoomInfoPO>();
-		list.add(new RoomInfoPO("12345678", "大床房", 10, 10, 100));
-		list.add(new RoomInfoPO("12345678", "双床房", 10, 10, 150));
+		list.add(new RoomInfoPO("12345678",RoomType.单人间, "大床房", 10, 10, 100));
+		list.add(new RoomInfoPO("12345678",RoomType.双人间, "双床房", 10, 10, 150));
 		return list;
 	}
 

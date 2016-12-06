@@ -64,20 +64,5 @@ public class CreditBLService_Stub implements CreditBLService {
 		// TODO 自动生成的方法存根
 		return null;
 	}
-
-//	String guestID;
-//	int credit;
-//	String time;
-//	String orderID;
-//	int preCredit;
-//	String reason;
-//
-//	public CreditBLService_Stub(String guestID, String time, String orderID, int preCredit,int credit, String reason) {
-//		this.guestID = guestID;
-//		this.credit = credit;
-//		this.time = time;
-//		this.orderID = orderID;
-//		this.preCredit = preCredit;
-//		this.reason = reason;
-//	}
+	
 }
