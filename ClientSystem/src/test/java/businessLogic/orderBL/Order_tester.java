@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 
 import org.junit.Test;
 
-import utilities.OrderState;
 import utilities.ResultMessage;
 import utilities.RoomType;
 import vo.GuestEvaluationVO;

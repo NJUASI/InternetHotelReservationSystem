@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dataHelper.OrderDataHelper;
-import dataHelperImpl.DataFactoryImpl;
+import dataHelperImpl.stub.OrderDataHelperImpl_Stub;
 import dataService.orderDataService.OrderDataService;
 import po.CheckInPO;
 import po.CheckOutPO;
@@ -27,33 +27,12 @@ import utilities.ResultMessage;
  */
 public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDataService {
 
-	private static final long serialVersionUID = 3434060152387200042L;
+	private  OrderDataHelper orderDataHelper;
 	
-	private static OrderDataHelper orderDataHelper;
-	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/11/29
-	 * @throws RemoteException RMI
-	 */
 	public OrderDataServiceImpl() throws RemoteException {
-		if (orderDataHelper == null) {
-			init();
-		}
-	}
-
-	/**
-	 * 
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
-	 * 
-	 * 单例初始化 orderDataHelper
-	 */
-	private void init() {
-		DataFactoryImpl dataFactory = DataFactoryImpl.getInstance();
-		orderDataHelper = dataFactory.getOrderDataHelper();
+		super();
+//		orderDataHelper = new OrderDataServiceImpl();
+		orderDataHelper = new OrderDataHelperImpl_Stub();
 	}
 	
 	/**

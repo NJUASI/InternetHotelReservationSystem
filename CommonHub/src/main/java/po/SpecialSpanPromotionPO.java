@@ -14,6 +14,17 @@ public class SpecialSpanPromotionPO {
 	private LocalDate startDate;
 	private LocalDate endDate;
 	
+	public SpecialSpanPromotionPO(String userID, PromotionType promotionType, String promotionName, double discount,
+			LocalDate startDate, LocalDate endDate) {
+		super();
+		this.userID = userID;
+		this.promotionType = promotionType;
+		this.promotionName = promotionName;
+		this.discount = discount;
+		this.startDate = startDate;
+		this.endDate = endDate;
+	}
+
 	public SpecialSpanPromotionPO() {
 	}
 	

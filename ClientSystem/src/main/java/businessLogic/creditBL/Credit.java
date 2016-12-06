@@ -11,6 +11,7 @@ import businessLogicService.creditBLService.CreditBLService;
 import businessLogicService.creditBLService.CreditDataService_Stub;
 import dataService.creditDataService.CreditDataService;
 import po.CreditPO;
+import rmi.ClientRemoteHelper;
 import utilities.ResultMessage;
 import vo.CreditVO;
 
@@ -34,6 +35,7 @@ public class Credit implements CreditBLService{
 	 */
 	public Credit() {
 		guest = new Guest();
+//		creditDataService = ClientRemoteHelper.getInstance().getCreditDataService();
 		creditDataService = new CreditDataService_Stub();
 	}
 

@@ -8,10 +8,10 @@ import businessLogic.userBL.userService.service.UserService;
 import dataService.webMarketerDataService.WebMarketerDataService;
 import dataService.webMarketerDataService.WebMarketerDataService_Stub;
 import po.WebMarketerPO;
+import rmi.ClientRemoteHelper;
 import utilities.ResultMessage;
-import utilities.UserType;
-import vo.WebMarketerVO;
 import vo.UserVO;
+import vo.WebMarketerVO;
 
 /**
  * 
@@ -22,10 +22,8 @@ import vo.UserVO;
  */
 public class WebMarketer implements UserService{
 
-	
-	static int IDLength = 6; // 营销人员的ID长度为6
 
-	private static UserType type = UserType.WEB_MARKETER;
+	static int IDLength = 6; // 营销人员的ID长度为6
 
 	private WebMarketerDataService webMarketerDataService;
 
@@ -36,6 +34,7 @@ public class WebMarketer implements UserService{
 	 * 构造函数，初始化成员变量
 	 */
 	public WebMarketer() {
+//		webMarketerDataService = ClientRemoteHelper.getInstance().getWebMarketerDataService();
 		try {
 			webMarketerDataService = new WebMarketerDataService_Stub();
 		} catch (RemoteException e) {
@@ -50,14 +49,13 @@ public class WebMarketer implements UserService{
 	 * @param newUserVO 从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加网站营销人员信息
 	 */
-	public UserVO add(UserVO newUserVO) {
+	public WebMarketerVO add(UserVO newUserVO) {
 
-		
-		if(this.hasWebMarketer(newUserVO.userID)){return null;} //存在ID对应项
+		if(hasWebMarketer(newUserVO.userID)){return null;} //存在ID对应项
 
 		try {
 			WebMarketerPO webMarketerPO = this.convert(newUserVO);
-			return this.convert(webMarketerDataService.add(webMarketerPO));
+			return convert(webMarketerDataService.add(webMarketerPO));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -74,7 +72,7 @@ public class WebMarketer implements UserService{
 	public ResultMessage modify(UserVO userVO) {
 
 		ResultMessage msg = ResultMessage.USER_INFO_UPDATE_FAILURE;
-		
+
 		if(!this.hasWebMarketer(userVO.userID)){return msg;} //不存在ID对应项
 
 		try {
@@ -130,7 +128,7 @@ public class WebMarketer implements UserService{
 	public String getLogInInfo(String userID) {
 
 		if(!this.hasWebMarketer(userID)){return null;} //不存在ID对应项,后期细化
-		
+
 		try {
 			return webMarketerDataService.getSingleWebMarketer(userID).getPassword();
 		} catch (RemoteException e) {
@@ -143,25 +141,10 @@ public class WebMarketer implements UserService{
 	 * @author Byron Dong
 	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
-	 * @param  type 用户类型
-	 * @return boolean 判断指定用户是否为网站营销人员类型
-	 */
-	public static boolean isWebMarketer(UserType type) {
-		if (WebMarketer.type == type) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/28
 	 * @param  webMarketerPO 来自本类webMarketerInfo载体
 	 * @return UserVO userInfo载体
 	 */
-	private UserVO convert(WebMarketerPO webMarketerPO) {
+	private WebMarketerVO convert(WebMarketerPO webMarketerPO) {
 		if(webMarketerPO==null){return null;}
 		return new WebMarketerVO(webMarketerPO);
 	}
@@ -192,10 +175,10 @@ public class WebMarketer implements UserService{
 		}
 		return result;
 	}
-	
+
 	private boolean hasWebMarketer(String webMarketerID) {
 		UserVO webMarketerVO = this.getSingle(webMarketerID);
-		
+
 		if(webMarketerVO==null){
 			return false;
 		}

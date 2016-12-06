@@ -7,7 +7,9 @@ import java.util.List;
 import dataHelper.AddressDataHelper;
 import dataHelper.HotelFixedPromotionDataHelper;
 import dataHelper.SpecialSpanPromotionDataHelper;
-import dataHelperImpl.DataFactoryImpl;
+import dataHelperImpl.stub.AddressDataHelperImpl_Stub;
+import dataHelperImpl.stub.HotelFixedPromotionDataHelperImpl_Stub;
+import dataHelperImpl.stub.SpecialSpanPromotionImplDataHelper_Stub;
 import dataService.promotionDataService.PromotionDataService;
 import po.AddressPO;
 import po.HotelFixedPromotionPO;
@@ -18,77 +20,76 @@ public class PromotionDataServiceImpl extends UnicastRemoteObject implements Pro
 
 	private static final long serialVersionUID = 3434060152387200042L;
 	
-	private DataFactoryImpl dataFactory;
-	private HotelFixedPromotionDataHelper hotelFixedPromotion;
-	private SpecialSpanPromotionDataHelper specialSpanPromotion;
-	private AddressDataHelper specialCirclePromotion;
+	private HotelFixedPromotionDataHelper hotelFixedPromotionDataHelper;
+	private SpecialSpanPromotionDataHelper specialSpanPromotionDataHelper;
+	private AddressDataHelper addressDataHelper;
 	
 	public PromotionDataServiceImpl() throws RemoteException {
 		super();
-		dataFactory = DataFactoryImpl.getInstance();
-		hotelFixedPromotion = dataFactory.getHotelFixedPromotionDataHelper();
-		specialSpanPromotion = dataFactory.getSpecialSpanPromotionDataHelper();
-		specialCirclePromotion = dataFactory.getAddressDataHelper();
+//		hotelFixedPromotionDataHelper = new HotelFixedPromotionDataHelperImpl();
+//		specialSpanPromotionDataHelper = new SpecialSpanPromotionDataHelperImpl();
+//		addressDataHelper = new AddressDataHelperImpl();
+		hotelFixedPromotionDataHelper = new HotelFixedPromotionDataHelperImpl_Stub();
+		specialSpanPromotionDataHelper = new SpecialSpanPromotionImplDataHelper_Stub();
+		addressDataHelper = new AddressDataHelperImpl_Stub();
 	}
 
 
 	@Override
 	public List<HotelFixedPromotionPO> getHotelFixedPromotion(String hotelWorkerID) throws RemoteException {
-		return hotelFixedPromotion.getHotelFixedPromotion(hotelWorkerID);
+		return hotelFixedPromotionDataHelper.getHotelFixedPromotion(hotelWorkerID);
 	}
 
 
 	@Override
 	public ResultMessage updateHotelFixedPromotion(HotelFixedPromotionPO hotelFixedPromotionPO) throws RemoteException {
-		return hotelFixedPromotion.updateHotelFixedPromotion(hotelFixedPromotionPO);
+		return hotelFixedPromotionDataHelper.updateHotelFixedPromotion(hotelFixedPromotionPO);
 	}
 
 
 	@Override
 	public List<SpecialSpanPromotionPO> getHotelSpecialSpanPromotion(String hotelID) throws RemoteException {
-		return specialSpanPromotion.getHotelSpecialSpanPromotion(hotelID);
+		return specialSpanPromotionDataHelper.getHotelSpecialSpanPromotion(hotelID);
 	}
 
 
 	@Override
 	public List<SpecialSpanPromotionPO> getWebSpecialSpanPromotion() throws RemoteException {
-		return specialSpanPromotion.getWebSpecialSpanPromotion();
+		return specialSpanPromotionDataHelper.getWebSpecialSpanPromotion();
 	}
 
 
 	@Override
 	public ResultMessage addSpecialSpanPromotion(SpecialSpanPromotionPO specialSpanPromotionPO) throws RemoteException {
-		return specialSpanPromotion.addSpecialSpanPromotion(specialSpanPromotionPO);
+		return specialSpanPromotionDataHelper.addSpecialSpanPromotion(specialSpanPromotionPO);
 	}
 
 
 	@Override
 	public ResultMessage updateSpecialSpanPromotion(SpecialSpanPromotionPO specialSpanPromotionPO) throws RemoteException {
-		return specialSpanPromotion.updateSpecialSpanPromotion(specialSpanPromotionPO);
+		return specialSpanPromotionDataHelper.updateSpecialSpanPromotion(specialSpanPromotionPO);
 	}
 
 	@Override
-	public ResultMessage deleteSpecialSpanPromotion(SpecialSpanPromotionPO specialSpanPromotionPO)
-			throws RemoteException {
-		// TODO 自动生成的方法存根
-		return null;
+	public ResultMessage deleteSpecialSpanPromotion(String userID,String promotionName)throws RemoteException {
+		return specialSpanPromotionDataHelper.deleteSpecialSpanPromotion(userID, promotionName);
 	}
 
 	@Override
 	public List<AddressPO> getSpecialCirclePromotion(String city) throws RemoteException {
-		return specialCirclePromotion.getAll(city);
+		return addressDataHelper.getAll(city);
 	}
 
 
 	@Override
 	public ResultMessage updateSepecialCirclePromotion(AddressPO addressPO) throws RemoteException {
-		return specialCirclePromotion.modifyDiscout(addressPO);
+		return addressDataHelper.modifyDiscout(addressPO);
 	}
 
 
 	@Override
 	public double getSpecialCircleDiscount(String city, String cycle) throws RemoteException {
-		return specialCirclePromotion.getDiscout(city, cycle);
+		return addressDataHelper.getDiscout(city, cycle);
 	}
 
 }

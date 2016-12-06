@@ -32,6 +32,7 @@ public class ClientRemoteHelper {
 	private static ClientRemoteHelper remoteHelper = new ClientRemoteHelper();
 
 	public static ClientRemoteHelper getInstance(){
+		remoteHelper.init();//方便测试用
 		return remoteHelper;
 	}
 

@@ -9,6 +9,7 @@ import businessLogic.userBL.userService.service.UserService;
 import dataService.guestDataService.GuestDataService;
 import dataService.guestDataService.GuestDataService_Stub;
 import po.GuestPO;
+import rmi.ClientRemoteHelper;
 import utilities.ResultMessage;
 import vo.GuestVO;
 import vo.UserVO;
@@ -34,6 +35,7 @@ public class Guest implements UserService ,CreditService{
 	 * 构造函数，初始化成员变量
 	 */
 	public Guest() {
+//		guestDataService = ClientRemoteHelper.getInstance().getGuestDataService();
 		try {
 			guestDataService = new GuestDataService_Stub();
 		} catch (RemoteException e) {
@@ -51,11 +53,11 @@ public class Guest implements UserService ,CreditService{
 	public UserVO add(UserVO newUserVO) {
 
 
-		if(this.hasGuest(newUserVO.userID)){return null;} //存在ID对应项
+		if(hasGuest(newUserVO.userID)){return null;} //存在ID对应项
 
 		try {
-			GuestPO guestPO = this.convert(newUserVO);
-			  return this.convert(guestDataService.add(guestPO));
+			GuestPO guestPO = convert(newUserVO);
+			return convert(guestDataService.add(guestPO));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;

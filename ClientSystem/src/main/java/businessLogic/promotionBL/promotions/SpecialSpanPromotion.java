@@ -91,16 +91,16 @@ public class SpecialSpanPromotion {
 	}
 	
 	/**
-	 * @Description:根据被删除的promotion的数据，将数据库里对应的一条promotion删除
+	 * @Description:根据userID和策略名称，将数据库里对应的一条promotion删除
 	 * @param specialSpanPromotionVO
 	 * @return
 	 * ResultMessage
 	 * @author: Harvey Gong
 	 * @time:2016年12月2日 下午7:23:31
 	 */
-	public ResultMessage deleteSpecialSpanPromotion(SpecialSpanPromotionVO specialSpanPromotionVO){
+	public ResultMessage deleteSpecialSpanPromotion(String userID,String promotionName){
 		try {
-			return promotionDataService.deleteSpecialSpanPromotion(new SpecialSpanPromotionPO(specialSpanPromotionVO));
+			return promotionDataService.deleteSpecialSpanPromotion(userID,promotionName);
 		} catch (RemoteException e) {
 			return ResultMessage.FAIL;
 		}	

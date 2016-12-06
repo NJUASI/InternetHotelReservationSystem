@@ -58,13 +58,6 @@ public class PromotionBLService_Stub implements PromotionBLService{
 	}
 
 	@Override
-	public ResultMessage deleteSpecialSpanPromotion(SpecialSpanPromotionVO specialSpanPromotionVO) {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-
-	
-	@Override
 	public Iterator<AddressVO> getSpecialCirclePromotions(String city) {
 		// TODO 自动生成的方法存根
 		return null;
@@ -73,6 +66,12 @@ public class PromotionBLService_Stub implements PromotionBLService{
 	
 	@Override
 	public ResultMessage updateSpecialCirclePromotions(AddressVO addressVO) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
+	@Override
+	public ResultMessage deleteSpecialSpanPromotion(String userID, String promotionName) {
 		// TODO 自动生成的方法存根
 		return null;
 	}

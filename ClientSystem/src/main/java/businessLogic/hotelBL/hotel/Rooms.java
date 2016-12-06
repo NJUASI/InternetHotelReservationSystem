@@ -24,15 +24,16 @@ class Rooms {
 	private HotelDataService hotelDataService;
 
 	public Rooms(String hotelID) {
+//		this.hotelDataService = ClientRemoteHelper.getInstance().getHotelDataService();
 		try {
-			this.hotelDataService = new HotelDataService_Stub();
+			hotelDataService = new HotelDataService_Stub();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		this.hotelID = hotelID;
 		initRoomInfoPO();
 	}
-	
+
 	private void initRoomInfoPO(){
 		try {
 			hotelDataService.getRoomInfo(hotelID);
@@ -68,7 +69,7 @@ class Rooms {
 	 * @time:2016年12月4日 上午11:16:09
 	 */
 	public ResultMessage addRoomInfo(RoomInfoVO roomInfoVO){
-		
+
 		try {
 			hotelDataService.addRoomInfo(new RoomInfoPO(roomInfoVO));
 			initRoomInfoPO();
@@ -77,7 +78,7 @@ class Rooms {
 			return ResultMessage.FAIL;
 		}
 	}
-	
+
 	/**
 	 * @Description:删除一条客房信息
 	 * @param roomType
@@ -88,7 +89,7 @@ class Rooms {
 	 * @time:2016年12月4日 上午11:21:31
 	 */
 	public ResultMessage deleteRoomInfo(String roomType){
-		
+
 		try {
 			hotelDataService.deleteRoomInfo(hotelID,roomType);
 			initRoomInfoPO();
@@ -97,7 +98,7 @@ class Rooms {
 			return ResultMessage.FAIL;
 		}
 	}
-	
+
 	/**
 	 * @Description:更新一条hotel的客房信息
 	 * @param roomInfoVO
@@ -118,7 +119,7 @@ class Rooms {
 			return ResultMessage.FAIL;
 		}
 	}
-	
+
 	/**
 	 * @Description:当入住或退房时，调用此方法，更新该房型的剩余房间数量，线上线下均调用此方法
 	 * @param roomType
@@ -141,8 +142,8 @@ class Rooms {
 		}
 		return updateHotelRoomInfo(new RoomInfoVO(po),roomType);
 	}
-	
-	
+
+
 	private int findPO(String roomType){
 		for(int i = 0;i<roomInfoPOList.size();i++){
 			if(roomInfoPOList.get(i).getRoomType().equals(roomType)){
@@ -150,7 +151,7 @@ class Rooms {
 			}
 		}
 		return -1;
-		
+
 	}
 	/**
 	 * @Description:获得该酒店所有房间类型
@@ -167,8 +168,8 @@ class Rooms {
 		}
 		return allRoomType;
 	}
-	
-	
+
+
 	/**
 	 * @Description:获取当前所选房间类型的剩余房间数量
 	 * @param roomType
@@ -186,8 +187,8 @@ class Rooms {
 		}
 		return 0;
 	}
-	
-	
+
+
 	/**
 	 * @Description:获取该酒店最低价格
 	 * @return
@@ -205,5 +206,5 @@ class Rooms {
 		}
 		return min;
 	}
-	
+
 }

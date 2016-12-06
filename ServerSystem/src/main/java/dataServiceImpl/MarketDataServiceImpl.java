@@ -5,7 +5,9 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import dataHelper.MarketDataHelper;
+import dataHelperImpl.MarketDataHelperImpl;
 import dataHelperImpl.stub.DataFactoryImpl_Stub;
+import dataHelperImpl.stub.MarketDataHelperImpl_Stub;
 import dataService.marketDataService.MarketDataService;
 import po.MarketPO;
 import utilities.ResultMessage;
@@ -19,8 +21,6 @@ public class MarketDataServiceImpl extends UnicastRemoteObject implements Market
 
 	private static final long serialVersionUID = 3434060152387200042L;
 
-	private DataFactoryImpl_Stub factory;
-
 	private MarketDataHelper marketHelper;
 
 	/**
@@ -29,9 +29,8 @@ public class MarketDataServiceImpl extends UnicastRemoteObject implements Market
 	 * @updateTime 2016/12/1 构造函数，从工厂中获取marketDataHlper对象
 	 */
 	public MarketDataServiceImpl() throws RemoteException {
-//		this.factory = DataFactoryImpl.getInstance();
-		this.factory = DataFactoryImpl_Stub.getInstance();
-		this.marketHelper = this.factory.getMarketDataHelper();
+//		marketHelper = new MarketDataHelperImpl();
+		marketHelper = new MarketDataHelperImpl_Stub();
 	}
 
 	/**

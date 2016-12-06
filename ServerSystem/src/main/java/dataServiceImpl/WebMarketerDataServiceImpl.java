@@ -5,33 +5,32 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import dataHelper.WebMarketerDataHelper;
-import dataHelperImpl.stub.DataFactoryImpl_Stub;
+import dataHelperImpl.stub.WebMarketerDataHelperImpl_Stub;
 import dataService.webMarketerDataService.WebMarketerDataService;
 import po.WebMarketerPO;
 import utilities.ResultMessage;
 
 /**
  * 
- * @author 董金玉 lastChangedBy 董金玉 updateTime 2016/12/1
+ * @author 董金玉 
+ * @lastChangedBy Harvey 
+ * @updateTime 2016/12/6
  *
  */
 public class WebMarketerDataServiceImpl extends UnicastRemoteObject implements WebMarketerDataService{
 
 	private static final long serialVersionUID = 3434060152387200042L;
 	
-	private DataFactoryImpl_Stub factory;
-	
 	private WebMarketerDataHelper webMarketerHelper;
 	
 	/**
 	 * @author 董金玉
-	 * @lastChangedBy 董金玉
-	 * @updateTime 2016/12/1 构造函数，从工厂中获取webMarketerDataHlper对象
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/6 构造函数
 	 */
 	public WebMarketerDataServiceImpl() throws RemoteException {
-//		this.factory = DataFactoryImpl.getInstance();
-		this.factory = DataFactoryImpl_Stub.getInstance();
-		this.webMarketerHelper = this.factory.getWebMarketerDataHelper();
+//		webMarketerHelper = new WebMarketerDataHelperImpl();
+		webMarketerHelper = new WebMarketerDataHelperImpl_Stub();
 	
 	}
 

@@ -8,8 +8,8 @@ import businessLogic.userBL.userService.service.UserService;
 import dataService.webManagerDataService.WebManagerDataService;
 import dataService.webManagerDataService.WebManagerDataService_Stub;
 import po.WebManagerPO;
+import rmi.ClientRemoteHelper;
 import utilities.ResultMessage;
-import utilities.UserType;
 import vo.UserVO;
 import vo.WebManagerVO;
 
@@ -23,10 +23,8 @@ import vo.WebManagerVO;
 
 public class WebManager implements UserService{
 
-	
-	static int IDLength = 4; // 网站管理人员的ID长度为4
 
-	private static UserType type = UserType.WEB_MANAGER;
+	static int IDLength = 4; // 网站管理人员的ID长度为4
 
 	private WebManagerDataService webManagerDataService;
 
@@ -37,6 +35,7 @@ public class WebManager implements UserService{
 	 * 构造函数，初始化成员变量
 	 */
 	public WebManager() {
+//		webManagerDataService = ClientRemoteHelper.getInstance().getWebManagerDataService();
 		try {
 			webManagerDataService = new WebManagerDataService_Stub();
 		} catch (RemoteException e) {
@@ -53,7 +52,7 @@ public class WebManager implements UserService{
 	 */
 	public UserVO add(UserVO newUserVO) {
 
-		
+
 		if(this.hasWebManager(newUserVO.userID)){return null;} //存在ID对应项
 
 		try {
@@ -75,7 +74,7 @@ public class WebManager implements UserService{
 	public ResultMessage modify(UserVO userVO) {
 
 		ResultMessage msg = ResultMessage.USER_INFO_UPDATE_FAILURE;
-		
+
 		if(!this.hasWebManager(userVO.userID)){return msg;} //不存在ID对应项
 
 		try {
@@ -129,7 +128,7 @@ public class WebManager implements UserService{
 	 * @return String 指定用户 的登录信息
 	 */
 	public String getLogInInfo(String userID) {
-		
+
 		if(!this.hasWebManager(userID)){return null;} //不存在ID对应项,后期细化
 
 		try {
@@ -138,21 +137,6 @@ public class WebManager implements UserService{
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	/**
-	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/28
-	 * @param  type 用户类型
-	 * @return boolean 判断指定用户是否为网站管理人员类型
-	 */
-	public static boolean isWebManager(UserType type) {
-		if (WebManager.type == type) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	/**
@@ -193,10 +177,10 @@ public class WebManager implements UserService{
 		}
 		return result;
 	}
-	
+
 	private boolean hasWebManager(String webManagerID) {
 		UserVO webManagerVO = this.getSingle(webManagerID);
-		
+
 		if(webManagerVO==null){
 			return false;
 		}

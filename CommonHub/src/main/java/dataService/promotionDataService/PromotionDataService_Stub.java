@@ -57,13 +57,6 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 	}
 
 	@Override
-	public ResultMessage deleteSpecialSpanPromotion(SpecialSpanPromotionPO specialSpanPromotionPO)
-			throws RemoteException {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-
-	@Override
 	public List<AddressPO> getSpecialCirclePromotion(String city) throws RemoteException {
 		// TODO 自动生成的方法存根
 		return null;
@@ -81,6 +74,12 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 	public double getSpecialCircleDiscount(String city, String cycle) {
 		// TODO 自动生成的方法存根
 		return 0;
+	}
+
+	@Override
+	public ResultMessage deleteSpecialSpanPromotion(String userID, String promotionName) throws RemoteException {
+		// TODO 自动生成的方法存根
+		return null;
 	}
 
 }
