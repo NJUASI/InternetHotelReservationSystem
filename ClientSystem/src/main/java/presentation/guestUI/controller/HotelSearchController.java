@@ -17,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import presentation.hotelWorkerUI.controller.HotelTable;
 import presentation.hotelWorkerUI.controller.TypeTable;
 import presentation.webMarketerUI.controller.OrderTable;
 import utilities.OrderState;
@@ -84,24 +85,66 @@ public class HotelSearchController {
 	}
 
 	// Hotel概况浏览界面
+	
+	@FXML
+	TableView<HotelTable> hotelTable;
+	@FXML
+	private TableColumn<HotelTable, String>	hotelIDColumn3,hotelNameColumn3, addressColumn3, cityColumn3, cycleColumn3, minPriceColumn3,hasOrderColumn3, levelColumn3, scoreColumn3;	
+	List<HotelVO> hotelVOList;
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/11/27
 	 * @打开酒店浏览界面并初始化
 	 */
-//	hotelTable
-//	hotelIDColumn,hotelNameColumn addressColumn cityColumn cycleColumn minPriceColumn levelColumn scoreColumn
 	@FXML
 	protected void openHotelCheck() {
+		// cityChoose.getValue();
+		// cycleChoose;
 		cityAndCircle.setVisible(false);
 		hotelCheck.setVisible(true);
 		hotelChoose.setVisible(false);
+		
+		hotelVO = new HotelVO("12345", "hantingjiudiansss", "xinjiekou", "xinjiekou", "malianhedadao", "5xinji", 4.5,
+				198, "shoooo", "sdaf");
 
-		// cityChoose.getValue();
-		// cycleChoose;
+		hotelVOList=new LinkedList<>();
+		hotelVOList.add(hotelVO);
+		hotelVOList.add(hotelVO);
+		hotelVOList.add(hotelVO);
+		hotelVOList.add(hotelVO);
+		hotelVOList.add(hotelVO);
+		
+		
+		initHotelTable(hotelVOList);
+		
+		
 	}
 
+	void initHotelTable(List<HotelVO> hotelVOList){
+		hotelTable.getItems().clear();
+		List<HotelTable> dataList = new LinkedList<HotelTable>();
+		for (int i = 0; i < hotelVOList.size(); i++) {
+			HotelVO temp = hotelVOList.get(i);
+			dataList.add(new HotelTable(temp.hotelID, temp.hotelName,temp.address,temp.city,temp.circle,"false",Double.toString(temp.minPrice),temp.level,Double.toString(temp.score)));
+		}
+
+		ObservableList<HotelTable> data = FXCollections.observableArrayList();
+		for (int i = 0; i < dataList.size(); i++) {
+			data.add(dataList.get(i));
+		}
+		hotelIDColumn3.setCellValueFactory(cellData -> cellData.getValue().hotelID);
+		hotelNameColumn3.setCellValueFactory(cellData -> cellData.getValue().hotelName);
+		addressColumn3.setCellValueFactory(cellData -> cellData.getValue().address);
+		cityColumn3.setCellValueFactory(cellData -> cellData.getValue().city);
+		cycleColumn3.setCellValueFactory(cellData -> cellData.getValue().cycle);
+		minPriceColumn3.setCellValueFactory(cellData -> cellData.getValue().minPrice);
+		hasOrderColumn3.setCellValueFactory(cellData -> cellData.getValue().hasOrder);
+		levelColumn3.setCellValueFactory(cellData -> cellData.getValue().level);
+		scoreColumn3.setCellValueFactory(cellData -> cellData.getValue().score);
+		
+		hotelTable.setItems(data);
+	}
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990

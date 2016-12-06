@@ -25,6 +25,10 @@ public class TypeTable {
 	public String getRoomNum() {
 		return roomNum.get();
 	}
+	public String getRoomName() {
+		return roomName.get();
+	}
+	
 	public String getRemainRoomNum() {
 		return remainRoomNum.get();
 	}

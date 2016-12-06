@@ -61,6 +61,8 @@ public class OrderController {
 		private TableColumn<OrderTable, String> orderIDColumn,guestIDColumn, nameColumn, phoneColumn, priceColumn,
 				checkInTimeColumn, stateColumn,checkOutTimeColumn;
 
+		@FXML
+		private Button checkInBt1,checkOutBt1;
 		/**
 		 * @author 61990
 		 * @lastChangedBy 61990
@@ -70,7 +72,8 @@ public class OrderController {
 		@FXML
 		protected void searchExecutedOrder() {
 			// 获得输入的内容
-					
+			checkInBt1.setVisible(false);
+			checkOutBt1.setVisible(true);
 					orderVOlist=new LinkedList<>();
 					orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
 							 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
@@ -97,7 +100,8 @@ public class OrderController {
 		 */
 		@FXML
 		protected void searchAbnormalOrder() {
-			// 获得输入的内容
+			checkInBt1.setVisible(true);
+			checkOutBt1.setVisible(false);
 					
 					orderVOlist=new LinkedList<>();
 					orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
@@ -126,7 +130,9 @@ public class OrderController {
 		@FXML
 		protected void searchCancelledOrder() {
 			// 获得输入的内容
-					
+			checkInBt1.setVisible(false);
+			checkOutBt1.setVisible(false);
+			
 					orderVOlist=new LinkedList<>();
 					orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
 							 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
@@ -153,7 +159,8 @@ public class OrderController {
 		 */
 		@FXML
 		protected void searchUnexecutedOrder() {
-		
+			checkInBt1.setVisible(true);
+			checkOutBt1.setVisible(false);
 					orderVOlist=new LinkedList<>();
 					orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
 							 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
@@ -268,8 +275,14 @@ public class OrderController {
 		 * @updateTime 2016/11/27
 		 * @办理入住
 		 */
+		//订单详情执行
 		@FXML
 		protected void checkIn() {
+			
+		}
+		//订单概况执行
+		@FXML
+		protected void checkIn2() {
 			
 		}
 		/**
@@ -278,9 +291,14 @@ public class OrderController {
 		 * @updateTime 2016/11/27
 		 * @办理退房
 		 */
-		
+		//订单详情执行
 		@FXML
 		protected void checkOut() {
+			
+		}
+		//订单概况执行
+		@FXML
+		protected void checkOut2() {
 			
 		}
 		/**
