@@ -50,12 +50,12 @@ public class OrderController {
 	// 详情界面内容
 	@FXML
 	private Label detail_ID, detail_Hotel, detail_address, detail_roomType, detail_roomNum, detail_personNum,
-			detail_price, detail_personName, detail_phone, detail_createTime, detail_expectTime,detail_message;
+			detail_price, detail_personName, detail_phone,detail_expectLeaveTime ,detail_createTime, detail_expectTime,detail_message;
 	// 概况界面内容
 	@FXML
 	private TableView<OrderTable> table;
 	@FXML
-	private TableColumn<OrderTable, String> orderIDColumn, hotelNameColumn, addressColumn, priceColumn,
+	private TableColumn<OrderTable, String> orderIDColumn,nameColumn, hotelNameColumn, addressColumn, priceColumn,
 			checkInTimeColumn, stateColumn,checkOutTimeColumn;
 
 	/**
@@ -75,8 +75,8 @@ public class OrderController {
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/5
+	 * @lastChangedBy 61990
+	 * @updateTime 2016/11/30
 	 * @通过订单编号查找订单
 	 */
 	@FXML
@@ -98,10 +98,10 @@ public class OrderController {
 		final OrderState orderState = OrderState.ABNORMAL;
 		final RoomType roomType = RoomType.双人间;
 
-		orderVO = new OrderVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
-				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, 
-				roomType, 2, "301  302", 2, "zhangsan","13554321234", "no", 4.3, "good");
-		//
+		orderVO = new OrderVO(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
+		 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
+		 OrderState.ABNORMAL,false, "gaoy", "1212121") ,12.4,createTime,checkInTime,checkOutTime,RoomType.AMBASSADOR,4,"202",4,"adsfas",3.4,"22w222");
+
 		if (orderVO.orderGeneralVO.state == OrderState.ABNORMAL) {
 			cancelOrderPane.setDisable(false);
 		} else {
@@ -146,21 +146,20 @@ public class OrderController {
 			// 获得输入的内容
 		// LocalDate date = searchDate.getValue();
 		orderVOlist=new LinkedList<>();
-		orderVOlist.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.EXECUTED, false, "zhangsan","13554321234"));
-		orderVOlist.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.COMMENTED, false, "zhangsan","13554321234"));
-		orderVOlist.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.ABNORMAL, false, "zhangsan","13554321234"));
-		orderVOlist.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.UNEXECUTED, false, "zhangsan","13554321234"));
-		orderVOlist.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.CANCELLED, false, "zhangsan","13554321234"));
+		
+		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
+				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
+				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
+		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
+				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
+				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
+		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
+				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
+				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
+		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
+				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
+				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
+		
 		initOrderCheck(orderVOlist);
 	
 	
@@ -212,10 +211,11 @@ public class OrderController {
 		final OrderState orderState = OrderState.ABNORMAL;
 		final RoomType roomType = RoomType.商务套房;
 
-		orderVO = new OrderVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
-				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, 
-				roomType, 2, "301  302", 2, "zhangsan","13554321234", "no", 4.3, "good");
-		//
+		orderVO = new OrderVO(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
+				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
+				 OrderState.ABNORMAL,false, "gaoy", "1212121") ,12.4,createTime,checkInTime,checkOutTime,RoomType.AMBASSADOR,4,"202",4,"adsfas",3.4,"22w222");
+		
+		
 		if (orderVO.orderGeneralVO.state == OrderState.ABNORMAL) {
 			cancelOrderPane.setDisable(false);
 		} else {
@@ -232,22 +232,21 @@ public class OrderController {
 	protected void searchAbnormalOrder() {
 		// 获得输入的内容
 				
-				orderVOlist=new LinkedList<>();
-				orderVOlist.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-						200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-						OrderState.ABNORMAL, false, "zhangsan","13554321234"));
-				orderVOlist.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-						200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-						OrderState.ABNORMAL, false, "zhangsan","13554321234"));
-				orderVOlist.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-						200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-						OrderState.ABNORMAL, false, "zhangsan","13554321234"));
-				orderVOlist.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-						200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-						OrderState.ABNORMAL, false, "zhangsan","13554321234"));
-				orderVOlist.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-						200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-						OrderState.ABNORMAL, false, "zhangsan","13554321234"));
+orderVOlist=new LinkedList<>();
+		
+		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
+				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
+				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
+		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
+				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
+				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
+		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
+				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
+				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
+		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
+				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
+				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
+		
 				initOrderCheck(orderVOlist);
 			
 				cancelOrderPaneInCheck.setDisable(false);
@@ -259,21 +258,21 @@ public class OrderController {
 	protected void searchUnexecutedOrder() {
 	
 				orderVOlist=new LinkedList<>();
-				orderVOlist.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-						200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-						OrderState.UNEXECUTED, false, "zhangsan","13554321234"));
-				orderVOlist.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-						200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-						OrderState.UNEXECUTED, false, "zhangsan","13554321234"));
-				orderVOlist.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-						200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-						OrderState.UNEXECUTED, false, "zhangsan","13554321234"));
-				orderVOlist.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-						200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-						OrderState.UNEXECUTED, false, "zhangsan","13554321234"));
-				orderVOlist.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-						200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-						OrderState.UNEXECUTED, false, "zhangsan","13554321234"));
+				orderVOlist=new LinkedList<>();
+				
+				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
+						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
+						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
+				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
+						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
+						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
+				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
+						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
+						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
+				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
+						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
+						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
+				
 				initOrderCheck(orderVOlist);
 			
 				cancelOrderPaneInCheck.setDisable(true);
@@ -309,6 +308,7 @@ public class OrderController {
 		detail_phone.setText(orderVO.orderGeneralVO.phone);
 		detail_createTime.setText(orderVO.createTime.toString());
 		detail_expectTime.setText(orderVO.orderGeneralVO.expectExecuteTime.toString());
+		detail_expectLeaveTime.setText(orderVO.orderGeneralVO.expectLeaveTime.toString());
 		detail_price.setText(Double.toString(orderVO.orderGeneralVO.price));
 		detail_state.setText(orderVO.orderGeneralVO.state.toString());
 		detail_message.setText(orderVO.message);
@@ -325,8 +325,8 @@ public class OrderController {
 		List<OrderTable> orderList = new LinkedList<OrderTable>();
 		for (int i = 0; i < orderVOlist.size(); i++) {
 			OrderGeneralVO temp = orderVOlist.get(i);
-			orderList.add(new OrderTable(temp.orderID, temp.hotelName, temp.hotelAddress,
-					temp.expectExecuteTime.toString(),temp.expectLeaveTime.toString(),temp.price + "", temp.state.toString()));
+			orderList.add(new OrderTable(temp.orderID ,temp.orderID,temp.name,temp.phone, temp.hotelName,temp.hotelAddress,	temp.expectExecuteTime.toString(),temp.expectLeaveTime.toString(),temp.price + "", temp.state.toString()));
+					
 		}
 
 		ObservableList<OrderTable> data = FXCollections.observableArrayList();
@@ -334,6 +334,7 @@ public class OrderController {
 			data.add(orderList.get(i));
 		}
 		orderIDColumn.setCellValueFactory(cellData -> cellData.getValue().orderID);
+		nameColumn.setCellValueFactory(cellData -> cellData.getValue().name);
 		hotelNameColumn.setCellValueFactory(cellData -> cellData.getValue().hotelName);
 		addressColumn.setCellValueFactory(cellData -> cellData.getValue().address);
 		checkInTimeColumn.setCellValueFactory(cellData -> cellData.getValue().checkInTime);
