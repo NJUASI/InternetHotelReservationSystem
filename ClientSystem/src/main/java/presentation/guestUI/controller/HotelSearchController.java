@@ -150,10 +150,10 @@ public class HotelSearchController {
 				198, "shoooo", "sdaf");
 
 		roomList = new LinkedList<>();
-		roomList.add(new RoomInfoVO("123456",RoomType.单人间, "DANREN", 23,3, 259));
-		roomList.add(new RoomInfoVO("12123456",RoomType.双人间,"双人", 12,3, 259));
-		roomList.add(new RoomInfoVO("1232456",RoomType.三人间,"三间", 134,23, 2159));
-		roomList.add(new RoomInfoVO("1234136",RoomType.总统套房, "总统",233, 223, 259));
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
 		
 		
 		orderVOlist=new LinkedList<>();
@@ -187,7 +187,7 @@ public class HotelSearchController {
 	@FXML
 	TableView<TypeTable> roomTable;
 	@FXML
-	private TableColumn<TypeTable, String> typeColumn, remainRoomColumn, priceColumn;
+	private TableColumn<TypeTable, String> typeColumn, roomNameColumn,roomNumColumn,remainRoomColumn, priceColumn;
 
 	@FXML
 	TableView<EvaluationTable> evaluationTable;
@@ -233,24 +233,26 @@ public class HotelSearchController {
 	 * @param orderVO
 	 * @describe 初始化房间详情界面
 	 */
-	private void initRoomTable(List<RoomInfoVO> roomList) { 	
-		roomTable.getItems().clear();
-		List<TypeTable> dataList = new LinkedList<TypeTable>();
-		for (int i = 0; i < roomList.size(); i++) {
-			RoomInfoVO temp = roomList.get(i);
-			dataList.add(new TypeTable(temp.roomName, temp.remainNum + "", Double.toString(temp.price)));
-		}
+	 private void initRoomTable(List<RoomInfoVO> roomList) { 	
+			roomTable.getItems().clear();
+			List<TypeTable> dataList = new LinkedList<TypeTable>();
+			for (int i = 0; i < roomList.size(); i++) {
+				RoomInfoVO temp = roomList.get(i);
+				dataList.add(new TypeTable(temp.roomType.toString(),temp.roomName, temp.roomNum + "", temp.remainNum + "", Double.toString(temp.price)));
+			}
 
-		ObservableList<TypeTable> data = FXCollections.observableArrayList();
-		for (int i = 0; i < dataList.size(); i++) {
-			data.add(dataList.get(i));
-		}
-		typeColumn.setCellValueFactory(cellData -> cellData.getValue().roomType);
-		remainRoomColumn.setCellValueFactory(cellData -> cellData.getValue().remainRoomNum);
-		priceColumn.setCellValueFactory(cellData -> cellData.getValue().price);
+			ObservableList<TypeTable> data = FXCollections.observableArrayList();
+			for (int i = 0; i < dataList.size(); i++) {
+				data.add(dataList.get(i));
+			}
+			typeColumn.setCellValueFactory(cellData -> cellData.getValue().roomType);
+			roomNameColumn.setCellValueFactory(cellData -> cellData.getValue().roomName);
+			roomNumColumn.setCellValueFactory(cellData -> cellData.getValue().roomNum);
+			remainRoomColumn.setCellValueFactory(cellData -> cellData.getValue().remainRoomNum);
+			priceColumn.setCellValueFactory(cellData -> cellData.getValue().price);
 
-		roomTable.setItems(data);
-	}
+			roomTable.setItems(data);
+		}
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -325,7 +327,7 @@ public class HotelSearchController {
 	@FXML
 	protected void openCreateOrder() {
 		for (int i = 0; i < roomList.size(); i++) {
-		 roomTypeInOrder.getItems().add(roomList.get(i).roomName);
+		 roomTypeInOrder.getItems().add(roomList.get(i).roomType.toString());
 		}
 		roomTypeInOrder.setValue(roomTable.getSelectionModel().getSelectedItem().getRoomType());
 		remainNumInOrder.setText(roomTable.getSelectionModel().getSelectedItem().getRemainRoomNum());

@@ -153,6 +153,8 @@ public class CyclePromotionController {
 		System.out.println(cycleInput.getValue());
 		cycleDiscount.getText();
 	}
+	
+	
 
 }
 
