@@ -11,12 +11,11 @@ import javafx.scene.layout.AnchorPane;
  *
  */
 public class HotelWorkerViewController {
-	
 	Parent hotelInfo ,orderInfo, offline,remainRoom,promotion,roomInfo;	
 	
 		@FXML private AnchorPane right;
 	    @FXML private AnchorPane mainPane;
-	    
+	 
 	    /**
 		 * @author 61990
 		 * @lastChangedBy 61990

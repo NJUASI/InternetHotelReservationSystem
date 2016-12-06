@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
-import businessLogic.hotelBL.HotelBLController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,8 +13,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import presentation.Main;
 import presentation.guestUI.controller.EvaluationTable;
-import utilities.IDReserve;
 import vo.HotelEvaluationVO;
 import vo.HotelVO;
 
@@ -23,7 +22,7 @@ import vo.HotelVO;
  * @author 61990
  *
  */
-public class HotelInfoController {
+public class HotelController {
 	@FXML
 	private Pane hotelModifyPane;
 	@FXML
@@ -43,10 +42,12 @@ public class HotelInfoController {
 	 */
 	@FXML
 	private void initialize() {
-
-		hotelVO = HotelBLController.getInstance().getHotelInfo(IDReserve.getInstance().getUserID());
+		String s= Main.userID;
+		hotelVO = new HotelVO("12345", "hantingjiudiansss", "xinjiekou", "xinjiekou", "malianhedadao", "5xinji", 4.5,
+				198, "shoooo", "sdaf");
 		
 		initHotelDetail(hotelVO);
+		
 		commentList=new LinkedList<>();
 		commentList.add(new HotelEvaluationVO("12334", LocalDate.of(2005, 3, 2),5.0,"ssssdfgasdfadgljglfksdjfklajdlfkjasldfkj"));
 		commentList.add(new HotelEvaluationVO("12334", LocalDate.of(2005, 3, 2),5.0,"ssssdfgasdfadgljglfksdjfklajdlfkjasldfkj"));
@@ -143,6 +144,7 @@ public class HotelInfoController {
 			cityText.getItems().clear();
 			cycleText.getItems().clear();
 			cycleText.setValue("");
+			
 			cityText.getItems().add("1234");
 			cityText.getItems().add("1234");
 			cityText.getItems().add("1234");
@@ -158,6 +160,8 @@ public class HotelInfoController {
 		protected void getCycle(){
 			cityText.getValue();
 			cycleText.getItems().clear();
+			
+			
 			cycleText.getItems().add("1234");
 			cycleText.getItems().add("1234");
 			cycleText.getItems().add("1234");

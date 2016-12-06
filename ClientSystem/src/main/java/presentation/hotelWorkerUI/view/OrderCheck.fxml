@@ -25,7 +25,6 @@
          <children>
             <Button focusTraversable="false" layoutX="786.0" layoutY="70.0" mnemonicParsing="false" onAction="#orderDetail" text="查看详情" />
             <Separator layoutY="60.0" prefHeight="3.0" prefWidth="895.0" />
-            <Button layoutX="339.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchAbnormalOrder" text="异常订单" />
             <TableView fx:id="table" focusTraversable="false" layoutY="110.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="491.0" prefWidth="895.0" tableMenuButtonVisible="true">
                <columns>
                   <TableColumn fx:id="orderIDColumn" prefWidth="113.0" text="订单编号" />
@@ -43,11 +42,12 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <Button layoutX="136.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchUnexecutedOrder" text="未执行订单" />
-            <Button layoutX="238.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchCancelledOrder" text="已撤销订单" />
             <Button layoutX="34.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchExecutedOrder" text="已执行订单" />
-            <Button layoutX="564.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchAbnormalOrder" text="入住" />
-            <Button layoutX="636.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchAbnormalOrder" text="退房" />
+            <Button layoutX="136.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchUnexecutedOrder" text="未执行订单" />
+            <Button layoutX="339.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchAbnormalOrder" text="异常订单" />
+            <Button layoutX="238.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchCancelledOrder" text="已撤销订单" />
+            <Button fx:id="checkInBt1" layoutX="564.0" layoutY="70.0" mnemonicParsing="false" onAction="#checkIn2" text="入住" visible="false" />
+            <Button fx:id="checkOutBt1" layoutX="636.0" layoutY="70.0" mnemonicParsing="false" onAction="#checkOut2" text="退房" visible="false" />
          </children>
       </AnchorPane>
       <Pane fx:id="orderDetail" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" visible="false">
