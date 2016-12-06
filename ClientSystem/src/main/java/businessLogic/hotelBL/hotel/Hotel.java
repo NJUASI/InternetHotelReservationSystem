@@ -203,6 +203,14 @@ public class Hotel implements HotelInfoOperation{
 		return new Address(hotelPO.getCity(), hotelPO.getCircle());
 	}
 
+	/**
+	 * @Description:当有该酒店的订单的评价时，更新酒店的评分
+	 * @param score
+	 * @return
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月6日 上午11:11:51
+	 */
 	@Override
 	public ResultMessage scoreUpdate(double score) {
 		int commentsNum = hotelPO.getCommentsNum();

@@ -1,11 +1,10 @@
-package businessLogic.promotionBL.discountCalculation;
+package businessLogic.promotionBL;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import businessLogic.promotionBL.DiscountInSpan;
 import businessLogic.promotionBL.promotions.HotelFixedPromotion;
 import businessLogic.promotionBL.promotions.MemberLevelPromotion;
 import businessLogic.promotionBL.promotions.SpecialCirclePromotion;

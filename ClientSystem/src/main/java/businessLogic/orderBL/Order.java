@@ -8,10 +8,8 @@ import java.util.List;
 
 import businessLogic.hotelBL.HotelInfoOperation;
 import businessLogic.hotelBL.MockHotel;
-import businessLogic.hotelBL.hotel.Hotel;
 import businessLogic.promotionBL.DiscountInSpan;
 import businessLogic.promotionBL.MockPromotion;
-import businessLogic.promotionBL.discountCalculation.DiscountCalculator;
 import dataService.orderDataService.OrderDataService;
 import dataService.orderDataService.OrderDataService_Stub;
 import po.CheckInPO;
@@ -20,7 +18,6 @@ import po.GuestEvaluationPO;
 import po.HotelEvaluationPO;
 import po.OrderGeneralPO;
 import po.OrderPO;
-import rmi.ClientRemoteHelper;
 import utilities.OrderState;
 import utilities.PreOrder;
 import utilities.ResultMessage;

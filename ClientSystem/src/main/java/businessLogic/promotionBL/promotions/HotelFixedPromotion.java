@@ -17,7 +17,8 @@ import utilities.ResultMessage;
 import vo.HotelFixedPromotionVO;
 
 /**
- * @Description:对于酒店没有特定期间的促销策略操作的具体实现
+ * @Description:对于酒店会员生日折扣，企业会员折扣以及三间及以上预订的促销策略操作的具体实现
+ * 只有get和update，没有添加的功能
  * @author:Harvey Gong
  * @time:2016年12月1日 下午2:08:44
  */

@@ -3,6 +3,7 @@ package businessLogic.promotionBL.discountCalculation.discountOfPromotions;
 import java.time.LocalDate;
 
 import businessLogic.memberBL.Member;
+import businessLogic.memberBL.MockMember;
 import businessLogic.promotionBL.discountCalculation.CalculateDiscount;
 import utilities.MemberType;
 
@@ -25,23 +26,13 @@ public class VIPBirthdayDiscount implements CalculateDiscount{
 
 	@Override
 	public double getDiscount() {
-		Member member = new Member();
+		Member member = new MockMember();
 		if(member.isMember(guestID, MemberType.COMMON)){
 			birthDay = member.getMemberInfo(guestID, MemberType.COMMON).birthday;
-			if(isSameDay()){
+			if(date.isEqual(birthDay)){
 				return discount; 
 			}
 		}
 		return 1;
-	}
-
-	private boolean isSameDay(){
-		if(birthDay.getMonth()== date.getMonth())
-		{
-			if(birthDay.getDayOfMonth()==date.getDayOfMonth()){
-				return true;
-			}
-		}
-		return false;
 	}
 }

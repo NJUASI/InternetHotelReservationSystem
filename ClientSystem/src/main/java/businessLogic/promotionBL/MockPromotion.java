@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import businessLogic.promotionBL.discountCalculation.DiscountCalculator;
 import utilities.PreOrder;
 
 public class MockPromotion extends DiscountCalculator {

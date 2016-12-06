@@ -1,6 +1,7 @@
 package businessLogic.promotionBL.discountCalculation.discountOfPromotions;
 
 import businessLogic.memberBL.Member;
+import businessLogic.memberBL.MockMember;
 import businessLogic.promotionBL.discountCalculation.CalculateDiscount;
 import utilities.MemberType;
 
@@ -23,7 +24,7 @@ public class EnterpriseMemberDiscount implements CalculateDiscount{
 	}
 	
 	public boolean isEnterpriseMember(){
-		Member member = new Member();
+		Member member = new MockMember();
 		return member.isMember(guestID, MemberType.ENTERPRISE);
 	}
 }

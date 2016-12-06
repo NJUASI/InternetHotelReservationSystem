@@ -35,4 +35,15 @@ public class PreOrder {
 		
 	}
 
+	public PreOrder(String guestID, String hotelID, LocalDate expectExecuteDate, int roomNum, int lastDays) {
+		super();
+		this.guestID = guestID;
+		this.hotelID = hotelID;
+		this.expectExecuteDate = expectExecuteDate;
+		this.roomNum = roomNum;
+		this.lastDays = lastDays;
+	}
+	
+	
+
 }
