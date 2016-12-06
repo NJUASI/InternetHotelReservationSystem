@@ -42,7 +42,6 @@ public class HotelController {
 	 */
 	@FXML
 	private void initialize() {
-		String s= Main.userID;
 		hotelVO = new HotelVO("12345", "hantingjiudiansss", "xinjiekou", "xinjiekou", "malianhedadao", "5xinji", 4.5,
 				198, "shoooo", "sdaf");
 		
