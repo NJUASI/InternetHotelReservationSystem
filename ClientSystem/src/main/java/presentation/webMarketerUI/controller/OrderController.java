@@ -100,7 +100,7 @@ public class OrderController {
 
 		orderVO = new OrderVO(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
 		 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-		 OrderState.ABNORMAL,false, "gaoy", "1212121") ,12.4,createTime,checkInTime,checkOutTime,RoomType.AMBASSADOR,4,"202",4,"adsfas",3.4,"22w222");
+		 OrderState.ABNORMAL,false, "gaoy", "1212121") ,12.4,createTime,checkInTime,checkOutTime,RoomType.商务套房,4,"202",4,"adsfas",3.4,"22w222");
 
 		if (orderVO.orderGeneralVO.state == OrderState.ABNORMAL) {
 			cancelOrderPane.setDisable(false);
@@ -213,7 +213,7 @@ public class OrderController {
 
 		orderVO = new OrderVO(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
 				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				 OrderState.ABNORMAL,false, "gaoy", "1212121") ,12.4,createTime,checkInTime,checkOutTime,RoomType.AMBASSADOR,4,"202",4,"adsfas",3.4,"22w222");
+				 OrderState.ABNORMAL,false, "gaoy", "1212121") ,12.4,createTime,checkInTime,checkOutTime,RoomType.商务套房,4,"202",4,"adsfas",3.4,"22w222");
 		
 		
 		if (orderVO.orderGeneralVO.state == OrderState.ABNORMAL) {

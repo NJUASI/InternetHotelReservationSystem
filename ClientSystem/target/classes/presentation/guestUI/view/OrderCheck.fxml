@@ -36,22 +36,25 @@
                                           <Label layoutX="567.0" layoutY="131.0" text="价格：" />
                                           <Label fx:id="detail_price" layoutX="616.0" layoutY="131.0" text="610" />
                                           <Button fx:id="detail_state" alignment="CENTER" focusTraversable="false" layoutX="529.0" layoutY="57.0" mnemonicParsing="false" mouseTransparent="true" prefHeight="54.0" prefWidth="167.0" text="未执行" />
-                                          <GridPane layoutX="478.0" layoutY="235.0" prefHeight="118.0" prefWidth="328.0">
+                                          <GridPane layoutX="478.0" layoutY="226.0" prefHeight="127.0" prefWidth="328.0">
                                              <children>
                                                 <Label text="最晚执行时间：" GridPane.rowIndex="1" />
                                                 <Label fx:id="detail_expectTime" text="2016-10-2 14：00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                                 <Label fx:id="detail_createTime" text="2016-10-2 14：00" GridPane.columnIndex="1" />
                                                 <Label text="订单生成时间：" />
-                                                <Label text="客户入住时间：" GridPane.rowIndex="2" />
-                                                <Label text="客户退房时间：" GridPane.rowIndex="3" />
-                                                <Label fx:id="detail_checkOutTime" text="2016-10-2 14：00" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label fx:id="detail_checkInTime" text="2016-10-2 14：00" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label text="客户入住时间：" GridPane.rowIndex="3" />
+                                                <Label text="客户退房时间：" GridPane.rowIndex="4" />
+                                                <Label fx:id="detail_checkOutTime" text="2016-10-2 14：00" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                <Label fx:id="detail_checkInTime" text="2016-10-2 14：00" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <Label text="预计离开时间：" GridPane.rowIndex="2" />
+                                                <Label fx:id="detail_expectLeaveTime" text="2016-10-2 14：00" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                              </children>
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.0" minWidth="10.0" prefWidth="71.0" />
                                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="222.0" minWidth="10.0" prefWidth="172.0" />
                                              </columnConstraints>
                                              <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

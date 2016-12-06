@@ -150,10 +150,10 @@ public class HotelSearchController {
 				198, "shoooo", "sdaf");
 
 		roomList = new LinkedList<>();
-		roomList.add(new RoomInfoVO("123456", "DANREN", 23,3, 259));
-		roomList.add(new RoomInfoVO("12123456", "双人", 12,3, 259));
-		roomList.add(new RoomInfoVO("1232456","三间", 134,23, 2159));
-		roomList.add(new RoomInfoVO("1234136", "总统",233, 223, 259));
+		roomList.add(new RoomInfoVO("123456",RoomType.单人间, "DANREN", 23,3, 259));
+		roomList.add(new RoomInfoVO("12123456",RoomType.双人间,"双人", 12,3, 259));
+		roomList.add(new RoomInfoVO("1232456",RoomType.三人间,"三间", 134,23, 2159));
+		roomList.add(new RoomInfoVO("1234136",RoomType.总统套房, "总统",233, 223, 259));
 		
 		
 		orderVOlist=new LinkedList<>();
@@ -238,7 +238,7 @@ public class HotelSearchController {
 		List<TypeTable> dataList = new LinkedList<TypeTable>();
 		for (int i = 0; i < roomList.size(); i++) {
 			RoomInfoVO temp = roomList.get(i);
-			dataList.add(new TypeTable(temp.roomType, temp.remainNum + "", Double.toString(temp.price)));
+			dataList.add(new TypeTable(temp.roomName, temp.remainNum + "", Double.toString(temp.price)));
 		}
 
 		ObservableList<TypeTable> data = FXCollections.observableArrayList();
@@ -325,7 +325,7 @@ public class HotelSearchController {
 	@FXML
 	protected void openCreateOrder() {
 		for (int i = 0; i < roomList.size(); i++) {
-		 roomTypeInOrder.getItems().add(roomList.get(i).roomType);
+		 roomTypeInOrder.getItems().add(roomList.get(i).roomName);
 		}
 		roomTypeInOrder.setValue(roomTable.getSelectionModel().getSelectedItem().getRoomType());
 		remainNumInOrder.setText(roomTable.getSelectionModel().getSelectedItem().getRemainRoomNum());
