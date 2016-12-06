@@ -19,7 +19,10 @@ import utilities.OrderState;
 import utilities.RoomType;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
-
+/**
+ * @author 61990
+ *
+ */
 public class OrderController {
 	//订单概况
 		@FXML
@@ -238,7 +241,7 @@ public class OrderController {
 					final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
 
 					final OrderState orderState = OrderState.EXECUTED;
-					final RoomType roomType = RoomType.双人间;
+					final RoomType roomType = RoomType.三人间;
 
 					orderVO = new OrderVO(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
 							 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 

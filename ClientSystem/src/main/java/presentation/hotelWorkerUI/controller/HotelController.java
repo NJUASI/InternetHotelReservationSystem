@@ -17,6 +17,10 @@ import presentation.guestUI.controller.EvaluationTable;
 import vo.HotelEvaluationVO;
 import vo.HotelVO;
 
+/**
+ * @author 61990
+ *
+ */
 public class HotelController {
 	@FXML
 	private Pane hotelModifyPane;
