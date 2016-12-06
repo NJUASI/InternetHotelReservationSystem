@@ -23,4 +23,7 @@ public class MockHotel extends Hotel {
 	
 	
 
+	public ResultMessage scoreUpdate(double score) {
+		return ResultMessage.HOTEL_SCORE_UPDATE_SUCCESS;
+	}
 }

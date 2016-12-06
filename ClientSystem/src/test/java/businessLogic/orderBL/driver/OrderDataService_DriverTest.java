@@ -20,7 +20,7 @@ import utilities.RoomType;
  * 
  * @author charles
  * lastChangedBy charles
- * updateTime 2016/11/27
+ * updateTime 2016/12/5
  *
  */
 public class OrderDataService_DriverTest {
@@ -59,7 +59,7 @@ public class OrderDataService_DriverTest {
 				roomType, 1, "305", 2, "no", 4.5, "good");
 		
 		try {
-			assertEquals(ResultMessage.SUCCESS, driver.orderDataService.createOrder(createOrderVO));
+			assertEquals(ResultMessage.ORDER_CREATE_SUCCESS, driver.orderDataService.createOrder(createOrderVO));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -83,7 +83,7 @@ public class OrderDataService_DriverTest {
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		
 		try {
-			assertEquals(ResultMessage.SUCCESS, driver.orderDataService.executeOrder("123456789012"));
+			assertEquals(ResultMessage.ORDER_EXECUTE_SUCCESS, driver.orderDataService.executeOrder("123456789012"));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -108,7 +108,7 @@ public class OrderDataService_DriverTest {
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		
 		try {
-			assertEquals(ResultMessage.SUCCESS, driver.orderDataService.undoAbnormalOrder("123456789012"));
+			assertEquals(ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS, driver.orderDataService.undoAbnormalOrder("123456789012"));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -133,7 +133,7 @@ public class OrderDataService_DriverTest {
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		
 		try {
-			assertEquals(ResultMessage.SUCCESS, driver.orderDataService.undoNormalOrder("123456789012"));
+			assertEquals(ResultMessage.NORMAL_ORDER_UNDO_SUCCESS, driver.orderDataService.undoNormalOrder("123456789012"));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
