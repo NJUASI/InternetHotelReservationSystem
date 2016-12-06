@@ -8,11 +8,11 @@ import java.io.Serializable;
  * @lastChangedBy charles
  * @updateTime 2016/12/5
  * 
- * 优先级：已评论 > 已执行 > 未执行 > 异常 > 已取消
+ * 优先级：已取消 < 异常 < 未执行 < 已执行
  */
 public enum OrderState implements Serializable{
 	
-	CANCELLED, ABNORMAL, UNEXECUTED, EXECUTED, COMMENTED;
+	CANCELLED, ABNORMAL, UNEXECUTED, EXECUTED;
 	
 	
 	/**

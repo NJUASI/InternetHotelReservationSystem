@@ -262,7 +262,7 @@ public class OrderBLService_Stub implements OrderBLService {
 	 * @return 此客户在此相应酒店预定过的订单状态
 	 */
 	public OrderState getOrderState(String guestID, String hotelID) {
-		return OrderState.COMMENTED;
+		return OrderState.EXECUTED;
 	}
 	
 }

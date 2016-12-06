@@ -464,7 +464,7 @@ public class Order {
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/5
 	 * @param states 此客户在此相应酒店预定过的所有订单状态
-	 * @return 优先级最高的订单状态（已评论 > 已执行 > 未执行 > 异常 > 已取消）
+	 * @return 优先级最高的订单状态（已取消 < 异常 < 未执行 < 已执行）
 	 */
 	private static OrderState getMaxOrderState(List<OrderState> states) {
 		List<Integer> integers = new ArrayList<Integer>();
