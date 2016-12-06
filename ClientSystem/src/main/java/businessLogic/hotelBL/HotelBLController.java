@@ -28,7 +28,8 @@ public class HotelBLController implements HotelBLService {
 	private String guestID;
 	
 	private HotelBLController() {
-		
+		hotel = new Hotel();
+		hotelScan = new HotelScan();
 	}
 	
 	/**

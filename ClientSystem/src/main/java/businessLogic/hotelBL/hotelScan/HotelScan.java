@@ -51,6 +51,10 @@ public class HotelScan {
 		this.guestID = guestID;
 	}
 
+	public HotelScan() {
+		// TODO 自动生成的构造函数存根
+	}
+
 	/**
 	 * @Description:根据城市商圈的信息查找所有位于该城市商圈的酒店
 	 * @param addressVO

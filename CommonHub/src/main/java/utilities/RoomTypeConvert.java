@@ -11,9 +11,6 @@ public class RoomTypeConvert {
 		if(roomType.equals("三人间")){
 			return RoomType.三人间;
 		}
-		if(roomType.equals("豪华套房")){
-			return RoomType.豪华套房;
-		}
 		if(roomType.equals("总统套房")){
 			return RoomType.总统套房;
 		}

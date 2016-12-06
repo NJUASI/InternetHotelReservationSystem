@@ -99,6 +99,8 @@
             </GridPane>
             <Button focusTraversable="false" layoutX="230.0" layoutY="458.0" mnemonicParsing="false" onAction="#checkIn" prefHeight="31.0" prefWidth="50.0" text="确认" AnchorPane.bottomAnchor="112.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="615.0" AnchorPane.topAnchor="458.0" />
             <Separator layoutX="469.0" layoutY="60.0" orientation="VERTICAL" prefHeight="547.0" prefWidth="11.0" />
+            <Label layoutX="225.0" layoutY="99.0" text="线下入住" />
+            <Label layoutX="629.0" layoutY="99.0" text="线下退房" />
          </children>
       </AnchorPane>
    </children>
