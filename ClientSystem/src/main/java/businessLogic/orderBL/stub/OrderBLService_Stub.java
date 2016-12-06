@@ -55,7 +55,7 @@ public class OrderBLService_Stub implements OrderBLService {
 	 * @return 客户成功创建此订单
 	 */
 	public ResultMessage createOrder(final OrderVO orderVO) {
-		return ResultMessage.SUCCESS;
+		return ResultMessage.ORDER_CREATE_SUCCESS;
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class OrderBLService_Stub implements OrderBLService {
 	 * @return 酒店工作人员成功执行此订单
 	 */
 	public ResultMessage executeOrder(final String orderID) {
-		return ResultMessage.SUCCESS;
+		return ResultMessage.ORDER_EXECUTE_SUCCESS;
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class OrderBLService_Stub implements OrderBLService {
 	 * @return 网站营销人员是否成功撤销此异常订单
 	 */
 	public ResultMessage undoAbnormalOrder(final String orderID) {
-		return ResultMessage.SUCCESS;
+		return ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS;
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class OrderBLService_Stub implements OrderBLService {
 	 * @return 客户是否成功撤销此正常订单
 	 */
 	public ResultMessage undoNormalOrder(final String orderID) {
-		return ResultMessage.SUCCESS;
+		return ResultMessage.NORMAL_ORDER_UNDO_SUCCESS;
 	}
 
 	/**
@@ -196,7 +196,7 @@ public class OrderBLService_Stub implements OrderBLService {
 	 * @return 是否成功更新
 	 */
 	public ResultMessage updateCheckIn (CheckInVO checkInVO) {
-		return ResultMessage.SUCCESS;
+		return ResultMessage.CHECK_IN_SUCCESS;
 	}
 
 	/**
@@ -207,7 +207,7 @@ public class OrderBLService_Stub implements OrderBLService {
 	 * @return 是否成功更新
 	 */
 	public ResultMessage updateCheckOut (CheckOutVO checkOutVO) {
-		return ResultMessage.SUCCESS;
+		return ResultMessage.CHECK_OUT_SUCCESS;
 	}
 	
 	/**
@@ -219,7 +219,7 @@ public class OrderBLService_Stub implements OrderBLService {
 	 */
 	@Override
 	public ResultMessage addEvaluation(final GuestEvaluationVO evaluationVO) {
-		return ResultMessage.SUCCESS;
+		return ResultMessage.UPDATE_EVALUATION_SUCCESS;
 	}
 	
 	/**
@@ -232,9 +232,10 @@ public class OrderBLService_Stub implements OrderBLService {
 	@Override
 	public List<HotelEvaluationVO> getEvaluations(String hotelID) {
 		final List<HotelEvaluationVO> hotelEvaluations = new ArrayList<HotelEvaluationVO>();
-		final LocalDate checkInTime = LocalDateTime.of(2016, 2, 3, 11, 23).toLocalDate();
 		
-		hotelEvaluations.add(new HotelEvaluationVO("1234567890", checkInTime, 4.5, "good"));
+		hotelEvaluations.add(new HotelEvaluationVO("1234567890", LocalDate.of(2016, 2, 3), 4.5, "very good"));
+		hotelEvaluations.add(new HotelEvaluationVO("1234567891", LocalDate.of(2016, 4, 17), 4.5, "good"));
+		hotelEvaluations.add(new HotelEvaluationVO("1234567891", LocalDate.of(2016, 11, 23), 4.3, "ok"));
 		return hotelEvaluations;
 	}
 	

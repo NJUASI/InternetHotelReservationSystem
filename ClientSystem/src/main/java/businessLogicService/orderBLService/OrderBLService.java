@@ -161,7 +161,7 @@ public interface OrderBLService {
 	
 	
 	/*
-	 * 提供给Hotel的接口
+	 * 只提供给Hotel的接口
 	 */
 	/**
 	 * @author charles

@@ -435,26 +435,23 @@ public class Order {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/4
+	 * @updateTime 2016/12/5
 	 * @param guestID 此客户的客户编号
 	 * @param hotelID 此客户相对的酒店编号
 	 * @return 此客户在此相应酒店预定过的订单状态
+	 * ————————————————若此客户在此酒店没有订单记录？？？？
+	 * 
+	 * 直接从本层本模块getAllGuestOrderGeneral走
 	 */
 	public OrderState getOrderState(String guestID, String hotelID) {
-		List<OrderGeneralPO> guestOrders = null;
-		
-		try {
-			guestOrders = orderDataService.getAllGuestOrderGeneral(guestID);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		List<OrderGeneralVO> guestOrders = getAllGuestOrderGeneral(guestID);
 		
 		List<OrderState> states = new ArrayList<OrderState>();
 		if (guestOrders != null) {
 			for (int i = 0; i < guestOrders.size(); i++) {
-				OrderGeneralPO thisOrderGeneral = guestOrders.get(i);
-				if (thisOrderGeneral.getHotelID().equals(hotelID)) {
-					states.add(thisOrderGeneral.getState());
+				OrderGeneralVO thisOrderGeneral = guestOrders.get(i);
+				if (thisOrderGeneral.hotelID.equals(hotelID)) {
+					states.add(thisOrderGeneral.state);
 				}
 			}
 		}
@@ -465,11 +462,11 @@ public class Order {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/4
+	 * @updateTime 2016/12/5
 	 * @param states 此客户在此相应酒店预定过的所有订单状态
 	 * @return 优先级最高的订单状态（已评论 > 已执行 > 未执行 > 异常 > 已取消）
 	 */
-	private OrderState getMaxOrderState(List<OrderState> states) {
+	private static OrderState getMaxOrderState(List<OrderState> states) {
 		List<Integer> integers = new ArrayList<Integer>();
 		for (int i = 0; i < states.size(); i++) {
 			integers.add(states.get(i).ordinal());
@@ -481,7 +478,6 @@ public class Order {
 				indexOfMax = i;
 			}
 		}
-		return OrderState.values()[indexOfMax];
+		return OrderState.values()[integers.get(indexOfMax)];
 	}
-	
 }

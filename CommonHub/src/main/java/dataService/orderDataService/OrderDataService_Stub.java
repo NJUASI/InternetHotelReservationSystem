@@ -280,16 +280,4 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 		return bookedHotels;
 	}
 
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/5
-	 * @param guestID 此客户的客户编号
-	 * @param hotelID 此客户相对的酒店编号
-	 * @return 此客户在此相应酒店预定过的订单状态
-	 * @throws RemoteException RMI
-	 */
-	public OrderState getOrderState(String guestID, String hotelID) throws RemoteException {
-		return OrderState.COMMENTED;
-	}
 }
