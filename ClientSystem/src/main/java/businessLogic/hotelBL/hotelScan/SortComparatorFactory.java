@@ -21,16 +21,16 @@ public class SortComparatorFactory {
 		if(sortStrategy == SortStrategy.ASCLEVEL){
 			comparator = new AscLevelComparator();
 		}
-		if(sortStrategy == SortStrategy.ASCPRICE){
+		else if(sortStrategy == SortStrategy.ASCPRICE){
 			comparator = new AscPriceComparator();
 		}
-		if(sortStrategy == SortStrategy.DESCLEVEL){
+		else if(sortStrategy == SortStrategy.DESCLEVEL){
 			comparator = new DescLevelComparator();
 		}
-		if(sortStrategy == SortStrategy.DESCPRICE){
+		else if(sortStrategy == SortStrategy.DESCPRICE){
 			comparator = new DescPriceComparator();
 		}
-		if(sortStrategy == SortStrategy.DESCSCORE){
+		else if(sortStrategy == SortStrategy.DESCSCORE){
 			comparator = new DescScoreComparator();
 		}
 		return comparator;

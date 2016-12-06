@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import businessLogic.promotionBL.discountCalculation.DiscountCalculator;
+import businessLogic.promotionBL.DiscountCalculator;
 import utilities.OrderState;
 import utilities.ResultMessage;
 import utilities.RoomType;
@@ -216,4 +216,20 @@ public class MockOrder extends Order {
 		bookedHotels.add("12345679");
 		return bookedHotels;
 	}
+
+	/**
+	 * @Description:获取订单的状态
+	 * @param guestID
+	 * @param hotelID
+	 * @return
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月6日 上午9:12:40
+	 */
+	@Override
+	public OrderState getOrderState(String guestID, String hotelID) {
+		return OrderState.ABNORMAL;
+	}
+	
+	
 }

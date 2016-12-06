@@ -34,6 +34,14 @@ class Rooms {
 		initRoomInfoPO();
 	}
 
+	/**
+	 * @Description:当Rooms初始化以及酒店客房信息被添加或者更新时，调用此方法，
+	 * 获得最新的酒店客房信息
+	 * void
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月6日 上午11:16:21
+	 */
 	private void initRoomInfoPO(){
 		try {
 			hotelDataService.getRoomInfo(hotelID);
@@ -143,16 +151,6 @@ class Rooms {
 		return updateHotelRoomInfo(new RoomInfoVO(po),roomType);
 	}
 
-
-	private int findPO(String roomType){
-		for(int i = 0;i<roomInfoPOList.size();i++){
-			if(roomInfoPOList.get(i).getRoomType().equals(roomType)){
-				return i;
-			}
-		}
-		return -1;
-
-	}
 	/**
 	 * @Description:获得该酒店所有房间类型
 	 * @return
@@ -188,7 +186,6 @@ class Rooms {
 		return 0;
 	}
 
-
 	/**
 	 * @Description:获取该酒店最低价格
 	 * @return
@@ -205,6 +202,15 @@ class Rooms {
 			}
 		}
 		return min;
+	}
+	
+	private int findPO(String roomType){
+		for(int i = 0;i<roomInfoPOList.size();i++){
+			if(roomInfoPOList.get(i).getRoomType().equals(roomType)){
+				return i;
+			}
+		}
+		return -1;
 	}
 
 }

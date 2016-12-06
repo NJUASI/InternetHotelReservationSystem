@@ -2,11 +2,12 @@ package businessLogic.hotelBL.hotelScan;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-import businessLogic.hotelBL.hotel.Hotel;
-import businessLogic.orderBL.Order;
+import businessLogic.hotelBL.MockHotel;
+import businessLogic.orderBL.MockOrder;
 import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelPO;
@@ -55,6 +56,7 @@ public class HotelScan {
 	 */
 	public Iterator<HotelVO> getHotels(String city,String circle){
 		try {
+			System.out.println("enter");
 			hotelPOList = hotelDataService.getHotels(city,circle);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -73,7 +75,8 @@ public class HotelScan {
 	 */
 	public Iterator<HotelVO> sortHotels(SortStrategy sortStrategy){
 		List<HotelVO> hotelVOList = convertPOListToVOList(currentPOList);
-		hotelVOList.sort(sortComparatorFactory.createComparator(sortStrategy));
+		Comparator<HotelVO> comparator = sortComparatorFactory.createComparator(sortStrategy);
+		hotelVOList.sort(comparator);
 		//保存当前的顺序
 		currentPOList = convertVOListToPOList(hotelVOList);
 		return hotelVOList.iterator();
@@ -100,8 +103,8 @@ public class HotelScan {
 	private List<HotelVO> convertPOListToVOList(List<HotelPO> POList){
 		List<HotelVO> hotelVOList = new ArrayList<HotelVO>();
 		for(HotelPO hotelPO:currentPOList){
-			double minPrice = new Hotel(hotelPO.getHotelID()).getLowestPrice();
-			OrderState orderState = new Order().getOrderState(guestID, hotelPO.getHotelID());
+			double minPrice = new MockHotel(hotelPO.getHotelID()).getLowestPrice();
+			OrderState orderState = new MockOrder().getOrderState(guestID, hotelPO.getHotelID());
 			hotelVOList.add(new HotelVO(hotelPO,minPrice,orderState));
 		}
 		return hotelVOList;
