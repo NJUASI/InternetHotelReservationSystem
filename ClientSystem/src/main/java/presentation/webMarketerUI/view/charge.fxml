@@ -40,7 +40,7 @@
                   <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
-            <Button focusTraversable="false" layoutX="579.0" layoutY="146.0" mnemonicParsing="false" onAction="#search" text="查询" />
+            <Button fx:id="searchBtn" focusTraversable="false" layoutX="579.0" layoutY="146.0" mnemonicParsing="false" onAction="#search" text="查询" />
             <Pane fx:id="chargePane" layoutX="269.0" layoutY="186.0" prefHeight="361.0" prefWidth="358.0" visible="false">
                <children>
                   <GridPane layoutX="75.0" layoutY="59.0" prefHeight="161.0" prefWidth="226.0">
