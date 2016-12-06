@@ -7,8 +7,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.hotelBL.HotelInfoOperation;
+import businessLogic.hotelBL.MockHotel;
 import businessLogic.hotelBL.hotel.Hotel;
 import businessLogic.promotionBL.DiscountInSpan;
+import businessLogic.promotionBL.MockPromotion;
 import businessLogic.promotionBL.discountCalculation.DiscountCalculator;
 import dataService.orderDataService.OrderDataService;
 import dataService.orderDataService.OrderDataService_Stub;
@@ -51,12 +53,15 @@ public class Order {
 	 */
 	public Order() {
 //		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
+		
 		try {
 			orderDataService = new OrderDataService_Stub();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		discountCalculator = new DiscountCalculator();
+		
+		discountCalculator = new MockPromotion();
+		//hotel的协作类需要hotelID，故在此不能初始化
 	}
 
 	/**
@@ -69,7 +74,12 @@ public class Order {
 	 */
 	public double getTempPrice(OrderVO orderVO) {
 		Iterator<Double> discountsInSpan = discountCalculator.getDiscountInSpan(new PreOrder(orderVO));
-		return orderVO.previousPrice * discountsInSpan.next();
+		final double prePrice = orderVO.previousPrice;
+		double result = 0;
+		while(discountsInSpan.hasNext()) {
+			result += prePrice * discountsInSpan.next();
+		}
+		return result;
 	}
 	
 	/**
@@ -363,8 +373,10 @@ public class Order {
 		ResultMessage msg2 = ResultMessage.HOTEL_SCORE_UPDATE_FAILURE;
 		try {
 			msg1 = orderDataService.addEvaluation(new GuestEvaluationPO(evaluationVO));
-			
-			hotelInterface = new Hotel(orderDataService.getOrderDetail(evaluationVO.orderID).getHotelID());
+			/*
+			 * ！！！！！！！！！！！！MockHotel初始化！！！！！！！！！！！！！
+			 */
+			hotelInterface = new MockHotel(orderDataService.getOrderDetail(evaluationVO.orderID).getHotelID());
 			msg2 = hotelInterface.scoreUpdate(evaluationVO.score);
 		} catch (RemoteException e) {
 			e.printStackTrace();

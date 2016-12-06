@@ -16,4 +16,8 @@ public class MockHotel extends Hotel {
 		return ResultMessage.SUCCESS;
 	}
 
+	@Override
+	public ResultMessage scoreUpdate(double score) {
+		return ResultMessage.HOTEL_SCORE_UPDATE_SUCCESS;
+	}
 }

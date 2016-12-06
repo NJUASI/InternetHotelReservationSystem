@@ -56,7 +56,7 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 * @throws RemoteException RMI
 	 */
 	public ResultMessage createOrder(final OrderPO order) throws RemoteException {
-		return ResultMessage.SUCCESS;
+		return ResultMessage.ORDER_CREATE_SUCCESS;
 	}
 
 
@@ -69,7 +69,7 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 * @throws RemoteException RMI
 	 */
 	public ResultMessage executeOrder(final String orderID) throws RemoteException {
-		return ResultMessage.SUCCESS;
+		return ResultMessage.ORDER_EXECUTE_SUCCESS;
 	}
 
 
@@ -82,7 +82,7 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 * @throws RemoteException RMI
 	 */
 	public ResultMessage undoAbnormalOrder(final String orderID) throws RemoteException {
-		return ResultMessage.SUCCESS;
+		return ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS;
 	}
 
 	
@@ -95,7 +95,7 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 * @throws RemoteException RMI
 	 */
 	public ResultMessage undoNormalOrder(final String orderID) throws RemoteException {
-		return ResultMessage.SUCCESS;
+		return ResultMessage.NORMAL_ORDER_UNDO_SUCCESS;
 	}
 	
 	
