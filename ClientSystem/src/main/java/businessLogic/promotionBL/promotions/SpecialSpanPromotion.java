@@ -41,7 +41,7 @@ public class SpecialSpanPromotion {
 	 * @time:2016年12月1日 下午3:25:34
 	 */
 	public Iterator<SpecialSpanPromotionVO> getHotelSpecialSpanPromotions(String hotelID){
-		initSpecialSpanPromotionDiscountOneday(hotelID);
+		initSpecialSpanPromotions(hotelID);
 		return convertPOListToVOListIterator(specialSpanPromotions);
 	}
 
@@ -53,7 +53,7 @@ public class SpecialSpanPromotion {
 	 * @time:2016年12月1日 下午3:40:53
 	 */
 	public Iterator<SpecialSpanPromotionVO> getWebSpecialSpanPromotions(){
-		initSpecialSpanPromotionDiscountOneday(null);
+		initSpecialSpanPromotions(null);
 		return convertPOListToVOListIterator(specialSpanPromotions);
 	}
 
@@ -118,9 +118,9 @@ public class SpecialSpanPromotion {
 	 */
 	public double getDiscountOneday(String hotelID, LocalDate today){
 		double discount = 1;
-		initSpecialSpanPromotionDiscountOneday(hotelID);
+		initSpecialSpanPromotions(hotelID);
 		discount = discount * getSpecialSpanDiscount(today);
-		initSpecialSpanPromotionDiscountOneday(null);
+		initSpecialSpanPromotions(null);
 		discount = discount * getSpecialSpanDiscount(today); 
 		return discount;
 	}
@@ -149,7 +149,7 @@ public class SpecialSpanPromotion {
 		return specialSpanDiscount;
 	}
 
-	private void initSpecialSpanPromotionDiscountOneday(String hotelID){
+	private void initSpecialSpanPromotions(String hotelID){
 		try{
 			if(hotelID == null){
 				specialSpanPromotions = promotionDataService.getWebSpecialSpanPromotion();

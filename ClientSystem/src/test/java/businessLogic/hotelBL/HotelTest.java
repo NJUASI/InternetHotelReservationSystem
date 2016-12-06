@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import businessLogic.hotelBL.hotel.Hotel;
 import utilities.ResultMessage;
+import utilities.RoomType;
 import vo.HotelVO;
 import vo.RoomInfoVO;
 
@@ -52,7 +53,7 @@ public class HotelTest {
 	@Ignore
 	@Test
 	public void testUpdateHotelRoomInfo() {
-		RoomInfoVO vo = new RoomInfoVO("12345678","高级大床房",10,5,100);
+		RoomInfoVO vo = new RoomInfoVO("12345678",RoomType.单人间,"高级大床房",10,5,100);
 		assertEquals(hotel.updateHotelRoomInfo(vo,"高级大床房"), ResultMessage.SUCCESS);
 	}
 

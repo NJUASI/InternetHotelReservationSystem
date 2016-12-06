@@ -42,7 +42,7 @@ public class RoomDataHelperImplTest {
 		
 		RoomInfoPO po = new RoomInfoPO();
 		po.setHotelID("12345678");
-		po.setRoomType("高级双床房");
+		po.setRoomName("高级双床房");
 		
 		helper.updateRoomInfo(po, "高级大床房");
 	
@@ -57,7 +57,7 @@ public class RoomDataHelperImplTest {
 
 		RoomInfoPO po = new RoomInfoPO();
 		po.setHotelID("12345678");
-		po.setRoomType("高级大床房");
+		po.setRoomName("高级大床房");
 		
 		helper.addRoomInfo(po);
 		

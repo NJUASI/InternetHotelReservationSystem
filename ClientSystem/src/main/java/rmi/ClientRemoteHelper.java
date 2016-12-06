@@ -73,13 +73,10 @@ public class ClientRemoteHelper {
 			System.out.println("connect");
 
 		} catch (MalformedURLException e) {
-			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		} catch (NotBoundException e) {
-			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
 	}

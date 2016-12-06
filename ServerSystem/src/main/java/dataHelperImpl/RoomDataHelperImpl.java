@@ -11,6 +11,7 @@ import dataHelper.RoomDataHelper;
 import po.RoomInfoPO;
 import utilities.JDBCUtil;
 import utilities.ResultMessage;
+import utilities.RoomTypeConvert;
 
 /**
  * @Description:更新数据库中的客房信息
@@ -52,10 +53,11 @@ public class RoomDataHelperImpl implements RoomDataHelper {
 			while(rs.next()){
 				po = new RoomInfoPO();
 				po.setHotelID(hotelID);
-				po.setRoomType(rs.getString(2));
-				po.setRoomNum(rs.getInt(3));
-				po.setRemainNum(rs.getInt(4));
-				po.setPrice(rs.getDouble(5));
+				po.setRoomType(RoomTypeConvert.convert(rs.getString(2)));
+				po.setRoomName(rs.getString(3));
+				po.setRoomNum(rs.getInt(4));
+				po.setRemainNum(rs.getInt(5));
+				po.setPrice(rs.getDouble(6));
 				list.add(po);
 			}
 
@@ -77,20 +79,21 @@ public class RoomDataHelperImpl implements RoomDataHelper {
 	 * @time:2016年12月4日 下午1:34:10
 	 */
 	@Override
-	public ResultMessage updateRoomInfo(RoomInfoPO roomInfoPO, String oldRoomType) {
+	public ResultMessage updateRoomInfo(RoomInfoPO roomInfoPO, String oldRoomName) {
 		sql = "update roomInfo set "
-				+ "roomType = ? , roomNum = ? , remainNum = ? , price = ?"
-				+ "where hotelID = ? and roomType = ?";
+				+ "roomType = ? , roomName = ?, roomNum = ? , remainNum = ? , price = ?"
+				+ "where hotelID = ? and roomName = ?";
 
 		try {
 			ps = conn.prepareStatement(sql);
 
-			ps.setString(1, roomInfoPO.getRoomType());
-			ps.setInt(2, roomInfoPO.getRoomNum());
-			ps.setInt(3, roomInfoPO.getRemainNum());
-			ps.setDouble(4, roomInfoPO.getPrice());
-			ps.setString(5, roomInfoPO.getHotelID());
-			ps.setString(6, oldRoomType);
+			ps.setString(1, roomInfoPO.getRoomType().toString());
+			ps.setString(2, roomInfoPO.getRoomName());
+			ps.setInt(3, roomInfoPO.getRoomNum());
+			ps.setInt(4, roomInfoPO.getRemainNum());
+			ps.setDouble(5, roomInfoPO.getPrice());
+			ps.setString(6, roomInfoPO.getHotelID());
+			ps.setString(7, oldRoomName);
 
 			ps.execute();
 			return ResultMessage.SUCCESS;
@@ -109,17 +112,18 @@ public class RoomDataHelperImpl implements RoomDataHelper {
 	 */
 	@Override
 	public ResultMessage addRoomInfo(RoomInfoPO roomInfoPO) {
-		sql = "insert into roominfo(hotelID,roomType,roomNum,remainNum,price)"
-				+"values(?,?,?,?,?)";
+		sql = "insert into roominfo(hotelID,roomType,roomName,roomNum,remainNum,price)"
+				+"values(?,?,?,?,?,?)";
 
 		try {
 
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, roomInfoPO.getHotelID());
-			ps.setString(2, roomInfoPO.getRoomType());
-			ps.setInt(3, roomInfoPO.getRoomNum());
-			ps.setInt(4, roomInfoPO.getRemainNum());
-			ps.setDouble(5, roomInfoPO.getPrice());
+			ps.setString(2, roomInfoPO.getRoomType().toString());
+			ps.setString(3, roomInfoPO.getRoomName());
+			ps.setInt(4, roomInfoPO.getRoomNum());
+			ps.setInt(5, roomInfoPO.getRemainNum());
+			ps.setDouble(6, roomInfoPO.getPrice());
 			ps.execute();
 
 			return ResultMessage.SUCCESS;
@@ -139,14 +143,14 @@ public class RoomDataHelperImpl implements RoomDataHelper {
 	 * @time:2016年12月4日 下午1:45:29
 	 */
 	@Override
-	public ResultMessage deleteRoomInfo(String hotelID, String roomType) {
-		sql = "delete from roominfo where hotelID = ? and roomType = ?";
+	public ResultMessage deleteRoomInfo(String hotelID, String roomName) {
+		sql = "delete from roominfo where hotelID = ? and roomName = ?";
 
 		try {
 			ps = conn.prepareStatement(sql);
 
 			ps.setString(1, hotelID);
-			ps.setString(2, roomType);
+			ps.setString(2, roomName);
 			
 			ps.execute();
 			return ResultMessage.SUCCESS;

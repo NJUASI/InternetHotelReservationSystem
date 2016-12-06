@@ -1,4 +1,4 @@
-package businessLogic.hotelBL.hotelScan.sortComparator;
+package businessLogic.hotelBL.hotelScan.sortComparator.sortComparatorIImp;
 
 import java.util.Comparator;
 

@@ -49,7 +49,7 @@ public class OrderDataService_DriverTest {
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
 
 		final OrderState orderState = OrderState.EXECUTED;
-		final RoomType roomType = RoomType.AMBASSADOR;
+		final RoomType roomType = RoomType.商务套房;
 		
 
 		final OrderGeneralPO createOrderGeneralVO = new OrderGeneralPO("123456789012", "1234567890", 
@@ -176,7 +176,7 @@ public class OrderDataService_DriverTest {
 			assertEquals(expectExecuteTime, orderPO.getExpectExecuteTime());
 			assertEquals(expectLeaveTime, orderPO.getExpectLeaveTime());
 			assertEquals(OrderState.EXECUTED, orderPO.getState());
-			assertEquals(RoomType.AMBASSADOR, orderPO.getRoomType());
+			assertEquals(RoomType.商务套房, orderPO.getRoomType());
 			assertEquals(2, orderPO.getRoomNumCount());
 			assertEquals("301  302", orderPO.getRoomNumber());
 			assertEquals("zhangsan", orderPO.getName());

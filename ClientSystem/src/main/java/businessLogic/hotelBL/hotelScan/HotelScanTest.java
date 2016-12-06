@@ -9,10 +9,12 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import businessLogic.hotelBL.hotelScan.searchCriteria.LevelSpanCriteria;
-import businessLogic.hotelBL.hotelScan.searchCriteria.NullCriteria;
+import businessLogic.hotelBL.hotelScan.searchCriteria.SearchCriteria;
+import businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl.LevelSpanCriteria;
+import utilities.SearchCriteriaType;
 import utilities.SortStrategy;
 import vo.HotelVO;
+import vo.SearchCriteriaVO;
 
 /**
  * @Description:测试浏览酒店、搜索酒店的排序和搜索算法
@@ -23,7 +25,8 @@ import vo.HotelVO;
 public class HotelScanTest {
 
 	HotelScan hotelScan;
-	List<SearchCriteria> searchCriteria;
+	List<SearchCriteriaType> searchCriteriaTypes;
+	SearchCriteriaVO vo;
 	Iterator<HotelVO> itr;
 	HotelVO vo1;
 	HotelVO vo2;
@@ -33,7 +36,8 @@ public class HotelScanTest {
 	public void setUp() throws Exception {
 		hotelScan = new HotelScan("12345678");
 		hotelScan.getHotels("南京", "仙林");
-		searchCriteria = new ArrayList<SearchCriteria>();
+		vo = new SearchCriteriaVO();
+		searchCriteriaTypes = new ArrayList<SearchCriteriaType>();
 	}
 
 	@Test
@@ -56,7 +60,7 @@ public class HotelScanTest {
 		assertEquals("12345676",vo3.hotelID);
 		
 		
-		//按价格排序  由于只能拿到一个价格 做不了测试 TODO
+		//TODO 按价格排序  由于只能拿到一个价格 做不了测试 
 		
 		//按评分降序排序
 		itr = hotelScan.sortHotels(SortStrategy.DESCSCORE);
@@ -70,8 +74,8 @@ public class HotelScanTest {
 
 	@Test
 	public void testSearchHotelsOfNullCriteria() {
-		searchCriteria.add(new NullCriteria());
-		itr = hotelScan.searchHotels(searchCriteria);
+		
+		itr = hotelScan.searchHotels(searchCriteriaTypes,vo);
 		vo1 = itr.next();
 		vo2 = itr.next();
 		vo3 = itr.next();
@@ -82,8 +86,10 @@ public class HotelScanTest {
 	
 	@Test
 	public void testSearchHotelsOfLevelSpanCriteria() {
-		searchCriteria.add(new LevelSpanCriteria(4,5));
-		itr = hotelScan.searchHotels(searchCriteria);
+		searchCriteriaTypes.add(SearchCriteriaType.LEVEL_SPAN);
+		vo.minLevel = 4;
+		vo.maxLevel = 5;
+		itr = hotelScan.searchHotels(searchCriteriaTypes,vo);
 		vo1 = itr.next();
 		vo2 = itr.next();
 		assertEquals("12345678",vo1.hotelID);

@@ -56,7 +56,7 @@ public class HotelDataServiceImplTest {
 
 	@Test
 	public void testGetRoomInfo() {
-		assertEquals("大床房",roomDataHelper.getRoomInfo("12345678").get(0).getRoomType());
+		assertEquals("大床房",roomDataHelper.getRoomInfo("12345678").get(0).getRoomName());
 	}
 
 	@Test

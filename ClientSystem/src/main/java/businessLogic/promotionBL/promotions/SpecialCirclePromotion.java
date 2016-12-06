@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import businessLogic.hotelBL.hotel.Hotel;
-import businessLogic.memberBL.Member;
+import businessLogic.hotelBL.MockHotel;
+import businessLogic.memberBL.MockMember;
 import dataService.promotionDataService.PromotionDataService;
 import dataService.promotionDataService.PromotionDataService_Stub;
 import po.AddressPO;
@@ -73,7 +73,7 @@ public class SpecialCirclePromotion {
 	 */
 	public double getDiscount(String guestID,String hotelID){
 		if(isVIP(guestID)){
-			Address hotelAddress = new Hotel(hotelID).getHotelAddress();
+			Address hotelAddress = new MockHotel(hotelID).getHotelAddress();
 			String city = hotelAddress.city;
 			String cycle = hotelAddress.circle;
 			try {
@@ -86,7 +86,7 @@ public class SpecialCirclePromotion {
 	}
 		
 	private boolean isVIP(String guestID){
-		return new Member().isMember(guestID, MemberType.COMMON);
+		return new MockMember().isMember(guestID, MemberType.COMMON);
 	}
 	
 	private Iterator<AddressVO> convertPOListToVOListIterator(List<AddressPO> POList){

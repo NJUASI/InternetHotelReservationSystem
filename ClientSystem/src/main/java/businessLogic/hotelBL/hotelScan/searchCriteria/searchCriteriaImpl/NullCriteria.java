@@ -1,8 +1,8 @@
-package businessLogic.hotelBL.hotelScan.searchCriteria;
+package businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl;
 
 import java.util.List;
 
-import businessLogic.hotelBL.hotelScan.SearchCriteria;
+import businessLogic.hotelBL.hotelScan.searchCriteria.SearchCriteria;
 import vo.HotelVO;
 
 public class NullCriteria implements SearchCriteria {

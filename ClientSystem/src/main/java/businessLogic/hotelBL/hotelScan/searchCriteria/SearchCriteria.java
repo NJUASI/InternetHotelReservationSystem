@@ -1,4 +1,4 @@
-package businessLogic.hotelBL.hotelScan;
+package businessLogic.hotelBL.hotelScan.searchCriteria;
 
 import java.util.List;
 

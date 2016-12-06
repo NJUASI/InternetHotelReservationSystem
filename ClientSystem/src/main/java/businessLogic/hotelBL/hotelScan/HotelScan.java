@@ -7,13 +7,18 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.hotelBL.MockHotel;
+import businessLogic.hotelBL.hotelScan.searchCriteria.SearchCriteria;
+import businessLogic.hotelBL.hotelScan.searchCriteria.SearchCriteriaFactory;
+import businessLogic.hotelBL.hotelScan.sortComparator.SortComparatorFactory;
 import businessLogic.orderBL.MockOrder;
 import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelPO;
 import utilities.OrderState;
+import utilities.SearchCriteriaType;
 import utilities.SortStrategy;
 import vo.HotelVO;
+import vo.SearchCriteriaVO;
 
 /**
  * @Description:浏览酒店的类，为酒店浏览及搜索提供排序及范围搜索的功能
@@ -84,16 +89,18 @@ public class HotelScan {
 	
 	/**
 	 * @Description:根据传入的搜索标准对当前该城市商圈内的hotelPOList进行筛选
-	 * @param searchCriteria
+	 * @param searchCriteriaTypes
 	 * @return
 	 * Iterator<HotelGeneralVO>
 	 * @author: Harvey Gong
 	 * @time:2016年11月29日 下午8:33:25
 	 */
-	public Iterator<HotelVO> searchHotels(List<SearchCriteria> searchCriteria) {
+	public Iterator<HotelVO> searchHotels(List<SearchCriteriaType> searchCriteriaTypes,SearchCriteriaVO searchCriteriaVO) {
 		List<HotelVO> hotelVOList = convertPOListToVOList(hotelPOList);
-		for(int i = 0;i < searchCriteria.size();i++){
-			hotelVOList = searchCriteria.get(i).meetCriteria(hotelVOList);
+		SearchCriteriaFactory searchCriteriaFactory = new SearchCriteriaFactory();
+		for(int i = 0;i < searchCriteriaTypes.size();i++){
+			//由searchCriteria的工厂根据searchCriteriaType创建具体的searchCriteria，再调用meetCriteria
+			hotelVOList = searchCriteriaFactory.createSearchCriteria(searchCriteriaTypes.get(i), searchCriteriaVO).meetCriteria(hotelVOList);
 		}
 		//保存当前的搜索条件
 		currentPOList = convertVOListToPOList(hotelVOList);

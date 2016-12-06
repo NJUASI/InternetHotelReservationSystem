@@ -15,7 +15,8 @@ import vo.RoomInfoVO;
 
 
 /**
- * @Description:TODO
+ * @Description:对于单个酒店的基本操作：
+ * 获取、更新酒店详细信息、客房信息，增加客房信息
  * @author:Harvey Gong
  * @time:2016年12月3日 下午9:52:10
  */

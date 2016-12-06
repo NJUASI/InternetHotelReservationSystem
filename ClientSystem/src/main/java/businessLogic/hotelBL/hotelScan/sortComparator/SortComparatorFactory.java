@@ -1,12 +1,12 @@
-package businessLogic.hotelBL.hotelScan;
+package businessLogic.hotelBL.hotelScan.sortComparator;
 
 import java.util.Comparator;
 
-import businessLogic.hotelBL.hotelScan.sortComparator.AscLevelComparator;
-import businessLogic.hotelBL.hotelScan.sortComparator.AscPriceComparator;
-import businessLogic.hotelBL.hotelScan.sortComparator.DescLevelComparator;
-import businessLogic.hotelBL.hotelScan.sortComparator.DescPriceComparator;
-import businessLogic.hotelBL.hotelScan.sortComparator.DescScoreComparator;
+import businessLogic.hotelBL.hotelScan.sortComparator.sortComparatorIImp.AscLevelComparator;
+import businessLogic.hotelBL.hotelScan.sortComparator.sortComparatorIImp.AscPriceComparator;
+import businessLogic.hotelBL.hotelScan.sortComparator.sortComparatorIImp.DescLevelComparator;
+import businessLogic.hotelBL.hotelScan.sortComparator.sortComparatorIImp.DescPriceComparator;
+import businessLogic.hotelBL.hotelScan.sortComparator.sortComparatorIImp.DescScoreComparator;
 import utilities.SortStrategy;
 import vo.HotelVO;
 

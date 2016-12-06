@@ -2,6 +2,7 @@ package dataService.promotionDataService;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,15 +37,25 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 
 	@Override
 	public List<SpecialSpanPromotionPO> getWebSpecialSpanPromotion() throws RemoteException {
-		// TODO 自动生成的方法存根
-		return null;
+		List<SpecialSpanPromotionPO> list = new ArrayList<SpecialSpanPromotionPO>();
+		LocalDate startDate = LocalDate.of(2016, 11, 11);
+		LocalDate endDate = LocalDate.of(2016, 11, 12);
+		list.add(new SpecialSpanPromotionPO("99999999",PromotionType.HOTEL_HOLIDAY,"双十一折扣",0.9,startDate,endDate));
+		list.add(new SpecialSpanPromotionPO("99999999",PromotionType.HOTEL_HOLIDAY,"中秋折扣",0.8,startDate.plusMonths(1),endDate.plusMonths(1)));
+		list.add(new SpecialSpanPromotionPO("99999999",PromotionType.HOTEL_HOLIDAY,"元旦折扣",0.7,startDate.plusYears(1),endDate.plusYears(1)));
+		return list;
 	}
 
 
 	@Override
 	public List<SpecialSpanPromotionPO> getHotelSpecialSpanPromotion(String hotelID) throws RemoteException {
-		// TODO 自动生成的方法存根
-		return null;
+		List<SpecialSpanPromotionPO> list = new ArrayList<SpecialSpanPromotionPO>();
+		LocalDate startDate = LocalDate.of(2016, 11, 11);
+		LocalDate endDate = LocalDate.of(2016, 11, 12);
+		list.add(new SpecialSpanPromotionPO("12345678",PromotionType.HOTEL_HOLIDAY,"双十一折扣",0.9,startDate,endDate));
+		list.add(new SpecialSpanPromotionPO("12345678",PromotionType.HOTEL_HOLIDAY,"双十二折扣",0.8,startDate.plusMonths(1),endDate.plusMonths(1)));
+		list.add(new SpecialSpanPromotionPO("12345678",PromotionType.HOTEL_HOLIDAY,"春节折扣",0.7,startDate.plusYears(1),endDate.plusYears(1)));
+		return list;
 	}
 
 	@Override
@@ -76,8 +87,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 
 	@Override
 	public double getSpecialCircleDiscount(String city, String cycle) {
-		// TODO 自动生成的方法存根
-		return 0;
+		return 0.9;
 	}
 
 	@Override

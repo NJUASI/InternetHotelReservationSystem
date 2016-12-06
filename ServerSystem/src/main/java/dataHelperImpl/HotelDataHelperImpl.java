@@ -164,7 +164,6 @@ public class HotelDataHelperImpl implements HotelDataHelper{
 			ps.setString(9, hotelPO.getEquipment());
 			ps.setInt(10, hotelPO.getCommentsNum());
 		} catch (SQLException e) {
-			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
 	}

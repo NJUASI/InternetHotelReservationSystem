@@ -34,7 +34,7 @@ public class Order_tester {
 
 		final LocalDateTime expectExecuteTime = LocalDateTime.of(2016, 2, 3, 14, 00);
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
-		final RoomType roomType = RoomType.AMBASSADOR;
+		final RoomType roomType = RoomType.商务套房;
 		
 		final OrderGeneralVO createOrderGeneralVO = new OrderGeneralVO("1234567890", "12345678", "thisHotel", 
 				"nanjing", expectExecuteTime, expectLeaveTime, "zhangsan", "15012345678");
