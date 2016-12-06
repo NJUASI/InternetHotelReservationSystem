@@ -20,7 +20,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.webMarketerUI.controller.OrderController">
    <children>
-      <AnchorPane fx:id="searchPane" minHeight="0.0" minWidth="0.0" prefHeight="601.0" prefWidth="895.0" visible="false">
+      <AnchorPane fx:id="searchPane" minHeight="0.0" minWidth="0.0" prefHeight="601.0" prefWidth="895.0">
          <children>
             <Label layoutX="404.0" layoutY="14.0" prefHeight="39.0" text="异常订单" AnchorPane.topAnchor="14.0">
                <font>
@@ -57,12 +57,15 @@
                               <Label fx:id="detail_expectTime" text="2016-10-2 14：00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="detail_createTime" text="2016-10-2 14：00" GridPane.columnIndex="1" />
                               <Label text="生成时间：" />
+                              <Label text="预计离开时间：" GridPane.rowIndex="2" />
+                              <Label fx:id="detail_expectLeaveTime" text="2016-10-2 14：00" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.0" minWidth="10.0" prefWidth="71.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="222.0" minWidth="10.0" prefWidth="172.0" />
                            </columnConstraints>
                            <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
@@ -127,7 +130,7 @@
             </AnchorPane>
          </children>
       </Pane>
-      <AnchorPane fx:id="orderCheck" prefHeight="601.0" prefWidth="895.0">
+      <AnchorPane fx:id="orderCheck" prefHeight="601.0" prefWidth="895.0" visible="false">
          <children>
             <Button focusTraversable="false" layoutX="786.0" layoutY="70.0" mnemonicParsing="false" onAction="#OrderDetail" text="查看详情" />
             <Separator layoutY="60.0" prefHeight="3.0" prefWidth="895.0" />
@@ -147,13 +150,14 @@
             </Pane>
             <TableView fx:id="table" focusTraversable="false" layoutY="112.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="491.0" prefWidth="895.0" tableMenuButtonVisible="true">
                <columns>
-                  <TableColumn fx:id="orderIDColumn" prefWidth="113.0" text="订单编号" />
-                  <TableColumn fx:id="hotelNameColumn" prefWidth="122.0" text="酒店名" />
-                  <TableColumn fx:id="addressColumn" prefWidth="170.0" text="地址" />
-                  <TableColumn fx:id="checkInTimeColumn" prefWidth="153.0" text="预计入住时间" />
-                  <TableColumn fx:id="checkOutTimeColumn" prefWidth="150.0" text="预计离开时间" />
-                  <TableColumn fx:id="priceColumn" prefWidth="83.0" resizable="false" text="价格" />
-                  <TableColumn fx:id="stateColumn" prefWidth="98.0" text="订单状态" />
+                  <TableColumn fx:id="orderIDColumn" prefWidth="104.0" text="订单编号" />
+                  <TableColumn fx:id="nameColumn" prefWidth="100.0" text="客户姓名" />
+                  <TableColumn fx:id="hotelNameColumn" prefWidth="115.0" text="酒店名" />
+                  <TableColumn fx:id="addressColumn" prefWidth="135.0" text="地址" />
+                  <TableColumn fx:id="checkInTimeColumn" prefWidth="138.0" text="预计入住时间" />
+                  <TableColumn fx:id="checkOutTimeColumn" prefWidth="140.0" text="预计离开时间" />
+                  <TableColumn fx:id="priceColumn" prefWidth="69.0" resizable="false" text="价格" />
+                  <TableColumn fx:id="stateColumn" prefWidth="92.0" text="订单状态" />
                </columns>
             </TableView>
          </children>

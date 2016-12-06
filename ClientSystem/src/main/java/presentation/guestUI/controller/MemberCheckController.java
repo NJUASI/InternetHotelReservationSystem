@@ -72,11 +72,13 @@ public class MemberCheckController {
 	protected void register() {
 		memberCheck.setVisible(false);
 		memberModify.setVisible(true);
-		if (!"".equals(birthday.getText())) {
-			commonPane.setDisable(false);
+		if (birthday.getText()!=null) {
+			commonPane.setDisable(true);
+			birthdayPicker.setValue(memberVO.birthday);
 		}
-		if (!"".equals(enterprise.getText())) {
+		if (enterprise.getText()!=null) {
 			enterprisePane.setDisable(true);
+			enterprise.setText(memberVO.enterprise);
 		}
 	}
 	@FXML

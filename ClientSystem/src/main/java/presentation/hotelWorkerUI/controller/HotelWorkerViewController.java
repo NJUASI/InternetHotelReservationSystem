@@ -31,12 +31,7 @@ public class HotelWorkerViewController {
   			offline = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/Offline.fxml"));
   			right.getChildren().add(offline);		
   		}
-	    @FXML 
-  		protected void openRemainRoom() throws IOException{
-  			right.getChildren().removeAll(mainPane,hotelInfo ,orderInfo, offline,remainRoom,promotion,roomInfo);
-  			remainRoom = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/RemainRoomInfo.fxml"));
-  			right.getChildren().add(remainRoom);
-  		}
+
 	    @FXML 
   		protected void openPromotion() throws IOException{
 	    	right.getChildren().removeAll(mainPane,hotelInfo ,orderInfo, offline,remainRoom,promotion,roomInfo);

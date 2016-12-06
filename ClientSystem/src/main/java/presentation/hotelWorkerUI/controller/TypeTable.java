@@ -22,8 +22,15 @@ public class TypeTable {
 		this.remainRoomNum = new SimpleStringProperty(remainRoomNum);
 		this.price = new SimpleStringProperty(price);
 	}
-	public RoomType getRoomType() {
-		return RoomType.valueOf(roomType.get());
+	public String getRoomType() {
+		return roomType.get();
+	}
+
+	public String getRoomNum() {
+		return roomNum.get();
+	}
+	public String getRemainRoomNum() {
+		return remainRoomNum.get();
 	}
 	public String getPrice() {
 		return price.get();
