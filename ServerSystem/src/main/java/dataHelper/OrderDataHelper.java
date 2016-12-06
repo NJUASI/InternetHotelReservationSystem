@@ -37,6 +37,16 @@ public interface OrderDataHelper {
 	
 	/**
 	 * @author 董金玉
+	 * @lastChangedBy 董金玉
+	 * @updateTime 2016/12/5
+	 * @param orderID  
+	 * @param state  需要修改的状态
+	 * @return ResultMessage 是否成功修改orderInfo
+	 */
+	ResultMessage setHasCommentBool(String orderID);
+	
+	/**
+	 * @author 董金玉
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/4
 	 * @param orderID 此次订单评价的订单编号

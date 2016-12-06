@@ -49,10 +49,11 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	public ResultMessage add(final OrderPO orderPO) {
 		sql = "INSERT INTO `order`(`order`.orderID,`order`.guestID,`order`.hotelID,`order`.hotelName,"
             + "`order`.hotelAddress,`order`.price,`order`.expectExecuteTime,`order`.expectLeaveTime,"
-            + "`order`.state,`order`.previousPrice,`order`.createTime,`order`.checkInTime,`order`.checkOutTime,"
-            + "`order`.roomType,`order`.roomNumCount,`order`.roomNumber,`order`.expectGuestNumCount,"
-            + "`order`.`name`,`order`.phone,`order`.message,`order`.`comment`,`order`.score) "
-            + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            + "`order`.state,`order`.hasCommented,`order`.`name`,`order`.phone,`order`.previousPrice,"
+            + "`order`.createTime,`order`.checkInTime,`order`.checkOutTime,`order`.roomType,"
+            + "`order`.roomNumCount,`order`.roomNumber,`order`.expectGuestNumCount,`order`.message,"
+            + "`order`.`comment`,`order`.score) "
+            + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -65,19 +66,21 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			ps.setObject(7, orderPO.getExpectExecuteTime());
 			ps.setObject(8, orderPO.getExpectLeaveTime());
 			ps.setString(9, orderPO.getState().toString());
-			ps.setDouble(10, orderPO.getPreviousPrice());
-			ps.setObject(11, orderPO.getCreateTime());
-			ps.setObject(12, orderPO.getCheckInTime());
-			ps.setObject(13, orderPO.getCheckOutTime());
-			ps.setString(14, orderPO.getRoomType().toString());
-			ps.setInt(15, orderPO.getRoomNumCount());
-			ps.setString(16, orderPO.getRoomNumber());
-			ps.setInt(17, orderPO.getExpectGuestNumCount());
-			ps.setString(18, orderPO.getName());
-			ps.setString(19, orderPO.getPhone());
-			ps.setString(20, orderPO.getMessage());
-			ps.setString(21, orderPO.getComment());
-			ps.setDouble(22, orderPO.getScore());
+			ps.setString(10, String.valueOf(orderPO.getHasCommented()));
+			ps.setString(11, orderPO.getName());
+			ps.setString(12, orderPO.getPhone());
+			ps.setDouble(13, orderPO.getPreviousPrice());
+			ps.setObject(14, orderPO.getCreateTime());
+			ps.setObject(15, orderPO.getCheckInTime());
+			ps.setObject(16, orderPO.getCheckOutTime());
+			ps.setString(17, orderPO.getRoomType().toString());
+			ps.setInt(18, orderPO.getRoomNumCount());
+			ps.setString(19, orderPO.getRoomNumber());
+			ps.setInt(20, orderPO.getExpectGuestNumCount());
+			ps.setString(21, orderPO.getMessage());
+			ps.setString(22, orderPO.getComment());
+			ps.setDouble(23, orderPO.getScore());
+			
 			
 			ps.execute();
 		} catch (SQLException e) {
@@ -112,6 +115,30 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	}
 
 	/**
+	 * @author 董金玉
+	 * @lastChangedBy 董金玉
+	 * @updateTime 2016/12/5
+	 * @param orderID  
+	 * @param state  需要修改的状态
+	 * @return ResultMessage 是否成功修改orderInfo
+	 */
+	public ResultMessage setHasCommentBool(String orderID) {
+		sql = "UPDATE `order` SET `order`.hasCommented = ? WHERE `order`.orderID = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, String.valueOf(true)); //此处硬编码1-2对应sql语句中问号的位置
+			ps.setObject(2, orderID);
+			
+			ps.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return ResultMessage.FAIL;
+		}
+		return ResultMessage.SUCCESS;
+	}
+	
+	/**
 	 * @author  Byron Dong
 	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/12/4
@@ -126,7 +153,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setObject(1, comment);
-			ps.setDouble(1, score);
+			ps.setDouble(2, score);
 			ps.setObject(3, orderID);
 			
 			ps.execute();
@@ -357,22 +384,31 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			orderPO.setExpectExecuteTime(rs.getTimestamp(7).toLocalDateTime());
 			orderPO.setExpectLeaveTime(rs.getTimestamp(8).toLocalDateTime());
 			orderPO.setState(OrderState.valueOf(rs.getString(9)));
-			orderPO.setPreviousPrice(rs.getDouble(10));
-			orderPO.setCreateTime(rs.getTimestamp(11).toLocalDateTime());
-			orderPO.setCheckInTime(rs.getTimestamp(12).toLocalDateTime());
-			orderPO.setCheckOutTime(rs.getTimestamp(13).toLocalDateTime());
-			orderPO.setRoomType(RoomType.valueOf(rs.getString(14)));
-			orderPO.setRoomNumCount(rs.getInt(15));
-			orderPO.setRoomNumber(rs.getString(16));
-			orderPO.setExpectGuestNumCount(rs.getInt(17));
-			orderPO.setName(rs.getString(18));
-			orderPO.setPhone(rs.getString(19));
-			orderPO.setMessage(rs.getString(20));
-			orderPO.setComment(rs.getString(21));
-			orderPO.setScore(rs.getDouble(22));
+			orderPO.setHasCommented(convertBooleanString2Boolean(rs.getString(10)));
+			orderPO.setName(rs.getString(11));
+			orderPO.setPhone(rs.getString(12));
+			orderPO.setPreviousPrice(rs.getDouble(13));
+			orderPO.setCreateTime(rs.getTimestamp(14).toLocalDateTime());
+			orderPO.setCheckInTime(rs.getTimestamp(15).toLocalDateTime());
+			orderPO.setCheckOutTime(rs.getTimestamp(16).toLocalDateTime());
+			orderPO.setRoomType(RoomType.valueOf(rs.getString(17)));
+			orderPO.setRoomNumCount(rs.getInt(18));
+			orderPO.setRoomNumber(rs.getString(19));
+			orderPO.setExpectGuestNumCount(rs.getInt(20));
+			orderPO.setMessage(rs.getString(21));
+			orderPO.setComment(rs.getString(22));
+			orderPO.setScore(rs.getDouble(23));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return orderPO;
+	}
+	
+	private boolean convertBooleanString2Boolean(String a) {
+		if (a.equals("true")) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 }

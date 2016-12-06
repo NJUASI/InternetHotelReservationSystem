@@ -8,6 +8,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -27,6 +28,7 @@ import vo.HotelVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
 import vo.RoomInfoVO;
+import vo.SearchCriteriaVO;
 /**
  * @author 61990
  * @控制酒店预定界面
@@ -56,6 +58,7 @@ public class HotelSearchController {
 	@FXML
 	protected void searchCity(){
 		cityChoose.getItems().clear();
+		cycleChoose.getItems().clear();
 		cityChoose.getItems().add("222");
 	}
 	
@@ -158,15 +161,7 @@ public class HotelSearchController {
 		createPane.setVisible(false);
 	}
 
-	
-	/**
-	 * 
-	 */
-	@FXML
-	protected void openChoose() {
-		hotelCheck.setVisible(false);
-		hotelChoose.setVisible(true);
-	}
+
 
 	// HotelDetail界面
 
@@ -347,6 +342,92 @@ public class HotelSearchController {
 	}
 
 	// Hotel筛选界面
+
+	@FXML
+	private CheckBox box1,box2,box3,box4,box5,boxOnly;
+	@FXML
+	private ComboBox<Double> minScoreInput,maxScoreInput,minlevelInput,maxlevelInput;
+	@FXML
+	private TextField roomInput,minpriceInput,	maxpriceInput,hotelNameInput;
+	
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @updateTime 2016/11/30
+	 * @describe 打开酒店筛选
+	 */
+	@FXML
+	protected void openChoose() {
+		
+		hotelCheck.setVisible(false);
+		hotelChoose.setVisible(true);
+	}
+
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @updateTime 2016/11/30
+	 * @describe 筛选
+	 */
+	@FXML
+	protected void selectHotel() {
+		
+//		// 酒店名称
+//		hotelNameInput.getText();
+//		
+//		// 只查看已预定的酒店
+//		boxOnly.isSelected();
+//
+//		// 星级区间，最低星级
+//		minlevelInput.getValue();
+//		
+//		// 星级区间，最高星级
+//		maxlevelInput.getValue();
+//		
+//		// 价格区间，最低价格
+//		minpriceInput.getText();
+//		
+//		// 价格区间，最高价格
+//		maxpriceInput.getText();
+//		
+//		// 评分区间，最低价格
+//		minScoreInput.getValue();
+//		
+//		// 评分区间，最高价格
+//		maxScoreInput.getValue();
+//		
+//		// 房间类型列表
+//		
+//		List<RoomType> roomTypes=new LinkedList<>();
+//		if(box1.isSelected()){
+//			roomTypes.add(RoomType.valueOf(box1.getText()));
+//		}
+//		if(box2.isSelected()){
+//			roomTypes.add(RoomType.valueOf(box2.getText()));
+//		}
+//		if(box3.isSelected()){
+//			roomTypes.add(RoomType.valueOf(box3.getText()));
+//		}
+//		if(box4.isSelected()){
+//			roomTypes.add(RoomType.valueOf(box4.getText()));
+//		}
+//		if(box5.isSelected()){
+//			roomTypes.add(RoomType.valueOf(box5.getText()));
+//		}
+//
+//		// 剩余房间数量
+//		
+//		Integer.parseInt(roomInput.getText());
+//		
+//		
+//		SearchCriteriaVO vo=new SearchCriteriaVO();
+		
+		hotelCheck.setVisible(true);
+		hotelChoose.setVisible(false);
+	}
+	
+	
+	
 
 	// 订单生成界面
 	@FXML
