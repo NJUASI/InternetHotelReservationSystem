@@ -24,7 +24,7 @@ public final class HotelVO {
 
 	//	酒店商圈
 	public String circle;
-	
+
 	//  酒店地址
 	public String address;
 
@@ -42,7 +42,7 @@ public final class HotelVO {
 
 	//	设施服务
 	public String equipment;
-	
+
 	//  订单的状态
 	public OrderState orderState;
 
@@ -52,18 +52,18 @@ public final class HotelVO {
 
 	public HotelVO(String hotelID, String hotelName, String city, String cycle, String hotelAddress, 
 			String level, double score, double minPrice, String introduction, String equipment) {
-this.hotelID=hotelID;
-this.hotelName=hotelName;
-this.city=city;
-this.circle=cycle;
-this.address=hotelAddress;
-this.level=level;
-this.score=score;
-this.minPrice=minPrice;
-this.introduction=introduction;
-this.equipment=equipment;
+		this.hotelID=hotelID;
+		this.hotelName=hotelName;
+		this.city=city;
+		this.circle=cycle;
+		this.address=hotelAddress;
+		this.level=level;
+		this.score=score;
+		this.minPrice=minPrice;
+		this.introduction=introduction;
+		this.equipment=equipment;
 
-		
+
 	}
 
 	/**
@@ -84,7 +84,7 @@ this.equipment=equipment;
 		this.introduction = hotelPO.getIntroduction();
 		this.equipment = hotelPO.getEquipment();
 	}
-	
+
 	/**
 	 * @Description:酒店浏览时，调用此构造方法
 	 * @param hotelPO
@@ -98,6 +98,10 @@ this.equipment=equipment;
 		this(hotelPO);
 		this.minPrice = minPrice;
 		this.orderState = orderState;
+	}
+
+	public HotelVO() {
+		// TODO 自动生成的构造函数存根
 	}
 
 }
