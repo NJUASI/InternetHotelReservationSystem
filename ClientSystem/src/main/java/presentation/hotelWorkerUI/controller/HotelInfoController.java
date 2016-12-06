@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
+import businessLogic.hotelBL.HotelBLController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import presentation.guestUI.controller.EvaluationTable;
+import utilities.IDReserve;
 import vo.HotelEvaluationVO;
 import vo.HotelVO;
 
@@ -21,7 +23,7 @@ import vo.HotelVO;
  * @author 61990
  *
  */
-public class HotelController {
+public class HotelInfoController {
 	@FXML
 	private Pane hotelModifyPane;
 	@FXML
@@ -42,8 +44,7 @@ public class HotelController {
 	@FXML
 	private void initialize() {
 
-		hotelVO = new HotelVO("12345", "hantingjiudiansss", "xinjiekou", "xinjiekou", "malianhedadao", "5xinji", 4.5,
-				198, "shoooo", "sdaf");
+		hotelVO = HotelBLController.getInstance().getHotelInfo(IDReserve.getInstance().getUserID());
 		
 		initHotelDetail(hotelVO);
 		commentList=new LinkedList<>();

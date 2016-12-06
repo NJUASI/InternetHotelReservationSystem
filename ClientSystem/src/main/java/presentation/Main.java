@@ -16,7 +16,7 @@ import javafx.stage.Stage;
  */
 
 public class Main extends Application {
-	public static String userID;
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
