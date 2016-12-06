@@ -10,6 +10,7 @@ import dataService.hotelDataService.HotelDataService_Stub;
 import po.RoomInfoPO;
 import utilities.Operation;
 import utilities.ResultMessage;
+import utilities.RoomType;
 import vo.RoomInfoVO;
 
 /**
@@ -24,7 +25,7 @@ class Rooms {
 	private HotelDataService hotelDataService;
 
 	public Rooms(String hotelID) {
-//		this.hotelDataService = ClientRemoteHelper.getInstance().getHotelDataService();
+		//		this.hotelDataService = ClientRemoteHelper.getInstance().getHotelDataService();
 		try {
 			hotelDataService = new HotelDataService_Stub();
 		} catch (RemoteException e) {
@@ -159,12 +160,13 @@ class Rooms {
 	 * @author: Harvey Gong
 	 * @time:2016年12月4日 下午6:53:53
 	 */
-	public List<String> getRoomType(){
-		List<String> allRoomType = new ArrayList<String>();
-		//TODO
-		return allRoomType;
+	public Iterator<RoomType> getRoomType(){
+		List<RoomType> allRoomType = new ArrayList<RoomType>();
+		for(int i = 0;i<roomInfoPOList.size();i++){
+			allRoomType.add(roomInfoPOList.get(i).getRoomType());
+		}
+		return allRoomType.iterator();
 	}
-
 
 	/**
 	 * @Description:获取当前所选房间类型的剩余房间数量
@@ -175,9 +177,9 @@ class Rooms {
 	 * @author: Harvey Gong
 	 * @time:2016年12月4日 下午7:20:02
 	 */
-	public int getRemainNumOfSpecificType(String roomType){
+	public int getRemainNumOfSpecificType(String roomName){
 		for(int i = 0;i<roomInfoPOList.size();i++){
-			if(roomInfoPOList.get(i).getRoomType().equals(roomType)){
+			if(roomInfoPOList.get(i).getRoomName().equals(roomName)){
 				return roomInfoPOList.get(i).getRemainNum();
 			}
 		}
@@ -201,7 +203,7 @@ class Rooms {
 		}
 		return min;
 	}
-	
+
 	private int findPO(String roomType){
 		for(int i = 0;i<roomInfoPOList.size();i++){
 			if(roomInfoPOList.get(i).getRoomType().equals(roomType)){
@@ -211,4 +213,11 @@ class Rooms {
 		return -1;
 	}
 
+	public int getRemainRoomNum() {
+		int remainRoomNum = 0;
+		for(int i = 0;i < roomInfoPOList.size();i++){
+			remainRoomNum = remainRoomNum + roomInfoPOList.get(i).getRemainNum();
+		}
+		return 0;
+	}
 }

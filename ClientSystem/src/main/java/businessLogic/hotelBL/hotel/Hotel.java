@@ -2,7 +2,6 @@ package businessLogic.hotelBL.hotel;
 
 import java.rmi.RemoteException;
 import java.util.Iterator;
-import java.util.List;
 
 import businessLogic.hotelBL.HotelInfoOperation;
 import dataService.hotelDataService.HotelDataService;
@@ -10,6 +9,7 @@ import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelPO;
 import utilities.Address;
 import utilities.ResultMessage;
+import utilities.RoomType;
 import vo.HotelVO;
 import vo.RoomInfoVO;
 
@@ -31,14 +31,18 @@ public class Hotel implements HotelInfoOperation{
 		this.hotelID = hotelWorkerID;
 		initHotel();
 	}
+	
+	public Hotel() {
+		// TODO 自动生成的构造函数存根
+	}
 
 	private void initHotel() {
 		initHotelDataService();
 		initHotelPO();
-		initRooms();
+		initRooms(hotelID);
 	}
 
-	private void initRooms() {
+	private void initRooms(String hotelID) {
 		rooms = new Rooms(hotelID);
 	}
 
@@ -220,7 +224,12 @@ public class Hotel implements HotelInfoOperation{
 	}
 
 	@Override
-	public List<String> getRoomType(){
+	public Iterator<RoomType> getRoomType(){
 		return rooms.getRoomType();
+	}
+
+	public int getRemainRoomNum(String hotelID) {
+		initRooms(hotelID);
+		return rooms.getRemainRoomNum();
 	}
 }
