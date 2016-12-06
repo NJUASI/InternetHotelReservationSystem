@@ -221,6 +221,139 @@ public class Order {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有未执行>订单时，客户的编号
+	 * @return 客户个人<所有未执行>订单
+	 * 
+	 * 直接从本层本模块getAllGuestOrderGeneral走
+	 */
+	public List<OrderGeneralVO> getAllGuestUnexecutedOrderGeneral(final String guestID) {
+		final List<OrderGeneralVO> orderGeneralVOs = getAllGuestOrderGeneral(guestID);
+		
+		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
+		for (int i = 0; i < orderGeneralVOs.size(); i++) {
+			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
+			if (thisOrderGeneral.state == OrderState.UNEXECUTED) {
+				result.add(thisOrderGeneral);
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有已执行>订单时，客户的编号
+	 * @return 客户个人<所有已执行>订单
+	 * 
+	 * 直接从本层本模块getAllGuestOrderGeneral走
+	 */
+	public List<OrderGeneralVO> getAllGuestExecutedOrderGeneral(final String guestID) {
+		final List<OrderGeneralVO> orderGeneralVOs = getAllGuestOrderGeneral(guestID);
+		
+		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
+		for (int i = 0; i < orderGeneralVOs.size(); i++) {
+			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
+			if (thisOrderGeneral.state == OrderState.EXECUTED) {
+				result.add(thisOrderGeneral);
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有异常>订单时，客户的编号
+	 * @return 客户个人<所有异常>订单
+	 * 
+	 * 直接从本层本模块getAllGuestOrderGeneral走
+	 */
+	public List<OrderGeneralVO> getAllGuestAbnormalOrderGeneral(final String guestID) {
+		final List<OrderGeneralVO> orderGeneralVOs = getAllGuestOrderGeneral(guestID);
+		
+		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
+		for (int i = 0; i < orderGeneralVOs.size(); i++) {
+			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
+			if (thisOrderGeneral.state == OrderState.ABNORMAL) {
+				result.add(thisOrderGeneral);
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有已撤销>订单时，客户的编号
+	 * @return 客户个人<所有已撤销>订单
+	 * 
+	 * 直接从本层本模块getAllGuestOrderGeneral走
+	 */
+	public List<OrderGeneralVO> getAllGuestCancelledOrderGeneral(final String guestID) {
+		final List<OrderGeneralVO> orderGeneralVOs = getAllGuestOrderGeneral(guestID);
+		
+		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
+		for (int i = 0; i < orderGeneralVOs.size(); i++) {
+			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
+			if (thisOrderGeneral.state == OrderState.CANCELLED) {
+				result.add(thisOrderGeneral);
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有已评论>订单时，客户的编号
+	 * @return 客户个人<所有已评论>订单
+	 * 
+	 * 直接从本层本模块getAllGuestOrderGeneral走
+	 */
+	public List<OrderGeneralVO> getAllGuestCommentedOrderGeneral(final String guestID) {
+		final List<OrderGeneralVO> orderGeneralVOs = getAllGuestOrderGeneral(guestID);
+		
+		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
+		for (int i = 0; i < orderGeneralVOs.size(); i++) {
+			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
+			if (thisOrderGeneral.state == OrderState.EXECUTED && thisOrderGeneral.hasCommented == true) {
+				result.add(thisOrderGeneral);
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有未评价>订单时，客户的编号
+	 * @return 客户个人<所有未评论>订单
+	 * 
+	 * 直接从本层本模块getAllGuestOrderGeneral走
+	 */
+	public List<OrderGeneralVO> getAllGuestUncommentedOrderGeneral(final String guestID) {
+		final List<OrderGeneralVO> orderGeneralVOs = getAllGuestOrderGeneral(guestID);
+		
+		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
+		for (int i = 0; i < orderGeneralVOs.size(); i++) {
+			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
+			if (thisOrderGeneral.state == OrderState.EXECUTED && thisOrderGeneral.hasCommented == false) {
+				result.add(thisOrderGeneral);
+			}
+		}
+		return result;
+	}
+	
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
 	 * @updateTime 2016/11/27
 	 * @param hotelID 酒店要查看本酒店所有订单时，酒店的编号
 	 * @return 此酒店所有的所有订单

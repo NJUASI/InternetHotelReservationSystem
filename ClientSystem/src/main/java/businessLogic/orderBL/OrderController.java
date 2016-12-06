@@ -17,7 +17,9 @@ import vo.OrderVO;
  * 
  * @author cuihua
  * lastChangedBy charles
- * updateTime 2016/11/29
+ * updateTime 2016/12/7
+ * 
+ * 新增查看订单详情时各个种类的接口
  */
 public final class OrderController implements OrderBLService {
 
@@ -127,12 +129,77 @@ public final class OrderController implements OrderBLService {
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/11/27
-	 * @param guestID 客户要查看个人所有订单时，客户的编号
-	 * @return 客户个人所有订单
+	 * @param guestID 客户要查看个人<所有>订单时，客户的编号
+	 * @return 客户个人<所有>订单
 	 */
-	@Override
 	public List<OrderGeneralVO> getAllGuestOrderGeneral(final String guestID) {
 		return order.getAllGuestOrderGeneral(guestID);
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有未执行>订单时，客户的编号
+	 * @return 客户个人<所有未执行>订单
+	 */
+	public List<OrderGeneralVO> getAllGuestUnexecutedOrderGeneral(final String guestID) {
+		return order.getAllGuestUnexecutedOrderGeneral(guestID);
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有已执行>订单时，客户的编号
+	 * @return 客户个人<所有已执行>订单
+	 */
+	public List<OrderGeneralVO> getAllGuestExecutedOrderGeneral(final String guestID) {
+		return order.getAllGuestExecutedOrderGeneral(guestID);
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有异常>订单时，客户的编号
+	 * @return 客户个人<所有异常>订单
+	 */
+	public List<OrderGeneralVO> getAllGuestAbnormalOrderGeneral(final String guestID) {
+		return order.getAllGuestAbnormalOrderGeneral(guestID);
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有已撤销>订单时，客户的编号
+	 * @return 客户个人<所有已撤销>订单
+	 */
+	public List<OrderGeneralVO> getAllGuestCancelledOrderGeneral(final String guestID) {
+		return order.getAllGuestCancelledOrderGeneral(guestID);
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有已评价>订单时，客户的编号
+	 * @return 客户个人<所有已评价>订单
+	 */
+	public List<OrderGeneralVO> getAllGuestCommentedOrderGeneral(final String guestID) {
+		return order.getAllGuestCommentedOrderGeneral(guestID);
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有未评价>订单时，客户的编号
+	 * @return 客户个人<所有未评价>订单
+	 */
+	public List<OrderGeneralVO> getAllGuestUncommentedOrderGeneral(final String guestID) {
+		return order.getAllGuestUncommentedOrderGeneral(guestID);
 	}
 
 	/**
