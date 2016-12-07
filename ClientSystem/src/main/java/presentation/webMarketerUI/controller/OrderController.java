@@ -1,9 +1,12 @@
 package presentation.webMarketerUI.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
+import businessLogic.orderBL.OrderBLController;
+import businessLogicService.orderBLService.OrderBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import presentation.hotelWorkerUI.controller.OrderTable;
+import utilities.IDReserve;
 import utilities.OrderState;
 import utilities.RoomType;
 import vo.OrderGeneralVO;
@@ -24,18 +28,34 @@ import vo.OrderVO;
 /**
  * @author 61990
  *
+ * lastChangeBy charles
+ * updateTime 2016/12/7
+ * 
  */
 public class OrderController {
 
-	OrderVO orderVO;
+	private OrderBLService orderBLService;
+	
+	/*
+	 * 订单概况
+	 */
+	private final String hotelID = IDReserve.getInstance().getUserID();
+	
+	private List<OrderGeneralVO> orderGenerals;
 
-	List<OrderGeneralVO> orderVOlist;
+	/*
+	 * 订单详情
+	 */
+	private String orderID;
+	
+	private OrderVO orderVO;
 
 	@FXML
 	private Pane orderCheck, orderDetail, searchPane;
 
 	@FXML
 	private Pane cancelOrderPane, cancelOrderPaneInCheck;
+	
 	// 控制返回界面
 	@FXML
 	private Button back1, back2, detail_state;
@@ -48,10 +68,12 @@ public class OrderController {
 
 	@FXML
 	private ComboBox<String> cancelPercent, cancelPercentInCheck;
+	
 	// 详情界面内容
 	@FXML
 	private Label detail_ID, detail_Hotel, detail_address, detail_roomType, detail_roomNum, detail_personNum,
 			detail_price, detail_personName, detail_phone,detail_expectLeaveTime ,detail_createTime, detail_expectTime,detail_message;
+	
 	// 概况界面内容
 	@FXML
 	private TableView<OrderTable> table;
@@ -61,11 +83,14 @@ public class OrderController {
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/1 构造函数，初始化成员变量
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * 构造函数，初始化成员变量
 	 */
 	@FXML
 	private void initialize() {
+		orderBLService = OrderBLController.getInstance();
+		
 		cancelPercent.setValue("50%");
 		cancelPercent.getItems().add("50%");
 		cancelPercent.getItems().add("100%");
@@ -76,8 +101,8 @@ public class OrderController {
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
 	 * @通过订单编号查找订单
 	 */
 	@FXML
@@ -86,43 +111,29 @@ public class OrderController {
 		back2.setVisible(true);
 		orderDetail.setVisible(true);
 		searchPane.setVisible(false);
-		//TODO fjj注意：Order
-		// 获得输入的内容
-		// searchID.getText();
-		//通过orderID得到一条VO		
-		// Test,需要删掉s
-		final LocalDateTime createTime = LocalDateTime.of(2016, 2, 2, 18, 30);
-		final LocalDateTime checkInTime = LocalDateTime.of(2016, 2, 3, 11, 23);
-		final LocalDateTime checkOutTime = LocalDateTime.of(2016, 2, 4, 10, 58);
-		final LocalDateTime expectExecuteTime = LocalDateTime.of(2016, 2, 3, 14, 00);
-		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
-
-		final OrderState orderState = OrderState.ABNORMAL;
-		final RoomType roomType = RoomType.单人间;
-
-		orderVO = new OrderVO(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-		 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-		 OrderState.ABNORMAL,false, "gaoy", "1212121") ,12.4,createTime,checkInTime,checkOutTime,RoomType.双人间,4,"202",4,"adsfas",3.4,"22w222");
-
-		//		
+	
+		orderID = searchID.getText();
+		orderVO = orderBLService.getOrderDetail(orderID);
+		initOrderDetail(orderVO);
 		
 		if (orderVO.orderGeneralVO.state == OrderState.ABNORMAL) {
 			cancelOrderPane.setDisable(false);
 		} else {
 			cancelOrderPane.setDisable(true);
 		}
-
-		initOrderDetail(orderVO);
 	}
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @取消异常订单在订单详情中
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @在订单详情中取消异常订单
 	 */
 	@FXML
 	protected void cancelAbnormalOrder() {
+		//@高源：要catch什么Exception。。
+		//需修改接口  等会再来做这个
+		
 		try {
 			if (cancelPercent.getValue().equals("50%")) {
 				//TODO fjj注意：返回50%信用值，通过orderVO.guestID
@@ -140,31 +151,33 @@ public class OrderController {
 	 * @author 61990
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/11/30
-	 * @通过日期查找订单
+	 * @通过日期查找异常订单
 	 */
 	@FXML
 	protected void searchDateOrder() {
+		//@高源：不知道这个是在干嘛，跟后面那个searchAbnormalOrder有什么不一样
+		
 		try {
 			orderCheck.setVisible(true);
 		searchPane.setVisible(false);
 			// TODO fjj注意：获得输入的内容日期，通过日期获得一整天的异常订单
 		// LocalDate date = searchDate.getValue();
-		orderVOlist=new LinkedList<>();
+		orderGenerals=new LinkedList<>();
 		
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
+		orderGenerals.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
 				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
 				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
+		orderGenerals.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
 				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
 				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
+		orderGenerals.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
 				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
 				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
+		orderGenerals.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
 				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
 				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
 		
-		initOrderCheck(orderVOlist);
+		initOrderCheck(orderGenerals);
 	
 	
 		
@@ -203,22 +216,10 @@ public class OrderController {
 	 */
 	@FXML
 	protected void OrderDetail() {
-		//通过iD 得到 GeneralVO 
-//		ID：： table.getSelectionModel().getSelectedItem().getOrderID();
-		
-		final LocalDateTime createTime = LocalDateTime.of(2016, 2, 2, 18, 30);
-		final LocalDateTime checkInTime = LocalDateTime.of(2016, 2, 3, 11, 23);
-		final LocalDateTime checkOutTime = LocalDateTime.of(2016, 2, 4, 10, 58);
-		final LocalDateTime expectExecuteTime = LocalDateTime.of(2016, 2, 3, 14, 00);
-		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
-
-		final OrderState orderState = OrderState.ABNORMAL;
-		final RoomType roomType = RoomType.总统套房;
-
-		orderVO = new OrderVO(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				 OrderState.ABNORMAL,false, "gaoy", "1212121") ,12.4,createTime,checkInTime,checkOutTime,RoomType.总统套房,4,"202",4,"adsfas",3.4,"22w222");
-		
+		orderID = table.getSelectionModel().getSelectedItem().getOrderID();
+		orderVO = orderBLService.getOrderDetail(orderID);
+		//@高源：原本没有。。需要加吧？？
+		initOrderDetail(orderVO);
 		
 		if (orderVO.orderGeneralVO.state == OrderState.ABNORMAL) {
 			cancelOrderPane.setDisable(false);
@@ -234,58 +235,29 @@ public class OrderController {
 
 	@FXML
 	protected void searchAbnormalOrder() {
-		// TODO fjj注意：获得输入的内容日期，通过日期获得一整天的异常订单
-		// LocalDate date = searchDate.getValue();
-
-		orderVOlist=new LinkedList<>();
+		LocalDate date = searchDate.getValue();
 		
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
+		orderGenerals = orderBLService.getAllAbnormalOrderGeneral(date);
+		initOrderCheck(orderGenerals);
 		
-				initOrderCheck(orderVOlist);
-			
-				cancelOrderPaneInCheck.setDisable(false);
+		cancelOrderPaneInCheck.setDisable(false);
 				
 				 
 	}
 
 	@FXML
 	protected void searchUnexecutedOrder() {
-		// TODO fjj注意：获得输入的内容日期，通过日期获得一整天的未执行订单
-		// LocalDate date = searchDate.getValue();
-				orderVOlist=new LinkedList<>();
-				orderVOlist=new LinkedList<>();
-				
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				
-				initOrderCheck(orderVOlist);
-			
-				cancelOrderPaneInCheck.setDisable(true);
+		LocalDate date = searchDate.getValue();
+		
+		orderGenerals = orderBLService.getAllUnexecutedOrderGeneral(date);
+		initOrderCheck(orderGenerals);
+		
+		cancelOrderPaneInCheck.setDisable(true);
  
 	}
 	@FXML
 	protected void cancelAbnormalOrderInCheck() {
+		//@高源：接口有问题，修改接口，等会儿改
 		try {
 			if (cancelPercentInCheck.getValue().equals("50%")) {
 				//TODO fjj注意：返回50%信用值，通过 table.getSelectionModel().getSelectedItem().getOrderID();
@@ -326,11 +298,11 @@ public class OrderController {
 	 * @param orderVO
 	 * @describe 初始化订单概况界面
 	 */
-	private void initOrderCheck(List<OrderGeneralVO> orderVOlist) {
+	private void initOrderCheck(List<OrderGeneralVO> orderGenerals) {
 		table.getItems().clear();
 		List<OrderTable> orderList = new LinkedList<OrderTable>();
-		for (int i = 0; i < orderVOlist.size(); i++) {
-			OrderGeneralVO temp = orderVOlist.get(i);
+		for (int i = 0; i < orderGenerals.size(); i++) {
+			OrderGeneralVO temp = orderGenerals.get(i);
 			orderList.add(new OrderTable(temp.orderID ,temp.guestID,temp.name,temp.phone, temp.hotelName,temp.hotelAddress,	temp.expectExecuteTime.toString(),temp.expectLeaveTime.toString(),temp.price + "", temp.state.toString()));
 					
 		}

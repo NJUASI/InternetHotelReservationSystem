@@ -18,6 +18,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import presentation.guestUI.controller.EvaluationTable;
@@ -131,8 +132,10 @@ public class HotelController {
 
 	@FXML
 	private Label hotelIDText,scoreText;
+	@FXML	
+	private TextArea equipmentText;
 	@FXML
-	private TextField hotelNameText,hotelAddressText,equipmentText,introductionText;
+	private TextField hotelNameText,hotelAddressText,introductionText;
 	@FXML
 	private ComboBox<String> cityText,cycleText,levelText;
 	/**
@@ -176,6 +179,7 @@ public class HotelController {
 		cityText.getItems().clear();
 
 		//TODO djy注意：将当前酒店的城市从list中出去，然后逐一添加到combobox中,所有城市的list保存在哪儿的
+		// TDOD gcm 需要解释，我不懂你想要表达啥
 		Iterator<String> cities = sourceBLController.getCities();
 		while(cities.hasNext()){
 			cityText.getItems().add(cities.next());

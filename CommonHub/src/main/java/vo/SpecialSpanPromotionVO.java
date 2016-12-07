@@ -24,5 +24,12 @@ public class SpecialSpanPromotionVO{
 	public SpecialSpanPromotionVO() {
 		// TODO 自动生成的构造函数存根
 	}
+	public SpecialSpanPromotionVO(String promotionName, double discount, LocalDate startDate, LocalDate endDate) {
+
+		this.promotionName = promotionName;
+		this.discount =  discount;
+		this.startDate =startDate;
+		this.endDate = endDate;
+	}
 
 }
