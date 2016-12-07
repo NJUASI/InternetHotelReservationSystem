@@ -200,6 +200,8 @@ public class HotelController {
 		/**
 		 *  TODO gy注意：每次都将value清空，对用户不友好，用户如果不想修改，
 		 *  只是随意点了一下，就必须又去选择一次
+		 *   TODO gcm 我试了他所有的监听，他fx内在的方法并不能监听选择之后再清空，就是监听不到换城市这个动作，你可以试试别的方法
+		 * 
 		 */
 		
 		cycleText.getItems().clear();

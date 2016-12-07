@@ -47,6 +47,7 @@ public class MemberCheckController {
 			memberVO=memberBLController.getMemberInfo(IDReserve.getInstance().getUserID(), 
 					MemberType.BOTH);
 			// TODO gy 该会员类型该如何获取，在初始化的时候！！！！！
+			// TODO djy 通过ID得到他的guestVO啊，通过里面存的是否有生日或者企业来判断？
 			marketVO = new MarketVO("LV4", 0, 0);
 			// TODO 认领一下 获取客户等级
 			enterprise.setText(memberVO.enterprise);
