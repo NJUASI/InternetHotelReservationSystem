@@ -1,6 +1,5 @@
 package presentation.hotelWorkerUI.controller;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -8,8 +7,10 @@ import java.util.List;
 
 import businessLogic.hotelBL.HotelBLController;
 import businessLogic.orderBL.OrderBLController;
+import businessLogic.sourceBL.SourceBLController;
 import businessLogicService.hotelBLService.HotelBLService;
 import businessLogicService.orderBLService.OrderBLService;
+import businessLogicService.sourceBLService.SourceBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,11 +34,13 @@ public class HotelController {
 
 	HotelBLService hotelBLController;
 	OrderBLService orderBLController;
+	SourceBLService sourceBLController;
 	String hotelID = IDReserve.getInstance().getUserID();
 
 	public HotelController() {
 		hotelBLController = HotelBLController.getInstance();
 		orderBLController = OrderBLController.getInstance();
+		sourceBLController = SourceBLController.getInstance();
 	}
 
 	@FXML
@@ -161,7 +164,7 @@ public class HotelController {
 	/**
 	 * @author 61990
 	 * @lastChangedBy Harvey
-	 * @updateTime 2016/12/6
+	 * @updateTime 2016/12/7
 	 * @describe 点击城市按钮
 	 */
 	@FXML
@@ -169,13 +172,12 @@ public class HotelController {
 
 		//每次点击先清除一次
 		cityText.getItems().clear();
-
+		
 		//TODO 将当前酒店的城市从list中出去，然后逐一添加到combobox中,所有城市的list保存在哪儿的
-
-		cityText.getItems().add("1234");
-		cityText.getItems().add("1234");
-		cityText.getItems().add("1234");
-		cityText.getItems().add("1234");
+		Iterator<String> cities = sourceBLController.getCities();
+		while(cities.hasNext()){
+			cityText.getItems().add(cities.next());
+		}
 
 		//TODO 当新的城市被选点选时，cycletext需要被更新为当前city的所有的circle，并设值为第一个circle，从list除去
 	}
@@ -190,7 +192,6 @@ public class HotelController {
 
 		//TODO 通过当前city，获得当前城市所有的cycle，并将此酒店的circle从list中除去,不知道在哪个controller里面
 		String city = cityText.getValue();
-
 
 		cycleText.getItems().add("1234");
 		cycleText.getItems().add("1234");
@@ -207,10 +208,11 @@ public class HotelController {
 	@FXML
 	protected void getLevel(){
 		levelText.getItems().clear();
-		for(int i =1;i <= 5;i++ ){
-			levelText.getItems().add(""+i);
+		Iterator<String> levels = sourceBLController.getLevels();
+		while(levels.hasNext()){
+			levelText.getItems().add(levels.next());
 		}
-	}
+}
 
 	/**
 	 * @description 点击保存按钮

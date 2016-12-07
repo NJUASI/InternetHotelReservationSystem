@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import businessLogic.hotelBL.hotelScan.searchCriteria.SearchCriteria;
 import businessLogicService.hotelBLService.HotelBLService;
 import utilities.ResultMessage;
 import utilities.SearchCriteriaType;
@@ -22,13 +21,8 @@ public class HotelBLService_Stub implements HotelBLService{
 
 	}
 
-//	public ResultMessage updateEvaluation(EvaluationVO evaluationVO) {
-//		return ResultMessage.SUCCESS;
-//	}
-
-
 	public HotelVO getHotelInfo(String userID) {
-		return new HotelVO("12345678","thisHotel", "NanJing", "center", "address", "4" ,
+		return new HotelVO("12345678","thisHotel", "南京", "center", "address", "4" ,
 				5,123,"good","allEquipment");
 	}
 
