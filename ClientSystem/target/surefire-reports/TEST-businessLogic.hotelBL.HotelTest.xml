@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <testsuite tests="6" failures="0" name="businessLogic.hotelBL.HotelTest" time="15.251" errors="0" skipped="4">
+=======
+<testsuite tests="6" failures="0" name="businessLogic.hotelBL.HotelTest" time="0.809" errors="0" skipped="4">
+>>>>>>> master
 =======
 <testsuite tests="6" failures="0" name="businessLogic.hotelBL.HotelTest" time="0.809" errors="0" skipped="4">
 >>>>>>> master
@@ -72,6 +76,7 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <testcase classname="businessLogic.hotelBL.HotelTest" name="testUpdateRemainRoomInfo" time="0.062">
     <skipped/>
   </testcase>
@@ -92,6 +97,18 @@
 >>>>>>> master
     <skipped/>
   </testcase>
+=======
+  <testcase classname="businessLogic.hotelBL.HotelTest" name="testUpdateRemainRoomInfo" time="0.089">
+    <skipped/>
+  </testcase>
+  <testcase classname="businessLogic.hotelBL.HotelTest" name="testAddHotel" time="0.24"/>
+  <testcase classname="businessLogic.hotelBL.HotelTest" name="testGetHotelRoomInfo" time="0.24">
+    <skipped/>
+  </testcase>
+  <testcase classname="businessLogic.hotelBL.HotelTest" name="testGetHotelInfo" time="0.24">
+    <skipped/>
+  </testcase>
+>>>>>>> master
   <testcase classname="businessLogic.hotelBL.HotelTest" name="testUpdateHotelInfo" time="0"/>
   <testcase classname="businessLogic.hotelBL.HotelTest" name="testUpdateHotelRoomInfo" time="0">
     <skipped/>

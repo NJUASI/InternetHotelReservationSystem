@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <testsuite tests="7" failures="0" name="presentation.guestUI.driver.OrderBLService_DriverTest" time="0.007" errors="0" skipped="0">
+=======
+<testsuite tests="7" failures="0" name="presentation.guestUI.driver.OrderBLService_DriverTest" time="0.006" errors="0" skipped="0">
+>>>>>>> master
 =======
 <testsuite tests="7" failures="0" name="presentation.guestUI.driver.OrderBLService_DriverTest" time="0.006" errors="0" skipped="0">
 >>>>>>> master
@@ -72,17 +76,23 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <testcase classname="presentation.guestUI.driver.OrderBLService_DriverTest" name="testAddEvaluation" time="0.002"/>
   <testcase classname="presentation.guestUI.driver.OrderBLService_DriverTest" name="testGetTempPrice" time="0.002"/>
   <testcase classname="presentation.guestUI.driver.OrderBLService_DriverTest" name="testCreateOrder" time="0.001"/>
   <testcase classname="presentation.guestUI.driver.OrderBLService_DriverTest" name="testGetEvaluations" time="0.001"/>
   <testcase classname="presentation.guestUI.driver.OrderBLService_DriverTest" name="testGetAllGuestOrderGeneral" time="0.001"/>
 =======
+=======
+>>>>>>> master
   <testcase classname="presentation.guestUI.driver.OrderBLService_DriverTest" name="testAddEvaluation" time="0.001"/>
   <testcase classname="presentation.guestUI.driver.OrderBLService_DriverTest" name="testGetTempPrice" time="0.005"/>
   <testcase classname="presentation.guestUI.driver.OrderBLService_DriverTest" name="testCreateOrder" time="0"/>
   <testcase classname="presentation.guestUI.driver.OrderBLService_DriverTest" name="testGetEvaluations" time="0"/>
   <testcase classname="presentation.guestUI.driver.OrderBLService_DriverTest" name="testGetAllGuestOrderGeneral" time="0"/>
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
   <testcase classname="presentation.guestUI.driver.OrderBLService_DriverTest" name="testUndoNormalOrder" time="0"/>
   <testcase classname="presentation.guestUI.driver.OrderBLService_DriverTest" name="testGetOrderDetails" time="0"/>

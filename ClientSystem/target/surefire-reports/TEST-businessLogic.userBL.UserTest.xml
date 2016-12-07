@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <testsuite tests="7" failures="0" name="businessLogic.userBL.UserTest" time="0.019" errors="0" skipped="1">
+=======
+<testsuite tests="7" failures="0" name="businessLogic.userBL.UserTest" time="0.01" errors="0" skipped="1">
+>>>>>>> master
 =======
 <testsuite tests="7" failures="0" name="businessLogic.userBL.UserTest" time="0.01" errors="0" skipped="1">
 >>>>>>> master
@@ -72,6 +76,7 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <testcase classname="businessLogic.userBL.UserTest" name="testGetLogInInfo" time="0.006"/>
   <testcase classname="businessLogic.userBL.UserTest" name="testAdd" time="0.001"/>
   <testcase classname="businessLogic.userBL.UserTest" name="testAddHotel" time="0.002">
@@ -82,6 +87,8 @@
   <testcase classname="businessLogic.userBL.UserTest" name="testGetSingle" time="0.004"/>
   <testcase classname="businessLogic.userBL.UserTest" name="testModify" time="0.002"/>
 =======
+=======
+>>>>>>> master
   <testcase classname="businessLogic.userBL.UserTest" name="testGetLogInInfo" time="0.007"/>
   <testcase classname="businessLogic.userBL.UserTest" name="testAdd" time="0"/>
   <testcase classname="businessLogic.userBL.UserTest" name="testAddHotel" time="0">
@@ -91,5 +98,8 @@
   <testcase classname="businessLogic.userBL.UserTest" name="testGetAll" time="0.002"/>
   <testcase classname="businessLogic.userBL.UserTest" name="testGetSingle" time="0.001"/>
   <testcase classname="businessLogic.userBL.UserTest" name="testModify" time="0"/>
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 </testsuite>

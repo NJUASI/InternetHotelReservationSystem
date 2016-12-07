@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <testsuite tests="1" failures="0" name="businessLogic.marketBL.driver.MarketDataService_DriverTest" time="0.001" errors="0" skipped="0">
+=======
+<testsuite tests="1" failures="0" name="businessLogic.marketBL.driver.MarketDataService_DriverTest" time="0.003" errors="0" skipped="0">
+>>>>>>> master
 =======
 <testsuite tests="1" failures="0" name="businessLogic.marketBL.driver.MarketDataService_DriverTest" time="0.003" errors="0" skipped="0">
 >>>>>>> master
@@ -72,7 +76,11 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <testcase classname="businessLogic.marketBL.driver.MarketDataService_DriverTest" name="test" time="0.001"/>
+=======
+  <testcase classname="businessLogic.marketBL.driver.MarketDataService_DriverTest" name="test" time="0.003"/>
+>>>>>>> master
 =======
   <testcase classname="businessLogic.marketBL.driver.MarketDataService_DriverTest" name="test" time="0.003"/>
 >>>>>>> master

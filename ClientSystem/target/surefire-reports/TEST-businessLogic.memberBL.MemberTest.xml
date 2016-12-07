@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <testsuite tests="5" failures="0" name="businessLogic.memberBL.MemberTest" time="0.005" errors="0" skipped="0">
+=======
+<testsuite tests="5" failures="0" name="businessLogic.memberBL.MemberTest" time="0.006" errors="0" skipped="0">
+>>>>>>> master
 =======
 <testsuite tests="5" failures="0" name="businessLogic.memberBL.MemberTest" time="0.006" errors="0" skipped="0">
 >>>>>>> master
@@ -72,7 +76,11 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <testcase classname="businessLogic.memberBL.MemberTest" name="testAdd" time="0.004"/>
+=======
+  <testcase classname="businessLogic.memberBL.MemberTest" name="testAdd" time="0.005"/>
+>>>>>>> master
 =======
   <testcase classname="businessLogic.memberBL.MemberTest" name="testAdd" time="0.005"/>
 >>>>>>> master

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <testsuite tests="2" failures="0" name="presentation.guestUI.driver.HotelBLService_DriverTest" time="0.002" errors="0" skipped="2">
+=======
+<testsuite tests="2" failures="0" name="presentation.guestUI.driver.HotelBLService_DriverTest" time="0" errors="0" skipped="2">
+>>>>>>> master
 =======
 <testsuite tests="2" failures="0" name="presentation.guestUI.driver.HotelBLService_DriverTest" time="0" errors="0" skipped="2">
 >>>>>>> master
@@ -72,10 +76,17 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <testcase classname="presentation.guestUI.driver.HotelBLService_DriverTest" name="test1" time="0.001">
     <skipped/>
   </testcase>
   <testcase classname="presentation.guestUI.driver.HotelBLService_DriverTest" name="test2" time="0.001">
+=======
+  <testcase classname="presentation.guestUI.driver.HotelBLService_DriverTest" name="test1" time="0">
+    <skipped/>
+  </testcase>
+  <testcase classname="presentation.guestUI.driver.HotelBLService_DriverTest" name="test2" time="0">
+>>>>>>> master
 =======
   <testcase classname="presentation.guestUI.driver.HotelBLService_DriverTest" name="test1" time="0">
     <skipped/>

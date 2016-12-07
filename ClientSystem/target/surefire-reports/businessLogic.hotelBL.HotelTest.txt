@@ -2,7 +2,11 @@
 Test set: businessLogic.hotelBL.HotelTest
 -------------------------------------------------------------------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 Tests run: 6, Failures: 0, Errors: 0, Skipped: 4, Time elapsed: 5.128 sec
+=======
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 4, Time elapsed: 0.333 sec
+>>>>>>> master
 =======
 Tests run: 6, Failures: 0, Errors: 0, Skipped: 4, Time elapsed: 0.333 sec
 >>>>>>> master

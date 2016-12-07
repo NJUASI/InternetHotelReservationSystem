@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <testsuite tests="5" failures="0" name="dataServiceImpl.WebMarekterDataServiceImpl_Test" time="0.008" errors="0" skipped="0">
+=======
+<testsuite tests="5" failures="0" name="dataServiceImpl.WebMarekterDataServiceImpl_Test" time="0.017" errors="0" skipped="0">
+>>>>>>> master
 =======
 <testsuite tests="5" failures="0" name="dataServiceImpl.WebMarekterDataServiceImpl_Test" time="0.017" errors="0" skipped="0">
 >>>>>>> master
@@ -72,6 +76,7 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <testcase classname="dataServiceImpl.WebMarekterDataServiceImpl_Test" name="testGetAllWebMarketer" time="0.006"/>
   <testcase classname="dataServiceImpl.WebMarekterDataServiceImpl_Test" name="testAdd" time="0"/>
   <testcase classname="dataServiceImpl.WebMarekterDataServiceImpl_Test" name="testGetSingleWebMarketer" time="0"/>
@@ -81,6 +86,11 @@
   <testcase classname="dataServiceImpl.WebMarekterDataServiceImpl_Test" name="testGetAllWebMarketer" time="0.016"/>
   <testcase classname="dataServiceImpl.WebMarekterDataServiceImpl_Test" name="testAdd" time="0"/>
   <testcase classname="dataServiceImpl.WebMarekterDataServiceImpl_Test" name="testGetSingleWebMarketer" time="0"/>
+=======
+  <testcase classname="dataServiceImpl.WebMarekterDataServiceImpl_Test" name="testGetAllWebMarketer" time="0.016"/>
+  <testcase classname="dataServiceImpl.WebMarekterDataServiceImpl_Test" name="testAdd" time="0"/>
+  <testcase classname="dataServiceImpl.WebMarekterDataServiceImpl_Test" name="testGetSingleWebMarketer" time="0"/>
+>>>>>>> master
   <testcase classname="dataServiceImpl.WebMarekterDataServiceImpl_Test" name="testDeleteWebMarketer" time="0.001"/>
   <testcase classname="dataServiceImpl.WebMarekterDataServiceImpl_Test" name="testModify" time="0"/>
 >>>>>>> master

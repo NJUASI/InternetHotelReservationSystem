@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <testsuite tests="4" failures="0" name="dataServiceImpl.WebManagerDataServiceImpl_Test" time="0.005" errors="0" skipped="0">
+=======
+<testsuite tests="4" failures="0" name="dataServiceImpl.WebManagerDataServiceImpl_Test" time="0.028" errors="0" skipped="0">
+>>>>>>> master
 =======
 <testsuite tests="4" failures="0" name="dataServiceImpl.WebManagerDataServiceImpl_Test" time="0.028" errors="0" skipped="0">
 >>>>>>> master
@@ -72,7 +76,11 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <testcase classname="dataServiceImpl.WebManagerDataServiceImpl_Test" name="testAdd" time="0.001"/>
+=======
+  <testcase classname="dataServiceImpl.WebManagerDataServiceImpl_Test" name="testAdd" time="0.028"/>
+>>>>>>> master
 =======
   <testcase classname="dataServiceImpl.WebManagerDataServiceImpl_Test" name="testAdd" time="0.028"/>
 >>>>>>> master
