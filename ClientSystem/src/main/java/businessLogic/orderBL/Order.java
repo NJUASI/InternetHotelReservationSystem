@@ -229,15 +229,7 @@ public class Order {
 	 */
 	public List<OrderGeneralVO> getAllGuestUnexecutedOrderGeneral(final String guestID) {
 		final List<OrderGeneralVO> orderGeneralVOs = getAllGuestOrderGeneral(guestID);
-		
-		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
-		for (int i = 0; i < orderGeneralVOs.size(); i++) {
-			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
-			if (thisOrderGeneral.state == OrderState.UNEXECUTED) {
-				result.add(thisOrderGeneral);
-			}
-		}
-		return result;
+		return orderStateFilter(orderGeneralVOs, OrderState.UNEXECUTED);
 	}
 	
 	/**
@@ -251,15 +243,7 @@ public class Order {
 	 */
 	public List<OrderGeneralVO> getAllGuestExecutedOrderGeneral(final String guestID) {
 		final List<OrderGeneralVO> orderGeneralVOs = getAllGuestOrderGeneral(guestID);
-		
-		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
-		for (int i = 0; i < orderGeneralVOs.size(); i++) {
-			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
-			if (thisOrderGeneral.state == OrderState.EXECUTED) {
-				result.add(thisOrderGeneral);
-			}
-		}
-		return result;
+		return orderStateFilter(orderGeneralVOs, OrderState.EXECUTED);
 	}
 	
 	/**
@@ -273,15 +257,7 @@ public class Order {
 	 */
 	public List<OrderGeneralVO> getAllGuestAbnormalOrderGeneral(final String guestID) {
 		final List<OrderGeneralVO> orderGeneralVOs = getAllGuestOrderGeneral(guestID);
-		
-		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
-		for (int i = 0; i < orderGeneralVOs.size(); i++) {
-			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
-			if (thisOrderGeneral.state == OrderState.ABNORMAL) {
-				result.add(thisOrderGeneral);
-			}
-		}
-		return result;
+		return orderStateFilter(orderGeneralVOs, OrderState.ABNORMAL);
 	}
 	
 	/**
@@ -295,15 +271,7 @@ public class Order {
 	 */
 	public List<OrderGeneralVO> getAllGuestCancelledOrderGeneral(final String guestID) {
 		final List<OrderGeneralVO> orderGeneralVOs = getAllGuestOrderGeneral(guestID);
-		
-		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
-		for (int i = 0; i < orderGeneralVOs.size(); i++) {
-			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
-			if (thisOrderGeneral.state == OrderState.CANCELLED) {
-				result.add(thisOrderGeneral);
-			}
-		}
-		return result;
+		return orderStateFilter(orderGeneralVOs, OrderState.CANCELLED);
 	}
 	
 	/**
@@ -355,7 +323,7 @@ public class Order {
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/11/27
-	 * @param hotelID 酒店要查看本酒店<所有>订单时，酒店的编号
+	 * @param hotelID 酒店工作人员要查看本酒店<所有>订单时，酒店的编号
 	 * @return 此酒店<所有>订单
 	 */
 	public List<OrderGeneralVO> getAllHotelOrderGeneral(final String hotelID) {
@@ -381,88 +349,56 @@ public class Order {
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/7
-	 * @param hotelID 酒店要查看本酒店<所有未执行>订单时，酒店的编号
+	 * @param hotelID 酒店工作人员要查看本酒店<所有未执行>订单时，酒店的编号
 	 * @return 此酒店<所有未执行>的所有订单
 	 * 
 	 * 直接从本层本模块getAllHotelOrderGeneral走
 	 */
 	public List<OrderGeneralVO> getAllHotelUnexecutedOrderGeneral(final String hotelID) {
 		final List<OrderGeneralVO> orderGeneralVOs = getAllHotelOrderGeneral(hotelID);
-		
-		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
-		for (int i = 0; i < orderGeneralVOs.size(); i++) {
-			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
-			if (thisOrderGeneral.state == OrderState.UNEXECUTED) {
-				result.add(thisOrderGeneral);
-			}
-		}
-		return result;
+		return orderStateFilter(orderGeneralVOs, OrderState.UNEXECUTED);
 	}
 	
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/7
-	 * @param hotelID 酒店要查看本酒店<所有已执行>订单时，酒店的编号
+	 * @param hotelID 酒店工作人员要查看本酒店<所有已执行>订单时，酒店的编号
 	 * @return 此酒店<所有已执行>订单
 	 * 
 	 * 直接从本层本模块getAllHotelOrderGeneral走
 	 */
 	public List<OrderGeneralVO> getAllHotelExecutedOrderGeneral(final String hotelID) {
 		final List<OrderGeneralVO> orderGeneralVOs = getAllHotelOrderGeneral(hotelID);
-		
-		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
-		for (int i = 0; i < orderGeneralVOs.size(); i++) {
-			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
-			if (thisOrderGeneral.state == OrderState.EXECUTED) {
-				result.add(thisOrderGeneral);
-			}
-		}
-		return result;
+		return orderStateFilter(orderGeneralVOs, OrderState.EXECUTED);
 	}
 	
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/7
-	 * @param hotelID 酒店要查看本酒店<所有异常>订单时，酒店的编号
+	 * @param hotelID 酒店工作人员要查看本酒店<所有异常>订单时，酒店的编号
 	 * @return 此酒店所有异常>订单
 	 * 
 	 * 直接从本层本模块getAllHotelOrderGeneral走
 	 */
 	public List<OrderGeneralVO> getAllHotelAbnormalOrderGeneral(final String hotelID) {
 		final List<OrderGeneralVO> orderGeneralVOs = getAllHotelOrderGeneral(hotelID);
-		
-		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
-		for (int i = 0; i < orderGeneralVOs.size(); i++) {
-			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
-			if (thisOrderGeneral.state == OrderState.ABNORMAL) {
-				result.add(thisOrderGeneral);
-			}
-		}
-		return result;
+		return orderStateFilter(orderGeneralVOs, OrderState.ABNORMAL);
 	}
 	
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/7
-	 * @param hotelID 酒店要查看本酒店<所有已撤销>订单时，酒店的编号
+	 * @param hotelID 酒店工作人员要查看本酒店<所有已撤销>订单时，酒店的编号
 	 * @return 此酒店<所有已撤销>订单
 	 * 
 	 * 直接从本层本模块getAllHotelOrderGeneral走
 	 */
 	public List<OrderGeneralVO> getAllHotelCancelledOrderGeneral(final String hotelID) {
 		final List<OrderGeneralVO> orderGeneralVOs = getAllHotelOrderGeneral(hotelID);
-		
-		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
-		for (int i = 0; i < orderGeneralVOs.size(); i++) {
-			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
-			if (thisOrderGeneral.state == OrderState.CANCELLED) {
-				result.add(thisOrderGeneral);
-			}
-		}
-		return result;
+		return orderStateFilter(orderGeneralVOs, OrderState.CANCELLED);
 	}
 
 	/**
@@ -702,4 +638,15 @@ public class Order {
 		return OrderState.values()[integers.get(indexOfMax)];
 	}
 	
+	
+	private List<OrderGeneralVO> orderStateFilter(List<OrderGeneralVO>orderGenerals, OrderState expectOrderState) {
+		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
+		for (int i = 0; i < result.size(); i++) {
+			OrderGeneralVO thisOrderGeneral = orderGenerals.get(i);
+			if (thisOrderGeneral.state == expectOrderState) {
+				result.add(thisOrderGeneral);
+			}
+		}
+		return result;
+	}
 }
