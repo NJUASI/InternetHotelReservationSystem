@@ -2,11 +2,15 @@ package presentation.guestUI.controller;
 
 import java.time.LocalDate;
 
+import businessLogic.memberBL.MemberController;
+import businessLogicService.memberBLService.MemberBLService;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import utilities.IDReserve;
+import utilities.MemberType;
 import vo.MarketVO;
 import vo.MemberVO;
 
@@ -27,19 +31,24 @@ public class MemberCheckController {
 
 	@FXML
 	private Label enterprise, market, market2, birthday;
+	
+	private MemberBLService  memberBLController = MemberController.getInstance();
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/7
 	 * 构造函数，初始化成员变量
 	 */
 	@FXML
 	private void initialize() {
 		try {
-			//TODO djy注意：通过ID获得会员VO
-			memberVO=new MemberVO("12345",LocalDate.of(2001, 1, 22),null);
+			
+			memberVO=memberBLController.getMemberInfo(IDReserve.getInstance().getUserID(), 
+					MemberType.BOTH);
+			// TODO gy 该会员类型该如何获取，在初始化的时候！！！！！
 			marketVO = new MarketVO("LV4", 0, 0);
+			// TODO 认领一下 获取客户等级
 			enterprise.setText(memberVO.enterprise);
 			if(memberVO.enterprise!=null){
 			market.setText(marketVO.marketName);
@@ -95,7 +104,9 @@ public class MemberCheckController {
 	 */
 	@FXML
 	protected void registerEnterprise() {
-		//TODO djy注意：通过ID和QQ企业注册生日会员
+		//TODO 通过ID和QQ企业注册生日会员
+		// TODO DJY 接口不对应，若要实现界面就会内含逻辑
+		// TODO gy 双会员怎么办
 		enterprise.getText();	
 		initialize();
 	}
@@ -108,7 +119,9 @@ public class MemberCheckController {
 	 */
 	@FXML
 	protected void registerCommon() {
-		//TODO djy注意：通过ID和生日注册生日会员
+		//TODO 通过ID和生日注册生日会员
+		// TODO DJY 接口不对应，若要实现界面就会内含逻辑
+		// TODO gy 双会员怎么办
 //		String s=Main.userID;
 		birthdayPicker.getValue();
 		initialize();

@@ -1,11 +1,14 @@
 package presentation.webManagerUI.controller;
 
+import businessLogic.userBL.UserController;
+import businessLogicService.userBLService.UserBLService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import utilities.ResultMessage;
 import vo.GuestVO;
 
 /**
@@ -29,30 +32,34 @@ public class GuestController {
 
 	@FXML
 	private DatePicker birthdayPicker;
+	
+	private UserBLService userBLController;
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/1 构造函数，初始化成员变量
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/7构造函数，初始化成员变量
 	 */
 	@FXML
 	private void initialize() {
+		userBLController = UserController.getInstance();
 	}
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/2 
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/7 
 	 * @通过ID查VO
 	 */
 	@FXML
 	protected void search() {
-		//TODO fjy注意：通过ID查找VO
-		guestVO = new GuestVO("12356789", null, "人寿保险", "fjj", "fjj", "qfghyrs", "13999439954", 4.19);
+		
+		guestVO = (GuestVO) userBLController.getSingle(inputID.getText());
+		
+		if(guestVO == null){
+			// TODO gy 获取到的guestVO为空，代表找不到对应ID的客户，界面做提示处理，界面不跳转
+		}
 
 		try {	
-			// inputID.getText();
-			// test
-			
 			guestID.setText(guestVO.userID);
 			credit.setText(guestVO.credit + "");
 			nickName.setText(guestVO.nickName);
@@ -108,21 +115,23 @@ public class GuestController {
 	}
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/2 
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/7 
 	 * @更改VO并保存
 	 */
 	@FXML
 	protected void saveModify() {
-//		TODO djy注意：创建guestVO,并保存
-		guestVO.birthday = birthdayPicker.getValue();
-		guestVO.enterprise = enterpriseText.getText();
-		guestVO.phone=phoneText.getText();
-		guestVO.name=nameText.getText();
-		guestVO.nickName=nickNameText.getText();
-		guestVO.password=passwordText.getText();
-//		以上六条为改变内容
-		//save guestVO
+		
+		GuestVO tempGuestVO = guestVO;
+		tempGuestVO.birthday = birthdayPicker.getValue();
+		tempGuestVO.enterprise = enterpriseText.getText();
+		tempGuestVO.phone=phoneText.getText();
+		tempGuestVO.name=nameText.getText();
+		tempGuestVO.nickName=nickNameText.getText();
+		tempGuestVO.password=passwordText.getText();
+		
+		ResultMessage message = userBLController.modify(tempGuestVO);
+		// TODO gy 返回是否成功修改的信息，界面需做提示处理
 		modifyBt.setVisible(true);
 		modifyPane.setVisible(false);
 		

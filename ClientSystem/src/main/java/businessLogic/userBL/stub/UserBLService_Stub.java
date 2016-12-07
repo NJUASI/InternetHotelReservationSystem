@@ -43,12 +43,4 @@ public class UserBLService_Stub implements UserBLService {
 	public String getLogInInfo(String userID,UserType type) {
 		return "0000000";
 	}
-
-
-	@Override
-	public UserVO getSingle(String userID, UserType userType) {
-		return null;
-	}
-
-
 }
