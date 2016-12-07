@@ -46,6 +46,7 @@ public class GuestController {
 	 */
 	@FXML
 	protected void search() {
+		//TODO 通过ID查找VO
 		guestVO = new GuestVO("12356789", null, "人寿保险", "fjj", "fjj", "qfghyrs", "13999439954", 4.19);
 
 		try {	
@@ -83,6 +84,7 @@ public class GuestController {
 		passwordText.setText(password.getText());
 		nameText.setText(name.getText());
 		phoneText.setText(phone.getText());
+		
 		if(enterprise.getText()!=""){
 		enterpriseText.setText(enterprise.getText());
 		}
@@ -112,13 +114,14 @@ public class GuestController {
 	 */
 	@FXML
 	protected void saveModify() {
+//		TODO 创建guestVO,并保存
 		guestVO.birthday = birthdayPicker.getValue();
 		guestVO.enterprise = enterpriseText.getText();
 		guestVO.phone=phoneText.getText();
 		guestVO.name=nameText.getText();
 		guestVO.nickName=nickNameText.getText();
 		guestVO.password=passwordText.getText();
-		
+//		以上六条为改变内容
 		//save guestVO
 		modifyBt.setVisible(true);
 		modifyPane.setVisible(false);

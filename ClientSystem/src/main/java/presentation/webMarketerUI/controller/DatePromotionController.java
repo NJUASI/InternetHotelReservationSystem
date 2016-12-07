@@ -37,12 +37,15 @@ public class DatePromotionController {
 	@FXML
 	private void initialize() {
 		table.getItems().clear();
+		
+		//TODO 从数据库得到所有的网站类十一策略
 		List<DatePromotionTable> datePromotion = new LinkedList<DatePromotionTable>();
 		datePromotion.add(new DatePromotionTable("兰州", "www", LocalDate.of(2014,4,3),LocalDate.of(2014,4,23)));
 		datePromotion.add(new DatePromotionTable("兰2州", "w2ww", LocalDate.of(2015,6,7),LocalDate.of(2014,4,23)));
 		datePromotion.add(new DatePromotionTable("兰1州", "w2ww", LocalDate.of(2015,6,7),LocalDate.of(2014,4,23)));
 		datePromotion.add(new DatePromotionTable("兰4s州", "w2ww", LocalDate.of(2015,6,7),LocalDate.of(2014,4,23)));
 
+		
 		ObservableList<DatePromotionTable> data = FXCollections.observableArrayList();
 		for (int i = 0; i < datePromotion.size(); i++) {
 			data.add(datePromotion.get(i));
@@ -56,6 +59,7 @@ public class DatePromotionController {
 	
 
 	}
+	String preName;
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -69,6 +73,7 @@ public class DatePromotionController {
 					table.getSelectionModel().getSelectedItem().getDiscount(),
 					table.getSelectionModel().getSelectedItem().getStartDate(),
 					table.getSelectionModel().getSelectedItem().getEndDate());
+			preName=table.getSelectionModel().getSelectedItem().getName();
 			modifyPane.setVisible(true);
 			addBt.setVisible(false);
 		} catch (Exception e) {
@@ -84,11 +89,18 @@ public class DatePromotionController {
 	@FXML
 	protected void savePromotion() {
 		try {
-//			final LocalDate s1 = beginTime2.getValue();
-//		final LocalDate s2 = beginTime2.getValue();
-		// PromotionVO promitonVO=new
-		// PromotionVO(PromotionType.HOTEL__HOLIDAY,Double.parseDouble(doubleDiscount2.getText()),s1,s2);
+			
+			//TODO update已存在的一条数据 从数据库改变此条类十一策略
+		//	preName 之前的名字
+//			修改之后的信息
+//			nameText.getText();
+//			discountText.getText();
+//			startDatePicker.getValue();
+//			endDatePicker.getValue();
+
+	
 		System.out.println("success");
+		
 		modifyPane.setVisible(false);
 		addBt.setVisible(true);
 		setModifyText("","",null,null);
@@ -106,6 +118,7 @@ public class DatePromotionController {
 	@FXML
 	protected void addPromotion() {
 		try {
+			//TODO 添加已存在的一条数据 从数据库改变此条类十一策略
 //			nameText.getText();
 //			discountText.getText();
 //			startDatePicker.getValue();
@@ -147,7 +160,8 @@ public class DatePromotionController {
 	 */
 	@FXML
 	protected void deleteOne() {
-		//通过name删除
+		//TODO 删除已存在的一条数据 从数据库改变此条类十一策略
+		//通过name删除从下面的到name
 //		table.getSelectionModel().getSelectedItem().getName();
 		initialize();	
 	}

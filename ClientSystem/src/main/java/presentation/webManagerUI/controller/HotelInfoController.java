@@ -10,7 +10,10 @@ import javafx.scene.control.TextField;
 public class HotelInfoController {
 	
 	@FXML
-	private ComboBox<String> cityInput,cycleInput,levelInput;
+	private ComboBox<String> cityInput,cycleInput;
+	
+	@FXML
+	private ComboBox<Integer>levelInput;
 	@FXML
 	private TextField hotelName,address;
 	/**
@@ -21,8 +24,11 @@ public class HotelInfoController {
 	 */
 	@FXML
 	protected void searchCity() {
-		List<String> list = getCity();
 		cityInput.getItems().clear();
+		
+		//TODO 获得所有城市名称
+		List<String> list = getCity();
+		
 		for (int i = 0; i < list.size(); i++) {
 			cityInput.getItems().add(list.get(i));
 		}
@@ -46,20 +52,21 @@ public class HotelInfoController {
 	 */
 	@FXML
 	protected void searchLevel() {
-		//cityInput.getValue();
-		List<String> list = getLevel();
 		levelInput.getItems().clear();
+		
+	
+		List<Integer> list = getLevel();
+		
 		for (int i = 0; i < list.size(); i++) {
 			levelInput.getItems().add(list.get(i));
 		}
 	}
-	List<String> getLevel() {
-		List<String> list = new LinkedList<String>();
-		list.add("一");
-		list.add("二");
-		list.add("三");
-		list.add("四");
-		list.add("五");
+	List<Integer> getLevel() {
+		List<Integer> list = new LinkedList<Integer>();
+		for (int i = 1; i <5 ; i++) {
+			list.add(i);
+		}
+		
 		return list;
 	}
 	/**
@@ -70,6 +77,7 @@ public class HotelInfoController {
 	 */
 	@FXML
 	protected void searchCycle() {
+		//TODO 通过城市，获得所有商圈名称
 		//cityInput.getValue();
 		List<String> list = getCycle(cityInput.getValue());
 		cycleInput.getItems().clear();
@@ -96,6 +104,7 @@ public class HotelInfoController {
 	 */
 	@FXML
 	protected void addHotel(){
+		//TODO 创建hotelVO，保存，并需要返回初始化的酒店编号和密码
 //		addHotel(hotelName.getText(),cityInput.getValue(),cycleInput.getValue(),levelInput.getValue(),address.getText());
 
 	}

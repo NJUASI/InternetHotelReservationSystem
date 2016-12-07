@@ -31,8 +31,7 @@ public class CyclePromotionController {
 	 */
 	@FXML
 	private void initialize() {
-		
-
+	
 	}
 	/**
 	 * @author 61990
@@ -43,7 +42,7 @@ public class CyclePromotionController {
 	@FXML
 	protected void modifyOne() {
 		try {
-				cityInput.setValue(table.getSelectionModel().getSelectedItem().getCity());
+			cityInput.setValue(table.getSelectionModel().getSelectedItem().getCity());
 			cycleInput.setValue(table.getSelectionModel().getSelectedItem().getCycle());
 			cycleDiscount.setText(table.getSelectionModel().getSelectedItem().getDiscount());
 		} catch (Exception e) {
@@ -59,8 +58,12 @@ public class CyclePromotionController {
 	 */
 	@FXML
 	protected void searchCity() {
-		List<String> list = getCity();
 		cityInput.getItems().clear();
+		cycleInput.setValue("");
+		
+		//TODO 从数据库得到所有城市
+		List<String> list = getCity();
+		//		
 		for (int i = 0; i < list.size(); i++) {
 			cityInput.getItems().add(list.get(i));
 		}
@@ -84,8 +87,11 @@ public class CyclePromotionController {
 	 */
 	@FXML
 	protected void searchCycle() {
-		List<String> list = getCycle(cityInput.getValue());
 		cycleInput.getItems().clear();
+		
+		//TODO 根据城市名称从数据库得到所有对应商圈  	cityInput.getValue();
+		List<String> list = getCycle(cityInput.getValue());
+		//
 		for (int i = 0; i < list.size(); i++) {
 			cycleInput.getItems().add(list.get(i));
 		}
@@ -109,6 +115,7 @@ public class CyclePromotionController {
 	 */
 	@FXML
 	protected void searchInfo() {
+		//TODO 根据城市得到所有商圈的折扣信息 List AddressVO	cityInput.getValue();
 		System.out.println(cityInput.getValue());
 		List<AddressVO> address = new LinkedList<AddressVO>();
 		address.add(new AddressVO("兰州", "www", 10.9));
@@ -149,8 +156,9 @@ public class CyclePromotionController {
 	 */
 	@FXML
 	protected void saveLocalPromotion() {
-		cityInput.getPromptText();
-		System.out.println(cycleInput.getValue());
+		//TODO 通过城市商圈检索改变城市商圈策略
+		cityInput.getValue();
+		cycleInput.getValue();
 		cycleDiscount.getText();
 	}
 	

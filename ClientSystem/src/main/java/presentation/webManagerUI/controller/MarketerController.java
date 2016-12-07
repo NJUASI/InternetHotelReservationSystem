@@ -34,7 +34,7 @@ public class MarketerController {
 	 */
 	@FXML
 	protected void search() {
-		// 通过IDget marketer
+		//TODO 通过ID get marketerVO
 		marketerVO = new WebMarketerVO("12345678", "876543231");
 		marketerID.setText(marketerVO.userID);
 		password.setText(marketerVO.password);
@@ -68,7 +68,7 @@ public class MarketerController {
 	@FXML
 	protected void saveModify() {
 		marketerVO.password = password2.getText();
-		// save(hotelVO)
+		//TODO save(hotelVO) 维护信息，也可自己创建VO
 
 		modifyPane.setVisible(false);
 		marketerInfoPane.setVisible(true);
@@ -93,6 +93,7 @@ public class MarketerController {
 	 */
 	@FXML
 	protected void addMarketer() {
-		
+		//TODO 返回初始的标号和密码
+		//或者直接不提供
 	}
 }
