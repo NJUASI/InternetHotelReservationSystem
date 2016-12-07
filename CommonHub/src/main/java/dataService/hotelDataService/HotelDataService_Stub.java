@@ -30,7 +30,7 @@ public class HotelDataService_Stub extends UnicastRemoteObject implements HotelD
 	}
 	
 	public HotelPO getHotelInfo(String hotelID) {
-		return new HotelPO("12345678", "thisHotel", "NanJing", "center", "address", "4",
+		return new HotelPO("12345678", "thisHotel", "南京", "仙林中心", "address", "4",
 				5,"good", "allEquipment",5);
 	}
 	
