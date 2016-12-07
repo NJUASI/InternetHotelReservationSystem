@@ -20,7 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import presentation.hotelWorkerUI.controller.HotelTable;
 import presentation.hotelWorkerUI.controller.TypeTable;
-import presentation.webMarketerUI.controller.OrderTable;
+import presentation.hotelWorkerUI.controller.OrderTable;
 import utilities.OrderState;
 import utilities.RoomType;
 import vo.HotelEvaluationVO;
