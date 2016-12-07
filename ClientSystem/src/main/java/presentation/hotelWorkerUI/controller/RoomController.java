@@ -1,13 +1,13 @@
 package presentation.hotelWorkerUI.controller;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import businessLogic.hotelBL.HotelBLController;
+import businessLogic.sourceBL.SourceBLController;
 import businessLogicService.hotelBLService.HotelBLService;
-import exception.operationFailedException.UpdateFaiedException;
+import businessLogicService.sourceBLService.SourceBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,7 +18,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import utilities.IDReserve;
-import utilities.RoomType;
 import vo.RoomInfoVO;
 /**
  * @description 酒店客房信息界面的控制器
@@ -42,10 +41,13 @@ public class RoomController {
 	private TextField roomName,roomNum,price;
 
 
-	HotelBLService hotelBLController;
-	String hotelID;
+	private HotelBLService hotelBLController;
+	private SourceBLService sourceBLController;
+	private String hotelID;
+	
 	public RoomController() {
 		hotelBLController = HotelBLController.getInstance();
+		sourceBLController = SourceBLController.getInstance();
 		hotelID = IDReserve.getInstance().getUserID();
 	}
 
@@ -58,14 +60,10 @@ public class RoomController {
 	@FXML
 	private void initialize() {
 
-		//TODO gcm注意：需要初始化添加信息列表中的房间类型
 		roomType.getItems().clear();
+		//获取该酒店的所有客房信息
 		Iterator<RoomInfoVO> rooms = hotelBLController.getHotelRoomInfo(hotelID);
-		List<RoomInfoVO> roomList = new ArrayList<RoomInfoVO>();
-		while(rooms.hasNext()){
-			roomList.add(rooms.next());
-		}
-		initRoomTable(roomList);
+		initRoomTable(rooms);
 	}
 
 	/**
@@ -75,11 +73,11 @@ public class RoomController {
 	 * @updateTime 2016/12/7
 	 * @初始化房间类型表
 	 */
-	private void initRoomTable(List<RoomInfoVO> roomList) { 	
+	private void initRoomTable(Iterator<RoomInfoVO> rooms) { 	
 		roomTable.getItems().clear();
 		List<TypeTable> dataList = new LinkedList<TypeTable>();
-		for (int i = 0; i < roomList.size(); i++) {
-			RoomInfoVO temp = roomList.get(i);
+		while(rooms.hasNext()){
+			RoomInfoVO temp = rooms.next();
 			dataList.add(new TypeTable(temp.roomType.toString(),temp.roomName, temp.roomNum + "", temp.remainNum + "", Double.toString(temp.price)));
 		}
 
@@ -104,7 +102,14 @@ public class RoomController {
 	 */
 	@FXML
 	protected void modifyOne() {
-		// TODO gcm注意：房间类型选择的combobox中还需加入房间类型
+		roomType.getItems().clear();
+		
+		//
+		Iterator<String> roomTypes = sourceBLController.getRoomTypes();
+		while(roomTypes.hasNext()){
+			roomType.getItems().add(roomTypes.next());
+		}
+		
 		TypeTable selectedRoomVO = null;
 		try{
 			selectedRoomVO = roomTable.getSelectionModel().getSelectedItem();
@@ -127,7 +132,7 @@ public class RoomController {
 	protected void save() {
 		/**
 		 *  TODO gy注意：需要获得被点击修改房间类型的旧名字，原始房间剩余数量，计算出现修改房间数量修改后的房间剩余数量
-		 *	并把打包好的vo与旧名字传下去，调用更新客房信息的方法
+		 *	并把打包好的vo与旧名字传下去，直接用hotelBLController调用更新客房信息的方法
 		 */
 		modifyPane.setVisible(false);
 		addBt.setVisible(true);

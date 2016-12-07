@@ -143,7 +143,6 @@ public class CyclePromotionController {
 	 */
 	@FXML
 	protected void saveLocalPromotion() {
-		//TODO gcm注意：通过城市商圈检索改变城市商圈策略
 		String city = cityInput.getValue();
 		String circle = cycleInput.getValue();
 		double discount = Double.valueOf(cycleDiscount.getText());
