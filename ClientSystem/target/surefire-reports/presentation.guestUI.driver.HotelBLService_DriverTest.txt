@@ -1,12 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: presentation.guestUI.driver.HotelBLService_DriverTest
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-<<<<<<< HEAD
 Tests run: 2, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0.001 sec
-=======
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0 sec
->>>>>>> master
-=======
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0 sec
->>>>>>> master
