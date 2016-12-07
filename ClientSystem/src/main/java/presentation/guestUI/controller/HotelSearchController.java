@@ -28,7 +28,6 @@ import vo.HotelVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
 import vo.RoomInfoVO;
-import vo.SearchCriteriaVO;
 /**
  * @author 61990
  * @控制酒店预定界面
@@ -50,6 +49,7 @@ public class HotelSearchController {
 	 private ComboBox<String> cityChoose;
 	//
 	/**
+	 * @
 	 * @author 61990
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/11/27

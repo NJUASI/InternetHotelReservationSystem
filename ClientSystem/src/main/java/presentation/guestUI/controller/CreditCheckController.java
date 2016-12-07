@@ -12,8 +12,9 @@ import javafx.scene.control.TableView;
 import vo.CreditVO;
 
 /**
- * 
+ * @description 显示客户信用记录变化的界面控制器
  * @author 61990
+ * @lastChangedBy Harvey
  * 
  */
 public class CreditCheckController {
@@ -29,7 +30,7 @@ public class CreditCheckController {
 	 */
 	@FXML
 	private void initialize() {
-		//Main.userID;
+		//TODO 需要根据客户id拿到该客户的所有信用变化记录
 		List<CreditVO> credit = new LinkedList<CreditVO>();
 		credit.add(new CreditVO("1234567",LocalDateTime.of(1421, 12, 4, 2, 13),"123455667",67,53,"异常->正常"));		
 		credit.add(new CreditVO("1234567",LocalDateTime.of(1421, 12, 4, 2, 13),"123455667",67,53,"异常->正常"));

@@ -7,9 +7,9 @@ import javafx.scene.layout.Pane;
 import vo.GuestVO;
 
 /**
+ * @description 查看客户信息界面的控制类
  * @author 61990
- * @控制用户信息查看界面
- * @version 11.27
+ * @lastChangedBy Harvey
  */
 public class GuestInfoController {
 	GuestVO guestVO;
@@ -35,7 +35,7 @@ public class GuestInfoController {
 	 */
 	@FXML
 	private void initialize() {
-		// Main.userID;
+		// TODO 需要根据客户账号，获取客户的基本信息
 		guestVO = new GuestVO("12345", null, "", "张三", "小张", "123456", "13993323454", 100);
 		guestID.setText(guestVO.userID);
 		name.setText(guestVO.name);
@@ -46,10 +46,10 @@ public class GuestInfoController {
 	}
 
 	/**
+	 * @description 点击修改按钮
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
-	 * @点击修改按钮
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 */
 	@FXML
 	protected void modifyGuestInfo() {
@@ -64,13 +64,15 @@ public class GuestInfoController {
 	}
 
 	/**
+	 * @description 点击保存按钮
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
-	 * @点击保存按钮，保存客户信息
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 */
 	@FXML
 	protected void saveGuestInfo() {
+		
+		//TODO 需要先将修改过的信息封装成一个vo，然后调用下层更新客户信息的方法，并刷新客户信息
 		try {
 			name.setText(name2.getText());
 			nickname.setText(nickname2.getText());
@@ -91,10 +93,10 @@ public class GuestInfoController {
 	}
 
 	/**
+	 * @description 点击取消按钮，取消修改
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
-	 * @点击取消按钮，取消本次修改
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 */
 	@FXML
 	protected void cancer() {
