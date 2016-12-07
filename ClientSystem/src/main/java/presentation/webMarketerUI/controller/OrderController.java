@@ -160,7 +160,7 @@ public class OrderController {
 		try {
 			orderCheck.setVisible(true);
 		searchPane.setVisible(false);
-			// TODO fjj注意：获得输入的内容日期，通过日期获得一整天的异常订单
+			// TODO fjj注意：获得输入的内容日期，通过日期获得一整天的异常+未执行订单
 		// LocalDate date = searchDate.getValue();
 		orderGenerals=new LinkedList<>();
 		
