@@ -1,6 +1,7 @@
 package presentation.guestUI.controller;
 
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,9 +9,10 @@ import businessLogic.creditBL.CreditController;
 import businessLogicService.creditBLService.CreditBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML; 
+import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import utilities.IDReserve;
 import vo.CreditVO;
 
 /**
@@ -25,30 +27,31 @@ public class CreditCheckController {
 	@FXML
 	private TableColumn<CreditTable, String> guestIDColumn, orderIDColumn, previousCreditColumn,afterCreditColumn,timeColumn,reasonColumn;
 
-	private CreditBLService creditBLController = CreditController.getInstance();
+	private CreditBLService creditBLController;
+	private String guestID;
+	public CreditCheckController() {
+		creditBLController = CreditController.getInstance();
+		guestID = IDReserve.getInstance().getUserID();
+	}
 	
 	/**
+	 * @description 获取客户所有的信用变化记录
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27 构造函数，初始化成员变量
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 */
 	@FXML
 	private void initialize() {
-		//TODO djy注意：通过guestID获得所有信用记录
-		//TODO gcm 你定的credit接口，我不知道怎么用的
 
-		List<CreditVO> credit = new LinkedList<CreditVO>();
-		credit.add(new CreditVO("1234567",LocalDateTime.of(1421, 12, 4, 2, 13),"123455667",67,53,"异常->正常"));		
-		credit.add(new CreditVO("1234567",LocalDateTime.of(1421, 12, 4, 2, 13),"123455667",67,53,"异常->正常"));
-		credit.add(new CreditVO("1234567",LocalDateTime.of(1421, 12, 4, 2, 13),"123455667",67,53,"异常->正常"));
-		credit.add(new CreditVO("1234567",LocalDateTime.of(1421, 12, 4, 2, 13),"123455667",67,53,"异常->正常"));
-		credit.add(new CreditVO("1234567",LocalDateTime.of(1421, 12, 4, 2, 13),"123455667",67,53,"异常->正常"));
-
-
+		// 调用creditBL的方法，通过guest获得该用户所有的信用变化
+		Iterator<CreditVO> creditChanges = creditBLController.getAllCreditDetail(guestID);
+		
 		ObservableList<CreditTable> data = FXCollections.observableArrayList();
-		for (int i = 0; i < credit.size(); i++) {
-			data.add(new CreditTable(credit.get(i).guestID, credit.get(i).orderID, Double.toString(credit.get(i).previousCredit),Double.toString(credit.get(i).afterCredit),
-					credit.get(i).time.toString(),credit.get(i).reason));
+		while(creditChanges.hasNext()){
+			CreditVO credit = creditChanges.next();
+			data.add(new CreditTable(credit.guestID, credit.orderID, 
+					Double.toString(credit.previousCredit),Double.toString(credit.afterCredit),
+					credit.time.toString(),credit.reason));
 		}
 		guestIDColumn.setCellValueFactory(cellData -> cellData.getValue().guestID);
 		orderIDColumn.setCellValueFactory(cellData -> cellData.getValue().orderID);
