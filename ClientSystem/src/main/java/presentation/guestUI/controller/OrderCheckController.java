@@ -62,26 +62,8 @@ public class OrderCheckController {
 	 */
 	@FXML
 	private void initialize() {
-<<<<<<< HEAD
 		//通过guestID得到orderGeneralVOs list
 		orderBLService = OrderBLController.getInstance();
-=======
-		//TODO fjj注意：通过guestID得到orderVOlist general
-		orderVOlist=new LinkedList<>();
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
->>>>>>> master
-		
 		List<OrderGeneralVO> orderGenerals = orderBLService.getAllGuestOrderGeneral(guestID);
 		initOrderCheck(orderGenerals);
 	}
@@ -101,32 +83,10 @@ public class OrderCheckController {
 	 * @打开所有订单概况
 	 */
 	@FXML
-<<<<<<< HEAD
 	protected void searchAllOrder() {
-		//charles新加的，界面上没有对应按钮——所有订单
+		//@高源——————charles新加的，界面上没有对应按钮——所有订单
 		orderGenerals = orderBLService.getAllGuestOrderGeneral(guestID);
 		initOrderCheck(orderGenerals);
-=======
-	protected void searchExecutedOrder() {
-		//TODO fjj注意：searchExecutedOrder
-				
-				orderVOlist=new LinkedList<>();
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				
-				initOrderCheck(orderVOlist);
-				
->>>>>>> master
 	}
 	
 	/**
@@ -267,13 +227,8 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void orderDetail() {
-<<<<<<< HEAD
 		orderID = table.getSelectionModel().getSelectedItem().getOrderID();
 		
-=======
-		//TODO fjj注意：通过orderID获得订单详情
-//		System.out.println(table.getSelectionModel().getSelectedItem().getOrderID());
->>>>>>> master
 		orderDetail.setVisible(true);
 		orderCheck.setVisible(false);
 		
@@ -288,7 +243,6 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void commitComment() {
-<<<<<<< HEAD
 		final double score = Double.valueOf(orderScore.getText());
 		final String comment = orderComment.getText();
 		
@@ -301,12 +255,6 @@ public class OrderCheckController {
 			//@高源——————状态栏显示评价失败
 		}
 		orderVO = orderBLService.getOrderDetail(orderID);
-=======
-		//TODO fjj注意：传VO，改变内容，状态已评论，comment score同时一次，返回成功与否，添加评价
-//		orderVO.comment=orderComment.getText();
-//		orderVO.score=Double.orderScore.getText();
-//		评价订单
->>>>>>> master
 		initOrderDetail(orderVO);
 	}
 	/**
