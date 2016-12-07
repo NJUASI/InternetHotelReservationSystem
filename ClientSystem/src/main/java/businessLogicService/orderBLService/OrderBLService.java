@@ -16,8 +16,9 @@ import vo.OrderVO;
  * 
  * @author cuihua
  * lastChangedBy charles
- * updateTime 2016/12/4
+ * updateTime 2016/12/7
  *
+ * 新增查看订单详情时各个种类的接口
  */
 public interface OrderBLService {
 
@@ -81,10 +82,64 @@ public interface OrderBLService {
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/11/27
-	 * @param guestID 客户要查看个人所有订单时，客户的编号
-	 * @return 客户个人所有订单
+	 * @param guestID 客户要查看个人<所有>订单时，客户的编号
+	 * @return 客户个人<所有>订单
 	 */
 	List<OrderGeneralVO> getAllGuestOrderGeneral(String guestID);
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有未执行>订单时，客户的编号
+	 * @return 客户个人<所有未执行>订单
+	 */
+	List<OrderGeneralVO> getAllGuestUnexecutedOrderGeneral(String guestID);
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有已执行>订单时，客户的编号
+	 * @return 客户个人<所有已执行>订单
+	 */
+	List<OrderGeneralVO> getAllGuestExecutedOrderGeneral(String guestID);
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有异常>订单时，客户的编号
+	 * @return 客户个人<所有异常>订单
+	 */
+	List<OrderGeneralVO> getAllGuestAbnormalOrderGeneral(String guestID);
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有已撤销>订单时，客户的编号
+	 * @return 客户个人<所有已撤销>订单
+	 */
+	List<OrderGeneralVO> getAllGuestCancelledOrderGeneral(String guestID);
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有已评价>订单时，客户的编号
+	 * @return 客户个人<所有已评价>订单
+	 */
+	List<OrderGeneralVO> getAllGuestCommentedOrderGeneral(String guestID);
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有未评价>订单时，客户的编号
+	 * @return 客户个人<所有未评价>订单
+	 */
+	List<OrderGeneralVO> getAllGuestUncommentedOrderGeneral(String guestID);
 	
 	/**
 	 * @author charles
@@ -134,7 +189,7 @@ public interface OrderBLService {
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/4
-	 * @param checkInVO 酒店工作人员更新订单退房信息
+	 * @param checkOutVO 酒店工作人员更新订单退房信息
 	 * @return 是否成功更新
 	 */
 	ResultMessage updateCheckOut(CheckOutVO checkOutVO);
@@ -155,13 +210,13 @@ public interface OrderBLService {
 	 * @param hotelID 酒店工作人员／客户查看酒店的评论
 	 * @return 此酒店的所有评价
 	 */
-	public List<HotelEvaluationVO> getEvaluations(String hotelID);
+	List<HotelEvaluationVO> getEvaluations(String hotelID);
 	
 	
 	
 	
 	/*
-	 * 提供给Hotel的接口
+	 * 只提供给Hotel的接口
 	 */
 	/**
 	 * @author charles

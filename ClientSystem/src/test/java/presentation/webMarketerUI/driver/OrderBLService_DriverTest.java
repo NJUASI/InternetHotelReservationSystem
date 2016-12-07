@@ -19,7 +19,7 @@ import vo.OrderVO;
  * 
  * @author charles
  * lastChangedBy charles
- * updateTime 2016/11/27
+ * updateTime 2016/12/5
  *
  */
 public class OrderBLService_DriverTest {
@@ -32,10 +32,10 @@ public class OrderBLService_DriverTest {
 	 * test interface undoAbnormalOrder
 	 */
 	@Test
-	public void test1() {
+	public void testUndoAbnormalOrder() {
 		final OrderBLService_Stub stub = new OrderBLService_Stub();
 		final OrderBLService_Driver driver = new OrderBLService_Driver(stub);
-		assertEquals(ResultMessage.SUCCESS, driver.orderBLService.undoAbnormalOrder("123456789012"));
+		assertEquals(ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS, driver.orderBLService.undoAbnormalOrder("123456789012"));
 	}
 	
 	/**
@@ -46,7 +46,7 @@ public class OrderBLService_DriverTest {
 	 * test interface getOrderDetail
 	 */
 	@Test
-	public void test2() {
+	public void testGetOrderDetail() {
 		final OrderBLService_Stub stub = new OrderBLService_Stub();
 		final OrderBLService_Driver driver = new OrderBLService_Driver(stub);
 		final OrderVO orderVO = driver.orderBLService.getOrderDetail("123456789012");
@@ -77,7 +77,7 @@ public class OrderBLService_DriverTest {
 	 * test interface getAllAbnormalOrderGeneral(LocalDate date)
 	 */
 	@Test
-	public void test3() {
+	public void testGetAllAbnormalOrderGeneral01() {
 		final OrderBLService_Stub stub = new OrderBLService_Stub();
 		final OrderBLService_Driver driver = new OrderBLService_Driver(stub);
 		
@@ -104,7 +104,7 @@ public class OrderBLService_DriverTest {
 	 * test interface getAllAbnormalOrderGeneral()
 	 */
 	@Test
-	public void test4() {
+	public void testGetAllAbnormalOrderGeneral02() {
 		final OrderBLService_Stub stub = new OrderBLService_Stub();
 		final OrderBLService_Driver driver = new OrderBLService_Driver(stub);
 		
@@ -131,7 +131,7 @@ public class OrderBLService_DriverTest {
 	 * test interface getAllUnexecutedOrderGeneral
 	 */
 	@Test
-	public void test5() {
+	public void testGetAllUnexecutedOrderGeneral() {
 		final OrderBLService_Stub stub = new OrderBLService_Stub();
 		final OrderBLService_Driver driver = new OrderBLService_Driver(stub);
 		

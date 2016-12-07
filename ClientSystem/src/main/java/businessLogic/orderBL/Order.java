@@ -221,6 +221,139 @@ public class Order {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有未执行>订单时，客户的编号
+	 * @return 客户个人<所有未执行>订单
+	 * 
+	 * 直接从本层本模块getAllGuestOrderGeneral走
+	 */
+	public List<OrderGeneralVO> getAllGuestUnexecutedOrderGeneral(final String guestID) {
+		final List<OrderGeneralVO> orderGeneralVOs = getAllGuestOrderGeneral(guestID);
+		
+		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
+		for (int i = 0; i < orderGeneralVOs.size(); i++) {
+			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
+			if (thisOrderGeneral.state == OrderState.UNEXECUTED) {
+				result.add(thisOrderGeneral);
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有已执行>订单时，客户的编号
+	 * @return 客户个人<所有已执行>订单
+	 * 
+	 * 直接从本层本模块getAllGuestOrderGeneral走
+	 */
+	public List<OrderGeneralVO> getAllGuestExecutedOrderGeneral(final String guestID) {
+		final List<OrderGeneralVO> orderGeneralVOs = getAllGuestOrderGeneral(guestID);
+		
+		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
+		for (int i = 0; i < orderGeneralVOs.size(); i++) {
+			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
+			if (thisOrderGeneral.state == OrderState.EXECUTED) {
+				result.add(thisOrderGeneral);
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有异常>订单时，客户的编号
+	 * @return 客户个人<所有异常>订单
+	 * 
+	 * 直接从本层本模块getAllGuestOrderGeneral走
+	 */
+	public List<OrderGeneralVO> getAllGuestAbnormalOrderGeneral(final String guestID) {
+		final List<OrderGeneralVO> orderGeneralVOs = getAllGuestOrderGeneral(guestID);
+		
+		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
+		for (int i = 0; i < orderGeneralVOs.size(); i++) {
+			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
+			if (thisOrderGeneral.state == OrderState.ABNORMAL) {
+				result.add(thisOrderGeneral);
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有已撤销>订单时，客户的编号
+	 * @return 客户个人<所有已撤销>订单
+	 * 
+	 * 直接从本层本模块getAllGuestOrderGeneral走
+	 */
+	public List<OrderGeneralVO> getAllGuestCancelledOrderGeneral(final String guestID) {
+		final List<OrderGeneralVO> orderGeneralVOs = getAllGuestOrderGeneral(guestID);
+		
+		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
+		for (int i = 0; i < orderGeneralVOs.size(); i++) {
+			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
+			if (thisOrderGeneral.state == OrderState.CANCELLED) {
+				result.add(thisOrderGeneral);
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有已评论>订单时，客户的编号
+	 * @return 客户个人<所有已评论>订单
+	 * 
+	 * 直接从本层本模块getAllGuestOrderGeneral走
+	 */
+	public List<OrderGeneralVO> getAllGuestCommentedOrderGeneral(final String guestID) {
+		final List<OrderGeneralVO> orderGeneralVOs = getAllGuestOrderGeneral(guestID);
+		
+		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
+		for (int i = 0; i < orderGeneralVOs.size(); i++) {
+			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
+			if (thisOrderGeneral.state == OrderState.EXECUTED && thisOrderGeneral.hasCommented == true) {
+				result.add(thisOrderGeneral);
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<所有未评价>订单时，客户的编号
+	 * @return 客户个人<所有未评论>订单
+	 * 
+	 * 直接从本层本模块getAllGuestOrderGeneral走
+	 */
+	public List<OrderGeneralVO> getAllGuestUncommentedOrderGeneral(final String guestID) {
+		final List<OrderGeneralVO> orderGeneralVOs = getAllGuestOrderGeneral(guestID);
+		
+		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
+		for (int i = 0; i < orderGeneralVOs.size(); i++) {
+			OrderGeneralVO thisOrderGeneral = orderGeneralVOs.get(i);
+			if (thisOrderGeneral.state == OrderState.EXECUTED && thisOrderGeneral.hasCommented == false) {
+				result.add(thisOrderGeneral);
+			}
+		}
+		return result;
+	}
+	
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
 	 * @updateTime 2016/11/27
 	 * @param hotelID 酒店要查看本酒店所有订单时，酒店的编号
 	 * @return 此酒店所有的所有订单
@@ -435,26 +568,23 @@ public class Order {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/4
+	 * @updateTime 2016/12/5
 	 * @param guestID 此客户的客户编号
 	 * @param hotelID 此客户相对的酒店编号
 	 * @return 此客户在此相应酒店预定过的订单状态
+	 * ————————————————若此客户在此酒店没有订单记录？？？？
+	 * 
+	 * 直接从本层本模块getAllGuestOrderGeneral走
 	 */
 	public OrderState getOrderState(String guestID, String hotelID) {
-		List<OrderGeneralPO> guestOrders = null;
-		
-		try {
-			guestOrders = orderDataService.getAllGuestOrderGeneral(guestID);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		List<OrderGeneralVO> guestOrders = getAllGuestOrderGeneral(guestID);
 		
 		List<OrderState> states = new ArrayList<OrderState>();
 		if (guestOrders != null) {
 			for (int i = 0; i < guestOrders.size(); i++) {
-				OrderGeneralPO thisOrderGeneral = guestOrders.get(i);
-				if (thisOrderGeneral.getHotelID().equals(hotelID)) {
-					states.add(thisOrderGeneral.getState());
+				OrderGeneralVO thisOrderGeneral = guestOrders.get(i);
+				if (thisOrderGeneral.hotelID.equals(hotelID)) {
+					states.add(thisOrderGeneral.state);
 				}
 			}
 		}
@@ -465,11 +595,11 @@ public class Order {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/4
+	 * @updateTime 2016/12/5
 	 * @param states 此客户在此相应酒店预定过的所有订单状态
-	 * @return 优先级最高的订单状态（已评论 > 已执行 > 未执行 > 异常 > 已取消）
+	 * @return 优先级最高的订单状态（已取消 < 异常 < 未执行 < 已执行）
 	 */
-	private OrderState getMaxOrderState(List<OrderState> states) {
+	private static OrderState getMaxOrderState(List<OrderState> states) {
 		List<Integer> integers = new ArrayList<Integer>();
 		for (int i = 0; i < states.size(); i++) {
 			integers.add(states.get(i).ordinal());
@@ -481,7 +611,6 @@ public class Order {
 				indexOfMax = i;
 			}
 		}
-		return OrderState.values()[indexOfMax];
+		return OrderState.values()[integers.get(indexOfMax)];
 	}
-	
 }

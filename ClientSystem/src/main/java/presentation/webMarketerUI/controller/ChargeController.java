@@ -47,6 +47,8 @@ public class ChargeController {
 	 */
 	@FXML
 	private void initialize() {
+		
+		//TODO 掉需要的接口
 		userBLService = new UserBLService_Stub();
 	}
 	
@@ -58,6 +60,9 @@ public class ChargeController {
 	 */	
 	@FXML
 	protected void search() {
+		
+		//TODO 通过输入的得到guest的VO   searchGuestID.getText(),UserType.GUEST
+		
 		chargePane.setVisible(true);
 		guestVO = (GuestVO) userBLService.getSingle( searchGuestID.getText(),UserType.GUEST);
 		guestID.setText(guestVO.userID);
@@ -74,6 +79,9 @@ public class ChargeController {
 	 */
 	@FXML
 	protected void saveCharge() throws IOException {
+		//TODO 通过guestID保存   guestID.getText()得到ID
+//		通过得到改变后的信用值 Double.parseDouble(chargeNum.getText()) + Double.parseDouble(credit.getText())
+		
 		creditService = new Guest();
 		if (credit.getText() != null) {
 			creditService.modifyCredit(searchGuestID.getText(),
@@ -81,6 +89,7 @@ public class ChargeController {
 			showResult();
 		}
 	}
+	//弹窗
 	void showResult() throws IOException{
 			Pane root = new Pane();
 			Label result = new Label("save successfully");

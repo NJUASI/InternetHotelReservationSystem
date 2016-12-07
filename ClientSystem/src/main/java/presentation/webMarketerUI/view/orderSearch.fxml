@@ -130,7 +130,7 @@
             </AnchorPane>
          </children>
       </Pane>
-      <AnchorPane fx:id="orderCheck" prefHeight="601.0" prefWidth="895.0" visible="false">
+      <AnchorPane fx:id="orderCheck" prefHeight="601.0" prefWidth="895.0">
          <children>
             <Button focusTraversable="false" layoutX="786.0" layoutY="70.0" mnemonicParsing="false" onAction="#OrderDetail" text="查看详情" />
             <Separator layoutY="60.0" prefHeight="3.0" prefWidth="895.0" />
@@ -148,16 +148,17 @@
                   <Button focusTraversable="false" layoutX="117.0" layoutY="12.0" mnemonicParsing="false" onAction="#cancelAbnormalOrderInCheck" text="撤销" />
                </children>
             </Pane>
-            <TableView fx:id="table" focusTraversable="false" layoutY="112.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="491.0" prefWidth="895.0" tableMenuButtonVisible="true">
+            <TableView fx:id="table" focusTraversable="false" layoutY="117.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="486.0" prefWidth="895.0">
                <columns>
                   <TableColumn fx:id="orderIDColumn" prefWidth="104.0" text="订单编号" />
+                  <TableColumn fx:id="guestIDColumn" prefWidth="100.0" text="客户编号" />
                   <TableColumn fx:id="nameColumn" prefWidth="100.0" text="客户姓名" />
-                  <TableColumn fx:id="hotelNameColumn" prefWidth="115.0" text="酒店名" />
-                  <TableColumn fx:id="addressColumn" prefWidth="135.0" text="地址" />
-                  <TableColumn fx:id="checkInTimeColumn" prefWidth="138.0" text="预计入住时间" />
-                  <TableColumn fx:id="checkOutTimeColumn" prefWidth="140.0" text="预计离开时间" />
-                  <TableColumn fx:id="priceColumn" prefWidth="69.0" resizable="false" text="价格" />
-                  <TableColumn fx:id="stateColumn" prefWidth="92.0" text="订单状态" />
+                  <TableColumn fx:id="hotelNameColumn" prefWidth="105.0" text="酒店名" />
+                  <TableColumn fx:id="addressColumn" prefWidth="133.0" text="地址" visible="false" />
+                  <TableColumn fx:id="checkInTimeColumn" prefWidth="169.0" text="预计入住时间" />
+                  <TableColumn fx:id="checkOutTimeColumn" prefWidth="147.0" text="预计离开时间" />
+                  <TableColumn fx:id="priceColumn" minWidth="0.0" prefWidth="67.0" resizable="false" text="价格" />
+                  <TableColumn fx:id="stateColumn" prefWidth="100.0" text="订单状态" />
                </columns>
             </TableView>
          </children>

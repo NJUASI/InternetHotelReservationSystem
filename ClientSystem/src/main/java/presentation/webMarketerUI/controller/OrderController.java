@@ -57,7 +57,7 @@ public class OrderController {
 	private TableView<OrderTable> table;
 	@FXML
 	private TableColumn<OrderTable, String> orderIDColumn,nameColumn, hotelNameColumn, addressColumn, priceColumn,
-			checkInTimeColumn, stateColumn,checkOutTimeColumn;
+			checkInTimeColumn, stateColumn,checkOutTimeColumn,guestIDColumn;
 
 	/**
 	 * @author 61990
@@ -86,9 +86,10 @@ public class OrderController {
 		back2.setVisible(true);
 		orderDetail.setVisible(true);
 		searchPane.setVisible(false);
-		// Order.
+		//TODO Order
 		// 获得输入的内容
 		// searchID.getText();
+		//通过orderID得到一条VO		
 		// Test,需要删掉s
 		final LocalDateTime createTime = LocalDateTime.of(2016, 2, 2, 18, 30);
 		final LocalDateTime checkInTime = LocalDateTime.of(2016, 2, 3, 11, 23);
@@ -103,6 +104,8 @@ public class OrderController {
 		 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
 		 OrderState.ABNORMAL,false, "gaoy", "1212121") ,12.4,createTime,checkInTime,checkOutTime,RoomType.双人间,4,"202",4,"adsfas",3.4,"22w222");
 
+		//		
+		
 		if (orderVO.orderGeneralVO.state == OrderState.ABNORMAL) {
 			cancelOrderPane.setDisable(false);
 		} else {
@@ -122,9 +125,9 @@ public class OrderController {
 	protected void cancelAbnormalOrder() {
 		try {
 			if (cancelPercent.getValue().equals("50%")) {
-
+				//TODO 返回50%信用值，通过orderVO.guestID
 			} else if (cancelPercent.getValue().equals("100%")) {
-
+				//TODO 返回100%信用值，通过orderVO.guestID
 			}
 		} catch (Exception e) {
 			System.out.println("ssss");
@@ -144,7 +147,7 @@ public class OrderController {
 		try {
 			orderCheck.setVisible(true);
 		searchPane.setVisible(false);
-			// 获得输入的内容
+			// TODO 获得输入的内容日期，通过日期获得一整天的异常订单
 		// LocalDate date = searchDate.getValue();
 		orderVOlist=new LinkedList<>();
 		
@@ -200,8 +203,8 @@ public class OrderController {
 	 */
 	@FXML
 	protected void OrderDetail() {
-		//通过iD get GeneralVO 
-//		System.out.println(table.getSelectionModel().getSelectedItem().getOrderID());
+		//通过iD 得到 GeneralVO 
+//		ID：： table.getSelectionModel().getSelectedItem().getOrderID();
 		
 		final LocalDateTime createTime = LocalDateTime.of(2016, 2, 2, 18, 30);
 		final LocalDateTime checkInTime = LocalDateTime.of(2016, 2, 3, 11, 23);
@@ -231,9 +234,10 @@ public class OrderController {
 
 	@FXML
 	protected void searchAbnormalOrder() {
-		// 获得输入的内容
-				
-orderVOlist=new LinkedList<>();
+		// TODO 获得输入的内容日期，通过日期获得一整天的异常订单
+		// LocalDate date = searchDate.getValue();
+
+		orderVOlist=new LinkedList<>();
 		
 		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
 				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
@@ -257,7 +261,8 @@ orderVOlist=new LinkedList<>();
 
 	@FXML
 	protected void searchUnexecutedOrder() {
-	
+		// TODO 获得输入的内容日期，通过日期获得一整天的未执行订单
+		// LocalDate date = searchDate.getValue();
 				orderVOlist=new LinkedList<>();
 				orderVOlist=new LinkedList<>();
 				
@@ -283,9 +288,9 @@ orderVOlist=new LinkedList<>();
 	protected void cancelAbnormalOrderInCheck() {
 		try {
 			if (cancelPercentInCheck.getValue().equals("50%")) {
-
+				//TODO 返回50%信用值，通过 table.getSelectionModel().getSelectedItem().getOrderID();
 			} else if (cancelPercentInCheck.getValue().equals("100%")) {
-
+				//TODO 返回100%信用值，通过 table.getSelectionModel().getSelectedItem().getOrderID();
 			}
 		} catch (Exception e) {
 			System.out.println("ssss");
@@ -326,7 +331,7 @@ orderVOlist=new LinkedList<>();
 		List<OrderTable> orderList = new LinkedList<OrderTable>();
 		for (int i = 0; i < orderVOlist.size(); i++) {
 			OrderGeneralVO temp = orderVOlist.get(i);
-			orderList.add(new OrderTable(temp.orderID ,temp.orderID,temp.name,temp.phone, temp.hotelName,temp.hotelAddress,	temp.expectExecuteTime.toString(),temp.expectLeaveTime.toString(),temp.price + "", temp.state.toString()));
+			orderList.add(new OrderTable(temp.orderID ,temp.guestID,temp.name,temp.phone, temp.hotelName,temp.hotelAddress,	temp.expectExecuteTime.toString(),temp.expectLeaveTime.toString(),temp.price + "", temp.state.toString()));
 					
 		}
 
@@ -335,6 +340,7 @@ orderVOlist=new LinkedList<>();
 			data.add(orderList.get(i));
 		}
 		orderIDColumn.setCellValueFactory(cellData -> cellData.getValue().orderID);
+		guestIDColumn.setCellValueFactory(cellData -> cellData.getValue().guestID);
 		nameColumn.setCellValueFactory(cellData -> cellData.getValue().name);
 		hotelNameColumn.setCellValueFactory(cellData -> cellData.getValue().hotelName);
 		addressColumn.setCellValueFactory(cellData -> cellData.getValue().address);

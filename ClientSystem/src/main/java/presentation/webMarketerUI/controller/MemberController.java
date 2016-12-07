@@ -41,6 +41,9 @@ public class MemberController {
 	 */
 	@FXML
 	private void initialize() {
+		
+		//TODO 得到List<MarketVO> 从底层得到网站会员折扣信息
+		
 		marketBLService = new MarketBLService_Stub();
 		List<MarketVO> listMarket = marketBLService.getMemberFormulation();
 		name1.setText(listMarket.get(0).marketName);
@@ -115,6 +118,8 @@ public class MemberController {
 		list.add(new MarketVO(market3.getText(), Double.parseDouble(needCredit3.getText()) , Double.parseDouble(modifyDiscount3.getText())));
 		list.add(new MarketVO(market4.getText(), Double.parseDouble(needCredit4.getText()) , Double.parseDouble(modifyDiscount4.getText())));
 		list.add(new MarketVO(market5.getText(), Double.parseDouble(needCredit5.getText()) , Double.parseDouble(modifyDiscount5.getText())));
+		
+		//TODO 保存List<MarketVO> 从界面得到，存下去
 		
 		if(marketBLService.setMemberFormulation(list)==ResultMessage.SUCCESS){
 			System.out.println("success");
