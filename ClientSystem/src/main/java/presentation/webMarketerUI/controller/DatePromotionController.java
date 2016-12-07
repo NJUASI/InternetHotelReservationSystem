@@ -16,6 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import utilities.IDReserve;
 import vo.SpecialSpanPromotionVO;
 
 
@@ -39,9 +40,11 @@ public class DatePromotionController {
 	@FXML
 	private DatePicker startDatePicker, endDatePicker;
 
-	PromotionBLService promotionController;
+	private PromotionBLService promotionController;
+	private String hotelID;
 	public DatePromotionController() {
 		promotionController = PromotionBLController.getInstance();
+		hotelID = IDReserve.getInstance().getUserID();
 	}
 
 	/**
@@ -158,9 +161,9 @@ public class DatePromotionController {
 	 */
 	@FXML
 	protected void deleteOne() {
-		//TODO gcm注意：删除已存在的一条数据 从数据库改变此条类十一策略
-		//通过name删除从下面的到name
-		//		table.getSelectionModel().getSelectedItem().getName();
+		String promotionName = table.getSelectionModel().getSelectedItem().getName(); 
+		//通过hotelID和唯一promotionName删除此条promotion
+		promotionController.deleteSpecialSpanPromotion(hotelID, promotionName);
 		initialize();	
 	}
 	

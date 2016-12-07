@@ -86,5 +86,17 @@ public class HotelBLService_Stub implements HotelBLService{
 		return null;
 	}
 
+	@Override
+	public ResultMessage checkInOffline(String hotelID, String RoomName, int roomNum) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
+	@Override
+	public ResultMessage checkOutOffline(String hotelID, String RoomName, int roomNum) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
 
 }
