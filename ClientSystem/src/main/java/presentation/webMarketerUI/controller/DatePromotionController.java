@@ -1,9 +1,12 @@
 package presentation.webMarketerUI.controller;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import businessLogic.promotionBL.PromotionBLController;
+import businessLogicService.promotionBLService.PromotionBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,8 +16,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import vo.SpecialSpanPromotionVO;
 
 
+/**
+ * @Description:网站管理特定期间策略的界面控制器
+ * @author:Harvey Gong
+ * @lastChangedBy:Harvey Gong
+ * @time:2016年12月7日 下午8:43:37
+ */
 public class DatePromotionController {
 	@FXML
 	private Pane modifyPane;
@@ -29,23 +39,31 @@ public class DatePromotionController {
 	@FXML
 	private DatePicker startDatePicker, endDatePicker;
 
+	PromotionBLService promotionController;
+	public DatePromotionController() {
+		promotionController = PromotionBLController.getInstance();
+	}
+
 	/**
+	 * @description 初始化网站的所有特定期间策略
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27 构造函数，初始化成员变量
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 */
 	@FXML
 	private void initialize() {
 		table.getItems().clear();
-		
-		//TODO gcm注意：从数据库得到所有的网站类十一策略
-		List<DatePromotionTable> datePromotion = new LinkedList<DatePromotionTable>();
-		datePromotion.add(new DatePromotionTable("兰州", "www", LocalDate.of(2014,4,3),LocalDate.of(2014,4,23)));
-		datePromotion.add(new DatePromotionTable("兰2州", "w2ww", LocalDate.of(2015,6,7),LocalDate.of(2014,4,23)));
-		datePromotion.add(new DatePromotionTable("兰1州", "w2ww", LocalDate.of(2015,6,7),LocalDate.of(2014,4,23)));
-		datePromotion.add(new DatePromotionTable("兰4s州", "w2ww", LocalDate.of(2015,6,7),LocalDate.of(2014,4,23)));
 
-		
+		//调用promotion的方法获取网站的特定期间策略
+		Iterator<SpecialSpanPromotionVO> specialSpanPromotions = promotionController.getWebSpecialSpanPromotions();
+		List<DatePromotionTable> datePromotion = new ArrayList<DatePromotionTable>();
+
+		while(specialSpanPromotions.hasNext()){
+			SpecialSpanPromotionVO vo = specialSpanPromotions.next();
+			datePromotion.add(new DatePromotionTable(vo.promotionName,String.valueOf(vo.discount),
+					vo.startDate, vo.endDate));
+		}
+
 		ObservableList<DatePromotionTable> data = FXCollections.observableArrayList();
 		for (int i = 0; i < datePromotion.size(); i++) {
 			data.add(datePromotion.get(i));
@@ -56,7 +74,7 @@ public class DatePromotionController {
 		discountColumn.setCellValueFactory(cellData -> cellData.getValue().discount);
 
 		table.setItems(data);
-	
+
 
 	}
 	String preName;
@@ -81,77 +99,57 @@ public class DatePromotionController {
 		}
 	}
 	/**
+	 * @description 保存网站的特定期间策略
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @保存双十一策略
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 */
 	@FXML
 	protected void savePromotion() {
 		try {
-			
-			//TODO gcm注意：update已存在的一条数据 从数据库改变此条类十一策略
-		//	preName 之前的名字
-//			修改之后的信息
-//			nameText.getText();
-//			discountText.getText();
-//			startDatePicker.getValue();
-//			endDatePicker.getValue();
 
-	
-		System.out.println("success");
-		
-		modifyPane.setVisible(false);
-		addBt.setVisible(true);
-		setModifyText("","",null,null);
-		initialize();
+			// 调用promotion的更新特定期间策略的方法
+			promotionController.updateSpecialSpanPromotions(encapsulateVO());
+
+			modifyPane.setVisible(false);
+			addBt.setVisible(true);
+			setModifyText("","",null,null);
+			initialize();
 		} catch (Exception e) {
 			System.out.println("保存失败");
 		}
 	}
+
+
 	/**
+	 * @description 添加特定期间的策略
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 * @添加双十一策略
 	 */
 	@FXML
 	protected void addPromotion() {
 		try {
-			//TODO gcm注意：添加已存在的一条数据 从数据库改变此条类十一策略
-//			nameText.getText();
-//			discountText.getText();
-//			startDatePicker.getValue();
-//			endDatePicker.getValue();
-		System.out.println("success");
-	
+			promotionController.addSpecialSpanPromotion(encapsulateVO());
 		} catch (Exception e) {
 			System.out.println("保存失败");
 		}
 	}
+
 	/**
+	 * @description 取消修改
 	 * @author 61990
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/11/30
-	 * @取消修改双十一策略
 	 */
 	@FXML
 	protected void cancelModifyPromotion() {
-		try {
-			modifyPane.setVisible(false);
-			addBt.setVisible(true);
-			setModifyText("","",null,null);
-		} catch (Exception e) {
-
-		}
+		modifyPane.setVisible(false);
+		addBt.setVisible(true);
+		setModifyText("","",null,null);
 	}
-	private void setModifyText(String name,String discount,LocalDate startDate ,LocalDate endDate) {
-		
-		nameText.setText(name);
-		discountText.setText(discount);
-		startDatePicker.setValue(startDate);
-		endDatePicker.setValue(endDate);
-	}
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -162,7 +160,34 @@ public class DatePromotionController {
 	protected void deleteOne() {
 		//TODO gcm注意：删除已存在的一条数据 从数据库改变此条类十一策略
 		//通过name删除从下面的到name
-//		table.getSelectionModel().getSelectedItem().getName();
+		//		table.getSelectionModel().getSelectedItem().getName();
 		initialize();	
+	}
+	
+	private void setModifyText(String name,String discount,LocalDate startDate ,LocalDate endDate) {
+
+		nameText.setText(name);
+		discountText.setText(discount);
+		startDatePicker.setValue(startDate);
+		endDatePicker.setValue(endDate);
+	}
+
+	/**
+	 * @Description:将修改或添加的信息封装成一个vo
+	 * @return
+	 * SpecialSpanPromotionVO
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月7日 下午9:02:46
+	 */
+	private SpecialSpanPromotionVO encapsulateVO(){
+		SpecialSpanPromotionVO vo = new SpecialSpanPromotionVO();
+
+		//TODO gcm注意：这里使用了魔数，应该换一种方式，商讨之后决定
+		vo.setUserID("99999999");
+		vo.setPromotionName(nameText.getText());
+		vo.setStartDate(startDatePicker.getValue());
+		vo.setEndDate(endDatePicker.getValue());
+		return vo;
 	}
 }

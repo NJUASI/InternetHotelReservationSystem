@@ -1,8 +1,13 @@
 package presentation.webMarketerUI.controller;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import businessLogic.promotionBL.PromotionBLController;
+import businessLogic.sourceBL.SourceBLController;
+import businessLogicService.promotionBLService.PromotionBLService;
+import businessLogicService.sourceBLService.SourceBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,6 +29,14 @@ public class CyclePromotionController {
 	@FXML
 	private ComboBox<String> cityInput,cycleInput;
 
+	
+	SourceBLService sourceBLController;
+	PromotionBLService promotionBLController;
+	
+	public CyclePromotionController() {
+		sourceBLController = SourceBLController.getInstance();
+		promotionBLController = PromotionBLController.getInstance();
+	}
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -51,89 +64,64 @@ public class CyclePromotionController {
 	}
 	
 	/**
+	 * @查找城市的comboBox
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @查找城市
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 */
 	@FXML
 	protected void searchCity() {
 		cityInput.getItems().clear();
 		cycleInput.setValue("");
 		
-		//TODO gcm注意：从数据库得到所有城市
-		List<String> list = getCity();
-		//		
-		for (int i = 0; i < list.size(); i++) {
-			cityInput.getItems().add(list.get(i));
+		Iterator<String> cities = sourceBLController.getCities();
+		while(cities.hasNext()){
+			cityInput.getItems().add(cities.next());
 		}
 	}
-
-	List<String> getCity() {
-		List<String> list = new LinkedList<String>();
-		list.add("1");
-		list.add("122");
-		list.add("122221");
-		list.add("131");
-		list.add("3");
-		list.add("23");
-		return list;
-	}
+	
 	/**
+	 * @description 查找商圈的comboBox
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @查找商圈
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 */
 	@FXML
 	protected void searchCycle() {
 		cycleInput.getItems().clear();
-		
-		//TODO gcm注意：根据城市名称从数据库得到所有对应商圈  	cityInput.getValue();
-		List<String> list = getCycle(cityInput.getValue());
-		//
-		for (int i = 0; i < list.size(); i++) {
-			cycleInput.getItems().add(list.get(i));
+		String selectedCity = cityInput.getValue();
+		Iterator<String> circles = sourceBLController.getCircles(selectedCity);
+		while(circles.hasNext()){
+			cycleInput.getItems().add(circles.next());
 		}
 	}
 	
-	List<String> getCycle(String city) {
-		List<String> list = new LinkedList<String>();
-		list.add("123");
-		list.add("1233");
-		list.add("1231");
-		list.add("1232");
-		list.add("1213");
-		list.add("1123");
-		return list;
-	}
 	/**
+	 * @description 初始化选中城市的特定商圈的列表
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @初始化左边列表
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 */
 	@FXML
 	protected void searchInfo() {
-		//TODO gcm注意：根据城市得到所有商圈的折扣信息 List AddressVO	cityInput.getValue();
-		System.out.println(cityInput.getValue());
-		List<AddressVO> address = new LinkedList<AddressVO>();
-		address.add(new AddressVO("兰州", "www", 10.9));
-		address.add(new AddressVO("兰州", "www", 20.9));
-		address.add(new AddressVO("兰州", "www", 30.9));
-		address.add(new AddressVO("兰州", "www", 0.9));
-		address.add(new AddressVO("兰州", "www", 0.9));
-		address.add(new AddressVO("兰州", "www", 0.9));
-		address.add(new AddressVO("兰州", "www", 0.9));
-		address.add(new AddressVO("兰州", "www", 40.9));
-		address.add(new AddressVO("兰州", "www", 0.9));
-		address.add(new AddressVO("兰州", "www", 0.9));
-		address.add(new AddressVO("兰州", "www", 0.9));
-		address.add(new AddressVO("兰州", "www", 60.9));
-		address.add(new AddressVO("兰州", "www", 0.9));
-		address.add(new AddressVO("兰州", "www", 0.9));
-		address.add(new AddressVO("兰州", "www", 0.9));
-
+		//根据获取到selectedCity，然后调用promotion接口获取特定商圈折扣
+		String selectedCity = cityInput.getValue();
+		Iterator<AddressVO> specialCirclePromotions = null;
+		// TODO gcm注意：为null时可能会抛出异常，异常之后加
+		if(selectedCity!=null){
+			specialCirclePromotions = promotionBLController.getSpecialCirclePromotions(selectedCity);
+		}
+		
+		List<AddressVO> address = new ArrayList<AddressVO>();
+		while(specialCirclePromotions.hasNext()){
+			address.add(specialCirclePromotions.next());
+		}
+		
+		/**
+		 *  TODO gy注意：看看可不可以简化代码，
+		 *  我看网上可以直接调用FXCollections.observableArrayList(List list)
+		 *  而且addressTable和addressVO几乎一样，看看能不能消除冗余
+		 */
 		ObservableList<AddressTable> data = FXCollections.observableArrayList();
 		for (int i = 0; i < address.size(); i++) {
 			data.add(new AddressTable(address.get(i).city, address.get(i).circle, Double.toString(address.get(i).discout)));
@@ -145,10 +133,9 @@ public class CyclePromotionController {
 		table.setItems(data);
 	
 	}
-	
-
 
 	/**
+	 * @description 保存某一特定商圈的信息
 	 * @author 61990
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/11/30
@@ -157,12 +144,15 @@ public class CyclePromotionController {
 	@FXML
 	protected void saveLocalPromotion() {
 		//TODO gcm注意：通过城市商圈检索改变城市商圈策略
-		cityInput.getValue();
-		cycleInput.getValue();
-		cycleDiscount.getText();
+		String city = cityInput.getValue();
+		String circle = cycleInput.getValue();
+		double discount = Double.valueOf(cycleDiscount.getText());
+		AddressVO addressVO = new AddressVO(city,circle,discount);
+		//调用promotionController的更新特定商圈策略的方法
+		promotionBLController.updateSpecialCirclePromotions(addressVO);
 	}
 	
-	
+	//TODO gy注意：没有看到添加策略的方法
 
 }
 
