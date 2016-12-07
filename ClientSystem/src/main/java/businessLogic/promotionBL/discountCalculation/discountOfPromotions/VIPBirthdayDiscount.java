@@ -20,16 +20,11 @@ public class VIPBirthdayDiscount implements CalculateDiscount{
 		this.date = today;
 	}
 
-
-
-
-
 	@Override
 	public double getDiscount() {
 		Member member = new MockMember();
 		if(member.isMember(guestID, MemberType.COMMON)){
 			birthDay = member.getMemberInfo(guestID).birthday;
-			// TODO gcm 看一下我有修改接口，看一下你这逻辑有没有问题
 			if(date.isEqual(birthDay)){
 				return discount; 
 			}
