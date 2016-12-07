@@ -3,10 +3,10 @@ package businessLogic.hotelBL;
 import java.util.List;
 
 import businessLogic.hotelBL.hotel.Hotel;
-import businessLogic.hotelBL.hotel.RMILinkFailedException;
 import businessLogic.hotelBL.hotelScan.HotelScan;
 import businessLogicService.hotelBLService.HotelBLService;
 import exception.operationFailedException.GetFailedException;
+import exception.verificationException.RMILinkFailedException;
 import utilities.ResultMessage;
 import utilities.SearchCriteriaType;
 import utilities.SortStrategy;
@@ -42,7 +42,7 @@ public class HotelBLController implements HotelBLService {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月6日 下午5:08:48
 	 */
-	public void initHotel(String hotelID) throws RMILinkFailedException, GetFailedException{
+	public void initHotel(String hotelID){
 		hotel = new Hotel(hotelID);
 	}
 	
@@ -79,7 +79,27 @@ public class HotelBLController implements HotelBLService {
 	public ResultMessage addHotel(HotelVO hotelVO) {
 		return hotel.addHotelInfo(hotelVO);
 	}
+
 	
+	/**
+	 * @Description:线下的入住和退房操作，分别调用这两个方法
+	 * @param hotelID
+	 * @param RoomName
+	 * @param roomNum
+	 * @return
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月8日 上午12:34:02
+	 */
+	@Override
+	public ResultMessage checkInOffline(String hotelID, String RoomName, int roomNum) {
+		return hotel.checkIn(hotelID,RoomName,roomNum);
+	}
+
+	@Override
+	public ResultMessage checkOutOffline(String hotelID, String RoomName, int roomNum) {
+		return hotel.checkOut(hotelID,RoomName,roomNum);
+	}
 	// 浏览概况时的操作
 	public Iterator<HotelVO> getHotels(String city,String circle) {
 		return hotelScan.getHotels(city,circle);

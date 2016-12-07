@@ -12,13 +12,17 @@ import vo.SearchCriteriaVO;
 
 public interface HotelBLService {
 
-	public HotelVO getHotelInfo (String hotelWorkerID);
+	public HotelVO getHotelInfo (String hotelID);
 
 	public ResultMessage updateHotelInfo (HotelVO hotelVO);
 	
 	public ResultMessage addHotel (HotelVO hotelVO);
+	
+	public ResultMessage checkInOffline (String hotelID,String RoomName,int roomNum);
+	
+	public ResultMessage checkOutOffline (String hotelID,String RoomName,int roomNum);
 
-	public Iterator<RoomInfoVO> getHotelRoomInfo (String hotelWorkerID);
+	public Iterator<RoomInfoVO> getHotelRoomInfo (String hotelID);
 
 	public ResultMessage updateHotelRoomInfo (RoomInfoVO roomInfoVO,String roomType);
 	
