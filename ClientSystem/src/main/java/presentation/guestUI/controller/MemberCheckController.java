@@ -37,6 +37,7 @@ public class MemberCheckController {
 	@FXML
 	private void initialize() {
 		try {
+			//TODO 通过ID获得会员VO
 			memberVO=new MemberVO("12345",LocalDate.of(2001, 1, 22),null);
 			marketVO = new MarketVO("LV4", 0, 0);
 			enterprise.setText(memberVO.enterprise);
@@ -94,7 +95,7 @@ public class MemberCheckController {
 	 */
 	@FXML
 	protected void registerEnterprise() {
-//		String s=Main.userID;
+		//TODO 通过ID和QQ企业注册生日会员
 		enterprise.getText();	
 		initialize();
 	}
@@ -107,6 +108,7 @@ public class MemberCheckController {
 	 */
 	@FXML
 	protected void registerCommon() {
+		//TODO 通过ID和生日注册生日会员
 //		String s=Main.userID;
 		birthdayPicker.getValue();
 		initialize();

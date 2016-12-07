@@ -35,7 +35,9 @@ public class GuestInfoController {
 	 */
 	@FXML
 	private void initialize() {
-		// Main.userID;
+		
+		//TODO 通过guestID获得guestVO
+		
 		guestVO = new GuestVO("12345", null, "", "张三", "小张", "123456", "13993323454", 100);
 		guestID.setText(guestVO.userID);
 		name.setText(guestVO.name);
@@ -72,6 +74,8 @@ public class GuestInfoController {
 	@FXML
 	protected void saveGuestInfo() {
 		try {
+			//TODO 通过guestVO保存信息
+
 			name.setText(name2.getText());
 			nickname.setText(nickname2.getText());
 			phone.setText(phone2.getText());
@@ -84,6 +88,9 @@ public class GuestInfoController {
 			
 			guestModify.setVisible(false);
 			guestCheck.setVisible(true);
+			
+			//再次初始化界面
+			initialize();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
