@@ -12,6 +12,7 @@ import dataService.hotelWorkerDataService.HotelWorkerDataService;
 import dataService.marketDataService.MarketDataService;
 import dataService.orderDataService.OrderDataService;
 import dataService.promotionDataService.PromotionDataService;
+import dataService.sourceDataService.SourceDataService;
 import dataService.webManagerDataService.WebManagerDataService;
 import dataService.webMarketerDataService.WebMarketerDataService;
 
@@ -28,6 +29,7 @@ public class ClientRemoteHelper {
 	WebManagerDataService webManagerDataService;
 	WebMarketerDataService webMarketerDataService;
 	CreditDataService creditDataService;
+	SourceDataService sourceDataService;
 
 	private static ClientRemoteHelper remoteHelper = new ClientRemoteHelper();
 
@@ -69,6 +71,9 @@ public class ClientRemoteHelper {
 
 			creditDataService = (CreditDataService)
 					Naming.lookup(url+"CreditDataService");
+			
+			sourceDataService = (SourceDataService)
+					Naming.lookup(url+"SourceDataService");
 
 			System.out.println("connect");
 
@@ -115,5 +120,9 @@ public class ClientRemoteHelper {
 
 	public CreditDataService getCreditDataService(){
 		return creditDataService;
+	}
+	
+	public SourceDataService getSourceDataService(){
+		return sourceDataService;
 	}
 }
