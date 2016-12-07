@@ -170,11 +170,11 @@
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Button layoutX="586.0" layoutY="113.0" mnemonicParsing="false" onMouseClicked="#openSwitchCityCircle" text="切换城市商圈" />
-                  <Button layoutX="709.0" layoutY="113.0" mnemonicParsing="false" onMouseClicked="#openChoose" text="筛选" />
+                  <Button layoutX="586.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#openSwitchCityCircle" text="切换城市商圈" />
+                  <Button layoutX="710.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#openChoose" text="筛选" />
                   <Pane layoutY="198.0" prefHeight="401.0" prefWidth="895.0">
                      <children>
-                        <TableView fx:id="hotelTable" focusTraversable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="401.0" prefWidth="895.0" tableMenuButtonVisible="true">
+                        <TableView fx:id="hotelTable" focusTraversable="false" layoutY="-30.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="441.0" prefWidth="895.0" tableMenuButtonVisible="true">
                            <columns>
                               <TableColumn fx:id="hotelIDColumn3" prefWidth="113.0" text="酒店编号" />
                               <TableColumn fx:id="hotelNameColumn3" prefWidth="108.0" text="酒店名" />
@@ -189,9 +189,9 @@
                         </TableView>
                      </children>
                   </Pane>
-                  <Separator layoutY="149.0" prefWidth="895.0" />
-                  <Button layoutX="641.0" layoutY="160.0" mnemonicParsing="false" onAction="#openHotelDetail" text="查看详情" />
-                  <Button layoutX="743.0" layoutY="160.0" mnemonicParsing="false" text="立即预定" />
+                  <Separator layoutY="106.0" prefWidth="895.0" />
+                  <Button layoutX="649.0" layoutY="117.0" mnemonicParsing="false" onAction="#openHotelDetail" text="查看详情" />
+                  <Button layoutX="748.0" layoutY="117.0" mnemonicParsing="false" onAction="#createOrderIncheck" text="立即预定" />
                </children>
             </AnchorPane>
          </children>

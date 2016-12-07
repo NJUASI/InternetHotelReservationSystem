@@ -1,6 +1,7 @@
 package businessLogic.orderBL;
 
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.List;
 
 import businessLogicService.orderBLService.OrderBLService;
@@ -21,12 +22,12 @@ import vo.OrderVO;
  * 
  * 新增查看订单详情时各个种类的接口
  */
-public final class OrderController implements OrderBLService {
+public final class OrderBLController implements OrderBLService {
 
 	
 	private Order order;
 	
-	private static OrderController orderController;
+	private static OrderBLController orderController = new OrderBLController();
 	
 	/**
 	 * @author charles
@@ -34,7 +35,7 @@ public final class OrderController implements OrderBLService {
 	 * @updateTime 2016/11/29
 	 * 构造函数，初始化成员变量
 	 */
-	private OrderController() {
+	private OrderBLController() {
 		//new the mock object
 		order = new Order();
 	}
@@ -45,10 +46,7 @@ public final class OrderController implements OrderBLService {
 	 * @updateTime 2016/11/27
 	 * @return order controller的实例，单例化
 	 */
-	public static OrderController getInstance() {
-		if (orderController == null) {
-			orderController = new OrderController();
-		}
+	public static OrderBLController getInstance() {
 		return orderController;
 	}
 	
@@ -335,7 +333,7 @@ public final class OrderController implements OrderBLService {
 	 * @return 此酒店的所有评价
 	 */
 	@Override
-	public List<HotelEvaluationVO> getEvaluations(String hotelID) {
+	public Iterator<HotelEvaluationVO> getEvaluations(String hotelID) {
 		return order.getEvaluations(hotelID);
 	}
 	

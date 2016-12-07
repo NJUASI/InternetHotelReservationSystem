@@ -34,16 +34,17 @@ public class Hotel implements HotelInfoOperation{
 	
 	public Hotel() {
 		initHotelDataService();
+		initRooms();
 	}
 
 	private void initHotel() {
 		initHotelDataService();
 		initHotelPO();
-		initRooms(hotelID);
+		initRooms();
 	}
 
-	private void initRooms(String hotelID) {
-		rooms = new Rooms(hotelID);
+	private void initRooms() {
+		rooms = new Rooms();
 	}
 
 	private void initHotelPO() {
@@ -133,7 +134,7 @@ public class Hotel implements HotelInfoOperation{
 	 * @time:2016年12月3日 下午9:49:59
 	 */
 	public Iterator<RoomInfoVO> getHotelRoomInfo(String hotelWorkerID) {
-		return rooms.getRoomInfo();
+		return rooms.getRoomInfo(hotelWorkerID);
 	}
 
 	/**
@@ -158,8 +159,8 @@ public class Hotel implements HotelInfoOperation{
 	 * @author: Harvey Gong
 	 * @time:2016年12月4日 下午3:14:25
 	 */
-	public ResultMessage deleteRoomInfo(String roomType){
-		return rooms.deleteRoomInfo(roomType);
+	public ResultMessage deleteRoomInfo(String hotelID,String roomType){
+		return rooms.deleteRoomInfo(hotelID,roomType);
 	}
 
 	/**
@@ -234,7 +235,6 @@ public class Hotel implements HotelInfoOperation{
 	}
 
 	public int getRemainRoomNum(String hotelID) {
-		initRooms(hotelID);
 		return rooms.getRemainRoomNum();
 	}
 }

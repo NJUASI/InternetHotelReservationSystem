@@ -12,8 +12,9 @@ import javafx.scene.control.TableView;
 import vo.CreditVO;
 
 /**
- * 
+ * @description 显示客户信用记录变化的界面控制器
  * @author 61990
+ * @lastChangedBy Harvey
  * 
  */
 public class CreditCheckController {
@@ -30,14 +31,14 @@ public class CreditCheckController {
 	@FXML
 	private void initialize() {
 		//TODO 通过guestID获得所有信用记录
-		
+
 		List<CreditVO> credit = new LinkedList<CreditVO>();
 		credit.add(new CreditVO("1234567",LocalDateTime.of(1421, 12, 4, 2, 13),"123455667",67,53,"异常->正常"));		
 		credit.add(new CreditVO("1234567",LocalDateTime.of(1421, 12, 4, 2, 13),"123455667",67,53,"异常->正常"));
 		credit.add(new CreditVO("1234567",LocalDateTime.of(1421, 12, 4, 2, 13),"123455667",67,53,"异常->正常"));
 		credit.add(new CreditVO("1234567",LocalDateTime.of(1421, 12, 4, 2, 13),"123455667",67,53,"异常->正常"));
 		credit.add(new CreditVO("1234567",LocalDateTime.of(1421, 12, 4, 2, 13),"123455667",67,53,"异常->正常"));
-		
+
 
 		ObservableList<CreditTable> data = FXCollections.observableArrayList();
 		for (int i = 0; i < credit.size(); i++) {
@@ -53,5 +54,5 @@ public class CreditCheckController {
 		table.setItems(data);
 
 	}
-	
+
 }

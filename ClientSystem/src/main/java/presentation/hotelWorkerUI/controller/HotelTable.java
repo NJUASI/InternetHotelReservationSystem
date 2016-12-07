@@ -22,7 +22,7 @@ public class HotelTable {
 		this.minPrice = new SimpleStringProperty(minPrice);
 		this.level = new SimpleStringProperty(level);
 		this.score = new SimpleStringProperty(score);
-	
+
 	}
 	public String getHotelID() {
 		return hotelID.get();

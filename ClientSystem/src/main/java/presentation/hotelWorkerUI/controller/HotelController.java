@@ -1,10 +1,15 @@
 package presentation.hotelWorkerUI.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import businessLogic.hotelBL.HotelBLController;
+import businessLogic.orderBL.OrderBLController;
+import businessLogicService.hotelBLService.HotelBLService;
+import businessLogicService.orderBLService.OrderBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,12 +30,14 @@ import vo.HotelVO;
  *
  */
 public class HotelController {
-	
-	HotelBLController hotelBLController;
+
+	HotelBLService hotelBLController;
+	OrderBLService orderBLController;
 	String hotelID = IDReserve.getInstance().getUserID();
-	
+
 	public HotelController() {
 		hotelBLController = HotelBLController.getInstance();
+		orderBLController = OrderBLController.getInstance();
 	}
 
 	@FXML
@@ -47,24 +54,45 @@ public class HotelController {
 	 * @description: 在查看酒店详情时，需要显示酒店详情及酒店的所有评论
 	 * @author 61990
 	 * @lastChangedBy Harvey Gong
-	 * @updateTime 2016/12/6 
+	 * @updateTime 2016/12/7 
 	 */
 	@FXML
 	private void initialize() {
-		
+
 		//显示酒店详情
 		HotelVO hotelVO = hotelBLController.getHotelInfo(hotelID);
 		initHotelDetail(hotelVO);
 
-		//TODO 显示酒店的所有评论
-		commentList=new LinkedList<>();
-		commentList.add(new HotelEvaluationVO("12334", LocalDate.of(2005, 3, 2),5.0,"ssssdfgasdfadgljglfksdjfklajdlfkjasldfkj"));
-		commentList.add(new HotelEvaluationVO("12334", LocalDate.of(2005, 3, 2),5.0,"ssssdfgasdfadgljglfksdjfklajdlfkjasldfkj"));
-		commentList.add(new HotelEvaluationVO("12334", LocalDate.of(2005, 3, 2),5.0,"ssssdfgasdfadgljglfksdjfklajdlfkjasldfkj"));
-		commentList.add(new HotelEvaluationVO("12334", LocalDate.of(2005, 3, 2),5.0,"ssssdfgasdfadgljglfksdjfklajdlfkjasldfkj"));
-		commentList.add(new HotelEvaluationVO("12334", LocalDate.of(2005, 3, 2),5.0,"ssssdfgasdfadgljglfksdjfklajdlfkjasldfkj"));
+		//显示酒店的所有评论
+		Iterator<HotelEvaluationVO> evaluations = orderBLController.getEvaluations(hotelID);
+		commentList=new ArrayList<HotelEvaluationVO>();
+		while(evaluations.hasNext()){
+			commentList.add(evaluations.next());
+		}
 		initCommentTable(commentList);
 	}	
+
+
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @updateTime 2016/11/30
+	 * @param hotelVO
+	 * @describe 初始化酒店详情
+	 */
+	private void initHotelDetail(HotelVO hotelVO) {
+
+		hotelNameInDetail.setText(hotelVO.hotelName);
+		hotelIDInDetail.setText(hotelVO.hotelID);
+		hotelAddressInDetail.setText(hotelVO.address);
+		cityInDetail.setText(hotelVO.city);
+		cycleInDetail.setText(hotelVO.circle);
+		levelInDetail.setText(hotelVO.level);
+		scoreInDetail.setText(Double.toString(hotelVO.score));
+		equipmentInDetail.setText(hotelVO.equipment);
+		introductionInDetail.setText(hotelVO.introduction);
+	}
+
 	@FXML
 	TableView<EvaluationTable> evaluationTable;
 	@FXML
@@ -95,26 +123,9 @@ public class HotelController {
 
 		evaluationTable.setItems(data);
 	}
-	
-	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @param hotelVO
-	 * @describe 初始化酒店详情
-	 */
-	private void initHotelDetail(HotelVO hotelVO) {
 
-		hotelNameInDetail.setText(hotelVO.hotelName);
-		hotelIDInDetail.setText(hotelVO.hotelID);
-		hotelAddressInDetail.setText(hotelVO.address);
-		cityInDetail.setText(hotelVO.city);
-		cycleInDetail.setText(hotelVO.circle);
-		levelInDetail.setText(hotelVO.level);
-		scoreInDetail.setText(Double.toString(hotelVO.score));
-		equipmentInDetail.setText(hotelVO.equipment);
-		introductionInDetail.setText(hotelVO.introduction);
-	}
+
+
 	@FXML
 	private Label hotelIDText,scoreText;
 	@FXML
@@ -132,7 +143,7 @@ public class HotelController {
 	protected void modify() {
 
 		HotelVO hotelVO = hotelBLController.getHotelInfo(hotelID);
-		
+
 		hotelNameText.setText(hotelVO.hotelName);
 		hotelIDText.setText(hotelVO.hotelID);
 		hotelAddressText.setText(hotelVO.address);
@@ -146,6 +157,7 @@ public class HotelController {
 		hotelModifyPane.setVisible(true);
 		hotelInfoPane.setVisible(false);
 	}
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy Harvey
@@ -155,8 +167,11 @@ public class HotelController {
 	@FXML
 	protected void getCity(){
 
-		//TODO 将当前酒店的城市从list中出去，然后逐一添加到combobox中
-		
+		//每次点击先清除一次
+		cityText.getItems().clear();
+
+		//TODO 将当前酒店的城市从list中出去，然后逐一添加到combobox中,所有城市的list保存在哪儿的
+
 		cityText.getItems().add("1234");
 		cityText.getItems().add("1234");
 		cityText.getItems().add("1234");
@@ -172,7 +187,7 @@ public class HotelController {
 	 */
 	@FXML
 	protected void getCycle(){
-		
+
 		//TODO 通过当前city，获得当前城市所有的cycle，并将此酒店的circle从list中除去,不知道在哪个controller里面
 		String city = cityText.getValue();
 
@@ -184,10 +199,10 @@ public class HotelController {
 		cycleText.getItems().add("1234");
 	}
 	/**
+	 * @description 点击星级按钮
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/6
-	 * @describe 点击星级按钮
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 */
 	@FXML
 	protected void getLevel(){
@@ -198,8 +213,9 @@ public class HotelController {
 	}
 
 	/**
+	 * @description 点击保存按钮
 	 * @author 61990
-	 * @lastChangedBy 61990
+	 * @lastChangedBy Harvey
 	 * @updateTime 2016/12/6
 	 * @describe 点击保存按钮
 	 */
@@ -207,7 +223,7 @@ public class HotelController {
 	protected void save() {
 
 		HotelVO hotelVO = new HotelVO();
-		
+
 		hotelVO.hotelName=hotelNameText.getText();
 		hotelVO.address=hotelAddressText.getText();
 		hotelVO.city=cityText.getValue();
@@ -215,13 +231,12 @@ public class HotelController {
 		hotelVO.level=levelText.getValue();
 		hotelVO.equipment=equipmentText.getText();
 		hotelVO.introduction=introductionText.getText();
-		
-		//TODO 调用更新酒店信息的方法
+
+		//TODO 调用更新酒店信息的方法,可能会catch到exception，以后加入exception
 		hotelBLController.updateHotelInfo(hotelVO);
 		initHotelDetail(hotelVO);
 
 		hotelModifyPane.setVisible(false);
-		
 		hotelInfoPane.setVisible(true);
 	}
 

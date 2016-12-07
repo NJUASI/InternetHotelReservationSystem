@@ -30,7 +30,7 @@ public class Order_tester {
 	 */
 	@Test
 	public void test1() {
-		final OrderController controller = OrderController.getInstance();
+		final OrderBLController controller = OrderBLController.getInstance();
 
 		final LocalDateTime expectExecuteTime = LocalDateTime.of(2016, 2, 3, 14, 00);
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
@@ -53,7 +53,7 @@ public class Order_tester {
 	 */
 	@Test
 	public void test2() {
-		final OrderController controller = OrderController.getInstance();
+		final OrderBLController controller = OrderBLController.getInstance();
 		assertEquals(ResultMessage.UPDATE_EVALUATION_SUCCESS, controller.addEvaluation(new GuestEvaluationVO("1234567890", 4.5, "good")));
 				
 	}

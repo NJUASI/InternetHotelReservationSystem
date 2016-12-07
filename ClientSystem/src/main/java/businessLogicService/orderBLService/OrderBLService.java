@@ -1,6 +1,7 @@
 package businessLogicService.orderBLService;
 
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.List;
 
 import utilities.OrderState;
@@ -246,10 +247,7 @@ public interface OrderBLService {
 	 * @param hotelID 酒店工作人员／客户查看酒店的评论
 	 * @return 此酒店的所有评价
 	 */
-	List<HotelEvaluationVO> getEvaluations(String hotelID);
-	
-	
-	
+	Iterator<HotelEvaluationVO> getEvaluations(String hotelID);
 	
 	/*
 	 * 只提供给Hotel的接口

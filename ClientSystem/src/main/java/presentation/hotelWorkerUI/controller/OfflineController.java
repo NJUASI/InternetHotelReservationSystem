@@ -15,7 +15,7 @@ public class OfflineController {
 	private DatePicker date1,date2;
 	@FXML
 	private TextField phone;
-	
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -24,7 +24,7 @@ public class OfflineController {
 	 */
 	@FXML
 	protected void checkIn(){
-//		roomType.getValue(), roomNum.getText();
+		//		roomType.getValue(), roomNum.getText();
 		roomType.setValue("");
 		roomNum.setText("");
 		date1.setValue(null);

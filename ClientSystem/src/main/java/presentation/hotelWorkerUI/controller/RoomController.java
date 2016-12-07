@@ -1,8 +1,13 @@
 package presentation.hotelWorkerUI.controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import businessLogic.hotelBL.HotelBLController;
+import businessLogicService.hotelBLService.HotelBLService;
+import exception.operationFailedException.UpdateFaiedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,12 +17,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import utilities.IDReserve;
 import utilities.RoomType;
 import vo.RoomInfoVO;
 /**
+ * @description 酒店客房信息界面的控制器
  * @author 61990
- * @控制酒店房间界面
- * @version 11.27
+ * @lastChangedBY Harvey
  */
 public class RoomController {
 	@FXML
@@ -26,40 +32,47 @@ public class RoomController {
 	private TableView<TypeTable> roomTable;
 	@FXML
 	private TableColumn<TypeTable, String> typeColumn, roomNameColumn,roomNumColumn,remainRoomColumn, priceColumn;
-	
-	List<RoomInfoVO> roomList;
+
 	@FXML
 	private Button addBt;
-	
+
 	@FXML
 	private ComboBox<String> roomType;
 	@FXML
 	private TextField roomName,roomNum,price;
-	
+
+
+	HotelBLService hotelBLController;
+	String hotelID;
+	public RoomController() {
+		hotelBLController = HotelBLController.getInstance();
+		hotelID = IDReserve.getInstance().getUserID();
+	}
+
 	/**
+	 * @description 初始化该酒店的所有客房信息
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/6
-	 * @构造函数，初始化成员变量
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 */
 	@FXML
 	private void initialize() {
-		
+
+		//TODO 需要初始化添加信息列表中的房间类型
 		roomType.getItems().clear();
-		roomType.getItems().add("单人间");
-		roomType.getItems().add("双人间");
-		roomList = new LinkedList<>();
-		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
-		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
-		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
-		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
+		Iterator<RoomInfoVO> rooms = hotelBLController.getHotelRoomInfo(hotelID);
+		List<RoomInfoVO> roomList = new ArrayList<RoomInfoVO>();
+		while(rooms.hasNext()){
+			roomList.add(rooms.next());
+		}
 		initRoomTable(roomList);
 	}
-	
+
 	/**
+	 * @description 初始化客房信息列表
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/6
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 * @初始化房间类型表
 	 */
 	private void initRoomTable(List<RoomInfoVO> roomList) { 	
@@ -82,44 +95,44 @@ public class RoomController {
 
 		roomTable.setItems(data);
 	}
-	
+
 	/**
+	 * @description 从table中选中一条记录，然后点击修改
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @获取表中内容直接修改
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 */
 	@FXML
 	protected void modifyOne() {
+		// TODO 房间类型选择的combobox中还需加入房间类型
+		TypeTable selectedRoomVO = null;
 		try{
-			setModifyText(roomTable.getSelectionModel().getSelectedItem().getRoomType(),
-			roomTable.getSelectionModel().getSelectedItem().getRoomName(),
-			roomTable.getSelectionModel().getSelectedItem().getRoomType(),
-			roomTable.getSelectionModel().getSelectedItem().getPrice());
+			selectedRoomVO = roomTable.getSelectionModel().getSelectedItem();
+			setModifyText(selectedRoomVO.getRoomType(),selectedRoomVO.getRoomName(),
+					selectedRoomVO.getRoomType(),selectedRoomVO.getPrice());
 			modifyPane.setVisible(true);
 			addBt.setVisible(false);
 		} catch (Exception e) {
 			System.out.println("请选定");
 		}
 	}
-	
+
 	/**
+	 * @description 保存房间类型
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @保存房间类型
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 */
 	@FXML
 	protected void save() {
-		try {
-			
+		/**
+		 *  TODO 需要获得被点击修改房间类型的旧名字，原始房间剩余数量，计算出现修改房间数量修改后的房间剩余数量
+		 *	并把打包好的vo与旧名字传下去，调用更新客房信息的方法
+		 */
 		modifyPane.setVisible(false);
 		addBt.setVisible(true);
 		setModifyText("","","","");
 		initialize();
-		} catch (Exception e) {
-			System.out.println("保存失败");
-		}
 	}
 	void setModifyText(String roomType,String roomName,String roomNum,String price){
 		this.roomType.setValue(roomType);
@@ -127,42 +140,30 @@ public class RoomController {
 		this.roomNum.setText(roomNum);
 		this.price.setText(price);
 	}
-	
+
 	/**
+	 * @description 添加房间类型
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 * @添加房间类型
 	 */
 	@FXML
 	protected void addRoomType() {
-		try {
-//			roomType.getValue();
-//			roomName.getText();
-//			roomNum.getText();
-//			price.getText();
-//			RoomInfoVO=
-			initialize();
-		System.out.println("success");
-	
-		} catch (Exception e) {
-			System.out.println("保存失败");
-		}
+		// TODO 需要获取所添加的酒店信息，并根据该信息封装成一个vo，然后调用添加酒店客房信息的方法
+		initialize();
 	}
+
 	/**
+	 * @description 取消修改
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @取消修改
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 */
 	@FXML
 	protected void cancelModify() {
-		try {
-			modifyPane.setVisible(false);
-			addBt.setVisible(true);
-			setModifyText("","","","");
-		} catch (Exception e) {
-
-		}
+		modifyPane.setVisible(false);
+		addBt.setVisible(true);
+		setModifyText("","","","");
 	}
 }

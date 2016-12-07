@@ -21,18 +21,15 @@ import vo.RoomInfoVO;
 class Rooms {
 
 	List<RoomInfoPO> roomInfoPOList;
-	private String hotelID;
 	private HotelDataService hotelDataService;
 
-	public Rooms(String hotelID) {
+	public Rooms() {
 		//		this.hotelDataService = ClientRemoteHelper.getInstance().getHotelDataService();
 		try {
 			hotelDataService = new HotelDataService_Stub();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		this.hotelID = hotelID;
-		initRoomInfoPO();
 	}
 
 	/**
@@ -43,9 +40,9 @@ class Rooms {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月6日 上午11:16:21
 	 */
-	private void initRoomInfoPO(){
+	private void initRoomInfoPO(String hotelID){
 		try {
-			hotelDataService.getRoomInfo(hotelID);
+			roomInfoPOList = hotelDataService.getRoomInfo(hotelID);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -59,9 +56,15 @@ class Rooms {
 	 * @author: Harvey Gong
 	 * @time:2016年12月4日 上午10:59:13
 	 */
-	public Iterator<RoomInfoVO> getRoomInfo(){
+	public Iterator<RoomInfoVO> getRoomInfo(String hotelID){
+		
 		List<RoomInfoVO> roomInfoVOList = new ArrayList<RoomInfoVO>();
-
+		List<RoomInfoPO> roomInfoPOList = null;
+		try {
+			roomInfoPOList = hotelDataService.getRoomInfo(hotelID);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		for(RoomInfoPO roomInfoPO:roomInfoPOList){
 			roomInfoVOList.add(new RoomInfoVO(roomInfoPO));
 		}
@@ -81,7 +84,7 @@ class Rooms {
 
 		try {
 			hotelDataService.addRoomInfo(new RoomInfoPO(roomInfoVO));
-			initRoomInfoPO();
+			initRoomInfoPO(roomInfoVO.hotelID);
 			return ResultMessage.SUCCESS;
 		} catch (RemoteException e) {
 			return ResultMessage.FAIL;
@@ -97,11 +100,11 @@ class Rooms {
 	 * @author: Harvey Gong
 	 * @time:2016年12月4日 上午11:21:31
 	 */
-	public ResultMessage deleteRoomInfo(String roomType){
+	public ResultMessage deleteRoomInfo(String hotelID,String roomType){
 
 		try {
 			hotelDataService.deleteRoomInfo(hotelID,roomType);
-			initRoomInfoPO();
+			initRoomInfoPO(hotelID);
 			return ResultMessage.SUCCESS;
 		} catch (RemoteException e) {
 			return ResultMessage.FAIL;
@@ -121,7 +124,7 @@ class Rooms {
 
 		try {
 			hotelDataService.updateRoomInfo(new RoomInfoPO(roomInfoVO),oldRoomType);
-			initRoomInfoPO();
+			initRoomInfoPO(roomInfoVO.hotelID);
 			return ResultMessage.SUCCESS;
 		} catch (RemoteException e) {
 			e.printStackTrace();

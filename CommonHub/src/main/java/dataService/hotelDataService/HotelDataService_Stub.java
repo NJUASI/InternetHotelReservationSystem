@@ -8,6 +8,7 @@ import java.util.List;
 import po.HotelPO;
 import po.RoomInfoPO;
 import utilities.ResultMessage;
+import utilities.RoomType;
 
 public class HotelDataService_Stub extends UnicastRemoteObject implements HotelDataService  {
 	
@@ -43,8 +44,13 @@ public class HotelDataService_Stub extends UnicastRemoteObject implements HotelD
 
 	@Override
 	public List<RoomInfoPO> getRoomInfo(String hotelID) throws RemoteException {
-		// TODO 自动生成的方法存根
-		return null;
+		List<RoomInfoPO> list = new ArrayList<RoomInfoPO>();
+		list.add(new RoomInfoPO("12345678",RoomType.单人间,"金",1,0,100));
+		list.add(new RoomInfoPO("12345678",RoomType.双人间,"木",1,1,200));
+		list.add(new RoomInfoPO("12345678",RoomType.三人间,"水",1,0,300));
+		list.add(new RoomInfoPO("12345678",RoomType.商务套房,"火",1,1,400));
+		list.add(new RoomInfoPO("12345678",RoomType.总统套房,"土",1,0,500));
+		return list;
 	}
 
 
