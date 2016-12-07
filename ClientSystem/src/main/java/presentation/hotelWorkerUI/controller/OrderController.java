@@ -32,15 +32,29 @@ import vo.OrderVO;
  * @description 酒店查看订单的界面
  * @author 61990
  *
+ * lastChangeBy charles
+ * updateTime 2016/12/7
+ * 
  */
 public class OrderController {
 	
 	private OrderBLService orderBLService;
 	
+	/*
+	 * 订单概况
+	 */
 	private final String hotelID = IDReserve.getInstance().getUserID();
 	
 	private List<OrderGeneralVO> orderGenerals;
 
+	/*
+	 * 订单详情
+	 */
+	private String orderID;
+	
+	private OrderVO orderVO;
+
+	
 	//订单概况
 	@FXML
 	private Pane orderCheck;
@@ -176,11 +190,6 @@ public class OrderController {
 	/*
 	 * 订单详情初始化
 	 */
-	private String orderID;
-	
-	private OrderVO orderVO;
-
-	
 	@FXML
 	private Pane orderDetail;
 	@FXML
@@ -212,6 +221,9 @@ public class OrderController {
 		orderComment.setDisable(false);
 		orderScore.setDisable(false);	
 
+		orderVO = orderBLService.getOrderDetail(orderID);
+		initOrderDetail(orderVO);
+		
 		//show 相应的button
 		if(orderVO.orderGeneralVO.state==OrderState.EXECUTED){
 			checkOutBt.setVisible(true);
@@ -221,9 +233,6 @@ public class OrderController {
 			checkOutBt.setVisible(false);
 			checkInBt.setVisible(true);
 		}
-
-		orderVO = orderBLService.getOrderDetail(orderID);
-		initOrderDetail(orderVO);
 	}
 	
 	@FXML
