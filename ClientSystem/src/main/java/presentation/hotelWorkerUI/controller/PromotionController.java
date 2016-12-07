@@ -1,9 +1,11 @@
 package presentation.hotelWorkerUI.controller;
 
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import businessLogic.promotionBL.PromotionBLController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,7 +17,17 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import presentation.webMarketerUI.controller.DatePromotionTable;
+import utilities.IDReserve;
+import utilities.PromotionType;
+import vo.HotelFixedPromotionVO;
+import vo.SpecialSpanPromotionVO;
 
+/**
+ * @Description:酒店查看promotion的controller
+ * @author:Harvey Gong
+ * @lastChangedBy:Harvey Gong
+ * @time:2016年12月7日 上午10:36:35
+ */
 public class PromotionController {
 	@FXML
 	private Pane modifyPane,pane1,pane2,pane3;
@@ -31,58 +43,78 @@ public class PromotionController {
 	private DatePicker startDatePicker, endDatePicker;
 	@FXML
 	private Label threeLB,enterpriseLB,birthdayLB;
-	
+
 	List<DatePromotionTable> datePromotion;
 
+
+	PromotionBLController promotionBLController;
+	String hotelID;
 	/**
+	 * @Description:在初始化该controller时，初始化promotionBLController
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月7日 上午10:36:11
+	 */
+	public PromotionController() {
+		promotionBLController = PromotionBLController.getInstance();
+		hotelID = IDReserve.getInstance().getUserID();
+	}
+
+	/**
+	 * @description 初始化酒店特定期间折扣
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27 构造函数，初始化成员变量
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/6
 	 */
 	@FXML
 	private void initialize() {
+		//TODO 折扣显示有问题
+		Iterator<SpecialSpanPromotionVO> spanPromotionItr = promotionBLController.getHotelSpecialSpanPromotions(hotelID);
 		datePromotion = new LinkedList<DatePromotionTable>();
-		datePromotion.add(new DatePromotionTable("兰州", "www", LocalDate.of(2014,4,3),LocalDate.of(2014,4,23)));
-		datePromotion.add(new DatePromotionTable("兰2州", "w2ww", LocalDate.of(2015,6,7),LocalDate.of(2014,4,23)));
-		datePromotion.add(new DatePromotionTable("兰1州", "w2ww", LocalDate.of(2015,6,7),LocalDate.of(2014,4,23)));
-		datePromotion.add(new DatePromotionTable("兰4s州", "w2ww", LocalDate.of(2015,6,7),LocalDate.of(2014,4,23)));
-		initDatePromotion(datePromotion);
-	}
-	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @初始化其他三个
-	 */
-		protected void initDatePromotion(List<DatePromotionTable> datePromotion){
-			table.getItems().clear();
-			ObservableList<DatePromotionTable> data = FXCollections.observableArrayList();
-			for (int i = 0; i < datePromotion.size(); i++) {
-				data.add(datePromotion.get(i));
-			}
-			nameColumn.setCellValueFactory(cellData -> cellData.getValue().name);
-			startDateColumn.setCellValueFactory(cellData -> cellData.getValue().startDate);
-			endDateColumn.setCellValueFactory(cellData -> cellData.getValue().endDate);
-			discountColumn.setCellValueFactory(cellData -> cellData.getValue().discount);
-
-			table.setItems(data);
+		while (spanPromotionItr.hasNext()) {
+			SpecialSpanPromotionVO vo = spanPromotionItr.next();
+			datePromotion.add(new DatePromotionTable(vo.promotionName,String.valueOf(vo.discount),vo.startDate,vo.endDate));	
 		}
-/**
- * @author 61990
- * @lastChangedBy 61990
- * @updateTime 2016/11/30
- * @初始化其他三个
- */
-	protected void initOther(){
-		threeLB.setText("9");
-		birthdayLB.setText("1");
-		enterpriseLB.setText("8");
+		initDatePromotion(datePromotion);
+		initHotelFixedPromotion();
 	}
 	/**
+	 * @description 初始化特定期间折扣的tableView
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @修改三间及以上
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
+	 */
+	protected void initDatePromotion(List<DatePromotionTable> datePromotion){
+		table.getItems().clear();
+		ObservableList<DatePromotionTable> data = FXCollections.observableArrayList();
+		for (int i = 0; i < datePromotion.size(); i++) {
+			data.add(datePromotion.get(i));
+		}
+		nameColumn.setCellValueFactory(cellData -> cellData.getValue().name);
+		startDateColumn.setCellValueFactory(cellData -> cellData.getValue().startDate);
+		endDateColumn.setCellValueFactory(cellData -> cellData.getValue().endDate);
+		discountColumn.setCellValueFactory(cellData -> cellData.getValue().discount);
+
+		table.setItems(data);
+	}
+	/**
+	 * @description 初始化酒店固定的策略
+	 * @author 61990
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
+	 */
+	protected void initHotelFixedPromotion(){
+		Iterator<HotelFixedPromotionVO> list = promotionBLController.getHotelFixedPromotions(hotelID);
+		//TODO 折扣显示有问题
+		threeLB.setText(String.valueOf(list.next().discount));
+		birthdayLB.setText(String.valueOf(list.next().discount));
+		enterpriseLB.setText(String.valueOf(list.next().discount));
+	}
+	/**
+	 * @description 点击三间及以上折扣的按钮
+	 * @author 61990
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 */
 	@FXML
 	protected void modifyThree(){
@@ -92,21 +124,22 @@ public class PromotionController {
 		pane1.setVisible(true);
 	}
 	/**
+	 * @description 点击修改生日折扣的按钮 
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @修改生日策略
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 */
 	@FXML
 	protected void modifyBirthday(){
 		birthdayText.setVisible(true);
 		birthdayText.setText(threeLB.getText());
-		pane2.setVisible(true);
 		birthdayBt.setVisible(false);
+		pane2.setVisible(true);
 	}
 	/**
+	 * @description 点击修改企业会员的按钮
 	 * @author 61990
-	 * @lastChangedBy 61990
+	 * @lastChangedBy Harvey
 	 * @updateTime 2016/11/30
 	 * @修改企业策略
 	 */
@@ -114,47 +147,57 @@ public class PromotionController {
 	protected void modifyEnterprise(){
 		enterpriseText.setVisible(true);
 		enterpriseText.setText(threeLB.getText());
-		pane3.setVisible(true);
 		enterpriseBt.setVisible(false);
+		pane3.setVisible(true);
 	}
-	
+
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 * @保存修改三间及以上
 	 */
 	@FXML
 	protected void saveThree(){
+		updateHotelFixedPromotion(threeText, threeLB);
+		initHotelFixedPromotion();
+		
 		threeText.setVisible(false);
 		threeBt.setVisible(true);
 		pane1.setVisible(false);
 	}
+	
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 * @保存修改生日策略
 	 */
 	@FXML
 	protected void saveBirthday(){
+		updateHotelFixedPromotion(birthdayText,birthdayLB);
+		initHotelFixedPromotion();
+		
 		birthdayText.setVisible(false);
 		birthdayBt.setVisible(true);
 		pane2.setVisible(false);
 	}
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 * @保存修改企业策略
 	 */
 	@FXML
 	protected void saveEnterprise(){
+		updateHotelFixedPromotion(enterpriseText,enterpriseLB);
+		initHotelFixedPromotion();
+		
 		enterpriseText.setVisible(false);
 		enterpriseBt.setVisible(true);
 		pane3.setVisible(false);
 	}
-	
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -191,14 +234,12 @@ public class PromotionController {
 		enterpriseBt.setVisible(true);
 		pane3.setVisible(false);
 	}
-	
-	
-	
+
 	/**
+	 * @description 获取表中内容直接修改双十一  
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @获取表中内容直接修改双十一
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 */
 	@FXML
 	protected void modifyOne() {
@@ -213,24 +254,25 @@ public class PromotionController {
 			System.out.println("请选定");
 		}
 	}
+
 	/**
+	 * @description 保存特定期间策略
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @保存双十一策略
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 */
 	@FXML
 	protected void savePromotion() {
 		try {
-//			final LocalDate s1 = beginTime2.getValue();
-//		final LocalDate s2 = beginTime2.getValue();
-		// PromotionVO promitonVO=new
-		// PromotionVO(PromotionType.HOTEL__HOLIDAY,Double.parseDouble(doubleDiscount2.getText()),s1,s2);
-		System.out.println("success");
-		modifyPane.setVisible(false);
-		addBt.setVisible(true);
-		setModifyText("","",null,null);
-		initialize();
+			//			final LocalDate s1 = beginTime2.getValue();
+			//		final LocalDate s2 = beginTime2.getValue();
+			// PromotionVO promitonVO=new
+			// PromotionVO(PromotionType.HOTEL__HOLIDAY,Double.parseDouble(doubleDiscount2.getText()),s1,s2);
+			System.out.println("success");
+			modifyPane.setVisible(false);
+			addBt.setVisible(true);
+			setModifyText("","",null,null);
+			initialize();
 		} catch (Exception e) {
 			System.out.println("保存失败");
 		}
@@ -244,12 +286,12 @@ public class PromotionController {
 	@FXML
 	protected void addPromotion() {
 		try {
-//			nameText.getText();
-//			discountText.getText();
-//			startDatePicker.getValue();
-//			endDatePicker.getValue();
-		System.out.println("success");
-	
+			//			nameText.getText();
+			//			discountText.getText();
+			//			startDatePicker.getValue();
+			//			endDatePicker.getValue();
+			System.out.println("success");
+
 		} catch (Exception e) {
 			System.out.println("保存失败");
 		}
@@ -271,7 +313,7 @@ public class PromotionController {
 		}
 	}
 	private void setModifyText(String name,String discount,LocalDate startDate ,LocalDate endDate) {
-		
+
 		nameText.setText(name);
 		discountText.setText(discount);
 		startDatePicker.setValue(startDate);
@@ -286,7 +328,24 @@ public class PromotionController {
 	@FXML
 	protected void deleteOne() {
 		//通过name删除
-//		table.getSelectionModel().getSelectedItem().getName();
+		//		table.getSelectionModel().getSelectedItem().getName();
 		initialize();	
+	}
+	
+	/**
+	 * @Description:根据传入的field,label更新相应的酒店固定策略
+	 * @param field
+	 * @param label
+	 * void
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月7日 上午11:45:16
+	 */
+	private void updateHotelFixedPromotion(TextField field,Label label){
+		HotelFixedPromotionVO vo = new HotelFixedPromotionVO();
+		vo.hotelID = hotelID;
+		vo.discount = Double.valueOf(field.getText());
+		vo.promotionType = PromotionType.valueOf(label.getText());
+		promotionBLController.updateHotelFixedPromotion(vo);
 	}
 }

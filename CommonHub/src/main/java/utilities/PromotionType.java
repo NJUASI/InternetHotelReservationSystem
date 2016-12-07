@@ -5,7 +5,7 @@ import java.io.Serializable;
 public enum PromotionType implements Serializable{
 	
 	//	酒店促销策略
-	HOTEL__BIRTHDAY, HOTEL__ENTERPRISE, HOTEL__ROOM_NUM_COUNT_BIGGER_THAN_THREE, HOTEL_HOLIDAY, 
+	会员生日折扣, 企业会员折扣, 三间及以上预订折扣, HOTEL_HOLIDAY, 
 	
 	//	网站促销策略
 	WEB_HOLIDAY, WEB__VIP_APPOINTED_CYCLE;

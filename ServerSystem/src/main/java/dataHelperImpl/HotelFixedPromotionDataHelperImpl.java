@@ -56,7 +56,7 @@ public class HotelFixedPromotionDataHelperImpl implements HotelFixedPromotionDat
 			while(rs.next()){
 				hotelFixedPromotionPO = new HotelFixedPromotionPO();
 				hotelFixedPromotionPO.setHotelID(rs.getString(1));
-				hotelFixedPromotionPO.setPromotionType(stringToPromotionType(rs.getString(2)));
+				hotelFixedPromotionPO.setPromotionType(PromotionType.valueOf(rs.getString(2)));
 				hotelFixedPromotionPO.setDiscount(rs.getDouble(3));
 				hotelFixedPromotionPOList.add(hotelFixedPromotionPO);
 			}
@@ -92,19 +92,6 @@ public class HotelFixedPromotionDataHelperImpl implements HotelFixedPromotionDat
 			return ResultMessage.FAIL;
 		}
 		
-	}
-	
-	private PromotionType stringToPromotionType(String promotionType){
-		if(promotionType.equals("HOTEL__BIRTHDAY")){
-			return PromotionType.HOTEL__BIRTHDAY;
-		}
-		else if(promotionType.equals("HOTEL__ROOM_NUM_COUNT_BIGGER_THAN_THREE")){
-			return PromotionType.HOTEL__ROOM_NUM_COUNT_BIGGER_THAN_THREE;
-		}
-		else if(promotionType.equals("HOTEL__ENTERPRISE")){
-			return PromotionType.HOTEL__ENTERPRISE;
-		}
-		return null;
 	}
 	
 }

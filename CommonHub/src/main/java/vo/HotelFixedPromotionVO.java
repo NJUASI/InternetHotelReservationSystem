@@ -15,4 +15,8 @@ public class HotelFixedPromotionVO{
 		this.discount = hotelFixedPromotion.getDiscount();
 	}
 
+	public HotelFixedPromotionVO() {
+		// TODO 自动生成的构造函数存根
+	}
+
 }

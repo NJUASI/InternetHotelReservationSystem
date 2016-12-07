@@ -7,8 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 /**
+ * @description
  * @author 61990
- *
+ * @lastChangedBy Harvey
  */
 public class HotelWorkerViewController {
 	Parent hotelInfo ,orderInfo, offline,remainRoom,promotion,roomInfo;	
