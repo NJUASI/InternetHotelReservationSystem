@@ -38,7 +38,7 @@ public class Order_tester {
 		
 		final OrderGeneralVO createOrderGeneralVO = new OrderGeneralVO("1234567890", "12345678", "thisHotel", 
 				"nanjing", expectExecuteTime, expectLeaveTime, "zhangsan", "15012345678");
-		final OrderVO createOrderVO = new OrderVO(createOrderGeneralVO, 250, roomType, 1, 2, "charles", "15012345678", "no");
+		final OrderVO createOrderVO = new OrderVO(createOrderGeneralVO, 250, roomType, 1, 2, "no");
 		assertEquals(ResultMessage.ORDER_CREATE_SUCCESS, controller.createOrder(createOrderVO));
 				
 	}

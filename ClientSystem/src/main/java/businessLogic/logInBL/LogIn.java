@@ -80,12 +80,11 @@ public class LogIn implements LogInBLService{
 	private boolean infoDetector(UserVO userVO){
 		GuestVO guestVO = (GuestVO)userVO;
 		Detector detector = new Detector();
-		boolean userID = detector.idDetector(guestVO.userID,Guest.IDLength);
 		boolean name = detector.infoDetector(guestVO.name);
 		boolean password = detector.passwordDetector(guestVO.password);
 		boolean phone = detector.phoneDetector(guestVO.phone);
 		
-		if(userID&&name&&password&&phone){
+		if(name&&password&&phone){
 			return true;
 		}
 		else{

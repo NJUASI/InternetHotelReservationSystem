@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import utilities.UserType;
 import vo.GuestVO;
 
 /**
@@ -64,7 +63,7 @@ public class ChargeController {
 		//TODO fjy注意：通过输入的得到guest的VO   searchGuestID.getText(),UserType.GUEST
 		
 		chargePane.setVisible(true);
-		guestVO = (GuestVO) userBLService.getSingle( searchGuestID.getText(),UserType.GUEST);
+		guestVO = (GuestVO) userBLService.getSingle( searchGuestID.getText());
 		guestID.setText(guestVO.userID);
 		name.setText(guestVO.name);
 		credit.setText( Double.toString(guestVO.credit));
