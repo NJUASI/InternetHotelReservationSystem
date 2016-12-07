@@ -613,4 +613,5 @@ public class Order {
 		}
 		return OrderState.values()[integers.get(indexOfMax)];
 	}
+	
 }
