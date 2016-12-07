@@ -166,8 +166,8 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 
 	/**
 	 * @author charles
-	 * @lastChangedBy  Byron Dong
-	 * @updateTime 2016/12/5
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
 	 * @param orderID 此次入住的订单编号
 	 * @param roomNumber 房间号
 	 * @param checkInTime 入住时间
@@ -187,17 +187,15 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			ps.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return ResultMessage.CHECK_IN_FAILURE;
+			return ResultMessage.FAIL;
 		}
-		
-		
-		return ResultMessage.CHECK_IN_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 	
 	/**
 	 * @author charles
-	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/12/4
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
 	 * @param orderID 此次退房的订单编号
 	 * @param checkOutTime 退房时间
 	 * @return ResultMessage 是否成功修改orderInfo
@@ -214,10 +212,10 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			ps.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return ResultMessage.CHECK_OUT_FAILURE;
+			return ResultMessage.FAIL;
 		}
 		
-		return ResultMessage.CHECK_OUT_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 	
 	/**

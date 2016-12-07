@@ -22,7 +22,7 @@ import utilities.ResultMessage;
  * 
  * @author charles
  * lastChangedBy charles
- * updateTime 2016/11/29
+ * updateTime 2016/12/7
  *
  */
 public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDataService {
@@ -39,7 +39,7 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	 * 
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
+	 * @updateTime 2016/12/7
 	 * @param order 从逻辑层层传下来的Order载体
 	 * @return 客户是否成功创建此订单
 	 * @throws RemoteException RMI
@@ -50,46 +50,66 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 		String date = formateDate(order.getCreateTime().toLocalDate());
 		
 		order.setOrderID(random + date);
-		return orderDataHelper.add(order);
+		ResultMessage message = orderDataHelper.add(order);
+		if (message == ResultMessage.SUCCESS) {
+			return ResultMessage.ORDER_CREATE_SUCCESS;
+		}else {
+			return ResultMessage.ORDER_CREATE_FAILURE;
+		}
 	}
 
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
+	 * @updateTime 2016/12/7
 	 * @param orderID 酒店工作人员当前需要执行订单的订单号
 	 * @return 酒店工作人员是否成功执行此订单
 	 * @throws RemoteException RMI
 	 */
 	@Override
 	public ResultMessage executeOrder(final String orderID) throws RemoteException {
-		return orderDataHelper.setState(orderID, OrderState.EXECUTED);
+		ResultMessage message = orderDataHelper.setState(orderID, OrderState.EXECUTED);
+		if (message == ResultMessage.SUCCESS) {
+			return ResultMessage.ORDER_EXECUTE_SUCCESS;
+		}else {
+			return ResultMessage.ORDER_EXECUTE_FAILURE;
+		}
 	}
 
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
+	 * @updateTime 2016/12/7
 	 * @param orderID 网站营销人员当前需要撤销的异常订单的订单号
 	 * @return 网站营销人员是否成功撤销此异常订单
 	 * @throws RemoteException RMI
 	 */
 	@Override
 	public ResultMessage undoAbnormalOrder(final String orderID) throws RemoteException {
-		return orderDataHelper.setState(orderID, OrderState.CANCELLED);
+		ResultMessage message = orderDataHelper.setState(orderID, OrderState.CANCELLED);
+		if (message == ResultMessage.SUCCESS) {
+			return ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS;
+		}else {
+			return ResultMessage.ABNORMAL_ORDER_UNDO_FAILURE;
+		}
 	}
 
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
+	 * @updateTime 2016/12/7
 	 * @param orderID 客户当前需要撤销的正常订单的订单号
 	 * @return 客户是否成功撤销此正常订单
 	 * @throws RemoteException RMI
 	 */
 	@Override
 	public ResultMessage undoNormalOrder(final String orderID) throws RemoteException {
-		return orderDataHelper.setState(orderID, OrderState.CANCELLED);
+		ResultMessage message = orderDataHelper.setState(orderID, OrderState.CANCELLED);
+		if (message == ResultMessage.SUCCESS) {
+			return ResultMessage.NORMAL_ORDER_UNDO_SUCCESS;
+		}else {
+			return ResultMessage.NORMAL_ORDER_UNDO_FAILURE;
+		}
 	}
 	
 	/**
@@ -213,38 +233,57 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/4
+	 * @updateTime 2016/12/7
 	 * @param checkInPO 酒店工作人员更新订单入住信息
 	 * @return 是否成功更新
 	 */
 	@Override
 	public ResultMessage updateCheckIn (CheckInPO checkInPO) throws RemoteException {
-		return orderDataHelper.setCheckIn(checkInPO.getOrderID(), checkInPO.getRoomNumber(), checkInPO.getCheckInTime(), checkInPO.getExpectLeaveTime());
+		ResultMessage msg1 = orderDataHelper.setCheckIn(checkInPO.getOrderID(), checkInPO.getRoomNumber(), checkInPO.getCheckInTime(), checkInPO.getExpectLeaveTime());
+		ResultMessage msg2 = orderDataHelper.setState(checkInPO.getOrderID(), OrderState.EXECUTED);
+		
+		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
+			return ResultMessage.CHECK_IN_SUCCESS;
+		}else {
+			return ResultMessage.CHECK_IN_FAILURE;
+		}
 	}
 
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/4
+	 * @updateTime 2016/12/7
 	 * @param checkOutPO 酒店工作人员更新订单退房信息
 	 * @return 是否成功更新
 	 */
 	@Override
 	public ResultMessage updateCheckOut (CheckOutPO checkOutPO) throws RemoteException {
-		return orderDataHelper.setCheckOut(checkOutPO.getOrderID(), checkOutPO.getCheckOutTime());
+		ResultMessage msg1 = orderDataHelper.setCheckOut(checkOutPO.getOrderID(), checkOutPO.getCheckOutTime());
+		if (msg1 == ResultMessage.SUCCESS) {
+			return ResultMessage.CHECK_OUT_SUCCESS;
+		}else {
+			return ResultMessage.CHECK_OUT_FAILURE;
+		}
 	}
 	
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/4
+	 * @updateTime 2016/12/7
 	 * @param guestEvaluationPO 客户评价单个订单时产生的订单
 	 * @return 客户是否成功评价该订单
 	 * @throws RemoteException RMI
 	 */
 	@Override
 	public ResultMessage addEvaluation(GuestEvaluationPO guestEvaluationPO) throws RemoteException {
-		return orderDataHelper.setEvaluation(guestEvaluationPO.getOrderID(), guestEvaluationPO.getScore(), guestEvaluationPO.getComment());
+		ResultMessage msg1 = orderDataHelper.setEvaluation(guestEvaluationPO.getOrderID(), guestEvaluationPO.getScore(), guestEvaluationPO.getComment());
+		ResultMessage msg2 = orderDataHelper.setHasCommentBool(guestEvaluationPO.getOrderID());
+		
+		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
+			return ResultMessage.UPDATE_EVALUATION_SUCCESS;
+		}else {
+			return ResultMessage.UPDATE_EVALUATION_FAILURE;
+		}
 	}
 
 	/**
