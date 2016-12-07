@@ -57,6 +57,7 @@ public class GuestController {
 		
 		if(guestVO == null){
 			// TODO gy 获取到的guestVO为空，代表找不到对应ID的客户，界面做提示处理，界面不跳转
+		
 		}
 
 		try {	

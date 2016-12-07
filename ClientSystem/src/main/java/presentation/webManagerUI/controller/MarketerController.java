@@ -100,9 +100,9 @@ public class MarketerController {
 	}
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/2
-	 * @添加酒店工作人員信息
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/7
+	 * @添加营销人員信息
 	 * 是否需要待议
 	 */
 	@FXML

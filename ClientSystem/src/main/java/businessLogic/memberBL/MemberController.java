@@ -70,8 +70,8 @@ public class MemberController implements MemberBLService {
 	 * @param userID，memberType 从客户界面层传下来的用户ID和需要获取指定会员类型信息
 	 * @return memberVO MemberInfo载体
 	 */
-	public MemberVO getMemberInfo(String userID, MemberType memberType) {
-		return member.getMemberInfo(userID, memberType);
+	public MemberVO getMemberInfo(String userID) {
+		return member.getMemberInfo(userID);
 	}
 
 	/**

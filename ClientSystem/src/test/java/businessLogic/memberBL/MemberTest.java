@@ -42,7 +42,7 @@ public class MemberTest {
 	public void testGetMemberInfo() {
 		//test the method getMemberInfo
 		LocalDate time = LocalDate.of(1995, 01, 01);
-		MemberVO memberVO = member.getMemberInfo("1234567890", MemberType.BOTH);
+		MemberVO memberVO = member.getMemberInfo("1234567890");
 		
 		assertEquals(memberVO.guestID, "1234567890");
 		assertEquals(memberVO.birthday, time);
