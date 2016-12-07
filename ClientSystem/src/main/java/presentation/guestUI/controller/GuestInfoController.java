@@ -80,9 +80,9 @@ public class GuestInfoController {
 	@FXML
 	protected void saveGuestInfo() {
 
-		//TODO djj注意：需要先将修改过的信息封装成一个vo，然后调用下层更新客户信息的方法，并刷新客户信息
 		try {
 			//TODO djy注意：通过guestVO保存信息
+			// TODO gy 不是重新初始化了吗？
 
 			name.setText(name2.getText());
 			nickname.setText(nickname2.getText());
