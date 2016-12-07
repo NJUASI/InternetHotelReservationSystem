@@ -12,7 +12,9 @@ import businessLogic.hotelBL.HotelBLController;
 import businessLogic.orderBL.OrderBLController;
 import businessLogic.sourceBL.SourceBLController;
 import businessLogicService.hotelBLService.HotelBLService;
+import businessLogicService.orderBLService.GuestOrderBLService;
 import businessLogicService.orderBLService.OrderBLService;
+import businessLogicService.orderBLService.OrderForHotelModuleBLService;
 import businessLogicService.sourceBLService.SourceBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -67,12 +69,12 @@ public class HotelSearchController {
 	@FXML
 	private ComboBox<String> cityChoose;
 
-	private OrderBLService orderBLController;
+	private GuestOrderBLService guestOrder;
 	private SourceBLService sourceBLController;
 	private HotelBLService hotelBLController;
 	
 	public HotelSearchController() {
-		orderBLController  = OrderBLController.getInstance();
+		guestOrder = OrderBLController.getInstance();
 		sourceBLController = SourceBLController.getInstance();
 		hotelBLController = HotelBLController.getInstance();
 	}
@@ -593,7 +595,7 @@ public class HotelSearchController {
 				RoomType.convertString2Roomtype(roomTypeInOrder.getValue()), Integer.parseInt(roomCountInOrder.getText()), Integer.parseInt(guestNumInOrder.getText()), 
 				messageInOrder.getText());
 
-		final ResultMessage msg = orderBLController.createOrder(createVO);
+		final ResultMessage msg = guestOrder.createOrder(createVO);
 
 		if (msg == ResultMessage.ORDER_CREATE_SUCCESS) {
 			//@高源——————状态栏显示订单生成成功

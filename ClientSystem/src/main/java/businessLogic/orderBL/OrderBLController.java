@@ -13,6 +13,7 @@ import businessLogic.orderBL.order.WebMarketerOrder;
 import businessLogicService.orderBLService.CommonOrderBLService;
 import businessLogicService.orderBLService.GuestOrderBLService;
 import businessLogicService.orderBLService.HotelWorkerOrderBLService;
+import businessLogicService.orderBLService.OrderForHotelModuleBLService;
 import businessLogicService.orderBLService.WebMarketerOrderBLService;
 import utilities.OrderState;
 import utilities.ResultMessage;
@@ -31,7 +32,7 @@ import vo.OrderVO;
  * 
  * 对Order模块重构
  */
-public final class OrderBLController implements CommonOrderBLService, GuestOrderBLService, HotelWorkerOrderBLService, WebMarketerOrderBLService {
+public final class OrderBLController implements CommonOrderBLService, GuestOrderBLService, HotelWorkerOrderBLService, WebMarketerOrderBLService, OrderForHotelModuleBLService {
 
 	private CommonOrder commonOrder;
 	private GuestOrder guestOrder;
