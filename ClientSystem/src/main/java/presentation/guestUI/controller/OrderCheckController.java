@@ -41,9 +41,9 @@ public class OrderCheckController {
 	
 	private OrderBLService orderBLService;
 	
-	final String guestID = IDReserve.getInstance().getUserID();
+	private final String guestID = IDReserve.getInstance().getUserID();
 	
-	List<OrderGeneralVO> orderGenerals;
+	private List<OrderGeneralVO> orderGenerals;
 	
 	
 	//订单概况
