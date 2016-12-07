@@ -184,10 +184,10 @@ public class DatePromotionController {
 		SpecialSpanPromotionVO vo = new SpecialSpanPromotionVO();
 
 		//TODO gcm注意：这里使用了魔数，应该换一种方式，商讨之后决定
-		vo.setUserID("99999999");
-		vo.setPromotionName(nameText.getText());
-		vo.setStartDate(startDatePicker.getValue());
-		vo.setEndDate(endDatePicker.getValue());
+		vo.userID = "99999999";
+		vo.promotionName = nameText.getText();
+		vo.startDate =  startDatePicker.getValue();
+		vo.endDate = endDatePicker.getValue();
 		return vo;
 	}
 }
