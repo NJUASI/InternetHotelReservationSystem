@@ -14,7 +14,6 @@ public class SortComparatorFactory {
 	Comparator<HotelVO> comparator;
 	
 	public SortComparatorFactory() {
-		// TODO 自动生成的构造函数存根
 	}
 	
 	public Comparator<HotelVO> createComparator(SortStrategy sortStrategy){

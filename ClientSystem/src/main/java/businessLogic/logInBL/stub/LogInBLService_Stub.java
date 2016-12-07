@@ -35,7 +35,6 @@ public class LogInBLService_Stub implements LogInBLService {
 	 * @return 客户是否成功登录
 	 */
 	public ResultMessage guestLogIn(final String guest, final String password) {
-		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
 
@@ -50,7 +49,6 @@ public class LogInBLService_Stub implements LogInBLService {
 	 * @return 酒店是否成功登录
 	 */
 	public ResultMessage hotelWorkerLogIn(final String hotelWorker, final String password) {
-		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
 
@@ -65,7 +63,6 @@ public class LogInBLService_Stub implements LogInBLService {
 	 * @return 营销人员是否成功登录
 	 */
 	public ResultMessage webMarketerLogIn(final String webMarketer, final String password) {
-		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
 
@@ -80,7 +77,6 @@ public class LogInBLService_Stub implements LogInBLService {
 	 * @return 管理人员是否成功登录
 	 */
 	public ResultMessage webManagerLogIn(final String webManager, final String password) {
-		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
 
@@ -103,7 +99,6 @@ public class LogInBLService_Stub implements LogInBLService {
 
 	@Override
 	public GuestVO guestSignUp(UserVO guestVO) {
-		// TODO 自动生成的方法存根
 		return null;
 	}
 

@@ -26,7 +26,7 @@ public class HotelInfoController {
 	protected void searchCity() {
 		cityInput.getItems().clear();
 		
-		//TODO 获得所有城市名称
+		//TODO gcm注意：获得所有城市名称
 		List<String> list = getCity();
 		
 		for (int i = 0; i < list.size(); i++) {
@@ -77,7 +77,7 @@ public class HotelInfoController {
 	 */
 	@FXML
 	protected void searchCycle() {
-		//TODO 通过城市，获得所有商圈名称
+		//TODO gcm注意：通过城市，获得所有商圈名称
 		//cityInput.getValue();
 		List<String> list = getCycle(cityInput.getValue());
 		cycleInput.getItems().clear();
@@ -104,7 +104,7 @@ public class HotelInfoController {
 	 */
 	@FXML
 	protected void addHotel(){
-		//TODO 创建hotelVO，保存，并需要返回初始化的酒店编号和密码
+		//TODO gcm注意：建hotelVO，保存，并需要返回初始化的酒店编号和密码
 //		addHotel(hotelName.getText(),cityInput.getValue(),cycleInput.getValue(),levelInput.getValue(),address.getText());
 
 	}
