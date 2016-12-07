@@ -1,7 +1,6 @@
 package businessLogic.logInBL;
 
 import businessLogicService.logInBLService.LogInBLService;
-import utilities.ResultMessage;
 import utilities.UserType;
 import vo.GuestVO;
 import vo.UserVO;
@@ -53,9 +52,9 @@ public final class LogInController implements LogInBLService {
 	}
 
 	@Override
-	public ResultMessage logIn(String webManager, String password, UserType userType) {
+	public UserType logIn(String userID, String password) {
 		// TODO 自动生成的方法存根
-		return null;
+		return logIn.logIn(userID, password);
 	}
 
 }

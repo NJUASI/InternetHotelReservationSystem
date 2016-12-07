@@ -23,7 +23,7 @@ import vo.WebMarketerVO;
 public class WebMarketer implements UserService{
 
 
-	static int IDLength = 6; // 营销人员的ID长度为6
+	public static int IDLength = 6; // 营销人员的ID长度为6
 
 	private WebMarketerDataService webMarketerDataService;
 
@@ -126,15 +126,16 @@ public class WebMarketer implements UserService{
 	 * @return String 指定用户 的登录信息
 	 */
 	public String getLogInInfo(String userID) {
-
+		
 		if(!this.hasWebMarketer(userID)){return null;} //不存在ID对应项,后期细化
 
 		try {
 			return webMarketerDataService.getSingleWebMarketer(userID).getPassword();
+			
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 
 	/**

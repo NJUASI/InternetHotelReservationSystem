@@ -1,0 +1,40 @@
+package businessLogic.logInBL;
+
+import businessLogic.userBL.userService.Guest;
+import businessLogic.userBL.userService.HotelWorker;
+import businessLogic.userBL.userService.WebManager;
+import businessLogic.userBL.userService.WebMarketer;
+import utilities.Detector;
+import utilities.UserType;
+
+public class LogInFactory {
+	
+	private Detector detector;
+	
+	public LogInFactory(){
+		this.detector = new Detector();
+	}
+	
+	
+	public UserType getUserType(String userID){
+		
+		if(this.detector.idDetector(userID, Guest.IDLength)){
+			return UserType.GUEST;
+		}
+		
+		if(this.detector.idDetector(userID, HotelWorker.IDLength)){
+			return UserType.HOTEL_WORKER;
+		}
+		
+		if(this.detector.idDetector(userID, WebMarketer.IDLength)){
+			return UserType.WEB_MARKETER;
+		}
+		
+		if(this.detector.idDetector(userID, WebManager.IDLength)){
+			return UserType.WEB_MANAGER;
+		}
+		
+		return null;
+	}
+
+}

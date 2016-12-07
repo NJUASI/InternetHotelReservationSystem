@@ -129,14 +129,14 @@ public class Guest implements UserService ,CreditService{
 	 */
 	public String getLogInInfo(String userID) {
 
-		if(!this.hasGuest(userID)){return null;} //后期需要详细化
+		if(!this.hasGuest(userID)){return null;} //指定的客户不存在，返回null
 
 		try {
 			return guestDataService.getSingleGuest(userID).getPassword();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			return null; //出现异常返回null
 		}
-		return null;
 	}
 
 	/**
