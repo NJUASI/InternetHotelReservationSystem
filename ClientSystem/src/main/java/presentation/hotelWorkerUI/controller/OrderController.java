@@ -1,6 +1,9 @@
 package presentation.hotelWorkerUI.controller;
 
+import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,7 +12,11 @@ import businessLogicService.orderBLService.OrderBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -50,10 +57,12 @@ public class OrderController {
 	 */
 	@FXML
 	private void initialize() {
+
 		//通过hotelID得到orderGeneralVOs list
 		orderBLService = OrderBLController.getInstance();
 		List<OrderGeneralVO> orderGenerals = orderBLService.getAllGuestOrderGeneral(hotelID);
 		initOrderCheck(orderGenerals);
+
 	}
 
 
@@ -216,14 +225,24 @@ public class OrderController {
 		orderVO = orderBLService.getOrderDetail(orderID);
 		initOrderDetail(orderVO);
 	}
+	
+	@FXML
+	private Label checkInOrderID,checkInName;
+	@FXML
+	private TextField checkInRoomNum,checkInMinute,checkInHour;
+	@FXML
+	private DatePicker checkInLeaveDate;
+	
 	/**
 	 * @author 61990
+	 * @throws IOException 
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/11/27
 	 * @办理入住
 	 */
 	//订单详情执行
 	@FXML
+
 	protected void checkIn() {
 	//  TODO fjj注意：订单入住，提供订单号，房间号，离开时间等，界面暂缺
 	}
@@ -231,6 +250,7 @@ public class OrderController {
 	@FXML
 	protected void checkIn2() {
 	//  TODO fjj注意：订单入住，提供订单号，房间号，预计离开时间等，界面暂缺
+
 	}
 	
 	/**
@@ -243,6 +263,14 @@ public class OrderController {
 	@FXML
 	protected void checkOut() {
 	//  TODO gcm注意：订单退房，供订单号，需要下层更改离开时间
+	}
+	void buildCheckOutWindow() throws IOException{
+//		Parent checkOutStage = FXMLLoader.load(getClass().getResource("/presentation/popUp/checkIn.fxml"));
+//		Stage stage =new Stage();
+//		Scene scene = new Scene(checkOutStage);
+//		stage.setTitle("订单退房");
+//		stage.setScene(scene);
+//		stage.show();
 	}
 	//订单概况执行
 	@FXML

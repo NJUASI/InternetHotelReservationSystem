@@ -6,6 +6,8 @@ import utilities.PromotionType;
 public class HotelFixedPromotionVO{
 
 	public String hotelID;
+	
+
 	public PromotionType promotionType;
 	public double discount;
 
@@ -15,7 +17,13 @@ public class HotelFixedPromotionVO{
 		this.discount = hotelFixedPromotion.getDiscount();
 	}
 
-	public HotelFixedPromotionVO() {
+
+	public HotelFixedPromotionVO(String hotelID, PromotionType promotionType, double discount) {
+		super();
+		this.hotelID = hotelID;
+		this.promotionType = promotionType;
+		this.discount = discount;
+
 	}
 
 }

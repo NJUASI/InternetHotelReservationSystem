@@ -18,6 +18,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import presentation.guestUI.controller.EvaluationTable;
@@ -131,8 +132,10 @@ public class HotelController {
 
 	@FXML
 	private Label hotelIDText,scoreText;
+	@FXML	
+	private TextArea equipmentText;
 	@FXML
-	private TextField hotelNameText,hotelAddressText,equipmentText,introductionText;
+	private TextField hotelNameText,hotelAddressText,introductionText;
 	@FXML
 	private ComboBox<String> cityText,cycleText,levelText;
 	/**
