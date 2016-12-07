@@ -19,6 +19,18 @@ public class SourceDataService_Stub implements SourceDataService {
 		list.add("广东");
 		return list.iterator();
 	}
+	
+	@Override
+	public Iterator<String> getCircles(String city) {
+		List<String> list = new ArrayList<String>();
+		list.add("仙林中心");
+		list.add("马群");
+		list.add("大行宫");
+		list.add("夫子庙");
+		list.add("新街口");
+		return list.iterator();
+	}
+
 
 	@Override
 	public Iterator<String> getLevels() {
@@ -42,4 +54,5 @@ public class SourceDataService_Stub implements SourceDataService {
 		return list.iterator();
 	}
 
+	
 }

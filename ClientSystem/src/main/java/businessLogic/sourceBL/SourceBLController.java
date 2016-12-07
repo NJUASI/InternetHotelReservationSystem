@@ -25,7 +25,7 @@ public class SourceBLController implements SourceBLService {
 	public Iterator<String> getCities() {
 		return sourceDataService.getCities();
 	}
-
+	
 	@Override
 	public Iterator<String> getLevels() {
 		return sourceDataService.getLevels();
@@ -34,6 +34,11 @@ public class SourceBLController implements SourceBLService {
 	@Override
 	public Iterator<String> getRoomTypes() {
 		return sourceDataService.getRoomTypes();
+	}
+
+	@Override
+	public Iterator<String> getCircles(String city) {
+		return sourceDataService.getCircles(city);
 	}
 
 }

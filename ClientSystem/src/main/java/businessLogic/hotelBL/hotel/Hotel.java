@@ -73,7 +73,7 @@ public class Hotel implements HotelInfoOperation{
 	 * @author: Harvey Gong
 	 * @time:2016年12月3日 下午9:44:37
 	 */
-	public HotelVO getHotelInfo(String hotelWorkerID) {
+	public HotelVO getHotelInfo(String hotelID) {
 		try {
 			HotelPO hotelPO = hotelDataService.getHotelInfo(hotelID);
 			return new HotelVO(hotelPO);
