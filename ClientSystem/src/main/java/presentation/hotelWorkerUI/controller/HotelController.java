@@ -143,8 +143,6 @@ public class HotelController {
 		equipmentText.setText(hotelVO.equipment);
 		introductionText.setText(hotelVO.introduction);
 
-		//TODO 初始化城市的下拉框及商圈的下拉框，将comboBox的value设为该酒店的
-		
 		hotelModifyPane.setVisible(true);
 		hotelInfoPane.setVisible(false);
 	}
@@ -174,7 +172,8 @@ public class HotelController {
 	 */
 	@FXML
 	protected void getCycle(){
-		// 通过当前city
+		
+		//TODO 通过当前city，获得当前城市所有的cycle，并将此酒店的circle从list中除去,不知道在哪个controller里面
 		String city = cityText.getValue();
 
 
@@ -193,11 +192,9 @@ public class HotelController {
 	@FXML
 	protected void getLevel(){
 		levelText.getItems().clear();
-		levelText.getItems().add("1");
-		levelText.getItems().add("2");
-		levelText.getItems().add("3");
-		levelText.getItems().add("4");
-		levelText.getItems().add("5");
+		for(int i =1;i <= 5;i++ ){
+			levelText.getItems().add(""+i);
+		}
 	}
 
 	/**
@@ -224,6 +221,7 @@ public class HotelController {
 		initHotelDetail(hotelVO);
 
 		hotelModifyPane.setVisible(false);
+		
 		hotelInfoPane.setVisible(true);
 	}
 

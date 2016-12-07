@@ -23,9 +23,9 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 	@Override
 	public List<HotelFixedPromotionPO> getHotelFixedPromotion(String hotelWorkerID) throws RemoteException {
 		List<HotelFixedPromotionPO> list = new ArrayList<HotelFixedPromotionPO>();
-		list.add(new HotelFixedPromotionPO("12345678",PromotionType.HOTEL__BIRTHDAY,0.9));
-		list.add(new HotelFixedPromotionPO("12345678",PromotionType.HOTEL__ENTERPRISE,0.8));
-		list.add(new HotelFixedPromotionPO("12345678",PromotionType.HOTEL__ROOM_NUM_COUNT_BIGGER_THAN_THREE,0.7));
+		list.add(new HotelFixedPromotionPO("12345678",PromotionType.会员生日折扣,0.9));
+		list.add(new HotelFixedPromotionPO("12345678",PromotionType.企业会员折扣,0.8));
+		list.add(new HotelFixedPromotionPO("12345678",PromotionType.三间及以上预订折扣,0.7));
 		return list;
 	}
 

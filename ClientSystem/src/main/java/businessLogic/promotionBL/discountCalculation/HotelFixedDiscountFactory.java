@@ -26,11 +26,11 @@ public class HotelFixedDiscountFactory {
 
 	public CalculateDiscount createCalculateDiscount(PromotionType promotionType,double discount){
 		switch(promotionType){
-		case HOTEL__BIRTHDAY:
+		case 会员生日折扣:
 			return new VIPBirthdayDiscount(discount,preOrder.guestID,today);
-		case HOTEL__ROOM_NUM_COUNT_BIGGER_THAN_THREE:
+		case 三间及以上预订折扣:
 			return new ThreeAndAboveDiscount(discount,preOrder.roomNum);
-		case HOTEL__ENTERPRISE:
+		case 企业会员折扣:
 			return new EnterpriseMemberDiscount(discount,preOrder.guestID);
 		default:
 			return null;

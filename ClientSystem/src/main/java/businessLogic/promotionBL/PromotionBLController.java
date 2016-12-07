@@ -11,21 +11,21 @@ import vo.AddressVO;
 import vo.HotelFixedPromotionVO;
 import vo.SpecialSpanPromotionVO;
 
-public class PromotionController implements PromotionBLService {
+public class PromotionBLController implements PromotionBLService {
 
-	private static PromotionController promotionController = new PromotionController();
+	private static PromotionBLController promotionController = new PromotionBLController();
 	
 	private HotelFixedPromotion hotelFixedPromotion;
 	private SpecialSpanPromotion specialSpanPromotion;
 	private SpecialCirclePromotion specialCirclePromotion;
 	
-	private PromotionController() {
+	private PromotionBLController() {
 		hotelFixedPromotion = new HotelFixedPromotion();
 		specialSpanPromotion = new SpecialSpanPromotion();
 		specialCirclePromotion = new SpecialCirclePromotion();
 	}
 
-	public static PromotionController getInstance(){
+	public static PromotionBLController getInstance(){
 		return promotionController;
 	}
 

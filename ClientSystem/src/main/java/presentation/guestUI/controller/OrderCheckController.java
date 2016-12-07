@@ -15,7 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import presentation.webMarketerUI.controller.OrderTable;
+import presentation.hotelWorkerUI.controller.OrderTable;
 import utilities.OrderState;
 import utilities.RoomType;
 import vo.OrderGeneralVO;
