@@ -8,7 +8,6 @@ import vo.SpecialSpanPromotionVO;
 public class SpecialSpanPromotionPO {
 
 	private String userID;
-	private PromotionType promotionType;
 	private String promotionName;
 	private double discount;
 	private LocalDate startDate;
@@ -18,7 +17,6 @@ public class SpecialSpanPromotionPO {
 			LocalDate startDate, LocalDate endDate) {
 		super();
 		this.userID = userID;
-		this.promotionType = promotionType;
 		this.promotionName = promotionName;
 		this.discount = discount;
 		this.startDate = startDate;
@@ -30,7 +28,6 @@ public class SpecialSpanPromotionPO {
 	
 	public SpecialSpanPromotionPO(SpecialSpanPromotionVO specialSpanPromotionVO) {
 		this.userID = specialSpanPromotionVO.userID;
-		this.promotionType = specialSpanPromotionVO.promotionType;
 		this.discount = specialSpanPromotionVO.discount;
 		this.startDate = specialSpanPromotionVO.startDate;
 		this.endDate = specialSpanPromotionVO.endDate;
@@ -44,15 +41,6 @@ public class SpecialSpanPromotionPO {
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
-
-	public PromotionType getPromotionType() {
-		return promotionType;
-	}
-
-	public void setPromotionType(PromotionType promotionType) {
-		this.promotionType = promotionType;
-	}
-	
 
 	public String getPromotionName() {
 		return promotionName;

@@ -179,6 +179,7 @@ public class HotelController {
 		cityText.getItems().clear();
 
 		//TODO djy注意：将当前酒店的城市从list中出去，然后逐一添加到combobox中,所有城市的list保存在哪儿的
+		// TDOD gcm 需要解释，我不懂你想要表达啥
 		Iterator<String> cities = sourceBLController.getCities();
 		while(cities.hasNext()){
 			cityText.getItems().add(cities.next());

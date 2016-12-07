@@ -40,19 +40,22 @@ public class HotelWorkerController {
 	 */
 	@FXML
 	protected void search() {
-		
+		System.out.println(inputID.getText());
 		hotelWorkerVO = (HotelWorkerVO) userBLController.getSingle(inputID.getText());
+		
+		hotelInfoPane.setVisible(true);
 		
 		if(hotelWorkerVO == null){
 			// TODO gy 获取到的hotelWorkerVO为空，代表找不到对应ID的酒店工作人员，界面做提示处理，界面不跳转
 		}
+		
 		
 		try {
 			hotelID.setText(hotelWorkerVO.userID);
 			hotelName.setText(hotelWorkerVO.hotelName);
 			password.setText(hotelWorkerVO.password);
 
-			hotelInfoPane.setVisible(true);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

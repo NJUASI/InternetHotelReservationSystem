@@ -3,7 +3,9 @@ package presentation.webMarketerUI.controller;
 import java.util.LinkedList;
 import java.util.List;
 
-import businessLogic.marketBL.stub.MarketBLService_Stub;
+import javax.naming.spi.DirStateFactory.Result;
+
+import businessLogic.marketBL.MarketController;
 import businessLogicService.marketBLService.MarketBLService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -32,20 +34,19 @@ public class MemberController {
 	//加载维护的输入框
 	@FXML
 	private TextField market1,market2,market3,market4,market5,needCredit1,needCredit2,needCredit3,needCredit4,needCredit5,modifyDiscount1,modifyDiscount2,modifyDiscount3,modifyDiscount4,modifyDiscount5;
-	private MarketBLService marketBLService;
+	private MarketBLService marketBLController = MarketController.getInstance();
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27 构造函数，初始化成员变量
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/7 构造函数，初始化成员变量
 	 */
 	@FXML
 	private void initialize() {
 		
-		//TODO djy注意：得到List<MarketVO> 从底层得到网站会员折扣信息
+		//TODO gy注意：你fjj说要8个等级
 		
-		marketBLService = new MarketBLService_Stub();
-		List<MarketVO> listMarket = marketBLService.getMemberFormulation();
+		List<MarketVO> listMarket = marketBLController.getMemberFormulation();
 		name1.setText(listMarket.get(0).marketName);
 		name2.setText(listMarket.get(1).marketName);
 		name3.setText(listMarket.get(2).marketName);
@@ -105,8 +106,8 @@ public class MemberController {
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/7
 	 * @保存维护界面
 	 */
 	@FXML
@@ -119,11 +120,13 @@ public class MemberController {
 		list.add(new MarketVO(market4.getText(), Double.parseDouble(needCredit4.getText()) , Double.parseDouble(modifyDiscount4.getText())));
 		list.add(new MarketVO(market5.getText(), Double.parseDouble(needCredit5.getText()) , Double.parseDouble(modifyDiscount5.getText())));
 		
-		//TODO djy注意：保存List<MarketVO> 从界面得到，存下去
+		ResultMessage message = marketBLController.setMemberFormulation(list);
 		
-		if(marketBLService.setMemberFormulation(list)==ResultMessage.SUCCESS){
+		if(message==ResultMessage.SUCCESS){ 
+			// TODO gy 要换成界面上的提示
 			System.out.println("success");
 		}
+		
 		initialize();
 		marketCheckPane.setVisible(true);
 		marketModifyPane.setVisible(false);
