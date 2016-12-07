@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 
  * @author charles
  * @lastChangedBy charles
- * @updateTime 2016/12/5
+ * @updateTime 2016/12/7
  * 
  * 优先级：已取消 < 异常 < 未执行 < 已执行
  */
@@ -30,12 +30,26 @@ public enum OrderState implements Serializable{
 			return "异常";
 		}else if (this == UNEXECUTED) {
 			return "未执行";
-		}else if (this == EXECUTED) {
-			return "已执行";
 		}else {
-			return "已评论";
+			return "已执行";
 		}
 	}
 	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 */
+	public static OrderState convertString2OrderState(String a) {
+		if (a.equals("已撤销")) {
+			return OrderState.CANCELLED;
+		}else if (a.equals("异常")) {
+			return OrderState.ABNORMAL;
+		}else if (a.equals("未执行")) {
+			return OrderState.UNEXECUTED;
+		}else {
+			return OrderState.EXECUTED;
+		}
+	}
 	
 }
