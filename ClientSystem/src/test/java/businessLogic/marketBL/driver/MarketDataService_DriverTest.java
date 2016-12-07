@@ -24,9 +24,9 @@ public class MarketDataService_DriverTest {
 		try {
 			MarketPO marketPO = driver.marketDataService.getMemberFormulation().get(0);
 			
-			assertEquals("aa", marketPO.getMarketName());
-			assertEquals(0, marketPO.getMarketCredit(), 0);
-			assertEquals(0.9, marketPO.getMarketBenefit(), 0);
+			assertEquals("Lv1", marketPO.getMarketName());
+			assertEquals(500, marketPO.getMarketCredit(), 0);
+			assertEquals(0.95, marketPO.getMarketBenefit(), 0);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

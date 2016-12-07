@@ -32,4 +32,9 @@ public class MarketBLService_Stub implements MarketBLService {
 		return ResultMessage.SUCCESS;
 	}
 
+	@Override
+	public int getLevel(String guestID) {
+		return 0;
+	}
+
 }
