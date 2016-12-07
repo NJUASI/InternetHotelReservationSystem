@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import businessLogic.logInBL.stub.LogInBLService_Stub;
-import utilities.ResultMessage;
+import utilities.UserType;
 
 public class LogInBLService_DriverTest {
 
@@ -14,7 +14,7 @@ public class LogInBLService_DriverTest {
 		//test interface webMarketerLogIn
 		LogInBLService_Stub stub = new LogInBLService_Stub();
 		LogInBLService_Driver driver = new LogInBLService_Driver(stub);
-		assertEquals(ResultMessage.SUCCESS, driver.logInBLService.logIn("1234567890","000000"));
+		assertEquals(UserType.GUEST, driver.logInBLService.logIn("1234567890","000000"));
 	}
 
 }
