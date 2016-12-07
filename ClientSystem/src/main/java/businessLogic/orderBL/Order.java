@@ -610,12 +610,12 @@ public class Order {
 	
 	/**
 	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/2
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 * @param hotelID 酒店工作人员／客户查看酒店的评论
 	 * @return 此酒店的所有评价
 	 */
-	public List<HotelEvaluationVO> getEvaluations(String hotelID) {
+	public Iterator<HotelEvaluationVO> getEvaluations(String hotelID) {
 		final List<HotelEvaluationVO> result = new ArrayList<HotelEvaluationVO>();
 		
 		List<HotelEvaluationPO> hotelEvaluationPOs = null;
@@ -631,7 +631,7 @@ public class Order {
 			}
 		}
 		
-		return result;
+		return result.iterator();
 	}
 	
 	/**

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Test;
@@ -152,10 +153,10 @@ public class OrderBLService_DriverTest {
 		final OrderBLService_Stub stub = new OrderBLService_Stub();
 		final OrderBLService_Driver driver = new OrderBLService_Driver(stub);
 		
-		final List<HotelEvaluationVO> hotelEvaluationVOs = driver.orderBLService.getEvaluations("12345678");
-		final HotelEvaluationVO hotelEvaluationVO1 = hotelEvaluationVOs.get(0);
-		final HotelEvaluationVO hotelEvaluationVO2 = hotelEvaluationVOs.get(1);
-		final HotelEvaluationVO hotelEvaluationVO3 = hotelEvaluationVOs.get(2);
+		final Iterator<HotelEvaluationVO> hotelEvaluationVOs = driver.orderBLService.getEvaluations("12345678");
+		final HotelEvaluationVO hotelEvaluationVO1 = hotelEvaluationVOs.next();
+		final HotelEvaluationVO hotelEvaluationVO2 = hotelEvaluationVOs.next();
+		final HotelEvaluationVO hotelEvaluationVO3 = hotelEvaluationVOs.next();
 				
 		assertEquals("1234567890", hotelEvaluationVO1.guestID);
 		assertEquals(LocalDate.of(2016, 2, 3), hotelEvaluationVO1.checkInDate);

@@ -60,8 +60,8 @@ public class HotelBLController implements HotelBLService {
 
 	// 对单个hotel的操作
 	
-	public HotelVO getHotelInfo(String hotelWorkerID) {
-		return hotel.getHotelInfo(hotelWorkerID);
+	public HotelVO getHotelInfo(String hotelID) {
+		return hotel.getHotelInfo(hotelID);
 	}
 
 	public ResultMessage updateHotelInfo(HotelVO hotelVO) {
@@ -79,7 +79,7 @@ public class HotelBLController implements HotelBLService {
 	public ResultMessage addHotel(HotelVO hotelVO) {
 		return hotel.addHotelInfo(hotelVO);
 	}
-
+	
 	// 浏览概况时的操作
 	public Iterator<HotelVO> getHotels(String city,String circle) {
 		return hotelScan.getHotels(city,circle);

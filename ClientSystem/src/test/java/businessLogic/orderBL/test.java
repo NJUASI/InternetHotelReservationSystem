@@ -5,7 +5,7 @@ import vo.GuestEvaluationVO;
 public class test {
 
 	public static void main(String[] args) {
-		final OrderController controller = OrderController.getInstance();
+		final OrderBLController controller = OrderBLController.getInstance();
 		
 		System.out.println(controller.addEvaluation(new GuestEvaluationVO("1234567890", 4.5, "good")));
 	}

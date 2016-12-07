@@ -3,6 +3,7 @@ package businessLogic.orderBL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.promotionBL.DiscountCalculator;
@@ -194,12 +195,12 @@ public class MockOrder extends Order {
 	 * @return 此酒店的所有评价
 	 */
 	@Override
-	public List<HotelEvaluationVO> getEvaluations(String hotelID) {
+	public Iterator<HotelEvaluationVO> getEvaluations(String hotelID) {
 		final List<HotelEvaluationVO> hotelEvaluations = new ArrayList<HotelEvaluationVO>();
 		final LocalDate checkInTime = LocalDateTime.of(2016, 2, 3, 11, 23).toLocalDate();
 		
 		hotelEvaluations.add(new HotelEvaluationVO("1234567890", checkInTime, 4.5, "good"));
-		return hotelEvaluations;
+		return hotelEvaluations.iterator();
 	}
 	
 	/**

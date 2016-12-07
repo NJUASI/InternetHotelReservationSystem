@@ -3,6 +3,7 @@ package businessLogic.orderBL.stub;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import businessLogicService.orderBLService.OrderBLService;
@@ -395,13 +396,13 @@ public class OrderBLService_Stub implements OrderBLService {
 	 * @return 此酒店的所有评价
 	 */
 	@Override
-	public List<HotelEvaluationVO> getEvaluations(String hotelID) {
+	public Iterator<HotelEvaluationVO> getEvaluations(String hotelID) {
 		final List<HotelEvaluationVO> hotelEvaluations = new ArrayList<HotelEvaluationVO>();
 		
 		hotelEvaluations.add(new HotelEvaluationVO("1234567890", LocalDate.of(2016, 2, 3), 4.5, "very good"));
 		hotelEvaluations.add(new HotelEvaluationVO("1234567891", LocalDate.of(2016, 4, 17), 4.5, "good"));
 		hotelEvaluations.add(new HotelEvaluationVO("1234567891", LocalDate.of(2016, 11, 23), 4.3, "ok"));
-		return hotelEvaluations;
+		return hotelEvaluations.iterator();
 	}
 	
 	/**
