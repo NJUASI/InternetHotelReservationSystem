@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
+import businessLogic.creditBL.CreditController;
+import businessLogicService.creditBLService.CreditBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML; 
@@ -23,6 +25,8 @@ public class CreditCheckController {
 	@FXML
 	private TableColumn<CreditTable, String> guestIDColumn, orderIDColumn, previousCreditColumn,afterCreditColumn,timeColumn,reasonColumn;
 
+	private CreditBLService creditBLController = CreditController.getInstance();
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -31,6 +35,7 @@ public class CreditCheckController {
 	@FXML
 	private void initialize() {
 		//TODO djy注意：通过guestID获得所有信用记录
+		//TODO gcm 你定的credit接口，我不知道怎么用的
 
 		List<CreditVO> credit = new LinkedList<CreditVO>();
 		credit.add(new CreditVO("1234567",LocalDateTime.of(1421, 12, 4, 2, 13),"123455667",67,53,"异常->正常"));		
