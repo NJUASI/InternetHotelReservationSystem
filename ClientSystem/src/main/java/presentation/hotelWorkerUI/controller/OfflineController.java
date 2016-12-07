@@ -1,9 +1,12 @@
 package presentation.hotelWorkerUI.controller;
 
+import businessLogic.hotelBL.HotelBLController;
+import businessLogicService.hotelBLService.HotelBLService;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import utilities.IDReserve;
 
 public class OfflineController {
 
@@ -16,6 +19,13 @@ public class OfflineController {
 	@FXML
 	private TextField phone;
 
+	HotelBLService hotelBLController;
+	String hotelID;
+	public OfflineController() {
+		hotelBLController = HotelBLController.getInstance();
+		hotelID = IDReserve.getInstance().getUserID();
+	}
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -24,8 +34,9 @@ public class OfflineController {
 	 */
 	@FXML
 	protected void checkIn(){
-		//TODO gcm注意：线下入住，通过酒店ID，房间类型，房间数量等
-		//		roomType.getValue(), roomNum.getText();
+		
+		//TODO gy注意：将roomType改为roomName，roomNum改为comboBox，我把这种房间的剩余房间数量加载进来
+		hotelBLController.checkInOffline(hotelID, roomType.getValue(), Integer.valueOf(roomNum.getText()));
 		roomType.setValue("");
 		roomNum.setText("");
 		date1.setValue(null);
@@ -40,8 +51,11 @@ public class OfflineController {
 	 */
 	@FXML
 	protected void checkOut(){
-		//TODO gcm注意：线下退房，通过酒店ID，房间类型，房间数量等
-		//		roomType2.getValue(), roomNum2.getText();
+		/**
+		 * TODO gy注意：这里将roomType2改为roomName2，roomNum2也改为选择的，
+		 * 我把已经入住的房间数量加载进来，不然又会加入条件检测；
+		 */
+		hotelBLController.checkOutOffline(hotelID, roomType2.getValue(), Integer.valueOf(roomNum2.getText()));
 		roomType2.setValue("");
 		roomNum2.setText("");
 	}

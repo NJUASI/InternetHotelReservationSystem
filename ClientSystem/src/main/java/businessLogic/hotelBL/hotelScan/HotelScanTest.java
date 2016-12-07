@@ -9,8 +9,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import businessLogic.hotelBL.hotelScan.searchCriteria.SearchCriteria;
-import businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl.LevelSpanCriteria;
 import utilities.SearchCriteriaType;
 import utilities.SortStrategy;
 import vo.HotelVO;

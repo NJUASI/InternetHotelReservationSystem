@@ -4,9 +4,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import businessLogic.hotelBL.HotelInfoOperation;
-import businessLogic.promotionBL.DiscountInSpan;
-import businessLogic.promotionBL.MockPromotion;
 import businessLogicService.orderBLService.HotelWorkerOrderBLService;
 import dataService.orderDataService.OrderDataService;
 import dataService.orderDataService.OrderDataService_Stub;
@@ -22,7 +19,7 @@ import vo.OrderGeneralVO;
 /**
  * 
  * @author charles
- * lastChangedBy charles
+ * lastChangedBy Harvey
  * updateTime 2016/12/7
  *
  */
@@ -76,46 +73,6 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
-	 * @param hotelID 酒店工作人员要查看本酒店<所有>订单时，酒店的编号
-	 * @return 此酒店<所有>订单
-	 */
-	public List<OrderGeneralVO> getAllHotelOrderGeneral(final String hotelID) {
-		final List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
-		
-		List<OrderGeneralPO> orderGeneralPOs = null;
-		try {
-			orderGeneralPOs = orderDataService.getAllHotelOrderGeneral(hotelID);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		
-		if (orderGeneralPOs != null) {
-			for (int i = 0; i < orderGeneralPOs.size(); i++) {
-				result.add(new OrderGeneralVO(orderGeneralPOs.get(i)));
-			}
-		}
-		
-		return result;
-	}
-	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
-	 * @param hotelID 酒店工作人员要查看本酒店<所有某种特定类型>订单时，酒店的编号
-	 * @return 此酒店<所有某种特定类型>的所有订单
-	 * 
-	 * <所有某种特定类型>包括：未执行、已执行、异常、已撤销
-	 */
-	public List<OrderGeneralVO> getAllHotelSpecialOrderGeneral(String hotelID, OrderState expectOrderState) {
-		final List<OrderGeneralVO> orderGeneralVOs = getAllHotelOrderGeneral(hotelID);
-		return orderStateFilter(orderGeneralVOs, expectOrderState);
-	}
-	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
 	 * @updateTime 2016/12/4
 	 * @param checkInVO 酒店工作人员更新订单入住信息
 	 * @return 是否成功更新
@@ -147,26 +104,5 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 			e.printStackTrace();
 		}
 		return resultMessage;
-	}
-	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
-	 * @param orderGenerals 需要被筛选的订单详情列表
-	 * @param expectOrderState 期待被筛选出的订单状态
-	 * @return 符合此状态的所有订单
-	 */
-	private List<OrderGeneralVO> orderStateFilter(List<OrderGeneralVO> orderGenerals, OrderState expectOrderState) {
-		System.out.println("filter to " + expectOrderState);
-		
-		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
-		for (int i = 0; i < orderGenerals.size(); i++) {
-			OrderGeneralVO thisOrderGeneral = orderGenerals.get(i);
-			if (thisOrderGeneral.state.equals(expectOrderState)) {
-				result.add(thisOrderGeneral);
-			}
-		}
-		return result;
 	}
 }

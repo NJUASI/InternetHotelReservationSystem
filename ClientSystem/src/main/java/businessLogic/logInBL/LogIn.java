@@ -1,7 +1,6 @@
 package businessLogic.logInBL;
 
 import businessLogic.userBL.User;
-import businessLogic.userBL.userService.Guest;
 import businessLogicService.logInBLService.LogInBLService;
 import utilities.Detector;
 import utilities.UserType;

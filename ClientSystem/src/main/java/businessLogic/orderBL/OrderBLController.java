@@ -1,7 +1,6 @@
 package businessLogic.orderBL;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,13 +9,10 @@ import businessLogic.orderBL.order.GuestOrder;
 import businessLogic.orderBL.order.HotelWorkerOrder;
 import businessLogic.orderBL.order.OrderForHotelModule;
 import businessLogic.orderBL.order.WebMarketerOrder;
-import businessLogicService.orderBLService.CommonOrderBLService;
-import businessLogicService.orderBLService.GuestOrderBLService;
-import businessLogicService.orderBLService.HotelWorkerOrderBLService;
-import businessLogicService.orderBLService.OrderForHotelModuleBLService;
-import businessLogicService.orderBLService.WebMarketerOrderBLService;
+import businessLogicService.orderBLService.OrderBLService;
 import utilities.OrderState;
 import utilities.ResultMessage;
+import utilities.UserType;
 import vo.CheckInVO;
 import vo.CheckOutVO;
 import vo.GuestEvaluationVO;
@@ -32,7 +28,7 @@ import vo.OrderVO;
  * 
  * 对Order模块重构
  */
-public final class OrderBLController implements CommonOrderBLService, GuestOrderBLService, HotelWorkerOrderBLService, WebMarketerOrderBLService, OrderForHotelModuleBLService {
+public final class OrderBLController implements OrderBLService {
 
 	private CommonOrder commonOrder;
 	private GuestOrder guestOrder;
@@ -139,38 +135,14 @@ public final class OrderBLController implements CommonOrderBLService, GuestOrder
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
-	 * @param guestID 客户要查看个人<所有>订单时，客户的编号
-	 * @return 客户个人<所有>订单
-	 */
-	public List<OrderGeneralVO> getAllGuestOrderGeneral(final String guestID) {
-		return guestOrder.getAllGuestOrderGeneral(guestID);
-	}
-
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
-	 * @param hotelID 酒店工作人员要查看本酒店<所有某种特定类型>订单时，酒店的编号
-	 * @return 此酒店<所有某种特定类型>的所有订单
-	 * 
-	 * <所有某种特定类型>包括：未执行、已执行、异常、已撤销
-	 */
-	public List<OrderGeneralVO> getAllGuestSpecialOrderGeneral(String guestID, OrderState expectOrderState) {
-		return guestOrder.getAllGuestSpecialOrderGeneral(guestID, expectOrderState);
-	}
-	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
 	 * @updateTime 2016/12/7
 	 * @param guestID 客户要查看个人<已执行／未执行>订单时，客户的编号
 	 * @return 客户个人<已执行／未执行>订订单
 	 * 
 	 * <<已执行／未执行>只包含一种
 	 */
-	public List<OrderGeneralVO> getAllGuestCommentOrderGeneral(String guestID, boolean hasCommented) {
-		return guestOrder.getAllGuestCommentOrderGeneral(guestID, hasCommented);
+	public Iterator<OrderGeneralVO> getAllGuestCommentOrderGeneral(String guestID, boolean hasCommented) {
+		return commonOrder.getAllGuestCommentOrderGeneral(guestID, hasCommented);
 	}
 	
 	/**
@@ -208,31 +180,6 @@ public final class OrderBLController implements CommonOrderBLService, GuestOrder
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
-	 * @param hotelID 酒店要查看本酒店<所有>订单时，酒店的编号
-	 * @return 此酒店<所有>订单
-	 */
-	@Override
-	public List<OrderGeneralVO> getAllHotelOrderGeneral(final String hotelID) {
-		return hotelWorkerOrder.getAllHotelOrderGeneral(hotelID);
-	}
-	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
-	 * @param hotelID 酒店工作人员要查看本酒店<所有某种特定类型>订单时，酒店的编号
-	 * @return 此酒店<所有某种特定类型>的所有订单
-	 * 
-	 * <所有某种特定类型>包括：未执行、已执行、异常、已撤销
-	 */
-	public List<OrderGeneralVO> getAllHotelSpecialOrderGeneral(String hotelID, OrderState expectOrderState) {
-		return hotelWorkerOrder.getAllHotelSpecialOrderGeneral(hotelID, expectOrderState);
-	}
-	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
 	 * @updateTime 2016/12/4
 	 * @param checkInVO 酒店工作人员更新订单入住信息
 	 * @return 是否成功更新
@@ -251,10 +198,6 @@ public final class OrderBLController implements CommonOrderBLService, GuestOrder
 	public ResultMessage updateCheckOut (CheckOutVO checkOutVO) {
 		return hotelWorkerOrder.updateCheckOut(checkOutVO);
 	}
-	
-	
-	
-	
 	
 	
 	/*
@@ -296,11 +239,6 @@ public final class OrderBLController implements CommonOrderBLService, GuestOrder
 		return webMarketerOrder.getAllUnexecutedOrderGeneral(date);
 	}
 	
-	
-	
-	
-	
-	
 	/*
 	 * 为酒店模块单独的接口
 	 * 也可单独提出来
@@ -328,4 +266,19 @@ public final class OrderBLController implements CommonOrderBLService, GuestOrder
 		return orderForHotelModule.getOrderState(guestID, hotelID);
 	}
 
+	/**
+	 * @Description:调用commonOrder里面的方法
+	 * @param userID
+	 * @param userType
+	 * @param orderState
+	 * @return
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月8日 上午2:35:57
+	 */
+	@Override
+	public Iterator<OrderGeneralVO> getOrderGenerals(String userID, UserType userType, OrderState orderState) {
+		return commonOrder.getOrderGenerals(userID,userType,orderState);
+	}
+	
 }

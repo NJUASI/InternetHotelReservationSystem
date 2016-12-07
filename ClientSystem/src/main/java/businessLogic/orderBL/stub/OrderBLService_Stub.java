@@ -10,6 +10,7 @@ import businessLogicService.orderBLService.OrderBLService;
 import utilities.OrderState;
 import utilities.ResultMessage;
 import utilities.RoomType;
+import utilities.UserType;
 import vo.CheckInVO;
 import vo.CheckOutVO;
 import vo.GuestEvaluationVO;
@@ -429,5 +430,17 @@ public class OrderBLService_Stub implements OrderBLService {
 	public OrderState getOrderState(String guestID, String hotelID) {
 		return OrderState.EXECUTED;
 	}
-	
+
+	@Override
+	public Iterator<OrderGeneralVO> getOrderGenerals(String userID, UserType userType, OrderState orderState) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
+	@Override
+	public Iterator<OrderGeneralVO> getAllGuestCommentOrderGeneral(String guestID, boolean b) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
 }
