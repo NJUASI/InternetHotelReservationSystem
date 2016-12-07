@@ -57,7 +57,7 @@ class Rooms {
 	 * @time:2016年12月4日 上午10:59:13
 	 */
 	public Iterator<RoomInfoVO> getRoomInfo(String hotelID){
-		
+		initRoomInfoPO(hotelID);
 		List<RoomInfoVO> roomInfoVOList = new ArrayList<RoomInfoVO>();
 		List<RoomInfoPO> roomInfoPOList = null;
 		try {
@@ -133,7 +133,7 @@ class Rooms {
 	}
 
 	/**
-	 * @Description:当入住或退房时，调用此方法，更新该房型的剩余房间数量，线上线下均调用此方法
+	 * @Description:
 	 * @param roomType
 	 * @param operationedNum
 	 * @param operation
@@ -141,10 +141,13 @@ class Rooms {
 	 * ResultMessage
 	 * @exception:
 	 * @author: Harvey Gong
+	 * @param roomName 
 	 * @time:2016年12月4日 下午8:05:19
 	 */
-	public ResultMessage updateRemainRoomNum(String roomType,int operationedNum,Operation operation){
-		RoomInfoPO po = roomInfoPOList.get(findPO(roomType));
+	private ResultMessage updateRemainRoomNum(String hotelID,String roomName, int operationedNum,Operation operation){
+		
+		initRoomInfoPO(hotelID);
+		RoomInfoPO po = roomInfoPOList.get(findPO(roomName));
 		if(operation == Operation.CHECK_IN){
 			po.setRemainNum(po.getRemainNum()- operationedNum);
 		}
@@ -152,7 +155,7 @@ class Rooms {
 		{
 			po.setRemainNum(po.getRemainNum()+ operationedNum);
 		}
-		return updateHotelRoomInfo(new RoomInfoVO(po),roomType);
+		return updateHotelRoomInfo(new RoomInfoVO(po),roomName);
 	}
 
 	/**
@@ -163,7 +166,8 @@ class Rooms {
 	 * @author: Harvey Gong
 	 * @time:2016年12月4日 下午6:53:53
 	 */
-	public Iterator<RoomType> getRoomType(){
+	public Iterator<RoomType> getRoomType(String hotelID){
+		initRoomInfoPO(hotelID);
 		List<RoomType> allRoomType = new ArrayList<RoomType>();
 		for(int i = 0;i<roomInfoPOList.size();i++){
 			allRoomType.add(roomInfoPOList.get(i).getRoomType());
@@ -187,6 +191,35 @@ class Rooms {
 			}
 		}
 		return 0;
+	}
+	
+	public int getRemainRoomNum(String hotelID) {
+		initRoomInfoPO(hotelID);
+		int remainRoomNum = 0;
+		for(int i = 0;i < roomInfoPOList.size();i++){
+			remainRoomNum = remainRoomNum + roomInfoPOList.get(i).getRemainNum();
+		}
+		return 0;
+	}
+
+	/**
+	 * @Description:当入住或退房时，调用这两个方法，更新该房型的剩余房间数量，
+	 * 线上线下均调用这两个方法
+	 * @param hotelID
+	 * @param roomName
+	 * @param roomNum
+	 * @return
+	 * ResultMessage
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月8日 上午12:42:13
+	 */
+	public ResultMessage checkIn(String hotelID, String roomName, int roomNum) {
+		return updateRemainRoomNum(hotelID, roomName, roomNum, Operation.CHECK_IN);
+	}
+
+	public ResultMessage checkOut(String hotelID, String roomName, int roomNum) {
+		return updateRemainRoomNum(hotelID, roomName, roomNum, Operation.CHECK_OUT);
 	}
 
 	/**
@@ -216,11 +249,4 @@ class Rooms {
 		return -1;
 	}
 
-	public int getRemainRoomNum() {
-		int remainRoomNum = 0;
-		for(int i = 0;i < roomInfoPOList.size();i++){
-			remainRoomNum = remainRoomNum + roomInfoPOList.get(i).getRemainNum();
-		}
-		return 0;
-	}
 }

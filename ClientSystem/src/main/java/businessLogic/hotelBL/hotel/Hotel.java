@@ -8,6 +8,7 @@ import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelPO;
 import utilities.Address;
+import utilities.Operation;
 import utilities.ResultMessage;
 import utilities.RoomType;
 import vo.HotelVO;
@@ -24,12 +25,10 @@ public class Hotel implements HotelInfoOperation{
 
 	private HotelDataService hotelDataService;
 	private HotelPO hotelPO;
-	private String hotelID;
 	private Rooms rooms;
 
-	public Hotel(String hotelWorkerID) {
-		this.hotelID = hotelWorkerID;
-		initHotel();
+	public Hotel(String hotelID) {
+		initHotel(hotelID);
 	}
 	
 	public Hotel() {
@@ -37,9 +36,9 @@ public class Hotel implements HotelInfoOperation{
 		initRooms();
 	}
 
-	private void initHotel() {
+	private void initHotel(String hotelID) {
 		initHotelDataService();
-		initHotelPO();
+		initHotelPO(hotelID);
 		initRooms();
 	}
 
@@ -47,7 +46,7 @@ public class Hotel implements HotelInfoOperation{
 		rooms = new Rooms();
 	}
 
-	private void initHotelPO() {
+	private void initHotelPO(String hotelID) {
 		try {
 			hotelPO = hotelDataService.getHotelInfo(hotelID);
 		} catch (RemoteException e) {
@@ -210,7 +209,8 @@ public class Hotel implements HotelInfoOperation{
 	}
 
 	@Override
-	public Address getHotelAddress(){
+	public Address getHotelAddress(String hotelID){
+		initHotelPO(hotelID);
 		return new Address(hotelPO.getCity(), hotelPO.getCircle());
 	}
 
@@ -230,11 +230,20 @@ public class Hotel implements HotelInfoOperation{
 	}
 
 	@Override
-	public Iterator<RoomType> getRoomType(){
-		return rooms.getRoomType();
+	public Iterator<RoomType> getRoomType(String hotelID){
+		return rooms.getRoomType(hotelID);
 	}
 
 	public int getRemainRoomNum(String hotelID) {
-		return rooms.getRemainRoomNum();
+		return rooms.getRemainRoomNum(hotelID);
+	}
+
+	public ResultMessage checkIn(String hotelID, String roomName, int roomNum) {
+		return rooms.checkIn(hotelID,roomName,roomNum);
+		
+	}
+
+	public ResultMessage checkOut(String hotelID, String roomName, int roomNum) {
+		return rooms.checkOut(hotelID,roomName,roomNum);
 	}
 }
