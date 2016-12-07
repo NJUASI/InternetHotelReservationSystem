@@ -3,21 +3,17 @@ package vo;
 import java.time.LocalDate;
 
 import po.SpecialSpanPromotionPO;
-import utilities.PromotionType;
 
 public class SpecialSpanPromotionVO{
 
 	public String userID;
-	public PromotionType promotionType;
 	public String promotionName;	
 	public double discount;
 	public LocalDate startDate;
 	public LocalDate endDate;
-	
-	
+
 	public SpecialSpanPromotionVO(SpecialSpanPromotionPO specialSpanPromotionPO) {
 		this.userID = specialSpanPromotionPO.getUserID();
-		this.promotionType = specialSpanPromotionPO.getPromotionType();
 		this.promotionName = specialSpanPromotionPO.getPromotionName();
 		this.discount = specialSpanPromotionPO.getDiscount();
 		this.startDate = specialSpanPromotionPO.getStartDate();
@@ -25,8 +21,11 @@ public class SpecialSpanPromotionVO{
 	}
 
 
+	public SpecialSpanPromotionVO() {
+		// TODO 自动生成的构造函数存根
+	}
 	public SpecialSpanPromotionVO(String promotionName, double discount, LocalDate startDate, LocalDate endDate) {
-	
+
 		this.promotionName = promotionName;
 		this.discount =  discount;
 		this.startDate =startDate;

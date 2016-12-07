@@ -84,7 +84,7 @@ public class MemberCheckController {
 		}
 		if (enterprise.getText()!=null) {
 			enterprisePane.setDisable(true);
-			enterprise.setText(memberVO.enterprise);
+			enterpriseText.setText(memberVO.enterprise);
 		}
 	}
 	@FXML
