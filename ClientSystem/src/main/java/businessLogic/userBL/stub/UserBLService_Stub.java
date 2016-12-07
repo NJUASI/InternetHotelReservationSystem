@@ -49,12 +49,4 @@ public class UserBLService_Stub implements UserBLService {
 		return "0000000";
 	}
 
-
-	@Override
-	public UserVO getSingle(String userID, UserType userType) {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-
-
 }

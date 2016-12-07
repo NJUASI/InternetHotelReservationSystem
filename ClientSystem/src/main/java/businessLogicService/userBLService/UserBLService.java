@@ -13,7 +13,7 @@ public interface UserBLService {
 
 	public ResultMessage modify(UserVO userVO);
 	
-	public UserVO getSingle(String userID,UserType userType);
+	public UserVO getSingle(String userID);
 	
 	public ResultMessage addHotel(HotelVO newHotelVO, String hotelID);
 	

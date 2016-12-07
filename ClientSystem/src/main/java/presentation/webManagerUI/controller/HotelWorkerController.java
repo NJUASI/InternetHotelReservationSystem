@@ -1,9 +1,12 @@
 package presentation.webManagerUI.controller;
 
+import businessLogic.userBL.UserController;
+import businessLogicService.userBLService.UserBLService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import utilities.ResultMessage;
 import vo.HotelWorkerVO;
 
 /**
@@ -21,28 +24,38 @@ public class HotelWorkerController {
 	private TextField inputID, hotelName2, password2;
 	@FXML
 	private Label hotelID, hotelName, password, hotelID2;
+	
+	private UserBLService userBLController;
 
 	@FXML
 	private void initialize() {
-
+		userBLController = UserController.getInstance();
 	}
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/2
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/7
 	 * @搜索酒店并初始化界面
 	 */
 	@FXML
 	protected void search() {
-		// TODO 通过ID get hotelworkerVO
-			//		inputID.getText();
-		hotelWorkerVO = new HotelWorkerVO("12345678", "876543231", "七天连锁");
-		hotelID.setText(hotelWorkerVO.userID);
-		hotelName.setText(hotelWorkerVO.hotelName);
-		password.setText(hotelWorkerVO.password);
+		
+		hotelWorkerVO = (HotelWorkerVO) userBLController.getSingle(inputID.getText());
+		
+		if(hotelWorkerVO == null){
+			// TODO gy 获取到的hotelWorkerVO为空，代表找不到对应ID的酒店工作人员，界面做提示处理，界面不跳转
+		}
+		
+		try {
+			hotelID.setText(hotelWorkerVO.userID);
+			hotelName.setText(hotelWorkerVO.hotelName);
+			password.setText(hotelWorkerVO.password);
 
-		hotelInfoPane.setVisible(true);
+			hotelInfoPane.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -65,16 +78,20 @@ public class HotelWorkerController {
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/2
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/7
 	 * @保存酒店工作人員信息
 	 */
 	@FXML
 	protected void saveModify() {
 		
-		hotelWorkerVO.hotelName = hotelName2.getText();
-		hotelWorkerVO.password = password2.getText();
-		//TODO save(hotelVO),也可以再NEW一个hotelWorkerVO
+		HotelWorkerVO tempHotelWorkerVO = hotelWorkerVO;
+		
+		tempHotelWorkerVO.hotelName = hotelName2.getText();
+		tempHotelWorkerVO.password = password2.getText();
+		
+		ResultMessage message = userBLController.modify(tempHotelWorkerVO);
+		// TODO gy 返回是否成功修改的信息，界面需做提示处理
 
 		hotelModifyPane.setVisible(false);
 		hotelInfoPane.setVisible(true);

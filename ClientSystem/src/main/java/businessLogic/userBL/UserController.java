@@ -112,10 +112,4 @@ public class UserController implements UserBLService{
 		return user.getLogInInfo(userID,userType);
 	}
 
-	@Override
-	public UserVO getSingle(String userID, UserType userType) {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-
 }

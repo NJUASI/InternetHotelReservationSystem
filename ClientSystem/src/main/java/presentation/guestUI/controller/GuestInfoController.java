@@ -1,15 +1,19 @@
 package presentation.guestUI.controller;
 
+import businessLogic.userBL.UserController;
+import businessLogicService.userBLService.UserBLService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import utilities.IDReserve;
+import utilities.ResultMessage;
 import vo.GuestVO;
 
 /**
  * @description 查看客户信息界面的控制类
  * @author 61990
- * @lastChangedBy Harvey
+ * @lastChangedBy Byron Dong
  */
 public class GuestInfoController {
 	GuestVO guestVO;
@@ -27,17 +31,20 @@ public class GuestInfoController {
 	// modify 界面内容
 	@FXML
 	private TextField name2, nickname2, phone2, password2;
+	
+	private String userID =  IDReserve.getInstance().getUserID();;
+	
+	private UserBLService userBLController = UserController.getInstance();
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27 构造函数，初始化成员变量
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/7 构造函数，初始化成员变量
 	 */
 	@FXML
 	private void initialize() {
-		//TODO 通过guestID获得guestVO
-
-		guestVO = new GuestVO("12345", null, "", "张三", "小张", "123456", "13993323454", 100);
+		
+		guestVO = (GuestVO) userBLController.getSingle(userID);
 		guestID.setText(guestVO.userID);
 		name.setText(guestVO.name);
 		nickname.setText(guestVO.nickName);
@@ -67,7 +74,7 @@ public class GuestInfoController {
 	/**
 	 * @description 点击保存按钮
 	 * @author 61990
-	 * @lastChangedBy Harvey
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/12/7
 	 */
 	@FXML
@@ -81,12 +88,15 @@ public class GuestInfoController {
 			nickname.setText(nickname2.getText());
 			phone.setText(phone2.getText());
 			password.setText(password2.getText());
-
-			//			save(	name.setText(name2.getText()),			
-			//					nickname.setText(nickname2.getText()),
-			//			phone.setText(phone2.getText()),
-			//			password.setText(password2.getText()));
-
+			
+			GuestVO tempGuestVO = guestVO;
+			tempGuestVO.name = name2.getText();
+			tempGuestVO.nickName = nickname2.getText();
+			tempGuestVO.phone = phone2.getText();
+			tempGuestVO.password = password2.getText();
+			
+			ResultMessage message = userBLController.modify(tempGuestVO);
+			// TODO 得到modify是否成功的结果，界面后续做提示处理
 			guestModify.setVisible(false);
 			guestCheck.setVisible(true);
 

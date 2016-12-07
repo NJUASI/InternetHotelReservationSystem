@@ -489,7 +489,7 @@ public class HotelSearchController {
 	protected void createOrderIncheck(){
 	
 //		TODO 通过ID获得酒店详情  酒店订单列表 房间详情列表 
-//		hotelTable.getSelectionModel().getSelectedItem().getHotelID();
+//		String hotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
 //		roomList
 //		hotelVO
 		hotelVO = new HotelVO("12345", "hantingjiudiansss", "xinjiekou", "xinjiekou", "malianhedadao", "5xinji", 4.5,

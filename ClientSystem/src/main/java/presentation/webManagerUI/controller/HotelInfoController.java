@@ -105,6 +105,7 @@ public class HotelInfoController {
 	@FXML
 	protected void addHotel(){
 		//TODO 创建hotelVO，保存，并需要返回初始化的酒店编号和密码
+		// TODO gcm 先更改你addhotel的接口，我再去user那里修改
 //		addHotel(hotelName.getText(),cityInput.getValue(),cycleInput.getValue(),levelInput.getValue(),address.getText());
 
 	}
