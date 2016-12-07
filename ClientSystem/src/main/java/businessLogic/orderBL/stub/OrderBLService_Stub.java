@@ -251,6 +251,66 @@ public class OrderBLService_Stub implements OrderBLService {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param hotelID 酒店要查看本酒店<所有未执行>订单时，酒店的编号
+	 * @return 此酒店<所有未执行>的所有订单
+	 */
+	public List<OrderGeneralVO> getAllHotelUnexecutedOrderGeneral(final String hotelID) {
+		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.UNEXECUTED, false, "zhangsan","13554321234"));
+		return orderGenerals;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param hotelID 酒店要查看本酒店<所有已执行>订单时，酒店的编号
+	 * @return 此酒店<所有已执行>订单
+	 */
+	public List<OrderGeneralVO> getAllHotelExecutedOrderGeneral(final String hotelID) {
+		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.EXECUTED, false, "zhangsan","13554321234"));
+		return orderGenerals;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param hotelID 酒店要查看本酒店<所有异常>订单时，酒店的编号
+	 * @return 此酒店所有异常>订单
+	 */
+	public List<OrderGeneralVO> getAllHotelAbnormalOrderGeneral(final String hotelID) {
+		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.ABNORMAL, false, "zhangsan","13554321234"));
+		return orderGenerals;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param hotelID 酒店要查看本酒店<所有已撤销>订单时，酒店的编号
+	 * @return 此酒店<所有已撤销>订单
+	 */
+	public List<OrderGeneralVO> getAllHotelCancelledOrderGeneral(final String hotelID) {
+		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.CANCELLED, false, "zhangsan","13554321234"));
+		return orderGenerals;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
 	 * @updateTime 2016/12/5
 	 * @param date 网站营销人员撤销异常订单时输入的指定日期
 	 * @return 网站营销人员需要查看的当天所有的异常订单

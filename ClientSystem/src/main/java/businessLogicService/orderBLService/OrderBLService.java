@@ -145,11 +145,47 @@ public interface OrderBLService {
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/11/27
-	 * @param hotelID 酒店要查看本酒店所有订单时，酒店的编号
-	 * @return 此酒店所有的所有订单
+	 * @param hotelID 酒店要查看本酒店<所有>订单时，酒店的编号
+	 * @return 此酒店<所有>订单
 	 */
 	List<OrderGeneralVO> getAllHotelOrderGeneral(String hotelID);
 	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param hotelID 酒店要查看本酒店<所有未执行>订单时，酒店的编号
+	 * @return 此酒店<所有未执行>的所有订单
+	 */
+	List<OrderGeneralVO> getAllHotelUnexecutedOrderGeneral(String hotelID);
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param hotelID 酒店要查看本酒店<所有已执行>订单时，酒店的编号
+	 * @return 此酒店<所有已执行>订单
+	 */
+	List<OrderGeneralVO> getAllHotelExecutedOrderGeneral(String hotelID);
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param hotelID 酒店要查看本酒店<所有异常>订单时，酒店的编号
+	 * @return 此酒店所有异常>订单
+	 */
+	List<OrderGeneralVO> getAllHotelAbnormalOrderGeneral(String hotelID);
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @param hotelID 酒店要查看本酒店<所有已撤销>订单时，酒店的编号
+	 * @return 此酒店<所有已撤销>订单
+	 */
+	List<OrderGeneralVO> getAllHotelCancelledOrderGeneral(String hotelID);
+
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
