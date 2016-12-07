@@ -25,10 +25,18 @@
     <property name="line.separator" value="
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<<<<<<< HEAD
     <property name="os.name" value="Mac OS X"/>
     <property name="classworlds.conf" value="/Users/cuihua/Documents/SE/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf6195373467144663898.tmp"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/Users/cuihua/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+=======
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="classworlds.conf" value="D:\workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf8445117854107985885.tmp"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_60\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jre1.8.0_102/bin/server;C:/Program Files/Java/jre1.8.0_102/bin;C:/Program Files/Java/jre1.8.0_102/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files\Java\jdk1.8.0_60\bin;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;D:\MinGw\bin;D:\apache-maven-3.3.9\bin;C:\Program Files\Git\cmd;C:\Program Files (x86)\AMD\ATI.ACE\Core-Static;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;;D:\Docker Toolbox;D:\eclipse;;."/>
+>>>>>>> master
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -59,8 +67,15 @@
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
+<<<<<<< HEAD
   <testcase classname="presentation.guestUI.driver.LogInBLService_DriverTest" name="test1" time="0.001">
     <skipped/>
   </testcase>
   <testcase classname="presentation.guestUI.driver.LogInBLService_DriverTest" name="test2" time="0"/>
+=======
+  <testcase classname="presentation.guestUI.driver.LogInBLService_DriverTest" name="test1" time="0">
+    <skipped/>
+  </testcase>
+  <testcase classname="presentation.guestUI.driver.LogInBLService_DriverTest" name="test2" time="0.001"/>
+>>>>>>> master
 </testsuite>
