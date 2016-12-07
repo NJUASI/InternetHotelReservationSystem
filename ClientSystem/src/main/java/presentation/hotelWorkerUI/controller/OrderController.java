@@ -1,19 +1,27 @@
 package presentation.hotelWorkerUI.controller;
 
+import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import utilities.OrderState;
 import utilities.RoomType;
 import vo.OrderGeneralVO;
@@ -39,22 +47,7 @@ public class OrderController {
 	 */
 	@FXML
 	private void initialize() {
-		// TODO 需要获取酒店的所有订单
-		orderVOlist=new LinkedList<>();
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-
-		initOrderCheck(orderVOlist);
+		//此函数用的话告诉一下gy
 	}
 
 
@@ -275,21 +268,69 @@ public class OrderController {
 
 		initOrderDetail(orderVO);
 	}
+	
+	@FXML
+	private Label checkInOrderID,checkInName;
+	@FXML
+	private TextField checkInRoomNum,checkInMinute,checkInHour;
+	@FXML
+	private DatePicker checkInLeaveDate;
+	
 	/**
 	 * @author 61990
+	 * @throws IOException 
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/11/27
 	 * @办理入住
 	 */
 	//订单详情执行
 	@FXML
-	protected void checkIn() {
-	//  TODO 订单入住，提供订单号，房间号，离开时间等，界面暂缺
+	protected void checkIn() throws IOException{
+	
+//		buildCheckInWindow();
+//		checkInOrderID.setText(orderVO.orderGeneralVO.orderID);
+//		initCheckInWindow(orderVO.orderGeneralVO.orderID, orderVO.orderGeneralVO.name,
+//				orderVO.orderGeneralVO.expectLeaveTime.toLocalDate(),
+//				orderVO.orderGeneralVO.expectLeaveTime.getHour() + "",
+//				orderVO.orderGeneralVO.expectLeaveTime.getMinute() + "");
+	}
+	void initCheckInWindow(String orderID,String name,LocalDate date,String hour,String minute){
+//		checkInOrderID.setText(orderID);
+//		 checkInName.setText(name);
+//		 checkInLeaveDate.setValue(date);
+//		 checkInMinute.setText(minute);
+//		 checkInHour.setText(hour);
+	}
+	void buildCheckInWindow() throws IOException{
+//		Parent checkInStage = FXMLLoader.load(getClass().getResource("/presentation/popUp/checkIn.fxml"));
+//		Stage stage =new Stage();
+//		Scene scene = new Scene(checkInStage);
+//		stage.setTitle("订单入住");
+//		stage.setScene(scene);
+//		stage.show();
 	}
 	//订单概况执行
 	@FXML
-	protected void checkIn2() {
-	//  TODO 订单入住，提供订单号，房间号，预计离开时间等，界面暂缺
+	protected void checkIn2() throws IOException {
+//		 buildCheckInWindow();
+//		 initCheckInWindow(table.getSelectionModel().getSelectedItem().getOrderID(), table.getSelectionModel().getSelectedItem().getName(),
+//				 table.getSelectionModel().getSelectedItem().getCheckOutTime().toLocalDate(),
+//				 table.getSelectionModel().getSelectedItem().getCheckOutTime().getHour() + "",
+//				 table.getSelectionModel().getSelectedItem().getCheckOutTime().getMinute() + "");
+	}
+	@FXML
+	protected void sureCheckIn(){
+//		//  TODO 订单入住，提供订单号，房间号，预计离开时间等，界面暂缺
+//		 checkInOrderID.getText();
+//		 checkInName.getText();//客户姓名，可不管
+//		 checkInRoomNum.getText();//房间号
+//	//离开时间获取	LocalDateTime.of(checkInLeaveDate.getValue(),LocalTime.of(Integer.parseInt(checkInHour.getText()), Integer.parseInt(checkInMinute.getText())));
+//		
+	}
+	
+	@FXML
+	protected void sureCheckOut(){
+//	  TODO 订单退房，提供订单号，房间号，预计离开时间等，界面暂缺
 	}
 	/**
 	 * @author 61990
@@ -301,6 +342,14 @@ public class OrderController {
 	@FXML
 	protected void checkOut() {
 	//  TODO 订单退房，供订单号，需要下层更改离开时间
+	}
+	void buildCheckOutWindow() throws IOException{
+//		Parent checkOutStage = FXMLLoader.load(getClass().getResource("/presentation/popUp/checkIn.fxml"));
+//		Stage stage =new Stage();
+//		Scene scene = new Scene(checkOutStage);
+//		stage.setTitle("订单退房");
+//		stage.setScene(scene);
+//		stage.show();
 	}
 	//订单概况执行
 	@FXML

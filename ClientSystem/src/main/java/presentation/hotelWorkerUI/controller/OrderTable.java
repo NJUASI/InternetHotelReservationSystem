@@ -1,5 +1,7 @@
 package presentation.hotelWorkerUI.controller;
 
+import java.time.LocalDateTime;
+
 import javafx.beans.property.SimpleStringProperty;
 
 public class OrderTable { 
@@ -48,7 +50,9 @@ public class OrderTable {
 	public String getOrderID() {
 		return orderID.get();
 	}
-
+	public String getName() {
+		return name.get();
+	}
 	public String getHotelName() {
 		return hotelName.get();
 	}
@@ -57,11 +61,27 @@ public class OrderTable {
 		return address.get();
 	}
 
-	public String getCheckInTime() {
-		return checkInTime.get();
-	}
-	public String getCheckOutTime() {
-		return checkOutTime.get();
+
+	public LocalDateTime getCheckOutTime() {
+	
+		String time[]=new String[]{"","","","","",""};
+		String str =checkOutTime.get();
+		
+		
+			for (int i = 0,j=0; i < str.length(); i++) {
+				if(str.charAt(i)>='0'&&str.charAt(i)<='9'){
+					time[j]+=str.charAt(i);
+				}
+				else{
+					j++;
+				}
+			}
+			int date[]=new int[5];
+		for (int i = 0; i < 5; i++) {
+			date[i]=Integer.parseInt(time[i]);
+		}
+		
+		return LocalDateTime.of(date[0],date[1],date[2],date[3],date[4]);
 	}
 
 	public String getPrice() {

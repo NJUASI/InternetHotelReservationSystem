@@ -6,6 +6,8 @@ import utilities.PromotionType;
 public class HotelFixedPromotionVO{
 
 	public String hotelID;
+	
+
 	public PromotionType promotionType;
 	public double discount;
 
@@ -15,8 +17,11 @@ public class HotelFixedPromotionVO{
 		this.discount = hotelFixedPromotion.getDiscount();
 	}
 
-	public HotelFixedPromotionVO() {
-		// TODO 自动生成的构造函数存根
+	public HotelFixedPromotionVO(String hotelID, PromotionType promotionType, double discount) {
+		super();
+		this.hotelID = hotelID;
+		this.promotionType = promotionType;
+		this.discount = discount;
 	}
 
 }
