@@ -9,7 +9,6 @@ import businessLogic.hotelBL.HotelBLController;
 import businessLogic.orderBL.OrderBLController;
 import businessLogic.sourceBL.SourceBLController;
 import businessLogicService.hotelBLService.HotelBLService;
-import businessLogicService.orderBLService.CommonOrderBLService;
 import businessLogicService.orderBLService.OrderBLService;
 import businessLogicService.sourceBLService.SourceBLService;
 import javafx.collections.FXCollections;
@@ -35,13 +34,13 @@ import vo.HotelVO;
 public class HotelController {
 
 	HotelBLService hotelBLController;
-	CommonOrderBLService commonOrder;
+	OrderBLService orderBLController;
 	SourceBLService sourceBLController;
 	String hotelID = IDReserve.getInstance().getUserID();
 
 	public HotelController() {
 		hotelBLController = HotelBLController.getInstance();
-		commonOrder = OrderBLController.getInstance();
+		orderBLController = OrderBLController.getInstance();
 		sourceBLController = SourceBLController.getInstance();
 	}
 
@@ -69,7 +68,7 @@ public class HotelController {
 		initHotelDetail(hotelVO);
 
 		//显示酒店的所有评论
-		Iterator<HotelEvaluationVO> evaluations = commonOrder.getEvaluations(hotelID);
+		Iterator<HotelEvaluationVO> evaluations = orderBLController.getEvaluations(hotelID);
 		commentList=new ArrayList<HotelEvaluationVO>();
 		while(evaluations.hasNext()){
 			commentList.add(evaluations.next());
