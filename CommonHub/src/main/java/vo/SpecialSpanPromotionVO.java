@@ -24,4 +24,13 @@ public class SpecialSpanPromotionVO{
 		this.endDate = specialSpanPromotionPO.getEndDate();
 	}
 
+
+	public SpecialSpanPromotionVO(String promotionName, double discount, LocalDate startDate, LocalDate endDate) {
+	
+		this.promotionName = promotionName;
+		this.discount =  discount;
+		this.startDate =startDate;
+		this.endDate = endDate;
+	}
+
 }

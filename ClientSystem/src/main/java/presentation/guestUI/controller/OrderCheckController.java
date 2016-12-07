@@ -41,9 +41,20 @@ public class OrderCheckController {
 	
 	private OrderBLService orderBLService;
 	
+	/*
+	 * 订单概况
+	 */
 	private final String guestID = IDReserve.getInstance().getUserID();
 	
 	private List<OrderGeneralVO> orderGenerals;
+	
+	/*
+	 * 订单详情
+	 */
+	private String orderID;
+	
+	private OrderVO orderVO;
+	
 	
 	
 	//订单概况
@@ -199,11 +210,6 @@ public class OrderCheckController {
 	/*
 	 * 订单详情初始化
 	 */
-	private String orderID;
-	
-	OrderVO orderVO;
-	
-	
 	@FXML
 	private Pane orderDetail;
 	@FXML
