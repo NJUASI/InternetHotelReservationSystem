@@ -2,7 +2,7 @@ package presentation.hotelWorkerUI.controller;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class OrderTable {
+public class OrderTable { 
 	public SimpleStringProperty guestID;
 	public SimpleStringProperty orderID;
 	public SimpleStringProperty name;
