@@ -10,7 +10,7 @@ public interface MemberBLService {
 	
 	public ResultMessage modify(MemberVO memberVO);
 	
-	public MemberVO getMemberInfo(String userID, MemberType memberType);
+	public MemberVO getMemberInfo(String userID);
 	
 	public boolean isMember(String userID, MemberType memberType);
 	
