@@ -53,7 +53,6 @@ public final class LogInController implements LogInBLService {
 
 	@Override
 	public UserType logIn(String userID, String password) {
-		// TODO 自动生成的方法存根
 		return logIn.logIn(userID, password);
 	}
 

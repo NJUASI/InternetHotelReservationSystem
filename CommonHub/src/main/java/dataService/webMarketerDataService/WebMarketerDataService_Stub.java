@@ -13,7 +13,6 @@ public class WebMarketerDataService_Stub extends UnicastRemoteObject implements 
 	
 	public WebMarketerDataService_Stub() throws RemoteException {
 		super();
-		// TODO 自动生成的构造函数存根
 	}
 
 
@@ -36,13 +35,11 @@ public class WebMarketerDataService_Stub extends UnicastRemoteObject implements 
 
 	
 	public ResultMessage modify(WebMarketerPO webMarketerPO) {
-		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
 
 	
 	public ResultMessage deleteWebMarketer(String webMarketerID) {
-		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
 

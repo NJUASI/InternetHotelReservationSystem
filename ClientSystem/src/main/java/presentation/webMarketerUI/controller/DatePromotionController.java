@@ -38,7 +38,7 @@ public class DatePromotionController {
 	private void initialize() {
 		table.getItems().clear();
 		
-		//TODO 从数据库得到所有的网站类十一策略
+		//TODO gcm注意：从数据库得到所有的网站类十一策略
 		List<DatePromotionTable> datePromotion = new LinkedList<DatePromotionTable>();
 		datePromotion.add(new DatePromotionTable("兰州", "www", LocalDate.of(2014,4,3),LocalDate.of(2014,4,23)));
 		datePromotion.add(new DatePromotionTable("兰2州", "w2ww", LocalDate.of(2015,6,7),LocalDate.of(2014,4,23)));
@@ -90,7 +90,7 @@ public class DatePromotionController {
 	protected void savePromotion() {
 		try {
 			
-			//TODO update已存在的一条数据 从数据库改变此条类十一策略
+			//TODO gcm注意：update已存在的一条数据 从数据库改变此条类十一策略
 		//	preName 之前的名字
 //			修改之后的信息
 //			nameText.getText();
@@ -118,7 +118,7 @@ public class DatePromotionController {
 	@FXML
 	protected void addPromotion() {
 		try {
-			//TODO 添加已存在的一条数据 从数据库改变此条类十一策略
+			//TODO gcm注意：添加已存在的一条数据 从数据库改变此条类十一策略
 //			nameText.getText();
 //			discountText.getText();
 //			startDatePicker.getValue();
@@ -160,7 +160,7 @@ public class DatePromotionController {
 	 */
 	@FXML
 	protected void deleteOne() {
-		//TODO 删除已存在的一条数据 从数据库改变此条类十一策略
+		//TODO gcm注意：删除已存在的一条数据 从数据库改变此条类十一策略
 		//通过name删除从下面的到name
 //		table.getSelectionModel().getSelectedItem().getName();
 		initialize();	

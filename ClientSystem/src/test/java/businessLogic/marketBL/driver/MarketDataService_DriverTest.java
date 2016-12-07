@@ -28,7 +28,6 @@ public class MarketDataService_DriverTest {
 			assertEquals(0, marketPO.getMarketCredit(), 0);
 			assertEquals(0.9, marketPO.getMarketBenefit(), 0);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

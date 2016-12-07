@@ -39,7 +39,7 @@ public class OrderController {
 	 */
 	@FXML
 	private void initialize() {
-		// TODO 需要获取酒店的所有订单
+		// TODO fjj注意：需要获取酒店的所有订单
 		orderVOlist=new LinkedList<>();
 		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
 				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
@@ -72,7 +72,7 @@ public class OrderController {
 	 */
 	@FXML
 	protected void searchExecutedOrder() {
-		//  TODO 通过ID
+		//  TODO fjj注意：通过ID
 		checkInBt1.setVisible(false);
 		checkOutBt1.setVisible(true);
 		orderVOlist=new LinkedList<>();
@@ -101,7 +101,7 @@ public class OrderController {
 	 */
 	@FXML
 	protected void searchAbnormalOrder() {
-	//  TODO 通过ID
+	//  TODO fjj注意：通过ID
 		checkInBt1.setVisible(true);
 		checkOutBt1.setVisible(false);
 
@@ -131,7 +131,7 @@ public class OrderController {
 	 */
 	@FXML
 	protected void searchCancelledOrder() {
-	//  TODO 通过ID
+	//  TODO fjj注意：通过ID
 		// 获得输入的内容
 		checkInBt1.setVisible(false);
 		checkOutBt1.setVisible(false);
@@ -162,7 +162,7 @@ public class OrderController {
 	 */
 	@FXML
 	protected void searchUnexecutedOrder() {
-	//  TODO 通过ID
+	//  TODO fjj注意：通过ID
 		
 		checkInBt1.setVisible(true);
 		checkOutBt1.setVisible(false);
@@ -242,7 +242,7 @@ public class OrderController {
 	 */
 	@FXML
 	protected void orderDetail() {
-	//  TODO 通过orderID得到orderVO
+	//  TODO fjj注意：通过orderID得到orderVO
 		//			System.out.println(table.getSelectionModel().getSelectedItem().getOrderID());
 		orderDetail.setVisible(true);
 		orderCheck.setVisible(false);
@@ -284,12 +284,12 @@ public class OrderController {
 	//订单详情执行
 	@FXML
 	protected void checkIn() {
-	//  TODO 订单入住，提供订单号，房间号，离开时间等，界面暂缺
+	//  TODO fjj注意：订单入住，提供订单号，房间号，离开时间等，界面暂缺
 	}
 	//订单概况执行
 	@FXML
 	protected void checkIn2() {
-	//  TODO 订单入住，提供订单号，房间号，预计离开时间等，界面暂缺
+	//  TODO fjj注意：订单入住，提供订单号，房间号，预计离开时间等，界面暂缺
 	}
 	/**
 	 * @author 61990
@@ -300,7 +300,7 @@ public class OrderController {
 	//订单详情执行
 	@FXML
 	protected void checkOut() {
-	//  TODO 订单退房，供订单号，需要下层更改离开时间
+	//  TODO gcm注意：订单退房，供订单号，需要下层更改离开时间
 	}
 	//订单概况执行
 	@FXML

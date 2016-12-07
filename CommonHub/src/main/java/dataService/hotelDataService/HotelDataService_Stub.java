@@ -14,7 +14,6 @@ public class HotelDataService_Stub extends UnicastRemoteObject implements HotelD
 	
 	public HotelDataService_Stub() throws RemoteException {
 		super();
-		// TODO 自动生成的构造函数存根
 	}
 
 	@Override
@@ -56,28 +55,24 @@ public class HotelDataService_Stub extends UnicastRemoteObject implements HotelD
 
 	@Override
 	public ResultMessage updateRoomInfo(RoomInfoPO roomInfoPO, String oldRoomType) throws RemoteException {
-		// TODO 自动生成的方法存根
 		return null;
 	}
 
 
 	@Override
 	public ResultMessage addRoomInfo(RoomInfoPO roomInfoPO) throws RemoteException {
-		// TODO 自动生成的方法存根
 		return null;
 	}
 
 
 	@Override
 	public ResultMessage deleteRoomInfo(String hotelID, String roomType) throws RemoteException {
-		// TODO 自动生成的方法存根
 		return null;
 	}
 
 
 	@Override
 	public ResultMessage addHotelInfo(HotelPO hotelPO) throws RemoteException {
-		// TODO 自动生成的方法存根
 		return null;
 	}
 

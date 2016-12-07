@@ -57,7 +57,7 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void searchCity(){
-		//TODO 得到所有城市list<string>
+		//TODO gcm注意：得到所有城市list<string>
 
 		cityChoose.getItems().clear();
 		cycleChoose.getItems().clear();
@@ -73,7 +73,7 @@ public class HotelSearchController {
 	@FXML
 	protected void searchCycle(){
 		
-		//TODO 通过城市得到所有商圈 list<string>
+		//TODO gcm注意：通过城市得到所有商圈 list<string>
 //		cityChoose.getValue();
 		cycleChoose.getItems().clear();
 		cycleChoose.getItems().add("222");
@@ -107,7 +107,7 @@ public class HotelSearchController {
 	@FXML
 	protected void openHotelCheck() {
 		
-		//TODO 通过城市和商圈获得所有的城市  List<HotelVO> hotelVOList;
+		//TODO gcm注意：通过城市和商圈获得所有的酒店  List<HotelVO> hotelVOList;
 		
 		// cityChoose.getValue();
 		// cycleChoose.getValue();
@@ -189,7 +189,7 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void openHotelDetail() {
-		//TODO 通过ID获得酒店详情  酒店订单列表 酒店评价列表 房间详情列表 
+		//TODO gcm注意：通过ID获得酒店详情  酒店订单列表 酒店评价列表 房间详情列表 
 //		hotelTable.getSelectionModel().getSelectedItem().getHotelID();
 		
 		hotelCheck.setVisible(false);
@@ -430,7 +430,7 @@ public class HotelSearchController {
 //		
 //		Integer.parseInt(roomInput.getText());
 //		
-//		TODO 通过上面的信息建VO 传下BL 进行筛选  注意是固定的城市商圈
+//		TODO gcm注意：通过上面的信息建VO 传下BL 进行筛选  注意是固定的城市商圈
 //		SearchCriteriaVO vo=new SearchCriteriaVO();
 	
 		hotelCheck.setVisible(true);
@@ -488,7 +488,7 @@ public class HotelSearchController {
 	@FXML
 	protected void createOrderIncheck(){
 	
-//		TODO 通过ID获得酒店详情  酒店订单列表 房间详情列表 
+//		TODO gcm注意：通过ID获得酒店详情  酒店订单列表 房间详情列表 
 //		hotelTable.getSelectionModel().getSelectedItem().getHotelID();
 //		roomList
 //		hotelVO
@@ -523,7 +523,7 @@ public class HotelSearchController {
 
 	@FXML
 	protected void commitOrder() {
-		//TODO new 一个orderVO传下去生成订单
+		//TODO fjj注意：new 一个orderVO传下去生成订单
 //		orderVO = new OrderVO(
 //				new OrderGeneralVO("", Main.userID, hotelIDInOrder.getText(), hotelNameInOrder.getText(),
 //						hotelAddressInOrder.getText(), Double.parseDouble(priceOfOrder.getText()),

@@ -46,7 +46,7 @@ public class GuestController {
 	 */
 	@FXML
 	protected void search() {
-		//TODO 通过ID查找VO
+		//TODO fjy注意：通过ID查找VO
 		guestVO = new GuestVO("12356789", null, "人寿保险", "fjj", "fjj", "qfghyrs", "13999439954", 4.19);
 
 		try {	
@@ -114,7 +114,7 @@ public class GuestController {
 	 */
 	@FXML
 	protected void saveModify() {
-//		TODO 创建guestVO,并保存
+//		TODO djy注意：创建guestVO,并保存
 		guestVO.birthday = birthdayPicker.getValue();
 		guestVO.enterprise = enterpriseText.getText();
 		guestVO.phone=phoneText.getText();

@@ -52,7 +52,6 @@ public class HotelScan {
 	}
 
 	public HotelScan() {
-		// TODO 自动生成的构造函数存根
 	}
 
 	/**

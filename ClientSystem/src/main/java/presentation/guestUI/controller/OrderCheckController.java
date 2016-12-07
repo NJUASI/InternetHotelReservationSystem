@@ -42,7 +42,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	private void initialize() {
-		//TODO 通过guestID得到orderVOlist general
+		//TODO fjj注意：通过guestID得到orderVOlist general
 		orderVOlist=new LinkedList<>();
 		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
 				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
@@ -73,7 +73,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchExecutedOrder() {
-		//TODO searchExecutedOrder
+		//TODO fjj注意：searchExecutedOrder
 				
 				orderVOlist=new LinkedList<>();
 				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
@@ -288,7 +288,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void orderDetail() {
-		//TODO 通过orderID获得订单详情
+		//TODO fjj注意：通过orderID获得订单详情
 //		System.out.println(table.getSelectionModel().getSelectedItem().getOrderID());
 		orderDetail.setVisible(true);
 		orderCheck.setVisible(false);
@@ -316,7 +316,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void commitComment() {
-		//TODO 传VO，改变内容，状态已评论，comment score同时一次，返回成功与否，添加评价
+		//TODO fjj注意：传VO，改变内容，状态已评论，comment score同时一次，返回成功与否，添加评价
 //		orderVO.comment=orderComment.getText();
 //		orderVO.score=Double.orderScore.getText();
 //		评价订单
