@@ -16,6 +16,12 @@ public class DatePromotionTable {
 		this.startDate = new SimpleStringProperty(startDate.toString());
 		this.endDate = new SimpleStringProperty(endDate.toString());
 	}
+	public DatePromotionTable(String name, String  discount){
+		this.name = new SimpleStringProperty(name);
+		this.discount = new SimpleStringProperty(discount);
+		this.startDate = null;
+		this.endDate = null;
+	}
 
 	public void setDiscount(String discount) {
 		this.discount.set(discount);
