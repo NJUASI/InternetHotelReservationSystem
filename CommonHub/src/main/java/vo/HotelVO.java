@@ -50,20 +50,18 @@ public final class HotelVO {
 	public int commentsNum;
 
 
-	public HotelVO(String hotelID, String hotelName, String city, String cycle, String hotelAddress, 
+	public HotelVO(String hotelID, String hotelName, String city, String circle, String hotelAddress, 
 			String level, double score, double minPrice, String introduction, String equipment) {
 		this.hotelID=hotelID;
 		this.hotelName=hotelName;
 		this.city=city;
-		this.circle=cycle;
+		this.circle=circle;
 		this.address=hotelAddress;
 		this.level=level;
 		this.score=score;
 		this.minPrice=minPrice;
 		this.introduction=introduction;
 		this.equipment=equipment;
-
-
 	}
 
 	/**
@@ -77,7 +75,7 @@ public final class HotelVO {
 		this.hotelID = hotelPO.getHotelID();
 		this.hotelName = hotelPO.getHotelName();
 		this.city = hotelPO.getCity();
-		this.circle = hotelPO.getCity();
+		this.circle = hotelPO.getCircle();
 		this.address = hotelPO.getAddress();
 		this.level = hotelPO.getLevel();
 		this.score = hotelPO.getScore();

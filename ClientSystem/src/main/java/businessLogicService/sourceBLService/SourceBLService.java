@@ -19,6 +19,16 @@ public interface SourceBLService {
 	 * @time:2016年12月7日 下午4:55:09
 	 */
 	public Iterator<String> getCities();
+	
+	/**
+	 * @Description:获取该城市所有的商圈
+	 * @return
+	 * Iterator<String>
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月7日 下午6:44:47
+	 */
+	public Iterator<String> getCircles(String city);
 
 	
 	/**
