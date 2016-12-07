@@ -26,7 +26,7 @@ public class MemberBLService_Stub implements MemberBLService{
 		return null;
 	}
 
-	public MemberVO getMemberInfo(String userID, MemberType memberType) {
+	public MemberVO getMemberInfo(String userID) {
 		return null;
 	}
 
