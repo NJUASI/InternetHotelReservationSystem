@@ -72,7 +72,7 @@ public class OrderController {
 	 */
 	@FXML
 	protected void searchExecutedOrder() {
-		// 获得输入的内容
+		//  TODO 通过ID
 		checkInBt1.setVisible(false);
 		checkOutBt1.setVisible(true);
 		orderVOlist=new LinkedList<>();
@@ -101,6 +101,7 @@ public class OrderController {
 	 */
 	@FXML
 	protected void searchAbnormalOrder() {
+	//  TODO 通过ID
 		checkInBt1.setVisible(true);
 		checkOutBt1.setVisible(false);
 
@@ -130,6 +131,7 @@ public class OrderController {
 	 */
 	@FXML
 	protected void searchCancelledOrder() {
+	//  TODO 通过ID
 		// 获得输入的内容
 		checkInBt1.setVisible(false);
 		checkOutBt1.setVisible(false);
@@ -160,6 +162,8 @@ public class OrderController {
 	 */
 	@FXML
 	protected void searchUnexecutedOrder() {
+	//  TODO 通过ID
+		
 		checkInBt1.setVisible(true);
 		checkOutBt1.setVisible(false);
 		orderVOlist=new LinkedList<>();
@@ -238,6 +242,7 @@ public class OrderController {
 	 */
 	@FXML
 	protected void orderDetail() {
+	//  TODO 通过orderID得到orderVO
 		//			System.out.println(table.getSelectionModel().getSelectedItem().getOrderID());
 		orderDetail.setVisible(true);
 		orderCheck.setVisible(false);
@@ -279,12 +284,12 @@ public class OrderController {
 	//订单详情执行
 	@FXML
 	protected void checkIn() {
-
+	//  TODO 订单入住，提供订单号，房间号，离开时间等，界面暂缺
 	}
 	//订单概况执行
 	@FXML
 	protected void checkIn2() {
-
+	//  TODO 订单入住，提供订单号，房间号，预计离开时间等，界面暂缺
 	}
 	/**
 	 * @author 61990
@@ -295,7 +300,7 @@ public class OrderController {
 	//订单详情执行
 	@FXML
 	protected void checkOut() {
-
+	//  TODO 订单退房，供订单号，需要下层更改离开时间
 	}
 	//订单概况执行
 	@FXML
