@@ -35,7 +35,7 @@ public class HotelWorkerController {
 	 */
 	@FXML
 	protected void search() {
-		// TODO 通过ID get hotelworkerVO
+		// TODO djy注意：通过ID get hotelworkerVO
 			//		inputID.getText();
 		hotelWorkerVO = new HotelWorkerVO("12345678", "876543231", "七天连锁");
 		hotelID.setText(hotelWorkerVO.userID);
@@ -74,7 +74,7 @@ public class HotelWorkerController {
 		
 		hotelWorkerVO.hotelName = hotelName2.getText();
 		hotelWorkerVO.password = password2.getText();
-		//TODO save(hotelVO),也可以再NEW一个hotelWorkerVO
+		//TODO gcm注意：save(hotelVO),也可以再NEW一个hotelWorkerVO
 
 		hotelModifyPane.setVisible(false);
 		hotelInfoPane.setVisible(true);

@@ -61,7 +61,7 @@ public class ChargeController {
 	@FXML
 	protected void search() {
 		
-		//TODO 通过输入的得到guest的VO   searchGuestID.getText(),UserType.GUEST
+		//TODO fjy注意：通过输入的得到guest的VO   searchGuestID.getText(),UserType.GUEST
 		
 		chargePane.setVisible(true);
 		guestVO = (GuestVO) userBLService.getSingle( searchGuestID.getText(),UserType.GUEST);
@@ -79,7 +79,7 @@ public class ChargeController {
 	 */
 	@FXML
 	protected void saveCharge() throws IOException {
-		//TODO 通过guestID保存   guestID.getText()得到ID
+		//TODO fjy注意：通过guestID保存   guestID.getText()得到ID
 //		通过得到改变后的信用值 Double.parseDouble(chargeNum.getText()) + Double.parseDouble(credit.getText())
 		
 		creditService = new Guest();

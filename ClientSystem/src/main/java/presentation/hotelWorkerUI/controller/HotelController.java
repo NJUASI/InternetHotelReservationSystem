@@ -175,13 +175,13 @@ public class HotelController {
 		//每次点击先清除一次
 		cityText.getItems().clear();
 
-		//TODO 将当前酒店的城市从list中出去，然后逐一添加到combobox中,所有城市的list保存在哪儿的
+		//TODO djy注意：将当前酒店的城市从list中出去，然后逐一添加到combobox中,所有城市的list保存在哪儿的
 		Iterator<String> cities = sourceBLController.getCities();
 		while(cities.hasNext()){
 			cityText.getItems().add(cities.next());
 		}
 
-		//TODO 需要加上item被点选的监听,当新的城市被选点选时，cycletext需要被设值为第一个circle，从list除去
+		//TODO gy注意：需要加上item被点选的监听,当新的城市被选点选时，cycletext需要被设值为第一个circle，从list除去
 	}
 	
 	
@@ -195,7 +195,7 @@ public class HotelController {
 	protected void getCycle(){
 
 		/**
-		 *  TODO 高源注意：每次都将value清空，对用户不友好，用户如果不想修改，
+		 *  TODO gy注意：每次都将value清空，对用户不友好，用户如果不想修改，
 		 *  只是随意点了一下，就必须又去选择一次
 		 */
 		
@@ -242,7 +242,7 @@ public class HotelController {
 		hotelVO.equipment=equipmentText.getText();
 		hotelVO.introduction=introductionText.getText();
 
-		//TODO 调用更新酒店信息的方法,可能会catch到exception，以后加入exception
+		//TODO gcm注意：调用更新酒店信息的方法,可能会catch到exception，以后加入exception
 		hotelBLController.updateHotelInfo(hotelVO);
 		
 		initHotelDetail(hotelVO);

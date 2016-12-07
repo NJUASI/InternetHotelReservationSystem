@@ -18,7 +18,6 @@ public class GuestDataService_Stub extends UnicastRemoteObject implements GuestD
 	
 	public GuestDataService_Stub() throws RemoteException {
 		super();
-		// TODO 自动生成的构造函数存根
 	}
 
 
@@ -57,13 +56,11 @@ public class GuestDataService_Stub extends UnicastRemoteObject implements GuestD
 
 
 	public ResultMessage modifyMember(MemberPO memberPO) {
-		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
 
 
 	public ResultMessage modify(GuestPO guestPO) {
-		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
 

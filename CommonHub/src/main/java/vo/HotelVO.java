@@ -99,7 +99,6 @@ public final class HotelVO {
 	}
 
 	public HotelVO() {
-		// TODO 自动生成的构造函数存根
 	}
 
 }

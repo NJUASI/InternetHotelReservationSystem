@@ -35,7 +35,7 @@ public class GuestInfoController {
 	 */
 	@FXML
 	private void initialize() {
-		//TODO 通过guestID获得guestVO
+		//TODO fjy注意：通过guestID获得guestVO
 
 		guestVO = new GuestVO("12345", null, "", "张三", "小张", "123456", "13993323454", 100);
 		guestID.setText(guestVO.userID);
@@ -73,9 +73,9 @@ public class GuestInfoController {
 	@FXML
 	protected void saveGuestInfo() {
 
-		//TODO 需要先将修改过的信息封装成一个vo，然后调用下层更新客户信息的方法，并刷新客户信息
+		//TODO djj注意：需要先将修改过的信息封装成一个vo，然后调用下层更新客户信息的方法，并刷新客户信息
 		try {
-			//TODO 通过guestVO保存信息
+			//TODO djy注意：通过guestVO保存信息
 
 			name.setText(name2.getText());
 			nickname.setText(nickname2.getText());
