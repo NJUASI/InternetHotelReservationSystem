@@ -59,6 +59,7 @@ public class Order {
 		
 		discountCalculator = new MockPromotion();
 		//hotel的协作类需要hotelID，故在此不能初始化
+		//哈哈哈
 	}
 
 	/**
