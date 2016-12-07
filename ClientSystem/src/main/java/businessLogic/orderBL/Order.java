@@ -32,7 +32,7 @@ import vo.OrderVO;
  * 
  * @author charles
  * lastChangedBy charles
- * updateTime 2016/12/4
+ * updateTime 2016/12/6
  *
  */
 public class Order {
