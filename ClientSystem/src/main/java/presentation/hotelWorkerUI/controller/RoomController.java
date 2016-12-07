@@ -96,6 +96,9 @@ public class RoomController {
 		roomTable.setItems(data);
 	}
 
+	String preType;
+	String preRoomNum;
+	String preRemainNum;
 	/**
 	 * @description 从table中选中一条记录，然后点击修改
 	 * @author 61990
@@ -108,6 +111,9 @@ public class RoomController {
 		TypeTable selectedRoomVO = null;
 		try{
 			selectedRoomVO = roomTable.getSelectionModel().getSelectedItem();
+			preType=roomTable.getSelectionModel().getSelectedItem().getRoomType();
+			preRoomNum=roomTable.getSelectionModel().getSelectedItem().getRoomNum();
+			preRemainNum=roomTable.getSelectionModel().getSelectedItem().getRemainRoomNum();
 			setModifyText(selectedRoomVO.getRoomType(),selectedRoomVO.getRoomName(),
 					selectedRoomVO.getRoomType(),selectedRoomVO.getPrice());
 			modifyPane.setVisible(true);
@@ -127,8 +133,21 @@ public class RoomController {
 	protected void save() {
 		/**
 		 *  TODO gy注意：需要获得被点击修改房间类型的旧名字，原始房间剩余数量，计算出现修改房间数量修改后的房间剩余数量
+		 *  TODO gcm 旧名字指的是类型的名字吧？原始房间剩余数量不能打包，因为你在修改的时候有延迟，变数据库的时候不去直接动剩余房间信息
+		 *    			只能给你一个改变量然后你去加或者减剩余数量
+		 *  preName 旧类型
+		 *  Integer.parseInt(preRemainNum) 旧剩余数量
+		 * Integer.parseInt(preRoomNum) 旧房间总数量
+		 *  roomType.getValue() 新类型
+		 *  roomName.getText()  新名字
+		 *   Integer.parseInt(roomNum.getText())  新房间总数
+		 *  price.getText()  新价格
+		 *  剩余房间变化 Integer	int i= Integer.parseInt(roomNum.getText())-Integer.parseInt(preRoomNum)
+		 *  立即的房间剩余数量 给i+Integer.parseInt(preRemainNum);
+		 *  
 		 *	并把打包好的vo与旧名字传下去，调用更新客房信息的方法
 		 */
+	
 		modifyPane.setVisible(false);
 		addBt.setVisible(true);
 		setModifyText("","","","");
