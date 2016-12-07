@@ -59,7 +59,6 @@ public class Order {
 		
 		discountCalculator = new MockPromotion();
 		//hotel的协作类需要hotelID，故在此不能初始化
-		// 嘿嘿嘿
 	}
 
 	/**
@@ -571,6 +570,9 @@ public class Order {
 		return result.iterator();
 	}
 	
+	/*
+	 * 只提供给Hotel的接口
+	 */
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
@@ -593,11 +595,11 @@ public class Order {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/5
+	 * @updateTime 2016/12/7
 	 * @param guestID 此客户的客户编号
 	 * @param hotelID 此客户相对的酒店编号
 	 * @return 此客户在此相应酒店预定过的订单状态
-	 * ————————————————若此客户在此酒店没有订单记录？？？？
+	 * 若此客户在此酒店没有订单记录，就返回null
 	 * 
 	 * 直接从本层本模块getAllGuestOrderGeneral走
 	 */
@@ -612,9 +614,15 @@ public class Order {
 					states.add(thisOrderGeneral.state);
 				}
 			}
+		}else {
+			return null;
 		}
 		
-		return getMaxOrderState(states);
+		if (states.size() == 0) {
+			return null;
+		}else {
+			return getMaxOrderState(states);
+		}
 	}
 	
 	/**
@@ -624,7 +632,7 @@ public class Order {
 	 * @param states 此客户在此相应酒店预定过的所有订单状态
 	 * @return 优先级最高的订单状态（已取消 < 异常 < 未执行 < 已执行）
 	 */
-	private static OrderState getMaxOrderState(List<OrderState> states) {
+	private OrderState getMaxOrderState(List<OrderState> states) {
 		List<Integer> integers = new ArrayList<Integer>();
 		for (int i = 0; i < states.size(); i++) {
 			integers.add(states.get(i).ordinal());
@@ -640,11 +648,13 @@ public class Order {
 	}
 	
 	
-	private List<OrderGeneralVO> orderStateFilter(List<OrderGeneralVO>orderGenerals, OrderState expectOrderState) {
+	private List<OrderGeneralVO> orderStateFilter(List<OrderGeneralVO> orderGenerals, OrderState expectOrderState) {
+		System.out.println("filter to " + expectOrderState);
+		
 		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
-		for (int i = 0; i < result.size(); i++) {
+		for (int i = 0; i < orderGenerals.size(); i++) {
 			OrderGeneralVO thisOrderGeneral = orderGenerals.get(i);
-			if (thisOrderGeneral.state == expectOrderState) {
+			if (thisOrderGeneral.state.equals(expectOrderState)) {
 				result.add(thisOrderGeneral);
 			}
 		}

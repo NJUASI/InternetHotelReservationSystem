@@ -36,7 +36,7 @@ public final class OrderBLController implements OrderBLService {
 	 * 构造函数，初始化成员变量
 	 */
 	private OrderBLController() {
-		//new the mock object
+		// init the order
 		order = new Order();
 	}
 	
