@@ -42,6 +42,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	private void initialize() {
+		//TODO 通过guestID得到orderVOlist general
 		orderVOlist=new LinkedList<>();
 		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
 				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
@@ -72,7 +73,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchExecutedOrder() {
-		// 获得输入的内容
+		//TODO searchExecutedOrder
 				
 				orderVOlist=new LinkedList<>();
 				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
@@ -100,7 +101,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchAbnormalOrder() {
-		// 获得输入的内容
+		//TODO 
 				
 				orderVOlist=new LinkedList<>();
 				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
@@ -127,7 +128,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchCommentedOrder() {
-		// 获得输入的内容
+		//TODO 
 				
 				orderVOlist=new LinkedList<>();
 				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
@@ -155,7 +156,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchUncommentedOrder() {
-		// 获得输入的内容
+		//TODO 
 				
 				orderVOlist=new LinkedList<>();
 				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
@@ -183,7 +184,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchCancelledOrder() {
-		// 获得输入的内容
+		//TODO 
 				
 				orderVOlist=new LinkedList<>();
 				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
@@ -211,7 +212,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchUnexecutedOrder() {
-	
+		//TODO 
 				orderVOlist=new LinkedList<>();
 				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
 						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
@@ -287,6 +288,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void orderDetail() {
+		//TODO 通过orderID获得订单详情
 //		System.out.println(table.getSelectionModel().getSelectedItem().getOrderID());
 		orderDetail.setVisible(true);
 		orderCheck.setVisible(false);
@@ -304,26 +306,6 @@ public class OrderCheckController {
 						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
 						 OrderState.ABNORMAL,false, "gaoy", "1212121") ,12.4,createTime,checkInTime,checkOutTime,RoomType.商务套房,4,"202",4,"adsfas",3.4,"22w222");
 				
-				
-				//是否可以评论
-				if (orderVO.orderGeneralVO.state == OrderState.EXECUTED) {
-					if(!orderVO.orderGeneralVO.hasCommented){
-						orderComment.setDisable(true);
-						orderScore.setDisable(true);
-						commitBt.setDisable(true);
-
-					}else{
-						orderComment.setDisable(false);
-						orderScore.setDisable(false);	
-						commitBt.setDisable(false);
-
-					}
-				} else{
-					orderComment.setDisable(true);
-					orderScore.setDisable(true);
-					commitBt.setDisable(true);
-				}
-
 				initOrderDetail(orderVO);
 	}
 	/**
@@ -334,8 +316,8 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void commitComment() {
-		//传VO，改变内容，状态已评论，comment score同时一次，返回成功与否
-		orderVO.comment=orderComment.getText();
+		//TODO 传VO，改变内容，状态已评论，comment score同时一次，返回成功与否，添加评价
+//		orderVO.comment=orderComment.getText();
 //		orderVO.score=Double.orderScore.getText();
 //		评价订单
 		initOrderDetail(orderVO);
@@ -377,5 +359,24 @@ public class OrderCheckController {
 		detail_message.setText(orderVO.message);
 		orderComment.setText(orderVO.comment);
 		orderScore.setText(Double.toString(orderVO.score));
+		
+		//是否可以评论
+		if (orderVO.orderGeneralVO.state == OrderState.EXECUTED) {
+			if(!orderVO.orderGeneralVO.hasCommented){
+				orderComment.setDisable(true);
+				orderScore.setDisable(true);
+				commitBt.setDisable(true);
+
+			}else{
+				orderComment.setDisable(false);
+				orderScore.setDisable(false);	
+				commitBt.setDisable(false);
+
+			}
+		} else{
+			orderComment.setDisable(true);
+			orderScore.setDisable(true);
+			commitBt.setDisable(true);
+		}
 	}
 }
