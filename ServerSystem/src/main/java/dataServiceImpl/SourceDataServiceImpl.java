@@ -22,6 +22,12 @@ public class SourceDataServiceImpl implements SourceDataService {
 	public Iterator<String> getCities() {
 		return addressDataHelper.getCity().iterator();
 	}
+	
+	@Override
+	public Iterator<String> getCircles(String city) {
+		return addressDataHelper.getCircle(city).iterator();
+	}
+
 
 	@Override
 	public Iterator<String> getLevels() {
