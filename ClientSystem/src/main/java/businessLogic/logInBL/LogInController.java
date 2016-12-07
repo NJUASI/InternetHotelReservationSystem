@@ -51,9 +51,18 @@ public final class LogInController implements LogInBLService {
 		return logIn.guestSignUp(guestVO);
 	}
 
+	/**
+	 * @author Harvey Gong
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/7
+	 * @param userID
+	 *           从登录界面层传下来的userID
+	 * @param password
+	 *           从登录界面层传下来的password
+	 * @return 用户是否成功登录
+	 */
 	@Override
 	public UserType logIn(String userID, String password) {
-		// TODO 自动生成的方法存根
 		return logIn.logIn(userID, password);
 	}
 

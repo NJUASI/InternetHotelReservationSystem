@@ -1,9 +1,11 @@
 package presentation.signUpUI.controller;
 
-import java.io.IOException;
+import java.time.LocalDate;
 
 import com.sun.javafx.robot.impl.FXRobotHelper;
 
+import businessLogic.logInBL.LogInController;
+import businessLogicService.logInBLService.LogInBLService;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.Main;
+import utilities.IDReserve;
+import utilities.UserType;
+import vo.GuestVO;
+import vo.UserVO;
 	
 public class LogInViewController {
 	public static String userID;
@@ -36,10 +42,15 @@ public class LogInViewController {
 	@FXML
 	private TextField phone;
 	
+	private LogInBLService logInBLController;
+	
+	private RootFactory factory;
+	
 	
 	@FXML
 	private void initialize() {
-		
+		this.logInBLController = LogInController.getInstance();
+		factory = new RootFactory();
 	}
 	/**
 	 * @author 61990
@@ -67,41 +78,40 @@ public class LogInViewController {
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/7
 	 * @登录
 	 */
 	@FXML
 	protected void logIn() {
-//		 System.out.println(ID.getText()+" "+password.getText());
-		try {
-			Main.userID=ID.getText();
-			Parent root = null;
-			if (ID.getText().length() == 1) {
-				root = FXMLLoader.load(getClass().getResource("/presentation/GuestUI/view/Guest.fxml"));
-			} else if (ID.getText().length() == 2) {
-				root = FXMLLoader.load(getClass().getResource("/presentation/HotelWorkerUI/view/Hotel.fxml"));
-			} else if (ID.getText().length() == 3) {
-				root = FXMLLoader.load(getClass().getResource("/presentation/webManagerUI/view/Manager.fxml"));
-			} else if (ID.getText().length() == 4) {
-				root = FXMLLoader.load(getClass().getResource("/presentation/webMarketerUI/view/Marketer.fxml"));
+			UserType userType = logInBLController.logIn(ID.getText(), password.getText());
+			
+			if(userType==null){
+			// TODO 需要消息框或状态栏提示登录失败，关于失败原因这里暂时没有，后面细化，此处需要界面处理if之后不跳转界面
 			}
+			
+			IDReserve.getInstance().setUserID(ID.getText());
+			Parent root = factory.createRoot(userType);
+			// TODO 此处警告可能是依赖问题，需要下去查看
 			ObservableList<Stage> stage = FXRobotHelper.getStages();
 
 			Scene scene = new Scene(root);
 			stage.get(0).setScene(scene);
 
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-		}
-
 	}
 
+	/**
+	 * @author 61990
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/7
+	 * @客户注册
+	 */
 	@FXML
 	protected void register() {
-		System.out
-				.println(password2.getText() + " " + name.getText() + " " + nickName.getText() + " " + phone.getText());
+		GuestVO userVO = new GuestVO("",LocalDate.of(0,0,0),"",name.getText(), nickName.getText(),password2.getText()
+				,phone.getText(),0);
+		GuestVO guestVO = logInBLController.guestSignUp(userVO);
+		// TODO 此处返回了界面需要的自动递增的ID，后续操作由界面完成
 	}
 
 }

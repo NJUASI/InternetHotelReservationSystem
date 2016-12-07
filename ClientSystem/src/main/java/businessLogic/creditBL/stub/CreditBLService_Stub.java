@@ -24,13 +24,11 @@ public class CreditBLService_Stub implements CreditBLService {
 
 	
 	public Iterator<CreditVO> getAllCreditDetail(String guestID) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	
 	public ResultMessage charge(String guestID, float chargeNum) {
-		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
 
@@ -49,19 +47,16 @@ public class CreditBLService_Stub implements CreditBLService {
 	
 	
 	public List<MarketVO> getMemberFormulation() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Iterator<CreditVO> getCreditOfOneOrder(String orderID) {
-		// TODO 自动生成的方法存根
 		return null;
 	}
 
 	@Override
 	public ResultMessage addCredit(CreditVO creditVO) {
-		// TODO 自动生成的方法存根
 		return null;
 	}
 	

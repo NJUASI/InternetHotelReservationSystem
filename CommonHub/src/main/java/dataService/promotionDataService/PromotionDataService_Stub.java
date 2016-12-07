@@ -17,7 +17,6 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 
 	public PromotionDataService_Stub() throws RemoteException {
 		super();
-		// TODO 自动生成的构造函数存根
 	}
 
 	@Override
@@ -60,27 +59,23 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 
 	@Override
 	public ResultMessage addSpecialSpanPromotion(SpecialSpanPromotionPO specialSpanPromotionPO) throws RemoteException {
-		// TODO 自动生成的方法存根
 		return null;
 	}
 
 	@Override
 	public ResultMessage updateSpecialSpanPromotion(SpecialSpanPromotionPO specialSpanPromotionPO)
 			throws RemoteException {
-		// TODO 自动生成的方法存根
 		return null;
 	}
 
 	@Override
 	public List<AddressPO> getSpecialCirclePromotion(String city) throws RemoteException {
-		// TODO 自动生成的方法存根
 		return null;
 	}
 
 
 	@Override
 	public ResultMessage updateSepecialCirclePromotion(AddressPO addressPO) throws RemoteException {
-		// TODO 自动生成的方法存根
 		return null;
 	}
 
@@ -92,7 +87,6 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 
 	@Override
 	public ResultMessage deleteSpecialSpanPromotion(String userID, String promotionName) throws RemoteException {
-		// TODO 自动生成的方法存根
 		return null;
 	}
 

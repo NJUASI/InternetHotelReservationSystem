@@ -17,11 +17,13 @@ public class HotelFixedPromotionVO{
 		this.discount = hotelFixedPromotion.getDiscount();
 	}
 
+
 	public HotelFixedPromotionVO(String hotelID, PromotionType promotionType, double discount) {
 		super();
 		this.hotelID = hotelID;
 		this.promotionType = promotionType;
 		this.discount = discount;
+
 	}
 
 }

@@ -7,6 +7,8 @@ import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 
+import businessLogic.orderBL.OrderBLController;
+import businessLogicService.orderBLService.OrderBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,7 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+import utilities.IDReserve;
 import utilities.OrderState;
 import utilities.RoomType;
 import vo.OrderGeneralVO;
@@ -32,6 +34,13 @@ import vo.OrderVO;
  *
  */
 public class OrderController {
+	
+	private OrderBLService orderBLService;
+	
+	private final String hotelID = IDReserve.getInstance().getUserID();
+	
+	private List<OrderGeneralVO> orderGenerals;
+
 	//订单概况
 	@FXML
 	private Pane orderCheck;
@@ -42,12 +51,18 @@ public class OrderController {
 	List<OrderGeneralVO> orderVOlist;
 	/**
 	 * @author 61990
-	 * @lastChangedBy Harvey
-	 * @updateTime 2016/12/1 构造函数，初始化成员变量
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7 
+	 * 构造函数，初始化成员变量
 	 */
 	@FXML
 	private void initialize() {
-		//此函数用的话告诉一下gy
+
+		//通过hotelID得到orderGeneralVOs list
+		orderBLService = OrderBLController.getInstance();
+		List<OrderGeneralVO> orderGenerals = orderBLService.getAllGuestOrderGeneral(hotelID);
+		initOrderCheck(orderGenerals);
+
 	}
 
 
@@ -57,124 +72,73 @@ public class OrderController {
 
 	@FXML
 	private Button checkInBt1,checkOutBt1;
+	
+	
+	/*
+	 * 订单概况界面可分别查看各个类型的订单
+	 */
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @打开已执行订单概况
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @打开所有订单概况
 	 */
 	@FXML
-	protected void searchExecutedOrder() {
-		//  TODO 通过ID
-		checkInBt1.setVisible(false);
-		checkOutBt1.setVisible(true);
-		orderVOlist=new LinkedList<>();
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-
-		initOrderCheck(orderVOlist);
-
+	protected void searchAlldOrder() {
+		//@高源——————charles新加的，界面上没有对应按钮——所有订单
+		orderGenerals = orderBLService.getAllHotelOrderGeneral(hotelID);
+		initOrderCheck(orderGenerals);
 	}
-
+	
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @打开异常订单概况
-	 */
-	@FXML
-	protected void searchAbnormalOrder() {
-	//  TODO 通过ID
-		checkInBt1.setVisible(true);
-		checkOutBt1.setVisible(false);
-
-		orderVOlist=new LinkedList<>();
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-
-		initOrderCheck(orderVOlist);	
-	}
-
-
-	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @打开已撤销订单概况
-	 */
-	@FXML
-	protected void searchCancelledOrder() {
-	//  TODO 通过ID
-		// 获得输入的内容
-		checkInBt1.setVisible(false);
-		checkOutBt1.setVisible(false);
-
-		orderVOlist=new LinkedList<>();
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-
-		initOrderCheck(orderVOlist);
-
-	}
-
-	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
 	 * @打开未执行订单概况
 	 */
 	@FXML
 	protected void searchUnexecutedOrder() {
-	//  TODO 通过ID
-		
-		checkInBt1.setVisible(true);
-		checkOutBt1.setVisible(false);
-		orderVOlist=new LinkedList<>();
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-
-		initOrderCheck(orderVOlist);
+		orderGenerals = orderBLService.getAllHotelUnexecutedOrderGeneral(hotelID);
+		initOrderCheck(orderGenerals);
 	}
+	
+	/**
+	 * @author 61990
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @打开已执行订单概况
+	 */
+	@FXML
+	protected void searchExecutedOrder() {
+		orderGenerals = orderBLService.getAllHotelExecutedOrderGeneral(hotelID);
+		initOrderCheck(orderGenerals);
+	}
+
+	/**
+	 * @author 61990
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @打开异常订单概况
+	 */
+	@FXML
+	protected void searchAbnormalOrder() {
+		orderGenerals = orderBLService.getAllHotelAbnormalOrderGeneral(hotelID);
+		initOrderCheck(orderGenerals);
+	}
+
+
+	/**
+	 * @author 61990
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @打开已撤销订单概况
+	 */
+	@FXML
+	protected void searchCancelledOrder() {
+		orderGenerals = orderBLService.getAllHotelCancelledOrderGeneral(hotelID);
+		initOrderCheck(orderGenerals);
+	}
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -209,9 +173,14 @@ public class OrderController {
 
 
 
-	//订单详情初始化
+	/*
+	 * 订单详情初始化
+	 */
+	private String orderID;
+	
+	private OrderVO orderVO;
 
-	OrderVO orderVO;
+	
 	@FXML
 	private Pane orderDetail;
 	@FXML
@@ -229,34 +198,21 @@ public class OrderController {
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
 	 * @跳转订单详情界面
 	 */
 	@FXML
 	protected void orderDetail() {
-	//  TODO 通过orderID得到orderVO
-		//			System.out.println(table.getSelectionModel().getSelectedItem().getOrderID());
+		orderID = table.getSelectionModel().getSelectedItem().getOrderID();
+		
 		orderDetail.setVisible(true);
 		orderCheck.setVisible(false);
-		// Test,需要删掉s
-		final LocalDateTime createTime = LocalDateTime.of(2016, 2, 2, 18, 30);
-		final LocalDateTime checkInTime = LocalDateTime.of(2016, 2, 3, 11, 23);
-		final LocalDateTime checkOutTime = LocalDateTime.of(2016, 2, 4, 10, 58);
-		final LocalDateTime expectExecuteTime = LocalDateTime.of(2016, 2, 3, 14, 00);
-		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
-
-		final OrderState orderState = OrderState.EXECUTED;
-		final RoomType roomType = RoomType.三人间;
-
-		orderVO = new OrderVO(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") ,12.4,createTime,checkInTime,checkOutTime,RoomType.商务套房,4,"202",4,"adsfas",3.4,"22w222");
-		//					
-
 
 		orderComment.setDisable(false);
 		orderScore.setDisable(false);	
+
+		//show 相应的button
 		if(orderVO.orderGeneralVO.state==OrderState.EXECUTED){
 			checkOutBt.setVisible(true);
 			checkInBt.setVisible(false);
@@ -266,6 +222,7 @@ public class OrderController {
 			checkInBt.setVisible(true);
 		}
 
+		orderVO = orderBLService.getOrderDetail(orderID);
 		initOrderDetail(orderVO);
 	}
 	
@@ -285,53 +242,17 @@ public class OrderController {
 	 */
 	//订单详情执行
 	@FXML
-	protected void checkIn() throws IOException{
-	
-//		buildCheckInWindow();
-//		checkInOrderID.setText(orderVO.orderGeneralVO.orderID);
-//		initCheckInWindow(orderVO.orderGeneralVO.orderID, orderVO.orderGeneralVO.name,
-//				orderVO.orderGeneralVO.expectLeaveTime.toLocalDate(),
-//				orderVO.orderGeneralVO.expectLeaveTime.getHour() + "",
-//				orderVO.orderGeneralVO.expectLeaveTime.getMinute() + "");
-	}
-	void initCheckInWindow(String orderID,String name,LocalDate date,String hour,String minute){
-//		checkInOrderID.setText(orderID);
-//		 checkInName.setText(name);
-//		 checkInLeaveDate.setValue(date);
-//		 checkInMinute.setText(minute);
-//		 checkInHour.setText(hour);
-	}
-	void buildCheckInWindow() throws IOException{
-//		Parent checkInStage = FXMLLoader.load(getClass().getResource("/presentation/popUp/checkIn.fxml"));
-//		Stage stage =new Stage();
-//		Scene scene = new Scene(checkInStage);
-//		stage.setTitle("订单入住");
-//		stage.setScene(scene);
-//		stage.show();
+
+	protected void checkIn() {
+	//  TODO fjj注意：订单入住，提供订单号，房间号，离开时间等，界面暂缺
 	}
 	//订单概况执行
 	@FXML
-	protected void checkIn2() throws IOException {
-//		 buildCheckInWindow();
-//		 initCheckInWindow(table.getSelectionModel().getSelectedItem().getOrderID(), table.getSelectionModel().getSelectedItem().getName(),
-//				 table.getSelectionModel().getSelectedItem().getCheckOutTime().toLocalDate(),
-//				 table.getSelectionModel().getSelectedItem().getCheckOutTime().getHour() + "",
-//				 table.getSelectionModel().getSelectedItem().getCheckOutTime().getMinute() + "");
-	}
-	@FXML
-	protected void sureCheckIn(){
-//		//  TODO 订单入住，提供订单号，房间号，预计离开时间等，界面暂缺
-//		 checkInOrderID.getText();
-//		 checkInName.getText();//客户姓名，可不管
-//		 checkInRoomNum.getText();//房间号
-//	//离开时间获取	LocalDateTime.of(checkInLeaveDate.getValue(),LocalTime.of(Integer.parseInt(checkInHour.getText()), Integer.parseInt(checkInMinute.getText())));
-//		
+	protected void checkIn2() {
+	//  TODO fjj注意：订单入住，提供订单号，房间号，预计离开时间等，界面暂缺
+
 	}
 	
-	@FXML
-	protected void sureCheckOut(){
-//	  TODO 订单退房，提供订单号，房间号，预计离开时间等，界面暂缺
-	}
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -341,7 +262,7 @@ public class OrderController {
 	//订单详情执行
 	@FXML
 	protected void checkOut() {
-	//  TODO 订单退房，供订单号，需要下层更改离开时间
+	//  TODO gcm注意：订单退房，供订单号，需要下层更改离开时间
 	}
 	void buildCheckOutWindow() throws IOException{
 //		Parent checkOutStage = FXMLLoader.load(getClass().getResource("/presentation/popUp/checkIn.fxml"));

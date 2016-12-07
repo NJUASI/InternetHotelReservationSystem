@@ -24,7 +24,7 @@ public class OfflineController {
 	 */
 	@FXML
 	protected void checkIn(){
-		//TODO 线下入住，通过酒店ID，房间类型，房间数量等
+		//TODO gcm注意：线下入住，通过酒店ID，房间类型，房间数量等
 		//		roomType.getValue(), roomNum.getText();
 		roomType.setValue("");
 		roomNum.setText("");
@@ -40,7 +40,7 @@ public class OfflineController {
 	 */
 	@FXML
 	protected void checkOut(){
-		//TODO 线下退房，通过酒店ID，房间类型，房间数量等
+		//TODO gcm注意：线下退房，通过酒店ID，房间类型，房间数量等
 		//		roomType2.getValue(), roomNum2.getText();
 		roomType2.setValue("");
 		roomNum2.setText("");

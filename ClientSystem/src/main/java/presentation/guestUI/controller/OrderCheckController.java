@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
+import businessLogic.orderBL.OrderBLController;
+import businessLogicService.orderBLService.OrderBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,9 +17,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import presentation.hotelWorkerUI.controller.OrderController;
 import presentation.hotelWorkerUI.controller.OrderTable;
+import utilities.IDReserve;
 import utilities.OrderState;
+import utilities.ResultMessage;
 import utilities.RoomType;
+import vo.GuestEvaluationVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
 
@@ -25,8 +31,21 @@ import vo.OrderVO;
  * @author 61990
  * @控制订单查看界面
  * @version 12.3
+ * 
+ * lastChangeBy charles
+ * updateTime 2016/12/7
+ * 
+ * @高源 评论界面好像有点问题  房间号也不对
  */
 public class OrderCheckController {
+	
+	private OrderBLService orderBLService;
+	
+	private final String guestID = IDReserve.getInstance().getUserID();
+	
+	private List<OrderGeneralVO> orderGenerals;
+	
+	
 	//订单概况
 	@FXML
 	private Pane orderCheck;
@@ -34,30 +53,19 @@ public class OrderCheckController {
 	@FXML
 	private TableView<OrderTable> table;
 	
-	List<OrderGeneralVO> orderVOlist;
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/1 构造函数，初始化成员变量
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * 
+	 * 构造函数，初始化成员变量
 	 */
 	@FXML
 	private void initialize() {
-		//TODO 通过guestID得到orderVOlist general
-		orderVOlist=new LinkedList<>();
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		
-		initOrderCheck(orderVOlist);
+		//通过guestID得到orderGeneralVOs list
+		orderBLService = OrderBLController.getInstance();
+		List<OrderGeneralVO> orderGenerals = orderBLService.getAllGuestOrderGeneral(guestID);
+		initOrderCheck(orderGenerals);
 	}
 	
 	
@@ -65,170 +73,94 @@ public class OrderCheckController {
 	private TableColumn<OrderTable, String> orderIDColumn, hotelNameColumn, addressColumn, priceColumn,
 			checkInTimeColumn, stateColumn,checkOutTimeColumn;
 
+	/*
+	 * 订单概况界面可分别查看各个类型的订单
+	 */
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @打开已执行订单概况
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @打开所有订单概况
 	 */
 	@FXML
-	protected void searchExecutedOrder() {
-		//TODO searchExecutedOrder
-				
-				orderVOlist=new LinkedList<>();
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				
-				initOrderCheck(orderVOlist);
-				
+	protected void searchAllOrder() {
+		//@高源——————charles新加的，界面上没有对应按钮——所有订单
+		orderGenerals = orderBLService.getAllGuestOrderGeneral(guestID);
+		initOrderCheck(orderGenerals);
 	}
 	
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @打开异常订单概况
-	 */
-	@FXML
-	protected void searchAbnormalOrder() {
-		//TODO 
-				
-				orderVOlist=new LinkedList<>();
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				
-				initOrderCheck(orderVOlist);	
-	}
-	
-	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @打开已评论订单概况
-	 */
-	@FXML
-	protected void searchCommentedOrder() {
-		//TODO 
-				
-				orderVOlist=new LinkedList<>();
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				
-				initOrderCheck(orderVOlist);
-				
-	}
-	
-	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @打开未评论订单概况
-	 */
-	@FXML
-	protected void searchUncommentedOrder() {
-		//TODO 
-				
-				orderVOlist=new LinkedList<>();
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				
-				initOrderCheck(orderVOlist);
-				
-	}
-	
-	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @打开已撤销订单概况
-	 */
-	@FXML
-	protected void searchCancelledOrder() {
-		//TODO 
-				
-				orderVOlist=new LinkedList<>();
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				
-				initOrderCheck(orderVOlist);
-				
-	}
-	
-	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
 	 * @打开未执行订单概况
 	 */
 	@FXML
 	protected void searchUnexecutedOrder() {
-		//TODO 
-				orderVOlist=new LinkedList<>();
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-				
-				initOrderCheck(orderVOlist);
+		orderGenerals = orderBLService.getAllGuestUnexecutedOrderGeneral(guestID);
+		initOrderCheck(orderGenerals);
 	}
+	
+	/**
+	 * @author 61990
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @打开已执行订单概况
+	 */
+	@FXML
+	protected void searchExecutedOrder() {		
+		orderGenerals = orderBLService.getAllGuestExecutedOrderGeneral(guestID);
+		initOrderCheck(orderGenerals);
+	}
+	
+	/**
+	 * @author 61990
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @打开异常订单概况
+	 */
+	@FXML
+	protected void searchAbnormalOrder() {
+		orderGenerals = orderBLService.getAllGuestAbnormalOrderGeneral(guestID);
+		initOrderCheck(orderGenerals);
+	}
+	
+	/**
+	 * @author 61990
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @打开已撤销订单概况
+	 */
+	@FXML
+	protected void searchCancelledOrder() {
+		orderGenerals = orderBLService.getAllGuestCancelledOrderGeneral(guestID);
+		initOrderCheck(orderGenerals);
+	}
+	
+	/**
+	 * @author 61990
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @打开已评论订单概况
+	 */
+	@FXML
+	protected void searchCommentedOrder() {
+		orderGenerals = orderBLService.getAllGuestCommentedOrderGeneral(guestID);
+		initOrderCheck(orderGenerals);
+	}
+	
+	/**
+	 * @author 61990
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
+	 * @打开未评论订单概况
+	 */
+	@FXML
+	protected void searchUncommentedOrder() {
+		orderGenerals = orderBLService.getAllGuestUncommentedOrderGeneral(guestID);
+		initOrderCheck(orderGenerals);
+	}
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -236,11 +168,11 @@ public class OrderCheckController {
 	 * @param orderVO
 	 * @describe 选择并初始化订单概况界面
 	 */
-	private void initOrderCheck(List<OrderGeneralVO> orderVOlist) {
+	private void initOrderCheck(List<OrderGeneralVO> orderGenerals) {
 		table.getItems().clear();
 		List<OrderTable> orderList = new LinkedList<OrderTable>();
-		for (int i = 0; i < orderVOlist.size(); i++) {
-			OrderGeneralVO temp = orderVOlist.get(i);
+		for (int i = 0; i < orderGenerals.size(); i++) {
+			OrderGeneralVO temp = orderGenerals.get(i);
 			orderList.add(new OrderTable(temp.orderID, temp.hotelName, temp.hotelAddress,
 					temp.expectExecuteTime.toString(),temp.expectLeaveTime.toString(),temp.price + "", temp.state.toString()));
 		}
@@ -262,9 +194,16 @@ public class OrderCheckController {
 	
 	
 	
-	//订单详情初始化
+	
+	
+	/*
+	 * 订单详情初始化
+	 */
+	private String orderID;
 	
 	OrderVO orderVO;
+	
+	
 	@FXML
 	private Pane orderDetail;
 	@FXML
@@ -282,44 +221,40 @@ public class OrderCheckController {
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
+	 * @lastChangedBy cahrles
+	 * @updateTime 2016/12/7
 	 * @跳转订单详情界面
 	 */
 	@FXML
 	protected void orderDetail() {
-		//TODO 通过orderID获得订单详情
-//		System.out.println(table.getSelectionModel().getSelectedItem().getOrderID());
+		orderID = table.getSelectionModel().getSelectedItem().getOrderID();
+		
 		orderDetail.setVisible(true);
 		orderCheck.setVisible(false);
-		// Test,需要删掉s
-				final LocalDateTime createTime = LocalDateTime.of(2016, 2, 2, 18, 30);
-				final LocalDateTime checkInTime = LocalDateTime.of(2016, 2, 3, 11, 23);
-				final LocalDateTime checkOutTime = LocalDateTime.of(2016, 2, 4, 10, 58);
-				final LocalDateTime expectExecuteTime = LocalDateTime.of(2016, 2, 3, 14, 00);
-				final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
-
-				final OrderState orderState = OrderState.EXECUTED;
-				final RoomType roomType = RoomType.双人间;
-
-				orderVO = new OrderVO(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-						 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-						 OrderState.ABNORMAL,false, "gaoy", "1212121") ,12.4,createTime,checkInTime,checkOutTime,RoomType.商务套房,4,"202",4,"adsfas",3.4,"22w222");
-				
-				initOrderDetail(orderVO);
+		
+		orderVO = orderBLService.getOrderDetail(orderID);
+		initOrderDetail(orderVO);
 	}
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/7
 	 * @评价订单
 	 */
 	@FXML
 	protected void commitComment() {
-		//TODO 传VO，改变内容，状态已评论，comment score同时一次，返回成功与否，添加评价
-//		orderVO.comment=orderComment.getText();
-//		orderVO.score=Double.orderScore.getText();
-//		评价订单
+		final double score = Double.valueOf(orderScore.getText());
+		final String comment = orderComment.getText();
+		
+		GuestEvaluationVO evaluationVO = new GuestEvaluationVO(orderID, score, comment);
+		final ResultMessage result = orderBLService.addEvaluation(evaluationVO);
+		if (result == ResultMessage.UPDATE_EVALUATION_SUCCESS) {
+			//@高源——————状态栏显示已评价成功
+			
+		}else {
+			//@高源——————状态栏显示评价失败
+		}
+		orderVO = orderBLService.getOrderDetail(orderID);
 		initOrderDetail(orderVO);
 	}
 	/**
@@ -360,23 +295,15 @@ public class OrderCheckController {
 		orderComment.setText(orderVO.comment);
 		orderScore.setText(Double.toString(orderVO.score));
 		
-		//是否可以评论
-		if (orderVO.orderGeneralVO.state == OrderState.EXECUTED) {
-			if(!orderVO.orderGeneralVO.hasCommented){
-				orderComment.setDisable(true);
-				orderScore.setDisable(true);
-				commitBt.setDisable(true);
-
-			}else{
-				orderComment.setDisable(false);
-				orderScore.setDisable(false);	
-				commitBt.setDisable(false);
-
-			}
-		} else{
+		// 是否可以评论
+		if (!orderVO.orderGeneralVO.hasCommented) {
 			orderComment.setDisable(true);
 			orderScore.setDisable(true);
 			commitBt.setDisable(true);
+		} else {
+			orderComment.setDisable(false);
+			orderScore.setDisable(false);
+			commitBt.setDisable(false);
 		}
 	}
 }

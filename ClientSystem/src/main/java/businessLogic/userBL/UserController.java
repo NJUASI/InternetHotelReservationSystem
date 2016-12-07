@@ -52,7 +52,6 @@ public class UserController implements UserBLService{
 	 * @return ResultMessage 用户是否成功添加用户信息
 	 */
 	public UserVO add(UserVO newUserVO) {
-		// TODO Auto-generated method stub
 		return user.add(newUserVO);
 	}
 
@@ -111,11 +110,4 @@ public class UserController implements UserBLService{
 	public String getLogInInfo(String userID,UserType userType) {
 		return user.getLogInInfo(userID,userType);
 	}
-
-	@Override
-	public UserVO getSingle(String userID, UserType userType) {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-
 }

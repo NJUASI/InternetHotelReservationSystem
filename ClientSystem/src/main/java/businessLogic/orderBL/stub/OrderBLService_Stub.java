@@ -33,7 +33,6 @@ public class OrderBLService_Stub implements OrderBLService {
 	 * new 一个stub来进行连接测试
 	 */
 	public OrderBLService_Stub() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**

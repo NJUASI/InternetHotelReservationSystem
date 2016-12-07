@@ -16,7 +16,7 @@ public class MemberLevelPromotion {
 	public double getDiscount(String guestID){
 		List<MarketVO> commonMemberRegulations = new MockMarket().getMemberFormulation();
 		if(new MockMember().isMember(guestID, MemberType.COMMON)){
-			//TODO 需要一个获得客户id等级的接口,返回值为int
+			//TODO djj注意：需要一个获得客户id等级的接口,返回值为int
 			int degree = 1;
 			if(degree == 0){
 				return 0;

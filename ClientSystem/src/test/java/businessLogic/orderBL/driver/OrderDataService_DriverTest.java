@@ -181,13 +181,14 @@ public class OrderDataService_DriverTest {
 			assertEquals(checkOutTime, orderPO.getCheckOutTime());
 			assertEquals(expectExecuteTime, orderPO.getExpectExecuteTime());
 			assertEquals(expectLeaveTime, orderPO.getExpectLeaveTime());
-			assertEquals(OrderState.EXECUTED, orderPO.getState());
-			assertEquals(RoomType.商务套房, orderPO.getRoomType());
+			assertEquals(OrderState.UNEXECUTED, orderPO.getState());
+			assertEquals(RoomType.双人间, orderPO.getRoomType());
 			assertEquals(2, orderPO.getRoomNumCount());
 			assertEquals("301  302", orderPO.getRoomNumber());
-			assertEquals("zhangsan", orderPO.getName());
-			assertEquals("13554321234", orderPO.getPhone());
-			assertEquals("no", orderPO.getMessage());
+			assertEquals(3, orderPO.getExpectGuestNumCount());			
+			assertEquals("王老五", orderPO.getName());
+			assertEquals("13512341234", orderPO.getPhone());
+			assertEquals("no thanks", orderPO.getMessage());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}	
@@ -218,10 +219,10 @@ public class OrderDataService_DriverTest {
 			assertEquals("123456789012", orderGeneralPO.getOrderID());
 			assertEquals("1234567890", orderGeneralPO.getGuestID());
 			assertEquals("12345678", orderGeneralPO.getHotelID());
-			assertEquals("thisHotel", orderGeneralPO.getHotelName());
+			assertEquals("thisHotel1", orderGeneralPO.getHotelName());
 			assertEquals("address", orderGeneralPO.getHotelAddress());
 			assertEquals(200, orderGeneralPO.getPrice(), 0);
-			assertEquals(LocalDateTime.of(2016, 2, 3, 14, 0), orderGeneralPO.getExpectExecuteTime());
+			assertEquals(LocalDateTime.of(2016, 2, 1, 14, 0), orderGeneralPO.getExpectExecuteTime());
 			assertEquals(LocalDateTime.of(2016, 2, 4, 12, 0), orderGeneralPO.getExpectLeaveTime());
 			assertEquals(OrderState.EXECUTED, orderGeneralPO.getState());
 		} catch (RemoteException e) {
