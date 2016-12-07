@@ -110,10 +110,4 @@ public class UserController implements UserBLService{
 	public String getLogInInfo(String userID,UserType userType) {
 		return user.getLogInInfo(userID,userType);
 	}
-
-	@Override
-	public UserVO getSingle(String userID, UserType userType) {
-		return null;
-	}
-
 }
