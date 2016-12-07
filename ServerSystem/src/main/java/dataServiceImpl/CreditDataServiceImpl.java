@@ -17,7 +17,6 @@ public class CreditDataServiceImpl extends UnicastRemoteObject implements Credit
 	
 	public CreditDataServiceImpl() throws RemoteException {
 		super();
-		// TODO 自动生成的构造函数存根
 		creditDataHelper = new CreditDataHelperImpl_Stub();
 //		creditDataHelper = new CreditDataHelperImpl();
 	}

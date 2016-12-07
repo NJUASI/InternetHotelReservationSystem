@@ -86,7 +86,7 @@ public class OrderController {
 		back2.setVisible(true);
 		orderDetail.setVisible(true);
 		searchPane.setVisible(false);
-		//TODO Order
+		//TODO fjj注意：Order
 		// 获得输入的内容
 		// searchID.getText();
 		//通过orderID得到一条VO		
@@ -125,9 +125,9 @@ public class OrderController {
 	protected void cancelAbnormalOrder() {
 		try {
 			if (cancelPercent.getValue().equals("50%")) {
-				//TODO 返回50%信用值，通过orderVO.guestID
+				//TODO fjj注意：返回50%信用值，通过orderVO.guestID
 			} else if (cancelPercent.getValue().equals("100%")) {
-				//TODO 返回100%信用值，通过orderVO.guestID
+				//TODO fjj注意：返回100%信用值，通过orderVO.guestID
 			}
 		} catch (Exception e) {
 			System.out.println("ssss");
@@ -147,7 +147,7 @@ public class OrderController {
 		try {
 			orderCheck.setVisible(true);
 		searchPane.setVisible(false);
-			// TODO 获得输入的内容日期，通过日期获得一整天的异常订单
+			// TODO fjj注意：获得输入的内容日期，通过日期获得一整天的异常订单
 		// LocalDate date = searchDate.getValue();
 		orderVOlist=new LinkedList<>();
 		
@@ -234,7 +234,7 @@ public class OrderController {
 
 	@FXML
 	protected void searchAbnormalOrder() {
-		// TODO 获得输入的内容日期，通过日期获得一整天的异常订单
+		// TODO fjj注意：获得输入的内容日期，通过日期获得一整天的异常订单
 		// LocalDate date = searchDate.getValue();
 
 		orderVOlist=new LinkedList<>();
@@ -261,7 +261,7 @@ public class OrderController {
 
 	@FXML
 	protected void searchUnexecutedOrder() {
-		// TODO 获得输入的内容日期，通过日期获得一整天的未执行订单
+		// TODO fjj注意：获得输入的内容日期，通过日期获得一整天的未执行订单
 		// LocalDate date = searchDate.getValue();
 				orderVOlist=new LinkedList<>();
 				orderVOlist=new LinkedList<>();
@@ -288,9 +288,9 @@ public class OrderController {
 	protected void cancelAbnormalOrderInCheck() {
 		try {
 			if (cancelPercentInCheck.getValue().equals("50%")) {
-				//TODO 返回50%信用值，通过 table.getSelectionModel().getSelectedItem().getOrderID();
+				//TODO fjj注意：返回50%信用值，通过 table.getSelectionModel().getSelectedItem().getOrderID();
 			} else if (cancelPercentInCheck.getValue().equals("100%")) {
-				//TODO 返回100%信用值，通过 table.getSelectionModel().getSelectedItem().getOrderID();
+				//TODO fjj注意：返回100%信用值，通过 table.getSelectionModel().getSelectedItem().getOrderID();
 			}
 		} catch (Exception e) {
 			System.out.println("ssss");

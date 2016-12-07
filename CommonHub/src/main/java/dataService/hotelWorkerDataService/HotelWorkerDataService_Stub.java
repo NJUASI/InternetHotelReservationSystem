@@ -13,7 +13,6 @@ public class HotelWorkerDataService_Stub extends UnicastRemoteObject implements 
 	
 	public HotelWorkerDataService_Stub() throws RemoteException {
 		super();
-		// TODO 自动生成的构造函数存根
 	}
 
 
@@ -31,19 +30,16 @@ public class HotelWorkerDataService_Stub extends UnicastRemoteObject implements 
 	
 	
 	public HotelWorkerPO add(HotelWorkerPO newHotelWorkerPO) {
-		// TODO Auto-generated method stub
 		return new HotelWorkerPO("00001111", "123456","school");
 	}
 
 	
 	public ResultMessage modify(HotelWorkerPO hotelWorkerPO) {
-		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
 
 	
 	public ResultMessage initHotelWorker(String hotelWorkerID) {
-		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
 

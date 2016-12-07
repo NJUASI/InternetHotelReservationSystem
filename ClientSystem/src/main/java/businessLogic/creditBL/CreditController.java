@@ -54,13 +54,11 @@ public final class CreditController implements CreditBLService {
 	
 	@Override
 	public Iterator<CreditVO> getCreditOfOneOrder(String orderID) {
-		// TODO 自动生成的方法存根
 		return null;
 	}
 
 	@Override
 	public ResultMessage addCredit(CreditVO creditVO) {
-		// TODO 自动生成的方法存根
 		return null;
 	}
 

@@ -29,7 +29,6 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	
 	public OrderDataService_Stub() throws RemoteException {
 		super();
-		// TODO 自动生成的构造函数存根
 	}
 
 
@@ -56,6 +55,7 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 * @throws RemoteException RMI
 	 */
 	public ResultMessage createOrder(final OrderPO order) throws RemoteException {
+		System.out.println("OrderDataService---------createOrder--------------Success!");
 		return ResultMessage.ORDER_CREATE_SUCCESS;
 	}
 
@@ -69,6 +69,7 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 * @throws RemoteException RMI
 	 */
 	public ResultMessage executeOrder(final String orderID) throws RemoteException {
+		System.out.println("OrderDataService---------executeOrder--------------Success!");
 		return ResultMessage.ORDER_EXECUTE_SUCCESS;
 	}
 
@@ -82,6 +83,7 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 * @throws RemoteException RMI
 	 */
 	public ResultMessage undoAbnormalOrder(final String orderID) throws RemoteException {
+		System.out.println("OrderDataService---------undoAbnormal--------------Success!");
 		return ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS;
 	}
 
@@ -95,6 +97,7 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 * @throws RemoteException RMI
 	 */
 	public ResultMessage undoNormalOrder(final String orderID) throws RemoteException {
+		System.out.println("OrderDataService---------undoNormal--------------Success!");
 		return ResultMessage.NORMAL_ORDER_UNDO_SUCCESS;
 	}
 	
@@ -108,19 +111,20 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 * @throws RemoteException RMI
 	 */
 	public OrderPO getOrderDetail(final String orderID) throws RemoteException {
+		System.out.println("OrderDataService---------getOrderDetail--------------Success!");
+		
 		final LocalDateTime createTime = LocalDateTime.of(2016, 2, 2, 18, 20);
 		final LocalDateTime checkInTime = LocalDateTime.of(2016, 2, 3, 11, 23);
 		final LocalDateTime checkOutTime = LocalDateTime.of(2016, 2, 4, 10, 58);
 		final LocalDateTime expectExecuteTime = LocalDateTime.of(2016, 2, 3, 14, 00);
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
 
-		final OrderState orderState = OrderState.EXECUTED;
-		final RoomType roomType = RoomType.商务套房;
-		
+		final OrderState orderState = OrderState.UNEXECUTED;
+		final RoomType roomType = RoomType.双人间;
 		
 		return new OrderPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
 				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, 
-				roomType, 2, "301  302", 2, "zhangsan","13554321234", "no", 4.3, "good");
+				roomType, 2, "301  302", 3, "王老五","13512341234", "no thanks", 4.3, "good");
 	}
 
 	
@@ -133,10 +137,69 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 * @throws RemoteException RMI
 	 */
 	public List<OrderGeneralPO> getAllGuestOrderGeneral(final String guestID) throws RemoteException {
+		System.out.println("OrderDataService---------getAllGuestOrderGeneral--------------Success!");
+		
 		final List<OrderGeneralPO> orderGenerals = new ArrayList<OrderGeneralPO>();
-		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel1", "address", 
+				200, LocalDateTime.of(2016, 2, 1, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.EXECUTED, true, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel2", "address", 
+				200, LocalDateTime.of(2016, 2, 2, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.UNEXECUTED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel3", "address", 
 				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.ABNORMAL, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel4", "address", 
+				200, LocalDateTime.of(2016, 2, 4, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.CANCELLED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel5", "address", 
+				200, LocalDateTime.of(2016, 2, 5, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.EXECUTED, true, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel6", "address", 
+				200, LocalDateTime.of(2016, 2, 6, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
 				OrderState.EXECUTED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel7", "address", 
+				200, LocalDateTime.of(2016, 2, 7, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.UNEXECUTED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel8", "address", 
+				200, LocalDateTime.of(2016, 2, 8, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.EXECUTED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel9", "address", 
+				200, LocalDateTime.of(2016, 2, 9, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.CANCELLED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel0", "address", 
+				200, LocalDateTime.of(2016, 2, 10, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.ABNORMAL, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel1", "address", 
+				200, LocalDateTime.of(2016, 2, 1, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.EXECUTED, true, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel2", "address", 
+				200, LocalDateTime.of(2016, 2, 2, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.UNEXECUTED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel3", "address", 
+				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.ABNORMAL, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel4", "address", 
+				200, LocalDateTime.of(2016, 2, 4, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.CANCELLED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel5", "address", 
+				200, LocalDateTime.of(2016, 2, 5, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.EXECUTED, true, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel6", "address", 
+				200, LocalDateTime.of(2016, 2, 6, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.EXECUTED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel7", "address", 
+				200, LocalDateTime.of(2016, 2, 7, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.UNEXECUTED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel8", "address", 
+				200, LocalDateTime.of(2016, 2, 8, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.EXECUTED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel9", "address", 
+				200, LocalDateTime.of(2016, 2, 9, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.CANCELLED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel0", "address", 
+				200, LocalDateTime.of(2016, 2, 10, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.ABNORMAL, false, "zhangsan","13554321234"));
 		return orderGenerals;
 	}
 
@@ -150,6 +213,8 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 * @throws RemoteException RMI
 	 */
 	public List<OrderGeneralPO> getAllHotelOrderGeneral(final String hotelID) throws RemoteException {
+		System.out.println("OrderDataService---------getAllHotelOrderGeneral--------------Success!");
+		
 		final List<OrderGeneralPO> orderGenerals = new ArrayList<OrderGeneralPO>();
 		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
 				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
@@ -167,6 +232,8 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 * @throws RemoteException RMI
 	 */
 	public List<OrderGeneralPO> getAllAbnormalOrderGeneral(final LocalDate date) throws RemoteException {
+		System.out.println("OrderDataService---------getAllAbnormalOrderGeneral--------------Success!");
+		
 		final List<OrderGeneralPO> orderGenerals = new ArrayList<OrderGeneralPO>();
 		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
 				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
@@ -183,6 +250,8 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 * @throws RemoteException RMI
 	 */
 	public List<OrderGeneralPO> getAllAbnormalOrderGeneral() throws RemoteException {
+		System.out.println("OrderDataService---------getAllAbnormalOrderGeneral--------------Success!");
+		
 		final List<OrderGeneralPO> orderGenerals = new ArrayList<OrderGeneralPO>();
 		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
 				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
@@ -201,6 +270,8 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 */
 	@Override
 	public List<OrderGeneralPO> getAllUnexecutedOrderGeneral(final LocalDate date) throws RemoteException {
+		System.out.println("OrderDataService---------getAllUnexecutedOrderGeneralBydate--------------Success!");
+		
 		final List<OrderGeneralPO> orderGenerals = new ArrayList<OrderGeneralPO>();
 		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
 				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
@@ -218,6 +289,7 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 * @throws RemoteException RMI
 	 */
 	public ResultMessage updateCheckIn(CheckInPO checkInPO) throws RemoteException {
+		System.out.println("OrderDataService---------checkIn--------------Success!");
 		return ResultMessage.CHECK_IN_SUCCESS;
 	}
 
@@ -230,6 +302,7 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 * @throws RemoteException RMI
 	 */
 	public ResultMessage updateCheckOut (CheckOutPO checkOutPO) throws RemoteException {
+		System.out.println("OrderDataService---------checkOut--------------Success!");
 		return ResultMessage.CHECK_OUT_SUCCESS;
 	}
 	
@@ -243,6 +316,7 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 * @throws RemoteException RMI
 	 */
 	public ResultMessage addEvaluation(GuestEvaluationPO guestEvaluationPO) throws RemoteException {
+		System.out.println("OrderDataService---------evaluate--------------Success!");
 		return ResultMessage.UPDATE_EVALUATION_SUCCESS;
 	}
 	
@@ -256,6 +330,8 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 * @throws RemoteException RMI
 	 */
 	public List<HotelEvaluationPO> getEvaluations(String hotelID) throws RemoteException {
+		System.out.println("OrderDataService---------getEvaluations--------------Success!");
+		
 		List<HotelEvaluationPO> result = new ArrayList<HotelEvaluationPO>();
 		result.add(new HotelEvaluationPO("1234567890", LocalDate.of(2016, 11, 21), 4.5, "very good"));
 		result.add(new HotelEvaluationPO("1234567891", LocalDate.of(2016, 11, 21), 4.5, "good"));

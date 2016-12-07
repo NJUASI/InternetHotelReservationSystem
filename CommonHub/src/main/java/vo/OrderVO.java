@@ -110,13 +110,13 @@ public class OrderVO {
 	 * 
 	 * @author 61990
 	 * lastChangedBy charles
-	 * updateTime 2016/12/5
+	 * updateTime 2016/12/7
 	 * 
 	 * 因为订单的创建时间、入住时间、退房时间、房间号还未生成，不能从界面层直接得到，客户还未进行评论（评分、评价）
 	 * 所以order create的时候，提供一个专门的构造器
 	 */
 	public OrderVO (OrderGeneralVO orderGeneralVO, double previousPrice, RoomType roomType,
-			int roomNumCount, int expectGuestNumCount, String name, String phone, String message) {
+			int roomNumCount, int expectGuestNumCount, String message) {
 		this.orderGeneralVO = orderGeneralVO;
 		
 		this.createTime = LocalDateTime.now();

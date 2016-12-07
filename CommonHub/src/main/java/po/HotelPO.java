@@ -56,12 +56,13 @@ public final class HotelPO implements Serializable{
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月5日 上午12:54:24
 	 */
-	public HotelPO(String hotelID, String hotelName, String city, String circle, String hotelAddress, 
+	public HotelPO(String hotelID, String hotelName, String city, String circle, String address, 
 			String level, double score, String introduction, String equipment, int commentsNum) {
 		this.hotelID = hotelID;
 		this.hotelName = hotelName;
 		this.city = city;
 		this.circle = circle;
+		this.address = address;
 		this.level = level;
 		this.score = score;
 		this.introduction = introduction;
@@ -172,6 +173,5 @@ public final class HotelPO implements Serializable{
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
 
 }

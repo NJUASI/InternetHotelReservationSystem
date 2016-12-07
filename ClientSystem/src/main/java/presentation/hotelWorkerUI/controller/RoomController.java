@@ -58,7 +58,7 @@ public class RoomController {
 	@FXML
 	private void initialize() {
 
-		//TODO 需要初始化添加信息列表中的房间类型
+		//TODO gcm注意：需要初始化添加信息列表中的房间类型
 		roomType.getItems().clear();
 		Iterator<RoomInfoVO> rooms = hotelBLController.getHotelRoomInfo(hotelID);
 		List<RoomInfoVO> roomList = new ArrayList<RoomInfoVO>();
@@ -104,7 +104,7 @@ public class RoomController {
 	 */
 	@FXML
 	protected void modifyOne() {
-		// TODO 房间类型选择的combobox中还需加入房间类型
+		// TODO gcm注意：房间类型选择的combobox中还需加入房间类型
 		TypeTable selectedRoomVO = null;
 		try{
 			selectedRoomVO = roomTable.getSelectionModel().getSelectedItem();
@@ -126,7 +126,7 @@ public class RoomController {
 	@FXML
 	protected void save() {
 		/**
-		 *  TODO 需要获得被点击修改房间类型的旧名字，原始房间剩余数量，计算出现修改房间数量修改后的房间剩余数量
+		 *  TODO gy注意：需要获得被点击修改房间类型的旧名字，原始房间剩余数量，计算出现修改房间数量修改后的房间剩余数量
 		 *	并把打包好的vo与旧名字传下去，调用更新客房信息的方法
 		 */
 		modifyPane.setVisible(false);
@@ -150,7 +150,10 @@ public class RoomController {
 	 */
 	@FXML
 	protected void addRoomType() {
-		// TODO 需要获取所添加的酒店信息，并根据该信息封装成一个vo，然后调用添加酒店客房信息的方法
+		/**
+		 * TODO gy注意：需要获取所添加的酒店信息，在下面封装成vo
+		 * 并根据该信息封装成一个vo，然后调用添加酒店客房信息的方法
+		 */
 		initialize();
 	}
 

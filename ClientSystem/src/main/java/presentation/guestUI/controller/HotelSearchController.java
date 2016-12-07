@@ -2,9 +2,11 @@ package presentation.guestUI.controller;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 
+import businessLogic.orderBL.OrderBLController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,7 +23,9 @@ import javafx.scene.layout.Pane;
 import presentation.hotelWorkerUI.controller.HotelTable;
 import presentation.hotelWorkerUI.controller.TypeTable;
 import presentation.hotelWorkerUI.controller.OrderTable;
+import utilities.IDReserve;
 import utilities.OrderState;
+import utilities.ResultMessage;
 import utilities.RoomType;
 import vo.HotelEvaluationVO;
 import vo.HotelVO;
@@ -32,9 +36,20 @@ import vo.RoomInfoVO;
  * @author 61990
  * @控制酒店预定界面
  * @version 11.27
+ * 
+ * lastChangeBy charles
+ * updateTime 2016/12/7
+ * 
+ * @高源 没找到界面初始化的initialize()函数
+ * orderDataService的在界面初始化未实现
  */
 public class HotelSearchController {
-
+	
+	/*
+	 * ！！！！！！！！！orderBLService初始化！！！！！！！！！
+	 */
+	private OrderBLController orderBLService = OrderBLController.getInstance();
+	
 	// 加载HotelSearch相关界面
 
 	@FXML
@@ -57,7 +72,7 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void searchCity(){
-		//TODO 得到所有城市list<string>
+		//TODO gcm注意：得到所有城市list<string>
 
 		cityChoose.getItems().clear();
 		cycleChoose.getItems().clear();
@@ -73,7 +88,7 @@ public class HotelSearchController {
 	@FXML
 	protected void searchCycle(){
 		
-		//TODO 通过城市得到所有商圈 list<string>
+		//TODO gcm注意：通过城市得到所有商圈 list<string>
 //		cityChoose.getValue();
 		cycleChoose.getItems().clear();
 		cycleChoose.getItems().add("222");
@@ -107,7 +122,7 @@ public class HotelSearchController {
 	@FXML
 	protected void openHotelCheck() {
 		
-		//TODO 通过城市和商圈获得所有的城市  List<HotelVO> hotelVOList;
+		//TODO gcm注意：通过城市和商圈获得所有的酒店  List<HotelVO> hotelVOList;
 		
 		// cityChoose.getValue();
 		// cycleChoose.getValue();
@@ -189,7 +204,7 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void openHotelDetail() {
-		//TODO 通过ID获得酒店详情  酒店订单列表 酒店评价列表 房间详情列表 
+		//TODO gcm注意：通过ID获得酒店详情  酒店订单列表 酒店评价列表 房间详情列表 
 //		hotelTable.getSelectionModel().getSelectedItem().getHotelID();
 		
 		hotelCheck.setVisible(false);
@@ -430,7 +445,7 @@ public class HotelSearchController {
 //		
 //		Integer.parseInt(roomInput.getText());
 //		
-//		TODO 通过上面的信息建VO 传下BL 进行筛选  注意是固定的城市商圈
+//		TODO gcm注意：通过上面的信息建VO 传下BL 进行筛选  注意是固定的城市商圈
 //		SearchCriteriaVO vo=new SearchCriteriaVO();
 	
 		hotelCheck.setVisible(true);
@@ -488,8 +503,8 @@ public class HotelSearchController {
 	@FXML
 	protected void createOrderIncheck(){
 	
-//		TODO 通过ID获得酒店详情  酒店订单列表 房间详情列表 
-//		String hotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
+//		TODO gcm注意：通过ID获得酒店详情  酒店订单列表 房间详情列表 
+//		hotelTable.getSelectionModel().getSelectedItem().getHotelID();
 //		roomList
 //		hotelVO
 		hotelVO = new HotelVO("12345", "hantingjiudiansss", "xinjiekou", "xinjiekou", "malianhedadao", "5xinji", 4.5,
@@ -523,23 +538,30 @@ public class HotelSearchController {
 
 	@FXML
 	protected void commitOrder() {
-		//TODO new 一个orderVO传下去生成订单
-//		orderVO = new OrderVO(
-//				new OrderGeneralVO("", Main.userID, hotelIDInOrder.getText(), hotelNameInOrder.getText(),
-//						hotelAddressInOrder.getText(), Double.parseDouble(priceOfOrder.getText()),
-//						LocalDateTime.of(expectExecuteDateInOrder.getValue(),
-//								LocalTime.of(Integer.parseInt(hourInOrder.getText()),
-//										Integer.parseInt(minuteInOrder.getText()))),
-//						LocalDateTime.of(expectLeaveDateInOrder.getValue(),
-//								LocalTime.of(Integer.parseInt(hourInOrder.getText()),
-//										Integer.parseInt(minuteInOrder.getText()))),
-//						null),
-//				Double.parseDouble(previousPriceInOrder.getText()), LocalDateTime.now(), RoomType.DELUXE,
-//				Integer.parseInt(roomCountInOrder.getText()), Integer.parseInt(guestNumInOrder.getText()),
-//				nameInOrder.getText(), phoneInOrder.getText(), messageInOrder.getText());
-		// 传VO
-		System.out.println("生成成功");
-
+		final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(),
+				LocalTime.of(Integer.parseInt(hourInOrder.getText()),
+						Integer.parseInt(minuteInOrder.getText())));
+		final LocalDateTime expectLeaveTime = LocalDateTime.of(expectLeaveDateInOrder.getValue(),
+				LocalTime.of(Integer.parseInt(hourInOrder.getText()),
+						Integer.parseInt(minuteInOrder.getText())));
+		
+		OrderGeneralVO createOrderGeneral = new OrderGeneralVO(IDReserve.getInstance().getUserID(), hotelIDInOrder.getText(), 
+				hotelNameInOrder.getText(), hotelAddressInOrder.getText(), expectExecuteTime, expectLeaveTime, 
+				nameInOrder.getText(), phoneInOrder.getText());
+		
+		OrderVO createVO = new OrderVO(createOrderGeneral, Double.parseDouble(priceOfOrder.getText()), 
+				RoomType.convertString2Roomtype(roomTypeInOrder.getValue()), Integer.parseInt(roomCountInOrder.getText()), Integer.parseInt(guestNumInOrder.getText()), 
+				messageInOrder.getText());
+		
+		final ResultMessage msg = orderBLService.createOrder(createVO);
+		
+		if (msg == ResultMessage.ORDER_CREATE_SUCCESS) {
+			//@高源——————状态栏显示订单生成成功
+			
+		}else {
+			//@高源——————状态栏显示订单生成失败
+			
+		}
 	}
 
 }

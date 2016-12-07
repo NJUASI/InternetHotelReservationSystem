@@ -45,7 +45,6 @@ public class SearchCriteriaVO {
 	// TODO 有空房期间怎么做
 	
 	public SearchCriteriaVO() {
-		// TODO 自动生成的构造函数存根
 	}
 
 	public SearchCriteriaVO(String keyHotelName, boolean bookedOnly, int minLevel, int maxLevel, double minPrice,

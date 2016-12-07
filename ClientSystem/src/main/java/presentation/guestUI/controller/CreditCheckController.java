@@ -30,7 +30,7 @@ public class CreditCheckController {
 	 */
 	@FXML
 	private void initialize() {
-		//TODO 通过guestID获得所有信用记录
+		//TODO djy注意：通过guestID获得所有信用记录
 
 		List<CreditVO> credit = new LinkedList<CreditVO>();
 		credit.add(new CreditVO("1234567",LocalDateTime.of(1421, 12, 4, 2, 13),"123455667",67,53,"异常->正常"));		
