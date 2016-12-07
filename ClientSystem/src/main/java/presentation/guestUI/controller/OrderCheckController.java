@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import businessLogic.orderBL.OrderBLController;
+import businessLogicService.orderBLService.CommonOrderBLService;
+import businessLogicService.orderBLService.GuestOrderBLService;
 import businessLogicService.orderBLService.OrderBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,7 +41,9 @@ import vo.OrderVO;
  */
 public class OrderCheckController {
 	
-	private OrderBLService orderBLService;
+	private GuestOrderBLService guestOrder;
+	
+	private CommonOrderBLService commonOrder;
 	
 	/*
 	 * 订单概况
@@ -74,8 +78,10 @@ public class OrderCheckController {
 	@FXML
 	private void initialize() {
 		//通过guestID得到orderGeneralVOs list
-		orderBLService = OrderBLController.getInstance();
-		List<OrderGeneralVO> orderGenerals = orderBLService.getAllGuestOrderGeneral(guestID);
+		guestOrder = OrderBLController.getInstance();
+		commonOrder = OrderBLController.getInstance();
+		
+		List<OrderGeneralVO> orderGenerals = guestOrder.getAllGuestOrderGeneral(guestID);
 		initOrderCheck(orderGenerals);
 	}
 	
@@ -96,7 +102,7 @@ public class OrderCheckController {
 	@FXML
 	protected void searchAllOrder() {
 		//@高源——————charles新加的，界面上没有对应按钮——所有订单
-		orderGenerals = orderBLService.getAllGuestOrderGeneral(guestID);
+		orderGenerals = guestOrder.getAllGuestOrderGeneral(guestID);
 		initOrderCheck(orderGenerals);
 	}
 	
@@ -108,7 +114,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchUnexecutedOrder() {
-		orderGenerals = orderBLService.getAllGuestUnexecutedOrderGeneral(guestID);
+		orderGenerals = guestOrder.getAllGuestSpecialOrderGeneral(guestID, OrderState.UNEXECUTED);
 		initOrderCheck(orderGenerals);
 	}
 	
@@ -120,7 +126,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchExecutedOrder() {		
-		orderGenerals = orderBLService.getAllGuestExecutedOrderGeneral(guestID);
+		orderGenerals = guestOrder.getAllGuestSpecialOrderGeneral(guestID, OrderState.EXECUTED);
 		initOrderCheck(orderGenerals);
 	}
 	
@@ -132,7 +138,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchAbnormalOrder() {
-		orderGenerals = orderBLService.getAllGuestAbnormalOrderGeneral(guestID);
+		orderGenerals = guestOrder.getAllGuestSpecialOrderGeneral(guestID, OrderState.ABNORMAL);
 		initOrderCheck(orderGenerals);
 	}
 	
@@ -144,7 +150,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchCancelledOrder() {
-		orderGenerals = orderBLService.getAllGuestCancelledOrderGeneral(guestID);
+		orderGenerals = guestOrder.getAllGuestSpecialOrderGeneral(guestID, OrderState.CANCELLED);
 		initOrderCheck(orderGenerals);
 	}
 	
@@ -156,7 +162,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchCommentedOrder() {
-		orderGenerals = orderBLService.getAllGuestCommentedOrderGeneral(guestID);
+		orderGenerals = guestOrder.getAllGuestCommentOrderGeneral(guestID, true);
 		initOrderCheck(orderGenerals);
 	}
 	
@@ -168,7 +174,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchUncommentedOrder() {
-		orderGenerals = orderBLService.getAllGuestUncommentedOrderGeneral(guestID);
+		orderGenerals = guestOrder.getAllGuestCommentOrderGeneral(guestID, false);
 		initOrderCheck(orderGenerals);
 	}
 
@@ -238,7 +244,7 @@ public class OrderCheckController {
 		orderDetail.setVisible(true);
 		orderCheck.setVisible(false);
 		
-		orderVO = orderBLService.getOrderDetail(orderID);
+		orderVO = commonOrder.getOrderDetail(orderID);
 		initOrderDetail(orderVO);
 	}
 	/**
@@ -253,14 +259,14 @@ public class OrderCheckController {
 		final String comment = orderComment.getText();
 		
 		GuestEvaluationVO evaluationVO = new GuestEvaluationVO(orderID, score, comment);
-		final ResultMessage result = orderBLService.addEvaluation(evaluationVO);
+		final ResultMessage result = guestOrder.addEvaluation(evaluationVO);
 		if (result == ResultMessage.UPDATE_EVALUATION_SUCCESS) {
 			//@高源——————状态栏显示已评价成功
 			
 		}else {
 			//@高源——————状态栏显示评价失败
 		}
-		orderVO = orderBLService.getOrderDetail(orderID);
+		orderVO = commonOrder.getOrderDetail(orderID);
 		initOrderDetail(orderVO);
 	}
 	/**

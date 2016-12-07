@@ -6,7 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import businessLogic.orderBL.OrderBLController;
+import businessLogicService.orderBLService.CommonOrderBLService;
 import businessLogicService.orderBLService.OrderBLService;
+import businessLogicService.orderBLService.WebMarketerOrderBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -34,7 +36,9 @@ import vo.OrderVO;
  */
 public class OrderController {
 
-	private OrderBLService orderBLService;
+	private WebMarketerOrderBLService webMarketerOrder;
+	
+	private CommonOrderBLService commonOrder;
 	
 	/*
 	 * 订单概况
@@ -89,7 +93,8 @@ public class OrderController {
 	 */
 	@FXML
 	private void initialize() {
-		orderBLService = OrderBLController.getInstance();
+		webMarketerOrder = OrderBLController.getInstance();
+		commonOrder = OrderBLController.getInstance();
 		
 		cancelPercent.setValue("50%");
 		cancelPercent.getItems().add("50%");
@@ -113,7 +118,7 @@ public class OrderController {
 		searchPane.setVisible(false);
 	
 		orderID = searchID.getText();
-		orderVO = orderBLService.getOrderDetail(orderID);
+		orderVO = commonOrder.getOrderDetail(orderID);
 		initOrderDetail(orderVO);
 		
 		if (orderVO.orderGeneralVO.state == OrderState.ABNORMAL) {
@@ -160,7 +165,7 @@ public class OrderController {
 		try {
 			orderCheck.setVisible(true);
 		searchPane.setVisible(false);
-			// TODO fjj注意：获得输入的内容日期，通过日期获得一整天的异常订单
+			// TODO fjj注意：获得输入的内容日期，通过日期获得一整天的异常+未执行订单
 		// LocalDate date = searchDate.getValue();
 		orderGenerals=new LinkedList<>();
 		
@@ -217,7 +222,7 @@ public class OrderController {
 	@FXML
 	protected void OrderDetail() {
 		orderID = table.getSelectionModel().getSelectedItem().getOrderID();
-		orderVO = orderBLService.getOrderDetail(orderID);
+		orderVO = commonOrder.getOrderDetail(orderID);
 		//@高源：原本没有。。需要加吧？？
 		initOrderDetail(orderVO);
 		
@@ -237,7 +242,7 @@ public class OrderController {
 	protected void searchAbnormalOrder() {
 		LocalDate date = searchDate.getValue();
 		
-		orderGenerals = orderBLService.getAllAbnormalOrderGeneral(date);
+		orderGenerals = webMarketerOrder.getAllAbnormalOrderGeneral(date);
 		initOrderCheck(orderGenerals);
 		
 		cancelOrderPaneInCheck.setDisable(false);
@@ -249,7 +254,7 @@ public class OrderController {
 	protected void searchUnexecutedOrder() {
 		LocalDate date = searchDate.getValue();
 		
-		orderGenerals = orderBLService.getAllUnexecutedOrderGeneral(date);
+		orderGenerals = webMarketerOrder.getAllUnexecutedOrderGeneral(date);
 		initOrderCheck(orderGenerals);
 		
 		cancelOrderPaneInCheck.setDisable(true);

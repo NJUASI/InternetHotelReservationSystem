@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import businessLogic.orderBL.OrderBLController;
+import businessLogicService.orderBLService.CommonOrderBLService;
+import businessLogicService.orderBLService.HotelWorkerOrderBLService;
 import businessLogicService.orderBLService.OrderBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,7 +40,9 @@ import vo.OrderVO;
  */
 public class OrderController {
 	
-	private OrderBLService orderBLService;
+	private HotelWorkerOrderBLService hotelWorkerOrder;
+	
+	private CommonOrderBLService commonOrder;
 	
 	/*
 	 * 订单概况
@@ -71,10 +75,11 @@ public class OrderController {
 	 */
 	@FXML
 	private void initialize() {
-
 		//通过hotelID得到orderGeneralVOs list
-		orderBLService = OrderBLController.getInstance();
-		List<OrderGeneralVO> orderGenerals = orderBLService.getAllGuestOrderGeneral(hotelID);
+		hotelWorkerOrder = OrderBLController.getInstance();
+		commonOrder = OrderBLController.getInstance();
+		
+		List<OrderGeneralVO> orderGenerals = hotelWorkerOrder.getAllHotelOrderGeneral(hotelID);
 		initOrderCheck(orderGenerals);
 
 	}
@@ -100,7 +105,7 @@ public class OrderController {
 	@FXML
 	protected void searchAlldOrder() {
 		//@高源——————charles新加的，界面上没有对应按钮——所有订单
-		orderGenerals = orderBLService.getAllHotelOrderGeneral(hotelID);
+		orderGenerals = hotelWorkerOrder.getAllHotelOrderGeneral(hotelID);
 		initOrderCheck(orderGenerals);
 	}
 	
@@ -112,7 +117,7 @@ public class OrderController {
 	 */
 	@FXML
 	protected void searchUnexecutedOrder() {
-		orderGenerals = orderBLService.getAllHotelUnexecutedOrderGeneral(hotelID);
+		orderGenerals = hotelWorkerOrder.getAllHotelSpecialOrderGeneral(hotelID, OrderState.UNEXECUTED);
 		initOrderCheck(orderGenerals);
 	}
 	
@@ -124,7 +129,7 @@ public class OrderController {
 	 */
 	@FXML
 	protected void searchExecutedOrder() {
-		orderGenerals = orderBLService.getAllHotelExecutedOrderGeneral(hotelID);
+		orderGenerals = hotelWorkerOrder.getAllHotelSpecialOrderGeneral(hotelID, OrderState.EXECUTED);
 		initOrderCheck(orderGenerals);
 	}
 
@@ -136,7 +141,7 @@ public class OrderController {
 	 */
 	@FXML
 	protected void searchAbnormalOrder() {
-		orderGenerals = orderBLService.getAllHotelAbnormalOrderGeneral(hotelID);
+		orderGenerals = hotelWorkerOrder.getAllHotelSpecialOrderGeneral(hotelID, OrderState.ABNORMAL);
 		initOrderCheck(orderGenerals);
 	}
 
@@ -149,7 +154,7 @@ public class OrderController {
 	 */
 	@FXML
 	protected void searchCancelledOrder() {
-		orderGenerals = orderBLService.getAllHotelCancelledOrderGeneral(hotelID);
+		orderGenerals = hotelWorkerOrder.getAllHotelSpecialOrderGeneral(hotelID, OrderState.CANCELLED);
 		initOrderCheck(orderGenerals);
 	}
 	
@@ -221,7 +226,7 @@ public class OrderController {
 		orderComment.setDisable(false);
 		orderScore.setDisable(false);	
 
-		orderVO = orderBLService.getOrderDetail(orderID);
+		orderVO = commonOrder.getOrderDetail(orderID);
 		initOrderDetail(orderVO);
 		
 		//show 相应的button
