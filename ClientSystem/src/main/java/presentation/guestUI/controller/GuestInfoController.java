@@ -35,7 +35,8 @@ public class GuestInfoController {
 	 */
 	@FXML
 	private void initialize() {
-		// TODO 需要根据客户账号，获取客户的基本信息
+		//TODO 通过guestID获得guestVO
+
 		guestVO = new GuestVO("12345", null, "", "张三", "小张", "123456", "13993323454", 100);
 		guestID.setText(guestVO.userID);
 		name.setText(guestVO.name);
@@ -71,21 +72,26 @@ public class GuestInfoController {
 	 */
 	@FXML
 	protected void saveGuestInfo() {
-		
+
 		//TODO 需要先将修改过的信息封装成一个vo，然后调用下层更新客户信息的方法，并刷新客户信息
 		try {
+			//TODO 通过guestVO保存信息
+
 			name.setText(name2.getText());
 			nickname.setText(nickname2.getText());
 			phone.setText(phone2.getText());
 			password.setText(password2.getText());
 
-//			save(	name.setText(name2.getText()),			
-//					nickname.setText(nickname2.getText()),
-//			phone.setText(phone2.getText()),
-//			password.setText(password2.getText()));
-			
+			//			save(	name.setText(name2.getText()),			
+			//					nickname.setText(nickname2.getText()),
+			//			phone.setText(phone2.getText()),
+			//			password.setText(password2.getText()));
+
 			guestModify.setVisible(false);
 			guestCheck.setVisible(true);
+
+			//再次初始化界面
+			initialize();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

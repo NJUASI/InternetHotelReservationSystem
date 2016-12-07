@@ -19,6 +19,6 @@ public interface UserBLService {
 	
 	public List<UserVO> getAll(UserType userType);
 	
-	public String getPassword(String userID,UserType userType);
+	public String getLogInInfo(String userID, UserType userType);
 	
 }

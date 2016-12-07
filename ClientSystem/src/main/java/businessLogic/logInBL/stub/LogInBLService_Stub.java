@@ -97,8 +97,8 @@ public class LogInBLService_Stub implements LogInBLService {
 	}
 
 	@Override
-	public ResultMessage logIn(String webManager, String password,UserType userType) {
-		return ResultMessage.SUCCESS;
+	public UserType logIn(String webManager, String password) {
+		return UserType.GUEST;
 	}
 
 	@Override

@@ -24,7 +24,7 @@ import vo.WebManagerVO;
 public class WebManager implements UserService{
 
 
-	static int IDLength = 4; // 网站管理人员的ID长度为4
+	public static int IDLength = 4; // 网站管理人员的ID长度为4
 
 	private WebManagerDataService webManagerDataService;
 
@@ -128,15 +128,15 @@ public class WebManager implements UserService{
 	 * @return String 指定用户 的登录信息
 	 */
 	public String getLogInInfo(String userID) {
-
+		
 		if(!this.hasWebManager(userID)){return null;} //不存在ID对应项,后期细化
 
 		try {
 			return webManagerDataService.getSingleWebManager(userID).getPassword();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 
 	/**

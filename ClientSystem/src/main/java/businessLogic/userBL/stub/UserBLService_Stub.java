@@ -44,9 +44,9 @@ public class UserBLService_Stub implements UserBLService {
 		return ResultMessage.SUCCESS;
 	}
 
-	public String getLogInInfo(String userID) {
+	public String getLogInInfo(String userID,UserType type) {
 		// TODO Auto-generated method stub
-		return "000000";
+		return "0000000";
 	}
 
 
@@ -57,9 +57,4 @@ public class UserBLService_Stub implements UserBLService {
 	}
 
 
-	@Override
-	public String getPassword(String userID, UserType userType) {
-		// TODO 自动生成的方法存根
-		return null;
-	}
 }

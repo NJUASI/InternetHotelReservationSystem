@@ -30,14 +30,15 @@ public class CreditCheckController {
 	 */
 	@FXML
 	private void initialize() {
-		//TODO 需要根据客户id拿到该客户的所有信用变化记录
+		//TODO 通过guestID获得所有信用记录
+
 		List<CreditVO> credit = new LinkedList<CreditVO>();
 		credit.add(new CreditVO("1234567",LocalDateTime.of(1421, 12, 4, 2, 13),"123455667",67,53,"异常->正常"));		
 		credit.add(new CreditVO("1234567",LocalDateTime.of(1421, 12, 4, 2, 13),"123455667",67,53,"异常->正常"));
 		credit.add(new CreditVO("1234567",LocalDateTime.of(1421, 12, 4, 2, 13),"123455667",67,53,"异常->正常"));
 		credit.add(new CreditVO("1234567",LocalDateTime.of(1421, 12, 4, 2, 13),"123455667",67,53,"异常->正常"));
 		credit.add(new CreditVO("1234567",LocalDateTime.of(1421, 12, 4, 2, 13),"123455667",67,53,"异常->正常"));
-		
+
 
 		ObservableList<CreditTable> data = FXCollections.observableArrayList();
 		for (int i = 0; i < credit.size(); i++) {
@@ -53,5 +54,5 @@ public class CreditCheckController {
 		table.setItems(data);
 
 	}
-	
+
 }

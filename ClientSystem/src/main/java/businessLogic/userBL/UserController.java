@@ -118,9 +118,4 @@ public class UserController implements UserBLService{
 		return null;
 	}
 
-	@Override
-	public String getPassword(String userID, UserType userType) {
-		// TODO 自动生成的方法存根
-		return null;
-	}
 }

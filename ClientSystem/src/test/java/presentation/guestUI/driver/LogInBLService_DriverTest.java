@@ -8,7 +8,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import businessLogic.logInBL.stub.LogInBLService_Stub;
-import utilities.ResultMessage;
 import utilities.UserType;
 import vo.GuestVO;
 
@@ -20,7 +19,7 @@ public class LogInBLService_DriverTest {
 		//test interface guestLogIn
 		LogInBLService_Stub stub = new LogInBLService_Stub();
 		LogInBLService_Driver driver = new LogInBLService_Driver(stub);
-		assertEquals(ResultMessage.SUCCESS, driver.logInBLService.logIn("1234567890","000000", UserType.GUEST));
+		assertEquals(UserType.GUEST, driver.logInBLService.logIn("1234567890","000000"));
 	}
 
 	@Test

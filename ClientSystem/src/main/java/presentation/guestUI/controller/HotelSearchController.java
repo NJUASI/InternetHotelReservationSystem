@@ -19,8 +19,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import presentation.hotelWorkerUI.controller.HotelTable;
-import presentation.hotelWorkerUI.controller.OrderTable;
 import presentation.hotelWorkerUI.controller.TypeTable;
+import presentation.hotelWorkerUI.controller.OrderTable;
 import utilities.OrderState;
 import utilities.RoomType;
 import vo.HotelEvaluationVO;
@@ -57,6 +57,8 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void searchCity(){
+		//TODO 得到所有城市list<string>
+
 		cityChoose.getItems().clear();
 		cycleChoose.getItems().clear();
 		cityChoose.getItems().add("222");
@@ -70,6 +72,8 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void searchCycle(){
+		
+		//TODO 通过城市得到所有商圈 list<string>
 //		cityChoose.getValue();
 		cycleChoose.getItems().clear();
 		cycleChoose.getItems().add("222");
@@ -102,11 +106,12 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void openHotelCheck() {
+		
+		//TODO 通过城市和商圈获得所有的城市  List<HotelVO> hotelVOList;
+		
 		// cityChoose.getValue();
-		// cycleChoose;
-		cityAndCircle.setVisible(false);
-		hotelCheck.setVisible(true);
-		hotelChoose.setVisible(false);
+		// cycleChoose.getValue();
+		
 		
 		hotelVO = new HotelVO("12345", "hantingjiudiansss", "xinjiekou", "xinjiekou", "malianhedadao", "5xinji", 4.5,
 				198, "shoooo", "sdaf");
@@ -118,6 +123,9 @@ public class HotelSearchController {
 		hotelVOList.add(hotelVO);
 		hotelVOList.add(hotelVO);
 		
+		cityAndCircle.setVisible(false);
+		hotelCheck.setVisible(true);
+		hotelChoose.setVisible(false);
 		
 		initHotelTable(hotelVOList);
 		
@@ -181,6 +189,9 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void openHotelDetail() {
+		//TODO 通过ID获得酒店详情  酒店订单列表 酒店评价列表 房间详情列表 
+//		hotelTable.getSelectionModel().getSelectedItem().getHotelID();
+		
 		hotelCheck.setVisible(false);
 		hotelDetail.setVisible(true);
 
@@ -419,9 +430,9 @@ public class HotelSearchController {
 //		
 //		Integer.parseInt(roomInput.getText());
 //		
-//		
+//		TODO 通过上面的信息建VO 传下BL 进行筛选  注意是固定的城市商圈
 //		SearchCriteriaVO vo=new SearchCriteriaVO();
-		
+	
 		hotelCheck.setVisible(true);
 		hotelChoose.setVisible(false);
 	}
@@ -446,24 +457,51 @@ public class HotelSearchController {
 	 * @author 61990
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/11/27
-	 * @点击预定酒店按钮
+	 * @点击详情预定酒店按钮
 	 */
 	@FXML
 	protected void openCreateOrder() {
-		for (int i = 0; i < roomList.size(); i++) {
-		 roomTypeInOrder.getItems().add(roomList.get(i).roomType.toString());
-		}
 		roomTypeInOrder.setValue(roomTable.getSelectionModel().getSelectedItem().getRoomType());
 		remainNumInOrder.setText(roomTable.getSelectionModel().getSelectedItem().getRemainRoomNum());
 		previousPriceInOrder.setText(roomTable.getSelectionModel().getSelectedItem().getPrice());
-		
+		initCreateOrder();
+	}
+	
+	void initCreateOrder(){
+		for (int i = 0; i < roomList.size(); i++) {
+			 roomTypeInOrder.getItems().add(roomList.get(i).roomType.toString());
+		}
 		hotelNameInOrder.setText(hotelVO.hotelName);
 		hotelIDInOrder.setText(hotelVO.hotelID);
 		hotelAddressInOrder.setText(hotelVO.address);
 
 		hotelDetail.setVisible(false);
 		createPane.setVisible(true);
+		hotelCheck.setVisible(false);
+	}
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @updateTime 2016/11/27
+	 * @点击概况预定酒店按钮
+	 */
+	@FXML
+	protected void createOrderIncheck(){
+	
+//		TODO 通过ID获得酒店详情  酒店订单列表 房间详情列表 
+//		hotelTable.getSelectionModel().getSelectedItem().getHotelID();
+//		roomList
+//		hotelVO
+		hotelVO = new HotelVO("12345", "hantingjiudiansss", "xinjiekou", "xinjiekou", "malianhedadao", "5xinji", 4.5,
+				198, "shoooo", "sdaf");
 
+		roomList = new LinkedList<>();
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
+		
+		initCreateOrder();
 	}
 	/**
 	 * @author 61990
@@ -485,6 +523,7 @@ public class HotelSearchController {
 
 	@FXML
 	protected void commitOrder() {
+		//TODO new 一个orderVO传下去生成订单
 //		orderVO = new OrderVO(
 //				new OrderGeneralVO("", Main.userID, hotelIDInOrder.getText(), hotelNameInOrder.getText(),
 //						hotelAddressInOrder.getText(), Double.parseDouble(priceOfOrder.getText()),

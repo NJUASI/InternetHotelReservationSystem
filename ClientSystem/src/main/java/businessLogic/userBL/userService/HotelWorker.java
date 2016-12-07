@@ -23,7 +23,7 @@ import vo.UserVO;
 public class HotelWorker implements UserService{
 
 
-	static int IDLength = 8; // 酒店工作人员的ID长度为8
+	public static int IDLength = 8; // 酒店工作人员的ID长度为8
 
 	private HotelWorkerDataService hotelWorkerDataService;
 
@@ -127,15 +127,15 @@ public class HotelWorker implements UserService{
 	 * @return String 指定用户 的登录信息
 	 */
 	public String getLogInInfo(String userID) {
-
+		
 		if(!this.hasHotelWorker(userID)){return null;} //不存在ID对应项，返回值后期细化
 
 		try {
 			return hotelWorkerDataService.getSingleHotelWorker(userID).getPassword();
 		} catch (RemoteException e) {
 			e.printStackTrace();
+			return null; //需要后期处理，是决定继续采用null，还是换其他
 		}
-		return null; //需要后期处理，是决定继续采用null，还是换其他
 	}
 
 	/**

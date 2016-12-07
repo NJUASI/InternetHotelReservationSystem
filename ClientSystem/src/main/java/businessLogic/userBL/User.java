@@ -127,12 +127,11 @@ public class User {
 	 * @param  guestID, userType 从客户界面层传下来的指定用户ID和指定用户类型
 	 * @return String 指定用户 的登录信息
 	 */
-	public String getLogInInfo(String userID, UserType userType) {
+	public String getLogInInfo(String userID,UserType userType) {
 		
-		user = lengthFactory.createUser(userID.length());
+		user = factory.createUser(userType);
 		
-		if(isExistence(user))
-		{
+		if(isExistence(user)){
 			return user.getLogInInfo(userID); 
 		}
 		return null;
