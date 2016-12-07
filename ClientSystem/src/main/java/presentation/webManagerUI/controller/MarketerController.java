@@ -91,7 +91,7 @@ public class MarketerController {
 	 * @author 61990
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/12/2
-	 * @取消更改酒店工作人員信息
+	 * @取消更改人員信息
 	 */
 	@FXML
 	protected void cancelModify() {
