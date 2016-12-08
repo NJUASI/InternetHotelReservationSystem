@@ -32,7 +32,8 @@ import vo.OrderVO;
  * lastChangeBy charles
  * updateTime 2016/12/7
  * 
- * @高源 评论界面好像有点问题  房间号也不对
+ * TODO 高源：评论界面好像有点问题（酒店查看时可以查看到订单评论）  房间号也不对
+ * TODO 冯俊杰：修改credit产生一条信用记录addCredit还未实现   什么时候修改待讨论。。TODO 龚尘淼 TODO 高源 TODO 董金玉
  */
 public class OrderCheckController {
 
@@ -93,7 +94,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchAllOrder() {
-		//@高源——————charles新加的，界面上没有对应按钮——所有订单
+		//TODO 高源——————charles新加的，界面上没有对应按钮——所有订单
 		orderGenerals = orderBLController.getAllOrderGenerals(guestID, guest);
 		initOrderCheck(orderGenerals);
 	}
@@ -103,6 +104,8 @@ public class OrderCheckController {
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/8
 	 * @打开未执行订单概况
+	 * 
+	 * TODO 高源：未执行订单应该有一个撤销的按钮  undoNormalOrder
 	 */
 	@FXML
 	protected void searchUnexecutedOrder() {

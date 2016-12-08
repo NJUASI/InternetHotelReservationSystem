@@ -85,7 +85,10 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	 * @throws RemoteException RMI
 	 */
 	@Override
-	public ResultMessage undoAbnormalOrder(final String orderID) throws RemoteException {
+	public ResultMessage undoAbnormalOrder(final String orderID, final double percent) throws RemoteException {
+		OrderPO thisOrder = orderDataHelper.getSingleOrder(orderID);
+		//TODO 冯俊杰：调用User模块modifyCredit 减少信用值
+		
 		ResultMessage message = orderDataHelper.setState(orderID, OrderState.CANCELLED);
 		if (message == ResultMessage.SUCCESS) {
 			return ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS;

@@ -676,6 +676,8 @@ public class HotelSearchController {
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/11/27
 	 * @点击提交订单按钮
+	 * 
+	 * TODO 高源：对hourInOrder、hourInOrder2、minuteInOrder、minuteInOrder2的功能不清楚，故为猜测，检查一下
 	 */
 	OrderVO orderVO;
 
@@ -684,26 +686,27 @@ public class HotelSearchController {
 
 	@FXML
 	protected void commitOrder() {
-		final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(),
-				LocalTime.of(hourInOrder.getValue(),minuteInOrder.getValue()));
-		final LocalDateTime expectLeaveTime = LocalDateTime.of(expectLeaveDateInOrder.getValue(),
-				LocalTime.of(hourInOrder2.getValue(),minuteInOrder2.getValue()));
+		//TODO 高源：界面上的选择框必须选，默认值读入为null
+		final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(), 
+				LocalTime.of(hourInOrder.getValue(), minuteInOrder.getValue()));
+		final LocalDateTime expectLeaveTime = LocalDateTime.of(expectLeaveDateInOrder.getValue(), 
+				LocalTime.of(hourInOrder2.getValue(), minuteInOrder2.getValue()));
 
 		OrderGeneralVO createOrderGeneral = new OrderGeneralVO(IDReserve.getInstance().getUserID(), hotelIDInOrder.getText(), 
 				hotelNameInOrder.getText(), hotelAddressInOrder.getText(), expectExecuteTime, expectLeaveTime, 
 				nameInOrder.getText(), phoneInOrder.getText());
 
-		OrderVO createVO = new OrderVO(createOrderGeneral, Double.parseDouble(priceOfOrder.getText()), 
+		OrderVO createVO = new OrderVO(createOrderGeneral, Double.parseDouble(previousPriceInOrder.getText()), 
 				RoomType.convertString2Roomtype(roomTypeInOrder.getValue()), roomCountInOrder.getValue(), guestNumInOrder.getValue(), 
 				messageInOrder.getText());
 
 		final ResultMessage msg = orderBLController.createOrder(createVO);
 
 		if (msg == ResultMessage.ORDER_CREATE_SUCCESS) {
-			//@高源——————状态栏显示订单生成成功
+			//TODO 高源——————状态栏显示订单生成成功
 
 		}else {
-			//@高源——————状态栏显示订单生成失败
+			//TODO 高源——————状态栏显示订单生成失败
 
 		}
 	}
