@@ -32,7 +32,7 @@ import vo.OrderVO;
  * lastChangeBy charles
  * updateTime 2016/12/7
  * 
- * @高源 评论界面好像有点问题  房间号也不对
+ * TODO 高源 评论界面好像有点问题  房间号也不对
  */
 public class OrderCheckController {
 
@@ -93,7 +93,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchAllOrder() {
-		//@高源——————charles新加的，界面上没有对应按钮——所有订单
+		//TODO 高源——————charles新加的，界面上没有对应按钮——所有订单
 		orderGenerals = orderBLController.getAllOrderGenerals(guestID, guest);
 		initOrderCheck(orderGenerals);
 	}

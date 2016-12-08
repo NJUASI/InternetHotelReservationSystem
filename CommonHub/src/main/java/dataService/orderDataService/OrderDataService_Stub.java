@@ -216,9 +216,66 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 		System.out.println("OrderDataService---------getAllHotelOrderGeneral--------------Success!");
 		
 		final List<OrderGeneralPO> orderGenerals = new ArrayList<OrderGeneralPO>();
-		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel1", "address", 
+				200, LocalDateTime.of(2016, 2, 1, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.EXECUTED, true, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel2", "address", 
+				200, LocalDateTime.of(2016, 2, 2, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.UNEXECUTED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel3", "address", 
 				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.ABNORMAL, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel4", "address", 
+				200, LocalDateTime.of(2016, 2, 4, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.CANCELLED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel5", "address", 
+				200, LocalDateTime.of(2016, 2, 5, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.EXECUTED, true, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel6", "address", 
+				200, LocalDateTime.of(2016, 2, 6, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
 				OrderState.EXECUTED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel7", "address", 
+				200, LocalDateTime.of(2016, 2, 7, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.UNEXECUTED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel8", "address", 
+				200, LocalDateTime.of(2016, 2, 8, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.EXECUTED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel9", "address", 
+				200, LocalDateTime.of(2016, 2, 9, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.CANCELLED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel0", "address", 
+				200, LocalDateTime.of(2016, 2, 10, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.ABNORMAL, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel1", "address", 
+				200, LocalDateTime.of(2016, 2, 1, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.EXECUTED, true, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel2", "address", 
+				200, LocalDateTime.of(2016, 2, 2, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.UNEXECUTED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel3", "address", 
+				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.ABNORMAL, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel4", "address", 
+				200, LocalDateTime.of(2016, 2, 4, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.CANCELLED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel5", "address", 
+				200, LocalDateTime.of(2016, 2, 5, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.EXECUTED, true, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel6", "address", 
+				200, LocalDateTime.of(2016, 2, 6, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.EXECUTED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel7", "address", 
+				200, LocalDateTime.of(2016, 2, 7, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.UNEXECUTED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel8", "address", 
+				200, LocalDateTime.of(2016, 2, 8, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.EXECUTED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel9", "address", 
+				200, LocalDateTime.of(2016, 2, 9, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.CANCELLED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralPO("123456789012", "1234567890", "12345678", "thisHotel0", "address", 
+				200, LocalDateTime.of(2016, 2, 10, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.ABNORMAL, false, "zhangsan","13554321234"));
 		return orderGenerals;
 	}
 
