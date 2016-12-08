@@ -112,7 +112,7 @@ public class OrderDataService_DriverTest {
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		
 		try {
-			assertEquals(ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS, driver.orderDataService.undoAbnormalOrder("123456789012"));
+			assertEquals(ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS, driver.orderDataService.undoAbnormalOrder("123456789012", 0.5));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

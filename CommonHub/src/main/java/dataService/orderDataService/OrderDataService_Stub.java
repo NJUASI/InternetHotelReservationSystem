@@ -82,7 +82,7 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 * @return 网站营销人员是否成功撤销此异常订单
 	 * @throws RemoteException RMI
 	 */
-	public ResultMessage undoAbnormalOrder(final String orderID) throws RemoteException {
+	public ResultMessage undoAbnormalOrder(final String orderID, final double percent) throws RemoteException {
 		System.out.println("OrderDataService---------undoAbnormal--------------Success!");
 		return ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS;
 	}
