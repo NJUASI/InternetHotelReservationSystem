@@ -12,6 +12,7 @@ import dataService.hotelDataService.HotelDataService;
 import po.HotelPO;
 import po.RoomInfoPO;
 import utilities.ResultMessage;
+import utilities.RoomType;
 
 /**
  * @Description：关于酒店信息的相关操作包括：
@@ -68,8 +69,8 @@ public class HotelDataServiceImpl extends UnicastRemoteObject implements HotelDa
 	}
 
 	@Override
-	public ResultMessage updateRoomInfo(RoomInfoPO roomInfoPO, String oldRoomType) throws RemoteException {
-		return roomDataHelper.updateRoomInfo(roomInfoPO, oldRoomType);
+	public ResultMessage updateRoomInfo(RoomInfoPO roomInfoPO) throws RemoteException {
+		return roomDataHelper.updateRoomInfo(roomInfoPO);
 	}
 
 	@Override
@@ -78,7 +79,7 @@ public class HotelDataServiceImpl extends UnicastRemoteObject implements HotelDa
 	}
 
 	@Override
-	public ResultMessage deleteRoomInfo(String hotelID, String roomType) throws RemoteException {
+	public ResultMessage deleteRoomInfo(String hotelID, RoomType roomType) throws RemoteException {
 		return roomDataHelper.deleteRoomInfo(hotelID, roomType);
 	}
 

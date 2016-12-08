@@ -41,9 +41,7 @@ public class Main extends Application {
 			public void handle(WindowEvent event) {
 				System.exit(0); 
 			}
-			 
 		});
-
 	}
 
 	/**

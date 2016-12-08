@@ -5,14 +5,12 @@ import utilities.RoomType;
 
 public class TypeTable {
 	public SimpleStringProperty roomType;
-	public SimpleStringProperty roomName;
 	public SimpleStringProperty roomNum;
 	public SimpleStringProperty remainRoomNum;
 	public SimpleStringProperty price;
 
-	public TypeTable(String roomType, String roomName,String roomNum, String remainRoomNum,String price) {
+	public TypeTable(String roomType,String roomNum, String remainRoomNum,String price) {
 		this.roomType = new SimpleStringProperty(roomType);
-		this.roomName = new SimpleStringProperty(roomName);
 		this.roomNum = new SimpleStringProperty(roomNum);
 		this.remainRoomNum = new SimpleStringProperty(remainRoomNum);
 		this.price = new SimpleStringProperty(price);
@@ -24,9 +22,6 @@ public class TypeTable {
 
 	public String getRoomNum() {
 		return roomNum.get();
-	}
-	public String getRoomName() {
-		return roomName.get();
 	}
 	
 	public String getRemainRoomNum() {

@@ -35,13 +35,13 @@ import utilities.OrderState;
 import utilities.ResultMessage;
 import utilities.RoomType;
 import utilities.SearchCriteriaType;
-import vo.GuestVO;
 import vo.HotelEvaluationVO;
 import vo.HotelVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
 import vo.RoomInfoVO;
 import vo.SearchCriteriaVO;
+import javafx.scene.layout.StackPane;
 /**
  * @author 61990
  * @控制酒店预定界面
@@ -77,6 +77,13 @@ public class HotelSearchController {
 		sourceBLController = SourceBLController.getInstance();
 		hotelBLController = HotelBLController.getInstance();
 	}
+	
+	@FXML
+	private ComboBox<Integer> guestNumInOrder,roomCountInOrder, hourInOrder, hourInOrder2,minuteInOrder, minuteInOrder2;
+	@FXML
+	private ComboBox<Integer> minLevelInput,maxLevelInput;
+	@FXML
+	private ComboBox<Double> minScoreInput,maxScoreInput;
 	/**
 	 * @author 61990
 	 * @lastChangedBy Byron Dong
@@ -86,30 +93,36 @@ public class HotelSearchController {
 	@FXML
 	private void initialize() {
 		
-	for (int i = 0; i < 60; i++) {
+		int minutes = 60;
+		int hours = 24;
+		int maxGuestNum = 3;
+		//TODO gcm注意，用客户选择得房间类型，去下面拿到该酒店该房型得剩余房间数量
+		int maxRoomNum = 3;
+		int maxLevel = 5;
+		int maxScore = 5;
+		
+	for (int i = 0; i < minutes; i++) {
 	minuteInOrder.getItems().add(i);
 	minuteInOrder2.getItems().add(i);
 	}
-	for (int i = 0; i < 24; i++) {
+	for (int i = 0; i < hours; i++) {
 	hourInOrder.getItems().add(i);
 	hourInOrder2.getItems().add(i);
 	}
-	for (int i = 1; i < 5; i++) {
+	for (int i = 1; i <= maxGuestNum; i++) {
 		guestNumInOrder.getItems().add(i);	
 	}
-	for (int i = 1; i < 9; i++) {
+	for (int i = 1; i < maxRoomNum; i++) {
 		roomCountInOrder.getItems().add(i);	
 	}
-	for (int i = 1; i < 6; i++) {
-		minlevelInput.getItems().add(i);
-		maxlevelInput.getItems().add(i);	
+	for (int i = 1; i <= maxLevel; i++) {
+		minLevelInput.getItems().add(i);
+		maxLevelInput.getItems().add(i);	
 	}
-	for (int i = 0; i < 6; i++) {
+	for (int i = 0; i <= maxScore; i++) {
 		minScoreInput.getItems().add(i+0.0);
 		maxScoreInput.getItems().add(i+0.0);	
 	}
-	
-
 	
 	Iterator<String> cities = sourceBLController.getCities();
 
@@ -358,7 +371,7 @@ public class HotelSearchController {
 		List<TypeTable> dataList = new ArrayList<TypeTable>();
 		while(rooms.hasNext()){
 			RoomInfoVO temp = rooms.next();
-			dataList.add(new TypeTable(temp.roomType.toString(),temp.roomName,
+			dataList.add(new TypeTable(temp.roomType.toString(),
 					String.valueOf(temp.roomNum),String.valueOf(temp.remainNum),
 					Double.toString(temp.price)));
 		}
@@ -368,7 +381,6 @@ public class HotelSearchController {
 			data.add(dataList.get(i));
 		}
 		typeColumn.setCellValueFactory(cellData -> cellData.getValue().roomType);
-		roomNameColumn.setCellValueFactory(cellData -> cellData.getValue().roomName);
 		roomNumColumn.setCellValueFactory(cellData -> cellData.getValue().roomNum);
 		remainRoomColumn.setCellValueFactory(cellData -> cellData.getValue().remainRoomNum);
 		priceColumn.setCellValueFactory(cellData -> cellData.getValue().price);
@@ -430,10 +442,6 @@ public class HotelSearchController {
 	@FXML
 	private CheckBox box1,box2,box3,box4,box5,boxOnly;
 	@FXML
-	private ComboBox<Integer> minlevelInput,maxlevelInput;
-	@FXML
-	private ComboBox<Double> minScoreInput,maxScoreInput;
-	@FXML
 	private TextField roomInput,minpriceInput,	maxpriceInput,hotelNameInput;
 
 	/**
@@ -491,12 +499,12 @@ public class HotelSearchController {
 			criteria.add(SearchCriteriaType.BOOKED_ONLY);
 			vo.bookedOnly = boxOnly.isSelected();
 		}
-		if(minlevelInput.getValue()!=null){
+		if(minLevelInput.getValue()!=null){
 			criteria.add(SearchCriteriaType.LEVEL_SPAN);
 			//TODO gy注意：将星级选择的getValue改为int；
 			//TODO gcm改了
-			vo.minLevel = minlevelInput.getValue().intValue();
-			vo.maxLevel =  maxlevelInput.getValue().intValue();
+			vo.minLevel = minLevelInput.getValue().intValue();
+			vo.maxLevel =  maxLevelInput.getValue().intValue();
 		}
 		if(minpriceInput.getText()!=null){
 			criteria.add(SearchCriteriaType.ORGIN_PRICE_SPAN);
@@ -534,8 +542,6 @@ public class HotelSearchController {
 	@FXML
 	private TextField nameInOrder, phoneInOrder;
 	@FXML
-	private ComboBox<Integer> guestNumInOrder,roomCountInOrder, hourInOrder, hourInOrder2,minuteInOrder, minuteInOrder2;
-	@FXML
 	private DatePicker expectExecuteDateInOrder, expectLeaveDateInOrder;
 	@FXML
 	private TextArea messageInOrder;
@@ -548,7 +554,6 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void openCreateOrder() {
-		//TODO gcm 8日,不一样，这里是从详情界面拿东西初始化，因为各种需要的东西已经初始化了，而且这里我的意思是你直接就把		
 		roomTypeInOrder.setValue(roomTable.getSelectionModel().getSelectedItem().getRoomType());
 		remainNumInOrder.setText(roomTable.getSelectionModel().getSelectedItem().getRemainRoomNum());
 		previousPriceInOrder.setText(roomTable.getSelectionModel().getSelectedItem().getPrice());
@@ -556,7 +561,6 @@ public class HotelSearchController {
 	}
 
 	private void initCreateOrder(){
-		//TODO gcm 给一个guestVO
 		//TODO djy 给一个guestVO
 //		GuestVO guestVO = null;
 //		nameInOrder.setText(guestVO.name);
@@ -590,10 +594,10 @@ public class HotelSearchController {
 				198, "shoooo", "sdaf");
 
 		roomList = new LinkedList<>();
-		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
-		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
-		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
-		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
 
 		initCreateOrder();
 	}
@@ -615,6 +619,14 @@ public class HotelSearchController {
 	 * 
 	 * TODO 高源：对hourInOrder、hourInOrder2、minuteInOrder、minuteInOrder2的功能不清楚，故为猜测，检查一下
 	 */
+<<<<<<< HEAD
+=======
+	OrderVO orderVO;
+
+	@FXML 
+	StackPane right;
+
+>>>>>>> master
 	@FXML
 	protected void commitOrder() {
 		final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(), 

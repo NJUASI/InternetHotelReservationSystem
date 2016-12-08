@@ -68,7 +68,7 @@ public interface HotelInfoOperation {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月8日 上午12:44:36
 	 */
-	public ResultMessage checkIn(String hotelID, String roomName, int roomNum);
+	public ResultMessage checkIn(String hotelID, RoomType roomType, int roomNum);
 
 	/**
 	 * @Description:办理退房，线上线下均调此方法
@@ -81,5 +81,5 @@ public interface HotelInfoOperation {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月8日 上午12:44:56
 	 */
-	public ResultMessage checkOut(String hotelID, String roomName, int roomNum);
+	public ResultMessage checkOut(String hotelID, RoomType roomType, int roomNum);
 }
