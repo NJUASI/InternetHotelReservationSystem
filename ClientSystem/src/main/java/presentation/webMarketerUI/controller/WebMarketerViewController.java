@@ -37,6 +37,7 @@ public class WebMarketerViewController {
 	/**
 	 * @dscription 跳转信用充值界面
 	 * @author 61990
+	 * @throws IOException 
 	 * @lastChangedBy Harvey
 	 * @updateTime 2016/12/8
 	 */
@@ -48,6 +49,7 @@ public class WebMarketerViewController {
 	/**
 	 * @description 跳转会员等级制定界面
 	 * @author 61990
+	 * @throws IOException 
 	 * @lastChangedBy Harvey
 	 * @updateTime 2016/12/8
 	 */
@@ -59,6 +61,7 @@ public class WebMarketerViewController {
 	/**
 	 * @description 跳转网站商圈策略制定界面
 	 * @author 61990
+	 * @throws IOException 
 	 * @lastChangedBy Harvey
 	 * @updateTime 2016/12/8
 	 */
@@ -70,6 +73,7 @@ public class WebMarketerViewController {
 	/**
 	 * @description  跳转会员等级制定界面
 	 * @author 61990
+	 * @throws IOException 
 	 * @lastChangedBy Harvey
 	 * @updateTime 2016/12/8
 	 */
@@ -81,6 +85,7 @@ public class WebMarketerViewController {
 	/**
 	 * @description 跳转异常订单界面
 	 * @author 61990
+	 * @throws IOException 
 	 * @lastChangedBy Harvey
 	 * @updateTime 2016/12/8
 	 */

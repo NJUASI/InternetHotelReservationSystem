@@ -23,7 +23,7 @@ public class GuestViewController {
 	private Pane mainPane;
 
 	private Parent currentParent ;
-	
+
 	public GuestViewController() {
 		currentParent = mainPane;
 	}
@@ -101,7 +101,8 @@ public class GuestViewController {
 	 * @param path
 	 * void
 	 * @author: Harvey Gong
-	 * @lastChangedBy: Harvey Gong
+	 * @throws IOException 
+	 * @lastChangedBy: 61990
 	 * @time:2016年12月8日 下午2:49:52
 	 */
 	private void jump(String path){
