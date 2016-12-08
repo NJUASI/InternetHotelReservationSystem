@@ -71,7 +71,7 @@
                         <Font size="23.0" />
                      </font>
                   </Label>
-                  <PasswordField fx:id="password" layoutX="112.0" layoutY="178.0" prefHeight="30.0" prefWidth="178.0" />
+                  <PasswordField fx:id="password" focusTraversable="false" layoutX="112.0" layoutY="178.0" prefHeight="30.0" prefWidth="178.0" />
                </children>
             </Pane>
             <Button focusTraversable="false" layoutX="35.0" layoutY="527.0" mnemonicParsing="false" onMouseClicked="#openRMI" prefHeight="23.0" prefWidth="102.0" text="RMI" />
@@ -79,7 +79,7 @@
                <children>
                   <Label layoutX="54.0" layoutY="125.0" />
                   <TextField fx:id="rmiText" focusTraversable="false" layoutX="47.0" layoutY="120.0" prefHeight="30.0" prefWidth="239.0" />
-                  <Button defaultButton="true" focusTraversable="false" layoutX="141.0" layoutY="258.0" mnemonicParsing="false" onAction="#link" text="连接" />
+                  <Button focusTraversable="false" layoutX="141.0" layoutY="258.0" mnemonicParsing="false" onAction="#link" text="连接" />
                   <Label layoutX="144.0" layoutY="30.0" text="RMI">
                      <font>
                         <Font size="23.0" />
