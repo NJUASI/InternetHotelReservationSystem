@@ -8,7 +8,9 @@ import java.util.Iterator;
 
 import org.junit.Test;
 
+import businessLogic.orderBL.OrderBLController;
 import businessLogic.orderBL.stub.OrderBLService_Stub;
+import businessLogicService.orderBLService.OrderBLService;
 import utilities.OrderState;
 import utilities.ResultMessage;
 import utilities.RoomType;
@@ -82,11 +84,10 @@ public class OrderBLService_DriverTest {
 	 */
 	@Test
 	public void testGetAllHotelOrderGeneral() {
-		final OrderBLService_Stub stub = new OrderBLService_Stub();
-		final OrderBLService_Driver driver = new OrderBLService_Driver(stub);
+		final OrderBLService stub = OrderBLController.getInstance();
 		
-		final Iterator<OrderGeneralVO> orderGeneralVOs = driver.orderBLService.getOrderGenerals("1234567890",UserType.GUEST,null);
-		final OrderGeneralVO orderGeneralVO = orderGeneralVOs.next();	
+		final Iterator<OrderGeneralVO> orderGeneralVOs = stub.getOrderGenerals("1234567890",UserType.GUEST,null);
+		final OrderGeneralVO orderGeneralVO = orderGeneralVOs.next();
 		
 		assertEquals("123456789012", orderGeneralVO.orderID);
 		assertEquals("1234567890", orderGeneralVO.guestID);
