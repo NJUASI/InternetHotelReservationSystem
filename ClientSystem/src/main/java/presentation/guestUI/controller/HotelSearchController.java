@@ -100,6 +100,17 @@ public class HotelSearchController {
 	for (int i = 1; i < 9; i++) {
 		roomCountInOrder.getItems().add(i);	
 	}
+	for (int i = 1; i < 6; i++) {
+		minlevelInput.getItems().add(i);
+		maxlevelInput.getItems().add(i);	
+	}
+	for (int i = 0; i < 6; i++) {
+		minScoreInput.getItems().add(i+0.0);
+		maxScoreInput.getItems().add(i+0.0);	
+	}
+	
+
+	
 	Iterator<String> cities = sourceBLController.getCities();
 
 	while(cities.hasNext()){
@@ -547,10 +558,10 @@ public class HotelSearchController {
 	private void initCreateOrder(){
 		//TODO gcm 给一个guestVO
 		//TODO djy 给一个guestVO
-		GuestVO guestVO = null;
-		nameInOrder.setText(guestVO.name);
-		phoneInOrder.setText(guestVO.phone);
-		
+//		GuestVO guestVO = null;
+//		nameInOrder.setText(guestVO.name);
+//		phoneInOrder.setText(guestVO.phone);
+//		
 		for (int i = 0; i < roomList.size(); i++) {
 			roomTypeInOrder.getItems().add(roomList.get(i).roomType.toString());
 		}
