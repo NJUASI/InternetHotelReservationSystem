@@ -18,7 +18,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -27,6 +26,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import presentation.hotelWorkerUI.controller.HotelTable;
 import presentation.hotelWorkerUI.controller.OrderTable;
 import presentation.hotelWorkerUI.controller.TypeTable;
@@ -41,7 +41,6 @@ import vo.OrderGeneralVO;
 import vo.OrderVO;
 import vo.RoomInfoVO;
 import vo.SearchCriteriaVO;
-import javafx.scene.layout.StackPane;
 /**
  * @author 61990
  * @控制酒店预定界面
@@ -91,7 +90,7 @@ public class HotelSearchController {
 	 */
 	@FXML
 	private void initialize() {
-		
+
 		int minutes = 60;
 		int hours = 24;
 		int maxGuestNum = 3;
@@ -99,7 +98,7 @@ public class HotelSearchController {
 		int maxRoomNum = 3;
 		int maxLevel = 5;
 		int maxScore = 5;
-		
+
 	for (int i = 0; i < minutes; i++) {
 	minuteInOrder.getItems().add(i);
 	minuteInOrder2.getItems().add(i);
@@ -122,7 +121,12 @@ public class HotelSearchController {
 		minScoreInput.getItems().add(i+0.0);
 		maxScoreInput.getItems().add(i+0.0);	
 	}
-	
+
+
+	expectExecuteDateInOrder.setValue(LocalDate.now());
+	expectLeaveDateInOrder.setValue(LocalDate.now());
+
+
 	Iterator<String> cities = sourceBLController.getCities();
 
 	while(cities.hasNext()){
@@ -160,11 +164,7 @@ public class HotelSearchController {
 
 		cycleChoose.getItems().clear();
 
-		//调用sourceBL获取当前选中城市的所有商圈
-		Iterator<String> circles = sourceBLController.getCircles(cityChoose.getValue());
-		while(circles.hasNext()){
-			cycleChoose.getItems().add(circles.next());
-		}
+	
 	}
 
 	/**
@@ -370,6 +370,7 @@ public class HotelSearchController {
 		List<TypeTable> dataList = new ArrayList<TypeTable>();
 		while(rooms.hasNext()){
 			RoomInfoVO temp = rooms.next();
+
 			dataList.add(new TypeTable(temp.roomType.toString(),
 					String.valueOf(temp.roomNum),String.valueOf(temp.remainNum),
 					Double.toString(temp.price)));
@@ -529,13 +530,14 @@ public class HotelSearchController {
 
 	/*
 	 * TODO gy注意：确定这个界面也在这儿？。。。
+	 * TODO gcm 现在有点错综复杂了，想了一下还是这样好点，不然保留现场只能保留组件内容，他不能保留你组件状态
 	 * 这个类好tm大
 	 */
 
 
 	// 订单生成界面
 	@FXML
-	private ChoiceBox<String> roomTypeInOrder;
+	private ComboBox<String> roomTypeInOrder;
 	@FXML
 	private Label hotelNameInOrder, hotelIDInOrder, hotelAddressInOrder, previousPriceInOrder, priceOfOrder,remainNumInOrder;
 	@FXML
@@ -558,16 +560,36 @@ public class HotelSearchController {
 		previousPriceInOrder.setText(roomTable.getSelectionModel().getSelectedItem().getPrice());
 		initCreateOrder();
 	}
-
+//TODO gcm 合掉了	
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @updateTime 2016/11/27
+	 * @点击概况预定酒店按钮
+	 */
+	@FXML
+	protected void createOrderIncheck(){
+		initCreateOrder();
+	}
+	
 	private void initCreateOrder(){
+
+
+//		TODO 通过	 hotelID String hotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
+//		  roomList = new LinkedList<>();
+//		hotelVO也需要重新出事化
+		
+		//TODO gcm 给一个guestVO
+
+
 		//TODO djy 给一个guestVO
 //		GuestVO guestVO = null;
 //		nameInOrder.setText(guestVO.name);
 //		phoneInOrder.setText(guestVO.phone);
-//		
-		for (int i = 0; i < roomList.size(); i++) {
-			roomTypeInOrder.getItems().add(roomList.get(i).roomType.toString());
-		}
+//TODO 初始化房间列表		
+//		for (int i = 0; i < roomList.size(); i++) {
+//			roomTypeInOrder.getItems().add(roomList.get(i).roomType.toString());
+//		}
 
 		hotelNameInOrder.setText(hotelVO.hotelName);
 		hotelIDInOrder.setText(hotelVO.hotelID);
@@ -578,28 +600,32 @@ public class HotelSearchController {
 		hotelCheck.setVisible(false);
 	}
 
-	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
-	 * @点击概况预定酒店按钮
-	 */
-	@FXML
-	protected void createOrderIncheck(){
 
-		// TODO gy注意：与上面代码相似度极大，你看一下，能不能合，感觉是一个界面吧。。
-		//TODO djy 8日，这里是你界面没东西，必须通过ID得到东西比如没有HotelVO，没有ROOM typelist才能初始化订单详情界面，这里是立即预定
-		hotelVO = new HotelVO("12345", "hantingjiudiansss", "xinjiekou", "xinjiekou", "malianhedadao", "5xinji", 4.5,
-				198, "shoooo", "sdaf");
 
-		roomList = new LinkedList<>();
-		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
-		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
-		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
-		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
+//	/**
+//	 * @author 61990
+//	 * @lastChangedBy 61990
+//	 * @updateTime 2016/11/27
+//	 * @点击概况预定酒店按钮
+//	 */
+//	@FXML
+//	protected void createOrderIncheck(){
+//
+//		// TODO gy注意：与上面代码相似度极大，你看一下，能不能合，感觉是一个界面吧。。
+//		//TODO djy 8日，这里是你界面没东西，必须通过ID得到东西比如没有HotelVO，没有ROOM typelist才能初始化订单详情界面，这里是立即预定
+//		hotelVO = new HotelVO("12345", "hantingjiudiansss", "xinjiekou", "xinjiekou", "malianhedadao", "5xinji", 4.5,
+//				198, "shoooo", "sdaf");
+//
+//		roomList = new LinkedList<>();
+//		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
+//		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
+//		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
+//		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
+//
+//		initCreateOrder();
+//	}
 
-		initCreateOrder();
-	}
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
