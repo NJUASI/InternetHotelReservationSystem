@@ -97,22 +97,12 @@ public class CommonOrder implements CommonOrderBLService {
 			e.printStackTrace();
 		}
 
-<<<<<<< HEAD
+
 
 		if (orderGeneralPOs != null) {
 			for (OrderGeneralPO po : orderGeneralPOs) {
 				if (po.getState() == orderState) {
-=======
-		//当订单状态不为空时，返回对应状态的订单
-		if(orderState == null){
-			for(OrderGeneralPO po: orderGeneralPOs){
-				result.add(new OrderGeneralVO(po));
-			}
-		}
-		else{
-			for(OrderGeneralPO po: orderGeneralPOs){
-				if(po.getState() == orderState){
->>>>>>> master
+
 					result.add(new OrderGeneralVO(po));
 				}
 			}
