@@ -653,6 +653,7 @@ public class HotelSearchController {
 
 	@FXML
 	protected void commitOrder() {
+		//TODO 高源：界面上的选择框必须选，默认值读入为null
 		final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(), 
 				LocalTime.of(hourInOrder.getValue(), minuteInOrder.getValue()));
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(expectLeaveDateInOrder.getValue(), 
@@ -662,7 +663,7 @@ public class HotelSearchController {
 				hotelNameInOrder.getText(), hotelAddressInOrder.getText(), expectExecuteTime, expectLeaveTime, 
 				nameInOrder.getText(), phoneInOrder.getText());
 
-		OrderVO createVO = new OrderVO(createOrderGeneral, Double.parseDouble(priceOfOrder.getText()), 
+		OrderVO createVO = new OrderVO(createOrderGeneral, Double.parseDouble(previousPriceInOrder.getText()), 
 				RoomType.convertString2Roomtype(roomTypeInOrder.getValue()), roomCountInOrder.getValue(), guestNumInOrder.getValue(), 
 				messageInOrder.getText());
 

@@ -33,7 +33,7 @@ import vo.OrderVO;
  * @author 61990
  *
  * lastChangeBy charles
- * updateTime 2016/12/7
+ * updateTime 2016/12/8
  * 
  * TODO 高源 酒店查看时可以查看到订单评   但是disable吧。。不可修改
  */
