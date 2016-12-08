@@ -4,6 +4,7 @@ import businessLogic.userBL.UserController;
 import businessLogicService.userBLService.UserBLService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import utilities.IDReserve;
@@ -30,7 +31,9 @@ public class GuestInfoController {
 
 	// modify 界面内容
 	@FXML
-	private TextField name2, nickname2, phone2, password2;
+	private TextField name2, nickname2, phone2;
+	@FXML
+	private PasswordField password2,password3;
 	
 	private String userID =  IDReserve.getInstance().getUserID();;
 	
@@ -48,7 +51,7 @@ public class GuestInfoController {
 		guestID.setText(guestVO.userID);
 		name.setText(guestVO.name);
 		nickname.setText(guestVO.nickName);
-		password.setText(guestVO.password);
+		password.setText("******");
 		credit.setText(Double.toString(guestVO.credit));
 		phone.setText(guestVO.phone);
 	}
@@ -68,7 +71,8 @@ public class GuestInfoController {
 		name2.setText(name.getText());
 		nickname2.setText(nickname.getText());
 		phone2.setText(phone.getText());
-		password2.setText(password.getText());
+		password2.setText(guestVO.password);
+		password3.setText(guestVO.password);
 	}
 
 	/**
@@ -82,20 +86,17 @@ public class GuestInfoController {
 
 		try {
 			//TODO djy注意：通过guestVO保存信息
-			// TODO gy 不是重新初始化了吗？
-
-			name.setText(name2.getText());
-			nickname.setText(nickname2.getText());
-			phone.setText(phone2.getText());
-			password.setText(password2.getText());
 			
 			GuestVO tempGuestVO = guestVO;
 			tempGuestVO.name = name2.getText();
 			tempGuestVO.nickName = nickname2.getText();
 			tempGuestVO.phone = phone2.getText();
 			tempGuestVO.password = password2.getText();
-			
+			if(password2.getText()==password3.getText()){
 			ResultMessage message = userBLController.modify(tempGuestVO);
+			}else{
+//				TODO 密码不对
+			}
 			// TODO 得到modify是否成功的结果，界面后续做提示处理
 			guestModify.setVisible(false);
 			guestCheck.setVisible(true);

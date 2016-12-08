@@ -20,7 +20,7 @@
 
 <StackPane fx:id="right" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.guestUI.controller.HotelSearchController">
    <children>
-      <Pane fx:id="cityAndCircle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
+      <Pane fx:id="cityAndCircle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" visible="false">
          <children>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
                <children>
@@ -315,7 +315,7 @@
             </AnchorPane>
          </children>
       </Pane>
-      <Pane fx:id="createPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" visible="false">
+      <Pane fx:id="createPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
          <children>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
                <children>
@@ -336,7 +336,7 @@
                         <VBox layoutX="10.0" layoutY="50.0" prefHeight="110.0" prefWidth="116.0" spacing="30.0" />
                         <Label layoutX="212.0" layoutY="302.0" text="特殊需求：" />
                         <TextArea fx:id="messageInOrder" layoutX="313.0" layoutY="302.0" prefHeight="87.0" prefWidth="386.0" wrapText="true" />
-                        <GridPane layoutX="175.0" layoutY="117.0" prefHeight="154.0" prefWidth="251.0">
+                        <GridPane layoutX="175.0" layoutY="117.0" prefHeight="154.0" prefWidth="265.0">
                            <children>
                               <Label text="预计离开时间：" GridPane.rowIndex="3" />
                               <Label text="最晚执行时间：" GridPane.rowIndex="1" />
@@ -344,24 +344,24 @@
                               <Label text="离店日期：" GridPane.rowIndex="2" />
                               <DatePicker fx:id="expectExecuteDateInOrder" GridPane.columnIndex="1" />
                               <DatePicker fx:id="expectLeaveDateInOrder" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <HBox prefHeight="23.0" prefWidth="142.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="157.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <TextField fx:id="hourInOrder" prefHeight="41.0" prefWidth="38.0" />
+                                    <ComboBox fx:id="hourInOrder" prefHeight="30.0" prefWidth="60.0" />
                                     <Label prefHeight="30.0" prefWidth="33.0" text="  ：" />
-                                    <TextField fx:id="minuteInOrder" prefHeight="50.0" prefWidth="38.0" />
+                                    <ComboBox fx:id="minuteInOrder" prefHeight="30.0" prefWidth="60.0" />
                                  </children>
                               </HBox>
-                              <HBox prefHeight="61.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                              <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
-                                    <TextField fx:id="hourInOrder2" prefHeight="41.0" prefWidth="38.0" />
+                                    <ComboBox fx:id="hourInOrder2" prefHeight="30.0" prefWidth="60.0" />
                                     <Label prefHeight="30.0" prefWidth="33.0" text="  ：" />
-                                    <TextField fx:id="minuteInOrder2" prefHeight="55.0" prefWidth="38.0" />
+                                    <ComboBox fx:id="minuteInOrder2" prefHeight="30.0" prefWidth="60.0" />
                                  </children>
                               </HBox>
                            </children>
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="365.0" minWidth="10.0" prefWidth="113.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="332.0" minWidth="0.0" prefWidth="146.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="365.0" minWidth="10.0" prefWidth="106.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="332.0" minWidth="0.0" prefWidth="159.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -395,8 +395,8 @@
                               <Label text="预计入住人数：" GridPane.rowIndex="2" />
                               <Label text="房间数量：" GridPane.rowIndex="3" />
                               <TextField fx:id="nameInOrder" prefHeight="30.0" prefWidth="105.0" GridPane.columnIndex="1" />
-                              <TextField fx:id="guestNumInOrder" prefHeight="30.0" prefWidth="105.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField fx:id="roomCountInOrder" prefHeight="30.0" prefWidth="105.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <ComboBox fx:id="roomCountInOrder" prefHeight="30.0" prefWidth="66.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <ComboBox fx:id="guestNumInOrder" prefHeight="30.0" prefWidth="67.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                         <Label layoutX="175.0" layoutY="88.0" text="房间类型：" />
