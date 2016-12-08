@@ -65,13 +65,13 @@
                   <Label layoutX="54.0" layoutY="125.0" text="编号：" />
                   <TextField fx:id="ID" focusTraversable="false" layoutX="112.0" layoutY="120.0" prefHeight="23.0" prefWidth="178.0" />
                   <Label layoutX="54.0" layoutY="183.0" text="密码：" />
-                  <Button defaultButton="true" focusTraversable="false" layoutX="142.0" layoutY="260.0" mnemonicParsing="false" onAction="#logIn" text="登录" />
-                  <Label layoutX="144.0" layoutY="30.0" text="登录">
+                  <Button defaultButton="true" focusTraversable="false" layoutX="160" layoutY="260.0" mnemonicParsing="false" onAction="#logIn" text="登录" />
+                  <Label layoutX="160" layoutY="30.0" text="登录">
                      <font>
                         <Font size="23.0" />
                      </font>
                   </Label>
-                  <PasswordField fx:id="password" focusTraversable="false" layoutX="112.0" layoutY="178.0" prefHeight="30.0" prefWidth="178.0" />
+                  <PasswordField fx:id="password" focusTraversable="false" layoutX="112.0" layoutY="178.0" prefHeight="23.0" prefWidth="178.0" />
                </children>
             </Pane>
             <Button focusTraversable="false" layoutX="35.0" layoutY="527.0" mnemonicParsing="false" onMouseClicked="#openRMI" prefHeight="23.0" prefWidth="102.0" text="RMI" />

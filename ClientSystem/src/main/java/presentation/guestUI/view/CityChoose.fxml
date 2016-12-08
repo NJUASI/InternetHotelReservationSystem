@@ -248,7 +248,7 @@
                            <children>
                               <ComboBox fx:id="minScoreInput" focusTraversable="false" prefHeight="31.0" prefWidth="79.0" />
                               <Label prefHeight="26.0" prefWidth="34.0" text="——" />
-                              <ComboBox fx:id="maxScoreInput" focusTraversable="false" prefHeight="32.0" prefWidth="82.0" />
+                              <ComboBox fx:id="maxScoreInput" focusTraversable="false" prefHeight="31.0" prefWidth="79.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="237.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
@@ -287,9 +287,9 @@
                         </GridPane>
                         <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="139.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <children>
-                              <ComboBox fx:id="maxlevelInput" focusTraversable="false" prefHeight="31.0" prefWidth="79.0" />
+                              <ComboBox fx:id="minLevelInput" focusTraversable="false" prefHeight="31.0" prefWidth="79.0" />
                               <Label prefHeight="26.0" prefWidth="34.0" text="——" />
-                              <ComboBox fx:id="maxScoreInput1" focusTraversable="false" prefHeight="32.0" prefWidth="82.0" />
+                              <ComboBox fx:id="maxLevelInput" focusTraversable="false" prefHeight="31.0" prefWidth="79.0" />
                            </children>
                         </HBox>
                      </children>
