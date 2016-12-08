@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="right" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.guestUI.controller.HotelSearchController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.guestUI.controller.HotelSearchController">
    <children>
       <Pane fx:id="cityAndCircle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
          <children>
@@ -160,42 +160,6 @@
             </AnchorPane>
          </children>
       </Pane>
-      <Pane fx:id="hotelCheck" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" visible="false">
-         <children>
-            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
-               <children>
-                  <Separator layoutY="60.0" prefWidth="895.0" />
-                  <Label layoutX="401.0" layoutY="14.0" prefHeight="39.0" text="酒店浏览">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-                  <Button layoutX="586.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#openSwitchCityCircle" text="切换城市商圈" />
-                  <Button layoutX="710.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#openChoose" text="筛选" />
-                  <Pane layoutY="198.0" prefHeight="401.0" prefWidth="895.0">
-                     <children>
-                        <TableView fx:id="hotelTable" focusTraversable="false" layoutY="-30.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="441.0" prefWidth="895.0" tableMenuButtonVisible="true">
-                           <columns>
-                              <TableColumn fx:id="hotelIDColumn3" prefWidth="113.0" text="酒店编号" />
-                              <TableColumn fx:id="hotelNameColumn3" prefWidth="108.0" text="酒店名" />
-                              <TableColumn fx:id="addressColumn3" prefWidth="135.0" text="地址" />
-                              <TableColumn fx:id="cityColumn3" prefWidth="103.0" text="城市" />
-                              <TableColumn fx:id="cycleColumn3" prefWidth="109.0" text="商圈" />
-                              <TableColumn fx:id="hasOrderColumn3" prefWidth="81.0" resizable="false" text="是否已预订" />
-                              <TableColumn fx:id="minPriceColumn3" prefWidth="97.0" resizable="false" text="最低价格" />
-                              <TableColumn fx:id="levelColumn3" prefWidth="74.0" resizable="false" text="星级" />
-                              <TableColumn fx:id="scoreColumn3" prefWidth="72.0" text="评分" />
-                           </columns>
-                        </TableView>
-                     </children>
-                  </Pane>
-                  <Separator layoutY="106.0" prefWidth="895.0" />
-                  <Button layoutX="649.0" layoutY="117.0" mnemonicParsing="false" onAction="#openHotelDetail" text="查看详情" />
-                  <Button layoutX="748.0" layoutY="117.0" mnemonicParsing="false" onAction="#createOrderIncheck" text="立即预定" />
-               </children>
-            </AnchorPane>
-         </children>
-      </Pane>
       <Pane fx:id="hotelChoose" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" visible="false">
          <children>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
@@ -287,9 +251,9 @@
                         </GridPane>
                         <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="139.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <children>
-                              <ComboBox fx:id="maxlevelInput" focusTraversable="false" prefHeight="31.0" prefWidth="79.0" />
+                              <ComboBox fx:id="minlevelInput" focusTraversable="false" prefHeight="31.0" prefWidth="79.0" />
                               <Label prefHeight="26.0" prefWidth="34.0" text="——" />
-                              <ComboBox fx:id="maxScoreInput1" focusTraversable="false" prefHeight="32.0" prefWidth="82.0" />
+                              <ComboBox fx:id="maxlevelInput" focusTraversable="false" prefHeight="32.0" prefWidth="82.0" />
                            </children>
                         </HBox>
                      </children>
@@ -315,6 +279,42 @@
             </AnchorPane>
          </children>
       </Pane>
+      <Pane fx:id="hotelCheck" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" visible="false">
+         <children>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
+               <children>
+                  <Separator layoutY="60.0" prefWidth="895.0" />
+                  <Label layoutX="401.0" layoutY="14.0" prefHeight="39.0" text="酒店浏览">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="586.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#openSwitchCityCircle" text="切换城市商圈" />
+                  <Button layoutX="710.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#openChoose" text="筛选" />
+                  <Pane layoutY="198.0" prefHeight="401.0" prefWidth="895.0">
+                     <children>
+                        <TableView fx:id="hotelTable" focusTraversable="false" layoutY="-30.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="441.0" prefWidth="895.0" tableMenuButtonVisible="true">
+                           <columns>
+                              <TableColumn fx:id="hotelIDColumn3" prefWidth="113.0" text="酒店编号" />
+                              <TableColumn fx:id="hotelNameColumn3" prefWidth="108.0" text="酒店名" />
+                              <TableColumn fx:id="addressColumn3" prefWidth="135.0" text="地址" />
+                              <TableColumn fx:id="cityColumn3" prefWidth="103.0" text="城市" />
+                              <TableColumn fx:id="cycleColumn3" prefWidth="109.0" text="商圈" />
+                              <TableColumn fx:id="hasOrderColumn3" prefWidth="81.0" resizable="false" text="是否已预订" />
+                              <TableColumn fx:id="minPriceColumn3" prefWidth="97.0" resizable="false" text="最低价格" />
+                              <TableColumn fx:id="levelColumn3" prefWidth="74.0" resizable="false" text="星级" />
+                              <TableColumn fx:id="scoreColumn3" prefWidth="72.0" text="评分" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </Pane>
+                  <Separator layoutY="106.0" prefWidth="895.0" />
+                  <Button layoutX="649.0" layoutY="117.0" mnemonicParsing="false" onAction="#openHotelDetail" text="查看详情" />
+                  <Button layoutX="748.0" layoutY="117.0" mnemonicParsing="false" onAction="#createOrderIncheck" text="立即预定" />
+               </children>
+            </AnchorPane>
+         </children>
+      </Pane>
       <Pane fx:id="createPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" visible="false">
          <children>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
@@ -325,7 +325,7 @@
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Pane layoutY="62.0" prefHeight="541.0" prefWidth="895.0">
+                  <Pane layoutX="6.0" layoutY="62.0" prefHeight="541.0" prefWidth="895.0">
                      <children>
                         <Label layoutX="512.0" layoutY="88.0" text="剩余数量：" />
                         <Label fx:id="remainNumInOrder" layoutX="597.0" layoutY="87.0" text="ss">
@@ -336,7 +336,7 @@
                         <VBox layoutX="10.0" layoutY="50.0" prefHeight="110.0" prefWidth="116.0" spacing="30.0" />
                         <Label layoutX="212.0" layoutY="302.0" text="特殊需求：" />
                         <TextArea fx:id="messageInOrder" layoutX="313.0" layoutY="302.0" prefHeight="87.0" prefWidth="386.0" wrapText="true" />
-                        <GridPane layoutX="175.0" layoutY="117.0" prefHeight="154.0" prefWidth="265.0">
+                        <GridPane layoutX="131.0" layoutY="118.0" prefHeight="153.0" prefWidth="353.0">
                            <children>
                               <Label text="预计离开时间：" GridPane.rowIndex="3" />
                               <Label text="最晚执行时间：" GridPane.rowIndex="1" />
@@ -346,22 +346,22 @@
                               <DatePicker fx:id="expectLeaveDateInOrder" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="157.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <ComboBox fx:id="hourInOrder" prefHeight="30.0" prefWidth="60.0" />
+                                    <ComboBox fx:id="hourInOrder" prefHeight="30.0" prefWidth="74.0" promptText="00" />
                                     <Label prefHeight="30.0" prefWidth="33.0" text="  ：" />
-                                    <ComboBox fx:id="minuteInOrder" prefHeight="30.0" prefWidth="60.0" />
+                                    <ComboBox fx:id="minuteInOrder" prefHeight="30.0" prefWidth="78.0" promptText="00" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
-                                    <ComboBox fx:id="hourInOrder2" prefHeight="30.0" prefWidth="60.0" />
+                                    <ComboBox fx:id="hourInOrder2" prefHeight="30.0" prefWidth="76.0" promptText="00" />
                                     <Label prefHeight="30.0" prefWidth="33.0" text="  ：" />
-                                    <ComboBox fx:id="minuteInOrder2" prefHeight="30.0" prefWidth="60.0" />
+                                    <ComboBox fx:id="minuteInOrder2" prefHeight="30.0" prefWidth="78.0" promptText="00" />
                                  </children>
                               </HBox>
                            </children>
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="365.0" minWidth="10.0" prefWidth="106.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="332.0" minWidth="0.0" prefWidth="159.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="365.0" minWidth="10.0" prefWidth="113.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="332.0" minWidth="0.0" prefWidth="240.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -395,11 +395,11 @@
                               <Label text="预计入住人数：" GridPane.rowIndex="2" />
                               <Label text="房间数量：" GridPane.rowIndex="3" />
                               <TextField fx:id="nameInOrder" prefHeight="30.0" prefWidth="105.0" GridPane.columnIndex="1" />
-                              <ComboBox fx:id="roomCountInOrder" prefHeight="30.0" prefWidth="66.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <ComboBox fx:id="guestNumInOrder" prefHeight="30.0" prefWidth="67.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <ComboBox fx:id="roomCountInOrder" prefHeight="30.0" prefWidth="66.0" promptText="1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <ComboBox fx:id="guestNumInOrder" prefHeight="30.0" prefWidth="67.0" promptText="1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
-                        <Label layoutX="175.0" layoutY="88.0" text="房间类型：" />
+                        <Label layoutX="131.0" layoutY="88.0" text="房间类型：" />
                         <Label fx:id="hotelIDInOrder" layoutX="126.0" layoutY="50.0" />
                         <Label fx:id="hotelAddressInOrder" layoutX="244.0" layoutY="50.0" />
                         <Label layoutX="624.0" layoutY="60.0" text="订单价格：" />
@@ -408,14 +408,14 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="roomTypeInOrder" layoutX="283.0" layoutY="83.0" prefHeight="30.0" prefWidth="123.0" />
                         <Label layoutX="662.0" layoutY="88.0" text="房间价格：" />
                         <Label fx:id="previousPriceInOrder" layoutX="743.0" layoutY="87.0" text="ss">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Button layoutX="431.0" layoutY="83.0" mnemonicParsing="false" onAction="#changeRoom" text="更改" />
+                        <Button layoutX="408.0" layoutY="83.0" mnemonicParsing="false" onAction="#changeRoom" text="更改" />
+                        <ComboBox fx:id="roomTypeInOrder" layoutX="244.0" layoutY="83.0" prefHeight="30.0" prefWidth="153.0" />
                      </children>
                   </Pane>
                </children>
