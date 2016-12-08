@@ -27,7 +27,7 @@ public final class CreditController implements CreditBLService {
 	 */
 	private CreditController() {
 		//new the mock object
-		credit = new MockCredit();
+		credit = new Credit();
 	}
 	
 	/**
