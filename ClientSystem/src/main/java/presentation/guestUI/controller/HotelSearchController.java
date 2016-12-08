@@ -619,14 +619,11 @@ public class HotelSearchController {
 	 * 
 	 * TODO 高源：对hourInOrder、hourInOrder2、minuteInOrder、minuteInOrder2的功能不清楚，故为猜测，检查一下
 	 */
-<<<<<<< HEAD
-=======
 	OrderVO orderVO;
 
 	@FXML 
 	StackPane right;
 
->>>>>>> master
 	@FXML
 	protected void commitOrder() {
 		final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(), 
