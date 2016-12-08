@@ -12,6 +12,10 @@ public class MockHotel extends Hotel {
 		super(hotelWorkerID);
 	}
 
+	public MockHotel() {
+		// TODO 自动生成的构造函数存根
+	}
+
 	@Override
 	public ResultMessage addHotelInfo(HotelVO hotelVO) {
 		return ResultMessage.SUCCESS;

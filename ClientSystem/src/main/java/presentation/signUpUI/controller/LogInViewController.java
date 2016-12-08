@@ -8,33 +8,35 @@ import businessLogic.logInBL.LogInController;
 import businessLogicService.logInBLService.LogInBLService;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import presentation.Main;
 import utilities.IDReserve;
 import utilities.UserType;
 import vo.GuestVO;
-import vo.UserVO;
 	
 public class LogInViewController {
 	public static String userID;
 	//登录和注册界面
 	@FXML
-	private Pane logInPane;
+	private Pane logInPane,registerPane,rmiPane;
 	@FXML
-	private Pane registerPane;
+	private Button registerBT,logInBT;
 	//登录信息
 	@FXML
 	private TextField ID;
 	@FXML
-	private TextField password;
+	private PasswordField password;
+	//登录信息
+	@FXML
+	private TextField rmiText;
 	//注册信息
 	@FXML
-	private TextField password2;
+	private PasswordField password2,password3;
 	@FXML
 	private TextField name;
 	@FXML
@@ -52,6 +54,8 @@ public class LogInViewController {
 		this.logInBLController = LogInController.getInstance();
 		factory = new RootFactory();
 	}
+	
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -62,6 +66,9 @@ public class LogInViewController {
 	protected void openLogIn() {
 		registerPane.setVisible(false);
 		logInPane.setVisible(true);
+		rmiPane.setVisible(false);
+		logInBT.setVisible(false);
+		registerBT.setVisible(true);
 	}
 	/**
 	 * @author 61990
@@ -73,8 +80,25 @@ public class LogInViewController {
 	public void openRegister() {
 		registerPane.setVisible(true);
 		logInPane.setVisible(false);
+		rmiPane.setVisible(false);
+		logInBT.setVisible(true);
+		registerBT.setVisible(false);
 	}
-
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @updateTime 2016/11/30
+	 * @切换RMI界面
+	 */
+	@FXML
+	public void openRMI() {
+		rmiPane.setVisible(true);
+		registerPane.setVisible(false);
+		logInPane.setVisible(false);
+		logInBT.setVisible(true);
+		registerBT.setVisible(false);
+	}
+	
 
 	/**
 	 * @author 61990
@@ -84,6 +108,7 @@ public class LogInViewController {
 	 */
 	@FXML
 	protected void logIn() {
+
 			UserType userType = logInBLController.logIn(ID.getText(), password.getText());
 			
 			if(userType==null){
@@ -108,10 +133,22 @@ public class LogInViewController {
 	 */
 	@FXML
 	protected void register() {
+//		TODO djy 8日 注意  对比两次输的密码成功后才能注册
+//		if(password2.getText()==password3.getText())
 		GuestVO userVO = new GuestVO("",LocalDate.of(0,0,0),"",name.getText(), nickName.getText(),password2.getText()
 				,phone.getText(),0);
 		GuestVO guestVO = logInBLController.guestSignUp(userVO);
 		// TODO 此处返回了界面需要的自动递增的ID，后续操作由界面完成
+	}
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @updateTime 2016/12/8
+	 * @连接RMI
+	 */
+	@FXML
+	protected void link() {
+		System.out.println(rmiText.getText());
 	}
 
 }

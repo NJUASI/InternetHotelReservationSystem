@@ -13,8 +13,8 @@ import utilities.RoomType;
  * @time:2016年12月4日 下午9:52:00
  */
 public interface HotelInfoOperation {
-	
-	
+
+
 	/**
 	 * @Description:更新酒店评分
 	 * @param score
@@ -25,7 +25,7 @@ public interface HotelInfoOperation {
 	 * @time:2016年12月4日 22:55:56
 	 */
 	public ResultMessage scoreUpdate(double score);
-	
+
 	/**
 	 * @Description:获取酒店所在的城市商圈
 	 * @return
@@ -34,8 +34,8 @@ public interface HotelInfoOperation {
 	 * lastChangedBy: Harvey Gong
 	 * @time:2016年12月4日 下午9:56:21
 	 */
-	public Address getHotelAddress();
-	
+	public Address getHotelAddress(String hotelID);
+
 	/**
 	 * @Description:委托给Rooms，获取该酒店的所有房间类型
 	 * @return
@@ -44,8 +44,8 @@ public interface HotelInfoOperation {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月4日 下午11:08:42
 	 */
-	public Iterator<RoomType> getRoomType();
-	
+	public Iterator<RoomType> getRoomType(String hotelID);
+
 	/**
 	 * @Description:根据酒店id获取该酒店剩余的房间总数量
 	 * @param hotelID
@@ -56,5 +56,30 @@ public interface HotelInfoOperation {
 	 * @time:2016年12月6日 下午5:32:46
 	 */
 	public int getRemainRoomNum(String hotelID);
-	
+
+	/**
+	 * @Description:办理入住，线上线下均调此方法
+	 * @param hotelID
+	 * @param roomName
+	 * @param roomNum
+	 * @return
+	 * ResultMessage
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月8日 上午12:44:36
+	 */
+	public ResultMessage checkIn(String hotelID, String roomName, int roomNum);
+
+	/**
+	 * @Description:办理退房，线上线下均调此方法
+	 * @param hotelID
+	 * @param roomName
+	 * @param roomNum
+	 * @return
+	 * ResultMessage
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月8日 上午12:44:56
+	 */
+	public ResultMessage checkOut(String hotelID, String roomName, int roomNum);
 }

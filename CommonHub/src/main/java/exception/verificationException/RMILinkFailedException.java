@@ -1,4 +1,4 @@
-package businessLogic.hotelBL.hotel;
+package exception.verificationException;
 
 /**
  * @Description:当rmi连接出错的时候抛出该异常

@@ -15,4 +15,6 @@ public interface SourceDataHelper {
 	public Iterator<String> getLevels();
 
 	public Iterator<String> getRoomTypes();
+
+	public Iterator<String> getCircles(String city);
 }

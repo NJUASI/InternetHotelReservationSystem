@@ -21,7 +21,6 @@ import javafx.scene.layout.Pane;
 import presentation.hotelWorkerUI.controller.OrderTable;
 import utilities.IDReserve;
 import utilities.OrderState;
-import utilities.RoomType;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
 
@@ -34,7 +33,7 @@ import vo.OrderVO;
  */
 public class OrderController {
 
-	private OrderBLService orderBLService;
+	private OrderBLService orderBLController;
 	
 	/*
 	 * 订单概况
@@ -89,7 +88,8 @@ public class OrderController {
 	 */
 	@FXML
 	private void initialize() {
-		orderBLService = OrderBLController.getInstance();
+		
+		orderBLController = OrderBLController.getInstance();
 		
 		cancelPercent.setValue("50%");
 		cancelPercent.getItems().add("50%");
@@ -113,7 +113,7 @@ public class OrderController {
 		searchPane.setVisible(false);
 	
 		orderID = searchID.getText();
-		orderVO = orderBLService.getOrderDetail(orderID);
+		orderVO = orderBLController.getOrderDetail(orderID);
 		initOrderDetail(orderVO);
 		
 		if (orderVO.orderGeneralVO.state == OrderState.ABNORMAL) {
@@ -160,7 +160,7 @@ public class OrderController {
 		try {
 			orderCheck.setVisible(true);
 		searchPane.setVisible(false);
-			// TODO fjj注意：获得输入的内容日期，通过日期获得一整天的异常订单
+			// TODO fjj注意：获得输入的内容日期，通过日期获得一整天的异常+未执行订单
 		// LocalDate date = searchDate.getValue();
 		orderGenerals=new LinkedList<>();
 		
@@ -217,7 +217,7 @@ public class OrderController {
 	@FXML
 	protected void OrderDetail() {
 		orderID = table.getSelectionModel().getSelectedItem().getOrderID();
-		orderVO = orderBLService.getOrderDetail(orderID);
+		orderVO = orderBLController.getOrderDetail(orderID);
 		//@高源：原本没有。。需要加吧？？
 		initOrderDetail(orderVO);
 		
@@ -237,11 +237,10 @@ public class OrderController {
 	protected void searchAbnormalOrder() {
 		LocalDate date = searchDate.getValue();
 		
-		orderGenerals = orderBLService.getAllAbnormalOrderGeneral(date);
+		orderGenerals = orderBLController.getAllAbnormalOrderGeneral(date);
 		initOrderCheck(orderGenerals);
 		
 		cancelOrderPaneInCheck.setDisable(false);
-				
 				 
 	}
 
@@ -249,7 +248,7 @@ public class OrderController {
 	protected void searchUnexecutedOrder() {
 		LocalDate date = searchDate.getValue();
 		
-		orderGenerals = orderBLService.getAllUnexecutedOrderGeneral(date);
+		orderGenerals = orderBLController.getAllUnexecutedOrderGeneral(date);
 		initOrderCheck(orderGenerals);
 		
 		cancelOrderPaneInCheck.setDisable(true);

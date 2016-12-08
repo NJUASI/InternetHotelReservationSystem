@@ -1,9 +1,7 @@
 package presentation.guestUI.controller;
 
 
-import java.time.LocalDateTime;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Iterator;
 
 import businessLogic.orderBL.OrderBLController;
 import businessLogicService.orderBLService.OrderBLService;
@@ -17,12 +15,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import presentation.hotelWorkerUI.controller.OrderController;
 import presentation.hotelWorkerUI.controller.OrderTable;
 import utilities.IDReserve;
 import utilities.OrderState;
 import utilities.ResultMessage;
-import utilities.RoomType;
+import utilities.UserType;
 import vo.GuestEvaluationVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
@@ -38,32 +35,32 @@ import vo.OrderVO;
  * @高源 评论界面好像有点问题  房间号也不对
  */
 public class OrderCheckController {
+
+	private OrderBLService orderBLController;
 	
-	private OrderBLService orderBLService;
-	
+	private UserType guest = UserType.GUEST;
+
 	/*
 	 * 订单概况
 	 */
 	private final String guestID = IDReserve.getInstance().getUserID();
-	
-	private List<OrderGeneralVO> orderGenerals;
-	
+
+	private Iterator<OrderGeneralVO> orderGenerals;
+
 	/*
 	 * 订单详情
 	 */
 	private String orderID;
-	
+
 	private OrderVO orderVO;
-	
-	
-	
+
 	//订单概况
 	@FXML
 	private Pane orderCheck;
 
 	@FXML
 	private TableView<OrderTable> table;
-	
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
@@ -74,56 +71,57 @@ public class OrderCheckController {
 	@FXML
 	private void initialize() {
 		//通过guestID得到orderGeneralVOs list
-		orderBLService = OrderBLController.getInstance();
-		List<OrderGeneralVO> orderGenerals = orderBLService.getAllGuestOrderGeneral(guestID);
+		orderBLController = OrderBLController.getInstance();
+
+		Iterator<OrderGeneralVO> orderGenerals = orderBLController.getOrderGenerals(guestID,guest,null);
 		initOrderCheck(orderGenerals);
 	}
-	
-	
+
+
 	@FXML
 	private TableColumn<OrderTable, String> orderIDColumn, hotelNameColumn, addressColumn, priceColumn,
-			checkInTimeColumn, stateColumn,checkOutTimeColumn;
+	checkInTimeColumn, stateColumn,checkOutTimeColumn;
 
 	/*
 	 * 订单概况界面可分别查看各个类型的订单
 	 */
 	/**
 	 * @author 61990
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/8
 	 * @打开所有订单概况
 	 */
 	@FXML
 	protected void searchAllOrder() {
 		//@高源——————charles新加的，界面上没有对应按钮——所有订单
-		orderGenerals = orderBLService.getAllGuestOrderGeneral(guestID);
+		orderGenerals = orderBLController.getOrderGenerals(guestID,guest,null);
 		initOrderCheck(orderGenerals);
 	}
-	
+
 	/**
 	 * @author 61990
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/8
 	 * @打开未执行订单概况
 	 */
 	@FXML
 	protected void searchUnexecutedOrder() {
-		orderGenerals = orderBLService.getAllGuestUnexecutedOrderGeneral(guestID);
+		orderGenerals = orderBLController.getOrderGenerals(guestID,guest,OrderState.UNEXECUTED);
 		initOrderCheck(orderGenerals);
 	}
-	
+
 	/**
 	 * @author 61990
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/8
 	 * @打开已执行订单概况
 	 */
 	@FXML
 	protected void searchExecutedOrder() {		
-		orderGenerals = orderBLService.getAllGuestExecutedOrderGeneral(guestID);
+		orderGenerals = orderBLController.getOrderGenerals(guestID,UserType.GUEST,OrderState.EXECUTED);
 		initOrderCheck(orderGenerals);
 	}
-	
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
@@ -132,10 +130,10 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchAbnormalOrder() {
-		orderGenerals = orderBLService.getAllGuestAbnormalOrderGeneral(guestID);
+		orderGenerals = orderBLController.getOrderGenerals(guestID,guest,OrderState.ABNORMAL);
 		initOrderCheck(orderGenerals);
 	}
-	
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
@@ -144,10 +142,10 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchCancelledOrder() {
-		orderGenerals = orderBLService.getAllGuestCancelledOrderGeneral(guestID);
+		orderGenerals = orderBLController.getOrderGenerals(guestID,guest,OrderState.CANCELLED);
 		initOrderCheck(orderGenerals);
 	}
-	
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
@@ -156,10 +154,10 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchCommentedOrder() {
-		orderGenerals = orderBLService.getAllGuestCommentedOrderGeneral(guestID);
+		orderGenerals = orderBLController.getAllGuestCommentOrderGeneral(guestID, true);
 		initOrderCheck(orderGenerals);
 	}
-	
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
@@ -168,7 +166,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchUncommentedOrder() {
-		orderGenerals = orderBLService.getAllGuestUncommentedOrderGeneral(guestID);
+		orderGenerals = orderBLController.getAllGuestCommentOrderGeneral(guestID, false);
 		initOrderCheck(orderGenerals);
 	}
 
@@ -179,19 +177,17 @@ public class OrderCheckController {
 	 * @param orderVO
 	 * @describe 选择并初始化订单概况界面
 	 */
-	private void initOrderCheck(List<OrderGeneralVO> orderGenerals) {
+	private void initOrderCheck(Iterator<OrderGeneralVO> orderGenerals) {
 		table.getItems().clear();
-		List<OrderTable> orderList = new LinkedList<OrderTable>();
-		for (int i = 0; i < orderGenerals.size(); i++) {
-			OrderGeneralVO temp = orderGenerals.get(i);
-			orderList.add(new OrderTable(temp.orderID, temp.hotelName, temp.hotelAddress,
-					temp.expectExecuteTime.toString(),temp.expectLeaveTime.toString(),temp.price + "", temp.state.toString()));
+		ObservableList<OrderTable> data = FXCollections.observableArrayList();
+
+		while(orderGenerals.hasNext()){
+			OrderGeneralVO vo = orderGenerals.next();
+			OrderTable orderTable = new OrderTable(vo.orderID, vo.hotelName, vo.hotelAddress,
+					vo.expectExecuteTime.toString(),vo.expectLeaveTime.toString(),vo.price + "", vo.state.toString());
+			data.add(orderTable);
 		}
 
-		ObservableList<OrderTable> data = FXCollections.observableArrayList();
-		for (int i = 0; i < orderList.size(); i++) {
-			data.add(orderList.get(i));
-		}
 		orderIDColumn.setCellValueFactory(cellData -> cellData.getValue().orderID);
 		hotelNameColumn.setCellValueFactory(cellData -> cellData.getValue().hotelName);
 		addressColumn.setCellValueFactory(cellData -> cellData.getValue().address);
@@ -202,11 +198,11 @@ public class OrderCheckController {
 
 		table.setItems(data);
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	/*
 	 * 订单详情初始化
 	 */
@@ -216,14 +212,14 @@ public class OrderCheckController {
 	private TextField orderScore;
 	@FXML
 	private TextArea orderComment;
-	
+
 	@FXML
 	private Button detail_state,commitBt;
 	@FXML
 	private Label detail_ID, detail_Hotel, detail_address, detail_roomType, detail_roomNum, detail_personNum,detail_roomNumber,
-			detail_price, detail_personName, detail_phone, detail_createTime, detail_expectTime,detail_expectLeaveTime,detail_message,detail_checkInTime,detail_checkOutTime;
-	
-	
+	detail_price, detail_personName, detail_phone, detail_createTime, detail_expectTime,detail_expectLeaveTime,detail_message,detail_checkInTime,detail_checkOutTime;
+
+
 
 	/**
 	 * @author 61990
@@ -234,11 +230,11 @@ public class OrderCheckController {
 	@FXML
 	protected void orderDetail() {
 		orderID = table.getSelectionModel().getSelectedItem().getOrderID();
-		
+
 		orderDetail.setVisible(true);
 		orderCheck.setVisible(false);
-		
-		orderVO = orderBLService.getOrderDetail(orderID);
+
+		orderVO = orderBLController.getOrderDetail(orderID);
 		initOrderDetail(orderVO);
 	}
 	/**
@@ -251,16 +247,16 @@ public class OrderCheckController {
 	protected void commitComment() {
 		final double score = Double.valueOf(orderScore.getText());
 		final String comment = orderComment.getText();
-		
+
 		GuestEvaluationVO evaluationVO = new GuestEvaluationVO(orderID, score, comment);
-		final ResultMessage result = orderBLService.addEvaluation(evaluationVO);
+		final ResultMessage result = orderBLController.addEvaluation(evaluationVO);
 		if (result == ResultMessage.UPDATE_EVALUATION_SUCCESS) {
 			//@高源——————状态栏显示已评价成功
-			
+
 		}else {
 			//@高源——————状态栏显示评价失败
 		}
-		orderVO = orderBLService.getOrderDetail(orderID);
+		orderVO = orderBLController.getOrderDetail(orderID);
 		initOrderDetail(orderVO);
 	}
 	/**
@@ -300,7 +296,7 @@ public class OrderCheckController {
 		detail_message.setText(orderVO.message);
 		orderComment.setText(orderVO.comment);
 		orderScore.setText(Double.toString(orderVO.score));
-		
+
 		// 是否可以评论
 		if (!orderVO.orderGeneralVO.hasCommented) {
 			orderComment.setDisable(true);

@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.hotelBL.MockHotel;
-import businessLogic.hotelBL.hotelScan.searchCriteria.SearchCriteria;
 import businessLogic.hotelBL.hotelScan.searchCriteria.SearchCriteriaFactory;
 import businessLogic.hotelBL.hotelScan.sortComparator.SortComparatorFactory;
 import businessLogic.orderBL.MockOrder;
@@ -41,17 +40,23 @@ public class HotelScan {
 	private String guestID;
 	
 	public HotelScan(String guestID) {
-//		hotelDataService = ClientRemoteHelper.getInstance().getHotelDataService();
-		try {
-			hotelDataService = new HotelDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+
+		initHotelDataService();
 		sortComparatorFactory = new SortComparatorFactory();
 		this.guestID = guestID;
 	}
 
+	private void initHotelDataService(){
+		try {
+//			hotelDataService = ClientRemoteHelper.getInstance().getHotelDataService();
+			hotelDataService = new HotelDataService_Stub();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public HotelScan() {
+		initHotelDataService();
 	}
 
 	/**
@@ -64,7 +69,6 @@ public class HotelScan {
 	 */
 	public Iterator<HotelVO> getHotels(String city,String circle){
 		try {
-			System.out.println("enter");
 			hotelPOList = hotelDataService.getHotels(city,circle);
 		} catch (RemoteException e) {
 			e.printStackTrace();

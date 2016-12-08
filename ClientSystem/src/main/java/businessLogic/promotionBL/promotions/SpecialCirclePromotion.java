@@ -73,7 +73,7 @@ public class SpecialCirclePromotion {
 	 */
 	public double getDiscount(String guestID,String hotelID){
 		if(isVIP(guestID)){
-			Address hotelAddress = new MockHotel(hotelID).getHotelAddress();
+			Address hotelAddress = new MockHotel().getHotelAddress(hotelID);
 			String city = hotelAddress.city;
 			String cycle = hotelAddress.circle;
 			try {

@@ -1,100 +1,85 @@
 package presentation.webManagerUI.controller;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Iterator;
 
+import javax.xml.ws.Holder;
+
+import businessLogic.hotelBL.HotelBLController;
+import businessLogic.sourceBL.SourceBLController;
+import businessLogicService.hotelBLService.HotelBLService;
+import businessLogicService.sourceBLService.SourceBLService;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import vo.HotelVO;
 
 public class HotelInfoController {
-	
+
 	@FXML
 	private ComboBox<String> cityInput,cycleInput;
-	
+
 	@FXML
 	private ComboBox<Integer>levelInput;
 	@FXML
 	private TextField hotelName,address;
+
+	private SourceBLService sourceBLController;
+	private HotelBLService hotelBLController;
+	public HotelInfoController() {
+		sourceBLController = SourceBLController.getInstance();
+		hotelBLController = HotelBLController.getInstance();
+	}
+
 	/**
+	 * @description 获得所有城市名称
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/2 
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7 
 	 * @查找城市
 	 */
 	@FXML
 	protected void searchCity() {
 		cityInput.getItems().clear();
-		
-		//TODO gcm注意：获得所有城市名称
-		List<String> list = getCity();
-		
-		for (int i = 0; i < list.size(); i++) {
-			cityInput.getItems().add(list.get(i));
+
+		Iterator<String> cities = sourceBLController.getCities();
+		while(cities.hasNext()){
+			cityInput.getItems().add(cities.next());
 		}
 	}
-	List<String> getCity() {
-		List<String> list = new LinkedList<String>();
-		list.add("1");
-		list.add("122");
-		list.add("122221");
-		list.add("131");
-		list.add("3");
-		list.add("23");
-		return list;
-	}
-	
+
 	/**
+	 * @description 查找星级
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/2
-	 * @查找星级
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
 	 */
 	@FXML
 	protected void searchLevel() {
 		levelInput.getItems().clear();
-		
-	
-		List<Integer> list = getLevel();
-		
-		for (int i = 0; i < list.size(); i++) {
-			levelInput.getItems().add(list.get(i));
-		}
-	}
-	List<Integer> getLevel() {
-		List<Integer> list = new LinkedList<Integer>();
-		for (int i = 1; i <5 ; i++) {
-			list.add(i);
-		}
-		
-		return list;
-	}
-	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/2
-	 * @查找商圈
-	 */
-	@FXML
-	protected void searchCycle() {
-		//TODO gcm注意：通过城市，获得所有商圈名称
-		//cityInput.getValue();
-		List<String> list = getCycle(cityInput.getValue());
-		cycleInput.getItems().clear();
-		for (int i = 0; i < list.size(); i++) {
-			cycleInput.getItems().add(list.get(i));
+
+		Iterator<String> levels = sourceBLController.getLevels();
+
+		while(levels.hasNext()){
+			//TODO 把levelInput的add改为String类型，因为其它都是String类型，就可以减少重复的代码
+			levelInput.getItems().add(Integer.valueOf(levels.next()));
 		}
 	}
 
-	List<String> getCycle(String city) {
-		List<String> list = new LinkedList<String>();
-		list.add("123");
-		list.add("1233");
-		list.add("1231");
-		list.add("1232");
-		list.add("1213");
-		list.add("1123");
-		return list;
+	/**
+	 * @description 查找商圈
+	 * @author 61990
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
+	 */
+	@FXML
+	protected void searchCycle() {
+
+		cycleInput.getItems().clear();
+		//调用sourceBL方法获取该城市的所有商圈
+		Iterator<String> circles = sourceBLController.getCircles(cityInput.getValue());
+		while(circles.hasNext()){
+			cycleInput.getItems().add(circles.next());
+		}
 	}
 	/**
 	 * @author 61990
@@ -104,10 +89,19 @@ public class HotelInfoController {
 	 */
 	@FXML
 	protected void addHotel(){
-		//TODO 创建hotelVO，保存，并需要返回初始化的酒店编号和密码
-		// TODO gcm 先更改你addhotel的接口，我再去user那里修改
-	//TODO gcm注意：建hotelVO，保存，并需要返回初始化的酒店编号和密码
-//		addHotel(hotelName.getText(),cityInput.getValue(),cycleInput.getValue(),levelInput.getValue(),address.getText());
-
+		//TODO djy注意:创建hotelVO，保存，并需要返回初始化的酒店编号和密码
+		/*
+		 *  TODO djy注意:先更改你addhotel的接口，我再去user那里修改
+		 *  我这里add没有问题，要怎么修改
+		 */
+		
+		HotelVO newHotel = new HotelVO();
+		newHotel.hotelName = hotelName.getText();
+		newHotel.city = cityInput.getValue();
+		newHotel.circle = cycleInput.getValue();
+		//TODO 还是将levelInput的改为返回String
+		newHotel.level = String.valueOf(levelInput.getValue());
+		newHotel.address = address.getText();
+		hotelBLController.addHotel(newHotel);
 	}
 }

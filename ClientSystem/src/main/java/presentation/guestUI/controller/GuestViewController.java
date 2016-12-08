@@ -10,92 +10,108 @@ import javafx.scene.layout.StackPane;
 
 /**
  * @author 61990
+ * @lastChangedBy Harvey
  *
  */
 public class GuestViewController {
-	Parent guestInfo, hotelInfo, orderInfo, memberInfo, creditInfo;
+
 
 	@FXML
 	private StackPane right;
-	
+
 	@FXML
 	private Pane mainPane;
 
+	private Parent currentParent ;
+
+	public GuestViewController() {
+		currentParent = mainPane;
+	}
+
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/8
 	 * @throws IOException 跳转客户信息界面
 	 */
 	@FXML
 	protected void openGuestInfo() throws IOException {
-		right.getChildren().removeAll(mainPane, guestInfo, hotelInfo, orderInfo, memberInfo, creditInfo);
-		guestInfo = FXMLLoader.load(getClass().getResource("/presentation/guestUI/view/GuestInfo.fxml"));
-		right.getChildren().add(guestInfo);
+		jump("GuestInfo");
 	}
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/8
 	 * @throws IOException 跳转酒店查询界面
 	 */
 	@FXML
 	protected void openHotel() throws IOException {
-		right.getChildren().removeAll(mainPane, guestInfo, hotelInfo, orderInfo, memberInfo, creditInfo);
-		hotelInfo = FXMLLoader.load(getClass().getResource("/presentation/guestUI/view/CityChoose.fxml"));
-		right.getChildren().add(hotelInfo);
+		jump("CityChoose");
 	}
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/8
 	 * @throws IOException 跳转订单查询界面
 	 */
 	@FXML
 	protected void openOrder() throws IOException {
-		right.getChildren().removeAll(mainPane, guestInfo, hotelInfo, orderInfo, memberInfo, creditInfo);
-		orderInfo = FXMLLoader.load(getClass().getResource("/presentation/guestUI/view/OrderCheck.fxml"));
-		right.getChildren().add(orderInfo);
+		jump("OrderCheck");
 	}
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/8
 	 * @throws IOException 跳转会员信息界面
 	 */
 	@FXML
 	protected void openMember() throws IOException {
-		right.getChildren().removeAll(mainPane, guestInfo, hotelInfo, orderInfo, memberInfo, creditInfo);
-		memberInfo = FXMLLoader.load(getClass().getResource("/presentation/guestUI/view/MemberCheck.fxml"));
-		right.getChildren().add(memberInfo);
+		jump("MemberCheck");
 	}
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/8
 	 * @throws IOException 跳转信用信息界面
 	 */
 	@FXML
 	protected void openCredit() throws IOException {
-		right.getChildren().removeAll(mainPane, guestInfo, hotelInfo, orderInfo, memberInfo, creditInfo);
-		creditInfo = FXMLLoader.load(getClass().getResource("/presentation/guestUI/view/Credit.fxml"));
-
-		right.getChildren().add(creditInfo);
+		jump("Credit");
 	}
-	
+
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/8
 	 * @throws IOException 跳转主界面
 	 */
 	@FXML
 	protected void openMain() {
-		right.getChildren().removeAll(mainPane, guestInfo, hotelInfo, orderInfo, memberInfo, creditInfo);
+		right.getChildren().clear();
 		right.getChildren().add(mainPane);
+	}
+
+	/**
+	 * @Description:封装跳转逻辑
+	 * @param parent
+	 * @param path
+	 * void
+	 * @author: Harvey Gong
+	 * @throws IOException 
+	 * @lastChangedBy: 61990
+	 * @time:2016年12月8日 下午2:49:52
+	 */
+	private void jump(String path){
+		right.getChildren().clear();
+		try {
+			currentParent = FXMLLoader.load(getClass().getResource("/presentation/guestUI/view/"+path+".fxml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		right.getChildren().add(currentParent);
 	}
 }

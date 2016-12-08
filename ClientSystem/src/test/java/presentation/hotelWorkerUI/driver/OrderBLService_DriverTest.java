@@ -5,14 +5,16 @@ import static org.junit.Assert.assertEquals;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Iterator;
-import java.util.List;
 
 import org.junit.Test;
 
+import businessLogic.orderBL.OrderBLController;
 import businessLogic.orderBL.stub.OrderBLService_Stub;
+import businessLogicService.orderBLService.OrderBLService;
 import utilities.OrderState;
 import utilities.ResultMessage;
 import utilities.RoomType;
+import utilities.UserType;
 import vo.CheckInVO;
 import vo.CheckOutVO;
 import vo.HotelEvaluationVO;
@@ -82,11 +84,10 @@ public class OrderBLService_DriverTest {
 	 */
 	@Test
 	public void testGetAllHotelOrderGeneral() {
-		final OrderBLService_Stub stub = new OrderBLService_Stub();
-		final OrderBLService_Driver driver = new OrderBLService_Driver(stub);
+		final OrderBLService stub = OrderBLController.getInstance();
 		
-		final List<OrderGeneralVO> orderGeneralVOs = driver.orderBLService.getAllHotelOrderGeneral("1234567890");
-		final OrderGeneralVO orderGeneralVO = orderGeneralVOs.get(0);	
+		final Iterator<OrderGeneralVO> orderGeneralVOs = stub.getOrderGenerals("1234567890",UserType.GUEST,null);
+		final OrderGeneralVO orderGeneralVO = orderGeneralVOs.next();
 		
 		assertEquals("123456789012", orderGeneralVO.orderID);
 		assertEquals("1234567890", orderGeneralVO.guestID);
