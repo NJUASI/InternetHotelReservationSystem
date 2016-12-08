@@ -336,8 +336,17 @@ public class OrderController {
 		 * 因为接口modifyCredit(String guestID, double creditNum)中creditNum为最后的直接修改值
 		 * 故将理想信用值的计算逻辑暴露给了presentation
 		 */
-		final GuestVO thisGuest = (GuestVO)userService.getSingle(orderVO.orderGeneralVO.guestID);
-		final double expectCreditNum = thisGuest.credit -  orderVO.orderGeneralVO.price * percent;
+		
+		if (orderVO == null) {
+			orderVO = orderBLController.getOrderDetail(orderID);
+		}
+		GuestVO thisGuest = (GuestVO)userService.getSingle(orderVO.orderGeneralVO.guestID);
+		/*
+		 * 因为数据的问题，getOrderDetail得到的是一个UNEXECUTED对象，所以执行会抛异常
+		 * 但是若是数据正确的话，就没有问题
+		 */
+		
+		final double expectCreditNum = thisGuest.credit - orderVO.orderGeneralVO.price * percent;
 		ResultMessage msg2 = guestCreditService.modifyCredit(orderVO.orderGeneralVO.guestID, expectCreditNum);
 		
 		if (msg1 == ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS && msg2 == ResultMessage.RECORE_CREDIT_SUCCESS) {
