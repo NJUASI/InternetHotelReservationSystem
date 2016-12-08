@@ -65,7 +65,7 @@ public class OrderForHotelModule implements OrderForHotelModuleBLService{
 	 * 直接从本层本模块getAllGuestOrderGeneral走
 	 */
 	public OrderState getOrderState(String guestID, String hotelID) {
-		Iterator<OrderGeneralVO> guestOrders = commonOrder.getOrderGenerals(guestID,UserType.GUEST,null);
+		Iterator<OrderGeneralVO> guestOrders = commonOrder.getAllOrderGenerals(guestID, UserType.GUEST);
 		
 		List<OrderState> states = new ArrayList<OrderState>();
 		while(guestOrders.hasNext()){

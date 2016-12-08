@@ -1,9 +1,7 @@
 package businessLogic.orderBL.order;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import businessLogic.hotelBL.HotelInfoOperation;
 import businessLogic.hotelBL.MockHotel;
@@ -14,11 +12,11 @@ import businessLogicService.orderBLService.GuestOrderBLService;
 import dataService.orderDataService.OrderDataService;
 import dataService.orderDataService.OrderDataService_Stub;
 import po.GuestEvaluationPO;
-import po.OrderGeneralPO;
 import po.OrderPO;
 import utilities.OrderState;
 import utilities.PreOrder;
 import utilities.ResultMessage;
+import utilities.UserType;
 import vo.GuestEvaluationVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
@@ -36,7 +34,10 @@ public class GuestOrder implements GuestOrderBLService {
 
 	private CommonOrder commonOrder;
 	
+	//hotel
 	private HotelInfoOperation hotelInterface;
+	
+	//promotion
 	private DiscountInSpan discountCalculator;
 	
 	/**
@@ -153,4 +154,23 @@ public class GuestOrder implements GuestOrderBLService {
 		
 	}
 
+	/**
+	 * @author charles
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
+	 * @param guestID 客户要查看个人<已执行／未执行>订单时，客户的编号
+	 * @return 客户个人<已执行／未执行>订订单
+	 * 
+	 * <<已执行／未执行>只包含一种
+	 */
+	public Iterator<OrderGeneralVO> getAllGuestCommentOrderGeneral(String guestID, boolean hasCommented) {
+		final Iterator<OrderGeneralVO> orderGenerals = commonOrder.getAllOrderGenerals(guestID,UserType.GUEST);
+
+		while(orderGenerals.hasNext()){
+			if(!orderGenerals.next().hasCommented){
+				orderGenerals.remove();
+			}
+		}
+		return orderGenerals;
+	}
 }

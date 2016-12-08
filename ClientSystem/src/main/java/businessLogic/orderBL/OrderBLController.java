@@ -24,7 +24,7 @@ import vo.OrderVO;
  * 
  * @author cuihua
  * lastChangedBy charles
- * updateTime 2016/12/7
+ * updateTime 2016/12/8
  * 
  * 对Order模块重构
  */
@@ -41,7 +41,7 @@ public final class OrderBLController implements OrderBLService {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/29
+	 * @updateTime 2016/12/7
 	 * 构造函数，初始化成员变量
 	 */
 	private OrderBLController() {
@@ -63,10 +63,41 @@ public final class OrderBLController implements OrderBLService {
 		return orderController;
 	}
 	
-
+	
+	
+	
+	
+	
 	/*
 	 * commonOrder的接口
 	 */
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/8
+	 * @param userID 客户编号
+	 * @param userType 客户类型：客户／酒店工作人员
+	 * @return 特定用户类型的全部订单
+	 */
+	@Override
+	public Iterator<OrderGeneralVO> getAllOrderGenerals(String userID, UserType userType) {
+		return commonOrder.getAllOrderGenerals(userID, userType);
+	}
+
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/8
+	 * @param userID 客户编号
+	 * @param userType 客户类型：客户／酒店工作人员
+	 * @param orderState <所有某种特定类型>包括：未执行、已执行、异常、已撤销
+	 * @return 需要得到的<所有某种特定类型>的order
+	 */
+	@Override
+	public Iterator<OrderGeneralVO> getSpecialOrderGenerals(String userID, UserType userType, OrderState orderState) {
+		return commonOrder.getSpecialOrderGenerals(userID, userType, orderState);
+	}
+	
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
@@ -90,6 +121,10 @@ public final class OrderBLController implements OrderBLService {
 	public Iterator<HotelEvaluationVO> getEvaluations(String hotelID) {
 		return commonOrder.getEvaluations(hotelID);
 	}
+	
+	
+	
+	
 	
 	
 	/*
@@ -142,7 +177,7 @@ public final class OrderBLController implements OrderBLService {
 	 * <<已执行／未执行>只包含一种
 	 */
 	public Iterator<OrderGeneralVO> getAllGuestCommentOrderGeneral(String guestID, boolean hasCommented) {
-		return commonOrder.getAllGuestCommentOrderGeneral(guestID, hasCommented);
+		return guestOrder.getAllGuestCommentOrderGeneral(guestID, hasCommented);
 	}
 	
 	/**
@@ -200,6 +235,10 @@ public final class OrderBLController implements OrderBLService {
 	}
 	
 	
+	
+	
+	
+	
 	/*
 	 * webMarketerOrder的接口
 	 */
@@ -239,6 +278,11 @@ public final class OrderBLController implements OrderBLService {
 		return webMarketerOrder.getAllUnexecutedOrderGeneral(date);
 	}
 	
+	
+	
+	
+	
+	
 	/*
 	 * 为酒店模块单独的接口
 	 * 也可单独提出来
@@ -264,21 +308,6 @@ public final class OrderBLController implements OrderBLService {
 	 */
 	public OrderState getOrderState(String guestID, String hotelID) {
 		return orderForHotelModule.getOrderState(guestID, hotelID);
-	}
-
-	/**
-	 * @Description:调用commonOrder里面的方法
-	 * @param userID
-	 * @param userType
-	 * @param orderState
-	 * @return
-	 * @author: Harvey Gong
-	 * @lastChangedBy: Harvey Gong
-	 * @time:2016年12月8日 上午2:35:57
-	 */
-	@Override
-	public Iterator<OrderGeneralVO> getOrderGenerals(String userID, UserType userType, OrderState orderState) {
-		return commonOrder.getOrderGenerals(userID,userType,orderState);
 	}
 	
 }
