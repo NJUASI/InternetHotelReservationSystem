@@ -35,6 +35,7 @@ import utilities.OrderState;
 import utilities.ResultMessage;
 import utilities.RoomType;
 import utilities.SearchCriteriaType;
+import vo.GuestVO;
 import vo.HotelEvaluationVO;
 import vo.HotelVO;
 import vo.OrderGeneralVO;
@@ -76,7 +77,47 @@ public class HotelSearchController {
 		sourceBLController = SourceBLController.getInstance();
 		hotelBLController = HotelBLController.getInstance();
 	}
+	/**
+	 * @author 61990
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/7 
+	 * @构造函数，初始化各种COMBOBOX
+	 */
+	@FXML
+	private void initialize() {
+		
+	for (int i = 0; i < 60; i++) {
+	minuteInOrder.getItems().add(i);
+	minuteInOrder2.getItems().add(i);
+	}
+	for (int i = 0; i < 24; i++) {
+	hourInOrder.getItems().add(i);
+	hourInOrder2.getItems().add(i);
+	}
+	for (int i = 1; i < 5; i++) {
+		guestNumInOrder.getItems().add(i);	
+	}
+	for (int i = 1; i < 9; i++) {
+		roomCountInOrder.getItems().add(i);	
+	}
+	for (int i = 1; i < 6; i++) {
+		minlevelInput.getItems().add(i);
+		maxlevelInput.getItems().add(i);	
+	}
+	for (int i = 0; i < 6; i++) {
+		minScoreInput.getItems().add(i+0.0);
+		maxScoreInput.getItems().add(i+0.0);	
+	}
+	
 
+	
+	Iterator<String> cities = sourceBLController.getCities();
+
+	while(cities.hasNext()){
+		cityChoose.getItems().add(cities.next());
+	}
+	
+	}
 	/**
 	 * @初始化所有城市
 	 * @author 61990
@@ -85,14 +126,6 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void searchCity(){
-
-		cityChoose.getItems().clear();
-		//调用sourceBLController的获得所有城市的方法
-		Iterator<String> cities = sourceBLController.getCities();
-
-		while(cities.hasNext()){
-			cityChoose.getItems().add(cities.next());
-		}
 
 		/**
 		 * TODO gy注意：当点选一个城市之后，应该cityChoose的setValue值，修改显示出来那个city
@@ -163,7 +196,9 @@ public class HotelSearchController {
 	private void initHotelTable(Iterator<HotelVO> hotels){
 		hotelTable.getItems().clear();
 		List<HotelTable> dataList = new ArrayList<HotelTable>();
+		
 		//TODO gy注意：显示hotel的table里面不是有订单，应该显示的是订单的状态,无订单的时候就在订单状态那栏写无订单
+		
 		while(hotels.hasNext()){
 			HotelVO temp = hotels.next();
 			dataList.add(new HotelTable(temp.hotelID, temp.hotelName,temp.address,
@@ -206,6 +241,7 @@ public class HotelSearchController {
 	/*
 	 *  TODO gy注意:确定hotelDetail界面不分开吗和订单浏览界面不分开吗？不分的话，这个类太大了
 	 *  可以专门用一个类把这两个类联系起来，就可以保存现场了
+	 * 
 	 */
 
 	@FXML
@@ -393,7 +429,9 @@ public class HotelSearchController {
 	@FXML
 	private CheckBox box1,box2,box3,box4,box5,boxOnly;
 	@FXML
-	private ComboBox<Double> minScoreInput,maxScoreInput,minlevelInput,maxlevelInput;
+	private ComboBox<Integer> minlevelInput,maxlevelInput;
+	@FXML
+	private ComboBox<Double> minScoreInput,maxScoreInput;
 	@FXML
 	private TextField roomInput,minpriceInput,	maxpriceInput,hotelNameInput;
 
@@ -455,6 +493,7 @@ public class HotelSearchController {
 		if(minlevelInput.getValue()!=null){
 			criteria.add(SearchCriteriaType.LEVEL_SPAN);
 			//TODO gy注意：将星级选择的getValue改为int；
+			//TODO gcm改了
 			vo.minLevel = minlevelInput.getValue().intValue();
 			vo.maxLevel =  maxlevelInput.getValue().intValue();
 		}
@@ -473,6 +512,7 @@ public class HotelSearchController {
 			vo.remainRoomNum = Integer.parseInt(roomInput.getText());
 		}
 		//TODO gy注意：能不能把房间类型列表的选择做成复选框checkBox或者选择框choiceBox，可能ifelse会少一点儿
+//		TODO gcm 不就是复选框checkBox吗
 //		vo.roomTypes = new ArrayList<RoomType>();
 		criteria.add(SearchCriteriaType.NULL);
 		
@@ -491,8 +531,9 @@ public class HotelSearchController {
 	@FXML
 	private Label hotelNameInOrder, hotelIDInOrder, hotelAddressInOrder, previousPriceInOrder, priceOfOrder,remainNumInOrder;
 	@FXML
-	private TextField nameInOrder, phoneInOrder, guestNumInOrder, roomCountInOrder, hourInOrder, hourInOrder2,
-	minuteInOrder, minuteInOrder2;
+	private TextField nameInOrder, phoneInOrder;
+	@FXML
+	private ComboBox<Integer> guestNumInOrder,roomCountInOrder, hourInOrder, hourInOrder2,minuteInOrder, minuteInOrder2;
 	@FXML
 	private DatePicker expectExecuteDateInOrder, expectLeaveDateInOrder;
 	@FXML
@@ -506,6 +547,7 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void openCreateOrder() {
+		//TODO gcm 8日,不一样，这里是从详情界面拿东西初始化，因为各种需要的东西已经初始化了，而且这里我的意思是你直接就把		
 		roomTypeInOrder.setValue(roomTable.getSelectionModel().getSelectedItem().getRoomType());
 		remainNumInOrder.setText(roomTable.getSelectionModel().getSelectedItem().getRemainRoomNum());
 		previousPriceInOrder.setText(roomTable.getSelectionModel().getSelectedItem().getPrice());
@@ -513,9 +555,16 @@ public class HotelSearchController {
 	}
 
 	private void initCreateOrder(){
+		//TODO gcm 给一个guestVO
+		//TODO djy 给一个guestVO
+//		GuestVO guestVO = null;
+//		nameInOrder.setText(guestVO.name);
+//		phoneInOrder.setText(guestVO.phone);
+//		
 		for (int i = 0; i < roomList.size(); i++) {
 			roomTypeInOrder.getItems().add(roomList.get(i).roomType.toString());
 		}
+
 		hotelNameInOrder.setText(hotelVO.hotelName);
 		hotelIDInOrder.setText(hotelVO.hotelID);
 		hotelAddressInOrder.setText(hotelVO.address);
@@ -535,6 +584,7 @@ public class HotelSearchController {
 	protected void createOrderIncheck(){
 
 		// TODO gy注意：与上面代码相似度极大，你看一下，能不能合，感觉是一个界面吧。。
+		//TODO djy 8日，这里是你界面没东西，必须通过ID得到东西比如没有HotelVO，没有ROOM typelist才能初始化订单详情界面，这里是立即预定
 		hotelVO = new HotelVO("12345", "hantingjiudiansss", "xinjiekou", "xinjiekou", "malianhedadao", "5xinji", 4.5,
 				198, "shoooo", "sdaf");
 
@@ -567,18 +617,16 @@ public class HotelSearchController {
 	@FXML
 	protected void commitOrder() {
 		final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(),
-				LocalTime.of(Integer.parseInt(hourInOrder.getText()),
-						Integer.parseInt(minuteInOrder.getText())));
+				LocalTime.of(hourInOrder.getValue(),minuteInOrder.getValue()));
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(expectLeaveDateInOrder.getValue(),
-				LocalTime.of(Integer.parseInt(hourInOrder.getText()),
-						Integer.parseInt(minuteInOrder.getText())));
+				LocalTime.of(hourInOrder2.getValue(),minuteInOrder2.getValue()));
 
 		OrderGeneralVO createOrderGeneral = new OrderGeneralVO(IDReserve.getInstance().getUserID(), hotelIDInOrder.getText(), 
 				hotelNameInOrder.getText(), hotelAddressInOrder.getText(), expectExecuteTime, expectLeaveTime, 
 				nameInOrder.getText(), phoneInOrder.getText());
 
 		OrderVO createVO = new OrderVO(createOrderGeneral, Double.parseDouble(priceOfOrder.getText()), 
-				RoomType.convertString2Roomtype(roomTypeInOrder.getValue()), Integer.parseInt(roomCountInOrder.getText()), Integer.parseInt(guestNumInOrder.getText()), 
+				RoomType.convertString2Roomtype(roomTypeInOrder.getValue()), roomCountInOrder.getValue(), guestNumInOrder.getValue(), 
 				messageInOrder.getText());
 
 		final ResultMessage msg = orderBLController.createOrder(createVO);
