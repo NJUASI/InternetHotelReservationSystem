@@ -32,7 +32,8 @@ import vo.OrderVO;
  * lastChangeBy charles
  * updateTime 2016/12/7
  * 
- * TODO 高源 评论界面好像有点问题  房间号也不对
+ * TODO 高源：评论界面好像有点问题（酒店查看时可以查看到订单评论）  房间号也不对
+ * TODO 龚尘淼：酒店界面的初始化有问题
  */
 public class OrderCheckController {
 
@@ -103,6 +104,8 @@ public class OrderCheckController {
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/8
 	 * @打开未执行订单概况
+	 * 
+	 * TODO 高源：未执行订单应该有一个撤销的按钮  undoNormalOrder
 	 */
 	@FXML
 	protected void searchUnexecutedOrder() {
