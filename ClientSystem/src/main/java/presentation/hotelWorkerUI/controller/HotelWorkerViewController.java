@@ -12,11 +12,11 @@ import javafx.scene.layout.AnchorPane;
  * @lastChangedBy Harvey
  */
 public class HotelWorkerViewController {
-	Parent hotelInfo ,orderInfo, offline,remainRoom,promotion,roomInfo;	
 
 	@FXML private AnchorPane right;
 	@FXML private AnchorPane mainPane;
-
+	
+	private Parent currentParent;
 	/**
 	 * @author 61990
 	 * @lastChangedBy Harvey
@@ -25,7 +25,7 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openHotelInfo() throws IOException{
-		jump(hotelInfo, "HotelDetail");
+		jump("HotelDetail");
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openOrderInfo() throws IOException{
-		jump(orderInfo,"OrderCheck");
+		jump("OrderCheck");
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openOffline() throws IOException{
-		jump(offline,"Offline");
+		jump("Offline");
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openPromotion() throws IOException{
-		jump(promotion, "Promotion");
+		jump("Promotion");
 	}
 	/**
 	 * @author 61990
@@ -68,7 +68,7 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openRoomInfo() throws IOException{
-		jump(roomInfo,"RoomInfo");
+		jump("RoomInfo");
 	}
 	/**
 	 * @author 61990
@@ -78,7 +78,7 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openMain() throws IOException{
-		right.getChildren().removeAll(mainPane,hotelInfo ,orderInfo, offline,remainRoom,promotion,roomInfo);
+		right.getChildren().clear();
 		right.getChildren().add(mainPane);
 	}
 	
@@ -91,12 +91,12 @@ public class HotelWorkerViewController {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月8日 下午2:54:27
 	 */
-	private void jump(Parent parent,String path){
-		right.getChildren().removeAll(mainPane,hotelInfo ,orderInfo, offline,remainRoom,promotion,roomInfo);
+	private void jump(String path){
+		right.getChildren().clear();
 		try {
-			roomInfo = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/"+path+".fxml"));
+			currentParent = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/"+path+".fxml"));
 		} catch (IOException e) {
 		}
-		right.getChildren().add(roomInfo);
+		right.getChildren().add(currentParent);
 	}
 }

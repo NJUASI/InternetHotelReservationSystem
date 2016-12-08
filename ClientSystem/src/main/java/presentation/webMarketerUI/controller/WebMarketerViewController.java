@@ -14,13 +14,13 @@ import javafx.scene.layout.StackPane;
  */
 public class WebMarketerViewController {
 
-	Parent charge, market, commonPromotion, cyclePromotion, abnormalOrder;
-
 	@FXML
 	private StackPane right;
 
 	@FXML
 	private Pane mainPane;
+	
+	private Parent currentParent;
 
 	/**
 	 * @author 61990
@@ -30,7 +30,7 @@ public class WebMarketerViewController {
 	 */
 	@FXML
 	protected void openMain() {
-		right.getChildren().removeAll(mainPane, charge, market, commonPromotion, cyclePromotion, abnormalOrder);
+		right.getChildren().clear();
 		right.getChildren().add(mainPane);
 	}
 
@@ -42,7 +42,7 @@ public class WebMarketerViewController {
 	 */
 	@FXML
 	protected void openCharge(){
-		jump(charge, "Charge");
+		jump("Charge");
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class WebMarketerViewController {
 	 */
 	@FXML
 	protected void openMarket(){
-		jump(market, "MemberCheck");
+		jump("MemberCheck");
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class WebMarketerViewController {
 	 */
 	@FXML
 	protected void openPromotion(){
-		jump(cyclePromotion, "CyclePromotion");
+		jump("CyclePromotion");
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class WebMarketerViewController {
 	 */
 	@FXML
 	protected void openCommonPromotion(){
-		jump(commonPromotion, "DatePromotion");
+		jump("DatePromotion");
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class WebMarketerViewController {
 	 */
 	@FXML
 	protected void openOrder(){
-		jump(abnormalOrder, "orderSearch");
+		jump("orderSearch");
 	}
 
 	/**
@@ -98,13 +98,13 @@ public class WebMarketerViewController {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月8日 下午3:08:03
 	 */
-	private void jump(Parent parent,String path){
-		right.getChildren().removeAll(mainPane, charge, market, commonPromotion, cyclePromotion, abnormalOrder);
+	private void jump(String path){
+		right.getChildren().clear();
 		try {
-			parent = FXMLLoader.load(getClass().getResource("/presentation/webMarketerUI/view/"+path+".fxml"));
+			currentParent = FXMLLoader.load(getClass().getResource("/presentation/webMarketerUI/view/"+path+".fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		right.getChildren().add(parent);
+		right.getChildren().add(currentParent);
 	}
 }

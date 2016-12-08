@@ -14,13 +14,19 @@ import javafx.scene.layout.StackPane;
  *
  */
 public class GuestViewController {
-	Parent guestInfo, hotelInfo, orderInfo, memberInfo, creditInfo;
+
 
 	@FXML
 	private StackPane right;
 
 	@FXML
 	private Pane mainPane;
+
+	private Parent currentParent ;
+	
+	public GuestViewController() {
+		currentParent = mainPane;
+	}
 
 	/**
 	 * @author 61990
@@ -30,7 +36,7 @@ public class GuestViewController {
 	 */
 	@FXML
 	protected void openGuestInfo() throws IOException {
-		jump(guestInfo, "GuestInfo");
+		jump("GuestInfo");
 	}
 
 	/**
@@ -41,7 +47,7 @@ public class GuestViewController {
 	 */
 	@FXML
 	protected void openHotel() throws IOException {
-		jump(hotelInfo, "CityChoose");
+		jump("CityChoose");
 	}
 
 	/**
@@ -52,7 +58,7 @@ public class GuestViewController {
 	 */
 	@FXML
 	protected void openOrder() throws IOException {
-		jump(orderInfo, "OrderCheck");
+		jump("OrderCheck");
 	}
 
 	/**
@@ -63,7 +69,7 @@ public class GuestViewController {
 	 */
 	@FXML
 	protected void openMember() throws IOException {
-		jump(memberInfo, "MemberCheck");
+		jump("MemberCheck");
 	}
 
 	/**
@@ -74,7 +80,7 @@ public class GuestViewController {
 	 */
 	@FXML
 	protected void openCredit() throws IOException {
-		jump(creditInfo, "Credit");
+		jump("Credit");
 	}
 
 	/**
@@ -85,7 +91,7 @@ public class GuestViewController {
 	 */
 	@FXML
 	protected void openMain() {
-		right.getChildren().removeAll(mainPane, guestInfo, hotelInfo, orderInfo, memberInfo, creditInfo);
+		right.getChildren().clear();
 		right.getChildren().add(mainPane);
 	}
 
@@ -98,13 +104,13 @@ public class GuestViewController {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月8日 下午2:49:52
 	 */
-	private void jump(Parent parent,String path){
-		right.getChildren().removeAll(mainPane, guestInfo, hotelInfo, orderInfo, memberInfo, creditInfo);
+	private void jump(String path){
+		right.getChildren().clear();
 		try {
-			parent = FXMLLoader.load(getClass().getResource("/presentation/guestUI/view/"+path+".fxml"));
+			currentParent = FXMLLoader.load(getClass().getResource("/presentation/guestUI/view/"+path+".fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		right.getChildren().add(parent);
+		right.getChildren().add(currentParent);
 	}
 }
