@@ -33,4 +33,8 @@ public class MockHotel extends Hotel {
 	public Address getHotelAddress(String hotelID){
 		return new Address("南京","仙林");
 	}
+	
+	public ResultMessage checkIn(String hotelID, String roomName, int roomNum) {
+		return ResultMessage.CHECK_IN_SUCCESS;
+	}
 }

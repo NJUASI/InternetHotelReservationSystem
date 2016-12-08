@@ -17,7 +17,7 @@ import vo.OrderGeneralVO;
  * 
  * @author charles
  * lastChangedBy charles
- * updateTime 2016/12/7
+ * updateTime 2016/12/8
  *
  */
 public class WebMarketerOrder implements WebMarketerOrderBLService {
@@ -47,7 +47,7 @@ public class WebMarketerOrder implements WebMarketerOrderBLService {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
+	 * @updateTime 2016/12/8
 	 * @param orderID 网站营销人员当前需要撤销的异常订单的订单号
 	 * @return 网站营销人员是否成功撤销此异常订单
 	 */
@@ -55,16 +55,14 @@ public class WebMarketerOrder implements WebMarketerOrderBLService {
 		ResultMessage resultMessage = ResultMessage.ABNORMAL_ORDER_UNDO_FAILURE;
 		
 		OrderState thisOrderState = commonOrder.getOrderDetail(orderID).orderGeneralVO.state;
-		if (thisOrderState != OrderState.ABNORMAL) {
-			return resultMessage;
-		}else {
+		if (thisOrderState == OrderState.ABNORMAL) {
 			try {
 				resultMessage = orderDataService.undoAbnormalOrder(orderID);
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
-			return resultMessage;
 		}
+		return resultMessage;
 	}
 	
 	/**

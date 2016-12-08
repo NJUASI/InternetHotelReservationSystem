@@ -68,10 +68,12 @@ public class OrderForHotelModule implements OrderForHotelModuleBLService{
 		Iterator<OrderGeneralVO> guestOrders = commonOrder.getAllOrderGenerals(guestID, UserType.GUEST);
 		
 		List<OrderState> states = new ArrayList<OrderState>();
-		while(guestOrders.hasNext()){
-			OrderGeneralVO thisOrderGeneral = guestOrders.next();
-			if (thisOrderGeneral.hotelID.equals(hotelID)) {
-				states.add(thisOrderGeneral.state);
+		if (guestOrders != null) {
+			while(guestOrders.hasNext()){
+				OrderGeneralVO thisOrderGeneral = guestOrders.next();
+				if (thisOrderGeneral.hotelID.equals(hotelID)) {
+					states.add(thisOrderGeneral.state);
+				}
 			}
 		}
 		

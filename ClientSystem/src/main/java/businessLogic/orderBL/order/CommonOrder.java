@@ -97,12 +97,9 @@ public class CommonOrder implements CommonOrderBLService {
 			e.printStackTrace();
 		}
 
-
-
 		if (orderGeneralPOs != null) {
 			for (OrderGeneralPO po : orderGeneralPOs) {
 				if (po.getState() == orderState) {
-
 					result.add(new OrderGeneralVO(po));
 				}
 			}
