@@ -86,16 +86,16 @@ public class OrderBLService_DriverTest {
 	public void testGetAllHotelOrderGeneral() {
 		final OrderBLService stub = OrderBLController.getInstance();
 		
-		final Iterator<OrderGeneralVO> orderGeneralVOs = stub.getOrderGenerals("1234567890",UserType.GUEST,null);
+		final Iterator<OrderGeneralVO> orderGeneralVOs = stub.getAllOrderGenerals("1234567890", UserType.GUEST);
 		final OrderGeneralVO orderGeneralVO = orderGeneralVOs.next();
 		
 		assertEquals("123456789012", orderGeneralVO.orderID);
 		assertEquals("1234567890", orderGeneralVO.guestID);
 		assertEquals("12345678", orderGeneralVO.hotelID);
-		assertEquals("thisHotel", orderGeneralVO.hotelName);
+		assertEquals("thisHotel1", orderGeneralVO.hotelName);
 		assertEquals("address", orderGeneralVO.hotelAddress);
 		assertEquals(200, orderGeneralVO.price, 0);
-		assertEquals(LocalDateTime.of(2016, 2, 3, 14, 0), orderGeneralVO.expectExecuteTime);
+		assertEquals(LocalDateTime.of(2016, 2, 1, 14, 0), orderGeneralVO.expectExecuteTime);
 		assertEquals(LocalDateTime.of(2016, 2, 4, 12, 0), orderGeneralVO.expectLeaveTime);
 		assertEquals(OrderState.EXECUTED, orderGeneralVO.state);
 		

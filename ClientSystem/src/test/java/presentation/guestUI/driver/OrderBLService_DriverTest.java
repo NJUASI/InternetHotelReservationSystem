@@ -142,7 +142,7 @@ public class OrderBLService_DriverTest {
 	@Test
 	public void testGetAllGuestOrderGeneral() {
 		final OrderBLService stub = OrderBLController.getInstance();
-		final Iterator<OrderGeneralVO> orderGeneralVOs = stub.getOrderGenerals("1234567890",UserType.GUEST,null);
+		final Iterator<OrderGeneralVO> orderGeneralVOs = stub.getAllOrderGenerals("1234567890", UserType.GUEST);
 		
 		final OrderGeneralVO orderGeneralVO = orderGeneralVOs.next();
 		

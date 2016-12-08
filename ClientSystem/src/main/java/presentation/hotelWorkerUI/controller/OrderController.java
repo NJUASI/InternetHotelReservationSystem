@@ -35,7 +35,7 @@ public class OrderController {
 
 	private OrderBLService orderBLController;
 
-	private UserType hotelWorker = UserType.HOTEL_WORKER;
+	private final UserType hotelWorker = UserType.HOTEL_WORKER;
 
 	/*
 	 * 订单概况
@@ -72,7 +72,7 @@ public class OrderController {
 		//通过hotelID得到orderGeneralVOs
 		orderBLController = OrderBLController.getInstance();
 
-		Iterator<OrderGeneralVO> orderGenerals = orderBLController.getOrderGenerals(hotelID,hotelWorker,null);
+		Iterator<OrderGeneralVO> orderGenerals = orderBLController.getAllOrderGenerals(hotelID, hotelWorker);
 		initOrderCheck(orderGenerals);
 
 	}
@@ -92,26 +92,26 @@ public class OrderController {
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
+	 * @updateTime 2016/12/8
 	 * @打开所有订单概况
 	 */
 	@FXML
 	protected void searchAlldOrder() {
 		//@高源——————charles新加的，界面上没有对应按钮——所有订单
-		orderGenerals = orderBLController.getOrderGenerals(hotelID,hotelWorker,null);
+		orderGenerals = orderBLController.getAllOrderGenerals(hotelID, hotelWorker);
 		initOrderCheck(orderGenerals);
 	}
 
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
+	 * @updateTime 2016/12/8
 	 * @打开未执行订单概况
 	 */
 	@FXML
 	protected void searchUnexecutedOrder() {
 
-		orderGenerals = orderBLController.getOrderGenerals(hotelID,hotelWorker,OrderState.UNEXECUTED);
+		orderGenerals = orderBLController.getSpecialOrderGenerals(hotelID, hotelWorker, OrderState.UNEXECUTED);
 
 		checkInBt1.setVisible(true);
 		checkOutBt1.setVisible(false);
@@ -122,13 +122,13 @@ public class OrderController {
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
+	 * @updateTime 2016/12/8
 	 * @打开已执行订单概况
 	 */
 	@FXML
 	protected void searchExecutedOrder() {
 
-		orderGenerals = orderBLController.getOrderGenerals(hotelID,hotelWorker,OrderState.EXECUTED);
+		orderGenerals = orderBLController.getSpecialOrderGenerals(hotelID, hotelWorker, OrderState.EXECUTED);
 
 		checkInBt1.setVisible(false);
 		checkOutBt1.setVisible(true);
@@ -139,13 +139,13 @@ public class OrderController {
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
+	 * @updateTime 2016/12/8
 	 * @打开异常订单概况
 	 */
 	@FXML
 	protected void searchAbnormalOrder() {
 
-		orderGenerals = orderBLController.getOrderGenerals(hotelID,hotelWorker,OrderState.ABNORMAL);
+		orderGenerals = orderBLController.getSpecialOrderGenerals(hotelID, hotelWorker, OrderState.ABNORMAL);
 
 		checkInBt1.setVisible(true);
 		checkOutBt1.setVisible(false);
@@ -157,13 +157,13 @@ public class OrderController {
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
+	 * @updateTime 2016/12/8
 	 * @打开已撤销订单概况
 	 */
 	@FXML
 	protected void searchCancelledOrder() {
 
-		orderGenerals = orderBLController.getOrderGenerals(hotelID,hotelWorker,OrderState.CANCELLED);
+		orderGenerals = orderBLController.getSpecialOrderGenerals(hotelID, hotelWorker, OrderState.CANCELLED);
 
 		checkInBt1.setVisible(false);
 		checkOutBt1.setVisible(false);
@@ -241,11 +241,12 @@ public class OrderController {
 		initOrderDetail(orderVO);
 
 		//show 相应的button
-		if(orderVO.orderGeneralVO.state==OrderState.EXECUTED){
+		if(orderVO.orderGeneralVO.state == OrderState.EXECUTED){
 			checkOutBt.setVisible(true);
 			checkInBt.setVisible(false);
 		}
-		if(orderVO.orderGeneralVO.state==OrderState.UNEXECUTED||orderVO.orderGeneralVO.state==OrderState.ABNORMAL){
+		if(orderVO.orderGeneralVO.state == OrderState.UNEXECUTED 
+				|| orderVO.orderGeneralVO.state == OrderState.ABNORMAL){
 			checkOutBt.setVisible(false);
 			checkInBt.setVisible(true);
 		}
@@ -336,8 +337,6 @@ public class OrderController {
 	//订单详情执行
 	@FXML
 	protected void checkOut() {
-
-
 		checkOutOrderID.setText(orderVO.orderGeneralVO.orderID );
 		checkOutName.setText(orderVO.orderGeneralVO.name);
 		checkOutPane.setVisible(true);
