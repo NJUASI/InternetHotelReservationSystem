@@ -36,6 +36,8 @@ import vo.OrderVO;
  * updateTime 2016/12/8
  * 
  * TODO 高源 酒店查看时可以查看到订单评   但是disable吧。。不可修改
+ * 
+ * TODO 冯俊杰：checkIn时修改credit产生一条信用记录addCredit还未实现
  */
 public class OrderController {
 

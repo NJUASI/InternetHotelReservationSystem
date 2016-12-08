@@ -33,10 +33,10 @@ import vo.OrderVO;
  * @author 61990
  *
  * lastChangeBy charles
- * updateTime 2016/12/7
+ * updateTime 2016/12/9
  * 
  * TODO 高源：网站营销人员查看订单时进的界面跳转有错误
- * TODO 冯俊杰：undo时修改credit产生记录addCredit还未实现cancel & cancelInCheck
+ * TODO 冯俊杰：undo时修改credit产生一条信用记录addCredit还未实现  cancel & cancelInCheck
  */
 public class OrderController {
 
