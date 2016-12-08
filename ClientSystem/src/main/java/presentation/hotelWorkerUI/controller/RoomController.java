@@ -18,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import utilities.IDReserve;
+import utilities.RoomType;
 import vo.RoomInfoVO;
 /**
  * @description 酒店客房信息界面的控制器
@@ -134,21 +135,14 @@ public class RoomController {
 	 */
 	@FXML
 	protected void save() {
-		/**
-		 *  TODO gcm 旧名字指的是类型的名字吧？原始房间剩余数量不能打包，因为你在修改的时候有延迟，变数据库的时候不去直接动剩余房间信息
-		 *    			只能给你一个改变量然后你去加或者减剩余数量
-		 *  preName 旧类型
-		 *  Integer.parseInt(preRemainNum) 旧剩余数量
-		 * Integer.parseInt(preRoomNum) 旧房间总数量
-		 *  roomType.getValue() 新类型
-		 *  roomName.getText()  新名字
-		 *   Integer.parseInt(roomNum.getText())  新房间总数
-		 *  price.getText()  新价格
-		 *  剩余房间变化 Integer	int i= Integer.parseInt(roomNum.getText())-Integer.parseInt(preRoomNum)
-		 *  立即的房间剩余数量 给i+Integer.parseInt(preRemainNum);
-		 *  
-		 *	并把打包好的vo与旧名字传下去，调用更新客房信息的方法
-		 */
+		
+		RoomInfoVO vo = new RoomInfoVO();
+		//打包好一个vo，通过hotelBLContoller调用update的方法
+		vo.hotelID = hotelID;
+		vo.roomType = RoomType.valueOf(roomType.getValue());
+		vo.price = Integer.valueOf(price.getText());
+		
+		hotelBLController.updateHotelRoomInfo(vo);
 	
 		modifyPane.setVisible(false);
 		addBt.setVisible(true);

@@ -9,7 +9,6 @@ import businessLogic.userBL.userService.service.UserService;
 import dataService.guestDataService.GuestDataService;
 import dataService.guestDataService.GuestDataService_Stub;
 import po.GuestPO;
-import rmi.ClientRemoteHelper;
 import utilities.ResultMessage;
 import vo.GuestVO;
 import vo.UserVO;

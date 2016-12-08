@@ -3,8 +3,6 @@ package presentation.webMarketerUI.controller;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 import businessLogic.marketBL.MarketController;
 import businessLogicService.marketBLService.MarketBLService;
 import javafx.fxml.FXML;

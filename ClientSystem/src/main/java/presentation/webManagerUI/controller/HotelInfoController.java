@@ -2,8 +2,6 @@ package presentation.webManagerUI.controller;
 
 import java.util.Iterator;
 
-import javax.xml.ws.Holder;
-
 import businessLogic.hotelBL.HotelBLController;
 import businessLogic.sourceBL.SourceBLController;
 import businessLogicService.hotelBLService.HotelBLService;
