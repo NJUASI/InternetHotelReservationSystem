@@ -4,7 +4,6 @@ import java.rmi.RemoteException;
 
 import businessLogic.hotelBL.HotelInfoOperation;
 import businessLogic.hotelBL.MockHotel;
-import businessLogic.hotelBL.hotel.Hotel;
 import businessLogicService.orderBLService.HotelWorkerOrderBLService;
 import dataService.orderDataService.OrderDataService;
 import dataService.orderDataService.OrderDataService_Stub;
@@ -91,10 +90,7 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 			hotelInterface = new MockHotel();
 			OrderVO thisOrder = commonOrder.getOrderDetail(checkInVO.orderID);
 			
-			/*
-			 * TODO gcm hotel checkIn 接口参数待确定
-			 */
-			msg2 = hotelInterface.checkIn(thisOrder.orderGeneralVO.orderID, thisOrder.roomType.toString(), thisOrder.roomNumCount); 
+			msg2 = hotelInterface.checkIn(thisOrder.orderGeneralVO.orderID, thisOrder.roomType, thisOrder.roomNumCount); 
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -126,10 +122,7 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 			hotelInterface = new MockHotel();
 			OrderVO thisOrder = commonOrder.getOrderDetail(checkOutVO.orderID);
 			
-			/*
-			 * TODO gcm hotel checkOut 接口参数待确定
-			 */
-			msg2 = hotelInterface.checkOut(thisOrder.orderGeneralVO.orderID, thisOrder.roomType.toString(), thisOrder.roomNumCount); 
+			msg2 = hotelInterface.checkOut(thisOrder.orderGeneralVO.orderID,thisOrder.roomType,thisOrder.roomNumCount); 
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
