@@ -8,10 +8,9 @@ import java.util.List;
 import businessLogic.userBL.userService.Guest;
 import businessLogic.userBL.userService.service.CreditService;
 import businessLogicService.creditBLService.CreditBLService;
-import businessLogicService.creditBLService.CreditDataService_Stub;
 import dataService.creditDataService.CreditDataService;
+import dataService.creditDataService.CreditDataService_Stub;
 import po.CreditPO;
-import rmi.ClientRemoteHelper;
 import utilities.ResultMessage;
 import vo.CreditVO;
 
@@ -36,7 +35,12 @@ public class Credit implements CreditBLService{
 	public Credit() {
 		guest = new Guest();
 //		creditDataService = ClientRemoteHelper.getInstance().getCreditDataService();
-		creditDataService = new CreditDataService_Stub();
+		try {
+			creditDataService = new CreditDataService_Stub();
+		} catch (RemoteException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
 	}
 
 	/**

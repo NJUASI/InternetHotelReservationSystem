@@ -366,7 +366,6 @@ public class OrderController {
 
 	@FXML
 	protected void sureCheckOut(){
-		//  TODO gcm注意：订单退房，供订单号，需要下层更改离开时间
 		//	  TODO fjj 订单退房，提供订单号
 		//	 checkOutOrderID.getText();ID
 		//	 checkOutName.getText();//客户姓名，可不管
