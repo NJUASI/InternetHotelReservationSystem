@@ -1,7 +1,6 @@
 package presentation.hotelWorkerUI.controller;
 
 import javafx.beans.property.SimpleStringProperty;
-import utilities.RoomType;
 
 public class TypeTable {
 	public SimpleStringProperty roomType;

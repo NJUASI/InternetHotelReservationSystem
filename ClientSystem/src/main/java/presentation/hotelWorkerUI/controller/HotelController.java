@@ -13,6 +13,8 @@ import businessLogicService.orderBLService.OrderBLService;
 import businessLogicService.sourceBLService.SourceBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -138,6 +140,15 @@ public class HotelController {
 	private TextField hotelNameText,hotelAddressText,introductionText;
 	@FXML
 	private ComboBox<String> cityText,cycleText,levelText;
+
+	//当前所选城市
+	private String currentCity;
+	//当前所选商圈
+	private String currentCircle;
+	//当前所选的星级
+	private String currentLevel;
+
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -162,9 +173,15 @@ public class HotelController {
 		equipmentText.setText(hotelVO.equipment);
 		introductionText.setText(hotelVO.introduction);
 
+		//保存当前的信息，避免跳转的时候
+		currentCity = hotelVO.city;
+		currentCircle = hotelVO.circle;
+		currentLevel = hotelVO.level;
+
 		hotelModifyPane.setVisible(true);
 		hotelInfoPane.setVisible(false);
 	}
+
 
 	/**
 	 * @author 61990
@@ -177,18 +194,33 @@ public class HotelController {
 
 		//每次点击先清除一次
 		cityText.getItems().clear();
+		cityText.setValue(currentCity);
 
-		//TODO djy注意：将当前酒店的城市从list中出去，然后逐一添加到combobox中,所有城市的list保存在哪儿的
-		// TDOD gcm 需要解释，我不懂你想要表达啥
 		Iterator<String> cities = sourceBLController.getCities();
 		while(cities.hasNext()){
 			cityText.getItems().add(cities.next());
 		}
 
+		//当此combobox被点击时
+		cityText.setOnMouseClicked(new EventHandler<Event>() {
+			@Override
+			public void handle(Event arg0) {
+				if(!currentCity.equals(cityText.getValue())){
+					currentCity = cityText.getValue();
+					Iterator<String> circles = sourceBLController.getCircles(currentCity);
+					cycleText.getItems().clear();
+					while(circles.hasNext()){
+						cycleText.getItems().add(circles.next());
+					}
+					cycleText.setValue(currentCircle);
+				}
+			}
+		});
+
 		//TODO gy注意：需要加上item被点选的监听,当新的城市被选点选时，cycletext需要被设值为第一个circle，从list除去
 	}
-	
-	
+
+
 	/**
 	 * @description 点击商圈按钮,初始化选中城市的所有商圈
 	 * @author 61990
@@ -198,20 +230,8 @@ public class HotelController {
 	@FXML
 	protected void getCycle(){
 
-		/**
-		 *  TODO gy注意：每次都将value清空，对用户不友好，用户如果不想修改，
-		 *  只是随意点了一下，就必须又去选择一次
-		 *   TODO gcm 我试了他所有的监听，他fx内在的方法并不能监听选择之后再清空，就是监听不到换城市这个动作，你可以试试别的方法
-		 * 
-		 */
-		
-		cycleText.getItems().clear();
 
-		Iterator<String> circles = sourceBLController.getCircles(cityText.getValue());
-		while(circles.hasNext()){
-			cycleText.getItems().add(circles.next());
-		}
-		
+
 	}
 	/**
 	 * @description 点击星级按钮
@@ -221,11 +241,14 @@ public class HotelController {
 	 */
 	@FXML
 	protected void getLevel(){
+		
 		levelText.getItems().clear();
 		Iterator<String> levels = sourceBLController.getLevels();
 		while(levels.hasNext()){
 			levelText.getItems().add(levels.next());
 		}
+		
+		// gy注意：还是那个问题，就是怎么在我选了comboBox的元素之后，发现这次选的和上次的不一样就能自动get到新值,有没有这种监听
 	}
 
 	/**
@@ -250,7 +273,7 @@ public class HotelController {
 
 		//TODO gcm注意：调用更新酒店信息的方法,可能会catch到exception，以后加入exception
 		hotelBLController.updateHotelInfo(hotelVO);
-		
+
 		initHotelDetail(hotelVO);
 
 		hotelModifyPane.setVisible(false);

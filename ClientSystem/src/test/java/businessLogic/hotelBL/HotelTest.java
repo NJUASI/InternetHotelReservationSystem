@@ -11,7 +11,6 @@ import org.junit.Test;
 
 import businessLogic.hotelBL.hotel.Hotel;
 import utilities.ResultMessage;
-import utilities.RoomType;
 import vo.HotelVO;
 import vo.RoomInfoVO;
 

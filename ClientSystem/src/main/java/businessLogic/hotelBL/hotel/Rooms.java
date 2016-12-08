@@ -123,6 +123,13 @@ class Rooms {
 	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO) {
 
 		try {
+			//当房间总数被修改时，需要更新一下剩余房间数量
+			initRoomInfoPO(roomInfoVO.hotelID);
+			RoomInfoPO po = roomInfoPOList.get(findPO(roomInfoVO.roomType));
+			int roomNum = po.getRoomNum();
+			int remainRoomNum = po.getRemainNum();
+			roomInfoVO.remainNum = remainRoomNum + roomInfoVO.roomNum - roomNum;
+			
 			hotelDataService.updateRoomInfo(new RoomInfoPO(roomInfoVO));
 			initRoomInfoPO(roomInfoVO.hotelID);
 			return ResultMessage.SUCCESS;

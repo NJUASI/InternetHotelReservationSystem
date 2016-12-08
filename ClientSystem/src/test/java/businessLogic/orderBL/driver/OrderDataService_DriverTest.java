@@ -19,8 +19,6 @@ import po.OrderPO;
 import utilities.OrderState;
 import utilities.ResultMessage;
 import utilities.RoomType;
-import vo.GuestEvaluationVO;
-import vo.HotelEvaluationVO;
 
 /**
  * 

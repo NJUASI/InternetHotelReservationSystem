@@ -86,9 +86,8 @@ public class HotelSearchController {
 	private ComboBox<Double> minScoreInput,maxScoreInput;
 	/**
 	 * @author 61990
-	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/12/7 
-	 * @构造函数，初始化各种COMBOBOX
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/8 
 	 */
 	@FXML
 	private void initialize() {
@@ -501,10 +500,8 @@ public class HotelSearchController {
 		}
 		if(minLevelInput.getValue()!=null){
 			criteria.add(SearchCriteriaType.LEVEL_SPAN);
-			//TODO gy注意：将星级选择的getValue改为int；
-			//TODO gcm改了
-			vo.minLevel = minLevelInput.getValue().intValue();
-			vo.maxLevel =  maxLevelInput.getValue().intValue();
+			vo.minLevel = minLevelInput.getValue();
+			vo.maxLevel =  maxLevelInput.getValue();
 		}
 		if(minpriceInput.getText()!=null){
 			criteria.add(SearchCriteriaType.ORGIN_PRICE_SPAN);
@@ -520,9 +517,11 @@ public class HotelSearchController {
 			criteria.add(SearchCriteriaType.REMAIN_ROOM_NUM);
 			vo.remainRoomNum = Integer.parseInt(roomInput.getText());
 		}
-		//TODO gy注意：能不能把房间类型列表的选择做成复选框checkBox或者选择框choiceBox，可能ifelse会少一点儿
+		
 //		TODO gcm 不就是复选框checkBox吗
+		//TODO gy 我不能用一个for循环去取到已经被勾选的框，只能单个取，给我一种可以通过循环取的方案
 //		vo.roomTypes = new ArrayList<RoomType>();
+		
 		criteria.add(SearchCriteriaType.NULL);
 		
 	}

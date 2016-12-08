@@ -35,4 +35,8 @@ public class RoomInfoVO {
 		this.remainNum = roomInfoPO.getRemainNum();
 		this.price = roomInfoPO.getPrice();
 	}
+
+	public RoomInfoVO() {
+		// TODO 自动生成的构造函数存根
+	}
 }
