@@ -1,7 +1,6 @@
 package businessLogicService.orderBLService;
 
 import java.util.Iterator;
-import java.util.List;
 
 import utilities.ResultMessage;
 import vo.GuestEvaluationVO;
@@ -12,7 +11,7 @@ import vo.OrderVO;
  * 
  * @author cuihua
  * lastChangedBy charles
- * updateTime 2016/12/7
+ * updateTime 2016/12/8
  *
  */
 public interface GuestOrderBLService {
@@ -54,5 +53,15 @@ public interface GuestOrderBLService {
 	 * @return 客户是否成功评价该订单
 	 */
 	ResultMessage addEvaluation(GuestEvaluationVO evaluationVO);
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/8
+	 * @param guestID 客户编号
+	 * @param hasCommented 状态：已评价／未评价
+	 * @return 客户<已评价／未评价>订单
+	 */
+	Iterator<OrderGeneralVO> getAllGuestCommentOrderGeneral(String guestID, boolean hasCommented);
 
 }

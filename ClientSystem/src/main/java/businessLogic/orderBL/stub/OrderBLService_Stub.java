@@ -432,14 +432,20 @@ public class OrderBLService_Stub implements OrderBLService {
 	}
 
 	@Override
-	public Iterator<OrderGeneralVO> getOrderGenerals(String userID, UserType userType, OrderState orderState) {
+	public Iterator<OrderGeneralVO> getAllGuestCommentOrderGeneral(String guestID, boolean b) {
 		// TODO 自动生成的方法存根
 		return null;
 	}
 
 	@Override
-	public Iterator<OrderGeneralVO> getAllGuestCommentOrderGeneral(String guestID, boolean b) {
-		// TODO 自动生成的方法存根
+	public Iterator<OrderGeneralVO> getAllOrderGenerals(String userID, UserType userType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Iterator<OrderGeneralVO> getSpecialOrderGenerals(String userID, UserType userType, OrderState orderState) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

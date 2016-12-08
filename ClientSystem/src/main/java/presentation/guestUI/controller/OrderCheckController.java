@@ -38,7 +38,7 @@ public class OrderCheckController {
 
 	private OrderBLService orderBLController;
 	
-	private UserType guest = UserType.GUEST;
+	private final UserType guest = UserType.GUEST;
 
 	/*
 	 * 订单概况
@@ -64,7 +64,7 @@ public class OrderCheckController {
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
+	 * @updateTime 2016/12/8
 	 * 
 	 * 构造函数，初始化成员变量
 	 */
@@ -73,7 +73,7 @@ public class OrderCheckController {
 		//通过guestID得到orderGeneralVOs list
 		orderBLController = OrderBLController.getInstance();
 
-		Iterator<OrderGeneralVO> orderGenerals = orderBLController.getOrderGenerals(guestID,guest,null);
+		Iterator<OrderGeneralVO> orderGenerals = orderBLController.getAllOrderGenerals(guestID, guest);
 		initOrderCheck(orderGenerals);
 	}
 
@@ -87,62 +87,62 @@ public class OrderCheckController {
 	 */
 	/**
 	 * @author 61990
-	 * @lastChangedBy Harvey
+	 * @lastChangedBy charles
 	 * @updateTime 2016/12/8
 	 * @打开所有订单概况
 	 */
 	@FXML
 	protected void searchAllOrder() {
 		//@高源——————charles新加的，界面上没有对应按钮——所有订单
-		orderGenerals = orderBLController.getOrderGenerals(guestID,guest,null);
+		orderGenerals = orderBLController.getAllOrderGenerals(guestID, guest);
 		initOrderCheck(orderGenerals);
 	}
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy Harvey
+	 * @lastChangedBy charles
 	 * @updateTime 2016/12/8
 	 * @打开未执行订单概况
 	 */
 	@FXML
 	protected void searchUnexecutedOrder() {
-		orderGenerals = orderBLController.getOrderGenerals(guestID,guest,OrderState.UNEXECUTED);
+		orderGenerals = orderBLController.getSpecialOrderGenerals(guestID, guest, OrderState.UNEXECUTED);
 		initOrderCheck(orderGenerals);
 	}
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy Harvey
+	 * @lastChangedBy charles
 	 * @updateTime 2016/12/8
 	 * @打开已执行订单概况
 	 */
 	@FXML
 	protected void searchExecutedOrder() {		
-		orderGenerals = orderBLController.getOrderGenerals(guestID,UserType.GUEST,OrderState.EXECUTED);
+		orderGenerals = orderBLController.getSpecialOrderGenerals(guestID, guest, OrderState.EXECUTED);
 		initOrderCheck(orderGenerals);
 	}
 
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
+	 * @updateTime 2016/12/8
 	 * @打开异常订单概况
 	 */
 	@FXML
 	protected void searchAbnormalOrder() {
-		orderGenerals = orderBLController.getOrderGenerals(guestID,guest,OrderState.ABNORMAL);
+		orderGenerals = orderBLController.getSpecialOrderGenerals(guestID, guest, OrderState.ABNORMAL);
 		initOrderCheck(orderGenerals);
 	}
 
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
+	 * @updateTime 2016/12/8
 	 * @打开已撤销订单概况
 	 */
 	@FXML
 	protected void searchCancelledOrder() {
-		orderGenerals = orderBLController.getOrderGenerals(guestID,guest,OrderState.CANCELLED);
+		orderGenerals = orderBLController.getSpecialOrderGenerals(guestID, guest, OrderState.CANCELLED);
 		initOrderCheck(orderGenerals);
 	}
 
@@ -237,6 +237,7 @@ public class OrderCheckController {
 		orderVO = orderBLController.getOrderDetail(orderID);
 		initOrderDetail(orderVO);
 	}
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
@@ -251,14 +252,16 @@ public class OrderCheckController {
 		GuestEvaluationVO evaluationVO = new GuestEvaluationVO(orderID, score, comment);
 		final ResultMessage result = orderBLController.addEvaluation(evaluationVO);
 		if (result == ResultMessage.UPDATE_EVALUATION_SUCCESS) {
-			//@高源——————状态栏显示已评价成功
+			//TODO 高源——————状态栏显示已评价成功
 
 		}else {
-			//@高源——————状态栏显示评价失败
+			//TODO 高源——————状态栏显示评价失败
+			
 		}
 		orderVO = orderBLController.getOrderDetail(orderID);
 		initOrderDetail(orderVO);
 	}
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -270,6 +273,7 @@ public class OrderCheckController {
 		orderDetail.setVisible(false);
 		orderCheck.setVisible(true);
 	}
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
