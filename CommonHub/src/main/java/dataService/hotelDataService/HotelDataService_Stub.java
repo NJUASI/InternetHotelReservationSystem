@@ -44,8 +44,11 @@ public class HotelDataService_Stub extends UnicastRemoteObject implements HotelD
 	@Override
 	public List<RoomInfoPO> getRoomInfo(String hotelID) throws RemoteException {
 		List<RoomInfoPO> list = new ArrayList<RoomInfoPO>();
-		list.add(new RoomInfoPO("12345678",RoomType.单人间,"金",1,0,100));
-		list.add(new RoomInfoPO("12345678",RoomType.双人间,"木",1,1,200));
+		list.add(new RoomInfoPO("12345678",RoomType.单人间,"普通大床房",1,0,100));
+		list.add(new RoomInfoPO("12345678",RoomType.单人间,"高级大床房",1,0,150));
+		list.add(new RoomInfoPO("12345678",RoomType.双人间,"普通双人间",1,1,200));
+		list.add(new RoomInfoPO("12345678",RoomType.双人间,"标间",1,1,250));
+		list.add(new RoomInfoPO("12345678",RoomType.双人间,"情侣套房",1,1,300));
 		list.add(new RoomInfoPO("12345678",RoomType.三人间,"水",1,0,300));
 		list.add(new RoomInfoPO("12345678",RoomType.商务套房,"火",1,1,400));
 		list.add(new RoomInfoPO("12345678",RoomType.总统套房,"土",1,0,500));
