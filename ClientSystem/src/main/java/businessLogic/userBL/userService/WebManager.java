@@ -8,7 +8,6 @@ import businessLogic.userBL.userService.service.UserService;
 import dataService.webManagerDataService.WebManagerDataService;
 import dataService.webManagerDataService.WebManagerDataService_Stub;
 import po.WebManagerPO;
-import rmi.ClientRemoteHelper;
 import utilities.ResultMessage;
 import vo.UserVO;
 import vo.WebManagerVO;

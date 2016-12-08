@@ -7,7 +7,6 @@ import businessLogicService.memberBLService.MemberBLService;
 import dataService.guestDataService.GuestDataService;
 import dataService.guestDataService.GuestDataService_Stub;
 import po.MemberPO;
-import rmi.ClientRemoteHelper;
 import utilities.MemberType;
 import utilities.ResultMessage;
 import vo.GuestVO;

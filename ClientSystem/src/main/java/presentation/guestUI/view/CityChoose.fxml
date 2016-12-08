@@ -201,13 +201,13 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <DatePicker focusTraversable="false" prefHeight="27.0" prefWidth="199.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <DatePicker focusTraversable="false" prefHeight="27.0" prefWidth="150" GridPane.columnIndex="1" GridPane.rowIndex="2" editable="false" />
                         <Label text="退房日期" GridPane.rowIndex="3">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <DatePicker focusTraversable="false" prefHeight="30.0" prefWidth="199.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <DatePicker focusTraversable="false" prefHeight="30.0" prefWidth="150" GridPane.columnIndex="1" GridPane.rowIndex="3" editable="false" />
                         <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="139.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <children>
                               <ComboBox fx:id="minScoreInput" focusTraversable="false" prefHeight="31.0" prefWidth="79.0" />
