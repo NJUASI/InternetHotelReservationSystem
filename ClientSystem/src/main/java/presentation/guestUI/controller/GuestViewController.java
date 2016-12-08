@@ -30,8 +30,8 @@ public class GuestViewController {
 	 */
 	@FXML
 	protected void openGuestInfo() throws IOException {
-		clearScene();
-		jump(guestInfo, "GuestInfo");
+		guestInfo = FXMLLoader.load(getClass().getResource("/presentation/guestUI/view/GuestInfo.fxml"));
+		jump(guestInfo);
 	}
 
 	/**
@@ -42,8 +42,8 @@ public class GuestViewController {
 	 */
 	@FXML
 	protected void openHotel() throws IOException {
-		clearScene();
-		jump(hotelInfo, "CityChoose");
+		hotelInfo = FXMLLoader.load(getClass().getResource("/presentation/guestUI/view/CityChoose.fxml"));
+		jump(hotelInfo);
 	}
 
 	/**
@@ -54,8 +54,8 @@ public class GuestViewController {
 	 */
 	@FXML
 	protected void openOrder() throws IOException {
-		clearScene();
-		jump(orderInfo, "OrderCheck");
+		orderInfo = FXMLLoader.load(getClass().getResource("/presentation/guestUI/view/OrderCheck.fxml"));
+		jump(orderInfo);
 	}
 
 	/**
@@ -66,8 +66,8 @@ public class GuestViewController {
 	 */
 	@FXML
 	protected void openMember() throws IOException {
-		clearScene();
-		jump(memberInfo, "MemberCheck");
+		memberInfo = FXMLLoader.load(getClass().getResource("/presentation/guestUI/view/MemberCheck.fxml"));
+		jump(memberInfo);
 	}
 
 	/**
@@ -78,7 +78,8 @@ public class GuestViewController {
 	 */
 	@FXML
 	protected void openCredit() throws IOException {
-		jump(creditInfo, "Credit");
+		creditInfo= FXMLLoader.load(getClass().getResource("/presentation/guestUI/view/MemberCheck.fxml"));
+		jump(creditInfo);
 	}
 
 	/**
@@ -92,19 +93,7 @@ public class GuestViewController {
 		right.getChildren().removeAll(mainPane, guestInfo, hotelInfo, orderInfo, memberInfo, creditInfo);
 		right.getChildren().add(mainPane);
 	}
-	/**
-	 * @Description:封装跳转逻辑
-	 * @param parent
-	 * @param path
-	 * void
-	 * @author: 61990
-	 * @lastChangedBy: 61990
-	 * @time:2016年12月8日 下午5:49:52
-	 */
-	private void clearScene(){
-		right.getChildren().removeAll(mainPane, guestInfo, hotelInfo, orderInfo, memberInfo, creditInfo);
-	}
-	
+
 	/**
 	 * @Description:封装跳转逻辑
 	 * @param parent
@@ -115,9 +104,8 @@ public class GuestViewController {
 	 * @lastChangedBy: 61990
 	 * @time:2016年12月8日 下午2:49:52
 	 */
-	private void jump(Parent parent,String path) throws IOException{
-		
-			parent = FXMLLoader.load(getClass().getResource("/presentation/guestUI/view/"+path+".fxml"));
+	private void jump(Parent parent) throws IOException{
+		right.getChildren().removeAll(mainPane, guestInfo, hotelInfo, orderInfo, memberInfo, creditInfo);	
 			right.getChildren().add(parent);
 		
 		
