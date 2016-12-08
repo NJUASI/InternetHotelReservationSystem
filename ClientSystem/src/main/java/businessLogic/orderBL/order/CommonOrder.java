@@ -114,12 +114,15 @@ public class CommonOrder implements CommonOrderBLService {
 		}
 
 		//当订单状态不为空时，返回对应状态的订单
-		if(orderState != null){
-			if(orderGeneralPOs != null){
-				for(OrderGeneralPO po: orderGeneralPOs){
-					if(orderState == po.getState()){
-						result.add(new OrderGeneralVO(po));
-					}
+		if(orderState == null){
+			for(OrderGeneralPO po: orderGeneralPOs){
+				result.add(new OrderGeneralVO(po));
+			}
+		}
+		else{
+			for(OrderGeneralPO po: orderGeneralPOs){
+				if(po.getState() == orderState){
+					result.add(new OrderGeneralVO(po));
 				}
 			}
 		}
