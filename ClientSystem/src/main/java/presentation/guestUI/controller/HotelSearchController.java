@@ -358,7 +358,7 @@ public class HotelSearchController {
 		List<TypeTable> dataList = new ArrayList<TypeTable>();
 		while(rooms.hasNext()){
 			RoomInfoVO temp = rooms.next();
-			dataList.add(new TypeTable(temp.roomType.toString(),temp.roomName,
+			dataList.add(new TypeTable(temp.roomType.toString(),
 					String.valueOf(temp.roomNum),String.valueOf(temp.remainNum),
 					Double.toString(temp.price)));
 		}
@@ -368,7 +368,6 @@ public class HotelSearchController {
 			data.add(dataList.get(i));
 		}
 		typeColumn.setCellValueFactory(cellData -> cellData.getValue().roomType);
-		roomNameColumn.setCellValueFactory(cellData -> cellData.getValue().roomName);
 		roomNumColumn.setCellValueFactory(cellData -> cellData.getValue().roomNum);
 		remainRoomColumn.setCellValueFactory(cellData -> cellData.getValue().remainRoomNum);
 		priceColumn.setCellValueFactory(cellData -> cellData.getValue().price);
@@ -590,10 +589,10 @@ public class HotelSearchController {
 				198, "shoooo", "sdaf");
 
 		roomList = new LinkedList<>();
-		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
-		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
-		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
-		roomList.add(new RoomInfoVO("123456", RoomType.三人间,"sasdasdas", 23,3, 259));
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
 
 		initCreateOrder();
 	}

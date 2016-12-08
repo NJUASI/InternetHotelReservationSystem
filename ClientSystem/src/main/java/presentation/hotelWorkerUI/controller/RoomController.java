@@ -78,7 +78,7 @@ public class RoomController {
 		List<TypeTable> dataList = new LinkedList<TypeTable>();
 		while(rooms.hasNext()){
 			RoomInfoVO temp = rooms.next();
-			dataList.add(new TypeTable(temp.roomType.toString(),temp.roomName, temp.roomNum + "", temp.remainNum + "", Double.toString(temp.price)));
+			dataList.add(new TypeTable(temp.roomType.toString(), temp.roomNum + "", temp.remainNum + "", Double.toString(temp.price)));
 		}
 
 		ObservableList<TypeTable> data = FXCollections.observableArrayList();
@@ -86,7 +86,6 @@ public class RoomController {
 			data.add(dataList.get(i));
 		}
 		typeColumn.setCellValueFactory(cellData -> cellData.getValue().roomType);
-		roomNameColumn.setCellValueFactory(cellData -> cellData.getValue().roomName);
 		roomNumColumn.setCellValueFactory(cellData -> cellData.getValue().roomNum);
 		remainRoomColumn.setCellValueFactory(cellData -> cellData.getValue().remainRoomNum);
 		priceColumn.setCellValueFactory(cellData -> cellData.getValue().price);
@@ -119,8 +118,7 @@ public class RoomController {
 			preType=roomTable.getSelectionModel().getSelectedItem().getRoomType();
 			preRoomNum=roomTable.getSelectionModel().getSelectedItem().getRoomNum();
 			preRemainNum=roomTable.getSelectionModel().getSelectedItem().getRemainRoomNum();
-			setModifyText(selectedRoomVO.getRoomType(),selectedRoomVO.getRoomName(),
-					selectedRoomVO.getRoomType(),selectedRoomVO.getPrice());
+			setModifyText(selectedRoomVO.getRoomType(),selectedRoomVO.getRoomType(),selectedRoomVO.getPrice());
 			modifyPane.setVisible(true);
 			addBt.setVisible(false);
 		} catch (Exception e) {
@@ -154,12 +152,11 @@ public class RoomController {
 	
 		modifyPane.setVisible(false);
 		addBt.setVisible(true);
-		setModifyText("","","","");
+		setModifyText("","","");
 		initialize();
 	}
-	void setModifyText(String roomType,String roomName,String roomNum,String price){
+	void setModifyText(String roomType,String roomNum,String price){
 		this.roomType.setValue(roomType);
-		this.roomName.setText(roomName);
 		this.roomNum.setText(roomNum);
 		this.price.setText(price);
 	}
@@ -190,6 +187,6 @@ public class RoomController {
 	protected void cancelModify() {
 		modifyPane.setVisible(false);
 		addBt.setVisible(true);
-		setModifyText("","","","");
+		setModifyText("","","");
 	}
 }
