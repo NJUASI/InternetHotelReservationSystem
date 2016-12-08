@@ -2,27 +2,26 @@ package businessLogic.orderBL.order;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-import businessLogicService.orderBLService.GuestOrderBLService;
 import businessLogicService.orderBLService.OrderForHotelModuleBLService;
 import dataService.orderDataService.OrderDataService;
 import dataService.orderDataService.OrderDataService_Stub;
 import utilities.OrderState;
+import utilities.UserType;
 import vo.OrderGeneralVO;
-
+/**
+ * @author charles
+ * @lastChangedBy Harvey
+ * @updateTime 2016/12/8
+ */
 public class OrderForHotelModule implements OrderForHotelModuleBLService{
 
 	private OrderDataService orderDataService;
 
-	private GuestOrderBLService guestOrderBLService;
+	private CommonOrder commonOrder;
 	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
-	 * 构造函数，初始化成员变量
-	 */
 	public OrderForHotelModule() {
 //		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
 		
@@ -32,7 +31,7 @@ public class OrderForHotelModule implements OrderForHotelModuleBLService{
 			e.printStackTrace();
 		}
 		
-		guestOrderBLService = new GuestOrder();
+		commonOrder = new CommonOrder();
 	}
 	
 	/**
@@ -66,18 +65,14 @@ public class OrderForHotelModule implements OrderForHotelModuleBLService{
 	 * 直接从本层本模块getAllGuestOrderGeneral走
 	 */
 	public OrderState getOrderState(String guestID, String hotelID) {
-		List<OrderGeneralVO> guestOrders = guestOrderBLService.getAllGuestOrderGeneral(guestID);
+		Iterator<OrderGeneralVO> guestOrders = commonOrder.getOrderGenerals(guestID,UserType.GUEST,null);
 		
 		List<OrderState> states = new ArrayList<OrderState>();
-		if (guestOrders != null) {
-			for (int i = 0; i < guestOrders.size(); i++) {
-				OrderGeneralVO thisOrderGeneral = guestOrders.get(i);
-				if (thisOrderGeneral.hotelID.equals(hotelID)) {
-					states.add(thisOrderGeneral.state);
-				}
+		while(guestOrders.hasNext()){
+			OrderGeneralVO thisOrderGeneral = guestOrders.next();
+			if (thisOrderGeneral.hotelID.equals(hotelID)) {
+				states.add(thisOrderGeneral.state);
 			}
-		}else {
-			return null;
 		}
 		
 		if (states.size() == 0) {

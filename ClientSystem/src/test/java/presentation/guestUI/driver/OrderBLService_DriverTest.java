@@ -13,6 +13,7 @@ import businessLogic.orderBL.stub.OrderBLService_Stub;
 import utilities.OrderState;
 import utilities.ResultMessage;
 import utilities.RoomType;
+import utilities.UserType;
 import vo.GuestEvaluationVO;
 import vo.HotelEvaluationVO;
 import vo.OrderGeneralVO;
@@ -142,8 +143,8 @@ public class OrderBLService_DriverTest {
 		final OrderBLService_Stub stub = new OrderBLService_Stub();
 		final OrderBLService_Driver driver = new OrderBLService_Driver(stub);
 		
-		final List<OrderGeneralVO> orderGeneralVOs = driver.orderBLService.getAllGuestOrderGeneral("1234567890");
-		final OrderGeneralVO orderGeneralVO = orderGeneralVOs.get(0);	
+		final Iterator<OrderGeneralVO> orderGeneralVOs = driver.orderBLService.getOrderGenerals("1234567890",UserType.GUEST,null);
+		final OrderGeneralVO orderGeneralVO = orderGeneralVOs.next();	
 		
 		assertEquals("123456789012", orderGeneralVO.orderID);
 		assertEquals("1234567890", orderGeneralVO.guestID);

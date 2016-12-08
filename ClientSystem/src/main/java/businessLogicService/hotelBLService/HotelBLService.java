@@ -24,7 +24,7 @@ public interface HotelBLService {
 
 	public Iterator<RoomInfoVO> getHotelRoomInfo (String hotelID);
 
-	public ResultMessage updateHotelRoomInfo (RoomInfoVO roomInfoVO,String roomType);
+	public ResultMessage updateHotelRoomInfo (RoomInfoVO roomInfoVO,String oldRoomType);
 	
 	public Iterator<HotelVO> getHotels(String city,String circle);
 	

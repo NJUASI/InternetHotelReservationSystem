@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.hotelBL.MockHotel;
-import businessLogic.hotelBL.hotelScan.searchCriteria.SearchCriteria;
 import businessLogic.hotelBL.hotelScan.searchCriteria.SearchCriteriaFactory;
 import businessLogic.hotelBL.hotelScan.sortComparator.SortComparatorFactory;
 import businessLogic.orderBL.MockOrder;

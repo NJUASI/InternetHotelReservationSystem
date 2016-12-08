@@ -5,9 +5,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import businessLogic.hotelBL.HotelInfoOperation;
-import businessLogic.promotionBL.DiscountInSpan;
-import businessLogic.promotionBL.MockPromotion;
 import businessLogicService.orderBLService.WebMarketerOrderBLService;
 import dataService.orderDataService.OrderDataService;
 import dataService.orderDataService.OrderDataService_Stub;

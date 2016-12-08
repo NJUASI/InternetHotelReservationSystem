@@ -3,7 +3,6 @@ package businessLogic.hotelBL;
 import java.util.Iterator;
 
 import utilities.Address;
-import utilities.Operation;
 import utilities.ResultMessage;
 import utilities.RoomType;
 
