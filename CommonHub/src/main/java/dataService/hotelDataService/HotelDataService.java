@@ -7,6 +7,7 @@ import java.util.List;
 import po.HotelPO;
 import po.RoomInfoPO;
 import utilities.ResultMessage;
+import utilities.RoomType;
 
 public interface HotelDataService extends Remote{
 
@@ -26,10 +27,10 @@ public interface HotelDataService extends Remote{
 	public List<RoomInfoPO> getRoomInfo(String hotelID) throws RemoteException;
 
 	//因为可能会修改名字，为了能够找到数据并修改，必须传入原名字的参数
-	public ResultMessage updateRoomInfo(RoomInfoPO roomInfoPO,String oldRoomType) throws RemoteException;
+	public ResultMessage updateRoomInfo(RoomInfoPO roomInfoPO) throws RemoteException;
 
 	public ResultMessage addRoomInfo(RoomInfoPO roomInfoPO) throws RemoteException;
 
-	public ResultMessage deleteRoomInfo(String hotelID, String roomType) throws RemoteException;
+	public ResultMessage deleteRoomInfo(String hotelID,RoomType roomType) throws RemoteException;
 
 }

@@ -8,6 +8,7 @@ import businessLogicService.hotelBLService.HotelBLService;
 import exception.operationFailedException.GetFailedException;
 import exception.verificationException.RMILinkFailedException;
 import utilities.ResultMessage;
+import utilities.RoomType;
 import utilities.SearchCriteriaType;
 import utilities.SortStrategy;
 import vo.HotelVO;
@@ -72,8 +73,8 @@ public class HotelBLController implements HotelBLService {
 		return hotel.getHotelRoomInfo(hotelWorkerID);
 	}
 
-	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO,String oldRoomType) {
-		return hotel.updateHotelRoomInfo(roomInfoVO,oldRoomType);
+	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO) {
+		return hotel.updateHotelRoomInfo(roomInfoVO);
 	}
 
 	public ResultMessage addHotel(HotelVO hotelVO) {
@@ -92,13 +93,13 @@ public class HotelBLController implements HotelBLService {
 	 * @time:2016年12月8日 上午12:34:02
 	 */
 	@Override
-	public ResultMessage checkInOffline(String hotelID, String RoomName, int roomNum) {
-		return hotel.checkIn(hotelID,RoomName,roomNum);
+	public ResultMessage checkInOffline(String hotelID,RoomType roomType, int roomNum) {
+		return hotel.checkIn(hotelID,roomType,roomNum);
 	}
 
 	@Override
-	public ResultMessage checkOutOffline(String hotelID, String RoomName, int roomNum) {
-		return hotel.checkOut(hotelID,RoomName,roomNum);
+	public ResultMessage checkOutOffline(String hotelID,RoomType roomType, int roomNum) {
+		return hotel.checkOut(hotelID,roomType,roomNum);
 	}
 	// 浏览概况时的操作
 	public Iterator<HotelVO> getHotels(String city,String circle) {

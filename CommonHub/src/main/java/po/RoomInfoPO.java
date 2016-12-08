@@ -25,9 +25,6 @@ public class RoomInfoPO implements Serializable{
 	// 房间类型
 	private RoomType roomType;
 	
-	// 房间名称
-	private String roomName;
-	
 	// 房间数
 	private int roomNum;
 	
@@ -37,11 +34,10 @@ public class RoomInfoPO implements Serializable{
 	// 价格
 	private double price;
 	
-	public RoomInfoPO(String hotelID,RoomType roomType, String roomName, int roomNumCount, int remainNum, double price) {
+	public RoomInfoPO(String hotelID,RoomType roomType, int roomNumCount, int remainNum, double price) {
 		super();
 		this.hotelID = hotelID;
 		this.roomType = roomType;	
-		this.roomName = roomName;
 		this.roomNum = roomNumCount;
 		this.remainNum = remainNum;
 		this.price = price;
@@ -50,7 +46,6 @@ public class RoomInfoPO implements Serializable{
 	public RoomInfoPO(RoomInfoVO roomInfoVO) {
 		this.hotelID = roomInfoVO.hotelID;
 		this.roomType = roomInfoVO.roomType;
-		this.roomName = roomInfoVO.roomName;
 		this.roomNum = roomInfoVO.roomNum;
 		this.price = roomInfoVO.price;
 	}
@@ -70,14 +65,6 @@ public class RoomInfoPO implements Serializable{
 		this.roomType = roomType;
 	}
 	
-	public String getRoomName() {
-		return roomName;
-	}
-
-	public void setRoomName(String roomName) {
-		this.roomName = roomName;
-	}
-	
 	public int getRoomNum() {
 		return roomNum;
 	}
@@ -92,7 +79,6 @@ public class RoomInfoPO implements Serializable{
 	public void setRemainNum(int remainNum) {
 		this.remainNum = remainNum;
 	}
-	
 	
 	public double getPrice() {			
 		return price;
