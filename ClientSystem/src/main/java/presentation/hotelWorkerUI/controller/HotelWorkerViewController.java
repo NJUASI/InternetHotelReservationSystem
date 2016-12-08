@@ -25,7 +25,8 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openHotelInfo() throws IOException{
-		jump(hotelInfo, "HotelDetail");
+		hotelInfo = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/HotelDetail.fxml"));
+		jump(hotelInfo);
 	}
 
 	/**
@@ -36,7 +37,8 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openOrderInfo() throws IOException{
-		jump(orderInfo,"OrderCheck");
+		orderInfo = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/OrderCheck.fxml"));
+		jump(orderInfo);
 	}
 
 	/**
@@ -47,7 +49,8 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openOffline() throws IOException{
-		jump(offline,"Offline");
+		offline = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/Offline.fxml"));
+		jump(offline);
 	}
 
 	/**
@@ -58,7 +61,8 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openPromotion() throws IOException{
-		jump(promotion, "Promotion");
+		promotion = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/Promotion.fxml"));
+		jump(promotion);
 	}
 	/**
 	 * @author 61990
@@ -68,7 +72,8 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openRoomInfo() throws IOException{
-		jump(roomInfo,"RoomInfo");
+		roomInfo = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/RoomInfo.fxml"));
+		jump(roomInfo);
 	}
 	/**
 	 * @author 61990
@@ -91,12 +96,8 @@ public class HotelWorkerViewController {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月8日 下午2:54:27
 	 */
-	private void jump(Parent parent,String path){
+	private void jump(Parent parent ){
 		right.getChildren().removeAll(mainPane,hotelInfo ,orderInfo, offline,remainRoom,promotion,roomInfo);
-		try {
-			roomInfo = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/"+path+".fxml"));
-		} catch (IOException e) {
-		}
 		right.getChildren().add(roomInfo);
 	}
 }

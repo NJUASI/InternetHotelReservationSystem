@@ -37,56 +37,66 @@ public class WebMarketerViewController {
 	/**
 	 * @dscription 跳转信用充值界面
 	 * @author 61990
+	 * @throws IOException 
 	 * @lastChangedBy Harvey
 	 * @updateTime 2016/12/8
 	 */
 	@FXML
-	protected void openCharge(){
-		jump(charge, "Charge");
+	protected void openCharge() throws IOException{
+		charge = FXMLLoader.load(getClass().getResource("/presentation/webMarketerUI/view/Charge.fxml"));
+		jump(charge);
 	}
 
 	/**
 	 * @description 跳转会员等级制定界面
 	 * @author 61990
+	 * @throws IOException 
 	 * @lastChangedBy Harvey
 	 * @updateTime 2016/12/8
 	 */
 	@FXML
-	protected void openMarket(){
-		jump(market, "MemberCheck");
+	protected void openMarket() throws IOException{
+		market = FXMLLoader.load(getClass().getResource("/presentation/webMarketerUI/view/MemberCheck.fxml"));
+		jump(market);
 	}
 
 	/**
 	 * @description 跳转网站商圈策略制定界面
 	 * @author 61990
+	 * @throws IOException 
 	 * @lastChangedBy Harvey
 	 * @updateTime 2016/12/8
 	 */
 	@FXML
-	protected void openPromotion(){
-		jump(cyclePromotion, "CyclePromotion");
+	protected void openPromotion() throws IOException{
+		cyclePromotion = FXMLLoader.load(getClass().getResource("/presentation/webMarketerUI/view/CyclePromotion.fxml"));
+		jump(cyclePromotion);
 	}
 
 	/**
 	 * @description  跳转会员等级制定界面
 	 * @author 61990
+	 * @throws IOException 
 	 * @lastChangedBy Harvey
 	 * @updateTime 2016/12/8
 	 */
 	@FXML
-	protected void openCommonPromotion(){
-		jump(commonPromotion, "DatePromotion");
+	protected void openCommonPromotion() throws IOException{
+		commonPromotion = FXMLLoader.load(getClass().getResource("/presentation/webMarketerUI/view/DatePromotion.fxml"));
+		jump(commonPromotion);
 	}
 
 	/**
 	 * @description 跳转异常订单界面
 	 * @author 61990
+	 * @throws IOException 
 	 * @lastChangedBy Harvey
 	 * @updateTime 2016/12/8
 	 */
 	@FXML
-	protected void openOrder(){
-		jump(abnormalOrder, "orderSearch");
+	protected void openOrder() throws IOException{
+		abnormalOrder = FXMLLoader.load(getClass().getResource("/presentation/webMarketerUI/view/orderSearch.fxml"));
+		jump(abnormalOrder);
 	}
 
 	/**
@@ -98,13 +108,8 @@ public class WebMarketerViewController {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月8日 下午3:08:03
 	 */
-	private void jump(Parent parent,String path){
+	private void jump(Parent parent){
 		right.getChildren().removeAll(mainPane, charge, market, commonPromotion, cyclePromotion, abnormalOrder);
-		try {
-			parent = FXMLLoader.load(getClass().getResource("/presentation/webMarketerUI/view/"+path+".fxml"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		right.getChildren().add(parent);
 	}
 }
