@@ -70,7 +70,7 @@ public class HotelSearchController {
 	private OrderBLService orderBLController;
 	private SourceBLService sourceBLController;
 	private HotelBLService hotelBLController;
-	
+
 	public HotelSearchController() {
 		orderBLController = OrderBLController.getInstance();
 		sourceBLController = SourceBLController.getInstance();
@@ -114,7 +114,7 @@ public class HotelSearchController {
 	protected void searchCycle(){
 
 		cycleChoose.getItems().clear();
-		
+
 		//调用sourceBL获取当前选中城市的所有商圈
 		Iterator<String> circles = sourceBLController.getCircles(cityChoose.getValue());
 		while(circles.hasNext()){
@@ -140,7 +140,7 @@ public class HotelSearchController {
 	TableView<HotelTable> hotelTable;
 	@FXML
 	private TableColumn<HotelTable, String>	hotelIDColumn3,hotelNameColumn3, addressColumn3, cityColumn3, cycleColumn3, minPriceColumn3,hasOrderColumn3, levelColumn3, scoreColumn3;	
-	
+
 	/**
 	 * @酒店浏览界面初始化
 	 * @author 61990
@@ -187,7 +187,7 @@ public class HotelSearchController {
 
 		hotelTable.setItems(data);
 	}
-	
+
 	/**
 	 * @description 返回订单概况
 	 * @author 61990
@@ -201,7 +201,7 @@ public class HotelSearchController {
 		createPane.setVisible(false);
 	}
 
-	
+
 	// HotelDetail界面
 	/*
 	 *  TODO gy注意:确定hotelDetail界面不分开吗和订单浏览界面不分开吗？不分的话，这个类太大了
@@ -227,10 +227,10 @@ public class HotelSearchController {
 		//TODO fjj注意： 酒店订单列表 酒店评价列表
 
 		String hotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
-		
+
 		//获取hotelVO，调用hotelBL的方法
 		hotelVO = hotelBLController.getHotelInfo(hotelID);
-		
+
 		hotelCheck.setVisible(false);
 		hotelDetail.setVisible(true);
 
@@ -251,7 +251,7 @@ public class HotelSearchController {
 		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
 				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
 				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		
+
 		//TODO fjj注意：调用orderbL
 		commentList=new LinkedList<>();
 		commentList.add(new HotelEvaluationVO("12334", LocalDate.of(2005, 3, 2),5.0,"ssssdfgasdfadgljglfksdjfklajdlfkjasldfkj"));
@@ -411,6 +411,9 @@ public class HotelSearchController {
 		hotelChoose.setVisible(true);
 	}
 
+	List<SearchCriteriaType> criteria;
+	SearchCriteriaVO vo;
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -419,48 +422,15 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void selectHotel() {
-		
-		SearchCriteriaVO vo = setSearchCriteriaVO();
-		List<SearchCriteriaType> criteria = setCriteria(vo);
+
+		//获取到各种搜索条件和用了哪些搜索方法
+		setVOAndCriteria();
 		
 		//调用hotelBL的方法，根据搜索标准列表搜索酒店
 		hotelBLController.searchHotels(criteria, vo);
 
 		hotelCheck.setVisible(true);
 		hotelChoose.setVisible(false);
-	}
-	
-	/**
-	 * @Description:根据得到的vo信息，创建搜索标准
-	 * @param vo
-	 * @return
-	 * List<SearchCriteriaType>
-	 * @author: Harvey Gong
-	 * @lastChangedBy: Harvey Gong
-	 * @time:2016年12月7日 下午10:11:09
-	 */
-	private List<SearchCriteriaType> setCriteria(SearchCriteriaVO vo) {
-		List<SearchCriteriaType> criteria = new ArrayList<SearchCriteriaType>();
-		if(vo.keyHotelName!=null){
-			criteria.add(SearchCriteriaType.HOTEL_NAME);
-		}
-		if(vo.bookedOnly){
-			criteria.add(SearchCriteriaType.BOOKED_ONLY);
-		}
-		if(minlevelInput.getValue()!=null){
-			criteria.add(SearchCriteriaType.LEVEL_SPAN);
-		}
-		if(minpriceInput.getText()!=null){
-			criteria.add(SearchCriteriaType.ORGIN_PRICE_SPAN);
-		}
-		if(minScoreInput.getValue()!=null){
-			criteria.add(SearchCriteriaType.SCORE_SPAN);
-		}
-		if(roomInput.getText()!=null){
-			criteria.add(SearchCriteriaType.REMAIN_ROOM_NUM);
-		}
-		criteria.add(SearchCriteriaType.NULL);
-		return criteria;
 	}
 
 	/**
@@ -471,23 +441,42 @@ public class HotelSearchController {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月7日 下午10:18:27
 	 */
-	private SearchCriteriaVO setSearchCriteriaVO(){
-		SearchCriteriaVO vo = new SearchCriteriaVO();
+	private void setVOAndCriteria(){
+		vo = new SearchCriteriaVO();
+		criteria = new ArrayList<SearchCriteriaType>();
 		
-		vo.keyHotelName = hotelNameInput.getText();
-		vo.bookedOnly = boxOnly.isSelected();
-		//TODO gy注意：将星级选择的getValue改为int；
-		vo.minLevel = minlevelInput.getValue().intValue();
-		vo.maxLevel =  maxlevelInput.getValue().intValue();
-		vo.minPrice = Double.valueOf(minpriceInput.getText());
-		vo.maxPrice = Double.valueOf(maxpriceInput.getText());
-		vo.minScore = minScoreInput.getValue();
-		vo.maxScore = maxScoreInput.getValue();
-		vo.roomTypes = new ArrayList<RoomType>();
+		if(vo.keyHotelName!=null){
+			criteria.add(SearchCriteriaType.HOTEL_NAME);
+			vo.keyHotelName = hotelNameInput.getText();
+		}
+		if(vo.bookedOnly){
+			criteria.add(SearchCriteriaType.BOOKED_ONLY);
+			vo.bookedOnly = boxOnly.isSelected();
+		}
+		if(minlevelInput.getValue()!=null){
+			criteria.add(SearchCriteriaType.LEVEL_SPAN);
+			//TODO gy注意：将星级选择的getValue改为int；
+			vo.minLevel = minlevelInput.getValue().intValue();
+			vo.maxLevel =  maxlevelInput.getValue().intValue();
+		}
+		if(minpriceInput.getText()!=null){
+			criteria.add(SearchCriteriaType.ORGIN_PRICE_SPAN);
+			vo.minPrice = Double.valueOf(minpriceInput.getText());
+			vo.maxPrice = Double.valueOf(maxpriceInput.getText());
+		}
+		if(minScoreInput.getValue()!=null){
+			criteria.add(SearchCriteriaType.SCORE_SPAN);
+			vo.minScore = minScoreInput.getValue();
+			vo.maxScore = maxScoreInput.getValue();
+		}
+		if(roomInput.getText()!=null){
+			criteria.add(SearchCriteriaType.REMAIN_ROOM_NUM);
+			vo.remainRoomNum = Integer.parseInt(roomInput.getText());
+		}
 		//TODO gy注意：能不能把房间类型列表的选择做成复选框checkBox或者选择框choiceBox，可能ifelse会少一点儿
-		vo.remainRoomNum = Integer.parseInt(roomInput.getText());
+//		vo.roomTypes = new ArrayList<RoomType>();
+		criteria.add(SearchCriteriaType.NULL);
 		
-		return vo;
 	}
 
 
@@ -536,7 +525,7 @@ public class HotelSearchController {
 		createPane.setVisible(true);
 		hotelCheck.setVisible(false);
 	}
-	
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990

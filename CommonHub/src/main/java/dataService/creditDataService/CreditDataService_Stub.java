@@ -2,6 +2,8 @@ package dataService.creditDataService;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import po.CreditPO;
@@ -15,7 +17,12 @@ public class CreditDataService_Stub extends UnicastRemoteObject implements Credi
 
 	@Override
 	public List<CreditPO> getAllCreditDetail(String guestID) throws RemoteException {
-		return null;
+		List<CreditPO> list = new ArrayList<CreditPO>();
+		LocalDateTime date = LocalDateTime.of(2016, 11, 11, 11, 11, 11, 11);
+		list.add(new CreditPO("1234567890",date,"123456789",100,200,"executed"));
+		list.add(new CreditPO("1234567891",date,"123456789",100,200,"executed"));
+		list.add(new CreditPO("1234567892",date,"123456789",100,200,"executed"));
+		return list;
 	}
 
 	@Override

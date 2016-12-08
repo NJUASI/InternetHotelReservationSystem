@@ -8,17 +8,14 @@ import businessLogic.logInBL.LogInController;
 import businessLogicService.logInBLService.LogInBLService;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import presentation.Main;
 import utilities.IDReserve;
 import utilities.UserType;
 import vo.GuestVO;
-import vo.UserVO;
 	
 public class LogInViewController {
 	public static String userID;

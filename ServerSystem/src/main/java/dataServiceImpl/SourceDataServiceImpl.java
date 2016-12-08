@@ -20,12 +20,12 @@ public class SourceDataServiceImpl implements SourceDataService {
 	
 	@Override
 	public Iterator<String> getCities() {
-		return addressDataHelper.getCity().iterator();
+		return sourceDataHelper.getCities();
 	}
 	
 	@Override
 	public Iterator<String> getCircles(String city) {
-		return addressDataHelper.getCircle(city).iterator();
+		return sourceDataHelper.getCircles(city);
 	}
 
 	@Override

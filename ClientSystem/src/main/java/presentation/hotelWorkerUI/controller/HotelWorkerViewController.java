@@ -19,78 +19,84 @@ public class HotelWorkerViewController {
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/1
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/8
 	 * @查看酒店信息 
 	 */    
 	@FXML 
 	protected void openHotelInfo() throws IOException{
-		right.getChildren().removeAll(mainPane,hotelInfo ,orderInfo, offline,remainRoom,promotion,roomInfo);
-		hotelInfo = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/HotelDetail.fxml"));		
-		right.getChildren().add(hotelInfo);			
+		jump(hotelInfo, "HotelDetail");
 	}
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/1
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/8
 	 * @查看酒店订单信息 
 	 */    
 	@FXML 
 	protected void openOrderInfo() throws IOException{
-		right.getChildren().removeAll(mainPane,hotelInfo ,orderInfo, offline,remainRoom,promotion,roomInfo);
-		orderInfo = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/OrderCheck.fxml"));
-		right.getChildren().add(orderInfo);	  			
+		jump(orderInfo,"OrderCheck");
 	}
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/1
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/8
 	 * @线下处理 
 	 */    
 	@FXML 
 	protected void openOffline() throws IOException{
-		right.getChildren().removeAll(mainPane,hotelInfo ,orderInfo, offline,remainRoom,promotion,roomInfo);
-		offline = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/Offline.fxml"));
-		right.getChildren().add(offline);		
+		jump(offline,"Offline");
 	}
 
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/1
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/8
 	 * @查看酒店策略信息 
 	 */    
 	@FXML 
 	protected void openPromotion() throws IOException{
-		right.getChildren().removeAll(mainPane,hotelInfo ,orderInfo, offline,remainRoom,promotion,roomInfo);
-		promotion = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/Promotion.fxml"));
-		right.getChildren().add(promotion);
+		jump(promotion, "Promotion");
 	}
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/1
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/8
 	 * @查看酒店房间信息 
 	 */    
 	@FXML 
 	protected void openRoomInfo() throws IOException{
-		right.getChildren().removeAll(mainPane,hotelInfo ,orderInfo, offline,remainRoom,promotion,roomInfo);
-		roomInfo = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/RoomInfo.fxml"));
-
-		right.getChildren().add(roomInfo);
+		jump(roomInfo,"RoomInfo");
 	}
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/1
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/8
 	 * @查看主面板信息 
 	 */    
 	@FXML 
 	protected void openMain() throws IOException{
-
 		right.getChildren().removeAll(mainPane,hotelInfo ,orderInfo, offline,remainRoom,promotion,roomInfo);
 		right.getChildren().add(mainPane);
+	}
+	
+	/**
+	 * @Description:封装界面跳转逻辑
+	 * @param parent
+	 * @param path
+	 * void
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月8日 下午2:54:27
+	 */
+	private void jump(Parent parent,String path){
+		right.getChildren().removeAll(mainPane,hotelInfo ,orderInfo, offline,remainRoom,promotion,roomInfo);
+		try {
+			roomInfo = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/"+path+".fxml"));
+		} catch (IOException e) {
+		}
+		right.getChildren().add(roomInfo);
 	}
 }
