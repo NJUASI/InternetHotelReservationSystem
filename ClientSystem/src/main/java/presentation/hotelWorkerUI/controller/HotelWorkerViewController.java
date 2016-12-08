@@ -12,11 +12,11 @@ import javafx.scene.layout.AnchorPane;
  * @lastChangedBy Harvey
  */
 public class HotelWorkerViewController {
-	Parent hotelInfo ,orderInfo, offline,remainRoom,promotion,roomInfo;	
 
 	@FXML private AnchorPane right;
 	@FXML private AnchorPane mainPane;
-
+	
+	private Parent currentParent;
 	/**
 	 * @author 61990
 	 * @lastChangedBy Harvey
@@ -25,8 +25,7 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openHotelInfo() throws IOException{
-		hotelInfo = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/HotelDetail.fxml"));
-		jump(hotelInfo);
+		jump("HotelDetail");
 	}
 
 	/**
@@ -37,8 +36,7 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openOrderInfo() throws IOException{
-		orderInfo = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/OrderCheck.fxml"));
-		jump(orderInfo);
+		jump("OrderCheck");
 	}
 
 	/**
@@ -49,8 +47,7 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openOffline() throws IOException{
-		offline = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/Offline.fxml"));
-		jump(offline);
+		jump("Offline");
 	}
 
 	/**
@@ -61,8 +58,7 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openPromotion() throws IOException{
-		promotion = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/Promotion.fxml"));
-		jump(promotion);
+		jump("Promotion");
 	}
 	/**
 	 * @author 61990
@@ -72,8 +68,7 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openRoomInfo() throws IOException{
-		roomInfo = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/RoomInfo.fxml"));
-		jump(roomInfo);
+		jump("RoomInfo");
 	}
 	/**
 	 * @author 61990
@@ -83,7 +78,7 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openMain() throws IOException{
-		right.getChildren().removeAll(mainPane,hotelInfo ,orderInfo, offline,remainRoom,promotion,roomInfo);
+		right.getChildren().clear();
 		right.getChildren().add(mainPane);
 	}
 	
@@ -96,8 +91,12 @@ public class HotelWorkerViewController {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月8日 下午2:54:27
 	 */
-	private void jump(Parent parent ){
-		right.getChildren().removeAll(mainPane,hotelInfo ,orderInfo, offline,remainRoom,promotion,roomInfo);
-		right.getChildren().add(roomInfo);
+	private void jump(String path){
+		right.getChildren().clear();
+		try {
+			currentParent = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/"+path+".fxml"));
+		} catch (IOException e) {
+		}
+		right.getChildren().add(currentParent);
 	}
 }

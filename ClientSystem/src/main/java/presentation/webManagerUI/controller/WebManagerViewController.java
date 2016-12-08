@@ -9,12 +9,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 public class WebManagerViewController {
-	Parent guest, hotel, marketer, hotelInfo;
-
 	@FXML
 	private StackPane right;
 	@FXML
 	private Pane mainPane;
+	
+	private Parent currentParent;
 
 	/**
 	 * @author 61990
@@ -24,8 +24,7 @@ public class WebManagerViewController {
 	 */
 	@FXML
 	protected void openGuest() throws IOException {
-		guest = FXMLLoader.load(getClass().getResource("/presentation/webMarketerUI/view/GuestModify.fxml"));
-		jump(guest);
+		jump("GuestModify");
 	}
 	/**
 	 * @author 61990
@@ -35,8 +34,7 @@ public class WebManagerViewController {
 	 */
 	@FXML
 	protected void openHotel() throws IOException {
-		hotel = FXMLLoader.load(getClass().getResource("/presentation/webMarketerUI/view/HotelWorkerModify.fxml"));
-		jump(hotel);
+		jump("HotelWorkerModify");
 	}
 	/**
 	 * @author 61990
@@ -46,8 +44,7 @@ public class WebManagerViewController {
 	 */
 	@FXML
 	protected void openMarketer() throws IOException {
-		marketer = FXMLLoader.load(getClass().getResource("/presentation/webMarketerUI/view/MarketerModify.fxml"));
-		jump(marketer);
+		jump("MarketerModify");
 	}
 	/**
 	 * @author 61990
@@ -57,8 +54,7 @@ public class WebManagerViewController {
 	 */
 	@FXML
 	protected void openHotelInfo() throws IOException {
-		hotelInfo = FXMLLoader.load(getClass().getResource("/presentation/webMarketerUI/view/HotelInfo.fxml"));
-		jump(hotelInfo);
+		jump("HotelInfo");
 	}
 	/**
 	 * @author 61990
@@ -68,7 +64,7 @@ public class WebManagerViewController {
 	 */
 	@FXML
 	protected void openMain() {
-		right.getChildren().removeAll(mainPane, guest, hotel, marketer, hotelInfo);
+		right.getChildren().clear();
 		right.getChildren().add(mainPane);
 	}
 	
@@ -81,9 +77,13 @@ public class WebManagerViewController {
 	 * @lastChangedBy: 61990
 	 * @time:2016年12月8日 下午3:08:24
 	 */
-	private void jump(Parent parent){
-		right.getChildren().removeAll(mainPane,guest, hotel, marketer, hotelInfo);
-
-		right.getChildren().add(parent);
+	private void jump(String path){
+		right.getChildren().clear();
+		try {
+			currentParent = FXMLLoader.load(getClass().getResource("/presentation/webMarketerUI/view/"+path+".fxml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		right.getChildren().add(currentParent);
 	}
 }
