@@ -23,25 +23,28 @@
       </Label>
       <AnchorPane prefHeight="625.0" prefWidth="1000.0">
          <children>
-            <Pane fx:id="registerPane" layoutX="330.0" layoutY="198.0" prefHeight="284.0" prefWidth="330.0" visible="false">
+            <Pane fx:id="registerPane" layoutX="330.0" layoutY="198.0" prefHeight="325.0" prefWidth="330.0" visible="false">
                <children>
-                  <Button fx:id="register" layoutX="147.0" layoutY="247.0" mnemonicParsing="false" onMouseClicked="#register" text="注册" />
-                  <GridPane layoutX="61.0" layoutY="73.0" prefHeight="145.0" prefWidth="222.0">
+                  <Button fx:id="register" layoutX="147.0" layoutY="271.0" mnemonicParsing="false" onMouseClicked="#register" text="注册" />
+                  <GridPane layoutX="58.0" layoutY="69.0" prefHeight="187.0" prefWidth="228.0">
                      <children>
-                        <Label prefHeight="19.0" prefWidth="91.0" text="姓      名：" GridPane.rowIndex="1" />
+                        <Label prefHeight="19.0" prefWidth="91.0" text="姓      名：" GridPane.rowIndex="2" />
                         <Label text="密      码：" />
-                        <Label text="昵      称：" GridPane.rowIndex="2" />
-                        <Label text="联系方式：" GridPane.rowIndex="3" />
-                        <TextField fx:id="password2" prefHeight="23.0" prefWidth="178.0" GridPane.columnIndex="1" />
-                        <TextField fx:id="name" prefHeight="23.0" prefWidth="178.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField fx:id="nickName" prefHeight="30.0" prefWidth="311.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="phone" prefHeight="23.0" prefWidth="178.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="昵      称：" GridPane.rowIndex="3" />
+                        <Label text="联系方式：" GridPane.rowIndex="4" />
+                        <TextField fx:id="name" prefHeight="23.0" prefWidth="178.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="nickName" prefHeight="30.0" prefWidth="311.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="phone" prefHeight="23.0" prefWidth="178.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="确认密码：" GridPane.rowIndex="1" />
+                        <PasswordField fx:id="password3" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <PasswordField fx:id="password2" GridPane.columnIndex="1" />
                      </children>
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="136.0" minWidth="10.0" prefWidth="83.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0" minWidth="10.0" prefWidth="125.0" />
                      </columnConstraints>
                      <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -55,16 +58,29 @@
                   </Label>
                </children>
             </Pane>
-            <Button fx:id="logInWindow" focusTraversable="false" layoutX="154.0" layoutY="567.0" mnemonicParsing="false" onMouseClicked="#openLogIn" prefHeight="23.0" prefWidth="102.0" text="登录" />
-            <Button fx:id="registerWindow" focusTraversable="false" layoutX="35.0" layoutY="567.0" mnemonicParsing="false" onMouseClicked="#openRegister" prefHeight="23.0" prefWidth="102.0" text="注册" />
+            <Button fx:id="logInBT" focusTraversable="false" layoutX="35.0" layoutY="567.0" mnemonicParsing="false" onMouseClicked="#openLogIn" prefHeight="23.0" prefWidth="102.0" text="登录" />
+            <Button fx:id="registerBT" focusTraversable="false" layoutX="35.0" layoutY="567.0" mnemonicParsing="false" onMouseClicked="#openRegister" prefHeight="23.0" prefWidth="102.0" text="注册" />
             <Pane fx:id="logInPane" layoutX="335.0" layoutY="185.0" prefHeight="304.0" prefWidth="330.0">
                <children>
                   <Label layoutX="54.0" layoutY="125.0" text="编号：" />
                   <TextField fx:id="ID" focusTraversable="false" layoutX="112.0" layoutY="120.0" prefHeight="23.0" prefWidth="178.0" />
                   <Label layoutX="54.0" layoutY="183.0" text="密码：" />
-                  <TextField fx:id="password" focusTraversable="false" layoutX="112.0" layoutY="178.0" prefHeight="23.0" prefWidth="178.0" />
-                  <Button fx:id="logIn" defaultButton="true" focusTraversable="false" layoutX="142.0" layoutY="260.0" mnemonicParsing="false" onAction="#logIn" text="登录" />
+                  <Button defaultButton="true" focusTraversable="false" layoutX="142.0" layoutY="260.0" mnemonicParsing="false" onAction="#logIn" text="登录" />
                   <Label layoutX="144.0" layoutY="30.0" text="登录">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="password" layoutX="112.0" layoutY="178.0" prefHeight="30.0" prefWidth="178.0" />
+               </children>
+            </Pane>
+            <Button focusTraversable="false" layoutX="35.0" layoutY="527.0" mnemonicParsing="false" onMouseClicked="#openRMI" prefHeight="23.0" prefWidth="102.0" text="RMI" />
+            <Pane fx:id="rmiPane" layoutX="336.0" layoutY="187.0" prefHeight="304.0" prefWidth="361.0" visible="false">
+               <children>
+                  <Label layoutX="54.0" layoutY="125.0" />
+                  <TextField fx:id="rmiText" focusTraversable="false" layoutX="47.0" layoutY="120.0" prefHeight="30.0" prefWidth="239.0" />
+                  <Button defaultButton="true" focusTraversable="false" layoutX="141.0" layoutY="258.0" mnemonicParsing="false" onAction="#link" text="连接" />
+                  <Label layoutX="144.0" layoutY="30.0" text="RMI">
                      <font>
                         <Font size="23.0" />
                      </font>
