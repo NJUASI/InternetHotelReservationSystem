@@ -14,8 +14,13 @@ import businessLogic.sourceBL.SourceBLController;
 import businessLogicService.hotelBLService.HotelBLService;
 import businessLogicService.orderBLService.OrderBLService;
 import businessLogicService.sourceBLService.SourceBLService;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -128,11 +133,29 @@ public class HotelSearchController {
 
 
 	Iterator<String> cities = sourceBLController.getCities();
-
+	
 	while(cities.hasNext()){
 		cityChoose.getItems().add(cities.next());
 	}
+	Iterator<String> circles = sourceBLController.getCircles(cityChoose.getItems().get(0));
+	while(circles.hasNext()){
+		cycleChoose.getItems().add(circles.next());	
+	}
+	cityChoose.setValue(cityChoose.getItems().get(0));
+	cycleChoose.setValue(cycleChoose.getItems().get(0));
+	//TODO gcm  newValue 为改变后你点的那个值
 	
+	cityChoose.valueProperty().addListener(new ChangeListener<String>() {
+		@Override
+		public void changed(ObservableValue ov, String oldValue, String newValue) {
+			cycleChoose.getItems().clear();
+			Iterator<String> circles = sourceBLController.getCircles(newValue);
+			while(circles.hasNext()){
+				cycleChoose.getItems().add(circles.next());
+				
+			}cycleChoose.setValue(cycleChoose.getItems().get(0));
+		}    
+      });
 	}
 	/**
 	 * @初始化所有城市
@@ -161,10 +184,6 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void searchCycle(){
-
-		cycleChoose.getItems().clear();
-
-	
 	}
 
 	/**
