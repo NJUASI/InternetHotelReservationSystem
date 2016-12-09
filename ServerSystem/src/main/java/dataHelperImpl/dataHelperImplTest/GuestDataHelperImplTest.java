@@ -27,21 +27,19 @@ public class GuestDataHelperImplTest {
 		
 	}
 
-	@Ignore
 	@Test
 	public void testAdd() {
-		String name = "董金玉";
-		String phone  ="13523456789";
-		String nickName = "kkkkkkkkk";
-		String password  ="123456DJYF";
+		LocalDate birthday = LocalDate.of(1997, 10, 1);
+		String name = "高源";
+		String phone  ="15951953939";
+		String nickName = "hhjhjhj";
+		String password  ="asdfghjkl";
 		
-		System.out.println("name "+code.encryptChinese(name));
-		GuestPO guestPO = new GuestPO("", LocalDate.of(2016, 8, 2), "school", 
-				code.encryptChinese(name), code.encryptChinese(nickName),
+		GuestPO guestPO = new GuestPO("", birthday, "", 
+				code.encryptChinese(name), nickName,
 				code.encryptChinese(password), code.encryptChinese(phone), 107);
 		GuestPO tempGuestPO = helper.add(guestPO);
 		
-		assertEquals(nickName,code.decodeChinese(tempGuestPO.getNickName()));
 	}
 
 	@Ignore
@@ -52,6 +50,7 @@ public class GuestDataHelperImplTest {
 		assertEquals(ResultMessage.SUCCESS,helper.modify(guestPO));
 	}
 
+	@Ignore
 	@Test
 	public void testGetSingle() {
 		GuestPO guestPO = helper.getSingle("1234567894");

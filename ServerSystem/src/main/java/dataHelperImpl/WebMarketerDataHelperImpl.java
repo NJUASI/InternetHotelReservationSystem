@@ -9,6 +9,7 @@ import java.util.List;
 
 import dataHelper.WebMarketerDataHelper;
 import po.WebMarketerPO;
+import utilities.Ciphertext;
 import utilities.JDBCUtil;
 import utilities.ResultMessage;
 
@@ -44,11 +45,11 @@ public class WebMarketerDataHelperImpl implements WebMarketerDataHelper {
 	 * @return ResultMessage 是否成功添加到数据库中
 	 */
 	public WebMarketerPO add(WebMarketerPO webMarketerPO) {
-		sql = "INSERT INTO webmarketer(webmarketer.`password`) VALUES(?,?)";
+		sql = "INSERT INTO webmarketer(webmarketer.`password`) VALUES(?)";
 
 		try {
 			ps = conn.prepareStatement(sql); // 插入数据的准备工作，1-2对应sql语句中问号的顺序
-			ps.setString(1, "123456"); // 在使用setObject方法是必须注意，我们应该使用对应数据类型,
+			ps.setString(1, new Ciphertext().encryptChinese("qwertyuiop123456")); // 在使用setObject方法是必须注意，我们应该使用对应数据类型,
 															// 虽然Object可以替代所有该set方法，但会影响效率所以尽量使用对应数据类型的set方法
 
 			ps.execute(); // 执行sql语句，返回值为boolean
