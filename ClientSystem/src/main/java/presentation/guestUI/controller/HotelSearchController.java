@@ -111,20 +111,7 @@ public class HotelSearchController {
 		}
 		cityChoose.setValue(cityChoose.getItems().get(0));
 		cycleChoose.setValue(cycleChoose.getItems().get(0));
-		//TODO gcm  newValue 为改变后你点的那个值
-		//	监听里改商圈
-
-		cityChoose.valueProperty().addListener(new ChangeListener<String>() {
-			@Override
-			public void changed(ObservableValue ov, String oldValue, String newValue) {
-				cycleChoose.getItems().clear();
-				Iterator<String> circles = sourceBLController.getCircles(newValue);
-				while(circles.hasNext()){
-					cycleChoose.getItems().add(circles.next());
-
-				}cycleChoose.setValue(cycleChoose.getItems().get(0));
-			}    
-		});
+		
 	}
 
 	void initEveryBox(){
@@ -175,9 +162,36 @@ public class HotelSearchController {
 		
 
 		//给城市选择添加添加事件处理器和值改变的监听器
-		cityChoose.setOnShowing(new CityChooseHandler());
-		cityChoose.valueProperty().addListener(new CityChangedListener());
+		cityChoose.valueProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue ov, String oldValue, String newValue) {
+				cycleChoose.getItems().clear();
+				Iterator<String> circles = sourceBLController.getCircles(newValue);
+				while(circles.hasNext()){
+					cycleChoose.getItems().add(circles.next());
 
+				}cycleChoose.setValue(cycleChoose.getItems().get(0));
+			}    
+		});
+//		cityChoose.setOnShowing(new CityChooseHandler());
+//		cityChoose.valueProperty().addListener(new CityChangedListener());
+//	TODO 给房间变化也加一个监听
+		roomTypeInOrder.valueProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue ov, String oldValue, String roomtype) {
+//			TODO gcm 通过名字找  rooms对应项改变,rooms已经赋值
+				previousPriceInOrder.setText("1");
+				remainNumInOrder.setText("2");
+			}    
+	     });
+		roomCountInOrder.valueProperty().addListener(new ChangeListener<Integer>() {
+			@Override
+			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer roomNum) {
+				// TODO gcm 通过roomNum得到房间数量，并计算订单价格返回
+					priceOfOrder.setText("123");
+			}    
+	     });
+	
 		Iterator<String> cities = sourceBLController.getCities();
 
 		while(cities.hasNext()){
@@ -185,29 +199,29 @@ public class HotelSearchController {
 		}
 	}
 
-	class CityChooseHandler implements EventHandler<Event>{
-		@Override
-		public void handle(Event arg0) {
-			if(cityChoose.getItems().size() <= 1){
-				Iterator<String> cities = sourceBLController.getCities();
-				while(cities.hasNext()){
-					cityChoose.getItems().add(cities.next());
-				}
-			}
-		}
-	}
-
-	class CityChangedListener implements ChangeListener<String>{
-		@Override
-		public void changed(ObservableValue<? extends String> arg0, String preCity, String newCity) {
-			cycleChoose.getItems().clear();
-			Iterator<String> circles = sourceBLController.getCircles(newCity);
-			while(circles.hasNext()){
-				cycleChoose.getItems().add(circles.next());
-			}
-			cycleChoose.setValue(cycleChoose.getItems().get(0));
-		}
-	}
+//	class CityChooseHandler implements EventHandler<Event>{
+//		@Override
+//		public void handle(Event arg0) {
+//			if(cityChoose.getItems().size() <= 1){
+//				Iterator<String> cities = sourceBLController.getCities();
+//				while(cities.hasNext()){
+//					cityChoose.getItems().add(cities.next());
+//				}
+//			}
+//		}
+//	}
+//
+//	class CityChangedListener implements ChangeListener<String>{
+//		@Override
+//		public void changed(ObservableValue<? extends String> arg0, String preCity, String newCity) {
+//			cycleChoose.getItems().clear();
+//			Iterator<String> circles = sourceBLController.getCircles(newCity);
+//			while(circles.hasNext()){
+//				cycleChoose.getItems().add(circles.next());
+//			}
+//			cycleChoose.setValue(cycleChoose.getItems().get(0));
+//		}
+//	}
 	@FXML
 	protected void openSwitchCityCircle(){
 		cityAndCircle.setVisible(true);
@@ -596,6 +610,7 @@ public class HotelSearchController {
 		 */
 		@FXML
 		protected void openCreateOrder() {
+
 			roomTypeInOrder.setValue(roomTable.getSelectionModel().getSelectedItem().getRoomType());
 			remainNumInOrder.setText(roomTable.getSelectionModel().getSelectedItem().getRemainRoomNum());
 			previousPriceInOrder.setText(roomTable.getSelectionModel().getSelectedItem().getPrice());
@@ -610,14 +625,16 @@ public class HotelSearchController {
 		 */
 		@FXML
 		protected void createOrderIncheck(){
-			guestVO = (GuestVO) userBLController.getSingle(IDReserve.getInstance().getUserID());
-			//TODO gcm 这里我自己加了，不知道对不对，就是从概况界面直接生成需要这些
-			hotelVO = hotelBLController.getHotelInfo(hotelTable.getSelectionModel().getSelectedItem().getHotelID());
-			rooms = hotelBLController.getHotelRoomInfo(hotelTable.getSelectionModel().getSelectedItem().getHotelID());
+			
 			initCreateOrder();
 		}
 
 		private void initCreateOrder(){
+			//TODO gcm 这里我自己加了，不知道对不对，就是从概况界面直接生成需要这些
+			hotelVO = hotelBLController.getHotelInfo(hotelTable.getSelectionModel().getSelectedItem().getHotelID());
+			rooms = hotelBLController.getHotelRoomInfo(hotelTable.getSelectionModel().getSelectedItem().getHotelID());
+			
+			guestVO = (GuestVO) userBLController.getSingle(IDReserve.getInstance().getUserID());
 			
 			nameInOrder.setText(guestVO.name);
 			phoneInOrder.setText(guestVO.phone);
@@ -638,17 +655,6 @@ public class HotelSearchController {
 			hotelCheck.setVisible(false);
 		}
 
-
-		/**
-		 * @author 61990
-		 * @lastChangedBy 61990
-		 * @updateTime 2016/11/27
-		 * @改变房间类型
-		 */
-		@FXML
-		protected void changeRoom(){
-			roomTypeInOrder.getValue();
-		}
 		/**
 		 * @author 61990
 		 * @lastChangedBy 61990
