@@ -109,7 +109,8 @@
                                           </GridPane>
                                           <Label layoutX="174.0" layoutY="384.0" text="特别要求：" />
                                           <Label fx:id="detail_message" layoutX="263.0" layoutY="386.0" maxHeight="299.0" prefWidth="299.0" text="三个孩子，不要窗户ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss" wrapText="true" />
-                                          <Button focusTraversable="false" layoutX="587.0" layoutY="168.0" mnemonicParsing="false" onAction="#cancel" text="返回" />
+                                          <Button focusTraversable="false" layoutX="617.0" layoutY="168.0" mnemonicParsing="false" onAction="#cancel" text="返回" />
+                                          <Button fx:id="undoBt2" focusTraversable="false" layoutX="542.0" layoutY="168.0" mnemonicParsing="false" onAction="#undoInDetail" text="撤销" />
                                        </children>
                                     </Pane>
                                  </children>
@@ -158,7 +159,7 @@
          <children>
             <Button focusTraversable="false" layoutX="786.0" layoutY="70.0" mnemonicParsing="false" onAction="#orderDetail" text="查看详情" />
             <Separator layoutY="60.0" prefHeight="3.0" prefWidth="895.0" />
-            <Button layoutX="576.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchAbnormalOrder" text="异常订单" />
+            <Button layoutX="588.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchAbnormalOrder" text="异常订单" />
             <TableView fx:id="table" focusTraversable="false" layoutY="110.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="491.0" prefWidth="895.0" tableMenuButtonVisible="true">
                <columns>
                   <TableColumn fx:id="orderIDColumn" prefWidth="113.0" text="订单编号" />
@@ -175,11 +176,13 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <Button layoutX="361.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchUnexecutedOrder" text="未执行订单" />
-            <Button layoutX="252.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchUncommentedOrder" text="未评论订单" />
-            <Button layoutX="469.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchCancelledOrder" text="已撤销订单" />
-            <Button layoutX="145.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchCommentedOrder" text="已评论订单" />
-            <Button layoutX="34.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchExecutedOrder" text="已执行订单" />
+            <Button fx:id="undoBt" layoutX="701.0" layoutY="70.0" mnemonicParsing="false" onAction="#undoNormalOrder" text="撤销" />
+            <Button layoutX="398.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchUnexecutedOrder" text="未执行订单" />
+            <Button layoutX="303.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchUncommentedOrder" text="未评论订单" />
+            <Button layoutX="493.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchCancelledOrder" text="已撤销订单" />
+            <Button layoutX="208.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchCommentedOrder" text="已评论订单" />
+            <Button layoutX="113.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchExecutedOrder" text="已执行订单" />
+            <Button layoutX="33.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchAllOrder" text="所有订单" />
          </children>
       </AnchorPane>
    </children>
