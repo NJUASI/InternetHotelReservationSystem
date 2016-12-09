@@ -8,8 +8,8 @@ import vo.MarketVO;
 /**
  * 
  * @author charles
- * @lastChangedBy charles
- * @updateTime 2016/11/27
+ * @lastChangedBy Byron Dong
+ * @updateTime 2016/12/8
  * 
  * @description 营销模块逻辑：制定会员等级制度、获取会员等级制度
  */
@@ -18,5 +18,7 @@ public interface MarketBLService {
 	public List<MarketVO> getMemberFormulation();
 	
 	public ResultMessage setMemberFormulation(List<MarketVO> marketVOList);
+	
+	public int getLevel(String guestID);
 	
 }

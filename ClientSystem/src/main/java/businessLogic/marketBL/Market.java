@@ -4,11 +4,14 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import businessLogic.userBL.UserController;
 import businessLogicService.marketBLService.MarketBLService;
+import businessLogicService.userBLService.UserBLService;
 import dataService.marketDataService.MarketDataService;
 import dataService.marketDataService.MarketDataService_Stub;
 import po.MarketPO;
 import utilities.ResultMessage;
+import vo.GuestVO;
 import vo.MarketVO;
 
 /**
@@ -17,8 +20,9 @@ import vo.MarketVO;
  *
  */
 public class Market implements MarketBLService{
+	
 	private MarketDataService marketDataService;
-
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -74,5 +78,27 @@ public class Market implements MarketBLService{
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/8
+	 * @param guestID 需要获取等级客户ID
+	 * @return int 获取客户当前会员等级（需要处理未达最低信用值的情况，此时返回值为0）
+	 */
+	public int getLevel(String guestID){
+		UserBLService user = UserController.getInstance();
+		double credit = ((GuestVO)user.getSingle(guestID)).credit;
+		List<MarketVO> list = this.getMemberFormulation();
+		
+		int level = 0;
+		for(int i=0;i<list.size();i++){
+			if(credit>=list.get(i).marketCredit){
+				level++;
+			}
+		}
+		
+		return level;
 	}
 }

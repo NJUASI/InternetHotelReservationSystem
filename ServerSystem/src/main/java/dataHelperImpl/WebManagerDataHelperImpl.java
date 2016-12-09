@@ -44,12 +44,11 @@ public class WebManagerDataHelperImpl implements WebManagerDataHelper {
 	 * @return ResultMessage 是否成功添加到数据库中
 	 */
 	public WebManagerPO add(WebManagerPO webManagerPO) {
-		sql = "INSERT INTO webmanager(webmanager.webManagerID,webmanager.`password`) VALUES(?,?)";
+		sql = "INSERT INTO webmanager(webmanager.`password`) VALUES(?)";
 
 		try {
 			ps = conn.prepareStatement(sql); // 插入数据的准备工作，1-2对应sql语句中问号的顺序
-			ps.setString(1, webManagerPO.getWebManagerID());
-			ps.setString(2, webManagerPO.getPassword()); // 在使用setObject方法是必须注意，我们应该使用对应数据类型,
+			ps.setString(1, webManagerPO.getPassword()); // 在使用setObject方法是必须注意，我们应该使用对应数据类型,
 															// 虽然Object可以替代所有该set方法，但会影响效率所以尽量使用对应数据类型的set方法
 			ps.execute(); // 执行sql语句，返回值为boolean
 		} catch (SQLException e) {

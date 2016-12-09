@@ -51,8 +51,8 @@ public class UserController implements UserBLService{
 	 * @param userVO 从客户界面层传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加用户信息
 	 */
-	public UserVO add(UserVO newUserVO) {
-		return user.add(newUserVO);
+	public UserVO add(UserVO newUserVO , UserType userType) {
+		return user.add(newUserVO , userType);
 	}
 
 	/**
