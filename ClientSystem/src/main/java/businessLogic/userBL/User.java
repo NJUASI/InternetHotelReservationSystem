@@ -94,18 +94,30 @@ public class User {
 	 * @param newHotelVO 从客户界面层传下来的hotelInfo载体
 	 * @return ResultMessage 酒店是否添加成功
 	 */
-	public ResultMessage addHotel(HotelVO newHotelVO) {
+	public HotelVO addHotel(HotelVO newHotelVO) {
 
-		if(newHotelVO==null){return ResultMessage.HOTEL_ADD_FAILURE;}
+		if(newHotelVO==null){return null;}
 		
 		Hotel hotel = new Hotel();
 		
 		HotelWorkerVO  hotelWorkerVO = new HotelWorkerVO(newHotelVO.hotelName);
 		hotelWorkerVO = (HotelWorkerVO) this.add(hotelWorkerVO, UserType.HOTEL_WORKER); //生成一个酒店工作人员账户
 		
+		if(hotelWorkerVO==null){
+			// 代表添加失败
+			return null;
+		}
+		
 		newHotelVO.hotelID = hotelWorkerVO.userID;
+		
+		// TODO gcm 如果hotelWorker添加成功，hotel没有添加成功！！！这种情况需要做什么？
+		if(hotel.addHotelInfo(newHotelVO)==ResultMessage.SUCCESS){ //与该酒店工作人员同步
+			return newHotelVO;
+		}
+		else{
+			return null;
+		}
 			
-		return hotel.addHotelInfo(newHotelVO); //与该酒店工作人员同步
 
 	}
 

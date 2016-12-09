@@ -31,8 +31,9 @@ public class UserBLService_Stub implements UserBLService {
 	}
 
 	
-	public ResultMessage addHotel(HotelVO newHotelVO) {
-		return ResultMessage.SUCCESS;
+	public HotelVO addHotel(HotelVO newHotelVO) {
+		return new HotelVO("12345678","thisHotel", "南京", "center", "address", "4" ,
+				5,123,"good","allEquipment");
 	}
 
 	
