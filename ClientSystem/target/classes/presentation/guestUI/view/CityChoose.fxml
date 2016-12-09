@@ -201,13 +201,13 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <DatePicker focusTraversable="false" prefHeight="27.0" prefWidth="150" GridPane.columnIndex="1" GridPane.rowIndex="2" editable="false" />
+                        <DatePicker editable="false" focusTraversable="false" prefHeight="27.0" prefWidth="150" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label text="退房日期" GridPane.rowIndex="3">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <DatePicker focusTraversable="false" prefHeight="30.0" prefWidth="150" GridPane.columnIndex="1" GridPane.rowIndex="3" editable="false" />
+                        <DatePicker editable="false" focusTraversable="false" prefHeight="30.0" prefWidth="150" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="139.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <children>
                               <ComboBox fx:id="minScoreInput" focusTraversable="false" prefHeight="31.0" prefWidth="79.0" />
@@ -348,16 +348,16 @@
                               <DatePicker fx:id="expectLeaveDateInOrder" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="157.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <ComboBox fx:id="hourInOrder" prefHeight="30.0" prefWidth="74.0" promptText="00" />
+                                    <ComboBox fx:id="hourInOrder" prefHeight="30.0" prefWidth="74.0" />
                                     <Label prefHeight="30.0" prefWidth="33.0" text="  ：" />
-                                    <ComboBox fx:id="minuteInOrder" prefHeight="30.0" prefWidth="78.0" promptText="00" />
+                                    <ComboBox fx:id="minuteInOrder" prefHeight="30.0" prefWidth="78.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
-                                    <ComboBox fx:id="hourInOrder2" prefHeight="30.0" prefWidth="76.0" promptText="00" />
+                                    <ComboBox fx:id="hourInOrder2" prefHeight="30.0" prefWidth="76.0" />
                                     <Label prefHeight="30.0" prefWidth="33.0" text="  ：" />
-                                    <ComboBox fx:id="minuteInOrder2" prefHeight="30.0" prefWidth="78.0" promptText="00" />
+                                    <ComboBox fx:id="minuteInOrder2" prefHeight="30.0" prefWidth="78.0" />
                                  </children>
                               </HBox>
                            </children>
@@ -397,8 +397,8 @@
                               <Label text="预计入住人数：" GridPane.rowIndex="2" />
                               <Label text="房间数量：" GridPane.rowIndex="3" />
                               <TextField fx:id="nameInOrder" prefHeight="30.0" prefWidth="105.0" GridPane.columnIndex="1" />
-                              <ComboBox fx:id="roomCountInOrder" prefHeight="30.0" prefWidth="66.0" promptText="1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <ComboBox fx:id="guestNumInOrder" prefHeight="30.0" prefWidth="67.0" promptText="1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <ComboBox fx:id="roomCountInOrder" prefHeight="30.0" prefWidth="66.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <ComboBox fx:id="guestNumInOrder" prefHeight="30.0" prefWidth="67.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                         <Label layoutX="131.0" layoutY="88.0" text="房间类型：" />
@@ -416,8 +416,8 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Button layoutX="408.0" layoutY="83.0" mnemonicParsing="false" onAction="#changeRoom" text="更改" />
-                        <ChoiceBox fx:id="roomTypeInOrder" layoutX="244.0" layoutY="83.0" prefHeight="30.0" prefWidth="153.0" />
+                        <Button layoutX="431.0" layoutY="83.0" mnemonicParsing="false" onAction="#changeRoom" text="更改" />
+                        <ComboBox fx:id="roomTypeInOrder" layoutX="244.0" layoutY="81.0" prefHeight="32.0" prefWidth="177.0" />
                      </children>
                   </Pane>
                </children>

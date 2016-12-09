@@ -63,10 +63,10 @@
                                        </columnResizePolicy>
                                        <columns>
                                           <TableColumn fx:id="typeColumn" prefWidth="287.0" text="房间类型" />
-                                          <TableColumn fx:id="roomNameColumn" prefWidth="309.0" text="房间名称" />
+                                          <TableColumn fx:id="roomNameColumn" prefWidth="309.0" text="房间名称" visible="false" />
                                           <TableColumn fx:id="roomNumColumn" prefWidth="309.0" text="房间总数" visible="false" />
-                                          <TableColumn fx:id="remainRoomColumn" prefWidth="309.0" text="剩余数量" />
-                                          <TableColumn fx:id="priceColumn" prefWidth="75.0" text="价格" />
+                                          <TableColumn fx:id="remainRoomColumn" prefWidth="182.0" text="剩余数量" />
+                                          <TableColumn fx:id="priceColumn" prefWidth="202.0" text="价格" />
                                        </columns>
                                     </TableView>
                                  </children>
@@ -201,13 +201,13 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <DatePicker focusTraversable="false" prefHeight="27.0" prefWidth="150" GridPane.columnIndex="1" GridPane.rowIndex="2" editable="false" />
+                        <DatePicker editable="false" focusTraversable="false" prefHeight="27.0" prefWidth="150" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label text="退房日期" GridPane.rowIndex="3">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <DatePicker focusTraversable="false" prefHeight="30.0" prefWidth="150" GridPane.columnIndex="1" GridPane.rowIndex="3" editable="false" />
+                        <DatePicker editable="false" focusTraversable="false" prefHeight="30.0" prefWidth="150" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="139.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <children>
                               <ComboBox fx:id="minScoreInput" focusTraversable="false" prefHeight="31.0" prefWidth="79.0" />
@@ -302,7 +302,7 @@
                               <TableColumn fx:id="addressColumn3" prefWidth="135.0" text="地址" />
                               <TableColumn fx:id="cityColumn3" prefWidth="103.0" text="城市" />
                               <TableColumn fx:id="cycleColumn3" prefWidth="109.0" text="商圈" />
-                              <TableColumn fx:id="hasOrderColumn3" prefWidth="81.0" resizable="false" text="是否已预订" />
+                              <TableColumn fx:id="hasOrderColumn3" prefWidth="81.0" resizable="false" text="以前预定" />
                               <TableColumn fx:id="minPriceColumn3" prefWidth="97.0" resizable="false" text="最低价格" />
                               <TableColumn fx:id="levelColumn3" prefWidth="74.0" resizable="false" text="星级" />
                               <TableColumn fx:id="scoreColumn3" prefWidth="72.0" text="评分" />
@@ -348,16 +348,16 @@
                               <DatePicker fx:id="expectLeaveDateInOrder" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="157.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <ComboBox fx:id="hourInOrder" prefHeight="30.0" prefWidth="74.0" promptText="00" />
+                                    <ComboBox fx:id="hourInOrder" prefHeight="30.0" prefWidth="74.0" />
                                     <Label prefHeight="30.0" prefWidth="33.0" text="  ：" />
-                                    <ComboBox fx:id="minuteInOrder" prefHeight="30.0" prefWidth="78.0" promptText="00" />
+                                    <ComboBox fx:id="minuteInOrder" prefHeight="30.0" prefWidth="78.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
-                                    <ComboBox fx:id="hourInOrder2" prefHeight="30.0" prefWidth="76.0" promptText="00" />
+                                    <ComboBox fx:id="hourInOrder2" prefHeight="30.0" prefWidth="76.0" />
                                     <Label prefHeight="30.0" prefWidth="33.0" text="  ：" />
-                                    <ComboBox fx:id="minuteInOrder2" prefHeight="30.0" prefWidth="78.0" promptText="00" />
+                                    <ComboBox fx:id="minuteInOrder2" prefHeight="30.0" prefWidth="78.0" />
                                  </children>
                               </HBox>
                            </children>
@@ -397,8 +397,8 @@
                               <Label text="预计入住人数：" GridPane.rowIndex="2" />
                               <Label text="房间数量：" GridPane.rowIndex="3" />
                               <TextField fx:id="nameInOrder" prefHeight="30.0" prefWidth="105.0" GridPane.columnIndex="1" />
-                              <ComboBox fx:id="roomCountInOrder" prefHeight="30.0" prefWidth="66.0" promptText="1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <ComboBox fx:id="guestNumInOrder" prefHeight="30.0" prefWidth="67.0" promptText="1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <ComboBox fx:id="roomCountInOrder" prefHeight="30.0" prefWidth="66.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <ComboBox fx:id="guestNumInOrder" prefHeight="30.0" prefWidth="67.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                         <Label layoutX="131.0" layoutY="88.0" text="房间类型：" />
@@ -416,8 +416,8 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Button layoutX="408.0" layoutY="83.0" mnemonicParsing="false" onAction="#changeRoom" text="更改" />
-                        <ChoiceBox fx:id="roomTypeInOrder" layoutX="244.0" layoutY="83.0" prefHeight="30.0" prefWidth="153.0" />
+                        <Button layoutX="431.0" layoutY="83.0" mnemonicParsing="false" onAction="#changeRoom" text="更改" />
+                        <ComboBox fx:id="roomTypeInOrder" layoutX="244.0" layoutY="81.0" prefHeight="32.0" prefWidth="177.0" />
                      </children>
                   </Pane>
                </children>
