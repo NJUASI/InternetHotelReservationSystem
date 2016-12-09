@@ -3,6 +3,7 @@ package po;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import utilities.CreditRecord;
 import vo.CreditVO;
 
 public class CreditPO implements Serializable{
@@ -28,11 +29,11 @@ public class CreditPO implements Serializable{
 	private double afterCredit;
 	
 	//	变化原因 即动作
-	private String reason;
+	private CreditRecord reason;
 	
 	public CreditPO(){}
 	
-	public CreditPO(String guestID, LocalDateTime time, String orderID, double previousCredit, double afterCredit, String reason) {
+	public CreditPO(String guestID, LocalDateTime time, String orderID, double previousCredit, double afterCredit, CreditRecord reason) {
 		this.guestID = guestID;
 		this.time = time;
 		this.orderID = orderID;
@@ -90,11 +91,11 @@ public class CreditPO implements Serializable{
 		this.afterCredit = credit;
 	}
 
-	public String getReason() {
+	public CreditRecord getCreditRecord() {
 		return reason;
 	}
 
-	public void setReason(String reason) {
+	public void setCreditRecord(CreditRecord reason) {
 		this.reason = reason;
 	}
 	

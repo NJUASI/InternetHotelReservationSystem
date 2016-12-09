@@ -1,6 +1,7 @@
 package presentation.guestUI.controller;
 
 import javafx.beans.property.SimpleStringProperty;
+import utilities.CreditRecord;
 
 public class CreditTable {
 		public final SimpleStringProperty guestID;
@@ -10,7 +11,7 @@ public class CreditTable {
 		public final SimpleStringProperty reason;
 		public final SimpleStringProperty time;
 		
-		public CreditTable(String guestID, String orderID, String previousCredit , String  afterCredit,String  time,String  reason ) {
+		public CreditTable(String guestID, String orderID, String previousCredit, String afterCredit, String time, String reason) {
 			this.guestID = new SimpleStringProperty(guestID);
 			this.orderID = new SimpleStringProperty(orderID);
 			this.previousCredit = new SimpleStringProperty(previousCredit);

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.CreditPO;
+import utilities.CreditRecord;
 import utilities.ResultMessage;
 
 public class CreditDataService_Stub extends UnicastRemoteObject implements CreditDataService {
@@ -19,9 +20,9 @@ public class CreditDataService_Stub extends UnicastRemoteObject implements Credi
 	public List<CreditPO> getAllCreditDetail(String guestID) throws RemoteException {
 		List<CreditPO> list = new ArrayList<CreditPO>();
 		LocalDateTime date = LocalDateTime.of(2016, 11, 11, 11, 11, 11, 11);
-		list.add(new CreditPO("1234567890",date,"123456789",100,200,"executed"));
-		list.add(new CreditPO("1234567891",date,"123456789",100,200,"executed"));
-		list.add(new CreditPO("1234567892",date,"123456789",100,200,"executed"));
+		list.add(new CreditPO("1234567890",date,"123456789",100,200,CreditRecord.EXECUTE));
+		list.add(new CreditPO("1234567891",date,"123456789",100,200,CreditRecord.EXECUTE));
+		list.add(new CreditPO("1234567892",date,"123456789",100,200,CreditRecord.EXECUTE));
 		return list;
 	}
 

@@ -25,7 +25,6 @@ import presentation.hotelWorkerUI.controller.OrderTable;
 import utilities.IDReserve;
 import utilities.OrderState;
 import utilities.ResultMessage;
-import vo.GuestVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
 
@@ -42,16 +41,10 @@ public class OrderController {
 
 	//order
 	private OrderBLService orderBLController;
-
-	//user
-	private GuestCreditService guestCreditService;
-	private UserService userService;
 	
 	/*
 	 * 订单概况
 	 */
-	private final String hotelID = IDReserve.getInstance().getUserID();
-	
 	private List<OrderGeneralVO> orderGenerals;
 
 	/*
@@ -102,8 +95,6 @@ public class OrderController {
 	private void initialize() {
 		
 		orderBLController = OrderBLController.getInstance();
-		guestCreditService = new Guest();
-		userService = new Guest();
 		
 		cancelPercent.setValue("50%");
 		cancelPercent.getItems().add("50%");
@@ -167,15 +158,24 @@ public class OrderController {
 		orderCheck.setVisible(true);
 		searchPane.setVisible(false);
 		
-		LocalDate date = searchDate.getValue();
-		List<OrderGeneralVO> abnormalOrderGenerals = orderBLController.getAllAbnormalOrderGeneral(date);
-		List<OrderGeneralVO> unexecutedOrderGenerals = orderBLController.getAllUnexecutedOrderGeneral(date);
-
-		orderGenerals.addAll(abnormalOrderGenerals);
-		orderGenerals.addAll(unexecutedOrderGenerals);
+//		LocalDate date = searchDate.getValue();
+//		List<OrderGeneralVO> abnormalOrderGenerals = orderBLController.getAllAbnormalOrderGeneral(date);
+//		List<OrderGeneralVO> unexecutedOrderGenerals = orderBLController.getAllUnexecutedOrderGeneral(date);
+//
+//		orderGenerals.addAll(abnormalOrderGenerals);
+//		orderGenerals.addAll(unexecutedOrderGenerals);
+//		
+//		//TODO 冯俊杰：按时间排序
+//		initOrderCheck(orderGenerals);
 		
-		//TODO 冯俊杰：按时间排序
+		LocalDate date = searchDate.getValue();
+		
+		orderGenerals = orderBLController.getAllAbnormalOrderGeneral(date);
 		initOrderCheck(orderGenerals);
+		
+		cancelOrderPaneInCheck.setDisable(false);
+				 
+	
 	}
 
 	/**
@@ -209,7 +209,6 @@ public class OrderController {
 	protected void OrderDetail() {
 		orderID = table.getSelectionModel().getSelectedItem().getOrderID();
 		orderVO = orderBLController.getOrderDetail(orderID);
-		//TODO 高源：原本没有下面这句。。需要加吧？？
 		initOrderDetail(orderVO);
 		
 		if (orderVO.orderGeneralVO.state == OrderState.ABNORMAL) {
@@ -325,31 +324,14 @@ public class OrderController {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/8
+	 * @updateTime 2016/12/9
 	 * @param orderID
 	 * @param percent
 	 */
 	private void undoAbnormalOrder(String orderID, double percent) {
-		ResultMessage msg1 = orderBLController.undoAbnormalOrder(orderID, percent);
+		ResultMessage result = orderBLController.undoAbnormalOrder(orderID, percent);
 		
-		/*
-		 * 因为接口modifyCredit(String guestID, double creditNum)中creditNum为最后的直接修改值
-		 * 故将理想信用值的计算逻辑暴露给了presentation
-		 */
-		
-		if (orderVO == null) {
-			orderVO = orderBLController.getOrderDetail(orderID);
-		}
-		GuestVO thisGuest = (GuestVO)userService.getSingle(orderVO.orderGeneralVO.guestID);
-		/*
-		 * 因为数据的问题，getOrderDetail得到的是一个UNEXECUTED对象，所以执行会抛异常
-		 * 但是若是数据正确的话，就没有问题
-		 */
-		
-		final double expectCreditNum = thisGuest.credit - orderVO.orderGeneralVO.price * percent;
-		ResultMessage msg2 = guestCreditService.modifyCredit(orderVO.orderGeneralVO.guestID, expectCreditNum);
-		
-		if (msg1 == ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS && msg2 == ResultMessage.RECORE_CREDIT_SUCCESS) {
+		if (result == ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS) {
 			//TODO 高源：状态栏显示异常订单撤销成功
 			
 		}else {

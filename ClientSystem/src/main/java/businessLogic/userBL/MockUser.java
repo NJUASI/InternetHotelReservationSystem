@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import utilities.CreditRecord;
 import utilities.ResultMessage;
 import utilities.UserType;
 import vo.CreditVO;
@@ -53,9 +54,9 @@ public class MockUser extends User{
 	
 	public Iterator<CreditVO> getAllCreditDetail(String userID) {
 		List<CreditVO> creditDetailList = new LinkedList<CreditVO>();
-		creditDetailList.add(new CreditVO("1234567890", LocalDateTime.of(2016, 10, 2, 18, 12), "123420161002", 100, 100, "undo"));
-		creditDetailList.add(new CreditVO("1234567890", LocalDateTime.of(2016, 10, 3, 13, 14), "124520161003", 100, 100, "create"));
-		creditDetailList.add(new CreditVO("1234567890", LocalDateTime.of(2016, 10, 4, 15, 22), "244520161004", 100, 300, "executed"));
+		creditDetailList.add(new CreditVO("1234567890", LocalDateTime.of(2016, 10, 2, 18, 12), "123420161002", 100, 100, CreditRecord.UNDO_ABNORMAL));
+		creditDetailList.add(new CreditVO("1234567890", LocalDateTime.of(2016, 10, 3, 13, 14), "124520161003", 100, 100, CreditRecord.EXECUTE));
+		creditDetailList.add(new CreditVO("1234567890", LocalDateTime.of(2016, 10, 4, 15, 22), "244520161004", 100, 300, CreditRecord.EXECUTE));
 		return creditDetailList.iterator();
 	}
 
