@@ -35,9 +35,9 @@
             <Label layoutX="267.0" layoutY="394.0" text="详细地址：" />
             <Separator layoutY="60.0" prefHeight="3.0" prefWidth="895.0" />
             <TextField fx:id="hotelName" focusTraversable="false" layoutX="397.0" layoutY="122.0" prefHeight="30.0" prefWidth="216.0" />
-            <ComboBox fx:id="cityInput" focusTraversable="false" layoutX="418.0" layoutY="183.0" onMouseClicked="#searchCity" prefHeight="30.0" prefWidth="140.0" />
-            <ComboBox fx:id="cycleInput" focusTraversable="false" layoutX="418.0" layoutY="254.0" onMouseClicked="#searchCycle" prefHeight="30.0" prefWidth="140.0" />
-            <ComboBox fx:id="levelInput" focusTraversable="false" layoutX="418.0" layoutY="323.0" onMouseClicked="#searchLevel" prefHeight="30.0" prefWidth="140.0" />
+            <ComboBox fx:id="cityInput" focusTraversable="false" layoutX="418.0" layoutY="183.0" prefHeight="30.0" prefWidth="140.0" />
+            <ComboBox fx:id="cycleInput" focusTraversable="false" layoutX="418.0" layoutY="254.0" prefHeight="30.0" prefWidth="140.0" />
+            <ComboBox fx:id="levelInput" focusTraversable="false" layoutX="418.0" layoutY="323.0" prefHeight="30.0" prefWidth="140.0" />
             <Button focusTraversable="false" layoutX="429.0" layoutY="497.0" mnemonicParsing="false" onAction="#addHotel" text="添加" />
          </children>
       </AnchorPane>
