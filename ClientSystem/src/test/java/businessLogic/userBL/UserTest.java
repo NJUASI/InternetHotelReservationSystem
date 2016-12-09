@@ -36,9 +36,9 @@ public class UserTest {
 		User user= new User();
 		
 		LocalDate birthday = LocalDate.of(1995, 1, 1);
-		GuestVO guestVO = (GuestVO)user.add(new GuestVO("1234567890", birthday, "school", "zhangsan", "xiaosan",
+		GuestVO guestVO = (GuestVO)user.add(new GuestVO(null, birthday, "school", "zhangsan", "xiaosan",
 				"000000", "13523456789",100), UserType.GUEST);
-		assertEquals(guestVO,null);
+		assertEquals(guestVO.userID,"1234567890");
 	}
 
 	@Test
@@ -95,7 +95,7 @@ public class UserTest {
 		
 		HotelVO hotelVO = new HotelVO("12345677", "thisHotel", "NanJing", "center", "address", "4",
 				5,123, "good", "allEquipment");
-		assertEquals(user.addHotel(hotelVO, "12345677"),ResultMessage.SUCCESS);
+		assertEquals(user.addHotel(hotelVO),ResultMessage.SUCCESS);
 	}
 	
 	@Test

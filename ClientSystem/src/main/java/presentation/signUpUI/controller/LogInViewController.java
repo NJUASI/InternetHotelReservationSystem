@@ -136,7 +136,7 @@ public class LogInViewController {
 		
 		GuestVO guestVO = null;
 		if(password2.getText().equals(password3.getText())){
-		GuestVO userVO = new GuestVO("",LocalDate.of(0,0,0),"",name.getText(), nickName.getText(),password2.getText()
+		GuestVO userVO = new GuestVO("",LocalDate.of(1,1,1),"",name.getText(), nickName.getText(),password2.getText()
 				,phone.getText(),0);
 		guestVO = logInBLController.guestSignUp(userVO);
 		// TODO 此处返回了界面需要的自动递增的ID，后续操作由界面完成
