@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.HotelWorkerPO;
+import utilities.Ciphertext;
 import utilities.ResultMessage;
 
 public class HotelWorkerDataService_Stub extends UnicastRemoteObject implements HotelWorkerDataService{
@@ -17,20 +18,23 @@ public class HotelWorkerDataService_Stub extends UnicastRemoteObject implements 
 
 
 	public HotelWorkerPO getSingleHotelWorker(String hotelWorkerID) {
-		return new HotelWorkerPO("00001111", "123456","school");
+		Ciphertext b = new Ciphertext();
+		return new HotelWorkerPO("00001111", b.encrypt("123456"),"school");
 	}
 
 	
 	public List<HotelWorkerPO> getAllHotelWorker() {
+		Ciphertext a = new Ciphertext();
 		List<HotelWorkerPO>  list= new ArrayList<HotelWorkerPO>();
-		HotelWorkerPO b= new HotelWorkerPO("00001111", "123456","school");
+		HotelWorkerPO b= new HotelWorkerPO("00001111", a.encrypt("123456"),"school");
 		list.add(b);
 		return list;
 	}
 	
 	
 	public HotelWorkerPO add(HotelWorkerPO newHotelWorkerPO) {
-		return new HotelWorkerPO("00001111", "123456","school");
+		Ciphertext a = new Ciphertext();
+		return new HotelWorkerPO("00001111",a.encrypt("123456"),"school");
 	}
 
 	

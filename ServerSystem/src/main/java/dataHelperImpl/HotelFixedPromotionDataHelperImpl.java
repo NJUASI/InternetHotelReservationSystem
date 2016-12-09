@@ -29,7 +29,7 @@ public class HotelFixedPromotionDataHelperImpl implements HotelFixedPromotionDat
 	private String sql;
 	
 	public HotelFixedPromotionDataHelperImpl() {
-		conn = JDBCUtil.getGongConnection();
+		conn = JDBCUtil.getConnection();
 	}
 	
 	/**

@@ -24,7 +24,7 @@ public class HotelDataHelperImpl implements HotelDataHelper{
 	private String sql;
 
 	public HotelDataHelperImpl() {
-		conn = JDBCUtil.getGongConnection();
+		conn = JDBCUtil.getConnection();
 	}
 
 	/**
