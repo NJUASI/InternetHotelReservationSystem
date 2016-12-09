@@ -158,15 +158,24 @@ public class OrderController {
 		orderCheck.setVisible(true);
 		searchPane.setVisible(false);
 		
-		LocalDate date = searchDate.getValue();
-		List<OrderGeneralVO> abnormalOrderGenerals = orderBLController.getAllAbnormalOrderGeneral(date);
-		List<OrderGeneralVO> unexecutedOrderGenerals = orderBLController.getAllUnexecutedOrderGeneral(date);
-
-		orderGenerals.addAll(abnormalOrderGenerals);
-		orderGenerals.addAll(unexecutedOrderGenerals);
+//		LocalDate date = searchDate.getValue();
+//		List<OrderGeneralVO> abnormalOrderGenerals = orderBLController.getAllAbnormalOrderGeneral(date);
+//		List<OrderGeneralVO> unexecutedOrderGenerals = orderBLController.getAllUnexecutedOrderGeneral(date);
+//
+//		orderGenerals.addAll(abnormalOrderGenerals);
+//		orderGenerals.addAll(unexecutedOrderGenerals);
+//		
+//		//TODO 冯俊杰：按时间排序
+//		initOrderCheck(orderGenerals);
 		
-		//TODO 冯俊杰：按时间排序
+		LocalDate date = searchDate.getValue();
+		
+		orderGenerals = orderBLController.getAllAbnormalOrderGeneral(date);
 		initOrderCheck(orderGenerals);
+		
+		cancelOrderPaneInCheck.setDisable(false);
+				 
+	
 	}
 
 	/**
@@ -200,7 +209,6 @@ public class OrderController {
 	protected void OrderDetail() {
 		orderID = table.getSelectionModel().getSelectedItem().getOrderID();
 		orderVO = orderBLController.getOrderDetail(orderID);
-		//TODO 高源：原本没有下面这句。。需要加吧？？
 		initOrderDetail(orderVO);
 		
 		if (orderVO.orderGeneralVO.state == OrderState.ABNORMAL) {
