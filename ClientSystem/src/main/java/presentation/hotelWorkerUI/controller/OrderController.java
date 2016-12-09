@@ -325,8 +325,6 @@ public class OrderController {
 		if (result == ResultMessage.CHECK_IN_SUCCESS) {
 			//TODO 高源：状态栏显示入住成功
 			
-			
-			
 		}else {
 			//TODO 高源：状态栏显示入住失败
 			

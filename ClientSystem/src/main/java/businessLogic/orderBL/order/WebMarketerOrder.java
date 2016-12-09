@@ -2,18 +2,22 @@ package businessLogic.orderBL.order;
 
 import java.rmi.RemoteException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import businessLogic.userBL.userService.Guest;
-import businessLogic.userBL.userService.service.GuestCreditService;
-import businessLogic.userBL.userService.service.UserService;
+import businessLogic.creditBL.CreditController;
+import businessLogic.userBL.UserController;
+import businessLogicService.creditBLService.CreditBLService;
 import businessLogicService.orderBLService.WebMarketerOrderBLService;
+import businessLogicService.userBLService.UserBLService;
 import dataService.orderDataService.OrderDataService;
 import dataService.orderDataService.OrderDataService_Stub;
 import po.OrderGeneralPO;
+import utilities.CreditRecord;
 import utilities.OrderState;
 import utilities.ResultMessage;
+import vo.CreditVO;
 import vo.GuestVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
@@ -31,9 +35,11 @@ public class WebMarketerOrder implements WebMarketerOrderBLService {
 
 	private CommonOrder commonOrder;
 	
+	//creidt
+	private CreditBLService creditBLService;
+	
 	//user
-	private GuestCreditService guestCreditService;
-	private UserService userService;
+	private UserBLService userBLService;
 	
 	/**
 	 * @author charles
@@ -52,8 +58,8 @@ public class WebMarketerOrder implements WebMarketerOrderBLService {
 		
 		commonOrder = new CommonOrder();
 		
-		guestCreditService = new Guest();
-		userService = new Guest();
+		creditBLService = CreditController.getInstance();
+		userBLService = UserController.getInstance();
 	}
 	
 	/**
@@ -64,28 +70,32 @@ public class WebMarketerOrder implements WebMarketerOrderBLService {
 	 * @param percent 撤销后需要恢复的信用值比例
 	 * @return 网站营销人员是否成功按比例撤销此异常订单
 	 */
-	public ResultMessage undoAbnormalOrder(final String orderID, final double percent) {
-		OrderVO thisOrder = commonOrder.getOrderDetail(orderID);
-		
+	public ResultMessage undoAbnormalOrder(final String orderID, final double percent) {		
 		ResultMessage msg1 = ResultMessage.ABNORMAL_ORDER_UNDO_FAILURE;
 		ResultMessage msg2 = ResultMessage.RECORE_CREDIT_FAILURE;
 		
+		OrderVO thisOrder = commonOrder.getOrderDetail(orderID);
 		OrderState thisOrderState = thisOrder.orderGeneralVO.state;
 		if (thisOrderState == OrderState.ABNORMAL) {
 			try {
+				//撤销异常订单
 				msg1 = orderDataService.undoAbnormalOrder(orderID, percent);
+				
+				//添加信用记录
+				/*
+				 * 因为数据的问题，getOrderDetail得到的是一个UNEXECUTED对象，所以执行会抛异常
+				 * 但是若是数据正确的话，就没有问题
+				 */
+				GuestVO thisGuest = (GuestVO)userBLService.getSingle(thisOrder.orderGeneralVO.guestID);
+				final LocalDateTime time = LocalDateTime.now();
+				final double afterCredit = thisGuest.credit - thisOrder.orderGeneralVO.price * percent;
+				final CreditVO creditVO = new CreditVO(thisOrder.orderGeneralVO.guestID, time, 
+						thisOrder.orderGeneralVO.orderID, thisGuest.credit, afterCredit, CreditRecord.UNDO_ABNORMAL);
+				msg2 = creditBLService.addCreditRecord(creditVO);
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
 		}
-
-		GuestVO thisGuest = (GuestVO)userService.getSingle(thisOrder.orderGeneralVO.guestID);
-		/*
-		 * 因为数据的问题，getOrderDetail得到的是一个UNEXECUTED对象，所以执行会抛异常
-		 * 但是若是数据正确的话，就没有问题
-		 */
-		final double expectCreditNum = thisGuest.credit - thisOrder.orderGeneralVO.price * percent;
-		msg2 = guestCreditService.modifyCredit(thisOrder.orderGeneralVO.guestID, expectCreditNum);
 		
 		if (msg1 == ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS && msg2 == ResultMessage.RECORE_CREDIT_SUCCESS) {
 			return ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS;
