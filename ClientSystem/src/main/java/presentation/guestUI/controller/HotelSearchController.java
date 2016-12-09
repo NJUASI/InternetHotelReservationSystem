@@ -11,9 +11,11 @@ import java.util.List;
 import businessLogic.hotelBL.HotelBLController;
 import businessLogic.orderBL.OrderBLController;
 import businessLogic.sourceBL.SourceBLController;
+import businessLogic.userBL.UserController;
 import businessLogicService.hotelBLService.HotelBLService;
 import businessLogicService.orderBLService.OrderBLService;
 import businessLogicService.sourceBLService.SourceBLService;
+import businessLogicService.userBLService.UserBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -71,11 +73,13 @@ public class HotelSearchController {
 	private OrderBLService orderBLController;
 	private SourceBLService sourceBLController;
 	private HotelBLService hotelBLController;
+	private UserBLService userBLController;
 
 	public HotelSearchController() {
 		orderBLController = OrderBLController.getInstance();
 		sourceBLController = SourceBLController.getInstance();
 		hotelBLController = HotelBLController.getInstance();
+		userBLController = UserController.getInstance();
 	}
 	/**
 	 * @author 61990
@@ -555,9 +559,8 @@ public class HotelSearchController {
 	}
 
 	private void initCreateOrder(){
-		//TODO gcm 给一个guestVO
-		//TODO djy 给一个guestVO
-//		GuestVO guestVO = null;
+		// TODO gcm 给一下需要查找客户信息的客户ID
+//		GuestVO guestVO = userBLController.getSingle(userID);
 //		nameInOrder.setText(guestVO.name);
 //		phoneInOrder.setText(guestVO.phone);
 //		
@@ -584,7 +587,8 @@ public class HotelSearchController {
 	protected void createOrderIncheck(){
 
 		// TODO gy注意：与上面代码相似度极大，你看一下，能不能合，感觉是一个界面吧。。
-		//TODO djy 8日，这里是你界面没东西，必须通过ID得到东西比如没有HotelVO，没有ROOM typelist才能初始化订单详情界面，这里是立即预定
+		//TODO gcm 8日，这里是你界面没东西，必须通过ID得到东西比如没有HotelVO，没有ROOM typelist才能初始化订单详情界面，这里是立即预定
+		
 		hotelVO = new HotelVO("12345", "hantingjiudiansss", "xinjiekou", "xinjiekou", "malianhedadao", "5xinji", 4.5,
 				198, "shoooo", "sdaf");
 

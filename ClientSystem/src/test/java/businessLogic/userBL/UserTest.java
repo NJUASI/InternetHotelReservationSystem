@@ -37,7 +37,7 @@ public class UserTest {
 		
 		LocalDate birthday = LocalDate.of(1995, 1, 1);
 		GuestVO guestVO = (GuestVO)user.add(new GuestVO("1234567890", birthday, "school", "zhangsan", "xiaosan",
-				"000000", "13523456789",100));
+				"000000", "13523456789",100), UserType.GUEST);
 		assertEquals(guestVO,null);
 	}
 

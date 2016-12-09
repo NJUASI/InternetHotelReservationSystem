@@ -64,7 +64,7 @@ public class LogIn implements LogInBLService{
 		
 		if(!this.infoDetector(guestVO)){return null;} //检查内容是否符合规范，不符合返回null
 		
-		return (GuestVO)user.add(guestVO);
+		return (GuestVO)user.add(guestVO ,UserType.GUEST);
 	}
 	
 	private boolean hasUserType(UserType userType){

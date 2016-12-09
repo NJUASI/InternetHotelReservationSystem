@@ -12,6 +12,11 @@ public class HotelWorkerVO extends UserVO{
 		this.hotelName = hotelName;
 	}
 	
+	public HotelWorkerVO(String hotelName) {
+		super(null,null);
+		this.hotelName = hotelName;
+	}
+	
 	public HotelWorkerVO(HotelWorkerPO hotelWorkerPO) {
 		super(hotelWorkerPO.getHotelWorkerID(),hotelWorkerPO.getPassword());
 		this.hotelName = hotelWorkerPO.getHotelName();

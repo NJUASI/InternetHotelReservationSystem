@@ -9,7 +9,7 @@ import vo.UserVO;
 
 public interface UserBLService {
 
-	public UserVO add(UserVO newUserVO);
+	public UserVO add(UserVO newUserVO ,UserType userType);
 
 	public ResultMessage modify(UserVO userVO);
 	
