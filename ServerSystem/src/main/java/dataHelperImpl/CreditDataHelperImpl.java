@@ -63,7 +63,7 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 				creditPO.setOrderID(String.valueOf(rs.getObject(3)));
 				creditPO.setPreCredit(rs.getDouble(4));
 				creditPO.setCredit(rs.getDouble(5));
-				creditPO.setCreditRecord(CreditRecord.valueOf(rs.getString(6)));
+				creditPO.setCreditRecord(CreditRecord.convertString2CreditRecord(rs.getString(6)));
 
 				result.add(creditPO);
 			}
@@ -122,7 +122,7 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 				creditPO.setOrderID(String.valueOf(rs.getObject(3)));
 				creditPO.setPreCredit(rs.getDouble(4));
 				creditPO.setCredit(rs.getDouble(5));
-				creditPO.setCreditRecord(CreditRecord.valueOf(rs.getString(6)));
+				creditPO.setCreditRecord(CreditRecord.convertString2CreditRecord(rs.getString(6)));
 
 				result.add(creditPO);
 			}
