@@ -25,7 +25,6 @@ import presentation.hotelWorkerUI.controller.OrderTable;
 import utilities.IDReserve;
 import utilities.OrderState;
 import utilities.ResultMessage;
-import vo.GuestVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
 
@@ -46,8 +45,6 @@ public class OrderController {
 	/*
 	 * 订单概况
 	 */
-	private final String hotelID = IDReserve.getInstance().getUserID();
-	
 	private List<OrderGeneralVO> orderGenerals;
 
 	/*

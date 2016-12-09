@@ -81,14 +81,11 @@ public class Credit implements CreditBLService{
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/9
 	 * @param creditVO 一条信用记录
-	 * @return 是否成功添加此信用记录
+	 * @return 是否成功添加此信用记录并修改客户信用值
 	 */
 	public ResultMessage addCreditRecord(CreditVO creditVO){
 		guest = new Guest();
 		try {
-			/*
-			 * TODO 高源：存疑，在其职责内，是否应该修改信用值。还是单单纯纯地添加一条记录
-			 */
 			//调用guest的方法，改变该客户的总信用值
 			guest.modifyCredit(creditVO.guestID, creditVO.afterCredit);
 			return creditDataService.addCredit(new CreditPO(creditVO));
