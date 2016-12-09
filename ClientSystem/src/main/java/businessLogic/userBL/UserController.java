@@ -2,6 +2,8 @@ package businessLogic.userBL;
 
 import java.util.List;
 
+import businessLogic.userBL.userService.Guest;
+import businessLogic.userBL.userService.service.GuestCreditService;
 import businessLogicService.userBLService.UserBLService;
 import utilities.ResultMessage;
 import utilities.UserType;
@@ -86,6 +88,18 @@ public class UserController implements UserBLService{
 	 */
 	public ResultMessage addHotel(HotelVO newHotelVO, String hotelID) {
 		return user.addHotel(newHotelVO, hotelID);
+	}
+	
+	/**
+	 * @author 董金玉
+	 * @lastChangedBy 董金玉
+	 * @updateTime 2016/12/9
+	 * @param guestID，creditNum 客户ID和需要修改的信用值
+	 * @return ResultMessage 信用值是否添加成功
+	 */
+	public ResultMessage modifyCredit(String guestID, double creditNum) {
+		GuestCreditService guest = new Guest(); 
+		return guest.modifyCredit(guestID, creditNum);
 	}
 
 
