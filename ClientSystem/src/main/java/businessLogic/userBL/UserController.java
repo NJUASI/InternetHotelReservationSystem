@@ -86,8 +86,8 @@ public class UserController implements UserBLService{
 	 * @param newHotelVO，hotelID 从客户界面层传下来的hotelInfo载体和指定酒店ID
 	 * @return ResultMessage 酒店是否添加成功
 	 */
-	public ResultMessage addHotel(HotelVO newHotelVO, String hotelID) {
-		return user.addHotel(newHotelVO, hotelID);
+	public ResultMessage addHotel(HotelVO newHotelVO) {
+		return user.addHotel(newHotelVO);
 	}
 	
 	/**
