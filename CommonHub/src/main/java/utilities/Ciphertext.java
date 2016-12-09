@@ -2,7 +2,7 @@ package utilities;
 
 /**
  * 
- * @author Byron Dong lastChangedBy Byron Dong updateTime 2016/12/6
+ * @author Byron Dong lastChangedBy Byron Dong updateTime 2016/12/9
  *
  */
 public class Ciphertext {
@@ -14,40 +14,10 @@ public class Ciphertext {
 	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/12/6
 	 * @param expression
-	 *            传入需要加密的字符串（只能为数字或字母）
+	 *            传入需要加密的字符串ß
 	 * @return String 返回加密后的字符串
 	 */
 	public String encrypt(String expression) {
-		String result = null;
-		result = this.revert(expression.substring(expression.length() - 3))
-				+ expression.substring(0, expression.length() - 3);
-
-		return result;
-	}
-
-	/**
-	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/12/6
-	 * @param expression
-	 *            传入需要解密的字符串（解密结果只能为数字或字母）
-	 * @return String 返回解密后的字符串
-	 */
-	public String decode(String expression) {
-		String result = null;
-		result = expression.substring(3) + this.revert(expression.substring(0, 3));
-		return result;
-	}
-
-	/**
-	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/12/6
-	 * @param expression
-	 *            传入需要加密的字符串（加密结果只能中文）
-	 * @return String 返回加密后的字符串
-	 */
-	public String encryptChinese(String expression) {
 
 		if (expression == null) {
 			return null;
@@ -82,10 +52,10 @@ public class Ciphertext {
 	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/12/6
 	 * @param expression
-	 *            传入需要解密的字符串（解密结果只能为中文）
+	 *            传入需要解密的字符串
 	 * @return String 返回解密后的字符串
 	 */
-	public String decodeChinese(String expression) {
+	public String decode(String expression) {
 
 		if (expression.equals(key)) {
 			return null;
@@ -113,24 +83,6 @@ public class Ciphertext {
 		return result;
 	}
 
-	/**
-	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/12/6
-	 * @param expression
-	 *            传入需要翻转的字符串
-	 * @return String 返回翻转后的字符串
-	 */
-	private String revert(String operand) {
-
-		if (operand == null) {
-			return "";
-		}
-
-		if (operand.length() == 1) {
-			return operand;
-		}
-		return operand.substring(operand.length() - 1) + this.revert(operand.substring(0, operand.length() - 1));
-	}
+	
 
 }

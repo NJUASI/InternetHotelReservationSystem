@@ -16,26 +16,12 @@ public class CiphertextTest {
 	
 	@Test
 	public void testEncrypt() {
-		assertEquals("54312",code.encrypt("12345"));
-		
-		assertEquals("owh12djgf",code.encrypt("12djgfhwo"));
+		assertEquals("奘寧妮",code.encrypt("大家好"));
 	}
 	
 	@Test
 	public void testDecode() {
-		assertEquals("12345",code.decode("54312"));
-		
-		assertEquals("12djgfhwo",code.decode("owh12djgf"));
-	}
-	
-	@Test
-	public void testEncryptChinese() {
-		assertEquals("奘寧妮",code.encryptChinese("大家好"));
-	}
-	
-	@Test
-	public void testDecodeChinese() {
-		assertEquals("大家好",code.decodeChinese("奘寧妮"));
+		assertEquals("大家好",code.decode("奘寧妮"));
 	}
 
 }
