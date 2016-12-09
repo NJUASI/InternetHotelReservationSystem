@@ -625,11 +625,12 @@ public class HotelSearchController {
 		 */
 		@FXML
 		protected void createOrderIncheck(){
-			
 			initCreateOrder();
 		}
 
-		private void initCreateOrder(){
+		private void initCreateOrder(){	
+			roomTypeInOrder.getItems().clear();
+
 			//TODO gcm 这里我自己加了，不知道对不对，就是从概况界面直接生成需要这些
 			hotelVO = hotelBLController.getHotelInfo(hotelTable.getSelectionModel().getSelectedItem().getHotelID());
 			rooms = hotelBLController.getHotelRoomInfo(hotelTable.getSelectionModel().getSelectedItem().getHotelID());
