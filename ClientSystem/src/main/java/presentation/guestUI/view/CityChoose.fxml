@@ -416,7 +416,6 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Button layoutX="431.0" layoutY="83.0" mnemonicParsing="false" onAction="#changeRoom" text="更改" />
                         <ComboBox fx:id="roomTypeInOrder" layoutX="244.0" layoutY="81.0" prefHeight="32.0" prefWidth="177.0" />
                      </children>
                   </Pane>
