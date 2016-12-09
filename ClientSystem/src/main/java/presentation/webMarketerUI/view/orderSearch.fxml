@@ -130,7 +130,7 @@
             </AnchorPane>
          </children>
       </Pane>
-      <AnchorPane fx:id="orderCheck" prefHeight="601.0" prefWidth="895.0">
+      <AnchorPane fx:id="orderCheck" prefHeight="601.0" prefWidth="895.0" visible="false">
          <children>
             <Button focusTraversable="false" layoutX="786.0" layoutY="70.0" mnemonicParsing="false" onAction="#OrderDetail" text="查看详情" />
             <Separator layoutY="60.0" prefHeight="3.0" prefWidth="895.0" />

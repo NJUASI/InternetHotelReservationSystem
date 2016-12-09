@@ -671,7 +671,7 @@ public class HotelSearchController {
 
 		@FXML
 		protected void commitOrder() {
-			//TODO 高源：界面上的选择框必须选，默认值读入为null
+		
 			final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(), 
 					LocalTime.of(hourInOrder.getValue(), minuteInOrder.getValue()));
 			final LocalDateTime expectLeaveTime = LocalDateTime.of(expectLeaveDateInOrder.getValue(), 
