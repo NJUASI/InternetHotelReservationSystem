@@ -42,13 +42,13 @@ public enum OrderState implements Serializable{
 	 */
 	public static OrderState convertString2OrderState(String a) {
 		if (a.equals("已撤销")) {
-			return OrderState.CANCELLED;
+			return CANCELLED;
 		}else if (a.equals("异常")) {
-			return OrderState.ABNORMAL;
+			return ABNORMAL;
 		}else if (a.equals("未执行")) {
-			return OrderState.UNEXECUTED;
+			return UNEXECUTED;
 		}else {
-			return OrderState.EXECUTED;
+			return EXECUTED;
 		}
 	}
 	

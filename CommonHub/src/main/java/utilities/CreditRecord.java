@@ -23,5 +23,24 @@ public enum CreditRecord {
 		}else {
 			return "异常->已撤销";
 		}
-	};
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/9
+	 */
+	public static CreditRecord convertString2CreditRecord(String a) {
+		if (a.equals("信用充值")) {
+			return CHARGE;
+		}else if (a.equals("未执行->已执行")) {
+			return EXECUTE;
+		}else if (a.equals("异常->已执行")) {
+			return ABNORMAL_EXECUTE;
+		}else if (a.equals("未执行->异常")) {
+			return OVERDUE;
+		}else {
+			return UNDO_ABNORMAL;
+		}
+	}
 }
