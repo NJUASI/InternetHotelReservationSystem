@@ -30,10 +30,10 @@ public class HotelWorkerDataHelperImplTest {
 		String password  = "asdfghjkl123456";
 		String hotelName = "桔子水晶酒店（南京新街口店）";
 		
-		String kk = code.encryptChinese(password);
-		HotelWorkerPO hotelWorkerPO  = new HotelWorkerPO("", code.encryptChinese(password), hotelName); 
+		String kk = code.encrypt(password);
+		HotelWorkerPO hotelWorkerPO  = new HotelWorkerPO("", code.encrypt(password), hotelName); 
 		helper.add(hotelWorkerPO);
-		System.out.println(code.decodeChinese(kk));
+		System.out.println(code.decode(kk));
 	}
 
 	@Test

@@ -36,8 +36,8 @@ public class GuestDataHelperImplTest {
 		String password  ="asdfghjkl";
 		
 		GuestPO guestPO = new GuestPO("", birthday, "", 
-				code.encryptChinese(name), nickName,
-				code.encryptChinese(password), code.encryptChinese(phone), 107);
+				code.encrypt(name), nickName,
+				code.encrypt(password), code.encrypt(phone), 107);
 		GuestPO tempGuestPO = helper.add(guestPO);
 		
 	}
@@ -57,10 +57,10 @@ public class GuestDataHelperImplTest {
 		
 //		assertEquals(LocalDate.of(2016, 3, 13),guestPO.getBirthday());
 //		assertEquals("学校",guestPO.getEnterprise());
-		assertEquals("董金玉",code.decodeChinese(guestPO.getName()));
-		assertEquals("kkkkkkkkk",code.decodeChinese(guestPO.getNickName()));
-		assertEquals("123456DJYF",code.decodeChinese(guestPO.getPassword()));
-		assertEquals("13523456789",code.decodeChinese(guestPO.getPhone()));
+		assertEquals("董金玉",code.decode(guestPO.getName()));
+		assertEquals("kkkkkkkkk",code.decode(guestPO.getNickName()));
+		assertEquals("123456DJYF",code.decode(guestPO.getPassword()));
+		assertEquals("13523456789",code.decode(guestPO.getPhone()));
 	}
 
 	@Ignore
