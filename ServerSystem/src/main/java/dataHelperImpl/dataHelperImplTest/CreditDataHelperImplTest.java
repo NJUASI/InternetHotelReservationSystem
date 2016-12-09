@@ -11,6 +11,7 @@ import org.junit.Test;
 import dataHelper.CreditDataHelper;
 import dataHelperImpl.CreditDataHelperImpl;
 import po.CreditPO;
+import utilities.CreditRecord;
 import utilities.ResultMessage;
 
 public class CreditDataHelperImplTest {
@@ -32,12 +33,12 @@ public class CreditDataHelperImplTest {
 		assertEquals("345620161209",list.get(1).getOrderID());
 		assertEquals(222,list.get(0).getPreCredit(),0);
 		assertEquals(233,list.get(1).getCredit(),0);
-		assertEquals("executed",list.get(0).getReason());
+		assertEquals("executed",list.get(0).getCreditRecord().EXECUTE);
 	}
 
 	@Test
 	public void testAdd() {
-		CreditPO creditPO = new CreditPO("1000000002",LocalDateTime.of(2016, 12, 07, 18, 14,21),"445620161212",111,444,"executed");
+		CreditPO creditPO = new CreditPO("1000000002",LocalDateTime.of(2016, 12, 07, 18, 14,21),"445620161212",111,444,CreditRecord.EXECUTE);
 		
 		assertEquals(ResultMessage.SUCCESS,helper.addCredit(creditPO));
 	}

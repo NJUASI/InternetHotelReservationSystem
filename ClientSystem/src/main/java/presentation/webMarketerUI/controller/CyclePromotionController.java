@@ -8,8 +8,12 @@ import businessLogic.promotionBL.PromotionBLController;
 import businessLogic.sourceBL.SourceBLController;
 import businessLogicService.promotionBLService.PromotionBLService;
 import businessLogicService.sourceBLService.SourceBLService;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -44,8 +48,34 @@ public class CyclePromotionController {
 	 */
 	@FXML
 	private void initialize() {
-	
+		cityInput.setOnShowing(new CityShowingHandler());
+		cityInput.valueProperty().addListener(new CityChangedListener());
 	}
+	
+	class CityShowingHandler implements EventHandler<Event>{
+		@Override
+		public void handle(Event arg0) {
+			if(cityInput.getItems().size() <= 1){
+				Iterator<String> cities = sourceBLController.getCities();
+				while(cities.hasNext()){
+					cityInput.getItems().add(cities.next());
+				}
+			}
+		}
+	}
+
+	class CityChangedListener implements ChangeListener<String> {
+		@Override
+		public void changed(ObservableValue arg0, String preCity, String selectedCity) {
+			cycleInput.getItems().clear();
+			Iterator<String> circles = sourceBLController.getCircles(selectedCity);
+			while(circles.hasNext()){
+				cycleInput.getItems().add(circles.next());
+			}
+			cycleInput.setValue(cycleInput.getItems().get(0));
+		}
+	}
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -60,39 +90,6 @@ public class CyclePromotionController {
 			cycleDiscount.setText(table.getSelectionModel().getSelectedItem().getDiscount());
 		} catch (Exception e) {
 			System.out.println("请选定或者输入城市商圈");
-		}
-	}
-	
-	/**
-	 * @查找城市的comboBox
-	 * @author 61990
-	 * @lastChangedBy Harvey
-	 * @updateTime 2016/12/7
-	 */
-	@FXML
-	protected void searchCity() {
-		cityInput.getItems().clear();
-		cycleInput.setValue("");
-		
-		Iterator<String> cities = sourceBLController.getCities();
-		while(cities.hasNext()){
-			cityInput.getItems().add(cities.next());
-		}
-	}
-	
-	/**
-	 * @description 查找商圈的comboBox
-	 * @author 61990
-	 * @lastChangedBy Harvey
-	 * @updateTime 2016/12/7
-	 */
-	@FXML
-	protected void searchCycle() {
-		cycleInput.getItems().clear();
-		String selectedCity = cityInput.getValue();
-		Iterator<String> circles = sourceBLController.getCircles(selectedCity);
-		while(circles.hasNext()){
-			cycleInput.getItems().add(circles.next());
 		}
 	}
 	
