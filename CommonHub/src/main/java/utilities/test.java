@@ -31,5 +31,11 @@ public class test {
 		System.out.println(CreditRecord.UNDO_ABNORMAL);
 		System.out.println(CreditRecord.OVERDUE);
 		
+		System.out.println(CreditRecord.convertString2CreditRecord("信用充值") == CreditRecord.CHARGE);
+		System.out.println(CreditRecord.convertString2CreditRecord("未执行->已执行"));
+		System.out.println(CreditRecord.EXECUTE);
+		System.out.println(CreditRecord.UNDO_ABNORMAL);
+		System.out.println(CreditRecord.OVERDUE);
+		
 	}
 }
