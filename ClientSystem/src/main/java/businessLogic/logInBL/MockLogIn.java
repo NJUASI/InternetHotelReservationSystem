@@ -111,7 +111,7 @@ public class MockLogIn extends LogIn {
 	 * @return 客户是否成功注册
 	 */
 	public GuestVO guestSignUp(UserVO guestVO) {
-		return (GuestVO)user.add(guestVO);
+		return (GuestVO)user.add(guestVO,UserType.GUEST);
 	}
 
 }

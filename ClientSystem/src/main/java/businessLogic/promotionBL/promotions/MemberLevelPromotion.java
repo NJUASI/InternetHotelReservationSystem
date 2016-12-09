@@ -2,6 +2,7 @@ package businessLogic.promotionBL.promotions;
 
 import java.util.List;
 
+import businessLogic.marketBL.MarketController;
 import businessLogic.marketBL.MockMarket;
 import businessLogic.memberBL.MockMember;
 import utilities.MemberType;
@@ -16,7 +17,7 @@ public class MemberLevelPromotion {
 	public double getDiscount(String guestID){
 		List<MarketVO> commonMemberRegulations = new MockMarket().getMemberFormulation();
 		if(new MockMember().isMember(guestID, MemberType.COMMON)){
-			//TODO djj注意：需要一个获得客户id等级的接口,返回值为int
+//			TODO gcm注意：MarketController.getInstance().getLevel(guestID) 传入客户ID可获取
 			int degree = 1;
 			if(degree == 0){
 				return 0;

@@ -64,4 +64,9 @@ public final class MarketController implements MarketBLService {
 		return market.setMemberFormulation(marketVOList);
 	}
 
+	@Override
+	public int getLevel(String guestID) {
+		return market.getLevel(guestID);
+	}
+
 }

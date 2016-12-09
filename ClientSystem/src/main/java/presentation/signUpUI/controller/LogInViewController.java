@@ -128,17 +128,25 @@ public class LogInViewController {
 	/**
 	 * @author 61990
 	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/12/7
+	 * @updateTime 2016/12/9
 	 * @客户注册
 	 */
 	@FXML
 	protected void register() {
-//		TODO djy 8日 注意  对比两次输的密码成功后才能注册
-//		if(password2.getText()==password3.getText())
+		
+		GuestVO guestVO = null;
+		if(password2.getText().equals(password3.getText())){
 		GuestVO userVO = new GuestVO("",LocalDate.of(0,0,0),"",name.getText(), nickName.getText(),password2.getText()
 				,phone.getText(),0);
-		GuestVO guestVO = logInBLController.guestSignUp(userVO);
+		guestVO = logInBLController.guestSignUp(userVO);
 		// TODO 此处返回了界面需要的自动递增的ID，后续操作由界面完成
+		}
+		
+		if(guestVO==null){
+			//TODO gy 注意 密码错误，界面提示两次输入不一致
+		}else{
+			//TODO 正常操作
+		}
 	}
 	/**
 	 * @author 61990

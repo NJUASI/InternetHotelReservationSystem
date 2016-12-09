@@ -11,18 +11,16 @@ import java.util.List;
 import businessLogic.hotelBL.HotelBLController;
 import businessLogic.orderBL.OrderBLController;
 import businessLogic.sourceBL.SourceBLController;
+import businessLogic.userBL.UserController;
 import businessLogicService.hotelBLService.HotelBLService;
 import businessLogicService.orderBLService.OrderBLService;
 import businessLogicService.sourceBLService.SourceBLService;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import businessLogicService.userBLService.UserBLService;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -31,7 +29,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import presentation.hotelWorkerUI.controller.HotelTable;
 import presentation.hotelWorkerUI.controller.OrderTable;
 import presentation.hotelWorkerUI.controller.TypeTable;
@@ -40,6 +37,7 @@ import utilities.OrderState;
 import utilities.ResultMessage;
 import utilities.RoomType;
 import utilities.SearchCriteriaType;
+import vo.GuestVO;
 import vo.HotelEvaluationVO;
 import vo.HotelVO;
 import vo.OrderGeneralVO;
@@ -75,103 +73,54 @@ public class HotelSearchController {
 	private OrderBLService orderBLController;
 	private SourceBLService sourceBLController;
 	private HotelBLService hotelBLController;
+	private UserBLService userBLController;
 
 	public HotelSearchController() {
 		orderBLController = OrderBLController.getInstance();
 		sourceBLController = SourceBLController.getInstance();
 		hotelBLController = HotelBLController.getInstance();
+		userBLController = UserController.getInstance();
 	}
-	
-	@FXML
-	private ComboBox<Integer> guestNumInOrder,roomCountInOrder, hourInOrder, hourInOrder2,minuteInOrder, minuteInOrder2;
-	@FXML
-	private ComboBox<Integer> minLevelInput,maxLevelInput;
-	@FXML
-	private ComboBox<Double> minScoreInput,maxScoreInput;
 	/**
 	 * @author 61990
-	 * @lastChangedBy Harvey
-	 * @updateTime 2016/12/8 
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/7 
+	 * @构造函数，初始化各种COMBOBOX
 	 */
 	@FXML
 	private void initialize() {
-		initEveryBox();
-
-//	TODO gcm	这段重复有点多
-//		先出事化
-	Iterator<String> cities = sourceBLController.getCities();
-	
-	while(cities.hasNext()){
-		cityChoose.getItems().add(cities.next());
-	}
-	Iterator<String> circles = sourceBLController.getCircles(cityChoose.getItems().get(0));
-	while(circles.hasNext()){
-		cycleChoose.getItems().add(circles.next());	
-	}
-	cityChoose.setValue(cityChoose.getItems().get(0));
-	cycleChoose.setValue(cycleChoose.getItems().get(0));
-	//TODO gcm  newValue 为改变后你点的那个值
-//	监听里改商圈
-	
-	cityChoose.valueProperty().addListener(new ChangeListener<String>() {
-		@Override
-		public void changed(ObservableValue ov, String oldValue, String newValue) {
-			cycleChoose.getItems().clear();
-			Iterator<String> circles = sourceBLController.getCircles(newValue);
-			while(circles.hasNext()){
-				cycleChoose.getItems().add(circles.next());
-				
-			}cycleChoose.setValue(cycleChoose.getItems().get(0));
-		}    
-      });
-	}
-	
-	void initEveryBox(){
-
-		int minutes = 60;
-		int hours = 24;
-		int maxGuestNum = 3;
-		//TODO gcm注意，用客户选择得房间类型，去下面拿到该酒店该房型得剩余房间数量
-		int maxRoomNum = 3;
-		int maxLevel = 5;
-		int maxScore = 5;
-
-	for (int i = 0; i < minutes; i++) {
+		
+	for (int i = 0; i < 60; i++) {
 	minuteInOrder.getItems().add(i);
 	minuteInOrder2.getItems().add(i);
 	}
-	minuteInOrder.setValue(0);
-	minuteInOrder2.setValue(0);
-	for (int i = 0; i < hours; i++) {
+	for (int i = 0; i < 24; i++) {
 	hourInOrder.getItems().add(i);
 	hourInOrder2.getItems().add(i);
 	}
-	hourInOrder.setValue(0);
-	hourInOrder2.setValue(0);
-	for (int i = 1; i <= maxGuestNum; i++) {
+	for (int i = 1; i < 5; i++) {
 		guestNumInOrder.getItems().add(i);	
 	}
-	guestNumInOrder.setValue(1);
-	for (int i = 1; i < maxRoomNum; i++) {
+	for (int i = 1; i < 9; i++) {
 		roomCountInOrder.getItems().add(i);	
 	}
-	roomCountInOrder.setValue(1);
-	for (int i = 1; i <= maxLevel; i++) {
-		minLevelInput.getItems().add(i);
-		maxLevelInput.getItems().add(i);	
+	for (int i = 1; i < 6; i++) {
+		minlevelInput.getItems().add(i);
+		maxlevelInput.getItems().add(i);	
 	}
-	minLevelInput.setValue(1);
-	maxLevelInput.setValue(5);
-	for (int i = 0; i <= maxScore; i++) {
+	for (int i = 0; i < 6; i++) {
 		minScoreInput.getItems().add(i+0.0);
 		maxScoreInput.getItems().add(i+0.0);	
 	}
-	minScoreInput.setValue(0.0);
-	maxScoreInput.setValue(5.0);
+	
 
-	expectExecuteDateInOrder.setValue(LocalDate.now());
-	expectLeaveDateInOrder.setValue(LocalDate.now());
+	
+	Iterator<String> cities = sourceBLController.getCities();
 
+	while(cities.hasNext()){
+		cityChoose.getItems().add(cities.next());
+	}
+	
 	}
 	/**
 	 * @初始化所有城市
@@ -200,6 +149,14 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void searchCycle(){
+
+		cycleChoose.getItems().clear();
+
+		//调用sourceBL获取当前选中城市的所有商圈
+		Iterator<String> circles = sourceBLController.getCircles(cityChoose.getValue());
+		while(circles.hasNext()){
+			cycleChoose.getItems().add(circles.next());
+		}
 	}
 
 	/**
@@ -405,7 +362,6 @@ public class HotelSearchController {
 		List<TypeTable> dataList = new ArrayList<TypeTable>();
 		while(rooms.hasNext()){
 			RoomInfoVO temp = rooms.next();
-
 			dataList.add(new TypeTable(temp.roomType.toString(),
 					String.valueOf(temp.roomNum),String.valueOf(temp.remainNum),
 					Double.toString(temp.price)));
@@ -477,6 +433,10 @@ public class HotelSearchController {
 	@FXML
 	private CheckBox box1,box2,box3,box4,box5,boxOnly;
 	@FXML
+	private ComboBox<Integer> minlevelInput,maxlevelInput;
+	@FXML
+	private ComboBox<Double> minScoreInput,maxScoreInput;
+	@FXML
 	private TextField roomInput,minpriceInput,	maxpriceInput,hotelNameInput;
 
 	/**
@@ -534,10 +494,12 @@ public class HotelSearchController {
 			criteria.add(SearchCriteriaType.BOOKED_ONLY);
 			vo.bookedOnly = boxOnly.isSelected();
 		}
-		if(minLevelInput.getValue()!=null){
+		if(minlevelInput.getValue()!=null){
 			criteria.add(SearchCriteriaType.LEVEL_SPAN);
-			vo.minLevel = minLevelInput.getValue();
-			vo.maxLevel =  maxLevelInput.getValue();
+			//TODO gy注意：将星级选择的getValue改为int；
+			//TODO gcm改了
+			vo.minLevel = minlevelInput.getValue().intValue();
+			vo.maxLevel =  maxlevelInput.getValue().intValue();
 		}
 		if(minpriceInput.getText()!=null){
 			criteria.add(SearchCriteriaType.ORGIN_PRICE_SPAN);
@@ -553,11 +515,9 @@ public class HotelSearchController {
 			criteria.add(SearchCriteriaType.REMAIN_ROOM_NUM);
 			vo.remainRoomNum = Integer.parseInt(roomInput.getText());
 		}
-		
+		//TODO gy注意：能不能把房间类型列表的选择做成复选框checkBox或者选择框choiceBox，可能ifelse会少一点儿
 //		TODO gcm 不就是复选框checkBox吗
-		//TODO gy 我不能用一个for循环去取到已经被勾选的框，只能单个取，给我一种可以通过循环取的方案
 //		vo.roomTypes = new ArrayList<RoomType>();
-		
 		criteria.add(SearchCriteriaType.NULL);
 		
 	}
@@ -565,18 +525,19 @@ public class HotelSearchController {
 
 	/*
 	 * TODO gy注意：确定这个界面也在这儿？。。。
-	 * TODO gcm 现在有点错综复杂了，想了一下还是这样好点，不然保留现场只能保留组件内容，他不能保留你组件状态
 	 * 这个类好tm大
 	 */
 
 
 	// 订单生成界面
 	@FXML
-	private ComboBox<String> roomTypeInOrder;
+	private ChoiceBox<String> roomTypeInOrder;
 	@FXML
 	private Label hotelNameInOrder, hotelIDInOrder, hotelAddressInOrder, previousPriceInOrder, priceOfOrder,remainNumInOrder;
 	@FXML
 	private TextField nameInOrder, phoneInOrder;
+	@FXML
+	private ComboBox<Integer> guestNumInOrder,roomCountInOrder, hourInOrder, hourInOrder2,minuteInOrder, minuteInOrder2;
 	@FXML
 	private DatePicker expectExecuteDateInOrder, expectLeaveDateInOrder;
 	@FXML
@@ -590,41 +551,22 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void openCreateOrder() {
+		//TODO gcm 8日,不一样，这里是从详情界面拿东西初始化，因为各种需要的东西已经初始化了，而且这里我的意思是你直接就把		
 		roomTypeInOrder.setValue(roomTable.getSelectionModel().getSelectedItem().getRoomType());
 		remainNumInOrder.setText(roomTable.getSelectionModel().getSelectedItem().getRemainRoomNum());
 		previousPriceInOrder.setText(roomTable.getSelectionModel().getSelectedItem().getPrice());
 		initCreateOrder();
 	}
-//TODO gcm 合掉了	
-	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
-	 * @点击概况预定酒店按钮
-	 */
-	@FXML
-	protected void createOrderIncheck(){
-		initCreateOrder();
-	}
-	
+
 	private void initCreateOrder(){
-
-
-//		TODO 通过	 hotelID String hotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
-//		  roomList = new LinkedList<>();
-//		hotelVO也需要重新出事化
-		
-		//TODO gcm 给一个guestVO
-
-
-		//TODO djy 给一个guestVO
-//		GuestVO guestVO = null;
+		// TODO gcm 给一下需要查找客户信息的客户ID
+//		GuestVO guestVO = userBLController.getSingle(userID);
 //		nameInOrder.setText(guestVO.name);
 //		phoneInOrder.setText(guestVO.phone);
-//TODO 初始化房间列表		
-//		for (int i = 0; i < roomList.size(); i++) {
-//			roomTypeInOrder.getItems().add(roomList.get(i).roomType.toString());
-//		}
+//		
+		for (int i = 0; i < roomList.size(); i++) {
+			roomTypeInOrder.getItems().add(roomList.get(i).roomType.toString());
+		}
 
 		hotelNameInOrder.setText(hotelVO.hotelName);
 		hotelIDInOrder.setText(hotelVO.hotelID);
@@ -635,32 +577,29 @@ public class HotelSearchController {
 		hotelCheck.setVisible(false);
 	}
 
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @updateTime 2016/11/27
+	 * @点击概况预定酒店按钮
+	 */
+	@FXML
+	protected void createOrderIncheck(){
 
+		// TODO gy注意：与上面代码相似度极大，你看一下，能不能合，感觉是一个界面吧。。
+		//TODO gcm 8日，这里是你界面没东西，必须通过ID得到东西比如没有HotelVO，没有ROOM typelist才能初始化订单详情界面，这里是立即预定
+		
+		hotelVO = new HotelVO("12345", "hantingjiudiansss", "xinjiekou", "xinjiekou", "malianhedadao", "5xinji", 4.5,
+				198, "shoooo", "sdaf");
 
-//	/**
-//	 * @author 61990
-//	 * @lastChangedBy 61990
-//	 * @updateTime 2016/11/27
-//	 * @点击概况预定酒店按钮
-//	 */
-//	@FXML
-//	protected void createOrderIncheck(){
-//
-//		// TODO gy注意：与上面代码相似度极大，你看一下，能不能合，感觉是一个界面吧。。
-//		//TODO djy 8日，这里是你界面没东西，必须通过ID得到东西比如没有HotelVO，没有ROOM typelist才能初始化订单详情界面，这里是立即预定
-//		hotelVO = new HotelVO("12345", "hantingjiudiansss", "xinjiekou", "xinjiekou", "malianhedadao", "5xinji", 4.5,
-//				198, "shoooo", "sdaf");
-//
-//		roomList = new LinkedList<>();
-//		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
-//		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
-//		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
-//		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
-//
-//		initCreateOrder();
-//	}
+		roomList = new LinkedList<>();
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
+		roomList.add(new RoomInfoVO("123456", RoomType.三人间, 23,3, 259));
 
-
+		initCreateOrder();
+	}
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -676,37 +615,31 @@ public class HotelSearchController {
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/11/27
 	 * @点击提交订单按钮
-	 * 
-	 * TODO 高源：对hourInOrder、hourInOrder2、minuteInOrder、minuteInOrder2的功能不清楚，故为猜测，检查一下
 	 */
 	OrderVO orderVO;
 
-	@FXML 
-	StackPane right;
-
 	@FXML
 	protected void commitOrder() {
-		//TODO 高源：界面上的选择框必须选，默认值读入为null
-		final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(), 
-				LocalTime.of(hourInOrder.getValue(), minuteInOrder.getValue()));
-		final LocalDateTime expectLeaveTime = LocalDateTime.of(expectLeaveDateInOrder.getValue(), 
-				LocalTime.of(hourInOrder2.getValue(), minuteInOrder2.getValue()));
+		final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(),
+				LocalTime.of(hourInOrder.getValue(),minuteInOrder.getValue()));
+		final LocalDateTime expectLeaveTime = LocalDateTime.of(expectLeaveDateInOrder.getValue(),
+				LocalTime.of(hourInOrder2.getValue(),minuteInOrder2.getValue()));
 
 		OrderGeneralVO createOrderGeneral = new OrderGeneralVO(IDReserve.getInstance().getUserID(), hotelIDInOrder.getText(), 
 				hotelNameInOrder.getText(), hotelAddressInOrder.getText(), expectExecuteTime, expectLeaveTime, 
 				nameInOrder.getText(), phoneInOrder.getText());
 
-		OrderVO createVO = new OrderVO(createOrderGeneral, Double.parseDouble(previousPriceInOrder.getText()), 
+		OrderVO createVO = new OrderVO(createOrderGeneral, Double.parseDouble(priceOfOrder.getText()), 
 				RoomType.convertString2Roomtype(roomTypeInOrder.getValue()), roomCountInOrder.getValue(), guestNumInOrder.getValue(), 
 				messageInOrder.getText());
 
 		final ResultMessage msg = orderBLController.createOrder(createVO);
 
 		if (msg == ResultMessage.ORDER_CREATE_SUCCESS) {
-			//TODO 高源——————状态栏显示订单生成成功
+			//@高源——————状态栏显示订单生成成功
 
 		}else {
-			//TODO 高源——————状态栏显示订单生成失败
+			//@高源——————状态栏显示订单生成失败
 
 		}
 	}

@@ -9,6 +9,7 @@ import businessLogic.userBL.userService.service.UserService;
 import utilities.ResultMessage;
 import utilities.UserType;
 import vo.HotelVO;
+import vo.HotelWorkerVO;
 import vo.UserVO;
 
 /**
@@ -43,9 +44,9 @@ public class User {
 	 * @param userVO 从客户界面层传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加用户信息
 	 */
-	public UserVO add(UserVO newUserVO) {
+	public UserVO add(UserVO newUserVO,UserType userType) {
 
-		user = lengthFactory.createUser(newUserVO.userID.length());
+		user = factory.createUser(userType);
 		if(isExistence(user))
 		{
 			return user.add(newUserVO);
@@ -89,15 +90,21 @@ public class User {
 	/**
 	 * @author Byron Dong
 	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/27
+	 * @updateTime 2016/12/9
 	 * @param newHotelVO，hotelID 从客户界面层传下来的hotelInfo载体和指定酒店ID
 	 * @return ResultMessage 酒店是否添加成功
 	 */
 	public ResultMessage addHotel(HotelVO newHotelVO, String hotelID) {
+		// TODO DJY 此处和add待议
 
-		Hotel hotel = new Hotel(hotelID);
+		if(newHotelVO==null){return ResultMessage.HOTEL_ADD_FAILURE;}
+		
+		Hotel hotel = new Hotel();
+		HotelWorkerVO  hotelWorkerVO = new HotelWorkerVO(newHotelVO.hotelName);
+		
 
-		if (hotel.getHotelInfo(hotelID) == null) {
+		if (hotel.getHotelInfo(newHotelVO.hotelID) == null) {
+			
 			return hotel.addHotelInfo(newHotelVO);
 		}
 

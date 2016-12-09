@@ -4,12 +4,15 @@ import java.util.Iterator;
 
 import businessLogic.hotelBL.HotelBLController;
 import businessLogic.sourceBL.SourceBLController;
+import businessLogic.userBL.UserController;
 import businessLogicService.hotelBLService.HotelBLService;
 import businessLogicService.sourceBLService.SourceBLService;
+import businessLogicService.userBLService.UserBLService;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import vo.HotelVO;
+import vo.HotelWorkerVO;
 
 public class HotelInfoController {
 
@@ -23,9 +26,12 @@ public class HotelInfoController {
 
 	private SourceBLService sourceBLController;
 	private HotelBLService hotelBLController;
+	private  UserBLService userBLConrtoller;
+	
 	public HotelInfoController() {
 		sourceBLController = SourceBLController.getInstance();
 		hotelBLController = HotelBLController.getInstance();
+		userBLConrtoller = UserController.getInstance();
 	}
 
 	/**
@@ -81,8 +87,8 @@ public class HotelInfoController {
 	}
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/2
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/9
 	 * @添加酒店信息
 	 */
 	@FXML
@@ -101,5 +107,9 @@ public class HotelInfoController {
 		newHotel.level = String.valueOf(levelInput.getValue());
 		newHotel.address = address.getText();
 		hotelBLController.addHotel(newHotel);
+		
+//		HotelWorkerVO tempHotelWorkerVO  = new HotelWorkerVO()
+		// TODO gcm 注意！！！	hotelID是你生成还是User生成因为两个的ID是一样的，我觉得是我生成
+		// TODO gy 注意！！！	所有的用户的add都是由User返回ID和默认密码吗
 	}
 }
