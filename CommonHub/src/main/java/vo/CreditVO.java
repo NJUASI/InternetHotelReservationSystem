@@ -3,6 +3,7 @@ package vo;
 import java.time.LocalDateTime;
 
 import po.CreditPO;
+import utilities.CreditRecord;
 
 public class CreditVO {
     
@@ -22,9 +23,9 @@ public class CreditVO {
 	public double afterCredit;
 	
 	//	变化原因 即动作
-	public String reason;
+	public CreditRecord reason;
 	
-	public CreditVO(String guestID, LocalDateTime time, String orderID, double previousCredit, double afterCredit, String reason) {
+	public CreditVO(String guestID, LocalDateTime time, String orderID, double previousCredit, double afterCredit, CreditRecord reason) {
 		this.guestID = guestID;
 		this.time = time;
 		this.orderID = orderID;
@@ -39,7 +40,7 @@ public class CreditVO {
 		this.orderID = creditPO.getOrderID();
 		this.previousCredit = creditPO.getPreCredit();
 		this.afterCredit = creditPO.getCredit();
-		this.reason = creditPO.getReason();
+		this.reason = creditPO.getCreditRecord();
 	}
 
 }
