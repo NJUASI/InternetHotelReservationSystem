@@ -45,9 +45,9 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <ComboBox fx:id="cycleInput" focusTraversable="false" layoutX="607.0" layoutY="259.0" onMouseClicked="#searchCycle" prefHeight="28.0" prefWidth="167.0" />
+                  <ComboBox fx:id="cycleInput" focusTraversable="false" layoutX="607.0" layoutY="259.0" prefHeight="28.0" prefWidth="167.0" />
                   <Button focusTraversable="false" layoutX="213.0" layoutY="499.0" mnemonicParsing="false" onAction="#modifyOne" text="修改" />
-                  <ComboBox fx:id="cityInput" focusTraversable="false" layoutX="607.0" layoutY="169.0" onMouseClicked="#searchCity" prefHeight="28.0" prefWidth="167.0" />
+                  <ComboBox fx:id="cityInput" focusTraversable="false" layoutX="607.0" layoutY="169.0" prefHeight="28.0" prefWidth="167.0" />
                   <Button focusTraversable="false" layoutX="800.0" layoutY="168.0" mnemonicParsing="false" onAction="#searchInfo" text="查询" />
                   <Label layoutX="382.0" layoutY="14.0" prefHeight="39.0" text="网站普通策略">
                      <font>

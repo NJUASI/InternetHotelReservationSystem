@@ -9,6 +9,7 @@ import java.util.List;
 
 import dataHelper.CreditDataHelper;
 import po.CreditPO;
+import utilities.CreditRecord;
 import utilities.JDBCUtil;
 import utilities.ResultMessage;
 
@@ -62,7 +63,7 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 				creditPO.setOrderID(String.valueOf(rs.getObject(3)));
 				creditPO.setPreCredit(rs.getDouble(4));
 				creditPO.setCredit(rs.getDouble(5));
-				creditPO.setReason(String.valueOf(rs.getObject(6)));
+				creditPO.setCreditRecord(CreditRecord.valueOf(rs.getString(6)));
 
 				result.add(creditPO);
 			}
@@ -94,7 +95,7 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 			ps.setObject(3, creditPO.getTime());
 			ps.setDouble(4, creditPO.getPreCredit()); 
 			ps.setDouble(5, creditPO.getCredit());
-			ps.setObject(6, creditPO.getReason());
+			ps.setObject(6, creditPO.getCreditRecord().toString());
 
 			ps.execute();
 		} catch (SQLException e) {
@@ -121,7 +122,7 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 				creditPO.setOrderID(String.valueOf(rs.getObject(3)));
 				creditPO.setPreCredit(rs.getDouble(4));
 				creditPO.setCredit(rs.getDouble(5));
-				creditPO.setReason(String.valueOf(rs.getObject(6)));
+				creditPO.setCreditRecord(CreditRecord.valueOf(rs.getString(6)));
 
 				result.add(creditPO);
 			}

@@ -25,7 +25,7 @@
          <children>
             <Pane fx:id="registerPane" layoutX="330.0" layoutY="198.0" prefHeight="325.0" prefWidth="330.0" visible="false">
                <children>
-                  <Button fx:id="register" layoutX="147.0" layoutY="271.0" mnemonicParsing="false" onMouseClicked="#register" text="注册" />
+                  <Button fx:id="registerBT" layoutX="147.0" layoutY="271.0" mnemonicParsing="false" onMouseClicked="#register" text="注册" />
                   <GridPane layoutX="58.0" layoutY="69.0" prefHeight="187.0" prefWidth="228.0">
                      <children>
                         <Label prefHeight="19.0" prefWidth="91.0" text="姓      名：" GridPane.rowIndex="2" />
