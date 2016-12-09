@@ -91,24 +91,22 @@ public class User {
 	 * @author Byron Dong
 	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/12/9
-	 * @param newHotelVO，hotelID 从客户界面层传下来的hotelInfo载体和指定酒店ID
+	 * @param newHotelVO 从客户界面层传下来的hotelInfo载体
 	 * @return ResultMessage 酒店是否添加成功
 	 */
-	public ResultMessage addHotel(HotelVO newHotelVO, String hotelID) {
-		// TODO DJY 此处和add待议
+	public ResultMessage addHotel(HotelVO newHotelVO) {
 
 		if(newHotelVO==null){return ResultMessage.HOTEL_ADD_FAILURE;}
 		
 		Hotel hotel = new Hotel();
-		HotelWorkerVO  hotelWorkerVO = new HotelWorkerVO(newHotelVO.hotelName);
 		
-
-		if (hotel.getHotelInfo(newHotelVO.hotelID) == null) {
+		HotelWorkerVO  hotelWorkerVO = new HotelWorkerVO(newHotelVO.hotelName);
+		hotelWorkerVO = (HotelWorkerVO) this.add(hotelWorkerVO, UserType.HOTEL_WORKER); //生成一个酒店工作人员账户
+		
+		newHotelVO.hotelID = hotelWorkerVO.userID;
 			
-			return hotel.addHotelInfo(newHotelVO);
-		}
+		return hotel.addHotelInfo(newHotelVO); //与该酒店工作人员同步
 
-		return ResultMessage.HOTEL_EXIST;
 	}
 
 	/**

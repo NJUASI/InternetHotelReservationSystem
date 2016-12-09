@@ -97,6 +97,9 @@ public class Market implements MarketBLService{
 			if(credit>=list.get(i).marketCredit){
 				level++;
 			}
+			else{
+				break;
+			}
 		}
 		
 		return level;
