@@ -31,7 +31,7 @@ public class UserBLService_Stub implements UserBLService {
 	}
 
 	
-	public ResultMessage addHotel(HotelVO newHotelVO, String hotelID) {
+	public ResultMessage addHotel(HotelVO newHotelVO) {
 		return ResultMessage.SUCCESS;
 	}
 

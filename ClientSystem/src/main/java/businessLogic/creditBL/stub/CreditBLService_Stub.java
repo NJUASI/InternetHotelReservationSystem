@@ -55,9 +55,6 @@ public class CreditBLService_Stub implements CreditBLService {
 		return null;
 	}
 
-	@Override
-	public ResultMessage addCredit(CreditVO creditVO) {
-		return null;
-	}
+
 	
 }

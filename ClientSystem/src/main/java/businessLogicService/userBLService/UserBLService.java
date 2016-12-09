@@ -15,7 +15,7 @@ public interface UserBLService {
 	
 	public UserVO getSingle(String userID);
 	
-	public ResultMessage addHotel(HotelVO newHotelVO, String hotelID);
+	public ResultMessage addHotel(HotelVO newHotelVO);
 	
 	public List<UserVO> getAll(UserType userType);
 	
