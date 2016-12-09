@@ -9,7 +9,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import businessLogic.userBL.userService.Guest;
-import businessLogic.userBL.userService.service.CreditService;
+import businessLogic.userBL.userService.service.GuestCreditService;
 import utilities.ResultMessage;
 import utilities.UserType;
 import vo.GuestVO;
@@ -101,7 +101,7 @@ public class UserTest {
 	@Test
 	public void testModifyCredit() {
 		//test the method modifyCredit
-		CreditService creditService = new Guest();
+		GuestCreditService creditService = new Guest();
 		
 		assertEquals(creditService.modifyCredit("1234567890", 100),ResultMessage.SUCCESS);
 	}

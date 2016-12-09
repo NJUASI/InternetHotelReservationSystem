@@ -2,6 +2,8 @@ package presentation.hotelWorkerUI.controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,7 +22,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import utilities.IDReserve;
 import utilities.OrderState;
+import utilities.ResultMessage;
 import utilities.UserType;
+import vo.CheckInVO;
+import vo.CheckOutVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
 /**
@@ -28,8 +33,12 @@ import vo.OrderVO;
  * @author 61990
  *
  * lastChangeBy charles
- * updateTime 2016/12/7
+ * updateTime 2016/12/8
  * 
+ * TODO 高源 酒店查看时可以查看到订单评   但是disable吧。。不可修改
+ * 
+ * TODO 冯俊杰：checkIn时修改credit产生一条信用记录addCredit还未实现
+ * TODO 冯俊杰：checkIn、checkOut后刷新orderGenerals，获取当前焦点位置<异常／未执行>，或者背景虚化了看不出来就不用区分了
  */
 public class OrderController {
 
@@ -97,7 +106,6 @@ public class OrderController {
 	 */
 	@FXML
 	protected void searchAlldOrder() {
-		//@高源——————charles新加的，界面上没有对应按钮——所有订单
 		orderGenerals = orderBLController.getAllOrderGenerals(hotelID, hotelWorker);
 		initOrderCheck(orderGenerals);
 	}
@@ -302,19 +310,27 @@ public class OrderController {
 	/**
 	 * @author 61990
 	 * @throws IOException 
-	 * @lastChangedBy 61990
+	 * @lastChangedBy charles
 	 * @updateTime 2016/12/8
 	 * @确定入住
 	 */
 	@FXML
 	protected void sureCheckIn(){
-		//  TODO fjj注意：订单入住，提供订单号，房间号，预计离开时间等
-		//  TODO 订单入住，提供订单号，房间号，预计离开时间等
-		//		 checkInOrderID.getText();ID
-		//		 checkInName.getText();//客户姓名，可不管
-		//		 checkInRoomNum.getText();//房间号
-		//离开时间获取	LocalDateTime.of(checkInLeaveDate.getValue(),LocalTime.of(Integer.parseInt(checkInHour.getText()), Integer.parseInt(checkInMinute.getText())));
-
+		final LocalDateTime checkInTime = LocalDateTime.now();
+		final LocalDateTime expectLeaveTime = LocalDateTime.of(checkInLeaveDate.getValue(), 
+				LocalTime.of(Integer.parseInt(checkInHour.getText()), Integer.parseInt(checkInMinute.getText())));
+		
+		final CheckInVO checkInVO = new CheckInVO(checkInOrderID.getText(), checkInRoomNum.getText(), checkInTime, expectLeaveTime);
+		final ResultMessage result = orderBLController.updateCheckIn(checkInVO);
+		if (result == ResultMessage.CHECK_IN_SUCCESS) {
+			//TODO 高源：状态栏显示入住成功
+			
+			
+			
+		}else {
+			//TODO 高源：状态栏显示入住失败
+			
+		}
 	}
 	@FXML
 	protected void cancelCheckIn(){
@@ -367,7 +383,17 @@ public class OrderController {
 	protected void sureCheckOut(){
 		//	  TODO fjj 订单退房，提供订单号
 		//	 checkOutOrderID.getText();ID
-		//	 checkOutName.getText();//客户姓名，可不管
+		final LocalDateTime checkOutTime = LocalDateTime.now();
+		final CheckOutVO checkOutVO = new CheckOutVO(checkInOrderID.getText(), checkOutTime);
+		
+		final ResultMessage result = orderBLController.updateCheckOut(checkOutVO);
+		if (result == ResultMessage.CHECK_OUT_SUCCESS) {
+			//TODO 高源：状态栏显示退房成功
+			
+		}else {
+			//TODO 高源：状态栏显示退房成功
+			
+		}
 	}
 
 	/**

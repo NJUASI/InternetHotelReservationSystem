@@ -6,6 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import businessLogic.orderBL.OrderBLController;
+import businessLogic.userBL.userService.Guest;
+import businessLogic.userBL.userService.service.GuestCreditService;
+import businessLogic.userBL.userService.service.UserService;
 import businessLogicService.orderBLService.OrderBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +24,8 @@ import javafx.scene.layout.Pane;
 import presentation.hotelWorkerUI.controller.OrderTable;
 import utilities.IDReserve;
 import utilities.OrderState;
+import utilities.ResultMessage;
+import vo.GuestVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
 
@@ -28,12 +33,19 @@ import vo.OrderVO;
  * @author 61990
  *
  * lastChangeBy charles
- * updateTime 2016/12/7
+ * updateTime 2016/12/9
  * 
+ * TODO 高源：网站营销人员查看订单时进的界面跳转有错误 方法监听好像也有点问题，就是最开始进去调全部订单没有  返回再点进去就有了
+ * TODO 冯俊杰：undo时修改credit产生一条信用记录addCredit还未实现  cancel & cancelInCheck
  */
 public class OrderController {
 
+	//order
 	private OrderBLService orderBLController;
+
+	//user
+	private GuestCreditService guestCreditService;
+	private UserService userService;
 	
 	/*
 	 * 订单概况
@@ -90,6 +102,8 @@ public class OrderController {
 	private void initialize() {
 		
 		orderBLController = OrderBLController.getInstance();
+		guestCreditService = new Guest();
+		userService = new Guest();
 		
 		cancelPercent.setValue("50%");
 		cancelPercent.getItems().add("50%");
@@ -126,65 +140,42 @@ public class OrderController {
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
+	 * @updateTime 2016/12/8
 	 * @在订单详情中取消异常订单
 	 */
 	@FXML
 	protected void cancelAbnormalOrder() {
-		//@高源：要catch什么Exception。。
-		//需修改接口  等会再来做这个
+		orderID = orderVO.orderGeneralVO.guestID;
 		
-		try {
-			if (cancelPercent.getValue().equals("50%")) {
-				//TODO fjj注意：返回50%信用值，通过orderVO.guestID
-			} else if (cancelPercent.getValue().equals("100%")) {
-				//TODO fjj注意：返回100%信用值，通过orderVO.guestID
-			}
-		} catch (Exception e) {
-			System.out.println("ssss");
-		}finally {
-			System.out.println("ucc");
+		double percent = 1.0;
+		if (cancelPercentInCheck.getValue().equals("50%")) {
+			percent = 0.5;
+		} else if (cancelPercentInCheck.getValue().equals("100%")) {
+			percent = 1.0;
 		}
+		undoAbnormalOrder(orderID, percent);
 	}
 	
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/30
-	 * @通过日期查找异常订单
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/8
+	 * @通过日期查所有异常订单和未执行订单
 	 */
 	@FXML
 	protected void searchDateOrder() {
-		//@高源：不知道这个是在干嘛，跟后面那个searchAbnormalOrder有什么不一样
-		
-		try {
-			orderCheck.setVisible(true);
+		orderCheck.setVisible(true);
 		searchPane.setVisible(false);
-			// TODO fjj注意：获得输入的内容日期，通过日期获得一整天的异常+未执行订单
-		// LocalDate date = searchDate.getValue();
-		orderGenerals=new LinkedList<>();
 		
-		orderGenerals.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderGenerals.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderGenerals.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderGenerals.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				 "七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				 OrderState.ABNORMAL,false, "gaoy", "1212121") );
+		LocalDate date = searchDate.getValue();
+		List<OrderGeneralVO> abnormalOrderGenerals = orderBLController.getAllAbnormalOrderGeneral(date);
+		List<OrderGeneralVO> unexecutedOrderGenerals = orderBLController.getAllUnexecutedOrderGeneral(date);
+
+		orderGenerals.addAll(abnormalOrderGenerals);
+		orderGenerals.addAll(unexecutedOrderGenerals);
 		
+		//TODO 冯俊杰：按时间排序
 		initOrderCheck(orderGenerals);
-	
-	
-		
-		} catch (Exception e) {
-			
-		}
-		
 	}
 
 	/**
@@ -218,7 +209,7 @@ public class OrderController {
 	protected void OrderDetail() {
 		orderID = table.getSelectionModel().getSelectedItem().getOrderID();
 		orderVO = orderBLController.getOrderDetail(orderID);
-		//@高源：原本没有。。需要加吧？？
+		//TODO 高源：原本没有下面这句。。需要加吧？？
 		initOrderDetail(orderVO);
 		
 		if (orderVO.orderGeneralVO.state == OrderState.ABNORMAL) {
@@ -254,18 +245,24 @@ public class OrderController {
 		cancelOrderPaneInCheck.setDisable(true);
  
 	}
+	/**
+	 * @author 61990
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/8
+	 * @在订单概况查看界面撤销异常订单
+	 */
 	@FXML
 	protected void cancelAbnormalOrderInCheck() {
-		//@高源：接口有问题，修改接口，等会儿改
-		try {
-			if (cancelPercentInCheck.getValue().equals("50%")) {
-				//TODO fjj注意：返回50%信用值，通过 table.getSelectionModel().getSelectedItem().getOrderID();
-			} else if (cancelPercentInCheck.getValue().equals("100%")) {
-				//TODO fjj注意：返回100%信用值，通过 table.getSelectionModel().getSelectedItem().getOrderID();
-			}
-		} catch (Exception e) {
-			System.out.println("ssss");
+		orderID = table.getSelectionModel().getSelectedItem().getOrderID();
+		
+		double percent = 1.0;
+		if (cancelPercentInCheck.getValue().equals("50%")) {
+			percent = 0.5;
+		} else if (cancelPercentInCheck.getValue().equals("100%")) {
+			percent = 1.0;
 		}
+
+		undoAbnormalOrder(orderID, percent);
 	}
 	/**
 	 * @author 61990
@@ -322,5 +319,42 @@ public class OrderController {
 
 		table.setItems(data);
 
+	}
+	
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/8
+	 * @param orderID
+	 * @param percent
+	 */
+	private void undoAbnormalOrder(String orderID, double percent) {
+		ResultMessage msg1 = orderBLController.undoAbnormalOrder(orderID, percent);
+		
+		/*
+		 * 因为接口modifyCredit(String guestID, double creditNum)中creditNum为最后的直接修改值
+		 * 故将理想信用值的计算逻辑暴露给了presentation
+		 */
+		
+		if (orderVO == null) {
+			orderVO = orderBLController.getOrderDetail(orderID);
+		}
+		GuestVO thisGuest = (GuestVO)userService.getSingle(orderVO.orderGeneralVO.guestID);
+		/*
+		 * 因为数据的问题，getOrderDetail得到的是一个UNEXECUTED对象，所以执行会抛异常
+		 * 但是若是数据正确的话，就没有问题
+		 */
+		
+		final double expectCreditNum = thisGuest.credit - orderVO.orderGeneralVO.price * percent;
+		ResultMessage msg2 = guestCreditService.modifyCredit(orderVO.orderGeneralVO.guestID, expectCreditNum);
+		
+		if (msg1 == ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS && msg2 == ResultMessage.RECORE_CREDIT_SUCCESS) {
+			//TODO 高源：状态栏显示异常订单撤销成功
+			
+		}else {
+			//TODO 高源：状态栏显示异常订单撤销失败
+			
+		}
 	}
 }

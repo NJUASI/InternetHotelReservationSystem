@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import businessLogic.userBL.stub.UserBLService_Stub;
 import businessLogic.userBL.userService.Guest;
-import businessLogic.userBL.userService.service.CreditService;
+import businessLogic.userBL.userService.service.GuestCreditService;
 import businessLogicService.userBLService.UserBLService;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -23,7 +23,7 @@ import vo.GuestVO;
 public class ChargeController {
 
 	private UserBLService userBLService;
-	private CreditService creditService;
+	private GuestCreditService creditService;
 	
 	GuestVO guestVO;
 	

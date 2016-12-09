@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import businessLogic.orderBL.stub.OrderBLService_Stub;
@@ -36,7 +35,7 @@ public class OrderBLService_DriverTest {
 	public void testUndoAbnormalOrder() {
 		final OrderBLService_Stub stub = new OrderBLService_Stub();
 		final OrderBLService_Driver driver = new OrderBLService_Driver(stub);
-		assertEquals(ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS, driver.orderBLService.undoAbnormalOrder("123456789012"));
+		assertEquals(ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS, driver.orderBLService.undoAbnormalOrder("123456789012", 0.5));
 	}
 	
 	/**

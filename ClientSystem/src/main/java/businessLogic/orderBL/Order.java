@@ -134,7 +134,7 @@ public class Order {
 	 * @param orderID 网站营销人员当前需要撤销的异常订单的订单号
 	 * @return 网站营销人员是否成功撤销此异常订单
 	 */
-	public ResultMessage undoAbnormalOrder(final String orderID) {
+	public ResultMessage undoAbnormalOrder(final String orderID, final double percent) {
 		ResultMessage resultMessage = ResultMessage.ABNORMAL_ORDER_UNDO_FAILURE;
 		
 		OrderState thisOrderState = getOrderDetail(orderID).orderGeneralVO.state;
@@ -142,7 +142,7 @@ public class Order {
 			return resultMessage;
 		}else {
 			try {
-				resultMessage = orderDataService.undoAbnormalOrder(orderID);
+				resultMessage = orderDataService.undoAbnormalOrder(orderID, percent);
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
