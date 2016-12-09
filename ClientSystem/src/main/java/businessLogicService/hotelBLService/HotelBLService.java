@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import utilities.ResultMessage;
+import utilities.RoomType;
 import utilities.SearchCriteriaType;
 import utilities.SortStrategy;
 import vo.HotelVO;
@@ -18,13 +19,13 @@ public interface HotelBLService {
 	
 	public ResultMessage addHotel (HotelVO hotelVO);
 	
-	public ResultMessage checkInOffline (String hotelID,String RoomName,int roomNum);
+	public ResultMessage checkInOffline (String hotelID,RoomType RoomName,int roomNum);
 	
-	public ResultMessage checkOutOffline (String hotelID,String RoomName,int roomNum);
+	public ResultMessage checkOutOffline (String hotelID,RoomType RoomName,int roomNum);
 
 	public Iterator<RoomInfoVO> getHotelRoomInfo (String hotelID);
 
-	public ResultMessage updateHotelRoomInfo (RoomInfoVO roomInfoVO,String oldRoomType);
+	public ResultMessage updateHotelRoomInfo (RoomInfoVO roomInfoVO);
 	
 	public Iterator<HotelVO> getHotels(String city,String circle);
 	

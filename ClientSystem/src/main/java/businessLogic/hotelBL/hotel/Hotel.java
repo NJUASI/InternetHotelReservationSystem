@@ -157,7 +157,7 @@ public class Hotel implements HotelInfoOperation{
 	 * @author: Harvey Gong
 	 * @time:2016年12月4日 下午3:14:25
 	 */
-	public ResultMessage deleteRoomInfo(String hotelID,String roomType){
+	public ResultMessage deleteRoomInfo(String hotelID,RoomType roomType){
 		return rooms.deleteRoomInfo(hotelID,roomType);
 	}
 
@@ -170,8 +170,8 @@ public class Hotel implements HotelInfoOperation{
 	 * @author: Harvey Gong
 	 * @time:2016年12月3日 下午9:50:41
 	 */
-	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO,String oldRoomType) {
-		return rooms.updateHotelRoomInfo(roomInfoVO,oldRoomType);
+	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO) {
+		return rooms.updateHotelRoomInfo(roomInfoVO);
 	}
 
 	/**
@@ -195,7 +195,7 @@ public class Hotel implements HotelInfoOperation{
 	 * @author: Harvey Gong
 	 * @time:2016年12月4日 下午7:31:07
 	 */
-	public int getRemainNumOfSpecificType(String roomType){
+	public int getRemainNumOfSpecificType(RoomType roomType){
 		return rooms.getRemainNumOfSpecificType(roomType);
 	}
 
@@ -237,12 +237,13 @@ public class Hotel implements HotelInfoOperation{
 		return rooms.getRemainRoomNum(hotelID);
 	}
 
-	public ResultMessage checkIn(String hotelID, String roomName, int roomNum) {
-		return rooms.checkIn(hotelID,roomName,roomNum);
+	public ResultMessage checkIn(String hotelID, RoomType roomType, int roomNum) {
+		return rooms.checkIn(hotelID,roomType,roomNum);
 		
 	}
 
-	public ResultMessage checkOut(String hotelID, String roomName, int roomNum) {
-		return rooms.checkOut(hotelID,roomName,roomNum);
+	public ResultMessage checkOut(String hotelID, RoomType roomType, int roomNum) {
+		return rooms.checkOut(hotelID,roomType,roomNum);
 	}
+
 }

@@ -52,13 +52,6 @@ public class HotelTest {
 
 	@Ignore
 	@Test
-	public void testUpdateHotelRoomInfo() {
-		RoomInfoVO vo = new RoomInfoVO("12345678",RoomType.单人间,"高级大床房",10,5,100);
-		assertEquals(hotel.updateHotelRoomInfo(vo,"高级大床房"), ResultMessage.SUCCESS);
-	}
-
-	@Ignore
-	@Test
 	public void testUpdateRemainRoomInfo() {
 	
 	}

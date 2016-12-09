@@ -100,7 +100,7 @@ class Rooms {
 	 * @author: Harvey Gong
 	 * @time:2016年12月4日 上午11:21:31
 	 */
-	public ResultMessage deleteRoomInfo(String hotelID,String roomType){
+	public ResultMessage deleteRoomInfo(String hotelID,RoomType roomType){
 
 		try {
 			hotelDataService.deleteRoomInfo(hotelID,roomType);
@@ -120,10 +120,10 @@ class Rooms {
 	 * @author: Harvey Gong
 	 * @time:2016年12月4日 上午11:03:24
 	 */
-	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO,String oldRoomType) {
+	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO) {
 
 		try {
-			hotelDataService.updateRoomInfo(new RoomInfoPO(roomInfoVO),oldRoomType);
+			hotelDataService.updateRoomInfo(new RoomInfoPO(roomInfoVO));
 			initRoomInfoPO(roomInfoVO.hotelID);
 			return ResultMessage.SUCCESS;
 		} catch (RemoteException e) {
@@ -144,10 +144,10 @@ class Rooms {
 	 * @param roomName 
 	 * @time:2016年12月4日 下午8:05:19
 	 */
-	private ResultMessage updateRemainRoomNum(String hotelID,String roomName, int operationedNum,Operation operation){
+	private ResultMessage updateRemainRoomNum(String hotelID,RoomType roomType, int operationedNum,Operation operation){
 		
 		initRoomInfoPO(hotelID);
-		RoomInfoPO po = roomInfoPOList.get(findPO(roomName));
+		RoomInfoPO po = roomInfoPOList.get(findPO(roomType));
 		if(operation == Operation.CHECK_IN){
 			po.setRemainNum(po.getRemainNum()- operationedNum);
 		}
@@ -155,7 +155,7 @@ class Rooms {
 		{
 			po.setRemainNum(po.getRemainNum()+ operationedNum);
 		}
-		return updateHotelRoomInfo(new RoomInfoVO(po),roomName);
+		return updateHotelRoomInfo(new RoomInfoVO(po));
 	}
 
 	/**
@@ -184,9 +184,9 @@ class Rooms {
 	 * @author: Harvey Gong
 	 * @time:2016年12月4日 下午7:20:02
 	 */
-	public int getRemainNumOfSpecificType(String roomName){
+	public int getRemainNumOfSpecificType(RoomType roomType){
 		for(int i = 0;i<roomInfoPOList.size();i++){
-			if(roomInfoPOList.get(i).getRoomName().equals(roomName)){
+			if(roomInfoPOList.get(i).getRoomType() == (roomType)){
 				return roomInfoPOList.get(i).getRemainNum();
 			}
 		}
@@ -214,12 +214,12 @@ class Rooms {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月8日 上午12:42:13
 	 */
-	public ResultMessage checkIn(String hotelID, String roomName, int roomNum) {
-		return updateRemainRoomNum(hotelID, roomName, roomNum, Operation.CHECK_IN);
+	public ResultMessage checkIn(String hotelID, RoomType roomType, int roomNum) {
+		return updateRemainRoomNum(hotelID, roomType, roomNum, Operation.CHECK_IN);
 	}
 
-	public ResultMessage checkOut(String hotelID, String roomName, int roomNum) {
-		return updateRemainRoomNum(hotelID, roomName, roomNum, Operation.CHECK_OUT);
+	public ResultMessage checkOut(String hotelID, RoomType roomType, int roomNum) {
+		return updateRemainRoomNum(hotelID, roomType, roomNum, Operation.CHECK_OUT);
 	}
 
 	/**
@@ -240,9 +240,9 @@ class Rooms {
 		return min;
 	}
 
-	private int findPO(String roomType){
+	private int findPO(RoomType roomType){
 		for(int i = 0;i<roomInfoPOList.size();i++){
-			if(roomInfoPOList.get(i).getRoomType().equals(roomType)){
+			if(roomInfoPOList.get(i).getRoomType() == roomType){
 				return i;
 			}
 		}

@@ -6,6 +6,7 @@ import java.util.List;
 
 import businessLogicService.hotelBLService.HotelBLService;
 import utilities.ResultMessage;
+import utilities.RoomType;
 import utilities.SearchCriteriaType;
 import utilities.SortStrategy;
 import vo.CheckInVO;
@@ -75,11 +76,6 @@ public class HotelBLService_Stub implements HotelBLService{
 	public Iterator<HotelVO> searchHotels(List<SearchCriteriaType> searchCriteriaTypes, SearchCriteriaVO vo) {
 		return null;
 	}
-	
-	@Override
-	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO, String roomType) {
-		return null;
-	}
 
 	@Override
 	public ResultMessage addHotel(HotelVO hotelVO) {
@@ -87,13 +83,13 @@ public class HotelBLService_Stub implements HotelBLService{
 	}
 
 	@Override
-	public ResultMessage checkInOffline(String hotelID, String RoomName, int roomNum) {
+	public ResultMessage checkInOffline(String hotelID, RoomType RoomName, int roomNum) {
 		// TODO 自动生成的方法存根
 		return null;
 	}
 
 	@Override
-	public ResultMessage checkOutOffline(String hotelID, String RoomName, int roomNum) {
+	public ResultMessage checkOutOffline(String hotelID, RoomType RoomName, int roomNum) {
 		// TODO 自动生成的方法存根
 		return null;
 	}
