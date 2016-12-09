@@ -11,6 +11,8 @@ import businessLogic.sourceBL.SourceBLController;
 import businessLogicService.hotelBLService.HotelBLService;
 import businessLogicService.orderBLService.OrderBLService;
 import businessLogicService.sourceBLService.SourceBLService;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -34,6 +36,17 @@ import vo.HotelVO;
  *
  */
 public class HotelController {
+
+	@FXML
+	private Label hotelIDText,scoreText;
+	@FXML	
+	private TextArea equipmentText;
+	@FXML
+	private TextField hotelNameText,hotelAddressText,introductionText;
+	@FXML
+	private ComboBox<String> cityText,cycleText,levelText;
+
+
 
 	HotelBLService hotelBLController;
 	OrderBLService orderBLController;
@@ -71,6 +84,7 @@ public class HotelController {
 
 		//显示酒店的所有评论
 		Iterator<HotelEvaluationVO> evaluations = orderBLController.getEvaluations(hotelID);
+
 		commentList=new ArrayList<HotelEvaluationVO>();
 		while(evaluations.hasNext()){
 			commentList.add(evaluations.next());
@@ -131,24 +145,6 @@ public class HotelController {
 	}
 
 
-
-	@FXML
-	private Label hotelIDText,scoreText;
-	@FXML	
-	private TextArea equipmentText;
-	@FXML
-	private TextField hotelNameText,hotelAddressText,introductionText;
-	@FXML
-	private ComboBox<String> cityText,cycleText,levelText;
-
-	//当前所选城市
-	private String currentCity;
-	//当前所选商圈
-	private String currentCircle;
-	//当前所选的星级
-	private String currentLevel;
-
-
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -173,82 +169,48 @@ public class HotelController {
 		equipmentText.setText(hotelVO.equipment);
 		introductionText.setText(hotelVO.introduction);
 
-		//保存当前的信息，避免跳转的时候
-		currentCity = hotelVO.city;
-		currentCircle = hotelVO.circle;
-		currentLevel = hotelVO.level;
+		cityText.setOnShowing(new CityShowingHandler());
+		cityText.valueProperty().addListener(new CityChangedListener());
+		levelText.setOnShowing(new LevelShowingHandler());
 
 		hotelModifyPane.setVisible(true);
 		hotelInfoPane.setVisible(false);
 	}
 
-
-	/**
-	 * @author 61990
-	 * @lastChangedBy Harvey
-	 * @updateTime 2016/12/7
-	 * @describe 点击城市按钮
-	 */
-	@FXML
-	protected void getCity(){
-
-		//每次点击先清除一次
-		cityText.getItems().clear();
-		cityText.setValue(currentCity);
-
-		Iterator<String> cities = sourceBLController.getCities();
-		while(cities.hasNext()){
-			cityText.getItems().add(cities.next());
-		}
-
-		//当此combobox被点击时
-		cityText.setOnMouseClicked(new EventHandler<Event>() {
-			@Override
-			public void handle(Event arg0) {
-				if(!currentCity.equals(cityText.getValue())){
-					currentCity = cityText.getValue();
-					Iterator<String> circles = sourceBLController.getCircles(currentCity);
-					cycleText.getItems().clear();
-					while(circles.hasNext()){
-						cycleText.getItems().add(circles.next());
-					}
-					cycleText.setValue(currentCircle);
+	class CityShowingHandler implements EventHandler<Event>{
+		@Override
+		public void handle(Event arg0) {
+			if(cityText.getItems().size() <= 1){
+				Iterator<String> cities = sourceBLController.getCities();
+				while(cities.hasNext()){
+					cityText.getItems().add(cities.next());
 				}
 			}
-		});
-
-		//TODO gy注意：需要加上item被点选的监听,当新的城市被选点选时，cycletext需要被设值为第一个circle，从list除去
-	}
-
-
-	/**
-	 * @description 点击商圈按钮,初始化选中城市的所有商圈
-	 * @author 61990
-	 * @lastChangedBy Harvey
-	 * @updateTime 2016/12/7
-	 */
-	@FXML
-	protected void getCycle(){
-
-
-
-	}
-	/**
-	 * @description 点击星级按钮
-	 * @author 61990
-	 * @lastChangedBy Harvey
-	 * @updateTime 2016/12/7
-	 */
-	@FXML
-	protected void getLevel(){
-		
-		levelText.getItems().clear();
-		Iterator<String> levels = sourceBLController.getLevels();
-		while(levels.hasNext()){
-			levelText.getItems().add(levels.next());
 		}
-		
-		// gy注意：还是那个问题，就是怎么在我选了comboBox的元素之后，发现这次选的和上次的不一样就能自动get到新值,有没有这种监听
+	}
+
+	class CityChangedListener implements ChangeListener<String> {
+		@Override
+		public void changed(ObservableValue arg0, String preCity, String selectedCity) {
+			cycleText.getItems().clear();
+			Iterator<String> circles = sourceBLController.getCircles(selectedCity);
+			while(circles.hasNext()){
+				cycleText.getItems().add(circles.next());
+			}
+			cycleText.setValue(cycleText.getItems().get(0));
+		}
+	}
+
+	class LevelShowingHandler implements EventHandler<Event>{
+		@Override
+		public void handle(Event arg0) {
+			if(levelText.getItems().size() <= 1){
+				Iterator<String> levels = sourceBLController.getLevels();
+				while(levels.hasNext()){
+					levelText.getItems().add(levels.next());
+				}	
+			}
+		}
 	}
 
 	/**

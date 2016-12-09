@@ -4,15 +4,16 @@ import java.util.Iterator;
 
 import businessLogic.hotelBL.HotelBLController;
 import businessLogic.sourceBL.SourceBLController;
-import businessLogic.userBL.UserController;
 import businessLogicService.hotelBLService.HotelBLService;
 import businessLogicService.sourceBLService.SourceBLService;
-import businessLogicService.userBLService.UserBLService;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import vo.HotelVO;
-import vo.HotelWorkerVO;
 
 public class HotelInfoController {
 
@@ -20,71 +21,22 @@ public class HotelInfoController {
 	private ComboBox<String> cityInput,cycleInput;
 
 	@FXML
-	private ComboBox<Integer>levelInput;
+	private ComboBox<String>levelInput;
 	@FXML
 	private TextField hotelName,address;
 
 	private SourceBLService sourceBLController;
 	private HotelBLService hotelBLController;
-	private  UserBLService userBLConrtoller;
 	
 	public HotelInfoController() {
 		sourceBLController = SourceBLController.getInstance();
 		hotelBLController = HotelBLController.getInstance();
-		userBLConrtoller = UserController.getInstance();
+		
+		cityInput.setOnShowing(new CityShowingHandler());
+		cityInput.valueProperty().addListener(new CityChangedListener());
+		levelInput.setOnShowing(new LevelShowingHandler());
 	}
 
-	/**
-	 * @description 获得所有城市名称
-	 * @author 61990
-	 * @lastChangedBy Harvey
-	 * @updateTime 2016/12/7 
-	 * @查找城市
-	 */
-	@FXML
-	protected void searchCity() {
-		cityInput.getItems().clear();
-
-		Iterator<String> cities = sourceBLController.getCities();
-		while(cities.hasNext()){
-			cityInput.getItems().add(cities.next());
-		}
-	}
-
-	/**
-	 * @description 查找星级
-	 * @author 61990
-	 * @lastChangedBy Harvey
-	 * @updateTime 2016/12/7
-	 */
-	@FXML
-	protected void searchLevel() {
-		levelInput.getItems().clear();
-
-		Iterator<String> levels = sourceBLController.getLevels();
-
-		while(levels.hasNext()){
-			//TODO 把levelInput的add改为String类型，因为其它都是String类型，就可以减少重复的代码
-			levelInput.getItems().add(Integer.valueOf(levels.next()));
-		}
-	}
-
-	/**
-	 * @description 查找商圈
-	 * @author 61990
-	 * @lastChangedBy Harvey
-	 * @updateTime 2016/12/7
-	 */
-	@FXML
-	protected void searchCycle() {
-
-		cycleInput.getItems().clear();
-		//调用sourceBL方法获取该城市的所有商圈
-		Iterator<String> circles = sourceBLController.getCircles(cityInput.getValue());
-		while(circles.hasNext()){
-			cycleInput.getItems().add(circles.next());
-		}
-	}
 	/**
 	 * @author 61990
 	 * @lastChangedBy Byron Dong
@@ -111,5 +63,41 @@ public class HotelInfoController {
 //		HotelWorkerVO tempHotelWorkerVO  = new HotelWorkerVO()
 		// TODO gcm 注意！！！	hotelID是你生成还是User生成因为两个的ID是一样的，我觉得是我生成
 		// TODO gy 注意！！！	所有的用户的add都是由User返回ID和默认密码吗
+	}
+	
+	class CityShowingHandler implements EventHandler<Event>{
+		@Override
+		public void handle(Event arg0) {
+			if(cityInput.getItems().size() <= 1){
+				Iterator<String> cities = sourceBLController.getCities();
+				while(cities.hasNext()){
+					cityInput.getItems().add(cities.next());
+				}
+			}
+		}
+	}
+
+	class CityChangedListener implements ChangeListener<String> {
+		@Override
+		public void changed(ObservableValue arg0, String preCity, String selectedCity) {
+			cycleInput.getItems().clear();
+			Iterator<String> circles = sourceBLController.getCircles(selectedCity);
+			while(circles.hasNext()){
+				cycleInput.getItems().add(circles.next());
+			}
+			cycleInput.setValue(cycleInput.getItems().get(0));
+		}
+	}
+
+	class LevelShowingHandler implements EventHandler<Event>{
+		@Override
+		public void handle(Event arg0) {
+			if(levelInput.getItems().size() <= 1){
+				Iterator<String> levels = sourceBLController.getLevels();
+				while(levels.hasNext()){
+					levelInput.getItems().add(levels.next());
+				}	
+			}
+		}
 	}
 }

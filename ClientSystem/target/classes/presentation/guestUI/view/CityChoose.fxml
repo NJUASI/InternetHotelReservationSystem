@@ -32,9 +32,9 @@
                   <Separator layoutX="141.0" layoutY="142.0" prefHeight="3.0" prefWidth="586.0" />
                   <Button layoutX="688.0" layoutY="192.0" mnemonicParsing="false" onAction="#openHotelCheck" prefHeight="3.0" text="搜索" />
                   <Separator layoutX="205.0" layoutY="263.0" prefHeight="3.0" prefWidth="458.0" />
-                  <ComboBox fx:id="cycleChoose" layoutX="508.0" layoutY="192.0" onMouseClicked="#searchCycle" prefHeight="30.0" prefWidth="137.0" />
+                  <ComboBox fx:id="cycleChoose" layoutX="508.0" layoutY="192.0" prefHeight="30.0" prefWidth="137.0" />
                   <Label layoutX="417.0" layoutY="197.0" text="选择商圈：" />
-                  <ComboBox fx:id="cityChoose" layoutX="252.0" layoutY="192.0" onMouseClicked="#searchCity" prefHeight="30.0" prefWidth="137.0" />
+                  <ComboBox fx:id="cityChoose" layoutX="252.0" layoutY="192.0" prefHeight="30.0" prefWidth="137.0" />
                   <Label layoutX="168.0" layoutY="197.0" text="选择城市：" />
                </children>
             </AnchorPane>
@@ -417,7 +417,7 @@
                            </font>
                         </Label>
                         <Button layoutX="408.0" layoutY="83.0" mnemonicParsing="false" onAction="#changeRoom" text="更改" />
-                        <ComboBox fx:id="roomTypeInOrder" layoutX="244.0" layoutY="83.0" prefHeight="30.0" prefWidth="153.0" />
+                        <ChoiceBox fx:id="roomTypeInOrder" layoutX="244.0" layoutY="83.0" prefHeight="30.0" prefWidth="153.0" />
                      </children>
                   </Pane>
                </children>

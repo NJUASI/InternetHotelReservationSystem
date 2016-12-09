@@ -16,8 +16,12 @@ import businessLogicService.hotelBLService.HotelBLService;
 import businessLogicService.orderBLService.OrderBLService;
 import businessLogicService.sourceBLService.SourceBLService;
 import businessLogicService.userBLService.UserBLService;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -37,7 +41,6 @@ import utilities.OrderState;
 import utilities.ResultMessage;
 import utilities.RoomType;
 import utilities.SearchCriteriaType;
-import vo.GuestVO;
 import vo.HotelEvaluationVO;
 import vo.HotelVO;
 import vo.OrderGeneralVO;
@@ -81,6 +84,7 @@ public class HotelSearchController {
 		hotelBLController = HotelBLController.getInstance();
 		userBLController = UserController.getInstance();
 	}
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy Byron Dong
@@ -105,8 +109,8 @@ public class HotelSearchController {
 		roomCountInOrder.getItems().add(i);	
 	}
 	for (int i = 1; i < 6; i++) {
-		minlevelInput.getItems().add(i);
-		maxlevelInput.getItems().add(i);	
+		minLevelInput.getItems().add(i);
+		maxLevelInput.getItems().add(i);	
 	}
 	for (int i = 0; i < 6; i++) {
 		minScoreInput.getItems().add(i+0.0);
@@ -114,48 +118,38 @@ public class HotelSearchController {
 	}
 	
 
+	//给城市选择添加添加事件处理器和值改变的监听器
+	cityChoose.setOnShowing(new CityChooseHandler());
+	cityChoose.valueProperty().addListener(new CityChangedListener());
 	
 	Iterator<String> cities = sourceBLController.getCities();
 
 	while(cities.hasNext()){
 		cityChoose.getItems().add(cities.next());
 	}
+	}
 	
+	class CityChooseHandler implements EventHandler<Event>{
+		@Override
+		public void handle(Event arg0) {
+			if(cityChoose.getItems().size() <= 1){
+				Iterator<String> cities = sourceBLController.getCities();
+				while(cities.hasNext()){
+					cityChoose.getItems().add(cities.next());
+				}
+			}
+		}
 	}
-	/**
-	 * @初始化所有城市
-	 * @author 61990
-	 * @lastChangedBy Harvey
-	 * @updateTime 2016/12/7
-	 */
-	@FXML
-	protected void searchCity(){
-
-		/**
-		 * TODO gy注意：当点选一个城市之后，应该cityChoose的setValue值，修改显示出来那个city
-		 * 所以这里应该会加一个监听，所有城市商圈出现的地方都有这样的问题，你改一下
-		 * 
-		 * 获取当前城市的所有商圈，调取以下方法
-		 * Iterator<String> circles = sourceBLController.getCircles(String city)
-		 */
-
-	}
-
-	/**
-	 * @description 获取当前所选城市的所有商圈
-	 * @author 61990
-	 * @lastChangedBy Harvey
-	 * @updateTime 2016/12/7
-	 */
-	@FXML
-	protected void searchCycle(){
-
-		cycleChoose.getItems().clear();
-
-		//调用sourceBL获取当前选中城市的所有商圈
-		Iterator<String> circles = sourceBLController.getCircles(cityChoose.getValue());
-		while(circles.hasNext()){
-			cycleChoose.getItems().add(circles.next());
+	
+	class CityChangedListener implements ChangeListener<String>{
+		@Override
+		public void changed(ObservableValue<? extends String> arg0, String preCity, String newCity) {
+			cycleChoose.getItems().clear();
+			Iterator<String> circles = sourceBLController.getCircles(newCity);
+			while(circles.hasNext()){
+				cycleChoose.getItems().add(circles.next());
+			}
+			cycleChoose.setValue(cycleChoose.getItems().get(0));
 		}
 	}
 
@@ -433,7 +427,7 @@ public class HotelSearchController {
 	@FXML
 	private CheckBox box1,box2,box3,box4,box5,boxOnly;
 	@FXML
-	private ComboBox<Integer> minlevelInput,maxlevelInput;
+	private ComboBox<Integer> minLevelInput,maxLevelInput;
 	@FXML
 	private ComboBox<Double> minScoreInput,maxScoreInput;
 	@FXML
@@ -494,12 +488,12 @@ public class HotelSearchController {
 			criteria.add(SearchCriteriaType.BOOKED_ONLY);
 			vo.bookedOnly = boxOnly.isSelected();
 		}
-		if(minlevelInput.getValue()!=null){
+		if(minLevelInput.getValue()!=null){
 			criteria.add(SearchCriteriaType.LEVEL_SPAN);
 			//TODO gy注意：将星级选择的getValue改为int；
 			//TODO gcm改了
-			vo.minLevel = minlevelInput.getValue().intValue();
-			vo.maxLevel =  maxlevelInput.getValue().intValue();
+			vo.minLevel = minLevelInput.getValue().intValue();
+			vo.maxLevel =  maxLevelInput.getValue().intValue();
 		}
 		if(minpriceInput.getText()!=null){
 			criteria.add(SearchCriteriaType.ORGIN_PRICE_SPAN);
@@ -643,5 +637,4 @@ public class HotelSearchController {
 
 		}
 	}
-
 }

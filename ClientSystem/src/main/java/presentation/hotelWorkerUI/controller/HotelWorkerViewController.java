@@ -13,8 +13,10 @@ import javafx.scene.layout.AnchorPane;
  */
 public class HotelWorkerViewController {
 
-	@FXML private AnchorPane right;
-	@FXML private AnchorPane mainPane;
+	@FXML 
+	private AnchorPane right;
+	@FXML 
+	private AnchorPane mainPane;
 	
 	private Parent currentParent;
 	/**
