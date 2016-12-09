@@ -88,10 +88,7 @@ public class HotelSearchController {
 
 	@FXML
 	private ComboBox<Integer> guestNumInOrder,roomCountInOrder, hourInOrder, hourInOrder2,minuteInOrder, minuteInOrder2;
-	@FXML
-	private ComboBox<Integer> minLevelInput,maxLevelInput;
-	@FXML
-	private ComboBox<Double> minScoreInput,maxScoreInput;
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy Harvey
@@ -159,7 +156,8 @@ public class HotelSearchController {
 		for (int i = 1; i < maxRoomNum; i++) {
 			roomCountInOrder.getItems().add(i);	
 		}
-		roomCountInOrder.setValue(1);
+//		房间必须选不初始
+//		roomCountInOrder.setValue(1);
 		for (int i = 1; i <= maxLevel; i++) {
 			minLevelInput.getItems().add(i);
 			maxLevelInput.getItems().add(i);	
@@ -172,6 +170,9 @@ public class HotelSearchController {
 		}
 		minScoreInput.setValue(0.0);
 		maxScoreInput.setValue(5.0);
+		expectExecuteDateInOrder.setValue(LocalDate.now());
+		expectLeaveDateInOrder.setValue(LocalDate.now());
+		
 
 		//给城市选择添加添加事件处理器和值改变的监听器
 		cityChoose.setOnShowing(new CityChooseHandler());
@@ -206,9 +207,12 @@ public class HotelSearchController {
 			}
 			cycleChoose.setValue(cycleChoose.getItems().get(0));
 		}
-
-
-
+	}
+	@FXML
+	protected void openSwitchCityCircle(){
+		cityAndCircle.setVisible(true);
+		hotelCheck.setVisible(false);
+	}
 		// Hotel概况浏览界面
 
 		@FXML
@@ -292,6 +296,7 @@ public class HotelSearchController {
 
 		List<HotelEvaluationVO> commentList;
 		List<RoomInfoVO> roomList;
+		Iterator<RoomInfoVO> rooms;
 		List<OrderGeneralVO> orderVOlist;
 		HotelVO hotelVO;
 		/**
@@ -312,7 +317,7 @@ public class HotelSearchController {
 			hotelCheck.setVisible(false);
 			hotelDetail.setVisible(true);
 
-			Iterator<RoomInfoVO> rooms = hotelBLController.getHotelRoomInfo(hotelID);
+			rooms = hotelBLController.getHotelRoomInfo(hotelID);
 
 
 			//TODO fjj注意：调用orderBL
@@ -581,6 +586,7 @@ public class HotelSearchController {
 		private DatePicker expectExecuteDateInOrder, expectLeaveDateInOrder;
 		@FXML
 		private TextArea messageInOrder;
+		GuestVO guestVO;
 
 		/**
 		 * @dscription 点击预订酒店按钮
@@ -604,17 +610,24 @@ public class HotelSearchController {
 		 */
 		@FXML
 		protected void createOrderIncheck(){
+			guestVO = (GuestVO) userBLController.getSingle(IDReserve.getInstance().getUserID());
+			//TODO gcm 这里我自己加了，不知道对不对，就是从概况界面直接生成需要这些
+			hotelVO = hotelBLController.getHotelInfo(hotelTable.getSelectionModel().getSelectedItem().getHotelID());
+			rooms = hotelBLController.getHotelRoomInfo(hotelTable.getSelectionModel().getSelectedItem().getHotelID());
 			initCreateOrder();
 		}
 
 		private void initCreateOrder(){
-			GuestVO guestVO = (GuestVO) userBLController.getSingle(IDReserve.getInstance().getUserID());
+			
 			nameInOrder.setText(guestVO.name);
 			phoneInOrder.setText(guestVO.phone);
-			//TODO gcm 初始化房间列表		
-			//		for (int i = 0; i < roomList.size(); i++) {
-			//			roomTypeInOrder.getItems().add(roomList.get(i).roomType.toString());
-			//		}
+			
+			
+			while(rooms.hasNext()){
+				RoomInfoVO temp = rooms.next();
+				roomTypeInOrder.getItems().add(temp.roomType.toString());
+			}
+		
 
 			hotelNameInOrder.setText(hotelVO.hotelName);
 			hotelIDInOrder.setText(hotelVO.hotelID);
@@ -624,31 +637,6 @@ public class HotelSearchController {
 			createPane.setVisible(true);
 			hotelCheck.setVisible(false);
 		}
-
-
-
-		//		hotelVO = new HotelVO("12345", "hantingjiudiansss", "xinjiekou", "xinjiekou", "malianhedadao", "5xinji", 4.5,
-		//				198, "shoooo", "sdaf");
-		// TODO GY 你看一下有没有问题已这一块
-
-		//	/**
-		//	 * @author 61990
-		//	 * @lastChangedBy 61990
-		//	 * @updateTime 2016/11/27
-		//	 * @点击概况预定酒店按钮
-		//	 */
-		//	@FXML
-		//	protected void createOrderIncheck(){
-		////
-		////		// TODO gy注意：与上面代码相似度极大，你看一下，能不能合，感觉是一个界面吧。。
-		////		//TODO djy 8日，这里是你界面没东西，必须通过ID得到东西比如没有HotelVO，没有ROOM typelist才能初始化订单详情界面，这里是立即预定
-		////		hotelVO = new HotelVO("12345", "hantingjiudiansss", "xinjiekou", "xinjiekou", "malianhedadao", "5xinji", 4.5,
-		////				198, "shoooo", "sdaf");
-		////
-		//
-		////
-		//		initCreateOrder();
-		//	}
 
 
 		/**
@@ -701,4 +689,4 @@ public class HotelSearchController {
 			}
 		}
 	}
-}
+
