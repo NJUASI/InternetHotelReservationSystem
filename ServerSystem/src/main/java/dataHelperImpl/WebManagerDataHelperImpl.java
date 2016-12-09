@@ -9,6 +9,7 @@ import java.util.List;
 
 import dataHelper.WebManagerDataHelper;
 import po.WebManagerPO;
+import utilities.Ciphertext;
 import utilities.JDBCUtil;
 import utilities.ResultMessage;
 
@@ -48,7 +49,7 @@ public class WebManagerDataHelperImpl implements WebManagerDataHelper {
 
 		try {
 			ps = conn.prepareStatement(sql); // 插入数据的准备工作，1-2对应sql语句中问号的顺序
-			ps.setString(1, "123456"); // 在使用setObject方法是必须注意，我们应该使用对应数据类型,
+			ps.setString(1, new Ciphertext().encrypt("qwertyuiop123456")); // 在使用setObject方法是必须注意，我们应该使用对应数据类型,
 															// 虽然Object可以替代所有该set方法，但会影响效率所以尽量使用对应数据类型的set方法
 			ps.execute(); // 执行sql语句，返回值为boolean
 		} catch (SQLException e) {
@@ -56,7 +57,7 @@ public class WebManagerDataHelperImpl implements WebManagerDataHelper {
 			return null;
 		}
 		webManagerPO.setWebManagerID(this.getTheLastID());
-		webManagerPO.setPassword("123456");
+		webManagerPO.setPassword(new Ciphertext().encrypt("qwertyuiop123456"));
 		return webManagerPO;
 	}
 

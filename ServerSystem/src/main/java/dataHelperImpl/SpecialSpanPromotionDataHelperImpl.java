@@ -22,7 +22,7 @@ public class SpecialSpanPromotionDataHelperImpl implements dataHelper.SpecialSpa
 	private String sql;
 
 	public SpecialSpanPromotionDataHelperImpl() {
-		conn = JDBCUtil.getGongConnection();
+		conn = JDBCUtil.getConnection();
 	}
 
 	/**

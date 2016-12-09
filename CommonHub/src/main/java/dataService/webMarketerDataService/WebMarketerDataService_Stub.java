@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.WebMarketerPO;
+import utilities.Ciphertext;
 import utilities.ResultMessage;
 
 public class WebMarketerDataService_Stub extends UnicastRemoteObject implements WebMarketerDataService{
@@ -17,20 +18,23 @@ public class WebMarketerDataService_Stub extends UnicastRemoteObject implements 
 
 
 	public WebMarketerPO getSingleWebMarketer(String webMarketID) {
-		return new WebMarketerPO("000001", "123456");
+		Ciphertext b = new Ciphertext();
+		return new WebMarketerPO("000001", b.encrypt("123456"));
 	}
 
 	
 	public List<WebMarketerPO> getAllWebMarketer() {
+		Ciphertext b = new Ciphertext();
 		List<WebMarketerPO> list= new ArrayList<WebMarketerPO>();
-		WebMarketerPO a= new WebMarketerPO("000001", "123456");
+		WebMarketerPO a= new WebMarketerPO("000001", b.encrypt("123456"));
 		list.add(a);
 		return list;
 	}
 	
 	
 	public WebMarketerPO add(WebMarketerPO newWebMarketerPO) {
-		return new WebMarketerPO("000001", "123456");
+		Ciphertext b = new Ciphertext();
+		return new WebMarketerPO("000001", b.encrypt("123456"));
 	}
 
 	

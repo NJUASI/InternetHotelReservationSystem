@@ -82,11 +82,11 @@ public class UserController implements UserBLService{
 	/**
 	 * @author 董金玉
 	 * @lastChangedBy 董金玉
-	 * @updateTime 2016/11/27
-	 * @param newHotelVO，hotelID 从客户界面层传下来的hotelInfo载体和指定酒店ID
-	 * @return ResultMessage 酒店是否添加成功
+	 * @updateTime 2016/12/9
+	 * @param newHotelVO 从客户界面层传下来的hotelInfo载体
+	 * @return HotelVO 酒店info载体
 	 */
-	public ResultMessage addHotel(HotelVO newHotelVO) {
+	public HotelVO addHotel(HotelVO newHotelVO) {
 		return user.addHotel(newHotelVO);
 	}
 	

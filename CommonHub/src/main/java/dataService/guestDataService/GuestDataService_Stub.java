@@ -11,6 +11,7 @@ import java.util.List;
 import po.CreditPO;
 import po.GuestPO;
 import po.MemberPO;
+import utilities.Ciphertext;
 import utilities.CreditRecord;
 import utilities.ResultMessage;
 
@@ -24,16 +25,18 @@ public class GuestDataService_Stub extends UnicastRemoteObject implements GuestD
 
 	public GuestPO getSingleGuest(String guestID) {
 		LocalDate birthday = LocalDate.of(1995, 1, 1);
+		Ciphertext a = new Ciphertext();
 		
-		return new GuestPO("1234567890", birthday, "school", "zhangsan", "xiaosan",
-				"000000", "13523456789",100);
+		return new GuestPO("1234567890", birthday, "school", a.encrypt("zhangsan"), "xiaosan",
+				a.encrypt("000000"), a.encrypt("13523456789"),100);
 	}
 
 
 	public List<GuestPO> getAllGuest() {
+		Ciphertext b = new Ciphertext();
 		List<GuestPO> list = new ArrayList<GuestPO>();
-		GuestPO a= new GuestPO("1234567890", LocalDate.of(1995, 1, 1), "school", "zhangsan", "xiaosan",
-				"000000", "13523456789",100);
+		GuestPO a= new GuestPO("1234567890", LocalDate.of(1995, 1, 1), "school", b.encrypt("zhangsan"), "xiaosan",
+				b.encrypt("000000"), b.encrypt("13523456789"),100);
 		list.add(a);
 		return list;
 	}
@@ -50,9 +53,10 @@ public class GuestDataService_Stub extends UnicastRemoteObject implements GuestD
 
 	public GuestPO add(GuestPO newGuestPO) {
 		LocalDate birthday = LocalDate.of(1995, 1, 1);
+		Ciphertext b = new Ciphertext();
 		
-		return new GuestPO("1234567890", birthday, "school", "zhangsan", "xiaosan",
-				"000000", "13523456789",100);
+		return new GuestPO("1234567890", birthday, "school", b.encrypt("zhangsan"), "xiaosan",
+				b.encrypt("000000"), b.encrypt("13523456789"),100);
 	}
 
 
