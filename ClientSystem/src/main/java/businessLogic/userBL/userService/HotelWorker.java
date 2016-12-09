@@ -44,14 +44,11 @@ public class HotelWorker implements UserService{
 	/**
 	 * @author Byron Dong
 	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/28
+	 * @updateTime 2016/12/9
 	 * @param newUserVO 从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加酒店工作人员信息
 	 */
 	public UserVO add(UserVO newUserVO) {
-
-
-		if(this.hasHotelWorker(newUserVO.userID)){return null;} //存在ID对应项
 
 		try {
 			HotelWorkerPO hotelWorkerPO = this.convert(newUserVO);

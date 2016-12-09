@@ -51,9 +51,6 @@ public class WebManager implements UserService{
 	 */
 	public UserVO add(UserVO newUserVO) {
 
-
-		if(this.hasWebManager(newUserVO.userID)){return null;} //存在ID对应项
-
 		try {
 			WebManagerPO webManagerPO = this.convert(newUserVO);
 			return this.convert(webManagerDataService.add(webManagerPO));

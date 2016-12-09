@@ -50,8 +50,6 @@ public class WebMarketer implements UserService{
 	 */
 	public WebMarketerVO add(UserVO newUserVO) {
 
-		if(hasWebMarketer(newUserVO.userID)){return null;} //存在ID对应项
-
 		try {
 			WebMarketerPO webMarketerPO = this.convert(newUserVO);
 			return convert(webMarketerDataService.add(webMarketerPO));

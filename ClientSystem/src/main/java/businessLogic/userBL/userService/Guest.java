@@ -45,14 +45,11 @@ public class Guest implements UserService, GuestCreditService{
 	/**
 	 * @author Byron Dong
 	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/27
+	 * @updateTime 2016/12/9
 	 * @param newUserVO 从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加客户信息
 	 */
 	public UserVO add(UserVO newUserVO) {
-
-
-		if(hasGuest(newUserVO.userID)){return null;} //存在ID对应项
 
 		try {
 			GuestPO guestPO = convert(newUserVO);
