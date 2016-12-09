@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import businessLogic.userBL.userService.service.CreditService;
+import businessLogic.userBL.userService.service.GuestCreditService;
 import businessLogic.userBL.userService.service.UserService;
 import dataService.guestDataService.GuestDataService;
 import dataService.guestDataService.GuestDataService_Stub;
@@ -20,7 +20,7 @@ import vo.UserVO;
  * updateTime 2016/11/27
  *
  */
-public class Guest implements UserService ,CreditService{
+public class Guest implements UserService, GuestCreditService{
 
 
 	public static int IDLength = 10; // 客户的ID长度为10

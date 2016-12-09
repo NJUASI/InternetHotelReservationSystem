@@ -49,15 +49,16 @@ public class WebMarketerOrder implements WebMarketerOrderBLService {
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/8
 	 * @param orderID 网站营销人员当前需要撤销的异常订单的订单号
-	 * @return 网站营销人员是否成功撤销此异常订单
+	 * @param percent 撤销后需要恢复的信用值比例
+	 * @return 网站营销人员是否成功按比例撤销此异常订单
 	 */
-	public ResultMessage undoAbnormalOrder(final String orderID) {
+	public ResultMessage undoAbnormalOrder(final String orderID, final double percent) {
 		ResultMessage resultMessage = ResultMessage.ABNORMAL_ORDER_UNDO_FAILURE;
 		
 		OrderState thisOrderState = commonOrder.getOrderDetail(orderID).orderGeneralVO.state;
 		if (thisOrderState == OrderState.ABNORMAL) {
 			try {
-				resultMessage = orderDataService.undoAbnormalOrder(orderID);
+				resultMessage = orderDataService.undoAbnormalOrder(orderID, percent);
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}

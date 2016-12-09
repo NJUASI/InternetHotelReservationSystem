@@ -112,7 +112,7 @@ public class OrderDataService_DriverTest {
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		
 		try {
-			assertEquals(ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS, driver.orderDataService.undoAbnormalOrder("123456789012"));
+			assertEquals(ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS, driver.orderDataService.undoAbnormalOrder("123456789012", 0.5));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -254,10 +254,10 @@ public class OrderDataService_DriverTest {
 			assertEquals("123456789012", orderGeneralPO.getOrderID());
 			assertEquals("1234567890", orderGeneralPO.getGuestID());
 			assertEquals("12345678", orderGeneralPO.getHotelID());
-			assertEquals("thisHotel", orderGeneralPO.getHotelName());
+			assertEquals("thisHotel1", orderGeneralPO.getHotelName());
 			assertEquals("address", orderGeneralPO.getHotelAddress());
 			assertEquals(200, orderGeneralPO.getPrice(), 0);
-			assertEquals(LocalDateTime.of(2016, 2, 3, 14, 0), orderGeneralPO.getExpectExecuteTime());
+			assertEquals(LocalDateTime.of(2016, 2, 1, 14, 0), orderGeneralPO.getExpectExecuteTime());
 			assertEquals(LocalDateTime.of(2016, 2, 4, 12, 0), orderGeneralPO.getExpectLeaveTime());
 			assertEquals(OrderState.EXECUTED, orderGeneralPO.getState());
 		} catch (RemoteException e) {

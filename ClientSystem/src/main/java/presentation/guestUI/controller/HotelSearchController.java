@@ -14,8 +14,13 @@ import businessLogic.sourceBL.SourceBLController;
 import businessLogicService.hotelBLService.HotelBLService;
 import businessLogicService.orderBLService.OrderBLService;
 import businessLogicService.sourceBLService.SourceBLService;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -90,6 +95,38 @@ public class HotelSearchController {
 	 */
 	@FXML
 	private void initialize() {
+		initEveryBox();
+
+//	TODO gcm	这段重复有点多
+//		先出事化
+	Iterator<String> cities = sourceBLController.getCities();
+	
+	while(cities.hasNext()){
+		cityChoose.getItems().add(cities.next());
+	}
+	Iterator<String> circles = sourceBLController.getCircles(cityChoose.getItems().get(0));
+	while(circles.hasNext()){
+		cycleChoose.getItems().add(circles.next());	
+	}
+	cityChoose.setValue(cityChoose.getItems().get(0));
+	cycleChoose.setValue(cycleChoose.getItems().get(0));
+	//TODO gcm  newValue 为改变后你点的那个值
+//	监听里改商圈
+	
+	cityChoose.valueProperty().addListener(new ChangeListener<String>() {
+		@Override
+		public void changed(ObservableValue ov, String oldValue, String newValue) {
+			cycleChoose.getItems().clear();
+			Iterator<String> circles = sourceBLController.getCircles(newValue);
+			while(circles.hasNext()){
+				cycleChoose.getItems().add(circles.next());
+				
+			}cycleChoose.setValue(cycleChoose.getItems().get(0));
+		}    
+      });
+	}
+	
+	void initEveryBox(){
 
 		int minutes = 60;
 		int hours = 24;
@@ -103,36 +140,38 @@ public class HotelSearchController {
 	minuteInOrder.getItems().add(i);
 	minuteInOrder2.getItems().add(i);
 	}
+	minuteInOrder.setValue(0);
+	minuteInOrder2.setValue(0);
 	for (int i = 0; i < hours; i++) {
 	hourInOrder.getItems().add(i);
 	hourInOrder2.getItems().add(i);
 	}
+	hourInOrder.setValue(0);
+	hourInOrder2.setValue(0);
 	for (int i = 1; i <= maxGuestNum; i++) {
 		guestNumInOrder.getItems().add(i);	
 	}
+	guestNumInOrder.setValue(1);
 	for (int i = 1; i < maxRoomNum; i++) {
 		roomCountInOrder.getItems().add(i);	
 	}
+	roomCountInOrder.setValue(1);
 	for (int i = 1; i <= maxLevel; i++) {
 		minLevelInput.getItems().add(i);
 		maxLevelInput.getItems().add(i);	
 	}
+	minLevelInput.setValue(1);
+	maxLevelInput.setValue(5);
 	for (int i = 0; i <= maxScore; i++) {
 		minScoreInput.getItems().add(i+0.0);
 		maxScoreInput.getItems().add(i+0.0);	
 	}
-
+	minScoreInput.setValue(0.0);
+	maxScoreInput.setValue(5.0);
 
 	expectExecuteDateInOrder.setValue(LocalDate.now());
 	expectLeaveDateInOrder.setValue(LocalDate.now());
 
-
-	Iterator<String> cities = sourceBLController.getCities();
-
-	while(cities.hasNext()){
-		cityChoose.getItems().add(cities.next());
-	}
-	
 	}
 	/**
 	 * @初始化所有城市
@@ -161,10 +200,6 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void searchCycle(){
-
-		cycleChoose.getItems().clear();
-
-	
 	}
 
 	/**
@@ -641,6 +676,8 @@ public class HotelSearchController {
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/11/27
 	 * @点击提交订单按钮
+	 * 
+	 * TODO 高源：对hourInOrder、hourInOrder2、minuteInOrder、minuteInOrder2的功能不清楚，故为猜测，检查一下
 	 */
 	OrderVO orderVO;
 
@@ -649,26 +686,27 @@ public class HotelSearchController {
 
 	@FXML
 	protected void commitOrder() {
-		final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(),
-				LocalTime.of(hourInOrder.getValue(),minuteInOrder.getValue()));
-		final LocalDateTime expectLeaveTime = LocalDateTime.of(expectLeaveDateInOrder.getValue(),
-				LocalTime.of(hourInOrder2.getValue(),minuteInOrder2.getValue()));
+		//TODO 高源：界面上的选择框必须选，默认值读入为null
+		final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(), 
+				LocalTime.of(hourInOrder.getValue(), minuteInOrder.getValue()));
+		final LocalDateTime expectLeaveTime = LocalDateTime.of(expectLeaveDateInOrder.getValue(), 
+				LocalTime.of(hourInOrder2.getValue(), minuteInOrder2.getValue()));
 
 		OrderGeneralVO createOrderGeneral = new OrderGeneralVO(IDReserve.getInstance().getUserID(), hotelIDInOrder.getText(), 
 				hotelNameInOrder.getText(), hotelAddressInOrder.getText(), expectExecuteTime, expectLeaveTime, 
 				nameInOrder.getText(), phoneInOrder.getText());
 
-		OrderVO createVO = new OrderVO(createOrderGeneral, Double.parseDouble(priceOfOrder.getText()), 
+		OrderVO createVO = new OrderVO(createOrderGeneral, Double.parseDouble(previousPriceInOrder.getText()), 
 				RoomType.convertString2Roomtype(roomTypeInOrder.getValue()), roomCountInOrder.getValue(), guestNumInOrder.getValue(), 
 				messageInOrder.getText());
 
 		final ResultMessage msg = orderBLController.createOrder(createVO);
 
 		if (msg == ResultMessage.ORDER_CREATE_SUCCESS) {
-			//@高源——————状态栏显示订单生成成功
+			//TODO 高源——————状态栏显示订单生成成功
 
 		}else {
-			//@高源——————状态栏显示订单生成失败
+			//TODO 高源——————状态栏显示订单生成失败
 
 		}
 	}

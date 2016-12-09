@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.userBL.userService.Guest;
-import businessLogic.userBL.userService.service.CreditService;
+import businessLogic.userBL.userService.service.GuestCreditService;
 import businessLogicService.creditBLService.CreditBLService;
 import dataService.creditDataService.CreditDataService;
 import dataService.creditDataService.CreditDataService_Stub;
@@ -23,7 +23,7 @@ import vo.CreditVO;
  */
 public class Credit implements CreditBLService{
 
-	private CreditService guest;
+	private GuestCreditService guest;
 	
 	private CreditDataService creditDataService;
 

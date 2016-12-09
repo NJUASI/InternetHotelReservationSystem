@@ -18,11 +18,12 @@ public interface WebMarketerOrderBLService {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
+	 * @updateTime 2016/12/8
 	 * @param orderID 网站营销人员当前需要撤销的异常订单的订单号
-	 * @return 网站营销人员是否成功撤销此异常订单
+	 * @param percent 撤销后需要恢复的信用值比例
+	 * @return 网站营销人员是否成功按比例撤销此异常订单
 	 */
-	ResultMessage undoAbnormalOrder(String orderID);
+	ResultMessage undoAbnormalOrder(String orderID, double percent);
 	
 	/**
 	 * @author charles

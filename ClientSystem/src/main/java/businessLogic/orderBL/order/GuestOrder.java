@@ -57,6 +57,8 @@ public class GuestOrder implements GuestOrderBLService {
 			e.printStackTrace();
 		}
 		
+		commonOrder = new CommonOrder();
+		
 		discountCalculator = new MockPromotion();
 		hotelInterface = new Hotel();
 	}
@@ -167,14 +169,16 @@ public class GuestOrder implements GuestOrderBLService {
 	 */
 	public Iterator<OrderGeneralVO> getAllGuestCommentOrderGeneral(String guestID, boolean hasCommented) {
 		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>(); 
+		System.out.println("guestID: " + guestID);
+		
 		final Iterator<OrderGeneralVO> orderGenerals = commonOrder.getAllOrderGenerals(guestID, UserType.GUEST);
 
 		while(orderGenerals.hasNext()){
 			OrderGeneralVO thisOrderGeneral = orderGenerals.next();
-			if(thisOrderGeneral.hasCommented == hasCommented){
+			if(thisOrderGeneral.state == OrderState.EXECUTED && thisOrderGeneral.hasCommented == hasCommented){
 				result.add(thisOrderGeneral);
 			}
 		}
-		return orderGenerals;
+		return result.iterator();
 	}
 }
