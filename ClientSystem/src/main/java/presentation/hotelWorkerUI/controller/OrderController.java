@@ -37,7 +37,6 @@ import vo.OrderVO;
  * 
  * TODO 高源 酒店查看时可以查看到订单评   但是disable吧。。不可修改
  * 
- * TODO 冯俊杰：checkIn时修改credit产生一条信用记录addCredit还未实现
  * TODO 冯俊杰：checkIn、checkOut后刷新orderGenerals，获取当前焦点位置<异常／未执行>，或者背景虚化了看不出来就不用区分了
  */
 public class OrderController {
@@ -324,8 +323,6 @@ public class OrderController {
 		final ResultMessage result = orderBLController.updateCheckIn(checkInVO);
 		if (result == ResultMessage.CHECK_IN_SUCCESS) {
 			//TODO 高源：状态栏显示入住成功
-			
-			
 			
 		}else {
 			//TODO 高源：状态栏显示入住失败

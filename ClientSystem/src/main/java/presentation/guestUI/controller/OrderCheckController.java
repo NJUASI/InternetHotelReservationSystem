@@ -33,7 +33,6 @@ import vo.OrderVO;
  * updateTime 2016/12/7
  * 
  * TODO 高源：评论界面好像有点问题（酒店查看时可以查看到订单评论）  房间号也不对
- * TODO 冯俊杰：修改credit产生一条信用记录addCredit还未实现   什么时候修改待讨论。。TODO 龚尘淼 TODO 高源 TODO 董金玉
  */
 public class OrderCheckController {
 
