@@ -38,7 +38,6 @@ public class Credit implements CreditBLService{
 		try {
 			creditDataService = new CreditDataService_Stub();
 		} catch (RemoteException e) {
-			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
 	}
@@ -78,16 +77,18 @@ public class Credit implements CreditBLService{
 	}
 	
 	/**
-	 * @Description:添加一条信用数据
-	 * @param creditVO
-	 * @return ResultMessage
-	 * @author: Harvey Gong
-	 * @lastChangedBy: Harvey Gong
-	 * @time:2016年12月5日 下午1:09:56
+	 * @author Harvey
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/9
+	 * @param creditVO 一条信用记录
+	 * @return 是否成功添加此信用记录
 	 */
-	public ResultMessage addCredit(CreditVO creditVO){
+	public ResultMessage addCreditRecord(CreditVO creditVO){
 		guest = new Guest();
 		try {
+			/*
+			 * TODO 高源：存疑，在其职责内，是否应该修改信用值。还是单单纯纯地添加一条记录
+			 */
 			//调用guest的方法，改变该客户的总信用值
 			guest.modifyCredit(creditVO.guestID, creditVO.afterCredit);
 			return creditDataService.addCredit(new CreditPO(creditVO));
