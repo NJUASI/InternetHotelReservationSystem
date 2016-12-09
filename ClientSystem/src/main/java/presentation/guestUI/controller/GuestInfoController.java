@@ -85,7 +85,6 @@ public class GuestInfoController {
 	protected void saveGuestInfo() {
 
 		try {
-			//TODO djy注意：通过guestVO保存信息
 			
 			GuestVO tempGuestVO = guestVO;
 			tempGuestVO.name = name2.getText();

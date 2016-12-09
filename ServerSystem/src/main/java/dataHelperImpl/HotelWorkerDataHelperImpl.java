@@ -44,14 +44,13 @@ public class HotelWorkerDataHelperImpl implements HotelWorkerDataHelper {
 	 * @return ResultMessage 是否成功添加到数据库中
 	 */
 	public HotelWorkerPO add(HotelWorkerPO hotelWorkerPO) {
-		sql = "INSERT INTO hotelworker(hotelworker.hotelWorkerID,hotelworker.hotelName,hotelworker.`password`) "
-				+ "values (?,?,?)";
+		sql = "INSERT INTO hotelworker(hotelworker.hotelName,hotelworker.`password`) "
+				+ "values (?,?)";
 
 		try {
 			ps = conn.prepareStatement(sql); // 插入数据的准备工作，1-3对应sql语句中问号的顺序
-			ps.setInt(1, Integer.parseInt(hotelWorkerPO.getHotelWorkerID()));
-			ps.setString(2, hotelWorkerPO.getHotelName()); // 在使用setObject方法是必须注意，我们应该使用对应数据类型
-			ps.setString(3, hotelWorkerPO.getPassword()); // 虽然Object可以替代所有该set方法，但会影响效率所以尽量使用对应数据类型的set方法
+			ps.setString(1, hotelWorkerPO.getHotelName()); // 在使用setObject方法是必须注意，我们应该使用对应数据类型
+			ps.setString(2, hotelWorkerPO.getPassword()); // 虽然Object可以替代所有该set方法，但会影响效率所以尽量使用对应数据类型的set方法
 
 			ps.execute(); // 执行sql语句，返回值为boolean
 		} catch (SQLException e) {
