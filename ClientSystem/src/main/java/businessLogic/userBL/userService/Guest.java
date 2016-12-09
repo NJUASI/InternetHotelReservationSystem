@@ -9,6 +9,7 @@ import businessLogic.userBL.userService.service.UserService;
 import dataService.guestDataService.GuestDataService;
 import dataService.guestDataService.GuestDataService_Stub;
 import po.GuestPO;
+import utilities.Ciphertext;
 import utilities.ResultMessage;
 import vo.GuestVO;
 import vo.UserVO;
@@ -52,7 +53,7 @@ public class Guest implements UserService, GuestCreditService{
 	public UserVO add(UserVO newUserVO) {
 
 		try {
-			GuestPO guestPO = convert(newUserVO);
+			GuestPO guestPO = this.encrypt(convert(newUserVO));
 			return convert(guestDataService.add(guestPO));
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -74,7 +75,7 @@ public class Guest implements UserService, GuestCreditService{
 		if(!this.hasGuest(userVO.userID)){return msg;} //不存在ID对应项
 
 		try {
-			GuestPO guestPO = this.convert(userVO);
+			GuestPO guestPO = this.encrypt(convert(userVO));
 			msg = guestDataService.modify(guestPO);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -92,7 +93,7 @@ public class Guest implements UserService, GuestCreditService{
 	public UserVO getSingle(String userID) {
 
 		try {
-			return this.convert(guestDataService.getSingleGuest(userID));
+			return this.convert(this.decode(guestDataService.getSingleGuest(userID)));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -217,6 +218,26 @@ public class Guest implements UserService, GuestCreditService{
 		else{
 			return true;
 		}
+	}
+	
+	private GuestPO encrypt(GuestPO guestPO){
+		Ciphertext encrpyt = new Ciphertext();
+		
+		guestPO.setName(encrpyt.encrypt(guestPO.getName()));
+		guestPO.setPassword(encrpyt.encrypt(guestPO.getPassword()));
+		guestPO.setPhone(encrpyt.encrypt(guestPO.getPhone()));
+		
+		return guestPO;
+	}
+	
+	private GuestPO decode(GuestPO guestPO){
+		Ciphertext decode = new Ciphertext();
+		
+		guestPO.setName(decode.decode(guestPO.getName()));
+		guestPO.setPassword(decode.decode(guestPO.getPassword()));
+		guestPO.setPhone(decode.decode(guestPO.getPhone()));
+		
+		return guestPO;
 	}
 
 }
