@@ -1,8 +1,8 @@
-package presentation.webMarketerUI.controller;
+package presentation.Table;
 
 import javafx.beans.property.SimpleStringProperty;
 
-class AddressTable {
+public class AddressTable {
 	public final SimpleStringProperty city;
 	public final SimpleStringProperty cycle;
 	public final SimpleStringProperty discount;

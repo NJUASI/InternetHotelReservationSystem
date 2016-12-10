@@ -16,7 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import presentation.webMarketerUI.controller.DatePromotionTable;
+import presentation.Table.DatePromotionTable;
 import utilities.IDReserve;
 import utilities.PromotionType;
 import vo.HotelFixedPromotionVO;
