@@ -31,10 +31,10 @@ public class HotelInfoController {
 	public HotelInfoController() {
 		sourceBLController = SourceBLController.getInstance();
 		userBLController = UserController.getInstance();
-		
-		cityInput.setOnShowing(new CityShowingHandler());
-		cityInput.valueProperty().addListener(new CityChangedListener());
-		levelInput.setOnShowing(new LevelShowingHandler());
+		//TODO gcm
+//		cityInput.setOnShowing(new CityShowingHandler());
+//		cityInput.valueProperty().addListener(new CityChangedListener());
+//		levelInput.setOnShowing(new LevelShowingHandler());
 	}
 
 	/**
