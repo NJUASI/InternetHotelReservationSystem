@@ -75,6 +75,7 @@ public class SpecialCirclePromotion {
 	 */
 	public double getDiscount(String guestID,String hotelID){
 		if(isVIP(guestID)){
+			//TODO 龚尘淼：mock，修改实现
 			Address hotelAddress = new MockHotel().getHotelAddress(hotelID);
 			String city = hotelAddress.city;
 			String cycle = hotelAddress.circle;
@@ -88,6 +89,7 @@ public class SpecialCirclePromotion {
 	}
 		
 	private boolean isVIP(String guestID){
+		//TODO 龚尘淼：mock，修改实现
 		return new MockMember().isMember(guestID, MemberType.COMMON);
 	}
 	

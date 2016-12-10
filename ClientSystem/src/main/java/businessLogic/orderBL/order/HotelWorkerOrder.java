@@ -137,10 +137,10 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 		}
 		
 		//更新酒店剩余房间信息
-		/*
-		 * new the mock one to test
-		 */
-		hotelInterface = new MockHotel();
+//		/*
+//		 * new the mock one to test
+//		 */
+//		hotelInterface = new MockHotel();
 		OrderVO thisOrder = commonOrder.getOrderDetail(checkInVO.orderID);
 		msg2 = hotelInterface.checkIn(thisOrder.orderGeneralVO.orderID, thisOrder.roomType, thisOrder.roomNumCount);
 		
@@ -170,10 +170,10 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 		}
 		
 		//更新酒店剩余房间信息
-		/*
-		 * new the mock one to test
-		 */
-		hotelInterface = new MockHotel();
+//		/*
+//		 * new the mock one to test
+//		 */
+//		hotelInterface = new MockHotel();
 		OrderVO thisOrder = commonOrder.getOrderDetail(checkOutVO.orderID);
 		msg2 = hotelInterface.checkOut(thisOrder.orderGeneralVO.orderID, thisOrder.roomType, thisOrder.roomNumCount);
 		

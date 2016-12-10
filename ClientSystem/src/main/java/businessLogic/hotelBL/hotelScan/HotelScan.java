@@ -118,6 +118,7 @@ public class HotelScan {
 	private List<HotelVO> convertPOListToVOList(List<HotelPO> POList){
 		List<HotelVO> hotelVOList = new ArrayList<HotelVO>();
 		for(HotelPO hotelPO:currentPOList){
+			//TODO gcm 修改Mock实现
 			double minPrice = new MockHotel(hotelPO.getHotelID()).getLowestPrice();
 			OrderState orderState = new MockOrder().getOrderState(guestID, hotelPO.getHotelID());
 			hotelVOList.add(new HotelVO(hotelPO,minPrice,orderState));

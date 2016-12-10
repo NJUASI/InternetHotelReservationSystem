@@ -2,6 +2,7 @@ package presentation.webMarketerUI.controller;
 
 import java.io.IOException;
 
+import businessLogic.userBL.UserController;
 import businessLogic.userBL.stub.UserBLService_Stub;
 import businessLogic.userBL.userService.Guest;
 import businessLogic.userBL.userService.service.GuestCreditService;
@@ -49,8 +50,10 @@ public class ChargeController {
 	private void initialize() {
 		
 		//TODO 掉需要的接口
-//	TODO	fjj 这个是谁的上面那句话
-		userBLService = new UserBLService_Stub();
+		//	TODO	fjj 这个是谁的上面那句话
+		//TODO 冯俊杰回复：不归我啊，但顺手将其修改为实现
+		userBLService = UserController.getInstance();
+//		userBLService = new UserBLService_Stub();
 	}
 	
 	/**

@@ -61,6 +61,10 @@ public class GuestOrder implements GuestOrderBLService {
 		
 		commonOrder = new CommonOrder();
 		
+		/*
+		 * new the mock one to test
+		 * TODO 龚尘淼：promotion没有无参数的初始化方法，不知道自己改初始化啥
+		 */
 		discountCalculator = new MockPromotion();
 		hotelInterface = new Hotel();
 	}
@@ -78,7 +82,6 @@ public class GuestOrder implements GuestOrderBLService {
 		try {
 			discountsInSpan = discountCalculator.getDiscountInSpan(new PreOrder(orderVO));
 		} catch (UserInexistException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		final double prePrice = orderVO.previousPrice;
@@ -136,10 +139,10 @@ public class GuestOrder implements GuestOrderBLService {
 		}
 		
 		//更新此订单撤销后的酒店剩余房间数
-		/*
-		 * new the mock one to test
-		 */
-		hotelInterface = new MockHotel();
+//		/*
+//		 * new the mock one to test
+//		 */
+//		hotelInterface = new MockHotel();
 		msg2 = hotelInterface.updateRemainRoomNumForUndoOrder(thisOrder.orderGeneralVO.hotelID, thisOrder.roomType, thisOrder.roomNumCount);
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
 			return ResultMessage.SUCCESS;
@@ -162,10 +165,10 @@ public class GuestOrder implements GuestOrderBLService {
 		try {
 			msg1 = orderDataService.addEvaluation(new GuestEvaluationPO(evaluationVO));
 			
-			/*
-			 * new the mock one to test
-			 */
-			hotelInterface = new MockHotel();
+//			/*
+//			 * new the mock one to test
+//			 */
+//			hotelInterface = new MockHotel();
 			msg2 = hotelInterface.scoreUpdate(evaluationVO.score);
 		} catch (RemoteException e) {
 			e.printStackTrace();
