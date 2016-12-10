@@ -80,7 +80,7 @@ public class WebManagerViewController {
 	private void jump(String path){
 		right.getChildren().clear();
 		try {
-			currentParent = FXMLLoader.load(getClass().getResource("/presentation/webMarketerUI/view/"+path+".fxml"));
+			currentParent = FXMLLoader.load(getClass().getResource("/presentation/webManagerUI/view/"+path+".fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
