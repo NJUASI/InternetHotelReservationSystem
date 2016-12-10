@@ -2,15 +2,10 @@ package businessLogicService.userBLService;
 
 import java.util.List;
 
-<<<<<<< HEAD
-import utilities.enums.ResultMessage;
-import utilities.enums.UserType;
-=======
 import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
-import utilities.ResultMessage;
-import utilities.UserType;
->>>>>>> master
+import utilities.enums.ResultMessage;
+import utilities.enums.UserType;
 import vo.HotelVO;
 import vo.UserVO;
 

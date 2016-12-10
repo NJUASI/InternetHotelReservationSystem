@@ -6,16 +6,11 @@ import businessLogic.hotelBL.hotel.Hotel;
 import businessLogic.userBL.userService.UserFactory;
 import businessLogic.userBL.userService.UserLengthFactory;
 import businessLogic.userBL.userService.service.UserService;
-<<<<<<< HEAD
-import utilities.enums.ResultMessage;
-import utilities.enums.UserType;
-=======
 import exception.operationFailedException.AddFaidException;
 import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
-import utilities.ResultMessage;
-import utilities.UserType;
->>>>>>> master
+import utilities.enums.ResultMessage;
+import utilities.enums.UserType;
 import vo.HotelVO;
 import vo.HotelWorkerVO;
 import vo.UserVO;

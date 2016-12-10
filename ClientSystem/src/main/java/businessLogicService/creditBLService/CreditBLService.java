@@ -2,12 +2,8 @@ package businessLogicService.creditBLService;
 
 import java.util.Iterator;
 
-<<<<<<< HEAD
-import utilities.enums.ResultMessage;
-=======
 import exception.verificationException.UserInexistException;
-import utilities.ResultMessage;
->>>>>>> master
+import utilities.enums.ResultMessage;
 import vo.CreditVO;
 
 /**
