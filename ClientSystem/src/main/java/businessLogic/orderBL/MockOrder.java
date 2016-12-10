@@ -7,9 +7,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.promotionBL.DiscountCalculator;
-import utilities.OrderState;
-import utilities.ResultMessage;
-import utilities.RoomType;
+import utilities.enums.OrderState;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
 import vo.GuestEvaluationVO;
 import vo.HotelEvaluationVO;
 import vo.OrderGeneralVO;

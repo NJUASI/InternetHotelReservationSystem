@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import dataService.webMarketerDataService.WebMarketerDataService;
 import po.WebMarketerPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class WebMarekterDataServiceImpl_Test {
 

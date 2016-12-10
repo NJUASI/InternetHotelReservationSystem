@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import presentation.PopUp.PopUp;
 import utilities.IDReserve;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.GuestVO;
 
 /**

@@ -9,7 +9,7 @@ import dataService.webManagerDataService.WebManagerDataService;
 import dataService.webManagerDataService.WebManagerDataService_Stub;
 import po.WebManagerPO;
 import utilities.Ciphertext;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.UserVO;
 import vo.WebManagerVO;
 

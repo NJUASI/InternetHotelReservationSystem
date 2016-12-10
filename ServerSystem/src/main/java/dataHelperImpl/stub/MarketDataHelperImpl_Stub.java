@@ -5,7 +5,7 @@ import java.util.List;
 
 import dataHelper.MarketDataHelper;
 import po.MarketPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 /**
  * 

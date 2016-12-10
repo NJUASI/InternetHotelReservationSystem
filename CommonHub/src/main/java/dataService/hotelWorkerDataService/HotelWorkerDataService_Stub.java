@@ -7,7 +7,7 @@ import java.util.List;
 
 import po.HotelWorkerPO;
 import utilities.Ciphertext;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class HotelWorkerDataService_Stub extends UnicastRemoteObject implements HotelWorkerDataService{
 

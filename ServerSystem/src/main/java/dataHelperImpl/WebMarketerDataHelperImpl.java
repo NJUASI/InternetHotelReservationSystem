@@ -11,7 +11,7 @@ import dataHelper.WebMarketerDataHelper;
 import po.WebMarketerPO;
 import utilities.Ciphertext;
 import utilities.JDBCUtil;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 /**
  * 

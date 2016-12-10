@@ -12,8 +12,8 @@ import dataService.promotionDataService.PromotionDataService;
 import dataService.promotionDataService.PromotionDataService_Stub;
 import po.HotelFixedPromotionPO;
 import utilities.PreOrder;
-import utilities.PromotionType;
-import utilities.ResultMessage;
+import utilities.enums.PromotionType;
+import utilities.enums.ResultMessage;
 import vo.HotelFixedPromotionVO;
 
 /**

@@ -1,7 +1,7 @@
 package businessLogicService.memberBLService;
 
-import utilities.MemberType;
-import utilities.ResultMessage;
+import utilities.enums.MemberType;
+import utilities.enums.ResultMessage;
 import vo.MemberVO;
 
 public interface MemberBLService {

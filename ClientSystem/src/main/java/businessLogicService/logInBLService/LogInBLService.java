@@ -5,7 +5,7 @@ import exception.inputException.InvalidLengthInputException;
 import exception.inputException.PasswordInputException;
 import exception.inputException.SpecialCharacterException;
 import exception.verificationException.WrongPasswordException;
-import utilities.UserType;
+import utilities.enums.UserType;
 import vo.GuestVO;
 import vo.UserVO;
 

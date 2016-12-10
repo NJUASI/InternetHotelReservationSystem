@@ -8,7 +8,7 @@ import dataHelper.HotelWorkerDataHelper;
 import dataHelperImpl.stub.HotelWorkerDataHelperImpl_Stub;
 import dataService.hotelWorkerDataService.HotelWorkerDataService;
 import po.HotelWorkerPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 /**
  * 

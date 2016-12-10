@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import po.HotelWorkerPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public interface HotelWorkerDataService extends Remote{
 

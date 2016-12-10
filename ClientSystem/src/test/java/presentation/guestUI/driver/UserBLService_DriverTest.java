@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import businessLogic.userBL.stub.UserBLService_Stub;
 import presentation.webManagerUI.driver.UserBLService_Driver;
-import utilities.UserType;
+import utilities.enums.UserType;
 import vo.GuestVO;
 import vo.UserVO;
 

@@ -5,7 +5,7 @@ import java.util.List;
 
 import dataHelper.WebMarketerDataHelper;
 import po.WebMarketerPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 /**
  * 

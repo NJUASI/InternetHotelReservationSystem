@@ -5,8 +5,8 @@ import java.util.List;
 
 import dataHelper.RoomDataHelper;
 import po.RoomInfoPO;
-import utilities.ResultMessage;
-import utilities.RoomType;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
 
 /**
  * @Description:RoomInfoDataHelperImpl的桩，供测试使用

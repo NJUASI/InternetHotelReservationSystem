@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import businessLogic.logInBL.stub.LogInBLService_Stub;
-import utilities.UserType;
+import utilities.enums.UserType;
 
 public class LogInBLService_DriverTest {
 

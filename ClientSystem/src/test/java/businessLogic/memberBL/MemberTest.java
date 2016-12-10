@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import org.junit.Test;
 
 import utilities.*;
+import utilities.enums.MemberType;
+import utilities.enums.ResultMessage;
 import vo.MemberVO;
 
 /**

@@ -9,7 +9,7 @@ import dataService.webMarketerDataService.WebMarketerDataService;
 import dataService.webMarketerDataService.WebMarketerDataService_Stub;
 import po.WebMarketerPO;
 import utilities.Ciphertext;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.UserVO;
 import vo.WebMarketerVO;
 

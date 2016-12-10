@@ -16,9 +16,9 @@ import po.GuestEvaluationPO;
 import po.HotelEvaluationPO;
 import po.OrderGeneralPO;
 import po.OrderPO;
-import utilities.OrderState;
-import utilities.ResultMessage;
-import utilities.RoomType;
+import utilities.enums.OrderState;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
 
 /**
  * 

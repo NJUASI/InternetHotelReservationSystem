@@ -8,7 +8,7 @@ import dataHelper.CreditDataHelper;
 import dataHelperImpl.stub.CreditDataHelperImpl_Stub;
 import dataService.creditDataService.CreditDataService;
 import po.CreditPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class CreditDataServiceImpl extends UnicastRemoteObject implements CreditDataService{
 

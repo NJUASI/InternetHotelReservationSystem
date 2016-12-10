@@ -2,7 +2,7 @@ package businessLogicService.creditBLService;
 
 import java.util.Iterator;
 
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.CreditVO;
 
 /**

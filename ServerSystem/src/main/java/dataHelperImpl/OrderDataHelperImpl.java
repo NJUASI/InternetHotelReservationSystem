@@ -11,9 +11,9 @@ import java.util.List;
 import dataHelper.OrderDataHelper;
 import po.OrderPO;
 import utilities.JDBCUtil;
-import utilities.OrderState;
-import utilities.ResultMessage;
-import utilities.RoomType;
+import utilities.enums.OrderState;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
 
 /**
  * 
@@ -381,7 +381,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			orderPO.setPrice(rs.getDouble(6));
 			orderPO.setExpectExecuteTime(rs.getTimestamp(7).toLocalDateTime());
 			orderPO.setExpectLeaveTime(rs.getTimestamp(8).toLocalDateTime());
-			orderPO.setState(OrderState.valueOf(rs.getString(9)));
+			orderPO.setState(OrderState.getEnum(rs.getString(9)));
 			orderPO.setHasCommented(convertBooleanString2Boolean(rs.getString(10)));
 			orderPO.setName(rs.getString(11));
 			orderPO.setPhone(rs.getString(12));

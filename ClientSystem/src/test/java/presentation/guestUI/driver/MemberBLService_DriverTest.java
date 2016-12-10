@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import org.junit.Test;
 
 import businessLogic.memberBL.stub.MemberBLService_Stub;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.MemberVO;
 
 public class MemberBLService_DriverTest {

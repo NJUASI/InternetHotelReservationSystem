@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 
 import org.junit.Test;
 
-import utilities.ResultMessage;
-import utilities.RoomType;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
 import vo.GuestEvaluationVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;

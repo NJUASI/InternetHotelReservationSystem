@@ -11,7 +11,7 @@ import businessLogicService.creditBLService.CreditBLService;
 import dataService.creditDataService.CreditDataService;
 import dataService.creditDataService.CreditDataService_Stub;
 import po.CreditPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.CreditVO;
 
 /**

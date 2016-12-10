@@ -6,7 +6,7 @@ import businessLogic.promotionBL.discountCalculation.discountOfPromotions.Enterp
 import businessLogic.promotionBL.discountCalculation.discountOfPromotions.ThreeAndAboveDiscount;
 import businessLogic.promotionBL.discountCalculation.discountOfPromotions.VIPBirthdayDiscount;
 import utilities.PreOrder;
-import utilities.PromotionType;
+import utilities.enums.PromotionType;
 
 /**
  * @Description:创建酒店无特定期间的促销策略的工厂

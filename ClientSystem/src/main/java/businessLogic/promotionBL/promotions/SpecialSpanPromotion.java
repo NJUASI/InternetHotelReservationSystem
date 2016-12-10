@@ -11,7 +11,7 @@ import businessLogic.promotionBL.discountCalculation.discountOfPromotions.Specia
 import dataService.promotionDataService.PromotionDataService;
 import dataService.promotionDataService.PromotionDataService_Stub;
 import po.SpecialSpanPromotionPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.SpecialSpanPromotionVO;
 
 /**

@@ -6,8 +6,8 @@ import java.util.List;
 
 import dataHelper.SpecialSpanPromotionDataHelper;
 import po.SpecialSpanPromotionPO;
-import utilities.PromotionType;
-import utilities.ResultMessage;
+import utilities.enums.PromotionType;
+import utilities.enums.ResultMessage;
 
 public class SpecialSpanPromotionImplDataHelper_Stub implements SpecialSpanPromotionDataHelper{
 

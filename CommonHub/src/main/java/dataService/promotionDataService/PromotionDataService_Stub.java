@@ -9,8 +9,8 @@ import java.util.List;
 import po.AddressPO;
 import po.HotelFixedPromotionPO;
 import po.SpecialSpanPromotionPO;
-import utilities.PromotionType;
-import utilities.ResultMessage;
+import utilities.enums.PromotionType;
+import utilities.enums.ResultMessage;
 
 public class PromotionDataService_Stub extends UnicastRemoteObject implements PromotionDataService {
 

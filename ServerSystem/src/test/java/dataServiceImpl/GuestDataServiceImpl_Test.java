@@ -11,7 +11,7 @@ import org.junit.Test;
 import dataService.guestDataService.GuestDataService;
 import po.GuestPO;
 import po.MemberPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class GuestDataServiceImpl_Test {
 

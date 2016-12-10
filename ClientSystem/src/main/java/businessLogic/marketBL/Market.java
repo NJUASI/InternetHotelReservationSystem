@@ -10,7 +10,7 @@ import businessLogicService.userBLService.UserBLService;
 import dataService.marketDataService.MarketDataService;
 import dataService.marketDataService.MarketDataService_Stub;
 import po.MarketPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.GuestVO;
 import vo.MarketVO;
 

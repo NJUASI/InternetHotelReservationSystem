@@ -2,8 +2,8 @@ package businessLogicService.userBLService;
 
 import java.util.List;
 
-import utilities.ResultMessage;
-import utilities.UserType;
+import utilities.enums.ResultMessage;
+import utilities.enums.UserType;
 import vo.HotelVO;
 import vo.UserVO;
 

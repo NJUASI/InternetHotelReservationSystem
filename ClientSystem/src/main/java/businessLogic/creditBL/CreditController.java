@@ -3,7 +3,7 @@ package businessLogic.creditBL;
 import java.util.Iterator;
 
 import businessLogicService.creditBLService.CreditBLService;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.CreditVO;
 
 /**

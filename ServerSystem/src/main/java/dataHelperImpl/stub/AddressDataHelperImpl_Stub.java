@@ -5,7 +5,7 @@ import java.util.List;
 
 import dataHelper.AddressDataHelper;
 import po.AddressPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 
 /**

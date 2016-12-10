@@ -18,7 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import presentation.Table.DatePromotionTable;
 import utilities.IDReserve;
-import utilities.PromotionType;
+import utilities.enums.PromotionType;
 import vo.HotelFixedPromotionVO;
 import vo.SpecialSpanPromotionVO;
 

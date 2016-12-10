@@ -19,7 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import presentation.Table.TypeTable;
 import utilities.IDReserve;
-import utilities.RoomType;
+import utilities.enums.RoomType;
 import vo.RoomInfoVO;
 /**
  * @description 酒店客房信息界面的控制器

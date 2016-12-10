@@ -1,6 +1,6 @@
 package businessLogic.userBL.userService.service;
 
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public interface GuestCreditService {
 	

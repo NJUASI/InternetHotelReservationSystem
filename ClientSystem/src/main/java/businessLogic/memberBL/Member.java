@@ -7,8 +7,8 @@ import businessLogicService.memberBLService.MemberBLService;
 import dataService.guestDataService.GuestDataService;
 import dataService.guestDataService.GuestDataService_Stub;
 import po.MemberPO;
-import utilities.MemberType;
-import utilities.ResultMessage;
+import utilities.enums.MemberType;
+import utilities.enums.ResultMessage;
 import vo.GuestVO;
 import vo.MemberVO;
 

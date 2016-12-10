@@ -12,9 +12,9 @@ import org.junit.Test;
 import dataHelper.OrderDataHelper;
 import dataHelperImpl.OrderDataHelperImpl;
 import po.OrderPO;
-import utilities.OrderState;
-import utilities.ResultMessage;
-import utilities.RoomType;
+import utilities.enums.OrderState;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
 
 public class OrderDataHelperImplTest {
 

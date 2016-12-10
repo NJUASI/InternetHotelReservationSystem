@@ -12,7 +12,7 @@ import org.junit.Test;
 import dataHelper.HotelFixedPromotionDataHelper;
 import dataHelperImpl.HotelFixedPromotionDataHelperImpl;
 import po.HotelFixedPromotionPO;
-import utilities.PromotionType;
+import utilities.enums.PromotionType;
 
 public class HotelFixedPromotionDataHelperImplTest {
 

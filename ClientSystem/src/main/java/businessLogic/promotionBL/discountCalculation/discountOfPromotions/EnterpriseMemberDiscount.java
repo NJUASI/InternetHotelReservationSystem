@@ -3,7 +3,7 @@ package businessLogic.promotionBL.discountCalculation.discountOfPromotions;
 import businessLogic.memberBL.Member;
 import businessLogic.memberBL.MockMember;
 import businessLogic.promotionBL.discountCalculation.CalculateDiscount;
-import utilities.MemberType;
+import utilities.enums.MemberType;
 
 public class EnterpriseMemberDiscount implements CalculateDiscount{
 

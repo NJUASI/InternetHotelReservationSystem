@@ -5,8 +5,8 @@ import java.util.List;
 
 import dataHelper.HotelFixedPromotionDataHelper;
 import po.HotelFixedPromotionPO;
-import utilities.PromotionType;
-import utilities.ResultMessage;
+import utilities.enums.PromotionType;
+import utilities.enums.ResultMessage;
 
 public class HotelFixedPromotionDataHelperImpl_Stub implements HotelFixedPromotionDataHelper{
 

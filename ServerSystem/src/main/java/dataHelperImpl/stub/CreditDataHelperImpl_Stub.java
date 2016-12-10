@@ -6,8 +6,8 @@ import java.util.List;
 
 import dataHelper.CreditDataHelper;
 import po.CreditPO;
-import utilities.CreditRecord;
-import utilities.ResultMessage;
+import utilities.enums.CreditRecord;
+import utilities.enums.ResultMessage;
 
 /**
  * 

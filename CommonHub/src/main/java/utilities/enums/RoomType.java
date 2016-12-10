@@ -1,10 +1,27 @@
-package utilities;
+package utilities.enums;
 
 import java.io.Serializable;
 
 public enum RoomType implements Serializable{
-	单人间, 双人间, 三人间, 总统套房, 商务套房;
+	单人间("a"), 双人间("kk"), 三人间("c"), 总统套房("d"), 商务套房("e");
 	
+	private String thisRoomtype;
+	
+	private RoomType(String a) {
+		this.thisRoomtype = a;
+	}
+	public String getRoomType() {
+		return thisRoomtype;
+	}
+	
+	public static RoomType getEnum(String a) {
+		for (RoomType roomType : values()) {
+			if (roomType.thisRoomtype.equals(a)) {
+				return roomType;
+			}
+		}
+		return null;
+	}
 	/**
 	 * @author charles
 	 * @lastChangedBy charles

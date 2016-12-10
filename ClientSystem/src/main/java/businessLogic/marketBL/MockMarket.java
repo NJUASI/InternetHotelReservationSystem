@@ -3,7 +3,7 @@ package businessLogic.marketBL;
 import java.util.LinkedList;
 import java.util.List;
 
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.MarketVO;
 
 public class MockMarket extends Market {

@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import businessLogic.memberBL.Member;
 import businessLogic.memberBL.MockMember;
 import businessLogic.promotionBL.discountCalculation.CalculateDiscount;
-import utilities.MemberType;
+import utilities.enums.MemberType;
 
 public class VIPBirthdayDiscount implements CalculateDiscount{
 

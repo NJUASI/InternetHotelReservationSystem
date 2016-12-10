@@ -9,7 +9,7 @@ import dataService.hotelWorkerDataService.HotelWorkerDataService;
 import dataService.hotelWorkerDataService.HotelWorkerDataService_Stub;
 import po.HotelWorkerPO;
 import utilities.Ciphertext;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.HotelWorkerVO;
 import vo.UserVO;
 

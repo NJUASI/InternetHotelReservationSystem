@@ -10,8 +10,8 @@ import java.util.List;
 import dataHelper.HotelFixedPromotionDataHelper;
 import po.HotelFixedPromotionPO;
 import utilities.JDBCUtil;
-import utilities.PromotionType;
-import utilities.ResultMessage;
+import utilities.enums.PromotionType;
+import utilities.enums.ResultMessage;
 
 /**
  * @Description:对数据库中hotelFixedPromotion表的具体操作

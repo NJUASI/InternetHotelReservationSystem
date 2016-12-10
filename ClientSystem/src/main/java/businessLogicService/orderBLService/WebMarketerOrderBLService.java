@@ -3,7 +3,7 @@ package businessLogicService.orderBLService;
 import java.time.LocalDate;
 import java.util.List;
 
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.OrderGeneralVO;
 
 /**

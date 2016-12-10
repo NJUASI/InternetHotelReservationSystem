@@ -10,8 +10,8 @@ import org.junit.Test;
 
 import businessLogic.userBL.userService.Guest;
 import businessLogic.userBL.userService.service.GuestCreditService;
-import utilities.ResultMessage;
-import utilities.UserType;
+import utilities.enums.ResultMessage;
+import utilities.enums.UserType;
 import vo.GuestVO;
 import vo.HotelVO;
 import vo.HotelWorkerVO;

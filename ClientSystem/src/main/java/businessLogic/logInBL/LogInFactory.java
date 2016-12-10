@@ -7,7 +7,7 @@ import businessLogic.userBL.userService.WebMarketer;
 import exception.inputException.InvalidLengthInputException;
 import exception.inputException.SpecialCharacterException;
 import utilities.Detector;
-import utilities.UserType;
+import utilities.enums.UserType;
 
 public class LogInFactory {
 	

@@ -8,7 +8,7 @@ import dataHelper.WebMarketerDataHelper;
 import dataHelperImpl.stub.WebMarketerDataHelperImpl_Stub;
 import dataService.webMarketerDataService.WebMarketerDataService;
 import po.WebMarketerPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 /**
  * 

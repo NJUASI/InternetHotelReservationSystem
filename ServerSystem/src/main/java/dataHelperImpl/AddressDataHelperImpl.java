@@ -10,7 +10,7 @@ import java.util.List;
 import dataHelper.AddressDataHelper;
 import po.AddressPO;
 import utilities.JDBCUtil;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 /**
  * 

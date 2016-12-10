@@ -2,8 +2,8 @@ package businessLogic.logInBL;
 
 import businessLogic.userBL.MockUser;
 import businessLogic.userBL.User;
-import utilities.ResultMessage;
-import utilities.UserType;
+import utilities.enums.ResultMessage;
+import utilities.enums.UserType;
 import vo.GuestVO;
 import vo.UserVO;
 

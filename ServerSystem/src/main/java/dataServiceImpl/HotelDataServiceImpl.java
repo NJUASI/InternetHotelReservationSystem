@@ -11,8 +11,8 @@ import dataHelperImpl.stub.RoomInfoDataHelperImpl_Stub;
 import dataService.hotelDataService.HotelDataService;
 import po.HotelPO;
 import po.RoomInfoPO;
-import utilities.ResultMessage;
-import utilities.RoomType;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
 
 /**
  * @Description：关于酒店信息的相关操作包括：

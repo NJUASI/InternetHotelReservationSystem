@@ -6,7 +6,7 @@ import java.util.List;
 
 import po.GuestPO;
 import po.MemberPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public interface GuestDataService extends Remote {
 

@@ -3,7 +3,7 @@ package businessLogic.marketBL;
 import java.util.List;
 
 import businessLogicService.marketBLService.MarketBLService;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.MarketVO;
 
 /**

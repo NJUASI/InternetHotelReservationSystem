@@ -1,7 +1,7 @@
 package businessLogic.userBL.userService;
 
 import businessLogic.userBL.userService.service.UserService;
-import utilities.UserType;
+import utilities.enums.UserType;
 
 /**
  * @Description:根据用户类型创建用户对象

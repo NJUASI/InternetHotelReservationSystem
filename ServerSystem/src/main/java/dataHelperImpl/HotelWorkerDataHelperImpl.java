@@ -11,7 +11,7 @@ import dataHelper.HotelWorkerDataHelper;
 import po.HotelWorkerPO;
 import utilities.Ciphertext;
 import utilities.JDBCUtil;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 /**
  * 

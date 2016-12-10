@@ -1,6 +1,6 @@
 package businessLogic.memberBL;
 
-import utilities.MemberType;
+import utilities.enums.MemberType;
 import vo.MemberVO;
 
 /**

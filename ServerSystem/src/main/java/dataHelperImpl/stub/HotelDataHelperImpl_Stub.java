@@ -5,7 +5,7 @@ import java.util.List;
 
 import dataHelper.HotelDataHelper;
 import po.HotelPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class HotelDataHelperImpl_Stub implements HotelDataHelper{
 

@@ -10,9 +10,8 @@ import java.util.List;
 import dataHelper.RoomDataHelper;
 import po.RoomInfoPO;
 import utilities.JDBCUtil;
-import utilities.ResultMessage;
-import utilities.RoomType;
-import utilities.RoomTypeConvert;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
 
 /**
  * @Description:更新数据库中的客房信息
@@ -54,7 +53,7 @@ public class RoomDataHelperImpl implements RoomDataHelper {
 			while(rs.next()){
 				po = new RoomInfoPO();
 				po.setHotelID(hotelID);
-				po.setRoomType(RoomTypeConvert.convert(rs.getString(2)));
+				po.setRoomType(RoomType.convertString2Roomtype(rs.getString(2)));
 				po.setRoomNum(rs.getInt(3));
 				po.setRemainNum(rs.getInt(4));
 				po.setPrice(rs.getDouble(5));
