@@ -8,6 +8,8 @@ import businessLogic.userBL.userService.service.GuestCreditService;
 import businessLogic.userBL.userService.service.UserService;
 import dataService.guestDataService.GuestDataService;
 import dataService.guestDataService.GuestDataService_Stub;
+import exception.operationFailedException.AddFaidException;
+import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import po.GuestPO;
 import utilities.Ciphertext;
@@ -48,8 +50,10 @@ public class Guest implements UserService, GuestCreditService {
 	 * @param newUserVO
 	 *            从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加客户信息
+	 * @throws AddFaidException 
+	 * @throws ParameterInvalidException 
 	 */
-	public UserVO add(UserVO newUserVO) {
+	public UserVO add(UserVO newUserVO){
 
 		try {
 			GuestPO guestPO = convert(newUserVO);

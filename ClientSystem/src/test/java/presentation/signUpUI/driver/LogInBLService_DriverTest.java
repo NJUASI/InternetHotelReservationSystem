@@ -10,12 +10,13 @@ import businessLogic.logInBL.stub.LogInBLService_Stub;
 import exception.inputException.InvalidInputException;
 import exception.inputException.InvalidLengthInputException;
 import exception.inputException.PasswordInputException;
+import exception.verificationException.ParameterInvalidException;
 import vo.GuestVO;
 
 public class LogInBLService_DriverTest {
 
 	@Test
-	public void test1() {
+	public void test1() throws ParameterInvalidException {
 		//test interface guestSignUp
 		try {
 			LogInBLService_Stub stub = new LogInBLService_Stub();

@@ -2,6 +2,7 @@ package businessLogicService.userBLService;
 
 import java.util.List;
 
+import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import utilities.ResultMessage;
 import utilities.UserType;
@@ -10,7 +11,7 @@ import vo.UserVO;
 
 public interface UserBLService {
 
-	public UserVO add(UserVO newUserVO ,UserType userType);
+	public UserVO add(UserVO newUserVO ,UserType userType) throws ParameterInvalidException;
 
 	public ResultMessage modify(UserVO userVO);
 	

@@ -6,6 +6,8 @@ import businessLogic.hotelBL.hotel.Hotel;
 import businessLogic.userBL.userService.UserFactory;
 import businessLogic.userBL.userService.UserLengthFactory;
 import businessLogic.userBL.userService.service.UserService;
+import exception.operationFailedException.AddFaidException;
+import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import utilities.ResultMessage;
 import utilities.UserType;
@@ -44,6 +46,8 @@ public class User {
 	 * @updateTime 2016/12/5
 	 * @param userVO 从客户界面层传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加用户信息
+	 * @throws AddFaidException 
+	 * @throws ParameterInvalidException 
 	 */
 	public UserVO add(UserVO newUserVO,UserType userType) {
 
@@ -97,6 +101,7 @@ public class User {
 	 * @updateTime 2016/12/9
 	 * @param newHotelVO 从客户界面层传下来的hotelInfo载体
 	 * @return ResultMessage 酒店是否添加成功
+	 * @throws AddFaidException 
 	 */
 	public HotelVO addHotel(HotelVO newHotelVO) {
 
@@ -105,12 +110,7 @@ public class User {
 		Hotel hotel = new Hotel();
 		
 		HotelWorkerVO  hotelWorkerVO = new HotelWorkerVO(newHotelVO.hotelName);
-		hotelWorkerVO = (HotelWorkerVO) this.add(hotelWorkerVO, UserType.HOTEL_WORKER); //生成一个酒店工作人员账户
-		
-		if(hotelWorkerVO==null){
-			// 代表添加失败
-			return null;
-		}
+		hotelWorkerVO = (HotelWorkerVO) this.add(hotelWorkerVO, UserType.HOTEL_WORKER);
 		
 		newHotelVO.hotelID = hotelWorkerVO.userID;
 		

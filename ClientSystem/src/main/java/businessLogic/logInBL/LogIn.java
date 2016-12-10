@@ -6,6 +6,7 @@ import exception.inputException.InvalidInputException;
 import exception.inputException.InvalidLengthInputException;
 import exception.inputException.PasswordInputException;
 import exception.inputException.SpecialCharacterException;
+import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import exception.verificationException.WrongPasswordException;
 import utilities.Detector;
@@ -80,6 +81,7 @@ public class LogIn implements LogInBLService{
 	 *           从注册界面层传下来的guestVO
 	 * @return 客户是否成功注册
 	 * @throws InvalidInputException,PasswordInputException 
+	 * @throws ParameterInvalidException 
 	 */
 	public GuestVO guestSignUp(UserVO guestVO) throws InvalidInputException,PasswordInputException,InvalidLengthInputException{
 		

@@ -2,6 +2,7 @@ package businessLogic.logInBL;
 
 import businessLogic.userBL.MockUser;
 import businessLogic.userBL.User;
+import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import utilities.ResultMessage;
 import utilities.UserType;
@@ -114,6 +115,7 @@ public class MockLogIn extends LogIn {
 	 * @param guestVO
 	 *           从注册界面层传下来的guestVO
 	 * @return 客户是否成功注册
+	 * @throws ParameterInvalidException 
 	 */
 	public GuestVO guestSignUp(UserVO guestVO) {
 		return (GuestVO)user.add(guestVO,UserType.GUEST);

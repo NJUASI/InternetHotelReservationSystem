@@ -4,6 +4,7 @@ import exception.inputException.InvalidInputException;
 import exception.inputException.InvalidLengthInputException;
 import exception.inputException.PasswordInputException;
 import exception.inputException.SpecialCharacterException;
+import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import exception.verificationException.WrongPasswordException;
 import utilities.UserType;

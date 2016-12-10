@@ -5,6 +5,7 @@ import exception.inputException.InvalidInputException;
 import exception.inputException.InvalidLengthInputException;
 import exception.inputException.PasswordInputException;
 import exception.inputException.SpecialCharacterException;
+import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import exception.verificationException.WrongPasswordException;
 import utilities.UserType;
@@ -55,6 +56,7 @@ public final class LogInController implements LogInBLService {
 	 * @throws InvalidLengthInputException 
 	 * @throws PasswordInputException 
 	 * @throws InvalidInputException 
+	 * @throws ParameterInvalidException 
 	 */
 	public GuestVO guestSignUp(UserVO guestVO) throws InvalidInputException, PasswordInputException, InvalidLengthInputException {
 		return logIn.guestSignUp(guestVO);

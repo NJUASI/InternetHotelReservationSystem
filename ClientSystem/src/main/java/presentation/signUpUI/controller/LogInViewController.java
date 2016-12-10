@@ -10,6 +10,7 @@ import exception.inputException.InvalidInputException;
 import exception.inputException.InvalidLengthInputException;
 import exception.inputException.PasswordInputException;
 import exception.inputException.SpecialCharacterException;
+import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import exception.verificationException.WrongPasswordException;
 import javafx.collections.ObservableList;
@@ -165,7 +166,7 @@ public class LogInViewController {
 			try {
 				guestVO = logInBLController.guestSignUp(userVO);
 				new PopUp("你的账号是"+guestVO.userID, "注册成功");
-			} catch (InvalidInputException e) {
+			}catch (InvalidInputException e) {
 				e.printStackTrace();
 				new PopUp("无效输入", "注册失败");
 			} catch(PasswordInputException e){
