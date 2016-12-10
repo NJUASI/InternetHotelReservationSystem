@@ -90,13 +90,16 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 				final GuestVO thisGuest = (GuestVO) userBLService.getSingle(thisOrder.orderGeneralVO.guestID);
 				
 				final LocalDateTime time = LocalDateTime.now();
-				final double afterCredit = thisGuest.credit + thisOrder.orderGeneralVO.price;
 				
 				CreditVO creditVO = null;
+				double afterCredit = 0;
 				if (thisOrderState == OrderState.UNEXECUTED) {
+					afterCredit = thisGuest.credit + thisOrder.orderGeneralVO.price;
 					creditVO = new CreditVO(thisOrder.orderGeneralVO.guestID, time, 
 							thisOrder.orderGeneralVO.orderID, thisGuest.credit, afterCredit, CreditRecord.EXECUTE);
 				}else {
+					//因为置为异常时被扣了相应的信用值，故在此先加回来再增加
+					afterCredit = thisGuest.credit + 2*thisOrder.orderGeneralVO.price;
 					creditVO = new CreditVO(thisOrder.orderGeneralVO.guestID, time, 
 							thisOrder.orderGeneralVO.orderID, thisGuest.credit, afterCredit, CreditRecord.ABNORMAL_EXECUTE);
 				}
@@ -165,7 +168,7 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 			hotelInterface = new MockHotel();
 			OrderVO thisOrder = commonOrder.getOrderDetail(checkOutVO.orderID);
 			
-			msg2 = hotelInterface.checkOut(thisOrder.orderGeneralVO.orderID,thisOrder.roomType,thisOrder.roomNumCount); 
+			msg2 = hotelInterface.checkOut(thisOrder.orderGeneralVO.orderID, thisOrder.roomType, thisOrder.roomNumCount); 
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

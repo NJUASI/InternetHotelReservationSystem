@@ -150,6 +150,7 @@ public class OrderController {
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/8
 	 * @通过日期查所有异常订单和未执行订单
+	 * 取消查看所有异常订单和未执行订单，直接查看异常订单
 	 */
 	@FXML
 	protected void searchDateOrder() {
@@ -172,8 +173,6 @@ public class OrderController {
 		initOrderCheck(orderGenerals);
 		
 		cancelOrderPaneInCheck.setDisable(false);
-				 
-	
 	}
 
 	/**

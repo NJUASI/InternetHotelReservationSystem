@@ -642,7 +642,6 @@ public class HotelSearchController {
 			roomTypeInOrder.getItems().add(temp.roomType.toString());
 		}
 
-
 		hotelNameInOrder.setText(hotelVO.hotelName);
 		hotelIDInOrder.setText(hotelVO.hotelID);
 		hotelAddressInOrder.setText(hotelVO.address);
