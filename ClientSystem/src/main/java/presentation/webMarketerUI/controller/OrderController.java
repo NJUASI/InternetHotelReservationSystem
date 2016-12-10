@@ -329,7 +329,7 @@ public class OrderController {
 	private void undoAbnormalOrder(String orderID, double percent) {
 		ResultMessage result = orderBLController.undoAbnormalOrder(orderID, percent);
 		
-		if (result == ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS) {
+		if (result == ResultMessage.SUCCESS) {
 			//TODO 高源：状态栏显示异常订单撤销成功
 			
 		}else {

@@ -52,9 +52,9 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 		order.setOrderID(random + date);
 		ResultMessage message = orderDataHelper.add(order);
 		if (message == ResultMessage.SUCCESS) {
-			return ResultMessage.ORDER_CREATE_SUCCESS;
+			return ResultMessage.SUCCESS;
 		}else {
-			return ResultMessage.ORDER_CREATE_FAILURE;
+			return ResultMessage.FAIL;
 		}
 	}
 
@@ -70,9 +70,9 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	public ResultMessage executeOrder(final String orderID) throws RemoteException {
 		ResultMessage message = orderDataHelper.setState(orderID, OrderState.EXECUTED);
 		if (message == ResultMessage.SUCCESS) {
-			return ResultMessage.ORDER_EXECUTE_SUCCESS;
+			return ResultMessage.SUCCESS;
 		}else {
-			return ResultMessage.ORDER_EXECUTE_FAILURE;
+			return ResultMessage.FAIL;
 		}
 	}
 
@@ -91,9 +91,9 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 		
 		ResultMessage message = orderDataHelper.setState(orderID, OrderState.CANCELLED);
 		if (message == ResultMessage.SUCCESS) {
-			return ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS;
+			return ResultMessage.SUCCESS;
 		}else {
-			return ResultMessage.ABNORMAL_ORDER_UNDO_FAILURE;
+			return ResultMessage.FAIL;
 		}
 	}
 
@@ -109,9 +109,9 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	public ResultMessage undoNormalOrder(final String orderID) throws RemoteException {
 		ResultMessage message = orderDataHelper.setState(orderID, OrderState.CANCELLED);
 		if (message == ResultMessage.SUCCESS) {
-			return ResultMessage.NORMAL_ORDER_UNDO_SUCCESS;
+			return ResultMessage.SUCCESS;
 		}else {
-			return ResultMessage.NORMAL_ORDER_UNDO_FAILURE;
+			return ResultMessage.FAIL;
 		}
 	}
 	
@@ -246,9 +246,9 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 		ResultMessage msg2 = orderDataHelper.setState(checkInPO.getOrderID(), OrderState.EXECUTED);
 		
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
-			return ResultMessage.CHECK_IN_SUCCESS;
+			return ResultMessage.SUCCESS;
 		}else {
-			return ResultMessage.CHECK_IN_FAILURE;
+			return ResultMessage.FAIL;
 		}
 	}
 
@@ -263,9 +263,9 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	public ResultMessage updateCheckOut (CheckOutPO checkOutPO) throws RemoteException {
 		ResultMessage msg1 = orderDataHelper.setCheckOut(checkOutPO.getOrderID(), checkOutPO.getCheckOutTime());
 		if (msg1 == ResultMessage.SUCCESS) {
-			return ResultMessage.CHECK_OUT_SUCCESS;
+			return ResultMessage.SUCCESS;
 		}else {
-			return ResultMessage.CHECK_OUT_FAILURE;
+			return ResultMessage.FAIL;
 		}
 	}
 	
@@ -283,9 +283,9 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 		ResultMessage msg2 = orderDataHelper.setHasCommentBool(guestEvaluationPO.getOrderID());
 		
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
-			return ResultMessage.UPDATE_EVALUATION_SUCCESS;
+			return ResultMessage.SUCCESS;
 		}else {
-			return ResultMessage.UPDATE_EVALUATION_FAILURE;
+			return ResultMessage.FAIL;
 		}
 	}
 

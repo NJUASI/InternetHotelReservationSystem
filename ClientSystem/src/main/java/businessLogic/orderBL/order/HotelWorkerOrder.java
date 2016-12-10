@@ -76,8 +76,8 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 	 * @return 酒店工作人员是否成功执行此订单
 	 */
 	public ResultMessage executeOrder(final String orderID) {
-		ResultMessage msg1 = ResultMessage.ORDER_EXECUTE_FAILURE;
-		ResultMessage msg2 = ResultMessage.RECORE_CREDIT_FAILURE;
+		ResultMessage msg1 = ResultMessage.FAIL;
+		ResultMessage msg2 = ResultMessage.FAIL;
 		
 		OrderState thisOrderState = commonOrder.getOrderDetail(orderID).orderGeneralVO.state;
 		if (thisOrderState == OrderState.UNEXECUTED || thisOrderState == OrderState.ABNORMAL) {
@@ -106,10 +106,10 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 			}
 		}
 		
-		if (msg1 == ResultMessage.ORDER_EXECUTE_SUCCESS && msg2 == ResultMessage.RECORE_CREDIT_SUCCESS) {
-			return ResultMessage.ORDER_EXECUTE_SUCCESS;
+		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
+			return ResultMessage.SUCCESS;
 		}else {
-			return ResultMessage.ORDER_EXECUTE_FAILURE;
+			return ResultMessage.FAIL;
 		}
 	}
 	
@@ -121,8 +121,8 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 	 * @return 是否成功更新
 	 */
 	public ResultMessage updateCheckIn (CheckInVO checkInVO) {
-		ResultMessage msg1 = ResultMessage.CHECK_IN_FAILURE;
-		ResultMessage msg2 = ResultMessage.CHECK_IN_FAILURE;
+		ResultMessage msg1 = ResultMessage.FAIL;
+		ResultMessage msg2 = ResultMessage.FAIL;
 		
 		try {
 			msg1 = orderDataService.updateCheckIn(new CheckInPO(checkInVO));
@@ -138,10 +138,10 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 			e.printStackTrace();
 		}
 		
-		if (msg1 == ResultMessage.CHECK_IN_SUCCESS && msg2 == ResultMessage.CHECK_IN_SUCCESS) {
-			return ResultMessage.CHECK_IN_SUCCESS;
+		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
+			return ResultMessage.SUCCESS;
 		}else {
-			return ResultMessage.CHECK_IN_FAILURE;
+			return ResultMessage.FAIL;
 		}
 	}
 
@@ -153,8 +153,8 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 	 * @return 是否成功更新
 	 */
 	public ResultMessage updateCheckOut (CheckOutVO checkOutVO) {
-		ResultMessage msg1 = ResultMessage.CHECK_OUT_FAILURE;
-		ResultMessage msg2 = ResultMessage.CHECK_OUT_FAILURE;
+		ResultMessage msg1 = ResultMessage.FAIL;
+		ResultMessage msg2 = ResultMessage.FAIL;
 		
 		try {
 			msg1 = orderDataService.updateCheckOut((new CheckOutPO(checkOutVO)));
@@ -170,10 +170,10 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 			e.printStackTrace();
 		}
 		
-		if (msg1 == ResultMessage.CHECK_OUT_SUCCESS && msg2 == ResultMessage.CHECK_OUT_SUCCESS) {
-			return ResultMessage.CHECK_OUT_SUCCESS;
+		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
+			return ResultMessage.SUCCESS;
 		}else {
-			return ResultMessage.CHECK_OUT_FAILURE;
+			return ResultMessage.FAIL;
 		}
 	}
 }

@@ -687,7 +687,7 @@ public class HotelSearchController {
 
 			final ResultMessage msg = orderBLController.createOrder(createVO);
 
-			if (msg == ResultMessage.ORDER_CREATE_SUCCESS) {
+			if (msg == ResultMessage.SUCCESS) {
 				//TODO 高源——————状态栏显示订单生成成功
 
 			}else {

@@ -71,8 +71,8 @@ public class WebMarketerOrder implements WebMarketerOrderBLService {
 	 * @return 网站营销人员是否成功按比例撤销此异常订单
 	 */
 	public ResultMessage undoAbnormalOrder(final String orderID, final double percent) {		
-		ResultMessage msg1 = ResultMessage.ABNORMAL_ORDER_UNDO_FAILURE;
-		ResultMessage msg2 = ResultMessage.RECORE_CREDIT_FAILURE;
+		ResultMessage msg1 = ResultMessage.FAIL;
+		ResultMessage msg2 = ResultMessage.FAIL;
 		
 		OrderVO thisOrder = commonOrder.getOrderDetail(orderID);
 		OrderState thisOrderState = thisOrder.orderGeneralVO.state;
@@ -97,10 +97,10 @@ public class WebMarketerOrder implements WebMarketerOrderBLService {
 			}
 		}
 		
-		if (msg1 == ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS && msg2 == ResultMessage.RECORE_CREDIT_SUCCESS) {
-			return ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS;
+		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
+			return ResultMessage.SUCCESS;
 		}else {
-			return ResultMessage.ABNORMAL_ORDER_UNDO_FAILURE;
+			return ResultMessage.FAIL;
 		}
 	}
 	

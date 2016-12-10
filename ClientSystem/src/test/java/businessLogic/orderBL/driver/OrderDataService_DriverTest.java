@@ -63,7 +63,7 @@ public class OrderDataService_DriverTest {
 				roomType, 1, "305", 2, "no", 4.5, "good");
 		
 		try {
-			assertEquals(ResultMessage.ORDER_CREATE_SUCCESS, driver.orderDataService.createOrder(createOrderVO));
+			assertEquals(ResultMessage.SUCCESS, driver.orderDataService.createOrder(createOrderVO));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -87,7 +87,7 @@ public class OrderDataService_DriverTest {
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		
 		try {
-			assertEquals(ResultMessage.ORDER_EXECUTE_SUCCESS, driver.orderDataService.executeOrder("123456789012"));
+			assertEquals(ResultMessage.SUCCESS, driver.orderDataService.executeOrder("123456789012"));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -112,7 +112,7 @@ public class OrderDataService_DriverTest {
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		
 		try {
-			assertEquals(ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS, driver.orderDataService.undoAbnormalOrder("123456789012", 0.5));
+			assertEquals(ResultMessage.SUCCESS, driver.orderDataService.undoAbnormalOrder("123456789012", 0.5));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -137,7 +137,7 @@ public class OrderDataService_DriverTest {
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		
 		try {
-			assertEquals(ResultMessage.NORMAL_ORDER_UNDO_SUCCESS, driver.orderDataService.undoNormalOrder("123456789012"));
+			assertEquals(ResultMessage.SUCCESS, driver.orderDataService.undoNormalOrder("123456789012"));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -361,13 +361,13 @@ public class OrderDataService_DriverTest {
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
 		final CheckInPO checkInPO = new CheckInPO("123456789012", "305", checkInTime, expectLeaveTime);		
 
-		ResultMessage result = ResultMessage.CHECK_IN_FAILURE;
+		ResultMessage result = ResultMessage.FAIL;
 		try {
 			result = driver.orderDataService.updateCheckIn(checkInPO);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		assertEquals(ResultMessage.CHECK_IN_SUCCESS, result);
+		assertEquals(ResultMessage.SUCCESS, result);
 	}
 	
 	/**
@@ -390,13 +390,13 @@ public class OrderDataService_DriverTest {
 		final LocalDateTime checkOutTime = LocalDateTime.of(2016, 2, 4, 10, 58);
 		final CheckOutPO checkOutPO = new CheckOutPO("123456789012", checkOutTime);
 		
-		ResultMessage result = ResultMessage.CHECK_OUT_FAILURE;
+		ResultMessage result = ResultMessage.FAIL;
 		try {
 			result = driver.orderDataService.updateCheckOut(checkOutPO);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		assertEquals(ResultMessage.CHECK_OUT_SUCCESS, result);
+		assertEquals(ResultMessage.SUCCESS, result);
 	}
 	
 	/**
@@ -416,13 +416,13 @@ public class OrderDataService_DriverTest {
 		}
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		
-		ResultMessage result = ResultMessage.UPDATE_EVALUATION_FAILURE;
+		ResultMessage result = ResultMessage.FAIL;
 		try {
 			result = driver.orderDataService.addEvaluation(new GuestEvaluationPO("123420161002", 4, "5"));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		assertEquals(ResultMessage.UPDATE_EVALUATION_SUCCESS, result);
+		assertEquals(ResultMessage.SUCCESS, result);
 	}
 	
 	/**

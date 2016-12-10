@@ -69,7 +69,8 @@ public class Guest implements UserService, GuestCreditService {
 	 */
 	public ResultMessage modify(UserVO userVO) {
 
-		ResultMessage msg = ResultMessage.USER_INFO_UPDATE_FAILURE;
+		//TODO 董金玉：USER_INFO_UPDATE_FAILURE
+		ResultMessage msg = ResultMessage.FAIL;
 
 		if (!this.hasGuest(userVO.userID)) {
 			return msg;

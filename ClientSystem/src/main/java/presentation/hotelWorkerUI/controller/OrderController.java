@@ -321,7 +321,7 @@ public class OrderController {
 		
 		final CheckInVO checkInVO = new CheckInVO(checkInOrderID.getText(), checkInRoomNum.getText(), checkInTime, expectLeaveTime);
 		final ResultMessage result = orderBLController.updateCheckIn(checkInVO);
-		if (result == ResultMessage.CHECK_IN_SUCCESS) {
+		if (result == ResultMessage.SUCCESS) {
 			//TODO 高源：状态栏显示入住成功
 			
 			
@@ -389,7 +389,7 @@ public class OrderController {
 		final CheckOutVO checkOutVO = new CheckOutVO(checkInOrderID.getText(), checkOutTime);
 		
 		final ResultMessage result = orderBLController.updateCheckOut(checkOutVO);
-		if (result == ResultMessage.CHECK_OUT_SUCCESS) {
+		if (result == ResultMessage.SUCCESS) {
 			//TODO 高源：状态栏显示退房成功
 			
 		}else {
