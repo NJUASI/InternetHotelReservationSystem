@@ -12,6 +12,7 @@ import dataService.promotionDataService.PromotionDataService;
 import dataService.promotionDataService.PromotionDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.HotelFixedPromotionPO;
+import rmi.ClientRemoteHelper;
 import utilities.PreOrder;
 import utilities.enums.PromotionType;
 import utilities.enums.ResultMessage;
@@ -29,11 +30,12 @@ public class HotelFixedPromotion {
 	private List<HotelFixedPromotionPO> hotelFixedPromotions;
 
 	public HotelFixedPromotion() {
-		try {
-			promotionDataService = new PromotionDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		promotionDataService = ClientRemoteHelper.getInstance().getPromotionDataService();
+//		try {
+//			promotionDataService = new PromotionDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	/**

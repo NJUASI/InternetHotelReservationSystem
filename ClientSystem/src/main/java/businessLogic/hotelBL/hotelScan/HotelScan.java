@@ -13,6 +13,7 @@ import businessLogic.orderBL.MockOrder;
 import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelPO;
+import rmi.ClientRemoteHelper;
 import utilities.enums.OrderState;
 import utilities.enums.SearchCriteriaType;
 import utilities.enums.SortStrategy;
@@ -47,12 +48,12 @@ public class HotelScan {
 	}
 
 	private void initHotelDataService(){
-		try {
-//			hotelDataService = ClientRemoteHelper.getInstance().getHotelDataService();
-			hotelDataService = new HotelDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		hotelDataService = ClientRemoteHelper.getInstance().getHotelDataService();
+//		try {
+//			hotelDataService = new HotelDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	public HotelScan() {

@@ -9,6 +9,7 @@ import dataService.webManagerDataService.WebManagerDataService;
 import dataService.webManagerDataService.WebManagerDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.WebManagerPO;
+import rmi.ClientRemoteHelper;
 import utilities.Ciphertext;
 import utilities.enums.ResultMessage;
 import vo.UserVO;
@@ -32,13 +33,12 @@ public class WebManager implements UserService {
 	 * @updateTime 2016/11/28 构造函数，初始化成员变量
 	 */
 	public WebManager() {
-		// webManagerDataService =
-		// ClientRemoteHelper.getInstance().getWebManagerDataService();
-		try {
-			webManagerDataService = new WebManagerDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		webManagerDataService = ClientRemoteHelper.getInstance().getWebManagerDataService();
+//		try {
+//			webManagerDataService = new WebManagerDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	/**

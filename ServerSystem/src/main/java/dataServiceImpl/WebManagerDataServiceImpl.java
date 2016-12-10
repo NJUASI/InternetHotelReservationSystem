@@ -5,6 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import dataHelper.WebManagerDataHelper;
+import dataHelperImpl.WebManagerDataHelperImpl;
 import dataHelperImpl.stub.WebManagerDataHelperImpl_Stub;
 import dataService.webManagerDataService.WebManagerDataService;
 import exception.verificationException.UserInexistException;
@@ -28,8 +29,8 @@ public class WebManagerDataServiceImpl extends UnicastRemoteObject implements We
 	 * @updateTime 2016/12/1 构造函数，从工厂中获取webManagerDataHlper对象
 	 */
 	public WebManagerDataServiceImpl() throws RemoteException {
-//		webManagerHelper = new WebManagerDataHelperImpl();
-		webManagerHelper = new WebManagerDataHelperImpl_Stub();
+		webManagerHelper = new WebManagerDataHelperImpl();
+//		webManagerHelper = new WebManagerDataHelperImpl_Stub();
 	}
 
 	/**

@@ -16,6 +16,7 @@ import dataService.orderDataService.OrderDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.GuestEvaluationPO;
 import po.OrderPO;
+import rmi.ClientRemoteHelper;
 import utilities.PreOrder;
 import utilities.enums.OrderState;
 import utilities.enums.ResultMessage;
@@ -50,13 +51,13 @@ public class GuestOrder implements GuestOrderBLService {
 	 * 构造函数，初始化成员变量
 	 */
 	public GuestOrder() {
-//		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
+		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
 		
-		try {
-			orderDataService = new OrderDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			orderDataService = new OrderDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 		
 		commonOrder = new CommonOrder();
 		

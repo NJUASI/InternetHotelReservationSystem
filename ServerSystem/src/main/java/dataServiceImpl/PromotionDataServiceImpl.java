@@ -7,6 +7,9 @@ import java.util.List;
 import dataHelper.AddressDataHelper;
 import dataHelper.HotelFixedPromotionDataHelper;
 import dataHelper.SpecialSpanPromotionDataHelper;
+import dataHelperImpl.AddressDataHelperImpl;
+import dataHelperImpl.HotelFixedPromotionDataHelperImpl;
+import dataHelperImpl.SpecialSpanPromotionDataHelperImpl;
 import dataHelperImpl.stub.AddressDataHelperImpl_Stub;
 import dataHelperImpl.stub.HotelFixedPromotionDataHelperImpl_Stub;
 import dataHelperImpl.stub.SpecialSpanPromotionImplDataHelper_Stub;
@@ -26,12 +29,12 @@ public class PromotionDataServiceImpl extends UnicastRemoteObject implements Pro
 	
 	public PromotionDataServiceImpl() throws RemoteException {
 		super();
-//		hotelFixedPromotionDataHelper = new HotelFixedPromotionDataHelperImpl();
-//		specialSpanPromotionDataHelper = new SpecialSpanPromotionDataHelperImpl();
-//		addressDataHelper = new AddressDataHelperImpl();
-		hotelFixedPromotionDataHelper = new HotelFixedPromotionDataHelperImpl_Stub();
-		specialSpanPromotionDataHelper = new SpecialSpanPromotionImplDataHelper_Stub();
-		addressDataHelper = new AddressDataHelperImpl_Stub();
+		hotelFixedPromotionDataHelper = new HotelFixedPromotionDataHelperImpl();
+		specialSpanPromotionDataHelper = new SpecialSpanPromotionDataHelperImpl();
+		addressDataHelper = new AddressDataHelperImpl();
+//		hotelFixedPromotionDataHelper = new HotelFixedPromotionDataHelperImpl_Stub();
+//		specialSpanPromotionDataHelper = new SpecialSpanPromotionImplDataHelper_Stub();
+//		addressDataHelper = new AddressDataHelperImpl_Stub();
 	}
 
 

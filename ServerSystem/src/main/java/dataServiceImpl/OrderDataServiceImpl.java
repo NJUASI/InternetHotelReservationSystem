@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dataHelper.OrderDataHelper;
+import dataHelperImpl.OrderDataHelperImpl;
 import dataHelperImpl.stub.OrderDataHelperImpl_Stub;
 import dataService.orderDataService.OrderDataService;
 import po.CheckInPO;
@@ -29,8 +30,8 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 
 	public OrderDataServiceImpl() throws RemoteException {
 		super();
-		// orderDataHelper = new OrderDataServiceImpl();
-		orderDataHelper = new OrderDataHelperImpl_Stub();
+		orderDataHelper = new OrderDataHelperImpl();
+//		orderDataHelper = new OrderDataHelperImpl_Stub();
 	}
 
 	/**
@@ -38,9 +39,11 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/10
-	 * @param order 从逻辑层层传下来的Order载体
+	 * @param order
+	 *            从逻辑层层传下来的Order载体
 	 * @return 客户是否成功创建此订单
-	 * @throws RemoteException RMI
+	 * @throws RemoteException
+	 *             RMI
 	 */
 	@Override
 	public ResultMessage createOrder(final OrderPO order) throws RemoteException {

@@ -10,6 +10,7 @@ import businessLogic.memberBL.MockMember;
 import dataService.promotionDataService.PromotionDataService;
 import dataService.promotionDataService.PromotionDataService_Stub;
 import po.AddressPO;
+import rmi.ClientRemoteHelper;
 import utilities.Address;
 import utilities.enums.MemberType;
 import utilities.enums.ResultMessage;
@@ -26,11 +27,12 @@ public class SpecialCirclePromotion {
 	private List<AddressPO> specialCirclePromotions;
 
 	public SpecialCirclePromotion() {
-		try {
-			promotionDataService = new PromotionDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		promotionDataService = ClientRemoteHelper.getInstance().getPromotionDataService();
+//		try {
+//			promotionDataService = new PromotionDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	/**
