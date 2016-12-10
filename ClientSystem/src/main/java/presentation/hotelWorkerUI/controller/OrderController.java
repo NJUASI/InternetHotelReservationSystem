@@ -36,7 +36,6 @@ import vo.OrderVO;
  * lastChangeBy charles
  * updateTime 2016/12/8
  * 
- * TODO 高源 酒店查看时可以查看到订单评   但是disable吧。。不可修改
  * 
  * TODO 冯俊杰：checkIn、checkOut后刷新orderGenerals，获取当前焦点位置<异常／未执行>，或者背景虚化了看不出来就不用区分了
  */
@@ -241,8 +240,8 @@ public class OrderController {
 		orderDetail.setVisible(true);
 		orderCheck.setVisible(false);
 
-		orderComment.setDisable(false);
-		orderScore.setDisable(false);	
+		orderComment.setDisable(true);
+		orderScore.setDisable(true);	
 
 		orderVO = orderBLController.getOrderDetail(orderID);
 		initOrderDetail(orderVO);

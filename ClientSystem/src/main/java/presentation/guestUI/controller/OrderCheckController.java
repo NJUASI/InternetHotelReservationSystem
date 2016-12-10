@@ -15,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import presentation.PopUp.PopUp;
 import presentation.Table.OrderTable;
 import utilities.IDReserve;
 import utilities.OrderState;
@@ -285,10 +286,10 @@ public class OrderCheckController {
 		final GuestEvaluationVO evaluationVO = new GuestEvaluationVO(orderID, score, comment);
 		final ResultMessage result = orderBLController.addEvaluation(evaluationVO);
 		if (result == ResultMessage.SUCCESS) {
-			//TODO 高源——————状态栏显示已评价成功
+			new PopUp("评价成功", "评价");
 
 		}else {
-			//TODO 高源——————状态栏显示评价失败
+			new PopUp("评价失败", "评价");
 			
 		}
 		
