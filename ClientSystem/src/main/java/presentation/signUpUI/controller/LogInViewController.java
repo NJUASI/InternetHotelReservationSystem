@@ -122,10 +122,16 @@ public class LogInViewController {
 					
 					IDReserve.getInstance().setUserID(ID.getText());
 					Parent root = factory.createRoot(userType);
-					ObservableList<Stage> stage = FXRobotHelper.getStages();
+					
+					if(root==null){
+						new PopUp("账号长度无效", "登录失败");
+					}
+					else{
+						ObservableList<Stage> stage = FXRobotHelper.getStages();
 
-					Scene scene = new Scene(root);
-					stage.get(0).setScene(scene);
+						Scene scene = new Scene(root);
+						stage.get(0).setScene(scene);
+					}
 				} catch (SpecialCharacterException e) {
 					e.printStackTrace();
 					new PopUp("账号中含有不合法符号", "登录失败");
