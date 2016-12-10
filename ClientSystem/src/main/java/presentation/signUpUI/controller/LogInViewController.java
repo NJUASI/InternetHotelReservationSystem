@@ -119,7 +119,6 @@ public class LogInViewController {
 			// }
 			IDReserve.getInstance().setUserID(ID.getText());
 			Parent root = factory.createRoot(userType);
-			// TODO 此处警告可能是依赖问题，需要下去查看
 			ObservableList<Stage> stage = FXRobotHelper.getStages();
 
 			Scene scene = new Scene(root);
@@ -145,7 +144,7 @@ public class LogInViewController {
 		GuestVO userVO = new GuestVO("",LocalDate.of(1,1,1),"",name.getText(), nickName.getText(),password2.getText()
 				,phone.getText(),0);
 		guestVO = logInBLController.guestSignUp(userVO);
-		// TODO 此处返回了界面需要的自动递增的ID，后续操作由界面完成
+		// TODO gy 此处返回了界面需要的自动递增的ID，后续操作由界面完成
 			
 		}
 		
