@@ -110,14 +110,13 @@ public class LogInViewController {
 	 */
 	@FXML
 	protected void logIn() {
-
+		try {
 			UserType userType = logInBLController.logIn(ID.getText(), password.getText());
-			
-			if(userType==null){
-				new PopUp("请检查你的账号或密码", "登录失败");
-			// TODO 细化啊你倒是，关于失败原因这里暂时没有，后面细化，此处需要界面处理if之后不跳转界面
-			}
-			
+//			TODO djy  這樣改行不行，你自己改
+			// if(userType==null){
+			// new PopUp("请检查你的账号或密码", "登录失败");
+			// // TODO 细化啊你倒是，关于失败原因这里暂时没有，后面细化，此处需要界面处理if之后不跳转界面
+			// }
 			IDReserve.getInstance().setUserID(ID.getText());
 			Parent root = factory.createRoot(userType);
 			// TODO 此处警告可能是依赖问题，需要下去查看
@@ -125,6 +124,10 @@ public class LogInViewController {
 
 			Scene scene = new Scene(root);
 			stage.get(0).setScene(scene);
+
+		} catch (Exception e) {
+			new PopUp("请检查你的账号或密码", "登录失败");
+		}
 
 	}
 
@@ -147,7 +150,7 @@ public class LogInViewController {
 		}
 		
 		if(guestVO==null){
-			new PopUp("密码输入不一致", "登录失败");
+			new PopUp("密码输入不一致", "注册失败");
 //			System.out.println("密码不一致");;
 		}else{
 			new PopUp("你的账号是"+guestVO.userID, "注册成功");
@@ -161,6 +164,7 @@ public class LogInViewController {
 	@FXML
 	protected void link() {
 		System.out.println(rmiText.getText());
+		new PopUp("连接成功", "rmi连接");
 	}
 
 }
