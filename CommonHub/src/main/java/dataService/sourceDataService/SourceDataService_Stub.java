@@ -1,13 +1,19 @@
 package dataService.sourceDataService;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class SourceDataService_Stub implements SourceDataService {
+public class SourceDataService_Stub extends UnicastRemoteObject implements SourceDataService {
+
+	public SourceDataService_Stub() throws RemoteException {
+		super();
+	}
 
 	@Override
-	public Iterator<String> getCities() {
+	public Iterator<String> getCities() throws RemoteException {
 		List<String> list = new ArrayList<String>();
 		list.add("北京");
 		list.add("上海");
@@ -21,7 +27,7 @@ public class SourceDataService_Stub implements SourceDataService {
 	}
 	
 	@Override
-	public Iterator<String> getCircles(String city) {
+	public Iterator<String> getCircles(String city) throws RemoteException {
 		List<String> list = new ArrayList<String>();
 		list.add("仙林中心");
 		list.add("马群");
@@ -33,7 +39,7 @@ public class SourceDataService_Stub implements SourceDataService {
 
 
 	@Override
-	public Iterator<String> getLevels() {
+	public Iterator<String> getLevels() throws RemoteException {
 		List<String> list = new ArrayList<String>();
 		list.add("1");
 		list.add("2");
@@ -44,7 +50,7 @@ public class SourceDataService_Stub implements SourceDataService {
 	}
 
 	@Override
-	public Iterator<String> getRoomTypes() {
+	public Iterator<String> getRoomTypes() throws RemoteException {
 		List<String> list = new ArrayList<String>();
 		list.add("单人间");
 		list.add("双人间");

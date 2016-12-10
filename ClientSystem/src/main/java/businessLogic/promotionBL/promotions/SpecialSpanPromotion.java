@@ -12,6 +12,7 @@ import dataService.promotionDataService.PromotionDataService;
 import dataService.promotionDataService.PromotionDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.SpecialSpanPromotionPO;
+import rmi.ClientRemoteHelper;
 import utilities.enums.ResultMessage;
 import vo.SpecialSpanPromotionVO;
 
@@ -26,11 +27,12 @@ public class SpecialSpanPromotion {
 	List<SpecialSpanPromotionPO> specialSpanPromotions;
 
 	public SpecialSpanPromotion() {
-		try {
-			promotionDataService = new PromotionDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		promotionDataService = ClientRemoteHelper.getInstance().getPromotionDataService();
+//		try {
+//			promotionDataService = new PromotionDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	/**

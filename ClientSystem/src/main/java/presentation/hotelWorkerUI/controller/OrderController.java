@@ -325,7 +325,7 @@ public class OrderController {
 			if (result == ResultMessage.SUCCESS) {
 				new PopUp("入住成功", "congratulation");			
 				
-				//此客户入住成功，将填写的房间号置为空，预计离开时间置为明日正午（全部恢复为默认值）
+				//TODO 高源：此客户入住成功，将填写的房间号置为空，预计离开时间置为明日正午（全部恢复为默认值）
 				checkInRoomNum.setText("");
 				checkInHour.setText("12");
 				checkInMinute.setText("00");

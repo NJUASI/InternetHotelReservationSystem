@@ -27,7 +27,8 @@ public final class MarketController implements MarketBLService {
 	 */
 	private MarketController() {
 		//new the mock object
-		market = new MockMarket();
+		market = new Market();
+//		market = new MockMarket();
 	}
 	
 	/**

@@ -5,6 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import dataHelper.GuestDataHelper;
+import dataHelperImpl.GuestDataHelperImpl;
 import dataHelperImpl.stub.GuestDataHelperImpl_Stub;
 import dataService.guestDataService.GuestDataService;
 import exception.operationFailedException.AddFaidException;
@@ -31,8 +32,8 @@ public class GuestDataServiceImpl extends UnicastRemoteObject implements GuestDa
 	 * @updateTime 2016/12/1 构造函数，从工厂中获取guestDataHelper,creditDataHlper对象
 	 */
 	public GuestDataServiceImpl() throws RemoteException {
-//		guestHelper = new GuestDataHelperImpl();
-		guestHelper = new GuestDataHelperImpl_Stub();
+		guestHelper = new GuestDataHelperImpl();
+//		guestHelper = new GuestDataHelperImpl_Stub();
 	}
 
 	/**

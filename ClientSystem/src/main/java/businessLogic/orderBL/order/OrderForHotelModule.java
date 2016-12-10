@@ -8,6 +8,7 @@ import java.util.List;
 import businessLogicService.orderBLService.OrderForHotelModuleBLService;
 import dataService.orderDataService.OrderDataService;
 import dataService.orderDataService.OrderDataService_Stub;
+import rmi.ClientRemoteHelper;
 import utilities.enums.OrderState;
 import utilities.enums.UserType;
 import vo.OrderGeneralVO;
@@ -23,13 +24,13 @@ public class OrderForHotelModule implements OrderForHotelModuleBLService{
 	private CommonOrder commonOrder;
 	
 	public OrderForHotelModule() {
-//		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
+		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
 		
-		try {
-			orderDataService = new OrderDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			orderDataService = new OrderDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 		
 		commonOrder = new CommonOrder();
 	}

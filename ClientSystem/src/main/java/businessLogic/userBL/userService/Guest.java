@@ -12,6 +12,7 @@ import exception.operationFailedException.AddFaidException;
 import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import po.GuestPO;
+import rmi.ClientRemoteHelper;
 import utilities.Ciphertext;
 import utilities.enums.ResultMessage;
 import vo.GuestVO;
@@ -34,13 +35,12 @@ public class Guest implements UserService, GuestCreditService {
 	 * @updateTime 2016/11/27 构造函数，初始化成员变量
 	 */
 	public Guest() {
-		// guestDataService =
-		// ClientRemoteHelper.getInstance().getGuestDataService();
-		try {
-			guestDataService = new GuestDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		guestDataService = ClientRemoteHelper.getInstance().getGuestDataService();
+//		try {
+//			guestDataService = new GuestDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	/**

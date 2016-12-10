@@ -75,6 +75,7 @@ public class PromotionController {
 		}
 		initDatePromotion(datePromotion);
 		
+		//TODO gcm 这里怎么还是这个样子的。。。。。
 		fixedPromotion= new LinkedList<>();
 		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.HOTEL_ABOVE_THREE_ROOMS,9.3));
 		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.HOTEL_ABOVE_THREE_ROOMS,9.3));
@@ -231,7 +232,7 @@ public class PromotionController {
 		table1.getItems().clear();
 		ObservableList<DatePromotionTable> data = FXCollections.observableArrayList();
 		for (int i = 0; i < fixedPromotion.size(); i++) {
-			data.add(new DatePromotionTable(fixedPromotion.get(i).promotionType.toString(),Double.toString(fixedPromotion.get(i).discount)));
+			data.add(new DatePromotionTable(fixedPromotion.get(i).promotionType.getChinesePromotiontype(),Double.toString(fixedPromotion.get(i).discount)));
 		}
 		nameColumn1.setCellValueFactory(cellData -> cellData.getValue().name);
 		discountColumn1.setCellValueFactory(cellData -> cellData.getValue().discount);
