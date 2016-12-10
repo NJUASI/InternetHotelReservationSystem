@@ -19,13 +19,15 @@ public interface HotelBLService {
 	
 	public ResultMessage addHotel (HotelVO hotelVO);
 	
-	public ResultMessage checkInOffline (String hotelID,RoomType RoomName,int roomNum);
+	public ResultMessage checkInOffline (String hotelID,RoomType RoomType,int roomNum);
 	
-	public ResultMessage checkOutOffline (String hotelID,RoomType RoomName,int roomNum);
+	public ResultMessage checkOutOffline (String hotelID,RoomType RoomType,int roomNum);
 
 	public Iterator<RoomInfoVO> getHotelRoomInfo (String hotelID);
 
 	public ResultMessage updateHotelRoomInfo (RoomInfoVO roomInfoVO);
+	
+	public int getRemainRoomNum(RoomType roomType);
 	
 	public Iterator<HotelVO> getHotels(String city,String circle);
 	

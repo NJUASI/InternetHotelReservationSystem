@@ -80,6 +80,10 @@ public class HotelBLController implements HotelBLService {
 	public ResultMessage addHotel(HotelVO hotelVO) {
 		return hotel.addHotelInfo(hotelVO);
 	}
+	
+	public int getRemainRoomNum(RoomType roomType){
+		return hotel.getRemainNumOfSpecificType(roomType);
+	}
 
 	
 	/**

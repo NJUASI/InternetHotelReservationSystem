@@ -94,5 +94,11 @@ public class HotelBLService_Stub implements HotelBLService{
 		return null;
 	}
 
+	@Override
+	public int getRemainRoomNum(RoomType roomType) {
+		// TODO 自动生成的方法存根
+		return 0;
+	}
+
 
 }
