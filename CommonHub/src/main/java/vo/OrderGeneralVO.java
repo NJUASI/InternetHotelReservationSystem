@@ -103,6 +103,25 @@ public class OrderGeneralVO {
 	 * @author 61990
 	 * lastChangedBy charles
 	 * updateTime 2016/12/5
+	 * 
+	 * 便于界面监听getTempPrice()
+	 */
+	public OrderGeneralVO(String guestID, String hotelID, LocalDateTime expectExecuteTime) {
+		this.orderID = null;
+		this.price = -1;
+		this.state = OrderState.UNEXECUTED;
+		this.hasCommented = false;
+		
+		this.guestID = guestID;
+		this.hotelID = hotelID;
+		this.expectExecuteTime = expectExecuteTime;
+	}
+	
+	/**
+	 * 
+	 * @author 61990
+	 * lastChangedBy charles
+	 * updateTime 2016/12/5
 	 */
 	public OrderGeneralVO(OrderGeneralPO orderGeneralPO) {
 		this.orderID = orderGeneralPO.getOrderID();

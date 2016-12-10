@@ -55,18 +55,15 @@ public class ChargeController {
 	 * @author 61990
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/11/27
-	 * @点击查询按钮，返回客户信息，初始化界面
+	 * @ 点击查询按钮，返回客户信息，初始化界面
 	 */	
 	@FXML
 	protected void search() {
-		
-		//TODO fjy注意：通过输入的得到guest的VO   searchGuestID.getText(),UserType.GUEST
-		
 		chargePane.setVisible(true);
-		guestVO = (GuestVO) userBLService.getSingle( searchGuestID.getText());
+		guestVO = (GuestVO) userBLService.getSingle(searchGuestID.getText());
 		guestID.setText(guestVO.userID);
 		name.setText(guestVO.name);
-		credit.setText( Double.toString(guestVO.credit));
+		credit.setText(Double.toString(guestVO.credit));
 	}
 	
 	/**
@@ -78,7 +75,7 @@ public class ChargeController {
 	 */
 	@FXML
 	protected void saveCharge() throws IOException {
-		//TODO fjy注意：通过guestID保存   guestID.getText()得到ID
+		//TODO djy/gcm注意：通过guestID保存   guestID.getText()得到ID
 //		通过得到改变后的信用值 Double.parseDouble(chargeNum.getText()) + Double.parseDouble(credit.getText())
 		
 		creditService = new Guest();
