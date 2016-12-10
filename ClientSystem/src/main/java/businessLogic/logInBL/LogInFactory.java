@@ -39,11 +39,7 @@ public class LogInFactory {
 		} catch (SpecialCharacterException e) {
 			e.printStackTrace();
 			throw new SpecialCharacterException();
-		} catch (InvalidLengthInputException e) {
-			e.printStackTrace();
-			throw new InvalidLengthInputException();
-		}
-		
+		}		
 		return null;
 	}
 
