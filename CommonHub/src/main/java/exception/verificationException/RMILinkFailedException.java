@@ -10,7 +10,7 @@ public class RMILinkFailedException extends Exception {
 
 	@Override
 	public void printStackTrace() {
-		System.out.println("rmi连接错误");
+		System.out.println("网络连接异常");
 	}
 	
 }
