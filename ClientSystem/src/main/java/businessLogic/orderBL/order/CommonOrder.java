@@ -148,7 +148,9 @@ public class CommonOrder implements CommonOrderBLService {
 
 		if (hotelEvaluationPOs != null) {
 			for (HotelEvaluationPO hotelEvaluationPO : hotelEvaluationPOs) {
-				result.add(new HotelEvaluationVO(hotelEvaluationPO));
+				if (hotelEvaluationPO.getScore() != -1) {
+					result.add(new HotelEvaluationVO(hotelEvaluationPO));
+				}
 			}
 		}
 

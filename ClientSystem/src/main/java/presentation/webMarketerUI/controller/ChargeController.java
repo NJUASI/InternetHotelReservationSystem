@@ -1,7 +1,9 @@
 package presentation.webMarketerUI.controller;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
+import businessLogic.creditBL.CreditController;
 import businessLogic.userBL.UserController;
 import businessLogic.userBL.stub.UserBLService_Stub;
 import businessLogic.userBL.userService.Guest;
@@ -15,7 +17,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import utilities.enums.CreditRecord;
+import vo.CreditVO;
 import vo.GuestVO;
+import vo.OrderVO;
 
 /**
  * @author 61990
@@ -24,8 +29,12 @@ import vo.GuestVO;
  */
 public class ChargeController {
 
+	//user
 	private UserBLService userBLService;
 	private GuestCreditService creditService;
+
+	//credit
+	private CreditController creditController;
 	
 	GuestVO guestVO;
 	
@@ -53,7 +62,10 @@ public class ChargeController {
 		//	TODO	fjj 这个是谁的上面那句话
 		//TODO 冯俊杰回复：不归我啊，但顺手将其修改为实现
 		userBLService = UserController.getInstance();
+		creditService = new Guest();
 //		userBLService = new UserBLService_Stub();
+		
+		creditController = CreditController.getInstance();
 	}
 	
 	/**
@@ -88,18 +100,30 @@ public class ChargeController {
 		//TODO djy/gcm注意：通过guestID保存   guestID.getText()得到ID
 //		通过得到改变后的信用值 Double.parseDouble(chargeNum.getText()) + Double.parseDouble(credit.getText())
 		
-		creditService = new Guest();
 		if (credit.getText() != null) {
+			/*
+			 * TODO 董金玉：因为user里的modifyCredit只是单纯的将信用值改变为期望值，crredit里面没有相关接口
+			 * 故此处逻辑暴露，要不就这样，要不还是得新增接口Credit.charge(args)
+			 */
+			final LocalDateTime time = LocalDateTime.now();
+			final double preCredit = Double.parseDouble(chargeNum.getText());
+			double afterCredit = preCredit +  Double.parseDouble(credit.getText());
+			CreditVO creditVO = new CreditVO(guestID.getText(), time, "", preCredit, afterCredit, CreditRecord.CHARGE);
 			try {
-				creditService.modifyCredit(searchGuestID.getText(),
-						Double.parseDouble(chargeNum.getText()) + Double.parseDouble(credit.getText()));
-			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				creditController.addCreditRecord(creditVO);
 			} catch (UserInexistException e) {
 				e.printStackTrace();
-				// TODO 弹窗提示，需要充值的客户不存在
 			}
+//			try {
+//				afterCredit = Double.parseDouble(chargeNum.getText()) +  Double.parseDouble(credit.getText());
+//				creditVO = new CreditVO(guestID.getText(), time, 
+//						"", thisGuest.credit, afterCredit, CreditRecord.CHARGE);
+//			} catch (NumberFormatException e) {
+//				e.printStackTrace();
+//			} catch (UserInexistException e) {
+//				e.printStackTrace();
+//				// TODO 弹窗提示，需要充值的客户不存在
+//			}
 			showResult();
 		}
 	}
