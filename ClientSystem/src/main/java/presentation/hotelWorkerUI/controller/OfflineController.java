@@ -3,6 +3,7 @@ package presentation.hotelWorkerUI.controller;
 import businessLogic.hotelBL.HotelBLController;
 import businessLogicService.hotelBLService.HotelBLService;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -14,7 +15,7 @@ public class OfflineController {
 	@FXML
 	private ComboBox<String> roomType,roomType2;
 	@FXML
-	private TextField roomNum,roomNum2;
+	private ComboBox<Integer> roomNum,roomNum2;
 	@FXML
 	private DatePicker date1,date2;
 	@FXML
@@ -26,7 +27,13 @@ public class OfflineController {
 		hotelBLController = HotelBLController.getInstance();
 		hotelID = IDReserve.getInstance().getUserID();
 	}
-
+	@FXML
+	void Initialize(){
+		for (int i = 0; i < 5; i++) {
+			roomNum.getItems().add(i);
+			roomNum2.getItems().add(i);
+		}
+	}
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -36,13 +43,12 @@ public class OfflineController {
 	@FXML
 	protected void checkIn(){
 		
-		//TODO gy注意：将roomType改为roomName，roomNum改为comboBox，我把这种房间的剩余房间数量加载进来
-		hotelBLController.checkInOffline(hotelID, RoomType.valueOf(roomType.getValue()), Integer.valueOf(roomNum.getText()));
+		//TODO 将roomType改为roomName，roomNum改为comboBox，我把这种房间的剩余房间数量加载进来
+//		TODO fjj 不知道@谁
+//		TODO gcm 这个时间可能已经没有name了吧，房间类型没变，num已经变为box
+		hotelBLController.checkInOffline(hotelID, RoomType.valueOf(roomType.getValue()), Integer.valueOf(roomNum.getValue()));
 		roomType.setValue("");
-		roomNum.setText("");
-		date1.setValue(null);
-		date2.setValue(null);
-		phone.setText("");
+		roomNum.setValue(null);
 	}
 	/**
 	 * @author 61990
@@ -53,11 +59,14 @@ public class OfflineController {
 	@FXML
 	protected void checkOut(){
 		/**
-		 * TODO gy注意：这里将roomType2改为roomName2，roomNum2也改为选择的，
+		 * TODO fjj注意：这里将roomType2改为roomName2，roomNum2也改为选择的，
 		 * 我把已经入住的房间数量加载进来，不然又会加入条件检测；
+		 * 我加了已经，房间的初始数目在前面初始化
+		 * roomNum.getItems().add(i);for循环
 		 */
-		hotelBLController.checkOutOffline(hotelID,RoomType.valueOf(roomType2.getValue()), Integer.valueOf(roomNum2.getText()));
+		
+		hotelBLController.checkOutOffline(hotelID,RoomType.valueOf(roomType2.getValue()), Integer.valueOf(roomNum2.getValue()));
 		roomType2.setValue("");
-		roomNum2.setText("");
+		roomNum2.setValue(null);;
 	}
 }

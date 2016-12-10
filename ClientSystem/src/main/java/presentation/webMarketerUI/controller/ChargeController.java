@@ -48,6 +48,7 @@ public class ChargeController {
 	private void initialize() {
 		
 		//TODO 掉需要的接口
+//	TODO	fjj 这个是谁的上面那句话
 		userBLService = new UserBLService_Stub();
 	}
 	

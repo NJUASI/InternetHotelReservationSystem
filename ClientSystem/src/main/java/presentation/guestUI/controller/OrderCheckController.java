@@ -132,12 +132,12 @@ public class OrderCheckController {
 	private void undoOrder(String orderID){
 		ResultMessage result = orderBLController.undoNormalOrder(orderID);
 		if (result == ResultMessage.SUCCESS) {
-			//TODO 高源：显示撤销成功
+			new PopUp("撤销成功", "撤销");
 			
-			System.out.println("undo this normal order successed!");
 		}else {
-			//TODO 高源：显示撤销失败
-		}
+//			TODO 先这样吧,撤销的我想直接放在界面的一个label里,完了做
+			new PopUp("撤销失败", "撤销");
+			}
 	}
 	/**
 	 * @author 61990

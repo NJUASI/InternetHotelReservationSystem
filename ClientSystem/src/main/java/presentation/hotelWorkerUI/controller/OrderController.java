@@ -20,6 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import presentation.PopUp.PopUp;
 import presentation.Table.OrderTable;
 import utilities.IDReserve;
 import utilities.OrderState;
@@ -321,15 +322,14 @@ public class OrderController {
 		final CheckInVO checkInVO = new CheckInVO(checkInOrderID.getText(), checkInRoomNum.getText(), checkInTime, expectLeaveTime);
 		final ResultMessage result = orderBLController.updateCheckIn(checkInVO);
 		if (result == ResultMessage.SUCCESS) {
-			//TODO 高源：状态栏显示入住成功
-			
+			new PopUp("入住成功", "congratulation");			
 			
 			//此客户入住成功，将填写的房间号置为空，预计离开时间置为明日正午（全部恢复为默认值）
 			checkInRoomNum.setText("");
 			checkInHour.setText("12");
 			checkInMinute.setText("00");
 		}else {
-			//TODO 高源：状态栏显示入住失败
+			new PopUp("入住失败", "so sorry");	
 			
 		}
 	}
@@ -386,11 +386,12 @@ public class OrderController {
 		final CheckOutVO checkOutVO = new CheckOutVO(checkInOrderID.getText(), checkOutTime);
 		
 		final ResultMessage result = orderBLController.updateCheckOut(checkOutVO);
+//	TODO 后期可以把这些放在界面里，不弹框
 		if (result == ResultMessage.SUCCESS) {
-			//TODO 高源：状态栏显示退房成功
-			
+			new PopUp("退房成功", "congratulation");	
+						
 		}else {
-			//TODO 高源：状态栏显示退房成功
+			new PopUp("退房失败", "congratulation");	
 			
 		}
 	}

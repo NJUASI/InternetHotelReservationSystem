@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import presentation.PopUp.PopUp;
 import utilities.ResultMessage;
 import vo.WebMarketerVO;
 
@@ -42,7 +43,8 @@ public class MarketerController {
 		marketerVO = (WebMarketerVO) userBLController.getSingle(inputID.getText());
 		
 		if(marketerVO == null){
-			// TODO gy 获取到的marketerVO为空，代表找不到对应ID的网站营销人员，界面做提示处理，界面不跳转
+//			TODO djy得不到不是可以直接弄到异常里吗
+				new PopUp("请检查输入内容", "sorry");
 		}
 		
 		marketerID.setText(marketerVO.userID);
@@ -82,7 +84,9 @@ public class MarketerController {
 		tempMarketerVO.password = password2.getText();
 		
 		ResultMessage message = userBLController.modify(tempMarketerVO);
-		// TODO gy 返回是否成功修改的信息，界面需做提示处理
+		 		
+		new PopUp(message.toString(), "congratulation");	
+
 
 		modifyPane.setVisible(false);
 		marketerInfoPane.setVisible(true);
@@ -108,7 +112,7 @@ public class MarketerController {
 	@FXML
 	protected void addMarketer() {
 		//TODO 返回初始的标号和密码
-		// TODO gy 这个方法是添加酒店工作人员还是营销？
-		//或者直接不提供
+		// TODO djy 这个方法是添加酒店工作人员还是营销？
+//		营销人员的VO
 	}
 }
