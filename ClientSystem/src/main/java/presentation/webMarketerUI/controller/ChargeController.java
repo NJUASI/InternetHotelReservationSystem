@@ -6,6 +6,7 @@ import businessLogic.userBL.stub.UserBLService_Stub;
 import businessLogic.userBL.userService.Guest;
 import businessLogic.userBL.userService.service.GuestCreditService;
 import businessLogicService.userBLService.UserBLService;
+import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -60,7 +61,12 @@ public class ChargeController {
 	@FXML
 	protected void search() {
 		chargePane.setVisible(true);
-		guestVO = (GuestVO) userBLService.getSingle(searchGuestID.getText());
+		try {
+			guestVO = (GuestVO) userBLService.getSingle(searchGuestID.getText());
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+			// 为了保证编译能通过
+		}
 		guestID.setText(guestVO.userID);
 		name.setText(guestVO.name);
 		credit.setText(Double.toString(guestVO.credit));
@@ -80,8 +86,16 @@ public class ChargeController {
 		
 		creditService = new Guest();
 		if (credit.getText() != null) {
-			creditService.modifyCredit(searchGuestID.getText(),
-					Double.parseDouble(chargeNum.getText()) + Double.parseDouble(credit.getText()));
+			try {
+				creditService.modifyCredit(searchGuestID.getText(),
+						Double.parseDouble(chargeNum.getText()) + Double.parseDouble(credit.getText()));
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UserInexistException e) {
+				e.printStackTrace();
+				// TODO 弹窗提示，需要充值的客户不存在
+			}
 			showResult();
 		}
 	}

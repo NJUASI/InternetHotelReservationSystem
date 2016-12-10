@@ -6,6 +6,7 @@ import businessLogic.hotelBL.hotel.Hotel;
 import businessLogic.userBL.userService.UserFactory;
 import businessLogic.userBL.userService.UserLengthFactory;
 import businessLogic.userBL.userService.service.UserService;
+import exception.verificationException.UserInexistException;
 import utilities.ResultMessage;
 import utilities.UserType;
 import vo.HotelVO;
@@ -78,8 +79,9 @@ public class User {
 	 * @updateTime 2016/11/27
 	 * @param userVO，userType 从客户界面层传下来的userInfo载体和指定用户类型
 	 * @return UserVO 单一userInfo载体
+	 * @throws UserInexistException 
 	 */
-	public UserVO getSingle(String userID) {
+	public UserVO getSingle(String userID) throws UserInexistException {
 
 		user = lengthFactory.createUser(userID.length());
 		
@@ -144,8 +146,9 @@ public class User {
 	 * @updateTime 2016/11/27
 	 * @param  guestID, userType 从客户界面层传下来的指定用户ID和指定用户类型
 	 * @return String 指定用户 的登录信息
+	 * @throws UserInexistException 
 	 */
-	public String getLogInInfo(String userID,UserType userType) {
+	public String getLogInInfo(String userID,UserType userType) throws UserInexistException {
 		
 		user = factory.createUser(userType);
 		

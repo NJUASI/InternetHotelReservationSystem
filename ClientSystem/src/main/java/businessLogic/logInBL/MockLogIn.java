@@ -2,6 +2,7 @@ package businessLogic.logInBL;
 
 import businessLogic.userBL.MockUser;
 import businessLogic.userBL.User;
+import exception.verificationException.UserInexistException;
 import utilities.ResultMessage;
 import utilities.UserType;
 import vo.GuestVO;
@@ -35,8 +36,9 @@ public class MockLogIn extends LogIn {
 	 * @param password
 	 *            从登录界面层传下来的密码
 	 * @return 客户是否成功登录
+	 * @throws UserInexistException 
 	 */
-	public ResultMessage guestLogIn(final String guest, final String password,UserType userType) {
+	public ResultMessage guestLogIn(final String guest, final String password,UserType userType) throws UserInexistException {
 		final String realPassword = user.getLogInInfo(guest, userType);
 		if (realPassword.equals(password)) {
 			return ResultMessage.SUCCESS;
@@ -54,8 +56,9 @@ public class MockLogIn extends LogIn {
 	 * @param password
 	 *            从登录界面层传下来的密码
 	 * @return 酒店是否成功登录
+	 * @throws UserInexistException 
 	 */
-	public ResultMessage hotelWorkerLogIn(final String hotelWorker, final String password,UserType userType) {
+	public ResultMessage hotelWorkerLogIn(final String hotelWorker, final String password,UserType userType) throws UserInexistException {
 		final String realPassword = user.getLogInInfo(hotelWorker,userType);
 		if (realPassword.equals(password)) {
 			return ResultMessage.SUCCESS;
@@ -73,8 +76,9 @@ public class MockLogIn extends LogIn {
 	 * @param password
 	 *            从登录界面层传下来的密码
 	 * @return 营销人员是否成功登录
+	 * @throws UserInexistException 
 	 */
-	public ResultMessage webMarketerLogIn(final String webMarketer, final String password,UserType userType) {
+	public ResultMessage webMarketerLogIn(final String webMarketer, final String password,UserType userType) throws UserInexistException {
 		final String realPassword = user.getLogInInfo(webMarketer,userType);
 		if (realPassword.equals(password)) {
 			return ResultMessage.SUCCESS;
@@ -92,8 +96,9 @@ public class MockLogIn extends LogIn {
 	 * @param password
 	 *            从登录界面层传下来的密码
 	 * @return 管理人员是否成功登录
+	 * @throws UserInexistException 
 	 */
-	public ResultMessage webManagerLogIn(final String webManager, final String password,UserType userType) {
+	public ResultMessage webManagerLogIn(final String webManager, final String password,UserType userType) throws UserInexistException {
 		final String realPassword = user.getLogInInfo(webManager,userType);
 		if (realPassword.equals(password)) {
 			return ResultMessage.SUCCESS;

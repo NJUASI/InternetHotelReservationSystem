@@ -6,6 +6,7 @@ import exception.inputException.InvalidInputException;
 import exception.inputException.InvalidLengthInputException;
 import exception.inputException.PasswordInputException;
 import exception.inputException.SpecialCharacterException;
+import exception.verificationException.UserInexistException;
 import exception.verificationException.WrongPasswordException;
 import utilities.Detector;
 import utilities.UserType;
@@ -43,10 +44,11 @@ public class LogIn implements LogInBLService{
 	 * @author: Harvey Gong
 	 * @throws SpecialCharacterException 
 	 * @throws InvalidLengthInputException 
+	 * @throws UserInexistException 
 	 * @lastChangedBy: Byron Dong
 	 * @time:2016年12月7日 
 	 */
-	public UserType logIn(String userID,String password) throws WrongPasswordException, SpecialCharacterException, InvalidLengthInputException{
+	public UserType logIn(String userID,String password) throws WrongPasswordException, SpecialCharacterException, InvalidLengthInputException, UserInexistException{
 		
 		UserType userType = null;
 		try {

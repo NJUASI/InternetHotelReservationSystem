@@ -7,6 +7,7 @@ import java.util.List;
 import dataHelper.GuestDataHelper;
 import dataHelperImpl.stub.GuestDataHelperImpl_Stub;
 import dataService.guestDataService.GuestDataService;
+import exception.verificationException.UserInexistException;
 import po.GuestPO;
 import po.MemberPO;
 import utilities.ResultMessage;
@@ -39,12 +40,13 @@ public class GuestDataServiceImpl extends UnicastRemoteObject implements GuestDa
 	 * @param guestID 客户ID
 	 * @return GuestPO guestInfo载体
 	 */
-	public GuestPO getSingleGuest(String guestID) throws RemoteException {
-		
-		if(guestID==null||guestID==""||guestID.length()!=10){return null;} //传入的ID无效，返回空
+	public GuestPO getSingleGuest(String guestID) throws RemoteException ,UserInexistException{
 		
 		GuestPO guestPO = guestHelper.getSingle(guestID);
-		//从数据库中得到一个按ID索引的PO，若不存在则为空
+		
+		if(guestPO==null){
+			throw new UserInexistException(); //从数据库中得到一个按ID索引的PO，若不存在则为空
+		}
 		return guestPO;
 	}
 

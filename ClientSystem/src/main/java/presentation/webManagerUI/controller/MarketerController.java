@@ -2,6 +2,7 @@ package presentation.webManagerUI.controller;
 
 import businessLogic.userBL.UserController;
 import businessLogicService.userBLService.UserBLService;
+import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -39,7 +40,12 @@ public class MarketerController {
 	 */
 	@FXML
 	protected void search() {
-		marketerVO = (WebMarketerVO) userBLController.getSingle(inputID.getText());
+		try {
+			marketerVO = (WebMarketerVO) userBLController.getSingle(inputID.getText());
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+			// 为了保证编译能通过
+		}
 		
 		if(marketerVO == null){
 			// TODO gy 获取到的marketerVO为空，代表找不到对应ID的网站营销人员，界面做提示处理，界面不跳转

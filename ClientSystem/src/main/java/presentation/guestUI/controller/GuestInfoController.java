@@ -2,6 +2,7 @@ package presentation.guestUI.controller;
 
 import businessLogic.userBL.UserController;
 import businessLogicService.userBLService.UserBLService;
+import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -48,7 +49,12 @@ public class GuestInfoController {
 	@FXML
 	private void initialize() {
 		
-		guestVO = (GuestVO) userBLController.getSingle(userID);
+		try {
+			guestVO = (GuestVO) userBLController.getSingle(userID);
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+			// 主要登录该情况是不出现的，只是为了编译通过
+		}
 		guestID.setText(guestVO.userID);
 		name.setText(guestVO.name);
 		nickname.setText(guestVO.nickName);

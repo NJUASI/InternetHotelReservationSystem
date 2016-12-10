@@ -5,6 +5,7 @@ import exception.inputException.InvalidInputException;
 import exception.inputException.InvalidLengthInputException;
 import exception.inputException.PasswordInputException;
 import exception.inputException.SpecialCharacterException;
+import exception.verificationException.UserInexistException;
 import exception.verificationException.WrongPasswordException;
 import utilities.UserType;
 import vo.GuestVO;
@@ -70,9 +71,10 @@ public final class LogInController implements LogInBLService {
 	 * @return 用户是否成功登录
 	 * @throws InvalidLengthInputException 
 	 * @throws SpecialCharacterException 
+	 * @throws UserInexistException 
 	 */
 	@Override
-	public UserType logIn(String userID, String password) throws WrongPasswordException, SpecialCharacterException, InvalidLengthInputException{
+	public UserType logIn(String userID, String password) throws WrongPasswordException, SpecialCharacterException, InvalidLengthInputException, UserInexistException{
 		return logIn.logIn(userID, password);
 	}
 

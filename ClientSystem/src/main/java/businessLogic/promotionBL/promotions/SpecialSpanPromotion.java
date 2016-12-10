@@ -10,6 +10,7 @@ import businessLogic.promotionBL.discountCalculation.CalculateDiscount;
 import businessLogic.promotionBL.discountCalculation.discountOfPromotions.SpecialSpanDiscount;
 import dataService.promotionDataService.PromotionDataService;
 import dataService.promotionDataService.PromotionDataService_Stub;
+import exception.verificationException.UserInexistException;
 import po.SpecialSpanPromotionPO;
 import utilities.ResultMessage;
 import vo.SpecialSpanPromotionVO;
@@ -114,9 +115,10 @@ public class SpecialSpanPromotion {
 	 * @return
 	 * double
 	 * @author: Harvey Gong
+	 * @throws UserInexistException 
 	 * @time:2016年12月1日 下午3:27:17
 	 */
-	public double getDiscountOneday(String hotelID, LocalDate today){
+	public double getDiscountOneday(String hotelID, LocalDate today) throws UserInexistException{
 		double discount = 1;
 		initSpecialSpanPromotions(hotelID);
 		discount = discount * getSpecialSpanDiscount(today);
@@ -125,7 +127,7 @@ public class SpecialSpanPromotion {
 		return discount;
 	}
 
-	private double getSpecialSpanDiscount(LocalDate today){
+	private double getSpecialSpanDiscount(LocalDate today) throws UserInexistException{
 		double discount = 1;
 		List<CalculateDiscount> specialSpanDiscount = initCalculateSpecialSpanDiscount(today);
 		for(int i = 0;i<specialSpanDiscount.size();i++){

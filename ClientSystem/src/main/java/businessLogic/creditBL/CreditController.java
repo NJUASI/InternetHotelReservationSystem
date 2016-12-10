@@ -3,6 +3,7 @@ package businessLogic.creditBL;
 import java.util.Iterator;
 
 import businessLogicService.creditBLService.CreditBLService;
+import exception.verificationException.UserInexistException;
 import utilities.ResultMessage;
 import vo.CreditVO;
 
@@ -69,9 +70,10 @@ public final class CreditController implements CreditBLService {
 	 * @updateTime 2016/12/9
 	 * @param creditVO 一条信用记录
 	 * @return 是否成功添加此信用记录
+	 * @throws UserInexistException 
 	 */
 	@Override
-	public ResultMessage addCreditRecord(CreditVO creditVO) {
+	public ResultMessage addCreditRecord(CreditVO creditVO) throws UserInexistException {
 		return credit.addCreditRecord(creditVO);
 	}
 

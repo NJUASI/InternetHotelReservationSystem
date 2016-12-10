@@ -2,6 +2,7 @@ package presentation.webManagerUI.controller;
 
 import businessLogic.userBL.UserController;
 import businessLogicService.userBLService.UserBLService;
+import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -53,7 +54,12 @@ public class GuestController {
 	@FXML
 	protected void search() {
 		
-		guestVO = (GuestVO) userBLController.getSingle(inputID.getText());
+		try {
+			guestVO = (GuestVO) userBLController.getSingle(inputID.getText());
+		} catch (UserInexistException e1) {
+			e1.printStackTrace();
+			// 为了保证编译能通过
+		}
 		
 		if(guestVO == null){
 			// TODO gy 获取到的guestVO为空，代表找不到对应ID的客户，界面做提示处理，界面不跳转

@@ -2,6 +2,7 @@ package presentation.webManagerUI.controller;
 
 import businessLogic.userBL.UserController;
 import businessLogicService.userBLService.UserBLService;
+import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -41,7 +42,12 @@ public class HotelWorkerController {
 	@FXML
 	protected void search() {
 		System.out.println(inputID.getText());
-		hotelWorkerVO = (HotelWorkerVO) userBLController.getSingle(inputID.getText());
+		try {
+			hotelWorkerVO = (HotelWorkerVO) userBLController.getSingle(inputID.getText());
+		} catch (UserInexistException e1) {
+			e1.printStackTrace();
+			// 为了保证编译能通过
+		}
 		
 		hotelInfoPane.setVisible(true);
 		

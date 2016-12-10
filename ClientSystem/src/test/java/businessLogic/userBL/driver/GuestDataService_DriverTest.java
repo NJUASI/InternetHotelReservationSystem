@@ -34,7 +34,7 @@ public class GuestDataService_DriverTest {
 			assertEquals("000000", a.decode(guestPO.getPassword()));
 			assertEquals("13523456789", a.decode(guestPO.getPhone()));
 			assertEquals(100, guestPO.getCredit(), 0);
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

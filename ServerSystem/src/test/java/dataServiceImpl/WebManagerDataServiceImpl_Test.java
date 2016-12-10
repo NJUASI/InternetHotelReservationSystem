@@ -22,7 +22,7 @@ public class WebManagerDataServiceImpl_Test {
 
 			assertEquals(webManagerPO.getWebManagerID(), "0001");
 			assertEquals(webManagerPO.getPassword(), "123456");
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -51,7 +51,7 @@ public class WebManagerDataServiceImpl_Test {
 
 			assertEquals(webManagerPO.getWebManagerID(), "0001");
 			assertEquals(webManagerPO.getPassword(), "123456");
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

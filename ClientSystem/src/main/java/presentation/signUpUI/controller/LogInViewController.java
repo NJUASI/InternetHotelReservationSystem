@@ -10,6 +10,7 @@ import exception.inputException.InvalidInputException;
 import exception.inputException.InvalidLengthInputException;
 import exception.inputException.PasswordInputException;
 import exception.inputException.SpecialCharacterException;
+import exception.verificationException.UserInexistException;
 import exception.verificationException.WrongPasswordException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -132,7 +133,10 @@ public class LogInViewController {
 						Scene scene = new Scene(root);
 						stage.get(0).setScene(scene);
 					}
-				} catch (SpecialCharacterException e) {
+				} catch(UserInexistException e){
+					e.printStackTrace();
+					new PopUp("该用户不存在", "登录失败");
+				}catch (SpecialCharacterException e) {
 					e.printStackTrace();
 					new PopUp("账号中含有不合法符号", "登录失败");
 				} catch (WrongPasswordException e) {
