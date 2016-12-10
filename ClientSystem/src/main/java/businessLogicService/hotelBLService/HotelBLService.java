@@ -27,7 +27,9 @@ public interface HotelBLService {
 
 	public ResultMessage updateHotelRoomInfo (RoomInfoVO roomInfoVO);
 	
-	public int getRemainRoomNum(RoomType roomType);
+	public int getRemainRoomNum(String hotelID,RoomType roomType);
+	
+	public double getOriginPrice(String hotelID, RoomType roomType);
 	
 	public Iterator<HotelVO> getHotels(String city,String circle);
 	

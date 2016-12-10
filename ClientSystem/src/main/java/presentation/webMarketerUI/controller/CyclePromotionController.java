@@ -115,11 +115,6 @@ public class CyclePromotionController {
 			address.add(specialCirclePromotions.next());
 		}
 		
-		/**
-		 *  TODO gcm 他变量不一样,String 不能直接加到里面，应该是必须要装换为simple…………的没有见到可行的方法
-		 *  我看网上可以直接调用FXCollections.observableArrayList(List list)
-		 *  而且addressTable和addressVO几乎一样，看看能不能消除冗余
-		 */
 		ObservableList<AddressTable> data = FXCollections.observableArrayList();
 		for (int i = 0; i < address.size(); i++) {
 			data.add(new AddressTable(address.get(i).city, address.get(i).circle, Double.toString(address.get(i).discout)));
@@ -145,12 +140,9 @@ public class CyclePromotionController {
 		String circle = cycleInput.getValue();
 		double discount = Double.valueOf(cycleDiscount.getText());
 		AddressVO addressVO = new AddressVO(city,circle,discount);
+		
 		//调用promotionController的更新特定商圈策略的方法
 		promotionBLController.updateSpecialCirclePromotions(addressVO);
 	}
-	
-	//TODO gcm注意：没有看到添加策略的方法
-// 	我原来理解的是你有没有那个折扣都要放在那个表里,相当于全部初始化,如果你需要添加,找到对应的城市商圈,如果没有折扣改折扣就行
-// 这样一个表就解决了,然后昨天发现你们是存了两个表,就有点矛盾,我可以加一个按钮,其实我那种想法方便点,就增删改查一起就走了,反正都是改折扣,想一下给我回复
 }
 

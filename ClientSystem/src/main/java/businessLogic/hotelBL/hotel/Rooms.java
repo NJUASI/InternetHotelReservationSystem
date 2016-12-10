@@ -129,7 +129,7 @@ class Rooms {
 			int roomNum = po.getRoomNum();
 			int remainRoomNum = po.getRemainNum();
 			roomInfoVO.remainNum = remainRoomNum + roomInfoVO.roomNum - roomNum;
-			
+
 			hotelDataService.updateRoomInfo(new RoomInfoPO(roomInfoVO));
 			initRoomInfoPO(roomInfoVO.hotelID);
 			return ResultMessage.SUCCESS;
@@ -152,7 +152,7 @@ class Rooms {
 	 * @time:2016年12月4日 下午8:05:19
 	 */
 	private ResultMessage updateRemainRoomNum(String hotelID,RoomType roomType, int operationedNum,Operation operation){
-		
+
 		initRoomInfoPO(hotelID);
 		RoomInfoPO po = roomInfoPOList.get(findPO(roomType));
 		if(operation == Operation.CHECK_IN){
@@ -189,17 +189,14 @@ class Rooms {
 	 * int
 	 * @exception:
 	 * @author: Harvey Gong
+	 * @param hotelID 
 	 * @time:2016年12月4日 下午7:20:02
 	 */
-	public int getRemainNumOfSpecificType(RoomType roomType){
-		for(int i = 0;i<roomInfoPOList.size();i++){
-			if(roomInfoPOList.get(i).getRoomType() == (roomType)){
-				return roomInfoPOList.get(i).getRemainNum();
-			}
-		}
-		return 0;
+	public int getRemainNumOfSpecificType(String hotelID, RoomType roomType){
+		initRoomInfoPO(hotelID);
+		return roomInfoPOList.get(findPO(roomType)).getRemainNum(); 
 	}
-	
+
 	public int getRemainRoomNum(String hotelID) {
 		initRoomInfoPO(hotelID);
 		int remainRoomNum = 0;
@@ -256,4 +253,12 @@ class Rooms {
 		return -1;
 	}
 
+	public ResultMessage updateRemainRoomNumForUndoOrder(String hotelID, RoomType roomType, int roomNum) {
+		return updateRemainRoomNum(hotelID, roomType, roomNum, Operation.UNDO_ORDER);
+	}
+
+	public double getOriginPrice(String hotelID, RoomType roomType) {
+		initRoomInfoPO(hotelID);
+		return roomInfoPOList.get(findPO(roomType)).getPrice();
+	}
 }

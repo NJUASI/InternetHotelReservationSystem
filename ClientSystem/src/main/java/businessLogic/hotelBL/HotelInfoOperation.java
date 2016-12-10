@@ -93,5 +93,5 @@ public interface HotelInfoOperation {
 	 * @lastChangedBy: charles
 	 * @time:2016/12/10
 	 */
-	public ResultMessage updateRemainRoomNum(String hotelID, RoomType roomType, int roomNum);
+	public ResultMessage updateRemainRoomNumForUndoOrder(String hotelID, RoomType roomType, int roomNum);
 }
