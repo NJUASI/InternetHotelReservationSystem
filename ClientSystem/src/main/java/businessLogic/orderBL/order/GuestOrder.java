@@ -194,4 +194,25 @@ public class GuestOrder implements GuestOrderBLService {
 		}
 		return result.iterator();
 	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/10
+	 * @param guestID 客户编号
+	 * @param hotelID 目标酒店编号
+	 * @return 客户在目标酒店的所有订单记录
+	 */
+	public Iterator<OrderGeneralVO> getMyOrdersOfThisHotel(String guestID, String hotelID) {
+		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
+		final Iterator<OrderGeneralVO> orderGenerals = commonOrder.getAllOrderGenerals(guestID, UserType.GUEST);
+
+		while(orderGenerals.hasNext()){
+			OrderGeneralVO thisOrderGeneral = orderGenerals.next();
+			if(thisOrderGeneral.hotelID.equals(hotelID)){
+				result.add(thisOrderGeneral);
+			}
+		}
+		return result.iterator();
+	}
 }

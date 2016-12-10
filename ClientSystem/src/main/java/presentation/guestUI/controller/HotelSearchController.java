@@ -167,8 +167,6 @@ public class HotelSearchController {
 
 	class RoomTypeChangeListener implements ChangeListener<String>{
 		public void changed(ObservableValue ov, String oldValue, String roomType) {
-
-			// TODO fjj roomType为当前订单所选的房间类型，需要计算订单加个返回，即需要给preOrder的roomType重新赋值
 			
 			//根据改变的房型，改变可预订的房间数量
 			roomCountInOrder.getItems().clear();
@@ -185,13 +183,38 @@ public class HotelSearchController {
 			
 			previousPriceInOrder.setText("1");
 			remainNumInOrder.setText("2");
+
+			// TODO fjj roomType为当前订单所选的房间类型，需要计算订单加个返回，即需要给preOrder的roomType重新赋值
+			// TODO gy 房间类型改变后此房间的单价会改变，显示在previousPriceInOrder的值需修改，你好像还没有实现，你改了我再改
+			final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(),
+					LocalTime.of(hourInOrder.getValue(), minuteInOrder.getValue()));
+
+			final OrderGeneralVO createOrderGeneral = new OrderGeneralVO(IDReserve.getInstance().getUserID(),
+					hotelIDInOrder.getText(), expectExecuteTime);
+
+			final OrderVO tempOrder = new OrderVO(createOrderGeneral,
+					Double.parseDouble(previousPriceInOrder.getText()),
+					RoomType.convertString2Roomtype(roomTypeInOrder.getValue()), roomCountInOrder.getValue());
+
+			final double tempPrice = orderBLController.getTempPrice(tempOrder);
+			
 		}    
 	}
 
 	class RoomNumChangeListener implements ChangeListener<Integer>{
 		public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer roomNum) {
-			// TODO fjj roomNum为当前订单所选的房间数量，需要计算订单价格返回,即需要给preOrder的roomNum重新赋值
-			priceOfOrder.setText("123");
+			final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(), 
+					LocalTime.of(hourInOrder.getValue(), minuteInOrder.getValue()));
+			
+			final OrderGeneralVO createOrderGeneral = new OrderGeneralVO(IDReserve.getInstance().getUserID(), 
+					hotelIDInOrder.getText(), expectExecuteTime);
+
+			final OrderVO tempOrder = new OrderVO(createOrderGeneral, Double.parseDouble(previousPriceInOrder.getText()), 
+					RoomType.convertString2Roomtype(roomTypeInOrder.getValue()), roomCountInOrder.getValue());
+			
+			final double tempPrice = orderBLController.getTempPrice(tempOrder);
+			
+			priceOfOrder.setText(String.valueOf(tempPrice));
 		}    
 	}
 
@@ -322,48 +345,36 @@ public class HotelSearchController {
 	@FXML
 	protected void openHotelDetail() {
 		//TODO fjj注意： 酒店订单列表 酒店评价列表
-		//TODO fjj注意： 酒店订单列表 酒店评价列表
+		//TODO 冯俊杰回复高源：酒店订单列表是指此客户在此酒店的所有订单吧？  不是所有酒店订单列表吧？确认一下  and我在fxml里面没找到这个地方
 		try{
-			
-		String hotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
 
-		//获取hotelVO，调用hotelBL的方法
-		hotelVO = hotelBLController.getHotelInfo(hotelID);
+			String hotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
 
-		hotelCheck.setVisible(false);
-		hotelDetail.setVisible(true);
+			// 获取hotelVO，调用hotelBL的方法
+			hotelVO = hotelBLController.getHotelInfo(hotelID);
+			hotelCheck.setVisible(false);
+			hotelDetail.setVisible(true);
+			rooms = hotelBLController.getHotelRoomInfo(hotelID);
 
-		rooms = hotelBLController.getHotelRoomInfo(hotelID);
+			// 此客户在此酒店的所有订单
+			orderVOlist = new ArrayList<OrderGeneralVO>();
+			Iterator<OrderGeneralVO> myOrdersOfThisHotel = orderBLController.getMyOrdersOfThisHotel(IDReserve.getInstance().getUserID(), hotelID);
+			while (myOrdersOfThisHotel.hasNext()) {
+				orderVOlist.add(myOrdersOfThisHotel.next());
+			}
 
+			// 初始化此酒店的评论
+			commentList = new ArrayList<HotelEvaluationVO>();
+			Iterator<HotelEvaluationVO> thisHotelEvaluation = orderBLController.getEvaluations(hotelID);
+			while (thisHotelEvaluation.hasNext()) {
+				commentList.add(thisHotelEvaluation.next());
+			}
 
-		//TODO fjj注意：调用orderBL
-		orderVOlist=new LinkedList<>();
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-		orderVOlist.add(new OrderGeneralVO("123456677","123456677", "123456677",  "1如家", 
-				"七里河十里店希望小学",124.0, LocalDateTime.of(2005, 3, 2, 22, 10),LocalDateTime.of(2005, 3, 2, 22, 10), 
-				OrderState.ABNORMAL,false, "gaoy", "1212121") );
-
-		//TODO fjj注意：调用orderbL
-		commentList=new LinkedList<>();
-		commentList.add(new HotelEvaluationVO("12334", LocalDate.of(2005, 3, 2),5.0,"ssssdfgasdfadgljglfksdjfklajdlfkjasldfkj"));
-		commentList.add(new HotelEvaluationVO("12334", LocalDate.of(2005, 3, 2),5.0,"ssssdfgasdfadgljglfksdjfklajdlfkjasldfkj"));
-		commentList.add(new HotelEvaluationVO("12334", LocalDate.of(2005, 3, 2),5.0,"ssssdfgasdfadgljglfksdjfklajdlfkjasldfkj"));
-		commentList.add(new HotelEvaluationVO("12334", LocalDate.of(2005, 3, 2),5.0,"ssssdfgasdfadgljglfksdjfklajdlfkjasldfkj"));
-		commentList.add(new HotelEvaluationVO("12334", LocalDate.of(2005, 3, 2),5.0,"ssssdfgasdfadgljglfksdjfklajdlfkjasldfkj"));
-
-		initRoomTable(rooms);
-		initCommentTable(commentList);
-		initHotelDetail(hotelVO);
-		initOrderCheck(orderVOlist);
-		}catch (Exception e) {
+			initRoomTable(rooms);
+			initCommentTable(commentList);
+			initHotelDetail(hotelVO);
+			initOrderCheck(orderVOlist);
+		} catch (Exception e) {
 			new PopUp("请选定酒店", "");
 		}
 	}
@@ -656,9 +667,6 @@ public class HotelSearchController {
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/11/27
 	 * @点击提交订单按钮
-	 * 
-	 * TODO fjj：对hourInOrder、hourInOrder2、minuteInOrder、minuteInOrder2的功能不清楚，故为猜测，检查一下
-	 * 就是生成一下准确时间，相当于timePicker
 	 */
 	OrderVO orderVO;
 

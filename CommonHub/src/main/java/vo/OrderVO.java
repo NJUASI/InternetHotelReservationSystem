@@ -10,7 +10,7 @@ import utilities.RoomType;
  * 
  * @author 61990
  * lastChangedBy charles
- * updateTime 2016/12/5
+ * updateTime 2016/12/10
  *
  */
 public class OrderVO {
@@ -131,6 +131,30 @@ public class OrderVO {
 		this.roomNumCount = roomNumCount;
 		this.expectGuestNumCount = expectGuestNumCount;
 		this.message = message;
+	}
+	
+	/**
+	 * 
+	 * @author 61990
+	 * lastChangedBy charles
+	 * updateTime 2016/12/10
+	 * 
+	 * 便于界面监听getTempPrice()
+	 */
+	public OrderVO(OrderGeneralVO orderGeneralVO, double previousPrice, RoomType roomType,
+			int roomNumCount) {
+		this.orderGeneralVO = orderGeneralVO;
+		
+		this.createTime = LocalDateTime.now();
+		this.checkInTime = null;
+		this.checkOutTime = null;
+		this.roomNumber = null;
+		this.score = -1;
+		this.comment = null;
+		
+		this.previousPrice = previousPrice;
+		this.roomType = roomType;
+		this.roomNumCount = roomNumCount;
 	}
 	
 	/**

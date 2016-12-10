@@ -238,6 +238,22 @@ public class OrderBLService_Stub implements OrderBLService {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
+	 * @updateTime 2016/12/10
+	 * @param guestID 客户编号
+	 * @param hotelID 目标酒店编号
+	 * @return 客户在目标酒店的所有订单记录
+	 */
+	public Iterator<OrderGeneralVO> getMyOrdersOfThisHotel(String guestID, String hotelID) {
+		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.EXECUTED, false, "zhangsan","13554321234"));
+		return orderGenerals.iterator();
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
 	 * @updateTime 2016/12/5
 	 * @param hotelID 酒店要查看本酒店所有订单时，酒店的编号
 	 * @return 此酒店所有的所有订单
