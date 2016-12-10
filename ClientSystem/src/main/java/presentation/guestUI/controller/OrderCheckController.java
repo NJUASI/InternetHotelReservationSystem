@@ -95,7 +95,6 @@ public class OrderCheckController {
 	@FXML
 	protected void searchAllOrder() {
 		undoBt.setVisible(false);
-		//TODO 高源——————charles新加的，界面上没有对应按钮——所有订单
 		orderGenerals = orderBLController.getAllOrderGenerals(guestID, guest);
 		initOrderCheck(orderGenerals);
 	}
@@ -106,7 +105,6 @@ public class OrderCheckController {
 	 * @updateTime 2016/12/8
 	 * @打开未执行订单概况
 	 * 
-	 * TODO 高源：未执行订单应该有一个撤销的按钮  undoNormalOrder
 	 */
 	@FXML
 	protected void searchUnexecutedOrder() {
@@ -117,10 +115,9 @@ public class OrderCheckController {
 	
 	/**
 	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/8
-	 * @撤销订单
-	 * TODO fjj 12.9：加了，以下是方法通过ID 撤销
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/10
+	 * @客户撤销未执行订单
 	 */
 	@FXML
 	protected void undoNormalOrder(){
@@ -130,8 +127,16 @@ public class OrderCheckController {
 	protected void undoInDetail(){
 		undoOrder(orderVO.orderGeneralVO.orderID);
 	}
-	void undoOrder(String orderID ){
-//		TODO fjj 你在这里测试是否可以撤销
+	
+	private void undoOrder(String orderID){
+		ResultMessage result = orderBLController.undoNormalOrder(orderID);
+		if (result == ResultMessage.SUCCESS) {
+			//TODO 高源：显示撤销成功
+			
+			System.out.println("undo this normal order successed!");
+		}else {
+			//TODO 高源：显示撤销失败
+		}
 	}
 	/**
 	 * @author 61990
@@ -277,7 +282,7 @@ public class OrderCheckController {
 		final double score = Double.valueOf(orderScore.getText());
 		final String comment = orderComment.getText();
 
-		GuestEvaluationVO evaluationVO = new GuestEvaluationVO(orderID, score, comment);
+		final GuestEvaluationVO evaluationVO = new GuestEvaluationVO(orderID, score, comment);
 		final ResultMessage result = orderBLController.addEvaluation(evaluationVO);
 		if (result == ResultMessage.SUCCESS) {
 			//TODO 高源——————状态栏显示已评价成功
@@ -286,6 +291,8 @@ public class OrderCheckController {
 			//TODO 高源——————状态栏显示评价失败
 			
 		}
+		
+		//刷新订单详情界面
 		orderVO = orderBLController.getOrderDetail(orderID);
 		initOrderDetail(orderVO);
 	}

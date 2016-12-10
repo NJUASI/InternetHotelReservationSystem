@@ -671,7 +671,6 @@ public class HotelSearchController {
 
 		@FXML
 		protected void commitOrder() {
-		
 			final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(), 
 					LocalTime.of(hourInOrder.getValue(), minuteInOrder.getValue()));
 			final LocalDateTime expectLeaveTime = LocalDateTime.of(expectLeaveDateInOrder.getValue(), 
