@@ -4,6 +4,8 @@ import businessLogic.userBL.userService.Guest;
 import businessLogic.userBL.userService.HotelWorker;
 import businessLogic.userBL.userService.WebManager;
 import businessLogic.userBL.userService.WebMarketer;
+import exception.inputException.InvalidLengthInputException;
+import exception.inputException.SpecialCharacterException;
 import utilities.Detector;
 import utilities.UserType;
 
@@ -16,22 +18,30 @@ public class LogInFactory {
 	}
 	
 	
-	public UserType getUserType(String userID){
+	public UserType getUserType(String userID) throws SpecialCharacterException, InvalidLengthInputException{
 		
-		if(this.detector.idDetector(userID, Guest.IDLength)){
-			return UserType.GUEST;
-		}
-		
-		if(this.detector.idDetector(userID, HotelWorker.IDLength)){
-			return UserType.HOTEL_WORKER;
-		}
-		
-		if(this.detector.idDetector(userID, WebMarketer.IDLength)){
-			return UserType.WEB_MARKETER;
-		}
-		
-		if(this.detector.idDetector(userID, WebManager.IDLength)){
-			return UserType.WEB_MANAGER;
+		try {
+			if(this.detector.idDetector(userID, Guest.IDLength)){
+				return UserType.GUEST;
+			}
+			
+			if(this.detector.idDetector(userID, HotelWorker.IDLength)){
+				return UserType.HOTEL_WORKER;
+			}
+			
+			if(this.detector.idDetector(userID, WebMarketer.IDLength)){
+				return UserType.WEB_MARKETER;
+			}
+			
+			if(this.detector.idDetector(userID, WebManager.IDLength)){
+				return UserType.WEB_MANAGER;
+			}
+		} catch (SpecialCharacterException e) {
+			e.printStackTrace();
+			throw new SpecialCharacterException();
+		} catch (InvalidLengthInputException e) {
+			e.printStackTrace();
+			throw new InvalidLengthInputException();
 		}
 		
 		return null;
