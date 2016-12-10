@@ -111,22 +111,33 @@ public class GuestOrder implements GuestOrderBLService {
 	 * @updateTime 2016/12/8
 	 * @param orderID 客户当前需要撤销的正常订单的订单号
 	 * @return 客户是否成功撤销此正常订单
-	 * 
-	 * TODO 冯俊杰、龚尘淼：需要调用酒店接口，更新酒店剩余房间数
 	 */
 	public ResultMessage undoNormalOrder(final String orderID) {
-		ResultMessage resultMessage = ResultMessage.FAIL;
+		ResultMessage msg1 = ResultMessage.FAIL;
+		ResultMessage msg2 = ResultMessage.FAIL;
 		
-		OrderState thisOrderState = commonOrder.getOrderDetail(orderID).orderGeneralVO.state;
+		OrderVO thisOrder = commonOrder.getOrderDetail(orderID);
+		//撤销未执行订单，改变此订单状态
+		final OrderState thisOrderState = thisOrder.orderGeneralVO.state;
 		if (thisOrderState == OrderState.UNEXECUTED) {
 			try {
-				resultMessage = orderDataService.undoNormalOrder(orderID);
+				msg1 = orderDataService.undoNormalOrder(orderID);
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
 		}
-		return resultMessage;
 		
+		//更新此订单撤销后的酒店剩余房间数
+		/*
+		 * new the mock one to test
+		 */
+		hotelInterface = new MockHotel();
+		msg2 = hotelInterface.updateRemainRoomNum(thisOrder.orderGeneralVO.hotelID, thisOrder.roomType, thisOrder.roomNumCount);
+		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
+			return ResultMessage.SUCCESS;
+		}else {
+			return ResultMessage.FAIL;
+		}
 	}
 	
 	/**

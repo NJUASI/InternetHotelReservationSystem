@@ -4,6 +4,7 @@ package businessLogic.hotelBL;
 import businessLogic.hotelBL.hotel.Hotel;
 import utilities.Address;
 import utilities.ResultMessage;
+import utilities.RoomType;
 import vo.HotelVO;
 
 public class MockHotel extends Hotel {
@@ -34,7 +35,15 @@ public class MockHotel extends Hotel {
 		return new Address("南京","仙林");
 	}
 	
-	public ResultMessage checkIn(String hotelID, String roomName, int roomNum) {
+	public ResultMessage checkIn(String hotelID, RoomType roomType, int roomNum) {
+		return ResultMessage.SUCCESS;
+	}
+	
+	public ResultMessage checkOut(String hotelID, RoomType roomType, int roomNum) {
+		return ResultMessage.SUCCESS;
+	}
+	
+	public ResultMessage updateRemainRoomNum(String hotelID, RoomType roomType, int roomNum) {
 		return ResultMessage.SUCCESS;
 	}
 }
