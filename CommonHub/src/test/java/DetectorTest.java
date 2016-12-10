@@ -33,8 +33,6 @@ public class DetectorTest {
 			assertEquals(false,this.detector.idDetector("123456AS90", 10));
 		} catch (SpecialCharacterException e) {
 			e.printStackTrace();
-		} catch (InvalidLengthInputException e) {
-			e.printStackTrace();
 		}
 	}
 	
