@@ -23,7 +23,7 @@ public class MemberLevelPromotionTest {
 
 	@Test
 	public void testGetDiscount() {
-		assertEquals(0.9, promotion.getDiscount("1234567890"),0.1);
+		assertEquals(0, promotion.getDiscount("1234567890"),0.1);
 	}
 
 }

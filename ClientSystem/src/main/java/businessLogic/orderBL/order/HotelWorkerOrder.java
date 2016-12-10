@@ -127,19 +127,20 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 		ResultMessage msg1 = ResultMessage.FAIL;
 		ResultMessage msg2 = ResultMessage.FAIL;
 		
+		//更新订单
 		try {
 			msg1 = orderDataService.updateCheckIn(new CheckInPO(checkInVO));
-			
-			/*
-			 * new the mock one to test
-			 */
-			hotelInterface = new MockHotel();
-			OrderVO thisOrder = commonOrder.getOrderDetail(checkInVO.orderID);
-			
-			msg2 = hotelInterface.checkIn(thisOrder.orderGeneralVO.orderID, thisOrder.roomType, thisOrder.roomNumCount); 
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+		
+		//更新酒店剩余房间信息
+		/*
+		 * new the mock one to test
+		 */
+		hotelInterface = new MockHotel();
+		OrderVO thisOrder = commonOrder.getOrderDetail(checkInVO.orderID);
+		msg2 = hotelInterface.checkIn(thisOrder.orderGeneralVO.orderID, thisOrder.roomType, thisOrder.roomNumCount);
 		
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
 			return ResultMessage.SUCCESS;
@@ -159,19 +160,20 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 		ResultMessage msg1 = ResultMessage.FAIL;
 		ResultMessage msg2 = ResultMessage.FAIL;
 		
+		//更新订单
 		try {
 			msg1 = orderDataService.updateCheckOut((new CheckOutPO(checkOutVO)));
-			
-			/*
-			 * new the mock one to test
-			 */
-			hotelInterface = new MockHotel();
-			OrderVO thisOrder = commonOrder.getOrderDetail(checkOutVO.orderID);
-			
-			msg2 = hotelInterface.checkOut(thisOrder.orderGeneralVO.orderID, thisOrder.roomType, thisOrder.roomNumCount); 
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+		
+		//更新酒店剩余房间信息
+		/*
+		 * new the mock one to test
+		 */
+		hotelInterface = new MockHotel();
+		OrderVO thisOrder = commonOrder.getOrderDetail(checkOutVO.orderID);
+		msg2 = hotelInterface.checkOut(thisOrder.orderGeneralVO.orderID, thisOrder.roomType, thisOrder.roomNumCount);
 		
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
 			return ResultMessage.SUCCESS;
