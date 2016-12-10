@@ -2,8 +2,10 @@ package dataHelperImpl.dataHelperImplTest;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -12,34 +14,44 @@ import org.junit.Test;
 import dataHelper.OrderDataHelper;
 import dataHelperImpl.OrderDataHelperImpl;
 import po.OrderPO;
+import utilities.Ciphertext;
 import utilities.enums.OrderState;
 import utilities.enums.ResultMessage;
 import utilities.enums.RoomType;
 
 public class OrderDataHelperImplTest {
 
-	OrderDataHelper helper =null;
+	OrderDataHelper helper = null;
+	
+	Ciphertext ciphertext = null;
 	
 	@Before
 	public void setUp() throws Exception {
 		helper = new OrderDataHelperImpl();
+		ciphertext = new Ciphertext();
 	}
 
-	@Ignore
+//	@Ignore
 	@Test
 	public void testAdd() {
-		final LocalDateTime createTime = LocalDateTime.of(2016, 2, 2, 18, 20);
-		final LocalDateTime checkInTime = LocalDateTime.of(2016, 2, 3, 11, 23);
-		final LocalDateTime checkOutTime = LocalDateTime.of(2016, 2, 4, 10, 58);
-		final LocalDateTime expectExecuteTime = LocalDateTime.of(2016, 2, 3, 14, 00);
-		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
-
-		final OrderState orderState = OrderState.EXECUTED;
-		final RoomType roomType = RoomType.BUSINESS_SUITE;
 		
-		OrderPO orderPO = new OrderPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
-				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, 
-				roomType, 2, "301  302", 2, "zhangsan","13554321234", "no", 4.3, "good");
+		
+		final LocalDateTime createTime = LocalDateTime.of(2016, 11, 7, 2, 56);
+//		final LocalDateTime checkInTime = LocalDateTime.of(2016, 7, 16, 18, 21);
+//		final LocalDateTime checkOutTime = LocalDateTime.of(2016, 7, 18, 11, 47);
+		final LocalDateTime expectExecuteTime = LocalDateTime.of(2016, 11, 11, 14, 00);
+		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 11, 12, 12, 00);
+
+		final OrderState orderState = OrderState.CANCELLED;
+		final RoomType roomType = RoomType.DOUBLE_BED;
+		final String orderID = formateRandomNumber((int) (Math.random() * 10000)) + formateDate(createTime.toLocalDate());
+		
+		final String name = ciphertext.encrypt("冯俊杰");
+		final String phone = ciphertext.encrypt("15205153110");
+		
+		OrderPO orderPO = new OrderPO(orderID, "1234567900", "98765443", "南京金陵饭店", "汉中路2号", 869, 869,
+				createTime, null, null, expectExecuteTime, expectLeaveTime, orderState, true, 
+				roomType, 1, "5312", 2, name, phone, "无", 4.5, "地理位置特别好，交通、购物、吃饭、去景点都特别方便");
 		
 		assertEquals(ResultMessage.SUCCESS,helper.add(orderPO));
 	}
@@ -88,6 +100,7 @@ public class OrderDataHelperImplTest {
 		assertEquals(LocalDateTime.of(2016, 1, 1, 19, 41,17),list.get(0).getCreateTime());
 	}
 
+	@Ignore
 	@Test
 	public void testGetAbnormal() {
 		List<OrderPO> list = helper.getAbnormal();
@@ -107,5 +120,23 @@ public class OrderDataHelperImplTest {
 		assertEquals("98765432",list.get(0).getHotelID());
 		assertEquals("学校",list.get(0).getHotelName());
 		assertEquals(LocalDateTime.of(2016, 1, 1, 19, 41,17),list.get(0).getCreateTime());
+	}
+	
+	
+	private String formateRandomNumber(int randomNumber) {
+		if (randomNumber >= 1000 && randomNumber <= 9999) {
+			return String.valueOf(randomNumber);
+		} else if (randomNumber > 100 && randomNumber <= 999) {
+			return "0" + String.valueOf(randomNumber);
+		} else if (randomNumber > 10 && randomNumber <= 99) {
+			return "00" + String.valueOf(randomNumber);
+		} else {
+			return "000" + String.valueOf(randomNumber);
+		}
+	}
+	
+	private String formateDate(LocalDate localDate) {
+		String temp = localDate.toString();
+		return temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8);
 	}
 }

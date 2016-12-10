@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="2" failures="0" name="presentation.guestUI.driver.HotelBLService_DriverTest" time="0.002" errors="0" skipped="2">
+<testsuite tests="2" failures="0" name="presentation.guestUI.driver.HotelBLService_DriverTest" time="0.01" errors="0" skipped="2">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib"/>
@@ -26,7 +26,7 @@
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Mac OS X"/>
-    <property name="classworlds.conf" value="/Users/cuihua/Documents/SE/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf4668364980552825713.tmp"/>
+    <property name="classworlds.conf" value="/Users/cuihua/Documents/SE/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf7237117228532807946.tmp"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/Users/cuihua/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -59,10 +59,10 @@
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="presentation.guestUI.driver.HotelBLService_DriverTest" name="test1" time="0.001">
+  <testcase classname="presentation.guestUI.driver.HotelBLService_DriverTest" name="test1" time="0.005">
     <skipped/>
   </testcase>
-  <testcase classname="presentation.guestUI.driver.HotelBLService_DriverTest" name="test2" time="0.001">
+  <testcase classname="presentation.guestUI.driver.HotelBLService_DriverTest" name="test2" time="0.005">
     <skipped/>
   </testcase>
 </testsuite>
