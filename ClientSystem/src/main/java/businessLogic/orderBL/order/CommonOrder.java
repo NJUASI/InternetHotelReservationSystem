@@ -34,7 +34,7 @@ public class CommonOrder implements CommonOrderBLService {
 	 * 构造函数，初始化成员变量
 	 */
 	public CommonOrder() {
-		//		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
+//		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
 
 		try {
 			orderDataService = new OrderDataService_Stub();
@@ -97,6 +97,7 @@ public class CommonOrder implements CommonOrderBLService {
 			e.printStackTrace();
 		}
 
+		//filter the expect ones
 		if (orderGeneralPOs != null) {
 			for (OrderGeneralPO po : orderGeneralPOs) {
 				if (po.getState() == orderState) {

@@ -26,8 +26,8 @@ import vo.OrderVO;
 /**
  * 
  * @author charles
- * lastChangedBy Harvey
- * updateTime 2016/12/7
+ * lastChangedBy charles
+ * updateTime 2016/12/10
  *
  */
 public class GuestOrder implements GuestOrderBLService {
@@ -111,6 +111,8 @@ public class GuestOrder implements GuestOrderBLService {
 	 * @updateTime 2016/12/8
 	 * @param orderID 客户当前需要撤销的正常订单的订单号
 	 * @return 客户是否成功撤销此正常订单
+	 * 
+	 * TODO 冯俊杰、龚尘淼：需要调用酒店接口，更新酒店剩余房间数
 	 */
 	public ResultMessage undoNormalOrder(final String orderID) {
 		ResultMessage resultMessage = ResultMessage.FAIL;
