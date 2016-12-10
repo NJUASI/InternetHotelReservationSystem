@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import presentation.PopUp.PopUp;
 import utilities.ResultMessage;
 import vo.MarketVO;
 
@@ -43,6 +44,7 @@ public class MemberController {
 	private void initialize() {
 		
 		//TODO gy注意：你fjj说要8个等级
+//		TODO fjj get  完了做
 		
 		List<MarketVO> listMarket = marketBLController.getMemberFormulation();
 		name1.setText(listMarket.get(0).marketName);
@@ -119,11 +121,8 @@ public class MemberController {
 		list.add(new MarketVO(market5.getText(), Double.parseDouble(needCredit5.getText()) , Double.parseDouble(modifyDiscount5.getText())));
 		
 		ResultMessage message = marketBLController.setMemberFormulation(list);
-		
-		if(message==ResultMessage.SUCCESS){ 
-			// TODO gy 要换成界面上的提示
-			System.out.println("success");
-		}
+
+			new PopUp(message.toString(), "");
 		
 		initialize();
 		marketCheckPane.setVisible(true);

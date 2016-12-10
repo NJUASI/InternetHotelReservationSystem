@@ -9,6 +9,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import presentation.PopUp.PopUp;
 import utilities.ResultMessage;
 import vo.GuestVO;
 
@@ -62,7 +63,11 @@ public class GuestController {
 		}
 		
 		if(guestVO == null){
-			// TODO gy 获取到的guestVO为空，代表找不到对应ID的客户，界面做提示处理，界面不跳转
+			
+//		TODO djy得不到不是可以直接弄到异常里吗
+			new PopUp("请检查输入内容", "sorry");
+			
+
 		
 		}
 
@@ -138,7 +143,9 @@ public class GuestController {
 		tempGuestVO.password=passwordText.getText();
 		
 		ResultMessage message = userBLController.modify(tempGuestVO);
-		// TODO gy 返回是否成功修改的信息，界面需做提示处理
+		
+		new PopUp(message.toString(), "congratulation");	
+		
 		modifyBt.setVisible(true);
 		modifyPane.setVisible(false);
 		

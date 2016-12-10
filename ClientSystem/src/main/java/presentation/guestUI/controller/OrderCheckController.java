@@ -15,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import presentation.PopUp.PopUp;
 import presentation.Table.OrderTable;
 import utilities.IDReserve;
 import utilities.OrderState;
@@ -131,12 +132,12 @@ public class OrderCheckController {
 	private void undoOrder(String orderID){
 		ResultMessage result = orderBLController.undoNormalOrder(orderID);
 		if (result == ResultMessage.SUCCESS) {
-			//TODO 高源：显示撤销成功
+			new PopUp("撤销成功", "撤销");
 			
-			System.out.println("undo this normal order successed!");
 		}else {
-			//TODO 高源：显示撤销失败
-		}
+//			TODO 先这样吧,撤销的我想直接放在界面的一个label里,完了做
+			new PopUp("撤销失败", "撤销");
+			}
 	}
 	/**
 	 * @author 61990
@@ -285,10 +286,10 @@ public class OrderCheckController {
 		final GuestEvaluationVO evaluationVO = new GuestEvaluationVO(orderID, score, comment);
 		final ResultMessage result = orderBLController.addEvaluation(evaluationVO);
 		if (result == ResultMessage.SUCCESS) {
-			//TODO 高源——————状态栏显示已评价成功
+			new PopUp("评价成功", "评价");
 
 		}else {
-			//TODO 高源——————状态栏显示评价失败
+			new PopUp("评价失败", "评价");
 			
 		}
 		

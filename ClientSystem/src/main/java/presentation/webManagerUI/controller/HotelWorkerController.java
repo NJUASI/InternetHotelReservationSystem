@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import presentation.PopUp.PopUp;
 import utilities.ResultMessage;
 import vo.HotelWorkerVO;
 
@@ -52,7 +53,8 @@ public class HotelWorkerController {
 		hotelInfoPane.setVisible(true);
 		
 		if(hotelWorkerVO == null){
-			// TODO gy 获取到的hotelWorkerVO为空，代表找不到对应ID的酒店工作人员，界面做提示处理，界面不跳转
+//			TODO djy得不到不是可以直接弄到异常里吗
+				new PopUp("请检查输入内容", "sorry");
 		}
 		
 		
@@ -100,7 +102,9 @@ public class HotelWorkerController {
 		tempHotelWorkerVO.password = password2.getText();
 		
 		ResultMessage message = userBLController.modify(tempHotelWorkerVO);
-		// TODO gy 返回是否成功修改的信息，界面需做提示处理
+		
+		new PopUp(message.toString(), "congratulation");	
+
 
 		hotelModifyPane.setVisible(false);
 		hotelInfoPane.setVisible(true);
