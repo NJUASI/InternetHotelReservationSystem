@@ -101,13 +101,14 @@ public class HotelSearchController {
 		
 		//gy 注意，可不可以把和最开始显示界面无关的东西放到后面再赋值，比如酒店搜索进去先要选城市商圈，我就只把这两个先赋值了，
 		// 这样的话感觉会有点儿优化,就感觉这个initEveryBox就把可以把她放到创建订单的时候再初始
+		//TODO gcm 有的是筛选酒店里的
 		
 		initEveryBox();
 
-		cityChoose.setOnShowing(new CityChooseHandler());
-		cityChoose.valueProperty().addListener(new CityChangedListener());
-
-		cityChoose.setValue(cityChoose.getItems().get(0));
+//		cityChoose.setOnShowing(new CityChooseHandler());
+//		cityChoose.valueProperty().addListener(new CityChangedListener());
+//
+//		cityChoose.setValue(cityChoose.getItems().get(0));
 	}
 
 	void initEveryBox(){
@@ -158,10 +159,10 @@ public class HotelSearchController {
 		expectExecuteDateInOrder.setValue(LocalDate.now());
 		expectLeaveDateInOrder.setValue(LocalDate.now());
 
-		cityChoose.setOnShowing(new CityChooseHandler());
-		cityChoose.valueProperty().addListener(new CityChangedListener());
-		roomTypeInOrder.valueProperty().addListener(new RoomTypeChangeListener());
-		roomCountInOrder.valueProperty().addListener(new RoomNumChangeListener());
+//		cityChoose.setOnShowing(new CityChooseHandler());
+//		cityChoose.valueProperty().addListener(new CityChangedListener());
+//		roomTypeInOrder.valueProperty().addListener(new RoomTypeChangeListener());
+//		roomCountInOrder.valueProperty().addListener(new RoomNumChangeListener());
 
 	}
 
@@ -636,9 +637,10 @@ public class HotelSearchController {
 	}
 	
 	
-	private String selectedHotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
+	private String selectedHotelID ;
 
 	private void initCreateOrder(){	
+		selectedHotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
 		roomTypeInOrder.getItems().clear();
 
 		hotelVO = hotelBLController.getHotelInfo(selectedHotelID);
