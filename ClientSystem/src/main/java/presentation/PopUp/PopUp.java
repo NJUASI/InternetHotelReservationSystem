@@ -15,13 +15,14 @@ import javafx.stage.Stage;
 public class PopUp {
 	StackPane root;
 	Stage stage;
+	Scene scene;
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/12/10
 	 * @只显示一条提示信息的通用方法
 	 */
-	PopUp(String message, String operation){
+	public PopUp(String message, String operation){
 		initWindow();
 		Label result = new Label(message);
 		root.getChildren().add(result);
@@ -29,8 +30,8 @@ public class PopUp {
 	}
 
 	private void initWindow() {
-		StackPane root = new StackPane();
-		Scene scene = new Scene(root,200,100); // 创建场景；
+		root = new StackPane();
+		scene = new Scene(root,200,100); // 创建场景；
 		stage = new Stage();// 创建舞台；
 		stage.setScene(scene); // 将场景载入舞台；
 		stage.show(); // 显示窗口；

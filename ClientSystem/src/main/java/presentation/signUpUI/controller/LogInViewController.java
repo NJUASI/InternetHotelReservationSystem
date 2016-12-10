@@ -15,10 +15,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import presentation.PopUp.PopUp;
 import utilities.IDReserve;
 import utilities.UserType;
 import vo.GuestVO;
 	
+@SuppressWarnings("restriction")
 public class LogInViewController {
 	public static String userID;
 	//登录和注册界面
@@ -112,8 +114,8 @@ public class LogInViewController {
 			UserType userType = logInBLController.logIn(ID.getText(), password.getText());
 			
 			if(userType==null){
-			// TODO 需要消息框或状态栏提示登录失败，关于失败原因这里暂时没有，后面细化，此处需要界面处理if之后不跳转界面
-				System.out.println("登录失败");
+				new PopUp("请检查你的账号或密码", "登录失败");
+			// TODO 细化啊你倒是，关于失败原因这里暂时没有，后面细化，此处需要界面处理if之后不跳转界面
 			}
 			
 			IDReserve.getInstance().setUserID(ID.getText());
@@ -141,19 +143,19 @@ public class LogInViewController {
 				,phone.getText(),0);
 		guestVO = logInBLController.guestSignUp(userVO);
 		// TODO 此处返回了界面需要的自动递增的ID，后续操作由界面完成
+			
 		}
 		
 		if(guestVO==null){
-			//TODO gy 注意 密码错误，界面提示两次输入不一致
-			System.out.println("密码不一致");;
+			new PopUp("密码输入不一致", "登录失败");
+//			System.out.println("密码不一致");;
 		}else{
-			//TODO 正常操作
+			new PopUp("你的账号是"+guestVO.userID, "注册成功");
 		}
 	}
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
-	 * @updateTime 2016/12/8
 	 * @连接RMI
 	 */
 	@FXML
