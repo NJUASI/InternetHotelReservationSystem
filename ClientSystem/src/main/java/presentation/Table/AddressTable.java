@@ -1,4 +1,4 @@
-package presentation.webMarketerUI.controller;
+package presentation.Table;
 
 import javafx.beans.property.SimpleStringProperty;
 

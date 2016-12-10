@@ -25,7 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import presentation.guestUI.controller.EvaluationTable;
+import presentation.Table.EvaluationTable;
 import utilities.IDReserve;
 import vo.HotelEvaluationVO;
 import vo.HotelVO;

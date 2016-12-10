@@ -1,4 +1,4 @@
-package presentation.guestUI.controller;
+package presentation.Table;
 
 import javafx.beans.property.SimpleStringProperty;
 import utilities.CreditRecord;

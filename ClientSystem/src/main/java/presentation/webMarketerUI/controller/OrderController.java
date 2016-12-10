@@ -21,7 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import presentation.hotelWorkerUI.controller.OrderTable;
+import presentation.Table.OrderTable;
 import utilities.IDReserve;
 import utilities.OrderState;
 import utilities.ResultMessage;
