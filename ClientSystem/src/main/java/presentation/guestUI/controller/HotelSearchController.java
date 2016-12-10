@@ -171,7 +171,7 @@ public class HotelSearchController {
 			
 			//根据改变的房型，改变可预订的房间数量
 			roomCountInOrder.getItems().clear();
-			int remainRoomNum = hotelBLController.getRemainRoomNum(RoomType.convertString2Roomtype(roomType));
+			int remainRoomNum = hotelBLController.getRemainRoomNum(RoomType.getEnum(roomType));
 			if(remainRoomNum<1){
 				roomCountInOrder.setValue(remainRoomNum);
 			}
@@ -195,7 +195,7 @@ public class HotelSearchController {
 
 			final OrderVO tempOrder = new OrderVO(createOrderGeneral,
 					Double.parseDouble(previousPriceInOrder.getText()),
-					RoomType.convertString2Roomtype(roomTypeInOrder.getValue()), roomCountInOrder.getValue());
+					RoomType.getEnum(roomTypeInOrder.getValue()), roomCountInOrder.getValue());
 
 			final double tempPrice = orderBLController.getTempPrice(tempOrder);
 			
@@ -211,7 +211,7 @@ public class HotelSearchController {
 					hotelIDInOrder.getText(), expectExecuteTime);
 
 			final OrderVO tempOrder = new OrderVO(createOrderGeneral, Double.parseDouble(previousPriceInOrder.getText()), 
-					RoomType.convertString2Roomtype(roomTypeInOrder.getValue()), roomCountInOrder.getValue());
+					RoomType.getEnum(roomTypeInOrder.getValue()), roomCountInOrder.getValue());
 			
 			final double tempPrice = orderBLController.getTempPrice(tempOrder);
 			
@@ -688,7 +688,7 @@ public class HotelSearchController {
 				nameInOrder.getText(), phoneInOrder.getText());
 
 		OrderVO createVO = new OrderVO(createOrderGeneral, Double.parseDouble(previousPriceInOrder.getText()), 
-				RoomType.convertString2Roomtype(roomTypeInOrder.getValue()), roomCountInOrder.getValue(), guestNumInOrder.getValue(), 
+				RoomType.getEnum(roomTypeInOrder.getValue()), roomCountInOrder.getValue(), guestNumInOrder.getValue(), 
 				messageInOrder.getText());
 
 		final ResultMessage msg = orderBLController.createOrder(createVO);

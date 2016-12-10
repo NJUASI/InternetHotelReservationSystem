@@ -50,7 +50,7 @@ public class OrderBLService_DriverTest {
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
 		
 		final OrderState orderState = OrderState.EXECUTED;
-		final RoomType roomType = RoomType.单人间;
+		final RoomType roomType = RoomType.SINGLE_BED;
 		
 		final OrderVO orderVO = new OrderVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
 				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, 
@@ -78,7 +78,7 @@ public class OrderBLService_DriverTest {
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
 		
 		final OrderState orderState = OrderState.EXECUTED;
-		final RoomType roomType = RoomType.单人间;
+		final RoomType roomType = RoomType.SINGLE_BED;
 		
 		final OrderVO orderVO = new OrderVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
 				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, 
@@ -124,7 +124,7 @@ public class OrderBLService_DriverTest {
 		assertEquals(LocalDateTime.of(2016, 2, 3, 14, 00), orderVO.orderGeneralVO.expectExecuteTime);
 		assertEquals(LocalDateTime.of(2016, 2, 4, 12, 00), orderVO.orderGeneralVO.expectLeaveTime);
 		assertEquals(OrderState.EXECUTED, orderVO.orderGeneralVO.state);
-		assertEquals(RoomType.商务套房, orderVO.roomType);
+		assertEquals(RoomType.BUSINESS_SUITE, orderVO.roomType);
 		assertEquals(2, orderVO.roomNumCount);
 		assertEquals("301  302", orderVO.roomNumber);
 		assertEquals("zhangsan", orderVO.orderGeneralVO.name);

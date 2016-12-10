@@ -63,7 +63,7 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 				creditPO.setOrderID(String.valueOf(rs.getObject(3)));
 				creditPO.setPreCredit(rs.getDouble(4));
 				creditPO.setCredit(rs.getDouble(5));
-				creditPO.setCreditRecord(CreditRecord.convertString2CreditRecord(rs.getString(6)));
+				creditPO.setCreditRecord(CreditRecord.getEnum(rs.getString(6)));
 
 				result.add(creditPO);
 			}
@@ -95,7 +95,7 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 			ps.setObject(3, creditPO.getTime());
 			ps.setDouble(4, creditPO.getPreCredit()); 
 			ps.setDouble(5, creditPO.getCredit());
-			ps.setObject(6, creditPO.getCreditRecord().toString());
+			ps.setObject(6, creditPO.getCreditRecord().getChineseCreditRecord());
 
 			ps.execute();
 		} catch (SQLException e) {
@@ -122,7 +122,7 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 				creditPO.setOrderID(String.valueOf(rs.getObject(3)));
 				creditPO.setPreCredit(rs.getDouble(4));
 				creditPO.setCredit(rs.getDouble(5));
-				creditPO.setCreditRecord(CreditRecord.convertString2CreditRecord(rs.getString(6)));
+				creditPO.setCreditRecord(CreditRecord.getEnum(rs.getString(6)));
 
 				result.add(creditPO);
 			}

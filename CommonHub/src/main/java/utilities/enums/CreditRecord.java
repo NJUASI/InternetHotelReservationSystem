@@ -33,7 +33,7 @@ public enum CreditRecord {
 	 * 汉字 TO enum
 	 * 便于从数据库读入
 	 */
-	public static CreditRecord convertString2CreditRecord(String a) {
+	public static CreditRecord getEnum(String a) {
 		for (CreditRecord creditRecord : values()) {
 			if (creditRecord.reason.equals(a)) {
 				return creditRecord;

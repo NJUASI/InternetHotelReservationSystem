@@ -36,7 +36,7 @@ public enum PromotionType implements Serializable{
 	 * 汉字 TO enum
 	 * 便于从数据库读入
 	 */
-	public PromotionType getEnum(String a) {
+	public static PromotionType getEnum(String a) {
 		for (PromotionType promotionType : values()) {
 			if (promotionType.chinesePromotionType.equals(a)) {
 				return promotionType;

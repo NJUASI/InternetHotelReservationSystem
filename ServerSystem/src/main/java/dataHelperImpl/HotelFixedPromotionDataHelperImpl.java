@@ -56,7 +56,7 @@ public class HotelFixedPromotionDataHelperImpl implements HotelFixedPromotionDat
 			while(rs.next()){
 				hotelFixedPromotionPO = new HotelFixedPromotionPO();
 				hotelFixedPromotionPO.setHotelID(rs.getString(1));
-				hotelFixedPromotionPO.setPromotionType(PromotionType.valueOf(rs.getString(2)));
+				hotelFixedPromotionPO.setPromotionType(PromotionType.getEnum(rs.getString(2)));
 				hotelFixedPromotionPO.setDiscount(rs.getDouble(3));
 				hotelFixedPromotionPOList.add(hotelFixedPromotionPO);
 			}
@@ -85,7 +85,7 @@ public class HotelFixedPromotionDataHelperImpl implements HotelFixedPromotionDat
 			ps = conn.prepareStatement(sql);
 			ps.setObject(1, hotelFixedPromotionPO.getDiscount());
 			ps.setString(2, hotelFixedPromotionPO.getHotelID());
-			ps.setString(3, hotelFixedPromotionPO.getPromotionType().toString());
+			ps.setString(3, hotelFixedPromotionPO.getPromotionType().getChinesePromotiontype());
 			ps.execute();
 			return ResultMessage.SUCCESS;
 		} catch (SQLException e) {

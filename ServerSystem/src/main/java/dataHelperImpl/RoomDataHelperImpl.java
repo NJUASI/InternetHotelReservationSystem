@@ -53,7 +53,7 @@ public class RoomDataHelperImpl implements RoomDataHelper {
 			while(rs.next()){
 				po = new RoomInfoPO();
 				po.setHotelID(hotelID);
-				po.setRoomType(RoomType.convertString2Roomtype(rs.getString(2)));
+				po.setRoomType(RoomType.getEnum(rs.getString(2)));
 				po.setRoomNum(rs.getInt(3));
 				po.setRemainNum(rs.getInt(4));
 				po.setPrice(rs.getDouble(5));
@@ -91,7 +91,7 @@ public class RoomDataHelperImpl implements RoomDataHelper {
 			ps.setInt(2, roomInfoPO.getRemainNum());
 			ps.setDouble(3, roomInfoPO.getPrice());
 			ps.setString(4, roomInfoPO.getHotelID());
-			ps.setString(5, roomInfoPO.getRoomType().toString());
+			ps.setString(5, roomInfoPO.getRoomType().getChineseRoomType());
 
 			ps.execute();
 			return ResultMessage.SUCCESS;
@@ -117,7 +117,7 @@ public class RoomDataHelperImpl implements RoomDataHelper {
 
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, roomInfoPO.getHotelID());
-			ps.setString(2, roomInfoPO.getRoomType().toString());
+			ps.setString(2, roomInfoPO.getRoomType().getChineseRoomType());
 			ps.setInt(3, roomInfoPO.getRoomNum());
 			ps.setInt(4, roomInfoPO.getRemainNum());
 			ps.setDouble(5, roomInfoPO.getPrice());
@@ -147,7 +147,7 @@ public class RoomDataHelperImpl implements RoomDataHelper {
 			ps = conn.prepareStatement(sql);
 
 			ps.setString(1, hotelID);
-			ps.setString(2, roomType.toString());
+			ps.setString(2, roomType.getChineseRoomType());
 			
 			ps.execute();
 			return ResultMessage.SUCCESS;
