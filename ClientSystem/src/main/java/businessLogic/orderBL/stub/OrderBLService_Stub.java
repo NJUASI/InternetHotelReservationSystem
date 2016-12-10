@@ -7,10 +7,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogicService.orderBLService.OrderBLService;
-import utilities.OrderState;
-import utilities.ResultMessage;
-import utilities.RoomType;
-import utilities.UserType;
+import utilities.enums.OrderState;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
+import utilities.enums.UserType;
 import vo.CheckInVO;
 import vo.CheckOutVO;
 import vo.GuestEvaluationVO;
@@ -108,7 +108,7 @@ public class OrderBLService_Stub implements OrderBLService {
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
 		
 		final OrderState orderState = OrderState.EXECUTED;
-		final RoomType roomType = RoomType.商务套房;
+		final RoomType roomType = RoomType.BUSINESS_SUITE;
 		
 		return new OrderVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
 				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, 

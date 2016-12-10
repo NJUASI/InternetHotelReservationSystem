@@ -10,7 +10,7 @@ import dataService.hotelWorkerDataService.HotelWorkerDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.HotelWorkerPO;
 import utilities.Ciphertext;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.HotelWorkerVO;
 import vo.UserVO;
 

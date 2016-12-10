@@ -7,7 +7,7 @@ import businessLogic.hotelBL.hotelScan.sortComparator.sortComparatorIImp.AscPric
 import businessLogic.hotelBL.hotelScan.sortComparator.sortComparatorIImp.DescLevelComparator;
 import businessLogic.hotelBL.hotelScan.sortComparator.sortComparatorIImp.DescPriceComparator;
 import businessLogic.hotelBL.hotelScan.sortComparator.sortComparatorIImp.DescScoreComparator;
-import utilities.SortStrategy;
+import utilities.enums.SortStrategy;
 import vo.HotelVO;
 
 public class SortComparatorFactory {

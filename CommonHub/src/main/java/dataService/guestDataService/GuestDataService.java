@@ -7,7 +7,7 @@ import java.util.List;
 import exception.verificationException.UserInexistException;
 import po.GuestPO;
 import po.MemberPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public interface GuestDataService extends Remote {
 

@@ -2,7 +2,7 @@ package vo;
 
 import java.util.List;
 
-import utilities.RoomType;
+import utilities.enums.RoomType;
 
 /**
  * @Description:将搜索条件界面的搜索信息封装到SearchCriteriaVO中

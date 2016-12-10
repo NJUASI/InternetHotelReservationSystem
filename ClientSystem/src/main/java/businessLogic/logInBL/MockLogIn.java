@@ -2,10 +2,15 @@ package businessLogic.logInBL;
 
 import businessLogic.userBL.MockUser;
 import businessLogic.userBL.User;
+<<<<<<< HEAD
+import utilities.enums.ResultMessage;
+import utilities.enums.UserType;
+=======
 import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import utilities.ResultMessage;
 import utilities.UserType;
+>>>>>>> master
 import vo.GuestVO;
 import vo.UserVO;
 

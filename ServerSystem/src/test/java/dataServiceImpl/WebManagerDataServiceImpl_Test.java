@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import dataService.webManagerDataService.WebManagerDataService;
 import po.WebManagerPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class WebManagerDataServiceImpl_Test {
 

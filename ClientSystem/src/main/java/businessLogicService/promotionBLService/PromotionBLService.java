@@ -2,7 +2,7 @@ package businessLogicService.promotionBLService;
 
 import java.util.Iterator;
 
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.AddressVO;
 import vo.HotelFixedPromotionVO;
 import vo.SpecialSpanPromotionVO;

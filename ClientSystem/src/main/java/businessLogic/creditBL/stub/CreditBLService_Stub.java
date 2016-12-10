@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogicService.creditBLService.CreditBLService;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.BasicInfoVO;
 import vo.CreditVO;
 import vo.GuestVO;

@@ -6,7 +6,7 @@ import java.util.List;
 
 import dataHelper.GuestDataHelper;
 import po.GuestPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 /**
  * 

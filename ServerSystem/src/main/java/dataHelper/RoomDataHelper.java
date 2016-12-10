@@ -3,8 +3,8 @@ package dataHelper;
 import java.util.List;
 
 import po.RoomInfoPO;
-import utilities.ResultMessage;
-import utilities.RoomType;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
 
 public interface RoomDataHelper {
 	

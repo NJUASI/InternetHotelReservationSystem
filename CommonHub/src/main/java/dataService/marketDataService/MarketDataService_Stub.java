@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.MarketPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class MarketDataService_Stub extends UnicastRemoteObject implements MarketDataService {
 

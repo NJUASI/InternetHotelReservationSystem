@@ -3,8 +3,8 @@ package businessLogic.hotelBL;
 import java.util.Iterator;
 
 import utilities.Address;
-import utilities.ResultMessage;
-import utilities.RoomType;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
 
 /**
  * @Description:对外提供的更新和获取酒店相关信息的接口

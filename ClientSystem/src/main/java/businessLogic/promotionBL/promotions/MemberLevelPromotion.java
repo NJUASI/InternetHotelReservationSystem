@@ -4,8 +4,12 @@ import java.util.List;
 
 import businessLogic.marketBL.Market;
 import businessLogic.memberBL.Member;
+<<<<<<< HEAD
+import utilities.enums.MemberType;
+=======
 import exception.verificationException.UserInexistException;
 import utilities.MemberType;
+>>>>>>> master
 import vo.MarketVO;
 
 public class MemberLevelPromotion {

@@ -9,7 +9,7 @@ import dataHelperImpl.stub.WebManagerDataHelperImpl_Stub;
 import dataService.webManagerDataService.WebManagerDataService;
 import exception.verificationException.UserInexistException;
 import po.WebManagerPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 /**
  * 

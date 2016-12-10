@@ -2,8 +2,12 @@ package businessLogicService.marketBLService;
 
 import java.util.List;
 
+<<<<<<< HEAD
+import utilities.enums.ResultMessage;
+=======
 import exception.verificationException.UserInexistException;
 import utilities.ResultMessage;
+>>>>>>> master
 import vo.MarketVO;
 
 /**

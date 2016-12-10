@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import businessLogicService.marketBLService.MarketBLService;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.MarketVO;
 
 public class MarketBLService_Stub implements MarketBLService {

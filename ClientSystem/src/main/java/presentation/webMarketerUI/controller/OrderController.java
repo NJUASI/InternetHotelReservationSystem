@@ -24,8 +24,8 @@ import javafx.scene.layout.Pane;
 import presentation.PopUp.PopUp;
 import presentation.Table.OrderTable;
 import utilities.IDReserve;
-import utilities.OrderState;
-import utilities.ResultMessage;
+import utilities.enums.OrderState;
+import utilities.enums.ResultMessage;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
 

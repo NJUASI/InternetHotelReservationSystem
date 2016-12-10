@@ -2,8 +2,8 @@ package businessLogicService.orderBLService;
 
 import java.util.Iterator;
 
-import utilities.OrderState;
-import utilities.UserType;
+import utilities.enums.OrderState;
+import utilities.enums.UserType;
 import vo.HotelEvaluationVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;

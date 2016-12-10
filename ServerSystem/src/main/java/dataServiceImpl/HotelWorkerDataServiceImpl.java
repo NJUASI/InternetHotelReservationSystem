@@ -9,7 +9,7 @@ import dataHelperImpl.stub.HotelWorkerDataHelperImpl_Stub;
 import dataService.hotelWorkerDataService.HotelWorkerDataService;
 import exception.verificationException.UserInexistException;
 import po.HotelWorkerPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 /**
  * 

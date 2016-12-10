@@ -3,7 +3,7 @@ package dataHelper;
 import java.util.List;
 
 import po.GuestPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 /**
  * 

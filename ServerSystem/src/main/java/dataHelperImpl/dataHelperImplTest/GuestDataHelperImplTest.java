@@ -13,7 +13,7 @@ import dataHelper.GuestDataHelper;
 import dataHelperImpl.GuestDataHelperImpl;
 import po.GuestPO;
 import utilities.Ciphertext;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class GuestDataHelperImplTest {
 

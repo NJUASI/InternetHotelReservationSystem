@@ -5,8 +5,12 @@ import java.time.LocalDate;
 import businessLogic.memberBL.Member;
 import businessLogic.memberBL.MockMember;
 import businessLogic.promotionBL.discountCalculation.CalculateDiscount;
+<<<<<<< HEAD
+import utilities.enums.MemberType;
+=======
 import exception.verificationException.UserInexistException;
 import utilities.MemberType;
+>>>>>>> master
 
 public class VIPBirthdayDiscount implements CalculateDiscount{
 

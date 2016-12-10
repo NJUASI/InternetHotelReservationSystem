@@ -8,7 +8,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import utilities.IDReserve;
-import utilities.RoomType;
+import utilities.enums.RoomType;
 
 public class OfflineController {
 

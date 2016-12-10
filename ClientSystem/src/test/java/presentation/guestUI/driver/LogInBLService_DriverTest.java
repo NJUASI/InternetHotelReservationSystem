@@ -12,7 +12,7 @@ import exception.inputException.InvalidInputException;
 import exception.inputException.InvalidLengthInputException;
 import exception.inputException.PasswordInputException;
 import exception.verificationException.ParameterInvalidException;
-import utilities.UserType;
+import utilities.enums.UserType;
 import vo.GuestVO;
 
 public class LogInBLService_DriverTest {

@@ -1,6 +1,6 @@
 package po;
 
-import utilities.PromotionType;
+import utilities.enums.PromotionType;
 import vo.HotelFixedPromotionVO;
 
 public class HotelFixedPromotionPO {

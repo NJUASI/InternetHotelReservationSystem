@@ -3,7 +3,7 @@ package po;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import utilities.CreditRecord;
+import utilities.enums.CreditRecord;
 import vo.CreditVO;
 
 public class CreditPO implements Serializable{

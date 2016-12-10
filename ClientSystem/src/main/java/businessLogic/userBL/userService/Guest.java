@@ -13,7 +13,7 @@ import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import po.GuestPO;
 import utilities.Ciphertext;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.GuestVO;
 import vo.UserVO;
 

@@ -7,7 +7,7 @@ import businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl.OriginP
 import businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl.RemainRoomNumCriteria;
 import businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl.RoomTypeCriteria;
 import businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl.ScoreSpanCriteria;
-import utilities.SearchCriteriaType;
+import utilities.enums.SearchCriteriaType;
 import vo.SearchCriteriaVO;
 
 public class SearchCriteriaFactory {

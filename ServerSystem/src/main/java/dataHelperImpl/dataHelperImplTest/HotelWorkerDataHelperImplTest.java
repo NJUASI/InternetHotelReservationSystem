@@ -12,7 +12,7 @@ import dataHelper.HotelWorkerDataHelper;
 import dataHelperImpl.HotelWorkerDataHelperImpl;
 import po.HotelWorkerPO;
 import utilities.Ciphertext;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class HotelWorkerDataHelperImplTest {
 

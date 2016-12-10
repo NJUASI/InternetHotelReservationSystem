@@ -1,4 +1,4 @@
-package utilities;
+package utilities.enums;
 
 import java.io.Serializable;
 

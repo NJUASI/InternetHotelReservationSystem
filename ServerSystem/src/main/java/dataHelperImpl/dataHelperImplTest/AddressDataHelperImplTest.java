@@ -10,7 +10,7 @@ import org.junit.Test;
 import dataHelper.AddressDataHelper;
 import dataHelperImpl.AddressDataHelperImpl;
 import po.AddressPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class AddressDataHelperImplTest {
 

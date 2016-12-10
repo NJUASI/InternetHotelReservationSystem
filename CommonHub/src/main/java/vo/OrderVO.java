@@ -3,8 +3,8 @@ package vo;
 import java.time.LocalDateTime;
 
 import po.OrderPO;
-import utilities.OrderState;
-import utilities.RoomType;
+import utilities.enums.OrderState;
+import utilities.enums.RoomType;
 
 /**
  * 

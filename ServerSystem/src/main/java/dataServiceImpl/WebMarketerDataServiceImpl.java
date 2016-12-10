@@ -9,7 +9,7 @@ import dataHelperImpl.stub.WebMarketerDataHelperImpl_Stub;
 import dataService.webMarketerDataService.WebMarketerDataService;
 import exception.verificationException.UserInexistException;
 import po.WebMarketerPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 /**
  * 

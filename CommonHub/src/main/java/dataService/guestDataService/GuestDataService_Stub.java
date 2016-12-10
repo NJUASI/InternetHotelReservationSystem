@@ -12,8 +12,8 @@ import po.CreditPO;
 import po.GuestPO;
 import po.MemberPO;
 import utilities.Ciphertext;
-import utilities.CreditRecord;
-import utilities.ResultMessage;
+import utilities.enums.CreditRecord;
+import utilities.enums.ResultMessage;
 
 public class GuestDataService_Stub extends UnicastRemoteObject implements GuestDataService{
 

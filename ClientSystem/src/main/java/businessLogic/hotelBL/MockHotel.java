@@ -3,8 +3,8 @@ package businessLogic.hotelBL;
 
 import businessLogic.hotelBL.hotel.Hotel;
 import utilities.Address;
-import utilities.ResultMessage;
-import utilities.RoomType;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
 import vo.HotelVO;
 
 public class MockHotel extends Hotel {

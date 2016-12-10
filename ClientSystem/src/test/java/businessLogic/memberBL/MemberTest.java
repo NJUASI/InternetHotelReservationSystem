@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import exception.verificationException.UserInexistException;
 import utilities.*;
+import utilities.enums.MemberType;
+import utilities.enums.ResultMessage;
 import vo.MemberVO;
 
 /**

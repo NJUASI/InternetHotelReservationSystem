@@ -11,7 +11,7 @@ import org.junit.Test;
 import dataHelper.MarketDataHelper;
 import dataHelperImpl.MarketDataHelperImpl;
 import po.MarketPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class MarketDataHelperImplTest {
 

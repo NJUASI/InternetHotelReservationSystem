@@ -3,7 +3,7 @@ package vo;
 import java.time.LocalDateTime;
 
 import po.OrderGeneralPO;
-import utilities.OrderState;
+import utilities.enums.OrderState;
 
 /**
  * 

@@ -12,7 +12,7 @@ import dataService.promotionDataService.PromotionDataService;
 import dataService.promotionDataService.PromotionDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.SpecialSpanPromotionPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.SpecialSpanPromotionVO;
 
 /**

@@ -3,7 +3,7 @@ package dataHelper;
 import java.util.List;
 
 import po.SpecialSpanPromotionPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public interface SpecialSpanPromotionDataHelper {
 

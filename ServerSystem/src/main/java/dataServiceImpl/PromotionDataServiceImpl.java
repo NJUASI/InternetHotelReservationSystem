@@ -14,7 +14,7 @@ import dataService.promotionDataService.PromotionDataService;
 import po.AddressPO;
 import po.HotelFixedPromotionPO;
 import po.SpecialSpanPromotionPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class PromotionDataServiceImpl extends UnicastRemoteObject implements PromotionDataService{
 

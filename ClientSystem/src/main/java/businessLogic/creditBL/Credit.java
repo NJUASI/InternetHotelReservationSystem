@@ -12,7 +12,7 @@ import dataService.creditDataService.CreditDataService;
 import dataService.creditDataService.CreditDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.CreditPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.CreditVO;
 
 /**

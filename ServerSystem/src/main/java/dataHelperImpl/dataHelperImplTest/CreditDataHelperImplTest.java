@@ -11,8 +11,8 @@ import org.junit.Test;
 import dataHelper.CreditDataHelper;
 import dataHelperImpl.CreditDataHelperImpl;
 import po.CreditPO;
-import utilities.CreditRecord;
-import utilities.ResultMessage;
+import utilities.enums.CreditRecord;
+import utilities.enums.ResultMessage;
 
 public class CreditDataHelperImplTest {
 

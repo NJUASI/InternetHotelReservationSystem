@@ -12,7 +12,7 @@ import dataHelper.WebMarketerDataHelper;
 import dataHelperImpl.WebMarketerDataHelperImpl;
 import po.WebMarketerPO;
 import utilities.Ciphertext;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class WebMarketerDataHelperImplTest {
 
