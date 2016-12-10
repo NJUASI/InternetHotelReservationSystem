@@ -1,8 +1,9 @@
 package businessLogic.memberBL;
 
 import businessLogicService.memberBLService.MemberBLService;
-import utilities.MemberType;
-import utilities.ResultMessage;
+import exception.verificationException.UserInexistException;
+import utilities.enums.MemberType;
+import utilities.enums.ResultMessage;
 import vo.MemberVO;
 
 /**
@@ -26,7 +27,7 @@ public class MemberController implements MemberBLService {
 	 */
 	private MemberController() {
 		//new the mock object
-		member = new MockMember();
+		member = new Member();
 	}
 	
 	/**
@@ -69,8 +70,9 @@ public class MemberController implements MemberBLService {
 	 * @updateTime 2016/11/27
 	 * @param userID，memberType 从客户界面层传下来的用户ID和需要获取指定会员类型信息
 	 * @return memberVO MemberInfo载体
+	 * @throws UserInexistException 
 	 */
-	public MemberVO getMemberInfo(String userID) {
+	public MemberVO getMemberInfo(String userID) throws UserInexistException {
 		return member.getMemberInfo(userID);
 	}
 
@@ -80,8 +82,9 @@ public class MemberController implements MemberBLService {
 	 * @updateTime 2016/11/27
 	 * @param userID，memberType 从客户界面层传下来的用户ID和需要获取指定会员类型信息
 	 * @return boolean 该用户是否为指定会员类型
+	 * @throws UserInexistException 
 	 */
-	public boolean isMember(String userID, MemberType memberType) {
+	public boolean isMember(String userID, MemberType memberType) throws UserInexistException {
 		return member.isMember(userID, memberType);
 	}
 
@@ -91,8 +94,9 @@ public class MemberController implements MemberBLService {
 	 * @updateTime 2016/11/27
 	 * @param userID 从客户界面层传下来的用户ID
 	 * @return MemberType 指定用户的会员类型
+	 * @throws UserInexistException 
 	 */
-	public MemberType getMemberType(String userID) {
+	public MemberType getMemberType(String userID) throws UserInexistException {
 		return member.getMemberType(userID);
 	}
 	

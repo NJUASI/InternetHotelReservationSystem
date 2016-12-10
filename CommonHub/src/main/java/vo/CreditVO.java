@@ -3,7 +3,7 @@ package vo;
 import java.time.LocalDateTime;
 
 import po.CreditPO;
-import utilities.CreditRecord;
+import utilities.enums.CreditRecord;
 
 public class CreditVO {
     

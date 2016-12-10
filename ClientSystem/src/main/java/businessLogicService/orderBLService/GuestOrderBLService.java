@@ -2,7 +2,7 @@ package businessLogicService.orderBLService;
 
 import java.util.Iterator;
 
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.GuestEvaluationVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
@@ -11,7 +11,7 @@ import vo.OrderVO;
  * 
  * @author cuihua
  * lastChangedBy charles
- * updateTime 2016/12/8
+ * updateTime 2016/12/10
  *
  */
 public interface GuestOrderBLService {
@@ -63,5 +63,15 @@ public interface GuestOrderBLService {
 	 * @return 客户<已评价／未评价>订单
 	 */
 	Iterator<OrderGeneralVO> getAllGuestCommentOrderGeneral(String guestID, boolean hasCommented);
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/10
+	 * @param guestID 客户编号
+	 * @param hotelID 目标酒店编号
+	 * @return 客户在目标酒店的所有订单记录
+	 */
+	Iterator<OrderGeneralVO> getMyOrdersOfThisHotel(String guestID, String hotelID);
 
 }

@@ -1,7 +1,7 @@
 package vo;
 
 import po.HotelPO;
-import utilities.OrderState;
+import utilities.enums.OrderState;
 
 /**
  * @Description:hotelVO中存有酒店的基本信息：

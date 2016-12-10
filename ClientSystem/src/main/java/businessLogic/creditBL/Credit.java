@@ -10,8 +10,9 @@ import businessLogic.userBL.userService.service.GuestCreditService;
 import businessLogicService.creditBLService.CreditBLService;
 import dataService.creditDataService.CreditDataService;
 import dataService.creditDataService.CreditDataService_Stub;
+import exception.verificationException.UserInexistException;
 import po.CreditPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.CreditVO;
 
 /**
@@ -82,8 +83,9 @@ public class Credit implements CreditBLService{
 	 * @updateTime 2016/12/9
 	 * @param creditVO 一条信用记录
 	 * @return 是否成功添加此信用记录并修改客户信用值
+	 * @throws UserInexistException 
 	 */
-	public ResultMessage addCreditRecord(CreditVO creditVO){
+	public ResultMessage addCreditRecord(CreditVO creditVO) throws UserInexistException{
 		guest = new Guest();
 		try {
 			//调用guest的方法，改变该客户的总信用值

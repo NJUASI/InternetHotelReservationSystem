@@ -17,8 +17,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import presentation.Table.TypeTable;
 import utilities.IDReserve;
-import utilities.RoomType;
+import utilities.enums.RoomType;
 import vo.RoomInfoVO;
 /**
  * @description 酒店客房信息界面的控制器
@@ -139,6 +140,11 @@ public class RoomController {
 		RoomInfoVO vo = new RoomInfoVO();
 		//打包好一个vo，通过hotelBLContoller调用update的方法
 		vo.hotelID = hotelID;
+		
+//		TODO gcm 意思是这里的roomtype不改变了呗,如果不用变我就界面让他不可改,这里是维护,也没增加增加剩余房间的数量
+//		也没改变房间总数
+//		
+//		int i= Integer.parseInt(preRemainNum)-Integer.parseInt(roomNum.getText());为增加或减少的房间数量
 		vo.roomType = RoomType.valueOf(roomType.getValue());
 		vo.price = Integer.valueOf(price.getText());
 		
@@ -165,9 +171,17 @@ public class RoomController {
 	@FXML
 	protected void addRoomType() {
 		/**
-		 * TODO gy注意：需要获取所添加的酒店信息，在下面封装成vo
+		 * TODO gcm注意：需要获取所添加的酒店信息，在下面封装成vo
+		 * 添加的时候
+		 * 
+		 * 
 		 * 并根据该信息封装成一个vo，然后调用添加酒店客房信息的方法
 		 */
+		RoomInfoVO vo = new RoomInfoVO();
+		vo.hotelID = hotelID;
+		vo.roomType = RoomType.valueOf(roomType.getValue());
+		vo.remainNum=Integer.parseInt(roomNum.getText());
+		vo.price = Integer.valueOf(price.getText());
 		initialize();
 	}
 

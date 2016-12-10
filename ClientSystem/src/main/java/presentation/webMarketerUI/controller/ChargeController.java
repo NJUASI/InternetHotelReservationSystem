@@ -6,6 +6,7 @@ import businessLogic.userBL.stub.UserBLService_Stub;
 import businessLogic.userBL.userService.Guest;
 import businessLogic.userBL.userService.service.GuestCreditService;
 import businessLogicService.userBLService.UserBLService;
+import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -48,6 +49,7 @@ public class ChargeController {
 	private void initialize() {
 		
 		//TODO 掉需要的接口
+//	TODO	fjj 这个是谁的上面那句话
 		userBLService = new UserBLService_Stub();
 	}
 	
@@ -55,18 +57,20 @@ public class ChargeController {
 	 * @author 61990
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/11/27
-	 * @点击查询按钮，返回客户信息，初始化界面
+	 * @ 点击查询按钮，返回客户信息，初始化界面
 	 */	
 	@FXML
 	protected void search() {
-		
-		//TODO fjy注意：通过输入的得到guest的VO   searchGuestID.getText(),UserType.GUEST
-		
 		chargePane.setVisible(true);
-		guestVO = (GuestVO) userBLService.getSingle( searchGuestID.getText());
+		try {
+			guestVO = (GuestVO) userBLService.getSingle(searchGuestID.getText());
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+			// 为了保证编译能通过
+		}
 		guestID.setText(guestVO.userID);
 		name.setText(guestVO.name);
-		credit.setText( Double.toString(guestVO.credit));
+		credit.setText(Double.toString(guestVO.credit));
 	}
 	
 	/**
@@ -78,13 +82,21 @@ public class ChargeController {
 	 */
 	@FXML
 	protected void saveCharge() throws IOException {
-		//TODO fjy注意：通过guestID保存   guestID.getText()得到ID
+		//TODO djy/gcm注意：通过guestID保存   guestID.getText()得到ID
 //		通过得到改变后的信用值 Double.parseDouble(chargeNum.getText()) + Double.parseDouble(credit.getText())
 		
 		creditService = new Guest();
 		if (credit.getText() != null) {
-			creditService.modifyCredit(searchGuestID.getText(),
-					Double.parseDouble(chargeNum.getText()) + Double.parseDouble(credit.getText()));
+			try {
+				creditService.modifyCredit(searchGuestID.getText(),
+						Double.parseDouble(chargeNum.getText()) + Double.parseDouble(credit.getText()));
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UserInexistException e) {
+				e.printStackTrace();
+				// TODO 弹窗提示，需要充值的客户不存在
+			}
 			showResult();
 		}
 	}

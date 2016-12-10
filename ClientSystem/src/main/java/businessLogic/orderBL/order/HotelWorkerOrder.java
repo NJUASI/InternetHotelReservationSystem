@@ -13,11 +13,12 @@ import businessLogicService.orderBLService.HotelWorkerOrderBLService;
 import businessLogicService.userBLService.UserBLService;
 import dataService.orderDataService.OrderDataService;
 import dataService.orderDataService.OrderDataService_Stub;
+import exception.verificationException.UserInexistException;
 import po.CheckInPO;
 import po.CheckOutPO;
-import utilities.CreditRecord;
-import utilities.OrderState;
-import utilities.ResultMessage;
+import utilities.enums.CreditRecord;
+import utilities.enums.OrderState;
+import utilities.enums.ResultMessage;
 import vo.CheckInVO;
 import vo.CheckOutVO;
 import vo.CreditVO;
@@ -90,18 +91,21 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 				final GuestVO thisGuest = (GuestVO) userBLService.getSingle(thisOrder.orderGeneralVO.guestID);
 				
 				final LocalDateTime time = LocalDateTime.now();
-				final double afterCredit = thisGuest.credit + thisOrder.orderGeneralVO.price;
 				
 				CreditVO creditVO = null;
+				double afterCredit = 0;
 				if (thisOrderState == OrderState.UNEXECUTED) {
+					afterCredit = thisGuest.credit + thisOrder.orderGeneralVO.price;
 					creditVO = new CreditVO(thisOrder.orderGeneralVO.guestID, time, 
 							thisOrder.orderGeneralVO.orderID, thisGuest.credit, afterCredit, CreditRecord.EXECUTE);
 				}else {
+					//因为置为异常时被扣了相应的信用值，故在此先加回来再增加
+					afterCredit = thisGuest.credit + 2*thisOrder.orderGeneralVO.price;
 					creditVO = new CreditVO(thisOrder.orderGeneralVO.guestID, time, 
 							thisOrder.orderGeneralVO.orderID, thisGuest.credit, afterCredit, CreditRecord.ABNORMAL_EXECUTE);
 				}
 				msg2 = creditBLService.addCreditRecord(creditVO);
-			} catch (RemoteException e) {
+			} catch (RemoteException | UserInexistException e) {
 				e.printStackTrace();
 			}
 		}
@@ -124,19 +128,20 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 		ResultMessage msg1 = ResultMessage.FAIL;
 		ResultMessage msg2 = ResultMessage.FAIL;
 		
+		//更新订单
 		try {
 			msg1 = orderDataService.updateCheckIn(new CheckInPO(checkInVO));
-			
-			/*
-			 * new the mock one to test
-			 */
-			hotelInterface = new MockHotel();
-			OrderVO thisOrder = commonOrder.getOrderDetail(checkInVO.orderID);
-			
-			msg2 = hotelInterface.checkIn(thisOrder.orderGeneralVO.orderID, thisOrder.roomType, thisOrder.roomNumCount); 
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+		
+		//更新酒店剩余房间信息
+		/*
+		 * new the mock one to test
+		 */
+		hotelInterface = new MockHotel();
+		OrderVO thisOrder = commonOrder.getOrderDetail(checkInVO.orderID);
+		msg2 = hotelInterface.checkIn(thisOrder.orderGeneralVO.orderID, thisOrder.roomType, thisOrder.roomNumCount);
 		
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
 			return ResultMessage.SUCCESS;
@@ -156,19 +161,20 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 		ResultMessage msg1 = ResultMessage.FAIL;
 		ResultMessage msg2 = ResultMessage.FAIL;
 		
+		//更新订单
 		try {
 			msg1 = orderDataService.updateCheckOut((new CheckOutPO(checkOutVO)));
-			
-			/*
-			 * new the mock one to test
-			 */
-			hotelInterface = new MockHotel();
-			OrderVO thisOrder = commonOrder.getOrderDetail(checkOutVO.orderID);
-			
-			msg2 = hotelInterface.checkOut(thisOrder.orderGeneralVO.orderID,thisOrder.roomType,thisOrder.roomNumCount); 
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+		
+		//更新酒店剩余房间信息
+		/*
+		 * new the mock one to test
+		 */
+		hotelInterface = new MockHotel();
+		OrderVO thisOrder = commonOrder.getOrderDetail(checkOutVO.orderID);
+		msg2 = hotelInterface.checkOut(thisOrder.orderGeneralVO.orderID, thisOrder.roomType, thisOrder.roomNumCount);
 		
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
 			return ResultMessage.SUCCESS;

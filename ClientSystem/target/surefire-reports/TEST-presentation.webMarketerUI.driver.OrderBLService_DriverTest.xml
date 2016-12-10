@@ -26,7 +26,7 @@
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Mac OS X"/>
-    <property name="classworlds.conf" value="/Users/cuihua/Documents/SE/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf8984848638693298059.tmp"/>
+    <property name="classworlds.conf" value="/Users/cuihua/Documents/SE/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf4668364980552825713.tmp"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/Users/cuihua/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -61,7 +61,7 @@
   </properties>
   <testcase classname="presentation.webMarketerUI.driver.OrderBLService_DriverTest" name="testUndoAbnormalOrder" time="0.001"/>
   <testcase classname="presentation.webMarketerUI.driver.OrderBLService_DriverTest" name="testGetOrderDetail" time="0"/>
-  <testcase classname="presentation.webMarketerUI.driver.OrderBLService_DriverTest" name="testGetAllAbnormalOrderGeneral01" time="0.001"/>
+  <testcase classname="presentation.webMarketerUI.driver.OrderBLService_DriverTest" name="testGetAllAbnormalOrderGeneral01" time="0"/>
   <testcase classname="presentation.webMarketerUI.driver.OrderBLService_DriverTest" name="testGetAllAbnormalOrderGeneral02" time="0"/>
-  <testcase classname="presentation.webMarketerUI.driver.OrderBLService_DriverTest" name="testGetAllUnexecutedOrderGeneral" time="0"/>
+  <testcase classname="presentation.webMarketerUI.driver.OrderBLService_DriverTest" name="testGetAllUnexecutedOrderGeneral" time="0.001"/>
 </testsuite>

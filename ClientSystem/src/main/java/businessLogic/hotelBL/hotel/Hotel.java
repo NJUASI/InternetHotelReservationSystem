@@ -8,8 +8,8 @@ import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelPO;
 import utilities.Address;
-import utilities.ResultMessage;
-import utilities.RoomType;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
 import vo.HotelVO;
 import vo.RoomInfoVO;
 
@@ -244,6 +244,23 @@ public class Hotel implements HotelInfoOperation{
 
 	public ResultMessage checkOut(String hotelID, RoomType roomType, int roomNum) {
 		return rooms.checkOut(hotelID,roomType,roomNum);
+	}
+
+	/**
+	 * @Description:客户撤销未执行订单时更新此酒店的剩余房间数
+	 * @param hotelID 目标酒店编号
+	 * @param roomType 目标房间类型
+	 * @param roomNum 此订单的房间数
+	 * @return ResultMessage 是否撤销成功
+	 * @author: charles
+	 * @lastChangedBy: charles
+	 * @time:2016/12/10
+	 * 
+	 * TODO 龚尘淼 具体实现
+	 */
+	@Override
+	public ResultMessage updateRemainRoomNum(String hotelID, RoomType roomType, int roomNum) {
+		return null;
 	}
 
 }

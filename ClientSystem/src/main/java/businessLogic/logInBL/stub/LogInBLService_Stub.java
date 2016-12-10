@@ -1,8 +1,8 @@
 package businessLogic.logInBL.stub;
 
 import businessLogicService.logInBLService.LogInBLService;
-import utilities.ResultMessage;
-import utilities.UserType;
+import utilities.enums.ResultMessage;
+import utilities.enums.UserType;
 import vo.GuestVO;
 import vo.UserVO;
 

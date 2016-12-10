@@ -9,6 +9,7 @@ import businessLogic.promotionBL.promotions.HotelFixedPromotion;
 import businessLogic.promotionBL.promotions.MemberLevelPromotion;
 import businessLogic.promotionBL.promotions.SpecialCirclePromotion;
 import businessLogic.promotionBL.promotions.SpecialSpanPromotion;
+import exception.verificationException.UserInexistException;
 import utilities.PreOrder;
 
 /**
@@ -37,10 +38,11 @@ public class DiscountCalculator implements DiscountInSpan{
 	 * @return
 	 * @exception:
 	 * @author: Harvey Gong
+	 * @throws UserInexistException 
 	 * @time:2016年12月2日 下午7:42:18
 	 */
 	@Override
-	public Iterator<Double> getDiscountInSpan(PreOrder preOrder) {
+	public Iterator<Double> getDiscountInSpan(PreOrder preOrder) throws UserInexistException {
 		List<Double> discountsInSpan = new ArrayList<Double>();
 		LocalDate today = preOrder.expectExecuteDate;
 		String guestID = preOrder.guestID;

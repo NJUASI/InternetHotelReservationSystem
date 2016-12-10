@@ -9,8 +9,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import utilities.SearchCriteriaType;
-import utilities.SortStrategy;
+import utilities.enums.SearchCriteriaType;
+import utilities.enums.SortStrategy;
 import vo.HotelVO;
 import vo.SearchCriteriaVO;
 

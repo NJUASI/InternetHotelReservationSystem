@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.Test;
 
 import businessLogic.marketBL.stub.MarketBLService_Stub;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.MarketVO;
 
 public class MarketBLService_DriverTest {

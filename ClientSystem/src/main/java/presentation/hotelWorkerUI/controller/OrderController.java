@@ -20,10 +20,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import presentation.PopUp.PopUp;
+import presentation.Table.OrderTable;
 import utilities.IDReserve;
-import utilities.OrderState;
-import utilities.ResultMessage;
-import utilities.UserType;
+import utilities.enums.OrderState;
+import utilities.enums.ResultMessage;
+import utilities.enums.UserType;
 import vo.CheckInVO;
 import vo.CheckOutVO;
 import vo.OrderGeneralVO;
@@ -35,7 +37,6 @@ import vo.OrderVO;
  * lastChangeBy charles
  * updateTime 2016/12/8
  * 
- * TODO 高源 酒店查看时可以查看到订单评   但是disable吧。。不可修改
  * 
  * TODO 冯俊杰：checkIn、checkOut后刷新orderGenerals，获取当前焦点位置<异常／未执行>，或者背景虚化了看不出来就不用区分了
  */
@@ -76,10 +77,9 @@ public class OrderController {
 	 */
 	@FXML
 	private void initialize() {
-		
-		//通过hotelID得到orderGeneralVOs
 		orderBLController = OrderBLController.getInstance();
 
+		//通过hotelID得到orderGeneralVOs
 		Iterator<OrderGeneralVO> orderGenerals = orderBLController.getAllOrderGenerals(hotelID, hotelWorker);
 		initOrderCheck(orderGenerals);
 
@@ -241,8 +241,8 @@ public class OrderController {
 		orderDetail.setVisible(true);
 		orderCheck.setVisible(false);
 
-		orderComment.setDisable(false);
-		orderScore.setDisable(false);	
+		orderComment.setDisable(true);
+		orderScore.setDisable(true);	
 
 		orderVO = orderBLController.getOrderDetail(orderID);
 		initOrderDetail(orderVO);
@@ -322,15 +322,14 @@ public class OrderController {
 		final CheckInVO checkInVO = new CheckInVO(checkInOrderID.getText(), checkInRoomNum.getText(), checkInTime, expectLeaveTime);
 		final ResultMessage result = orderBLController.updateCheckIn(checkInVO);
 		if (result == ResultMessage.SUCCESS) {
-			//TODO 高源：状态栏显示入住成功
+			new PopUp("入住成功", "congratulation");			
 			
-			
-			//此客户入住成功，将填写的房间号置为空，预计离开时间置为明日正午
+			//此客户入住成功，将填写的房间号置为空，预计离开时间置为明日正午（全部恢复为默认值）
 			checkInRoomNum.setText("");
 			checkInHour.setText("12");
 			checkInMinute.setText("00");
 		}else {
-			//TODO 高源：状态栏显示入住失败
+			new PopUp("入住失败", "so sorry");	
 			
 		}
 	}
@@ -383,17 +382,16 @@ public class OrderController {
 
 	@FXML
 	protected void sureCheckOut(){
-		//	  TODO fjj 订单退房，提供订单号
-		//	 checkOutOrderID.getText();ID
 		final LocalDateTime checkOutTime = LocalDateTime.now();
 		final CheckOutVO checkOutVO = new CheckOutVO(checkInOrderID.getText(), checkOutTime);
 		
 		final ResultMessage result = orderBLController.updateCheckOut(checkOutVO);
+//	TODO 后期可以把这些放在界面里，不弹框
 		if (result == ResultMessage.SUCCESS) {
-			//TODO 高源：状态栏显示退房成功
-			
+			new PopUp("退房成功", "congratulation");	
+						
 		}else {
-			//TODO 高源：状态栏显示退房成功
+			new PopUp("退房失败", "congratulation");	
 			
 		}
 	}

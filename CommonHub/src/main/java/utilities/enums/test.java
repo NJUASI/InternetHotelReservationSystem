@@ -1,4 +1,6 @@
-package utilities;
+package utilities.enums;
+
+import utilities.Ciphertext;
 
 public class test {
 
@@ -25,17 +27,24 @@ public class test {
 //		System.out.println(ciphertext.decodeChinese("u{蒔鈂玺几俻枡鬉滁鿋屉渭QQQ厈仝奘宗伊柈桒卫咽Q§Q皵圏夾"));
 //		System.out.println(ciphertext.decodeChinese("u{"));
 
-		System.out.println(CreditRecord.CHARGE);
-		System.out.println(CreditRecord.ABNORMAL_EXECUTE);
-		System.out.println(CreditRecord.EXECUTE);
-		System.out.println(CreditRecord.UNDO_ABNORMAL);
-		System.out.println(CreditRecord.OVERDUE);
+//		System.out.println(CreditRecord.CHARGE);
+//		System.out.println(CreditRecord.ABNORMAL_EXECUTE);
+//		System.out.println(CreditRecord.EXECUTE);
+//		System.out.println(CreditRecord.UNDO_ABNORMAL);
+//		System.out.println(CreditRecord.OVERDUE);
+//		
+//		System.out.println(CreditRecord.convertString2CreditRecord("信用充值") == CreditRecord.CHARGE);
+//		System.out.println(CreditRecord.convertString2CreditRecord("未执行->已执行"));
+//		System.out.println(CreditRecord.values()[2]);
+//		System.out.println(CreditRecord.UNDO_ABNORMAL);
+//		System.out.println(CreditRecord.OVERDUE);
 		
-		System.out.println(CreditRecord.convertString2CreditRecord("信用充值") == CreditRecord.CHARGE);
-		System.out.println(CreditRecord.convertString2CreditRecord("未执行->已执行"));
-		System.out.println(CreditRecord.EXECUTE);
-		System.out.println(CreditRecord.UNDO_ABNORMAL);
-		System.out.println(CreditRecord.OVERDUE);
 		
+		System.out.println(OrderState.EXECUTED);
+
+		System.out.println(OrderState.EXECUTED.getChineseOrderState());
+		
+		System.out.println(OrderState.getEnum("已执行"));
+
 	}
 }

@@ -3,6 +3,11 @@ package utilities;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import exception.inputException.InvalidInputException;
+import exception.inputException.InvalidLengthInputException;
+import exception.inputException.PasswordInputException;
+import exception.inputException.SpecialCharacterException;
+
 /**
  * 
  * @author Byron Dong lastChangedBy Byron Dong updateTime 2016/12/6
@@ -22,11 +27,18 @@ public class Detector {
 	 *            id的长度
 	 * @return boolean 是否符合要求规范
 	 */
-	public  boolean idDetector(String express, int length){
+	public  boolean idDetector(String express, int length) throws SpecialCharacterException{
+
+		if(express.length()!=length){
+			return false; //得到与指定长度匹配的数字
+		}
 		
 		expression = "[0-9]{"+String.valueOf(length)+"}";
 		
-		return this.getResultOfDetector(express); //得到与指定长度匹配的数字
+		if(!this.getResultOfDetector(express)){
+			throw new SpecialCharacterException();
+		} 
+		return true;
 	}
 	
 	/**
@@ -37,11 +49,14 @@ public class Detector {
 	 *            传入需要检查不合法符号的密码
 	 * @return boolean 是否符合要求规范
 	 */
-	public  boolean passwordDetector(String express){
+	public  boolean passwordDetector(String express) throws PasswordInputException{
 		
 		expression = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$";
 		
-		return this.getResultOfDetector(express); //密码必须是数字与字母的组合
+		if(!this.getResultOfDetector(express)){
+			throw new PasswordInputException(); //密码必须是数字与字母的组合
+		}
+		return true;
 	}
 	
 	/**
@@ -52,10 +67,13 @@ public class Detector {
 	 *            传入需要检查不合法符号的电话
 	 * @return boolean 是否符合要求规范
 	 */
-	public boolean phoneDetector(String express){
+	public boolean phoneDetector(String express) throws InvalidLengthInputException{
 		expression = "[0-9]{11}";
 		
-		return this.getResultOfDetector(express);
+		if(!this.getResultOfDetector(express)){
+			throw new InvalidLengthInputException();
+		}
+		return true;
 	}
 	
 	/**
@@ -66,10 +84,13 @@ public class Detector {
 	 *            传入需要检查不合法符号的信息内容
 	 * @return boolean 是否符合要求规范
 	 */
-	public boolean infoDetector(String express){ //统一检测填写信息内容中的不合法标识符
+	public boolean infoDetector(String express) throws InvalidInputException{ 
 		expression = "^[\u4e00-\u9fa5_a-zA-Z0-9]+$";
 		
-		return this.getResultOfDetector(express);
+		if(!this.getResultOfDetector(express)){
+			throw new InvalidInputException(); 	//统一检测填写信息内容中的不合法标识符
+		}
+		return true;
 	}
 	
 	/**
@@ -80,10 +101,13 @@ public class Detector {
 	 *            传入需要检查不合法符号的折扣
 	 * @return boolean 是否符合要求规范
 	 */
-	public boolean discoutDetector(String express){ //折扣只允许单数字
+	public boolean discoutDetector(String express)throws InvalidInputException{ //折扣只允许单数字
 		expression = "[0-9]{1}";
 		
-		return this.getResultOfDetector(express);
+		if(!this.getResultOfDetector(express)){
+			throw new InvalidInputException();
+		}
+		return true;
 	}
 	
 	/**

@@ -6,7 +6,7 @@ import businessLogic.promotionBL.promotions.HotelFixedPromotion;
 import businessLogic.promotionBL.promotions.SpecialCirclePromotion;
 import businessLogic.promotionBL.promotions.SpecialSpanPromotion;
 import businessLogicService.promotionBLService.PromotionBLService;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.AddressVO;
 import vo.HotelFixedPromotionVO;
 import vo.SpecialSpanPromotionVO;

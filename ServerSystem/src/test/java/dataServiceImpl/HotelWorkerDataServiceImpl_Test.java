@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import dataService.hotelWorkerDataService.HotelWorkerDataService;
 import po.HotelWorkerPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class HotelWorkerDataServiceImpl_Test {
 
@@ -23,7 +23,7 @@ public class HotelWorkerDataServiceImpl_Test {
 			assertEquals(hotelWorkerPO.getHotelWorkerID(), "00001111");
 			assertEquals(hotelWorkerPO.getPassword(), "123456");
 			assertEquals(hotelWorkerPO.getHotelName(), "school");
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -54,7 +54,7 @@ public class HotelWorkerDataServiceImpl_Test {
 			assertEquals(hotelWorkerPO.getHotelWorkerID(), "00001111");
 			assertEquals(hotelWorkerPO.getPassword(), "123456");
 			assertEquals(hotelWorkerPO.getHotelName(), "school");
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

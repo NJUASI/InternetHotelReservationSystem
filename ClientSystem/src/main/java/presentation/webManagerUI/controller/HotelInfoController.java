@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import presentation.PopUp.PopUp;
 import vo.HotelVO;
 
 public class HotelInfoController {
@@ -31,10 +32,10 @@ public class HotelInfoController {
 	public HotelInfoController() {
 		sourceBLController = SourceBLController.getInstance();
 		userBLController = UserController.getInstance();
-		
-		cityInput.setOnShowing(new CityShowingHandler());
-		cityInput.valueProperty().addListener(new CityChangedListener());
-		levelInput.setOnShowing(new LevelShowingHandler());
+		//TODO gcm
+//		cityInput.setOnShowing(new CityShowingHandler());
+//		cityInput.valueProperty().addListener(new CityChangedListener());
+//		levelInput.setOnShowing(new LevelShowingHandler());
 	}
 
 	/**
@@ -56,10 +57,10 @@ public class HotelInfoController {
 		HotelVO hotelVO = userBLController.addHotel(newHotel);
 		
 		if(hotelVO == null){
-			// TODO gy 代表添加失败，需要界面处理
+			new PopUp("添加失败", "congratulation");	
 		}
-		//然后 hotelVO里有添加成功后的参数
-		
+		//TODO djy 然后 hotelVO里有添加成功后的参数,没有密码，我需要的是登录的方式，也就是hotelWorker的账号密码
+//		new PopUp("撤销成功"+ hotelVO.hotelID+hotelVO.", "congratulation");	
 	}
 	
 	class CityShowingHandler implements EventHandler<Event>{

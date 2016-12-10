@@ -7,9 +7,10 @@ import java.util.List;
 import businessLogic.userBL.userService.service.UserService;
 import dataService.hotelWorkerDataService.HotelWorkerDataService;
 import dataService.hotelWorkerDataService.HotelWorkerDataService_Stub;
+import exception.verificationException.UserInexistException;
 import po.HotelWorkerPO;
 import utilities.Ciphertext;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.HotelWorkerVO;
 import vo.UserVO;
 
@@ -91,8 +92,9 @@ public class HotelWorker implements UserService {
 	 * @param userVO
 	 *            从userDoMain传下来的用户ID
 	 * @return UserVO 单一hotelWorkerInfo载体
+	 * @throws UserInexistException 
 	 */
-	public UserVO getSingle(String userID) {
+	public UserVO getSingle(String userID) throws UserInexistException {
 
 		try {
 			return this.convert(hotelWorkerDataService.getSingleHotelWorker(userID));
@@ -126,12 +128,9 @@ public class HotelWorker implements UserService {
 	 * @param userID
 	 *            从userDoMain传下来的指定用户ID
 	 * @return String 指定用户 的登录信息
+	 * @throws UserInexistException 
 	 */
-	public String getLogInInfo(String userID) {
-
-		if (!this.hasHotelWorker(userID)) {
-			return null;
-		} // 不存在ID对应项，返回值后期细化
+	public String getLogInInfo(String userID) throws UserInexistException {
 
 		try {
 			return convert(hotelWorkerDataService.getSingleHotelWorker(userID)).password;
@@ -188,13 +187,13 @@ public class HotelWorker implements UserService {
 	}
 
 	private boolean hasHotelWorker(String hotelWorkerID) {
-		UserVO hotelWorkerVO = this.getSingle(hotelWorkerID);
-
-		if (hotelWorkerVO == null) {
+		try {
+			UserVO hotelWorkerVO = this.getSingle(hotelWorkerID);
+		} catch (UserInexistException e) {
+			e.printStackTrace();
 			return false;
-		} else {
-			return true;
 		}
+		return true;
 	}
 
 	private HotelWorkerPO encrypt(HotelWorkerPO hotelWorkerPO) {

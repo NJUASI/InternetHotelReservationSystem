@@ -11,9 +11,9 @@ import java.util.List;
 import dataHelper.OrderDataHelper;
 import po.OrderPO;
 import utilities.JDBCUtil;
-import utilities.OrderState;
-import utilities.ResultMessage;
-import utilities.RoomType;
+import utilities.enums.OrderState;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
 
 /**
  * 
@@ -65,7 +65,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			ps.setDouble(6, orderPO.getPrice());
 			ps.setObject(7, orderPO.getExpectExecuteTime());
 			ps.setObject(8, orderPO.getExpectLeaveTime());
-			ps.setString(9, orderPO.getState().toString());
+			ps.setString(9, orderPO.getState().getChineseOrderState());
 			ps.setString(10, String.valueOf(orderPO.getHasCommented()));
 			ps.setString(11, orderPO.getName());
 			ps.setString(12, orderPO.getPhone());
@@ -73,7 +73,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			ps.setObject(14, orderPO.getCreateTime());
 			ps.setObject(15, orderPO.getCheckInTime());
 			ps.setObject(16, orderPO.getCheckOutTime());
-			ps.setString(17, orderPO.getRoomType().toString());
+			ps.setString(17, orderPO.getRoomType().getChineseRoomType());
 			ps.setInt(18, orderPO.getRoomNumCount());
 			ps.setString(19, orderPO.getRoomNumber());
 			ps.setInt(20, orderPO.getExpectGuestNumCount());
@@ -103,7 +103,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, state.toString()); //此处硬编码1-2对应sql语句中问号的位置
+			ps.setString(1, state.getChineseOrderState()); //此处硬编码1-2对应sql语句中问号的位置
 			ps.setObject(2, orderID);
 			
 			ps.execute();
@@ -381,7 +381,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			orderPO.setPrice(rs.getDouble(6));
 			orderPO.setExpectExecuteTime(rs.getTimestamp(7).toLocalDateTime());
 			orderPO.setExpectLeaveTime(rs.getTimestamp(8).toLocalDateTime());
-			orderPO.setState(OrderState.valueOf(rs.getString(9)));
+			orderPO.setState(OrderState.getEnum(rs.getString(9)));
 			orderPO.setHasCommented(convertBooleanString2Boolean(rs.getString(10)));
 			orderPO.setName(rs.getString(11));
 			orderPO.setPhone(rs.getString(12));
@@ -389,7 +389,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			orderPO.setCreateTime(rs.getTimestamp(14).toLocalDateTime());
 			orderPO.setCheckInTime(rs.getTimestamp(15).toLocalDateTime());
 			orderPO.setCheckOutTime(rs.getTimestamp(16).toLocalDateTime());
-			orderPO.setRoomType(RoomType.valueOf(rs.getString(17)));
+			orderPO.setRoomType(RoomType.getEnum(rs.getString(17)));
 			orderPO.setRoomNumCount(rs.getInt(18));
 			orderPO.setRoomNumber(rs.getString(19));
 			orderPO.setExpectGuestNumCount(rs.getInt(20));

@@ -16,9 +16,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import presentation.webMarketerUI.controller.DatePromotionTable;
+import presentation.Table.DatePromotionTable;
 import utilities.IDReserve;
-import utilities.PromotionType;
+import utilities.enums.PromotionType;
 import vo.HotelFixedPromotionVO;
 import vo.SpecialSpanPromotionVO;
 
@@ -30,20 +30,18 @@ import vo.SpecialSpanPromotionVO;
  */
 public class PromotionController {
 	@FXML
-	private Pane modifyPane,pane1,pane2,pane3;
+	private Pane modifyPane;
 	@FXML
-	private Button addBt,threeBt,birthdayBt,enterpriseBt;
+	private Button addBt;
 	@FXML
 	private TableView<DatePromotionTable> table;
 	@FXML
 	private TableColumn<DatePromotionTable, String> nameColumn,  discountColumn , startDateColumn , endDateColumn;
 	@FXML
-	private TextField nameText,discountText,enterpriseText,birthdayText,threeText;
+	private TextField nameText,discountText;
 	@FXML
 	private DatePicker startDatePicker, endDatePicker;
-	@FXML
-	private Label threeLB,enterpriseLB,birthdayLB;
-
+	
 	List<SpecialSpanPromotionVO> datePromotion;
 	List<HotelFixedPromotionVO> fixedPromotion;
 
@@ -78,10 +76,10 @@ public class PromotionController {
 		initDatePromotion(datePromotion);
 		
 		fixedPromotion= new LinkedList<>();
-		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.三间及以上预订折扣,9.3));
-		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.企业会员折扣,9.3));
-		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.三间及以上预订折扣,9.3));
-		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.三间及以上预订折扣,9.3));
+		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.HOTEL_ABOVE_THREE_ROOMS,9.3));
+		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.HOTEL_ABOVE_THREE_ROOMS,9.3));
+		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.HOTEL_ABOVE_THREE_ROOMS,9.3));
+		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.HOTEL_ABOVE_THREE_ROOMS,9.3));
 		initFixedPromotion(fixedPromotion);
 	}
 	/**
@@ -103,144 +101,9 @@ public class PromotionController {
 
 		table.setItems(data);
 	}
-//	/**
-//	 * @description 初始化酒店固定的策略
-//	 * @author 61990
-//	 * @lastChangedBy Harvey
-//	 * @updateTime 2016/12/7
-//	 */
-//	protected void initHotelFixedPromotion(){
-//		Iterator<HotelFixedPromotionVO> list = promotionBLController.getHotelFixedPromotions(hotelID);
-//		//TODO 折扣显示有问题
-//		threeLB.setText(String.valueOf(list.next().discount));
-//		birthdayLB.setText(String.valueOf(list.next().discount));
-//		enterpriseLB.setText(String.valueOf(list.next().discount));
-//	}
-//	/**
-//	 * @description 点击三间及以上折扣的按钮
-//	 * @author 61990
-//	 * @lastChangedBy Harvey
-//	 * @updateTime 2016/12/7
-//	 */
-//	@FXML
-//	protected void modifyThree(){
-//		threeText.setVisible(true);
-//		threeText.setText(threeLB.getText());
-//		threeBt.setVisible(false);
-//		pane1.setVisible(true);
-//	}
-//	/**
-//	 * @description 点击修改生日折扣的按钮 
-//	 * @author 61990
-//	 * @lastChangedBy Harvey
-//	 * @updateTime 2016/12/7
-//	 */
-//	@FXML
-//	protected void modifyBirthday(){
-//		birthdayText.setVisible(true);
-//		birthdayText.setText(threeLB.getText());
-//		birthdayBt.setVisible(false);
-//		pane2.setVisible(true);
-//	}
-//	/**
-//	 * @description 点击修改企业会员的按钮
-//	 * @author 61990
-//	 * @lastChangedBy Harvey
-//	 * @updateTime 2016/11/30
-//	 * @修改企业策略
-//	 */
-//	@FXML
-//	protected void modifyEnterprise(){
-//		enterpriseText.setVisible(true);
-//		enterpriseText.setText(threeLB.getText());
-//		enterpriseBt.setVisible(false);
-//		pane3.setVisible(true);
-//	}
-//
-//	/**
-//	 * @author 61990
-//	 * @lastChangedBy Harvey
-//	 * @updateTime 2016/12/7
-//	 * @保存修改三间及以上
-//	 */
-//	@FXML
-//	protected void saveThree(){
-//		updateHotelFixedPromotion(threeText, threeLB);
-//		initHotelFixedPromotion();
-//		
-//		threeText.setVisible(false);
-//		threeBt.setVisible(true);
-//		pane1.setVisible(false);
-//	}
-//	
-//	/**
-//	 * @author 61990
-//	 * @lastChangedBy Harvey
-//	 * @updateTime 2016/12/7
-//	 * @保存修改生日策略
-//	 */
-//	@FXML
-//	protected void saveBirthday(){
-//		updateHotelFixedPromotion(birthdayText,birthdayLB);
-//		initHotelFixedPromotion();
-//		
-//		birthdayText.setVisible(false);
-//		birthdayBt.setVisible(true);
-//		pane2.setVisible(false);
-//	}
-//	/**
-//	 * @author 61990
-//	 * @lastChangedBy Harvey
-//	 * @updateTime 2016/12/7
-//	 * @保存修改企业策略
-//	 */
-//	@FXML
-//	protected void saveEnterprise(){
-//		updateHotelFixedPromotion(enterpriseText,enterpriseLB);
-//		initHotelFixedPromotion();
-//		
-//		enterpriseText.setVisible(false);
-//		enterpriseBt.setVisible(true);
-//		pane3.setVisible(false);
-//	}
-//
-//	/**
-//	 * @author 61990
-//	 * @lastChangedBy 61990
-//	 * @updateTime 2016/11/30
-//	 * @取消修改三间及以上
-//	 */
-//	@FXML
-//	protected void cancelThree(){
-//		threeText.setVisible(false);
-//		threeBt.setVisible(true);
-//		pane1.setVisible(false);
-//	}
-//	/**
-//	 * @author 61990
-//	 * @lastChangedBy 61990
-//	 * @updateTime 2016/11/30
-//	 * @取消修改生日策略
-//	 */
-//	@FXML
-//	protected void cancelBirthday(){
-//		birthdayText.setVisible(false);
-//		birthdayBt.setVisible(true);
-//		pane2.setVisible(false);
-//	}
-//	/**
-//	 * @author 61990
-//	 * @lastChangedBy 61990
-//	 * @updateTime 2016/11/30
-//	 * @取消修改企业策略
-//	 */
-//	@FXML
-//	protected void cancelEnterprise(){
-//		enterpriseText.setVisible(false);
-//		enterpriseBt.setVisible(true);
-//		pane3.setVisible(false);
-//	}
 
+
+	String preName;
 	/**
 	 * @description 获取表中内容直接修改双十一  
 	 * @author 61990
@@ -254,6 +117,7 @@ public class PromotionController {
 					table.getSelectionModel().getSelectedItem().getDiscount(),
 					table.getSelectionModel().getSelectedItem().getStartDate(),
 					table.getSelectionModel().getSelectedItem().getEndDate());
+			preName=table.getSelectionModel().getSelectedItem().getName();
 			modifyPane.setVisible(true);
 			addBt.setVisible(false);
 		} catch (Exception e) {
@@ -270,10 +134,13 @@ public class PromotionController {
 	@FXML
 	protected void savePromotion() {
 		try {
-			//			final LocalDate s1 = beginTime2.getValue();
-			//		final LocalDate s2 = beginTime2.getValue();
-			// PromotionVO promitonVO=new
-			// PromotionVO(PromotionType.HOTEL__HOLIDAY,Double.parseDouble(doubleDiscount2.getText()),s1,s2);
+//			TODO gcm 保存双十一
+//			preName 改之前的名字
+//			改之后的信息
+//			nameText.getText();
+			//			discountText.getText();
+			//			startDatePicker.getValue();
+			//			endDatePicker.getValue();
 			System.out.println("success");
 			modifyPane.setVisible(false);
 			addBt.setVisible(true);
@@ -333,28 +200,12 @@ public class PromotionController {
 	 */
 	@FXML
 	protected void deleteOne() {
-		//通过name删除
+		//TODO gcm 通过name删除
 		//		table.getSelectionModel().getSelectedItem().getName();
 		initialize();	
 	}
 	
-//	/**
-//	 * @Description:根据传入的field,label更新相应的酒店固定策略
-//	 * @param field
-//	 * @param label
-//	 * void
-//	 * @author: Harvey Gong
-//	 * @lastChangedBy: Harvey Gong
-//	 * @time:2016年12月7日 上午11:45:16
-//	 */
-//	private void updateHotelFixedPromotion(TextField field,Label label){
-//		HotelFixedPromotionVO vo = new HotelFixedPromotionVO();
-//		vo.hotelID = hotelID;
-//		vo.discount = Double.valueOf(field.getText());
-//		vo.promotionType = PromotionType.valueOf(label.getText());
-//		promotionBLController.updateHotelFixedPromotion(vo);
-//	}
-//	by Gaoy
+
 	@FXML
 	private TableView<DatePromotionTable> table1;
 	@FXML
@@ -414,7 +265,7 @@ public class PromotionController {
 		 */
 	@FXML
 	protected void save(){
-		//TODO 
+		//TODO gcm 实现一下
 //		name.getText();String 需转换
 //		discountText1.getText();
 	}

@@ -8,9 +8,9 @@ import java.util.List;
 import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
 import po.RoomInfoPO;
-import utilities.Operation;
-import utilities.ResultMessage;
-import utilities.RoomType;
+import utilities.enums.Operation;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
 import vo.RoomInfoVO;
 
 /**

@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import businessLogic.promotionBL.promotions.MemberLevelPromotion;
+import exception.verificationException.UserInexistException;
 
 public class MemberLevelPromotionTest {
 
@@ -23,7 +24,11 @@ public class MemberLevelPromotionTest {
 
 	@Test
 	public void testGetDiscount() {
-		assertEquals(0.9, promotion.getDiscount("1234567890"),0.1);
+		try {
+			assertEquals(0, promotion.getDiscount("1234567890"),0.1);
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

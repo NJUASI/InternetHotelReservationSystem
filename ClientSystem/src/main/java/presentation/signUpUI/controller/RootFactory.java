@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import utilities.UserType;
+import utilities.enums.UserType;
 
 public class RootFactory {
 

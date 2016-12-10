@@ -5,7 +5,7 @@ import java.util.List;
 import businessLogic.hotelBL.HotelInfoOperation;
 import businessLogic.hotelBL.hotel.Hotel;
 import businessLogic.hotelBL.hotelScan.searchCriteria.SearchCriteria;
-import utilities.RoomType;
+import utilities.enums.RoomType;
 import vo.HotelVO;
 
 public class RoomTypeCriteria implements SearchCriteria {

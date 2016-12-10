@@ -6,8 +6,8 @@ import java.util.List;
 
 import po.HotelPO;
 import po.RoomInfoPO;
-import utilities.ResultMessage;
-import utilities.RoomType;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
 
 public interface HotelDataService extends Remote{
 

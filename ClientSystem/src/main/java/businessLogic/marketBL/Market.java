@@ -9,8 +9,9 @@ import businessLogicService.marketBLService.MarketBLService;
 import businessLogicService.userBLService.UserBLService;
 import dataService.marketDataService.MarketDataService;
 import dataService.marketDataService.MarketDataService_Stub;
+import exception.verificationException.UserInexistException;
 import po.MarketPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.GuestVO;
 import vo.MarketVO;
 
@@ -86,8 +87,9 @@ public class Market implements MarketBLService{
 	 * @updateTime 2016/12/8
 	 * @param guestID 需要获取等级客户ID
 	 * @return int 获取客户当前会员等级（需要处理未达最低信用值的情况，此时返回值为0）
+	 * @throws UserInexistException 
 	 */
-	public int getLevel(String guestID){
+	public int getLevel(String guestID) throws UserInexistException{
 		UserBLService user = UserController.getInstance();
 		double credit = ((GuestVO)user.getSingle(guestID)).credit;
 		List<MarketVO> list = this.getMemberFormulation();

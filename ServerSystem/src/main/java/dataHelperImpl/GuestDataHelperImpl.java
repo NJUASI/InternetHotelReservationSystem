@@ -10,7 +10,7 @@ import java.util.List;
 import dataHelper.GuestDataHelper;
 import po.GuestPO;
 import utilities.JDBCUtil;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 /**
  * 

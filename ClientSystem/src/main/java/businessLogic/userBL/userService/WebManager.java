@@ -7,9 +7,10 @@ import java.util.List;
 import businessLogic.userBL.userService.service.UserService;
 import dataService.webManagerDataService.WebManagerDataService;
 import dataService.webManagerDataService.WebManagerDataService_Stub;
+import exception.verificationException.UserInexistException;
 import po.WebManagerPO;
 import utilities.Ciphertext;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.UserVO;
 import vo.WebManagerVO;
 
@@ -92,8 +93,9 @@ public class WebManager implements UserService {
 	 * @param userVO
 	 *            从userDoMain传下来的用户ID
 	 * @return UserVO 单一webManagerInfo载体
+	 * @throws UserInexistException 
 	 */
-	public UserVO getSingle(String userID) {
+	public UserVO getSingle(String userID) throws UserInexistException {
 
 		try {
 			return this.convert(webManagerDataService.getSingleWebManager(userID));
@@ -127,13 +129,10 @@ public class WebManager implements UserService {
 	 * @param userID
 	 *            从userDoMain传下来的指定用户ID
 	 * @return String 指定用户 的登录信息
+	 * @throws UserInexistException 
 	 */
-	public String getLogInInfo(String userID) {
-
-		if (!this.hasWebManager(userID)) {
-			return null;
-		} // 不存在ID对应项,后期细化
-
+	public String getLogInInfo(String userID) throws UserInexistException {
+		
 		try {
 			return convert(webManagerDataService.getSingleWebManager(userID)).password;
 		} catch (RemoteException e) {
@@ -189,13 +188,14 @@ public class WebManager implements UserService {
 	}
 
 	private boolean hasWebManager(String webManagerID) {
-		UserVO webManagerVO = this.getSingle(webManagerID);
-
-		if (webManagerVO == null) {
+		try {
+			UserVO webManagerVO = this.getSingle(webManagerID);
+		} catch (UserInexistException e) {
+			e.printStackTrace();
 			return false;
-		} else {
-			return true;
 		}
+
+		return true;
 	}
 
 	private WebManagerPO encrypt(WebManagerPO webManagerPO) {

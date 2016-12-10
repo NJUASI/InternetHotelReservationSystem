@@ -1,8 +1,8 @@
 package businessLogic.memberBL.stub;
 
 import businessLogicService.memberBLService.MemberBLService;
-import utilities.MemberType;
-import utilities.ResultMessage;
+import utilities.enums.MemberType;
+import utilities.enums.ResultMessage;
 import vo.MemberVO;
 
 public class MemberBLService_Stub implements MemberBLService{

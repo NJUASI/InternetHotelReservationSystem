@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.HotelVO;
 
 public class User_tester {

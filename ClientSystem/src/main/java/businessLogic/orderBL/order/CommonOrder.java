@@ -10,8 +10,8 @@ import dataService.orderDataService.OrderDataService;
 import dataService.orderDataService.OrderDataService_Stub;
 import po.HotelEvaluationPO;
 import po.OrderGeneralPO;
-import utilities.OrderState;
-import utilities.UserType;
+import utilities.enums.OrderState;
+import utilities.enums.UserType;
 import vo.HotelEvaluationVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
@@ -34,7 +34,7 @@ public class CommonOrder implements CommonOrderBLService {
 	 * 构造函数，初始化成员变量
 	 */
 	public CommonOrder() {
-		//		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
+//		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
 
 		try {
 			orderDataService = new OrderDataService_Stub();
@@ -97,6 +97,7 @@ public class CommonOrder implements CommonOrderBLService {
 			e.printStackTrace();
 		}
 
+		//filter the expect ones
 		if (orderGeneralPOs != null) {
 			for (OrderGeneralPO po : orderGeneralPOs) {
 				if (po.getState() == orderState) {

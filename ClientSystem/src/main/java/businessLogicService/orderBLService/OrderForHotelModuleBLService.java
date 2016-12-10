@@ -2,7 +2,7 @@ package businessLogicService.orderBLService;
 
 import java.util.List;
 
-import utilities.OrderState;
+import utilities.enums.OrderState;
 
 /**
  * 

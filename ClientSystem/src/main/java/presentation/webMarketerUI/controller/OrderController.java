@@ -21,10 +21,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import presentation.hotelWorkerUI.controller.OrderTable;
+import presentation.PopUp.PopUp;
+import presentation.Table.OrderTable;
 import utilities.IDReserve;
-import utilities.OrderState;
-import utilities.ResultMessage;
+import utilities.enums.OrderState;
+import utilities.enums.ResultMessage;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
 
@@ -33,7 +34,6 @@ import vo.OrderVO;
  * lastChangeBy charles
  * updateTime 2016/12/9
  * 
- * TODO 高源：网站营销人员查看订单时进的界面跳转有错误 方法监听好像也有点问题，就是最开始进去调全部订单没有  返回再点进去就有了
  */
 public class OrderController {
 
@@ -150,6 +150,7 @@ public class OrderController {
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/8
 	 * @通过日期查所有异常订单和未执行订单
+	 * 取消查看所有异常订单和未执行订单，直接查看异常订单
 	 */
 	@FXML
 	protected void searchDateOrder() {
@@ -172,8 +173,6 @@ public class OrderController {
 		initOrderCheck(orderGenerals);
 		
 		cancelOrderPaneInCheck.setDisable(false);
-				 
-	
 	}
 
 	/**
@@ -330,11 +329,11 @@ public class OrderController {
 		ResultMessage result = orderBLController.undoAbnormalOrder(orderID, percent);
 		
 		if (result == ResultMessage.SUCCESS) {
-			//TODO 高源：状态栏显示异常订单撤销成功
+			new PopUp("撤销成功", "congratulation");	
+			
 			
 		}else {
-			//TODO 高源：状态栏显示异常订单撤销失败
-			
+			new PopUp("撤销失败", "sorry");	
 		}
 	}
 }

@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: businessLogic.hotelBL.HotelTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 3, Time elapsed: 0.139 sec
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 3, Time elapsed: 0.14 sec

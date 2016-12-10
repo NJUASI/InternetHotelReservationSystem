@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import businessLogic.promotionBL.promotions.SpecialSpanPromotion;
+import exception.verificationException.UserInexistException;
 
 public class SpecialSpanPromotionTest {
 
@@ -26,8 +27,13 @@ public class SpecialSpanPromotionTest {
 	@Test
 	public void testGetDiscountOneday() {
 		LocalDate today = LocalDate.of(2016, 11, 11);
-		double discount =  promotion.getDiscountOneday("12345678",today);
-		assertEquals(0.9*0.9,discount,0.01);
+		double discount;
+		try {
+			discount = promotion.getDiscountOneday("12345678",today);
+			assertEquals(0.9*0.9,discount,0.01);
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

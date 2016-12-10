@@ -10,9 +10,9 @@ import businessLogic.orderBL.order.HotelWorkerOrder;
 import businessLogic.orderBL.order.OrderForHotelModule;
 import businessLogic.orderBL.order.WebMarketerOrder;
 import businessLogicService.orderBLService.OrderBLService;
-import utilities.OrderState;
-import utilities.ResultMessage;
-import utilities.UserType;
+import utilities.enums.OrderState;
+import utilities.enums.ResultMessage;
+import utilities.enums.UserType;
 import vo.CheckInVO;
 import vo.CheckOutVO;
 import vo.GuestEvaluationVO;
@@ -24,7 +24,7 @@ import vo.OrderVO;
  * 
  * @author cuihua
  * lastChangedBy charles
- * updateTime 2016/12/8
+ * updateTime 2016/12/10
  * 
  * 对Order模块重构
  */
@@ -190,6 +190,19 @@ public final class OrderBLController implements OrderBLService {
 	@Override
 	public ResultMessage addEvaluation(GuestEvaluationVO evaluationVO) {
 		return guestOrder.addEvaluation(evaluationVO);
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/10
+	 * @param guestID 客户编号
+	 * @param hotelID 目标酒店编号
+	 * @return 客户在目标酒店的所有订单记录
+	 */
+	@Override
+	public Iterator<OrderGeneralVO> getMyOrdersOfThisHotel(String guestID, String hotelID) {
+		return guestOrder.getMyOrdersOfThisHotel(guestID, hotelID);
 	}
 	
 	

@@ -3,8 +3,8 @@ package po;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import utilities.OrderState;
-import utilities.RoomType;
+import utilities.enums.OrderState;
+import utilities.enums.RoomType;
 import vo.OrderVO;
 
 /**

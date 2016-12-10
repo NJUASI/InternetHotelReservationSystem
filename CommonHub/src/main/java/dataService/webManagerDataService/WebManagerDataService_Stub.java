@@ -7,7 +7,7 @@ import java.util.List;
 
 import po.WebManagerPO;
 import utilities.Ciphertext;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class WebManagerDataService_Stub extends UnicastRemoteObject implements WebManagerDataService{
 

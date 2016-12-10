@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import presentation.Table.CreditTable;
 import utilities.IDReserve;
 import vo.CreditVO;
 

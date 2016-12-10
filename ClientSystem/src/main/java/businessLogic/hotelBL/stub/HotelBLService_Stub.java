@@ -5,10 +5,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogicService.hotelBLService.HotelBLService;
-import utilities.ResultMessage;
-import utilities.RoomType;
-import utilities.SearchCriteriaType;
-import utilities.SortStrategy;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
+import utilities.enums.SearchCriteriaType;
+import utilities.enums.SortStrategy;
 import vo.CheckInVO;
 import vo.CheckOutVO;
 import vo.HotelEvaluationVO;

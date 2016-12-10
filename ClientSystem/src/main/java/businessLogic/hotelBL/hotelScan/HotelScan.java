@@ -13,9 +13,9 @@ import businessLogic.orderBL.MockOrder;
 import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelPO;
-import utilities.OrderState;
-import utilities.SearchCriteriaType;
-import utilities.SortStrategy;
+import utilities.enums.OrderState;
+import utilities.enums.SearchCriteriaType;
+import utilities.enums.SortStrategy;
 import vo.HotelVO;
 import vo.SearchCriteriaVO;
 

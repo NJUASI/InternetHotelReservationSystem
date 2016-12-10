@@ -13,12 +13,13 @@ import businessLogic.promotionBL.MockPromotion;
 import businessLogicService.orderBLService.GuestOrderBLService;
 import dataService.orderDataService.OrderDataService;
 import dataService.orderDataService.OrderDataService_Stub;
+import exception.verificationException.UserInexistException;
 import po.GuestEvaluationPO;
 import po.OrderPO;
-import utilities.OrderState;
 import utilities.PreOrder;
-import utilities.ResultMessage;
-import utilities.UserType;
+import utilities.enums.OrderState;
+import utilities.enums.ResultMessage;
+import utilities.enums.UserType;
 import vo.GuestEvaluationVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
@@ -26,8 +27,8 @@ import vo.OrderVO;
 /**
  * 
  * @author charles
- * lastChangedBy Harvey
- * updateTime 2016/12/7
+ * lastChangedBy charles
+ * updateTime 2016/12/10
  *
  */
 public class GuestOrder implements GuestOrderBLService {
@@ -72,7 +73,13 @@ public class GuestOrder implements GuestOrderBLService {
 	 * @return 若客户创建此订单，需要付的款项
 	 */
 	public double getTempPrice(OrderVO orderVO) {
-		Iterator<Double> discountsInSpan = discountCalculator.getDiscountInSpan(new PreOrder(orderVO));
+		Iterator<Double> discountsInSpan = null;
+		try {
+			discountsInSpan = discountCalculator.getDiscountInSpan(new PreOrder(orderVO));
+		} catch (UserInexistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		final double prePrice = orderVO.previousPrice;
 		double result = 0;
 		
@@ -113,18 +120,31 @@ public class GuestOrder implements GuestOrderBLService {
 	 * @return 客户是否成功撤销此正常订单
 	 */
 	public ResultMessage undoNormalOrder(final String orderID) {
-		ResultMessage resultMessage = ResultMessage.FAIL;
+		ResultMessage msg1 = ResultMessage.FAIL;
+		ResultMessage msg2 = ResultMessage.FAIL;
 		
-		OrderState thisOrderState = commonOrder.getOrderDetail(orderID).orderGeneralVO.state;
+		OrderVO thisOrder = commonOrder.getOrderDetail(orderID);
+		//撤销未执行订单，改变此订单状态
+		final OrderState thisOrderState = thisOrder.orderGeneralVO.state;
 		if (thisOrderState == OrderState.UNEXECUTED) {
 			try {
-				resultMessage = orderDataService.undoNormalOrder(orderID);
+				msg1 = orderDataService.undoNormalOrder(orderID);
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
 		}
-		return resultMessage;
 		
+		//更新此订单撤销后的酒店剩余房间数
+		/*
+		 * new the mock one to test
+		 */
+		hotelInterface = new MockHotel();
+		msg2 = hotelInterface.updateRemainRoomNum(thisOrder.orderGeneralVO.hotelID, thisOrder.roomType, thisOrder.roomNumCount);
+		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
+			return ResultMessage.SUCCESS;
+		}else {
+			return ResultMessage.FAIL;
+		}
 	}
 	
 	/**
@@ -176,6 +196,27 @@ public class GuestOrder implements GuestOrderBLService {
 		while(orderGenerals.hasNext()){
 			OrderGeneralVO thisOrderGeneral = orderGenerals.next();
 			if(thisOrderGeneral.state == OrderState.EXECUTED && thisOrderGeneral.hasCommented == hasCommented){
+				result.add(thisOrderGeneral);
+			}
+		}
+		return result.iterator();
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/10
+	 * @param guestID 客户编号
+	 * @param hotelID 目标酒店编号
+	 * @return 客户在目标酒店的所有订单记录
+	 */
+	public Iterator<OrderGeneralVO> getMyOrdersOfThisHotel(String guestID, String hotelID) {
+		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
+		final Iterator<OrderGeneralVO> orderGenerals = commonOrder.getAllOrderGenerals(guestID, UserType.GUEST);
+
+		while(orderGenerals.hasNext()){
+			OrderGeneralVO thisOrderGeneral = orderGenerals.next();
+			if(thisOrderGeneral.hotelID.equals(hotelID)){
 				result.add(thisOrderGeneral);
 			}
 		}

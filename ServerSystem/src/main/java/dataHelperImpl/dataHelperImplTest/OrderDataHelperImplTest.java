@@ -12,9 +12,9 @@ import org.junit.Test;
 import dataHelper.OrderDataHelper;
 import dataHelperImpl.OrderDataHelperImpl;
 import po.OrderPO;
-import utilities.OrderState;
-import utilities.ResultMessage;
-import utilities.RoomType;
+import utilities.enums.OrderState;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
 
 public class OrderDataHelperImplTest {
 
@@ -35,7 +35,7 @@ public class OrderDataHelperImplTest {
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
 
 		final OrderState orderState = OrderState.EXECUTED;
-		final RoomType roomType = RoomType.商务套房;
+		final RoomType roomType = RoomType.BUSINESS_SUITE;
 		
 		OrderPO orderPO = new OrderPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
 				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, 

@@ -5,7 +5,8 @@ import java.time.LocalDate;
 import businessLogic.memberBL.Member;
 import businessLogic.memberBL.MockMember;
 import businessLogic.promotionBL.discountCalculation.CalculateDiscount;
-import utilities.MemberType;
+import exception.verificationException.UserInexistException;
+import utilities.enums.MemberType;
 
 public class VIPBirthdayDiscount implements CalculateDiscount{
 
@@ -21,7 +22,7 @@ public class VIPBirthdayDiscount implements CalculateDiscount{
 	}
 
 	@Override
-	public double getDiscount() {
+	public double getDiscount() throws UserInexistException {
 		Member member = new MockMember();
 		if(member.isMember(guestID, MemberType.COMMON)){
 			birthDay = member.getMemberInfo(guestID).birthday;

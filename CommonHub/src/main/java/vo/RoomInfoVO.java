@@ -1,7 +1,7 @@
 package vo;
 
 import po.RoomInfoPO;
-import utilities.RoomType;
+import utilities.enums.RoomType;
 
 public class RoomInfoVO {
 	

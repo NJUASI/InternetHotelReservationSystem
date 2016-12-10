@@ -3,7 +3,7 @@ package po;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import utilities.OrderState;
+import utilities.enums.OrderState;
 import vo.OrderGeneralVO;
 
 public class OrderGeneralPO implements Serializable{

@@ -3,8 +3,8 @@ package businessLogic.hotelBL;
 import java.util.Iterator;
 
 import utilities.Address;
-import utilities.ResultMessage;
-import utilities.RoomType;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
 
 /**
  * @Description:对外提供的更新和获取酒店相关信息的接口
@@ -73,7 +73,7 @@ public interface HotelInfoOperation {
 	/**
 	 * @Description:办理退房，线上线下均调此方法
 	 * @param hotelID
-	 * @param roomName
+	 * @param roomType
 	 * @param roomNum
 	 * @return
 	 * ResultMessage
@@ -82,4 +82,16 @@ public interface HotelInfoOperation {
 	 * @time:2016年12月8日 上午12:44:56
 	 */
 	public ResultMessage checkOut(String hotelID, RoomType roomType, int roomNum);
+	
+	/**
+	 * @Description:客户撤销未执行订单时更新此酒店的剩余房间数
+	 * @param hotelID 目标酒店编号
+	 * @param roomType 目标房间类型
+	 * @param roomNum 此订单的房间数
+	 * @return ResultMessage 是否撤销成功
+	 * @author: charles
+	 * @lastChangedBy: charles
+	 * @time:2016/12/10
+	 */
+	public ResultMessage updateRemainRoomNum(String hotelID, RoomType roomType, int roomNum);
 }

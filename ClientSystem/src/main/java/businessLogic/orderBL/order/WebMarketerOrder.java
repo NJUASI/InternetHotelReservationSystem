@@ -13,10 +13,11 @@ import businessLogicService.orderBLService.WebMarketerOrderBLService;
 import businessLogicService.userBLService.UserBLService;
 import dataService.orderDataService.OrderDataService;
 import dataService.orderDataService.OrderDataService_Stub;
+import exception.verificationException.UserInexistException;
 import po.OrderGeneralPO;
-import utilities.CreditRecord;
-import utilities.OrderState;
-import utilities.ResultMessage;
+import utilities.enums.CreditRecord;
+import utilities.enums.OrderState;
+import utilities.enums.ResultMessage;
 import vo.CreditVO;
 import vo.GuestVO;
 import vo.OrderGeneralVO;
@@ -78,12 +79,12 @@ public class WebMarketerOrder implements WebMarketerOrderBLService {
 		OrderState thisOrderState = thisOrder.orderGeneralVO.state;
 		if (thisOrderState == OrderState.ABNORMAL) {
 			try {
-				//撤销异常订单
+				//撤销异常订单，将其状态只为已撤销
 				msg1 = orderDataService.undoAbnormalOrder(orderID, percent);
 				
-				//添加信用记录
+				//修改信用值并添加信用记录
 				/*
-				 * 因为数据的问题，getOrderDetail得到的是一个UNEXECUTED对象，所以执行会抛异常
+				 * 因为数据的问题，此时getOrderDetail得到的是一个UNEXECUTED对象，所以执行会抛异常
 				 * 但是若是数据正确的话，就没有问题
 				 */
 				GuestVO thisGuest = (GuestVO)userBLService.getSingle(thisOrder.orderGeneralVO.guestID);
@@ -92,7 +93,7 @@ public class WebMarketerOrder implements WebMarketerOrderBLService {
 				final CreditVO creditVO = new CreditVO(thisOrder.orderGeneralVO.guestID, time, 
 						thisOrder.orderGeneralVO.orderID, thisGuest.credit, afterCredit, CreditRecord.UNDO_ABNORMAL);
 				msg2 = creditBLService.addCreditRecord(creditVO);
-			} catch (RemoteException e) {
+			} catch (RemoteException | UserInexistException e) {
 				e.printStackTrace();
 			}
 		}

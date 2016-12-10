@@ -7,9 +7,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import utilities.CreditRecord;
-import utilities.ResultMessage;
-import utilities.UserType;
+import utilities.enums.CreditRecord;
+import utilities.enums.ResultMessage;
+import utilities.enums.UserType;
 import vo.CreditVO;
 import vo.GuestVO;
 import vo.UserVO;

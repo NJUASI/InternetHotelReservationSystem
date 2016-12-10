@@ -7,10 +7,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogicService.orderBLService.OrderBLService;
-import utilities.OrderState;
-import utilities.ResultMessage;
-import utilities.RoomType;
-import utilities.UserType;
+import utilities.enums.OrderState;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
+import utilities.enums.UserType;
 import vo.CheckInVO;
 import vo.CheckOutVO;
 import vo.GuestEvaluationVO;
@@ -108,7 +108,7 @@ public class OrderBLService_Stub implements OrderBLService {
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 2, 4, 12, 00);
 		
 		final OrderState orderState = OrderState.EXECUTED;
-		final RoomType roomType = RoomType.商务套房;
+		final RoomType roomType = RoomType.BUSINESS_SUITE;
 		
 		return new OrderVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
 				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, 
@@ -233,6 +233,22 @@ public class OrderBLService_Stub implements OrderBLService {
 				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
 				OrderState.EXECUTED, false, "zhangsan","13554321234"));
 		return orderGenerals;
+	}
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/10
+	 * @param guestID 客户编号
+	 * @param hotelID 目标酒店编号
+	 * @return 客户在目标酒店的所有订单记录
+	 */
+	public Iterator<OrderGeneralVO> getMyOrdersOfThisHotel(String guestID, String hotelID) {
+		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.EXECUTED, false, "zhangsan","13554321234"));
+		return orderGenerals.iterator();
 	}
 	
 	/**

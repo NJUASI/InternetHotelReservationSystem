@@ -3,7 +3,7 @@ package vo;
 import java.time.LocalDateTime;
 
 import po.OrderGeneralPO;
-import utilities.OrderState;
+import utilities.enums.OrderState;
 
 /**
  * 
@@ -96,6 +96,25 @@ public class OrderGeneralVO {
 		this.expectLeaveTime = expectLeaveTime;
 		this.name = name;
 		this.phone = phone;
+	}
+	
+	/**
+	 * 
+	 * @author 61990
+	 * lastChangedBy charles
+	 * updateTime 2016/12/5
+	 * 
+	 * 便于界面监听getTempPrice()
+	 */
+	public OrderGeneralVO(String guestID, String hotelID, LocalDateTime expectExecuteTime) {
+		this.orderID = null;
+		this.price = -1;
+		this.state = OrderState.UNEXECUTED;
+		this.hasCommented = false;
+		
+		this.guestID = guestID;
+		this.hotelID = hotelID;
+		this.expectExecuteTime = expectExecuteTime;
 	}
 	
 	/**
