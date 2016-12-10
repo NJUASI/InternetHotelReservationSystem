@@ -1,13 +1,8 @@
 package businessLogicService.memberBLService;
 
-<<<<<<< HEAD
+import exception.verificationException.UserInexistException;
 import utilities.enums.MemberType;
 import utilities.enums.ResultMessage;
-=======
-import exception.verificationException.UserInexistException;
-import utilities.MemberType;
-import utilities.ResultMessage;
->>>>>>> master
 import vo.MemberVO;
 
 public interface MemberBLService {
