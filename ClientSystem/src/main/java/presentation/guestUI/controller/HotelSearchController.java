@@ -33,6 +33,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import presentation.PopUp.PopUp;
 import presentation.Table.EvaluationTable;
 import presentation.Table.HotelTable;
 import presentation.Table.OrderTable;
@@ -240,6 +241,8 @@ public class HotelSearchController {
 	protected void openHotelCheck() {
 
 		//通过城市和商圈,调用hotelBL的方法获得所有的酒店
+		try {
+			
 		Iterator<HotelVO> hotels = hotelBLController.getHotels(cityChoose.getValue(), cycleChoose.getValue());
 
 		cityAndCircle.setVisible(false);
@@ -247,13 +250,14 @@ public class HotelSearchController {
 		hotelChoose.setVisible(false);
 
 		initHotelTable(hotels);
+		} catch (Exception e) {
+			new PopUp("城市商圈有误", "错误提醒");
+		}
 	}
 
 	private void initHotelTable(Iterator<HotelVO> hotels){
 		hotelTable.getItems().clear();
 		List<HotelTable> dataList = new ArrayList<HotelTable>();
-
-		//TODO gy注意：显示hotel的table里面不是有订单，应该显示的是订单的状态,无订单的时候就在订单状态那栏写无订单
 
 		while(hotels.hasNext()){
 			HotelVO temp = hotels.next();
@@ -318,7 +322,9 @@ public class HotelSearchController {
 	@FXML
 	protected void openHotelDetail() {
 		//TODO fjj注意： 酒店订单列表 酒店评价列表
-
+		//TODO fjj注意： 酒店订单列表 酒店评价列表
+		try{
+			
 		String hotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
 
 		//获取hotelVO，调用hotelBL的方法
@@ -357,7 +363,9 @@ public class HotelSearchController {
 		initCommentTable(commentList);
 		initHotelDetail(hotelVO);
 		initOrderCheck(orderVOlist);
-
+		}catch (Exception e) {
+			new PopUp("请选定酒店", "");
+		}
 	}
 
 
@@ -568,9 +576,8 @@ public class HotelSearchController {
 			criteria.add(SearchCriteriaType.REMAIN_ROOM_NUM);
 			vo.remainRoomNum = Integer.parseInt(roomInput.getText());
 		}
-
-		//		TODO gcm 不就是复选框checkBox吗
 		//TODO gy 我不能用一个for循环去取到已经被勾选的框，只能单个取，给我一种可以通过循环取的方案
+		//TODO gcm 容我考虑一下这个问题		
 		//		vo.roomTypes = new ArrayList<RoomType>();
 
 		criteria.add(SearchCriteriaType.NULL);
@@ -616,9 +623,8 @@ public class HotelSearchController {
 	protected void createOrderIncheck(){
 		initCreateOrder();
 	}
-
-
-	//TODO gy注意，直接给hotelTable里面的item加个监听，当被选中时，把这个成员变量selectedHotelID改为被选中的那个id就行了
+	
+	
 	private String selectedHotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
 
 	private void initCreateOrder(){	
@@ -651,7 +657,8 @@ public class HotelSearchController {
 	 * @updateTime 2016/11/27
 	 * @点击提交订单按钮
 	 * 
-	 * TODO 高源：对hourInOrder、hourInOrder2、minuteInOrder、minuteInOrder2的功能不清楚，故为猜测，检查一下
+	 * TODO fjj：对hourInOrder、hourInOrder2、minuteInOrder、minuteInOrder2的功能不清楚，故为猜测，检查一下
+	 * 就是生成一下准确时间，相当于timePicker
 	 */
 	OrderVO orderVO;
 
@@ -677,9 +684,9 @@ public class HotelSearchController {
 		final ResultMessage msg = orderBLController.createOrder(createVO);
 
 		if (msg == ResultMessage.SUCCESS) {
-			//TODO 高源——————状态栏显示订单生成成功
+			new PopUp("订单生成成功", "订单");
 		}else {
-			//TODO 高源——————状态栏显示订单生成失败
+			new PopUp("订单生成失败", "订单");
 		}
 	}
 }
