@@ -13,12 +13,9 @@ import dataServiceImpl.HotelWorkerDataServiceImpl;
 import dataServiceImpl.MarketDataServiceImpl;
 import dataServiceImpl.OrderDataServiceImpl;
 import dataServiceImpl.PromotionDataServiceImpl;
+import dataServiceImpl.SourceDataServiceImpl;
 import dataServiceImpl.WebManagerDataServiceImpl;
 import dataServiceImpl.WebMarketerDataServiceImpl;
-
-
-
-
 
 public class ServerRemoteHelper {
 
@@ -40,6 +37,7 @@ public class ServerRemoteHelper {
 			Naming.bind(url+"WebManagerDataService", new WebManagerDataServiceImpl());
 			Naming.bind(url+"WebMarketerDataService", new WebMarketerDataServiceImpl());
 			Naming.bind(url+"CreditDataService", new CreditDataServiceImpl());
+			Naming.bind(url+"SourceDataService", new SourceDataServiceImpl());
 			System.out.println("link");
 		} catch (RemoteException e) {
 			e.printStackTrace();

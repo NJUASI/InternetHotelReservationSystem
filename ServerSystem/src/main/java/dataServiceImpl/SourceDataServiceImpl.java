@@ -1,5 +1,7 @@
 package dataServiceImpl;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Iterator;
 
 import dataHelper.AddressDataHelper;
@@ -8,33 +10,35 @@ import dataHelperImpl.AddressDataHelperImpl;
 import dataHelperImpl.SourceDataHelperImpl;
 import dataService.sourceDataService.SourceDataService;
 
-public class SourceDataServiceImpl implements SourceDataService {
+public class SourceDataServiceImpl extends UnicastRemoteObject implements SourceDataService {
+
+	private static final long serialVersionUID = 5560320095426224562L;
 
 	SourceDataHelper sourceDataHelper;
 	AddressDataHelper addressDataHelper;
 	
-	public SourceDataServiceImpl() {
+	public SourceDataServiceImpl() throws RemoteException {
 		sourceDataHelper = new SourceDataHelperImpl();
 		addressDataHelper = new AddressDataHelperImpl();
 	}
 	
 	@Override
-	public Iterator<String> getCities() {
+	public Iterator<String> getCities() throws RemoteException {
 		return sourceDataHelper.getCities();
 	}
 	
 	@Override
-	public Iterator<String> getCircles(String city) {
+	public Iterator<String> getCircles(String city) throws RemoteException {
 		return sourceDataHelper.getCircles(city);
 	}
 
 	@Override
-	public Iterator<String> getLevels() {
+	public Iterator<String> getLevels() throws RemoteException{
 		return sourceDataHelper.getLevels();
 	}
 
 	@Override
-	public Iterator<String> getRoomTypes() {
+	public Iterator<String> getRoomTypes() throws RemoteException{
 		return sourceDataHelper.getRoomTypes();
 	}
 

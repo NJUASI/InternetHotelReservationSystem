@@ -7,7 +7,7 @@ import java.util.List;
 import po.WebMarketerPO;
 import utilities.ResultMessage;
 
-public interface WebMarketerDataService extends Remote{
+public interface WebMarketerDataService extends Remote {
 
 	public WebMarketerPO getSingleWebMarketer(String webMarketID) throws RemoteException;
 	

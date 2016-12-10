@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import rmi.ClientRemoteHelper;
 
 
 
@@ -49,6 +50,7 @@ public class Main extends Application {
 	 * @param args ……
 	 */
 	public static void main(final String[] args) {
+		ClientRemoteHelper.getInstance().init();
 		launch(args);
 	}
 }
