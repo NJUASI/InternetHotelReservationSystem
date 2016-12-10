@@ -1,11 +1,10 @@
 package utilities.enums;
 
-import java.util.Iterator;
-
 public enum CreditRecord {
 
 	//	信用充值，未执行正常订单执行，逾期订单执行，订单逾期（最晚订单执行时间），异常订单撤销
-	CHARGE("信用充值"), EXECUTE("未执行->已执行"), ABNORMAL_EXECUTE("异常->已执行"), OVERDUE("未执行->异常"), UNDO_ABNORMAL("异常->已撤销"); 
+	CHARGE("信用充值"), EXECUTE("未执行->已执行"), ABNORMAL_EXECUTE("异常->已执行"), 
+	OVERDUE("未执行->异常"), UNDO_ABNORMAL("异常->已撤销"); 
 	
 	private String reason;
 	

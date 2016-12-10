@@ -99,9 +99,9 @@ public class GuestOrder implements GuestOrderBLService {
 	public ResultMessage createOrder(final OrderVO orderVO) {
 		ResultMessage resultMessage = ResultMessage.FAIL;
 		
-		if (orderVO.orderGeneralVO.orderID == null && orderVO.orderGeneralVO.price == -1
+		if (orderVO.orderGeneralVO.orderID == "" && orderVO.orderGeneralVO.price == -1
 				&& orderVO.checkInTime == null && orderVO.checkOutTime == null 
-				&& orderVO.roomNumber == null && orderVO.score == -1 && orderVO.comment == null) {
+				&& orderVO.roomNumber == "" && orderVO.score == -1 && orderVO.comment == "") {
 			try {
 				orderVO.orderGeneralVO.price = getTempPrice(orderVO);
 				resultMessage = orderDataService.createOrder(new OrderPO(orderVO));
