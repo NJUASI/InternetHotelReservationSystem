@@ -32,8 +32,8 @@ public class HotelFixedPromotionDataHelperImplTest {
 	@Test
 	public void testGetHotelFixedPromotion() {
 		list = helper.getHotelFixedPromotion("12345678");
-		assertEquals(PromotionType.会员生日折扣,list.get(0).getPromotionType());
-		assertEquals(PromotionType.企业会员折扣, list.get(1).getPromotionType());
+		assertEquals(PromotionType.HOTEL_BIRTHDAY,list.get(0).getPromotionType());
+		assertEquals(PromotionType.HOTEL_ENTERPRISE, list.get(1).getPromotionType());
 	}
 
 	@Test
@@ -41,7 +41,7 @@ public class HotelFixedPromotionDataHelperImplTest {
 		HotelFixedPromotionPO po = new HotelFixedPromotionPO();
 		po.setHotelID("12345678");
 		po.setDiscount(0.6);
-		po.setPromotionType(PromotionType.企业会员折扣);
+		po.setPromotionType(PromotionType.HOTEL_ENTERPRISE);
 		helper.updateHotelFixedPromotion(po);
 		
 		list = helper.getHotelFixedPromotion("12345678");
