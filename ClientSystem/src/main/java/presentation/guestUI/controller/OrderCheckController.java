@@ -32,7 +32,6 @@ import vo.OrderVO;
  * lastChangeBy charles
  * updateTime 2016/12/7
  * 
- * TODO 高源：评论界面好像有点问题（酒店查看时可以查看到订单评论）  房间号也不对
  */
 public class OrderCheckController {
 
@@ -46,7 +45,8 @@ public class OrderCheckController {
 	private final String guestID = IDReserve.getInstance().getUserID();
 
 	private Iterator<OrderGeneralVO> orderGenerals;
-
+	@FXML
+	private Button undoBt,undoBt2;
 	/*
 	 * 订单详情
 	 */
@@ -71,6 +71,7 @@ public class OrderCheckController {
 	@FXML
 	private void initialize() {
 		//通过guestID得到orderGeneralVOs list
+		undoBt.setVisible(false);
 		orderBLController = OrderBLController.getInstance();
 
 		Iterator<OrderGeneralVO> orderGenerals = orderBLController.getAllOrderGenerals(guestID, guest);
@@ -93,6 +94,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchAllOrder() {
+		undoBt.setVisible(false);
 		//TODO 高源——————charles新加的，界面上没有对应按钮——所有订单
 		orderGenerals = orderBLController.getAllOrderGenerals(guestID, guest);
 		initOrderCheck(orderGenerals);
@@ -108,10 +110,29 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchUnexecutedOrder() {
+		undoBt.setVisible(true);
 		orderGenerals = orderBLController.getSpecialOrderGenerals(guestID, guest, OrderState.UNEXECUTED);
 		initOrderCheck(orderGenerals);
 	}
-
+	
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @updateTime 2016/12/8
+	 * @撤销订单
+	 * TODO fjj 12.9：加了，以下是方法通过ID 撤销
+	 */
+	@FXML
+	protected void undoNormalOrder(){
+		undoOrder(table.getSelectionModel().getSelectedItem().getOrderID());
+	}
+	@FXML
+	protected void undoInDetail(){
+		undoOrder(orderVO.orderGeneralVO.orderID);
+	}
+	void undoOrder(String orderID ){
+//		TODO fjj 你在这里测试是否可以撤销
+	}
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
@@ -120,6 +141,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchExecutedOrder() {		
+		undoBt.setVisible(false);
 		orderGenerals = orderBLController.getSpecialOrderGenerals(guestID, guest, OrderState.EXECUTED);
 		initOrderCheck(orderGenerals);
 	}
@@ -132,6 +154,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchAbnormalOrder() {
+		undoBt.setVisible(false);
 		orderGenerals = orderBLController.getSpecialOrderGenerals(guestID, guest, OrderState.ABNORMAL);
 		initOrderCheck(orderGenerals);
 	}
@@ -144,6 +167,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchCancelledOrder() {
+		undoBt.setVisible(false);
 		orderGenerals = orderBLController.getSpecialOrderGenerals(guestID, guest, OrderState.CANCELLED);
 		initOrderCheck(orderGenerals);
 	}
@@ -156,6 +180,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchCommentedOrder() {
+		undoBt.setVisible(false);
 		orderGenerals = orderBLController.getAllGuestCommentOrderGeneral(guestID, true);
 		initOrderCheck(orderGenerals);
 	}
@@ -168,6 +193,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchUncommentedOrder() {
+		undoBt.setVisible(false);
 		orderGenerals = orderBLController.getAllGuestCommentOrderGeneral(guestID, false);
 		initOrderCheck(orderGenerals);
 	}
@@ -253,7 +279,7 @@ public class OrderCheckController {
 
 		GuestEvaluationVO evaluationVO = new GuestEvaluationVO(orderID, score, comment);
 		final ResultMessage result = orderBLController.addEvaluation(evaluationVO);
-		if (result == ResultMessage.UPDATE_EVALUATION_SUCCESS) {
+		if (result == ResultMessage.SUCCESS) {
 			//TODO 高源——————状态栏显示已评价成功
 
 		}else {
@@ -284,11 +310,13 @@ public class OrderCheckController {
 	 * @describe 初始化订单详情界面
 	 */
 	private void initOrderDetail(OrderVO orderVO) {
+		
 		detail_ID.setText(orderVO.orderGeneralVO.hotelID);
 		detail_Hotel.setText(orderVO.orderGeneralVO.hotelName);
 		detail_address.setText(orderVO.orderGeneralVO.hotelAddress);
 		detail_roomType.setText(orderVO.roomType.toString());
 		detail_roomNum.setText(orderVO.roomNumCount + "");
+		detail_roomNumber.setText(orderVO.roomNumber);
 		detail_personNum.setText(orderVO.expectGuestNumCount + "");
 		detail_personName.setText(orderVO.orderGeneralVO.name);
 		detail_phone.setText(orderVO.orderGeneralVO.phone);
@@ -302,7 +330,12 @@ public class OrderCheckController {
 		detail_message.setText(orderVO.message);
 		orderComment.setText(orderVO.comment);
 		orderScore.setText(Double.toString(orderVO.score));
-
+		// 是否可以撤销
+		if (orderVO.orderGeneralVO.state==OrderState.UNEXECUTED){
+			undoBt2.setDisable(true);
+		}else{
+			undoBt2.setDisable(false);
+		}
 		// 是否可以评论
 		if (!orderVO.orderGeneralVO.hasCommented) {
 			orderComment.setDisable(true);

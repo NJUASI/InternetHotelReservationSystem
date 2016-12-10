@@ -14,14 +14,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="mainPane" prefHeight="625.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.signUpUI.controller.LogInViewController">
+<Pane fx:id="mainPane" prefHeight="601.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.signUpUI.controller.LogInViewController">
    <children>
       <Label layoutX="302.0" layoutY="71.0" prefHeight="68.0" prefWidth="396.0" text="互联网酒店预定系统">
          <font>
             <Font size="44.0" />
          </font>
       </Label>
-      <AnchorPane prefHeight="625.0" prefWidth="1000.0">
+      <AnchorPane prefHeight="601.0" prefWidth="1000.0">
          <children>
             <Pane fx:id="registerPane" layoutX="330.0" layoutY="198.0" prefHeight="325.0" prefWidth="330.0" visible="false">
                <children>
@@ -58,8 +58,8 @@
                   </Label>
                </children>
             </Pane>
-            <Button fx:id="logInBT" focusTraversable="false" layoutX="35.0" layoutY="567.0" mnemonicParsing="false" onMouseClicked="#openLogIn" prefHeight="23.0" prefWidth="102.0" text="登录" />
-            <Button fx:id="registerBT" focusTraversable="false" layoutX="35.0" layoutY="567.0" mnemonicParsing="false" onMouseClicked="#openRegister" prefHeight="23.0" prefWidth="102.0" text="注册" />
+            <Button fx:id="logInBT" focusTraversable="false" layoutX="35.0" layoutY="552.0" mnemonicParsing="false" onMouseClicked="#openLogIn" prefHeight="23.0" prefWidth="102.0" text="登录" />
+            <Button fx:id="registerBT" focusTraversable="false" layoutX="35.0" layoutY="552.0" mnemonicParsing="false" onMouseClicked="#openRegister" prefHeight="23.0" prefWidth="102.0" text="注册" />
             <Pane fx:id="logInPane" layoutX="335.0" layoutY="185.0" prefHeight="304.0" prefWidth="330.0">
                <children>
                   <Label layoutX="54.0" layoutY="125.0" text="编号：" />
@@ -74,7 +74,7 @@
                   <PasswordField fx:id="password" focusTraversable="false" layoutX="112.0" layoutY="178.0" prefHeight="23.0" prefWidth="178.0" />
                </children>
             </Pane>
-            <Button focusTraversable="false" layoutX="35.0" layoutY="527.0" mnemonicParsing="false" onMouseClicked="#openRMI" prefHeight="23.0" prefWidth="102.0" text="RMI" />
+            <Button focusTraversable="false" layoutX="35.0" layoutY="508.0" mnemonicParsing="false" onMouseClicked="#openRMI" prefHeight="23.0" prefWidth="102.0" text="RMI" />
             <Pane fx:id="rmiPane" layoutX="336.0" layoutY="187.0" prefHeight="304.0" prefWidth="361.0" visible="false">
                <children>
                   <Label layoutX="54.0" layoutY="125.0" />

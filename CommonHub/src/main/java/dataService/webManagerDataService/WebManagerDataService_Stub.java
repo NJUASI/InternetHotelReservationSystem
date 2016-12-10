@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.WebManagerPO;
+import utilities.Ciphertext;
 import utilities.ResultMessage;
 
 public class WebManagerDataService_Stub extends UnicastRemoteObject implements WebManagerDataService{
@@ -17,20 +18,23 @@ public class WebManagerDataService_Stub extends UnicastRemoteObject implements W
 
 
 	public WebManagerPO getSingleWebManager(String webManagerID) {
-		return new WebManagerPO("0001", "123456");
+		Ciphertext b = new Ciphertext();
+		return new WebManagerPO("0001", b.encrypt("123456"));
 	}
 
 	
 	public List<WebManagerPO> getAllWebManager() {
+		 Ciphertext b = new Ciphertext();
 		 List<WebManagerPO> list = new  ArrayList<WebManagerPO>();
-		 WebManagerPO a= new WebManagerPO("0001", "123456");
+		 WebManagerPO a= new WebManagerPO("0001", b.encrypt("123456"));
 		 list.add(a);
 		return list;
 	}
 
 	
 	public WebManagerPO add(WebManagerPO newWebManagerPO) {
-		return new WebManagerPO("0001", "123456");
+		 Ciphertext b = new Ciphertext();
+		return new WebManagerPO("0001", b.encrypt("123456"));
 	}
 
 	

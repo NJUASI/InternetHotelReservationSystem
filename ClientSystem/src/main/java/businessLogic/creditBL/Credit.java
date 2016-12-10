@@ -90,7 +90,7 @@ public class Credit implements CreditBLService{
 			guest.modifyCredit(creditVO.guestID, creditVO.afterCredit);
 			return creditDataService.addCredit(new CreditPO(creditVO));
 		} catch (RemoteException e) {
-			return ResultMessage.RECORE_CREDIT_FAILURE;
+			return ResultMessage.FAIL;
 		}
 	}
 	

@@ -2,10 +2,10 @@ package presentation.webManagerUI.controller;
 
 import java.util.Iterator;
 
-import businessLogic.hotelBL.HotelBLController;
 import businessLogic.sourceBL.SourceBLController;
-import businessLogicService.hotelBLService.HotelBLService;
+import businessLogic.userBL.UserController;
 import businessLogicService.sourceBLService.SourceBLService;
+import businessLogicService.userBLService.UserBLService;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
@@ -26,11 +26,11 @@ public class HotelInfoController {
 	private TextField hotelName,address;
 
 	private SourceBLService sourceBLController;
-	private HotelBLService hotelBLController;
+	private UserBLService userBLController;
 	
 	public HotelInfoController() {
 		sourceBLController = SourceBLController.getInstance();
-		hotelBLController = HotelBLController.getInstance();
+		userBLController = UserController.getInstance();
 		
 		cityInput.setOnShowing(new CityShowingHandler());
 		cityInput.valueProperty().addListener(new CityChangedListener());
@@ -45,11 +45,6 @@ public class HotelInfoController {
 	 */
 	@FXML
 	protected void addHotel(){
-		//TODO djy注意:创建hotelVO，保存，并需要返回初始化的酒店编号和密码
-		/*
-		 *  TODO djy注意:先更改你addhotel的接口，我再去user那里修改
-		 *  我这里add没有问题，要怎么修改
-		 */
 		
 		HotelVO newHotel = new HotelVO();
 		newHotel.hotelName = hotelName.getText();
@@ -58,11 +53,13 @@ public class HotelInfoController {
 		//TODO 还是将levelInput的改为返回String
 		newHotel.level = String.valueOf(levelInput.getValue());
 		newHotel.address = address.getText();
-		hotelBLController.addHotel(newHotel);
+		HotelVO hotelVO = userBLController.addHotel(newHotel);
 		
-//		HotelWorkerVO tempHotelWorkerVO  = new HotelWorkerVO()
-		// TODO gcm 注意！！！	hotelID是你生成还是User生成因为两个的ID是一样的，我觉得是我生成
-		// TODO gy 注意！！！	所有的用户的add都是由User返回ID和默认密码吗
+		if(hotelVO == null){
+			// TODO gy 代表添加失败，需要界面处理
+		}
+		//然后 hotelVO里有添加成功后的参数
+		
 	}
 	
 	class CityShowingHandler implements EventHandler<Event>{

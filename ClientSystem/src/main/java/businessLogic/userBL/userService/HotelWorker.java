@@ -8,19 +8,17 @@ import businessLogic.userBL.userService.service.UserService;
 import dataService.hotelWorkerDataService.HotelWorkerDataService;
 import dataService.hotelWorkerDataService.HotelWorkerDataService_Stub;
 import po.HotelWorkerPO;
+import utilities.Ciphertext;
 import utilities.ResultMessage;
 import vo.HotelWorkerVO;
 import vo.UserVO;
 
 /**
  * 
- * @author Byron Dong
- * lastChangedBy Byron Dong
- * updateTime 2016/11/28
+ * @author Byron Dong lastChangedBy Byron Dong updateTime 2016/11/28
  *
  */
-public class HotelWorker implements UserService{
-
+public class HotelWorker implements UserService {
 
 	public static int IDLength = 8; // 酒店工作人员的ID长度为8
 
@@ -29,11 +27,11 @@ public class HotelWorker implements UserService{
 	/**
 	 * @author Byron Dong
 	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/28
-	 * 构造函数，初始化成员变量
+	 * @updateTime 2016/11/28 构造函数，初始化成员变量
 	 */
 	public HotelWorker() {
-//		hotelWorkerDataService = ClientRemoteHelper.getInstance().getHotelWorkerDataService();
+		// hotelWorkerDataService =
+		// ClientRemoteHelper.getInstance().getHotelWorkerDataService();
 		try {
 			hotelWorkerDataService = new HotelWorkerDataService_Stub();
 		} catch (RemoteException e) {
@@ -45,14 +43,15 @@ public class HotelWorker implements UserService{
 	 * @author Byron Dong
 	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/12/9
-	 * @param newUserVO 从userDoMain传下来的userInfo载体
+	 * @param newUserVO
+	 *            从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加酒店工作人员信息
 	 */
 	public UserVO add(UserVO newUserVO) {
 
 		try {
 			HotelWorkerPO hotelWorkerPO = this.convert(newUserVO);
-			return this.convert( hotelWorkerDataService.add(hotelWorkerPO));
+			return this.convert(hotelWorkerDataService.add(hotelWorkerPO));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -63,14 +62,18 @@ public class HotelWorker implements UserService{
 	 * @author Byron Dong
 	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
-	 * @param newUserVO 从userDoMain传下来的userInfo载体
+	 * @param newUserVO
+	 *            从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功修改酒店工作人员信息
 	 */
 	public ResultMessage modify(UserVO userVO) {
 
-		ResultMessage msg = ResultMessage.USER_INFO_UPDATE_FAILURE;
+		//TODO: 董金玉USER_INFO_UPDATE_FAILURE
+		ResultMessage msg = ResultMessage.FAIL;
 
-		if(!this.hasHotelWorker(userVO.userID)){return msg;} //不存在ID对应项
+		if (!this.hasHotelWorker(userVO.userID)) {
+			return msg;
+		} // 不存在ID对应项
 
 		try {
 			HotelWorkerPO hotelWorkerPO = this.convert(userVO);
@@ -85,7 +88,8 @@ public class HotelWorker implements UserService{
 	 * @author Byron Dong
 	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
-	 * @param userVO 从userDoMain传下来的用户ID
+	 * @param userVO
+	 *            从userDoMain传下来的用户ID
 	 * @return UserVO 单一hotelWorkerInfo载体
 	 */
 	public UserVO getSingle(String userID) {
@@ -95,14 +99,14 @@ public class HotelWorker implements UserService{
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		return null; //若不存在ID对应项，就返回null
+		return null; // 若不存在ID对应项，就返回null
 	}
 
 	/**
 	 * @author Byron Dong
 	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
-	 * @param  
+	 * @param
 	 * @return List<UserVO> 指定用户类型的所有hotelWorkerInfo载体
 	 */
 	public List<UserVO> getAll() {
@@ -112,63 +116,73 @@ public class HotelWorker implements UserService{
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		return null; //若不存在ID对应项，就返回null
+		return null; // 若不存在ID对应项，就返回null
 	}
 
 	/**
 	 * @author Byron Dong
 	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
-	 * @param  userID 从userDoMain传下来的指定用户ID
+	 * @param userID
+	 *            从userDoMain传下来的指定用户ID
 	 * @return String 指定用户 的登录信息
 	 */
 	public String getLogInInfo(String userID) {
-		
-		if(!this.hasHotelWorker(userID)){return null;} //不存在ID对应项，返回值后期细化
+
+		if (!this.hasHotelWorker(userID)) {
+			return null;
+		} // 不存在ID对应项，返回值后期细化
 
 		try {
-			return hotelWorkerDataService.getSingleHotelWorker(userID).getPassword();
+			return convert(hotelWorkerDataService.getSingleHotelWorker(userID)).password;
 		} catch (RemoteException e) {
 			e.printStackTrace();
-			return null; //需要后期处理，是决定继续采用null，还是换其他
+			return null; // 需要后期处理，是决定继续采用null，还是换其他
 		}
 	}
 
 	/**
 	 * @author Byron Dong
 	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/11/28
-	 * @param  hotelWorkerPO 来自本类hotelWorkerInfo载体
+	 * @updateTime 2016/12/9
+	 * @param hotelWorkerPO
+	 *            来自本类hotelWorkerInfo载体
 	 * @return UserVO userInfo载体
 	 */
 	private UserVO convert(HotelWorkerPO hotelWorkerPO) {
-		if(hotelWorkerPO ==null){return null;}
-		return new HotelWorkerVO(hotelWorkerPO);
+		if (hotelWorkerPO == null) {
+			return null;
+		}
+		return new HotelWorkerVO(this.decode(hotelWorkerPO));
 	}
 
 	/**
 	 * @author Byron Dong
 	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
-	 * @param  userPO 来自本类userInfo载体
+	 * @param userPO
+	 *            来自本类userInfo载体
 	 * @return HotelWorkerVO hotelWorkerInfo载体
 	 */
 	private HotelWorkerPO convert(UserVO userVO) {
-		if(userVO ==null){return null;}
-		return new HotelWorkerPO((HotelWorkerVO) userVO);
+		if (userVO == null) {
+			return null;
+		}
+		return this.encrypt(new HotelWorkerPO((HotelWorkerVO) userVO));
 	}
 
 	/**
 	 * @author Byron Dong
 	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/28
-	 * @param  List<HotelWorkerPO> 来自本类所有hotelWorkerInfo载体
+	 * @param List<HotelWorkerPO>
+	 *            来自本类所有hotelWorkerInfo载体
 	 * @return List<UserVO> 所有对应的userInfo载体
 	 */
 	private List<UserVO> convert(List<HotelWorkerPO> list) {
 		List<UserVO> result = new ArrayList<UserVO>();
 		for (int i = 0; i < list.size(); i++) {
-			result.add(new HotelWorkerVO(list.get(i)));
+			result.add(new HotelWorkerVO(this.decode(list.get(i))));
 		}
 		return result;
 	}
@@ -176,12 +190,23 @@ public class HotelWorker implements UserService{
 	private boolean hasHotelWorker(String hotelWorkerID) {
 		UserVO hotelWorkerVO = this.getSingle(hotelWorkerID);
 
-		if(hotelWorkerVO==null){
+		if (hotelWorkerVO == null) {
 			return false;
-		}
-		else{
+		} else {
 			return true;
 		}
+	}
+
+	private HotelWorkerPO encrypt(HotelWorkerPO hotelWorkerPO) {
+		Ciphertext encrypt = new Ciphertext();
+		hotelWorkerPO.setPassword(encrypt.encrypt(hotelWorkerPO.getPassword()));
+		return hotelWorkerPO;
+	}
+
+	private HotelWorkerPO decode(HotelWorkerPO hotelWorkerPO) {
+		Ciphertext decode = new Ciphertext();
+		hotelWorkerPO.setPassword(decode.decode(hotelWorkerPO.getPassword()));
+		return hotelWorkerPO;
 	}
 
 }

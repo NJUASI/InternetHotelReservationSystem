@@ -31,7 +31,7 @@ public class RoomDataHelperImpl implements RoomDataHelper {
 
 
 	public RoomDataHelperImpl() {
-		conn = JDBCUtil.getGongConnection();
+		conn = JDBCUtil.getConnection();
 	}	
 
 	/**

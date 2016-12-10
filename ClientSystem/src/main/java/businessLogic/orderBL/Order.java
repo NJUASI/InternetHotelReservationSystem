@@ -87,7 +87,7 @@ public class Order {
 	 * @return 客户是否成功创建此订单
 	 */
 	public ResultMessage createOrder(final OrderVO orderVO) {
-		ResultMessage resultMessage = ResultMessage.ORDER_CREATE_FAILURE;
+		ResultMessage resultMessage = ResultMessage.FAIL;
 		
 		if (orderVO.orderGeneralVO.orderID != null && orderVO.orderGeneralVO.price != -1
 				&& orderVO.checkInTime != null && orderVO.checkOutTime != null 
@@ -112,7 +112,7 @@ public class Order {
 	 * @return 酒店工作人员是否成功执行此订单
 	 */
 	public ResultMessage executeOrder(final String orderID) {
-		ResultMessage resultMessage = ResultMessage.ORDER_EXECUTE_FAILURE;
+		ResultMessage resultMessage = ResultMessage.FAIL;
 		
 		OrderState thisOrderState = getOrderDetail(orderID).orderGeneralVO.state;
 		if (thisOrderState != OrderState.UNEXECUTED && thisOrderState != OrderState.ABNORMAL) {
@@ -135,7 +135,7 @@ public class Order {
 	 * @return 网站营销人员是否成功撤销此异常订单
 	 */
 	public ResultMessage undoAbnormalOrder(final String orderID, final double percent) {
-		ResultMessage resultMessage = ResultMessage.ABNORMAL_ORDER_UNDO_FAILURE;
+		ResultMessage resultMessage = ResultMessage.FAIL;
 		
 		OrderState thisOrderState = getOrderDetail(orderID).orderGeneralVO.state;
 		if (thisOrderState != OrderState.ABNORMAL) {
@@ -158,7 +158,7 @@ public class Order {
 	 * @return 客户是否成功撤销此正常订单
 	 */
 	public ResultMessage undoNormalOrder(final String orderID) {
-		ResultMessage resultMessage = ResultMessage.NORMAL_ORDER_UNDO_FAILURE;
+		ResultMessage resultMessage = ResultMessage.FAIL;
 		
 		OrderState thisOrderState = getOrderDetail(orderID).orderGeneralVO.state;
 		if (thisOrderState != OrderState.UNEXECUTED) {
@@ -486,7 +486,7 @@ public class Order {
 	 * @return 是否成功更新
 	 */
 	public ResultMessage updateCheckIn (CheckInVO checkInVO) {
-		ResultMessage resultMessage = ResultMessage.CHECK_IN_FAILURE;
+		ResultMessage resultMessage = ResultMessage.FAIL;
 		
 		try {
 			resultMessage = orderDataService.updateCheckIn(new CheckInPO(checkInVO));
@@ -504,7 +504,7 @@ public class Order {
 	 * @return 是否成功更新
 	 */
 	public ResultMessage updateCheckOut (CheckOutVO checkOutVO) {
-		ResultMessage resultMessage = ResultMessage.CHECK_OUT_FAILURE;
+		ResultMessage resultMessage = ResultMessage.FAIL;
 		
 		try {
 			resultMessage = orderDataService.updateCheckOut((new CheckOutPO(checkOutVO)));
@@ -522,9 +522,9 @@ public class Order {
 	 * @return 客户是否成功评价该订单
 	 */
 	public ResultMessage addEvaluation(GuestEvaluationVO evaluationVO) {
-		ResultMessage msg1 = ResultMessage.UPDATE_EVALUATION_FAILURE;
+		ResultMessage msg1 = ResultMessage.FAIL;
 		
-		ResultMessage msg2 = ResultMessage.HOTEL_SCORE_UPDATE_FAILURE;
+		ResultMessage msg2 = ResultMessage.FAIL;
 		try {
 			msg1 = orderDataService.addEvaluation(new GuestEvaluationPO(evaluationVO));
 			/*
@@ -536,10 +536,10 @@ public class Order {
 			e.printStackTrace();
 		}
 		
-		if (msg1 == ResultMessage.UPDATE_EVALUATION_SUCCESS && msg2 == ResultMessage.HOTEL_SCORE_UPDATE_SUCCESS) {
-			return ResultMessage.UPDATE_EVALUATION_SUCCESS;
+		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
+			return ResultMessage.SUCCESS;
 		}else {
-			return ResultMessage.UPDATE_EVALUATION_FAILURE;
+			return ResultMessage.FAIL;
 		}
 		
 	}

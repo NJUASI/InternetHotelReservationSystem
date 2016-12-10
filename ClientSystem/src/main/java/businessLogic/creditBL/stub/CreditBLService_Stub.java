@@ -42,7 +42,7 @@ public class CreditBLService_Stub implements CreditBLService {
 	 * @return 添加此条信用记录的结果
 	 */
 	public ResultMessage addCreditRecord(final CreditVO creditVO) {
-		return ResultMessage.RECORE_CREDIT_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 	
 	

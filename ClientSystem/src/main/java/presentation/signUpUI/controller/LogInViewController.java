@@ -113,6 +113,7 @@ public class LogInViewController {
 			
 			if(userType==null){
 			// TODO 需要消息框或状态栏提示登录失败，关于失败原因这里暂时没有，后面细化，此处需要界面处理if之后不跳转界面
+				System.out.println("登录失败");
 			}
 			
 			IDReserve.getInstance().setUserID(ID.getText());
@@ -144,6 +145,7 @@ public class LogInViewController {
 		
 		if(guestVO==null){
 			//TODO gy 注意 密码错误，界面提示两次输入不一致
+			System.out.println("密码不一致");;
 		}else{
 			//TODO 正常操作
 		}
