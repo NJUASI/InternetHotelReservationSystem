@@ -26,8 +26,8 @@ import vo.OrderVO;
 /**
  * 
  * @author charles
- * lastChangedBy Harvey
- * updateTime 2016/12/7
+ * lastChangedBy charles
+ * updateTime 2016/12/10
  *
  */
 public class GuestOrder implements GuestOrderBLService {
@@ -90,7 +90,7 @@ public class GuestOrder implements GuestOrderBLService {
 	 * @return 客户是否成功创建此订单
 	 */
 	public ResultMessage createOrder(final OrderVO orderVO) {
-		ResultMessage resultMessage = ResultMessage.ORDER_CREATE_FAILURE;
+		ResultMessage resultMessage = ResultMessage.FAIL;
 		
 		if (orderVO.orderGeneralVO.orderID == null && orderVO.orderGeneralVO.price == -1
 				&& orderVO.checkInTime == null && orderVO.checkOutTime == null 
@@ -111,9 +111,11 @@ public class GuestOrder implements GuestOrderBLService {
 	 * @updateTime 2016/12/8
 	 * @param orderID 客户当前需要撤销的正常订单的订单号
 	 * @return 客户是否成功撤销此正常订单
+	 * 
+	 * TODO 冯俊杰、龚尘淼：需要调用酒店接口，更新酒店剩余房间数
 	 */
 	public ResultMessage undoNormalOrder(final String orderID) {
-		ResultMessage resultMessage = ResultMessage.NORMAL_ORDER_UNDO_FAILURE;
+		ResultMessage resultMessage = ResultMessage.FAIL;
 		
 		OrderState thisOrderState = commonOrder.getOrderDetail(orderID).orderGeneralVO.state;
 		if (thisOrderState == OrderState.UNEXECUTED) {
@@ -135,8 +137,8 @@ public class GuestOrder implements GuestOrderBLService {
 	 * @return 客户是否成功评价该订单
 	 */
 	public ResultMessage addEvaluation(GuestEvaluationVO evaluationVO) {
-		ResultMessage msg1 = ResultMessage.UPDATE_EVALUATION_FAILURE;
-		ResultMessage msg2 = ResultMessage.HOTEL_SCORE_UPDATE_FAILURE;
+		ResultMessage msg1 = ResultMessage.FAIL;
+		ResultMessage msg2 = ResultMessage.FAIL;
 		
 		try {
 			msg1 = orderDataService.addEvaluation(new GuestEvaluationPO(evaluationVO));
@@ -150,10 +152,10 @@ public class GuestOrder implements GuestOrderBLService {
 			e.printStackTrace();
 		}
 		
-		if (msg1 == ResultMessage.UPDATE_EVALUATION_SUCCESS && msg2 == ResultMessage.HOTEL_SCORE_UPDATE_SUCCESS) {
-			return ResultMessage.UPDATE_EVALUATION_SUCCESS;
+		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
+			return ResultMessage.SUCCESS;
 		}else {
-			return ResultMessage.UPDATE_EVALUATION_FAILURE;
+			return ResultMessage.FAIL;
 		}
 		
 	}

@@ -1,4 +1,4 @@
-package presentation.hotelWorkerUI.controller;
+package presentation.Table;
 
 import javafx.beans.property.SimpleStringProperty;
 

@@ -21,7 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import presentation.hotelWorkerUI.controller.OrderTable;
+import presentation.Table.OrderTable;
 import utilities.IDReserve;
 import utilities.OrderState;
 import utilities.ResultMessage;
@@ -150,6 +150,7 @@ public class OrderController {
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/8
 	 * @通过日期查所有异常订单和未执行订单
+	 * 取消查看所有异常订单和未执行订单，直接查看异常订单
 	 */
 	@FXML
 	protected void searchDateOrder() {
@@ -172,8 +173,6 @@ public class OrderController {
 		initOrderCheck(orderGenerals);
 		
 		cancelOrderPaneInCheck.setDisable(false);
-				 
-	
 	}
 
 	/**
@@ -329,7 +328,7 @@ public class OrderController {
 	private void undoAbnormalOrder(String orderID, double percent) {
 		ResultMessage result = orderBLController.undoAbnormalOrder(orderID, percent);
 		
-		if (result == ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS) {
+		if (result == ResultMessage.SUCCESS) {
 			//TODO 高源：状态栏显示异常订单撤销成功
 			
 		}else {

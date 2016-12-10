@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import presentation.PopUp.PopUp;
 import utilities.IDReserve;
 import utilities.ResultMessage;
 import vo.GuestVO;
@@ -94,9 +95,9 @@ public class GuestInfoController {
 			if(password2.getText()==password3.getText()){
 			ResultMessage message = userBLController.modify(tempGuestVO);
 			}else{
-//				TODO 密码不对
+				new PopUp("请检查你的密码", "更改失败");
 			}
-			// TODO 得到modify是否成功的结果，界面后续做提示处理
+				new PopUp("您已经成功修改信息", "更改成功");
 			guestModify.setVisible(false);
 			guestCheck.setVisible(true);
 
@@ -111,7 +112,7 @@ public class GuestInfoController {
 	/**
 	 * @description 点击取消按钮，取消修改
 	 * @author 61990
-	 * @lastChangedBy Harvey
+	 * @lastChangedBy 61990
 	 * @updateTime 2016/12/7
 	 */
 	@FXML

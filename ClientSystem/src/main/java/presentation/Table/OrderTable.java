@@ -1,4 +1,4 @@
-package presentation.hotelWorkerUI.controller;
+package presentation.Table;
 
 import java.time.LocalDateTime;
 

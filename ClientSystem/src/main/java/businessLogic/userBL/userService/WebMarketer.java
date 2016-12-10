@@ -68,7 +68,8 @@ public class WebMarketer implements UserService {
 	 */
 	public ResultMessage modify(UserVO userVO) {
 
-		ResultMessage msg = ResultMessage.USER_INFO_UPDATE_FAILURE;
+		//TODO 董金玉：USER_INFO_UPDATE_FAILURE
+		ResultMessage msg = ResultMessage.FAIL;
 
 		if (!this.hasWebMarketer(userVO.userID)) {
 			return msg;

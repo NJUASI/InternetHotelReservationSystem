@@ -67,7 +67,9 @@ public class User {
 		if(isExistence(user)){
 			return user.modify(userVO);
 		}
-		return ResultMessage.USER_UNEXISTENCE;
+		
+		//TODO 董金玉：USER_UNEXISTENCE
+		return ResultMessage.FAIL;
 	}
 
 	/**
@@ -110,7 +112,8 @@ public class User {
 		
 		newHotelVO.hotelID = hotelWorkerVO.userID;
 		
-		// TODO gcm 如果hotelWorker添加成功，hotel没有添加成功！！！这种情况需要做什么？
+		// TODO 如果hotelWorker添加成功，hotel没有添加成功！！！这种情况需要做什么？
+		// TODO djy 不会有这种情况发生额，hotelWorker和hotel不是一一对应的嘛，hotelWorker添加成功了说明从上到下的连接也是
 		if(hotel.addHotelInfo(newHotelVO)==ResultMessage.SUCCESS){ //与该酒店工作人员同步
 			return newHotelVO;
 		}

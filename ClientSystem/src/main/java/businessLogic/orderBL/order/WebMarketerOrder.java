@@ -71,19 +71,19 @@ public class WebMarketerOrder implements WebMarketerOrderBLService {
 	 * @return 网站营销人员是否成功按比例撤销此异常订单
 	 */
 	public ResultMessage undoAbnormalOrder(final String orderID, final double percent) {		
-		ResultMessage msg1 = ResultMessage.ABNORMAL_ORDER_UNDO_FAILURE;
-		ResultMessage msg2 = ResultMessage.RECORE_CREDIT_FAILURE;
+		ResultMessage msg1 = ResultMessage.FAIL;
+		ResultMessage msg2 = ResultMessage.FAIL;
 		
 		OrderVO thisOrder = commonOrder.getOrderDetail(orderID);
 		OrderState thisOrderState = thisOrder.orderGeneralVO.state;
 		if (thisOrderState == OrderState.ABNORMAL) {
 			try {
-				//撤销异常订单
+				//撤销异常订单，将其状态只为已撤销
 				msg1 = orderDataService.undoAbnormalOrder(orderID, percent);
 				
-				//添加信用记录
+				//修改信用值并添加信用记录
 				/*
-				 * 因为数据的问题，getOrderDetail得到的是一个UNEXECUTED对象，所以执行会抛异常
+				 * 因为数据的问题，此时getOrderDetail得到的是一个UNEXECUTED对象，所以执行会抛异常
 				 * 但是若是数据正确的话，就没有问题
 				 */
 				GuestVO thisGuest = (GuestVO)userBLService.getSingle(thisOrder.orderGeneralVO.guestID);
@@ -97,10 +97,10 @@ public class WebMarketerOrder implements WebMarketerOrderBLService {
 			}
 		}
 		
-		if (msg1 == ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS && msg2 == ResultMessage.RECORE_CREDIT_SUCCESS) {
-			return ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS;
+		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
+			return ResultMessage.SUCCESS;
 		}else {
-			return ResultMessage.ABNORMAL_ORDER_UNDO_FAILURE;
+			return ResultMessage.FAIL;
 		}
 	}
 	

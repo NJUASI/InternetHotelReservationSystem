@@ -84,7 +84,7 @@ public class OrderBLService_DriverTest {
 				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, 
 				roomType, 2, "301  302", 2, "zhangsan","13554321234", "no", 4.3, "good");
 		
-		assertEquals(ResultMessage.ORDER_CREATE_SUCCESS, driver.orderBLService.createOrder(orderVO));
+		assertEquals(ResultMessage.SUCCESS, driver.orderBLService.createOrder(orderVO));
 	}
 	
 	/**
@@ -98,7 +98,7 @@ public class OrderBLService_DriverTest {
 	public void testUndoNormalOrder() {
 		final OrderBLService_Stub stub = new OrderBLService_Stub();
 		final OrderBLService_Driver driver = new OrderBLService_Driver(stub);
-		assertEquals(ResultMessage.NORMAL_ORDER_UNDO_SUCCESS, driver.orderBLService.undoNormalOrder("123456789012"));
+		assertEquals(ResultMessage.SUCCESS, driver.orderBLService.undoNormalOrder("123456789012"));
 	}
 
 	/**
@@ -170,7 +170,7 @@ public class OrderBLService_DriverTest {
 		final OrderBLService_Stub stub = new OrderBLService_Stub();
 		final OrderBLService_Driver driver = new OrderBLService_Driver(stub);
 		
-		assertEquals(ResultMessage.UPDATE_EVALUATION_SUCCESS, driver.orderBLService.addEvaluation(new GuestEvaluationVO
+		assertEquals(ResultMessage.SUCCESS, driver.orderBLService.addEvaluation(new GuestEvaluationVO
 				("123420161002", 4, "5")));
 	}
 	

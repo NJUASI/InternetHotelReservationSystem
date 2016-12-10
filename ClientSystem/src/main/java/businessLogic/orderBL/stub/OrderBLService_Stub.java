@@ -56,7 +56,7 @@ public class OrderBLService_Stub implements OrderBLService {
 	 * @return 客户成功创建此订单
 	 */
 	public ResultMessage createOrder(final OrderVO orderVO) {
-		return ResultMessage.ORDER_CREATE_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class OrderBLService_Stub implements OrderBLService {
 	 * @return 酒店工作人员成功执行此订单
 	 */
 	public ResultMessage executeOrder(final String orderID) {
-		return ResultMessage.ORDER_EXECUTE_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class OrderBLService_Stub implements OrderBLService {
 	 * @return 网站营销人员是否成功按比例撤销此异常订单
 	 */
 	public ResultMessage undoAbnormalOrder(final String orderID, final double percent) {
-		return ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class OrderBLService_Stub implements OrderBLService {
 	 * @return 客户是否成功撤销此正常订单
 	 */
 	public ResultMessage undoNormalOrder(final String orderID) {
-		return ResultMessage.NORMAL_ORDER_UNDO_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 
 	/**
@@ -363,7 +363,7 @@ public class OrderBLService_Stub implements OrderBLService {
 	 * @return 是否成功更新
 	 */
 	public ResultMessage updateCheckIn (CheckInVO checkInVO) {
-		return ResultMessage.CHECK_IN_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 
 	/**
@@ -374,7 +374,7 @@ public class OrderBLService_Stub implements OrderBLService {
 	 * @return 是否成功更新
 	 */
 	public ResultMessage updateCheckOut (CheckOutVO checkOutVO) {
-		return ResultMessage.CHECK_OUT_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 	
 	/**
@@ -386,7 +386,7 @@ public class OrderBLService_Stub implements OrderBLService {
 	 */
 	@Override
 	public ResultMessage addEvaluation(final GuestEvaluationVO evaluationVO) {
-		return ResultMessage.UPDATE_EVALUATION_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 	
 	/**

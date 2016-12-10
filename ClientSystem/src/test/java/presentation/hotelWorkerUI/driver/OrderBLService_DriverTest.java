@@ -41,7 +41,7 @@ public class OrderBLService_DriverTest {
 	public void testExecuteOrder() {
 		final OrderBLService_Stub stub = new OrderBLService_Stub();
 		final OrderBLService_Driver driver = new OrderBLService_Driver(stub);
-		assertEquals(ResultMessage.ORDER_EXECUTE_SUCCESS, driver.orderBLService.executeOrder("123456789012"));
+		assertEquals(ResultMessage.SUCCESS, driver.orderBLService.executeOrder("123456789012"));
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class OrderBLService_DriverTest {
 		
 		final CheckInVO checkInVO = new CheckInVO("123456789012", "305", checkInTime, expectLeaveTime);
 		
-		assertEquals(ResultMessage.CHECK_IN_SUCCESS, driver.orderBLService.updateCheckIn(checkInVO));
+		assertEquals(ResultMessage.SUCCESS, driver.orderBLService.updateCheckIn(checkInVO));
 		
 	}
 	
@@ -138,7 +138,7 @@ public class OrderBLService_DriverTest {
 
 		final CheckOutVO checkOutVO = new CheckOutVO("123456789012", checkOutTime);
 		
-		assertEquals(ResultMessage.CHECK_OUT_SUCCESS, driver.orderBLService.updateCheckOut(checkOutVO));
+		assertEquals(ResultMessage.SUCCESS, driver.orderBLService.updateCheckOut(checkOutVO));
 		
 	}
 	
