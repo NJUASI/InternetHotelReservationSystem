@@ -1,5 +1,6 @@
 package businessLogic.sourceBL;
 
+import java.rmi.RemoteException;
 import java.util.Iterator;
 
 import businessLogicService.sourceBLService.SourceBLService;
@@ -23,22 +24,42 @@ public class SourceBLController implements SourceBLService {
 	
 	@Override
 	public Iterator<String> getCities() {
-		return sourceDataService.getCities();
+		try {
+			return sourceDataService.getCities();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	@Override
 	public Iterator<String> getLevels() {
-		return sourceDataService.getLevels();
+		try {
+			return sourceDataService.getLevels();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
 	public Iterator<String> getRoomTypes() {
-		return sourceDataService.getRoomTypes();
+		try {
+			return sourceDataService.getRoomTypes();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
 	public Iterator<String> getCircles(String city) {
-		return sourceDataService.getCircles(city);
+		try {
+			return sourceDataService.getCircles(city);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }
