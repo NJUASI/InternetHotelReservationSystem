@@ -154,7 +154,6 @@ public class LogInViewController {
 					,phone.getText(),0);
 			try {
 				guestVO = logInBLController.guestSignUp(userVO);
-			
 				new PopUp("你的账号是"+guestVO.userID, "注册成功");
 			} catch (InvalidInputException e) {
 				e.printStackTrace();

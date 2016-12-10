@@ -30,7 +30,7 @@ public final class LogInController implements LogInBLService {
 	 */
 	private LogInController() {
 		// new the mock object
-		logIn = new MockLogIn();
+		logIn = new LogIn();
 	}
 	
 	/**
