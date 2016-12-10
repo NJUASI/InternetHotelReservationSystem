@@ -31,7 +31,7 @@ public class UserController implements UserBLService{
 	 */
 	private UserController() {
 		//new the mock object
-		user = new MockUser();
+		user = new User();
 	}
 
 	/**
