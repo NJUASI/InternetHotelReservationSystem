@@ -50,7 +50,6 @@ public class Main extends Application {
 	 * @param args ……
 	 */
 	public static void main(final String[] args) {
-		ClientRemoteHelper.getInstance().init();
 		launch(args);
 	}
 }
