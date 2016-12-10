@@ -45,7 +45,7 @@ public class WebManagerDataService_DriveTest {
 		try {
 			webManagerPO = driver.webManagerDataService.getSingleWebManager("0001");
 			assertEquals("123456",a.decode( webManagerPO.getPassword()));
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

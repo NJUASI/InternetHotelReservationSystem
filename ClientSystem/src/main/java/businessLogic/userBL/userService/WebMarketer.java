@@ -7,6 +7,7 @@ import java.util.List;
 import businessLogic.userBL.userService.service.UserService;
 import dataService.webMarketerDataService.WebMarketerDataService;
 import dataService.webMarketerDataService.WebMarketerDataService_Stub;
+import exception.verificationException.UserInexistException;
 import po.WebMarketerPO;
 import utilities.Ciphertext;
 import utilities.ResultMessage;
@@ -91,8 +92,9 @@ public class WebMarketer implements UserService {
 	 * @param userVO
 	 *            从userDoMain传下来的用户ID
 	 * @return UserVO 单一webMarketerInfo载体
+	 * @throws UserInexistException 
 	 */
-	public UserVO getSingle(String userID) {
+	public UserVO getSingle(String userID) throws UserInexistException {
 
 		try {
 			return this.convert(webMarketerDataService.getSingleWebMarketer(userID));
@@ -127,12 +129,9 @@ public class WebMarketer implements UserService {
 	 * @param userID
 	 *            从userDoMain传下来的指定用户ID
 	 * @return String 指定用户 的登录信息
+	 * @throws UserInexistException 
 	 */
-	public String getLogInInfo(String userID) {
-
-		if (!this.hasWebMarketer(userID)) {
-			return null;
-		} // 不存在ID对应项,后期细化
+	public String getLogInInfo(String userID) throws UserInexistException {
 
 		try {
 			return convert(webMarketerDataService.getSingleWebMarketer(userID)).password;
@@ -190,13 +189,15 @@ public class WebMarketer implements UserService {
 	}
 
 	private boolean hasWebMarketer(String webMarketerID) {
-		UserVO webMarketerVO = this.getSingle(webMarketerID);
-
-		if (webMarketerVO == null) {
+		
+		try {
+			UserVO webMarketerVO = this.getSingle(webMarketerID);
+		} catch (UserInexistException e) {
+			e.printStackTrace();
 			return false;
-		} else {
-			return true;
 		}
+
+		return true;
 	}
 
 	private WebMarketerPO encrypt(WebMarketerPO webMaketerPO) {

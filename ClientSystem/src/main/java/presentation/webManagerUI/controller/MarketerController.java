@@ -2,6 +2,7 @@ package presentation.webManagerUI.controller;
 
 import businessLogic.userBL.UserController;
 import businessLogicService.userBLService.UserBLService;
+import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -40,7 +41,12 @@ public class MarketerController {
 	 */
 	@FXML
 	protected void search() {
-		marketerVO = (WebMarketerVO) userBLController.getSingle(inputID.getText());
+		try {
+			marketerVO = (WebMarketerVO) userBLController.getSingle(inputID.getText());
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+			// 为了保证编译能通过
+		}
 		
 		if(marketerVO == null){
 //			TODO djy得不到不是可以直接弄到异常里吗

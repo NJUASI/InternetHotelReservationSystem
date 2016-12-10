@@ -16,6 +16,7 @@ import businessLogicService.hotelBLService.HotelBLService;
 import businessLogicService.orderBLService.OrderBLService;
 import businessLogicService.sourceBLService.SourceBLService;
 import businessLogicService.userBLService.UserBLService;
+import exception.verificationException.UserInexistException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -652,7 +653,12 @@ public class HotelSearchController {
 		hotelVO = hotelBLController.getHotelInfo(selectedHotelID);
 		rooms = hotelBLController.getHotelRoomInfo(selectedHotelID);
 
-		guestVO = (GuestVO) userBLController.getSingle(selectedHotelID);
+		try {
+			guestVO = (GuestVO) userBLController.getSingle(selectedHotelID);
+		} catch (UserInexistException e) {
+			// 该情况是不会出现的，保证编译能通过
+			e.printStackTrace();
+		}
 		nameInOrder.setText(guestVO.name);
 		phoneInOrder.setText(guestVO.phone);
 

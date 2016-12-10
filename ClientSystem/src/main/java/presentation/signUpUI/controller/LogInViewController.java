@@ -10,6 +10,8 @@ import exception.inputException.InvalidInputException;
 import exception.inputException.InvalidLengthInputException;
 import exception.inputException.PasswordInputException;
 import exception.inputException.SpecialCharacterException;
+import exception.verificationException.ParameterInvalidException;
+import exception.verificationException.UserInexistException;
 import exception.verificationException.WrongPasswordException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -122,11 +124,20 @@ public class LogInViewController {
 					
 					IDReserve.getInstance().setUserID(ID.getText());
 					Parent root = factory.createRoot(userType);
-					ObservableList<Stage> stage = FXRobotHelper.getStages();
+					
+					if(root==null){
+						new PopUp("账号长度无效", "登录失败");
+					}
+					else{
+						ObservableList<Stage> stage = FXRobotHelper.getStages();
 
-					Scene scene = new Scene(root);
-					stage.get(0).setScene(scene);
-				} catch (SpecialCharacterException e) {
+						Scene scene = new Scene(root);
+						stage.get(0).setScene(scene);
+					}
+				} catch(UserInexistException e){
+					e.printStackTrace();
+					new PopUp("该用户不存在", "登录失败");
+				}catch (SpecialCharacterException e) {
 					e.printStackTrace();
 					new PopUp("账号中含有不合法符号", "登录失败");
 				} catch (WrongPasswordException e) {
@@ -155,7 +166,7 @@ public class LogInViewController {
 			try {
 				guestVO = logInBLController.guestSignUp(userVO);
 				new PopUp("你的账号是"+guestVO.userID, "注册成功");
-			} catch (InvalidInputException e) {
+			}catch (InvalidInputException e) {
 				e.printStackTrace();
 				new PopUp("无效输入", "注册失败");
 			} catch(PasswordInputException e){

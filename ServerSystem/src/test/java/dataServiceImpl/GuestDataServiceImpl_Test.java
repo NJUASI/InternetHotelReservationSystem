@@ -30,7 +30,7 @@ public class GuestDataServiceImpl_Test {
 			assertEquals(guestPO.getPassword(),"000000");
 			assertEquals(guestPO.getPhone(),"13523456789");
 			assertEquals(guestPO.getCredit(),100,0);
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -71,7 +71,7 @@ public class GuestDataServiceImpl_Test {
 			assertEquals(guestPO.getPassword(),"000000");
 			assertEquals(guestPO.getPhone(),"13523456789");
 			assertEquals(guestPO.getCredit(),100,0);
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
