@@ -4,7 +4,12 @@ import java.util.List;
 
 import businessLogic.marketBL.Market;
 import businessLogic.memberBL.Member;
+<<<<<<< HEAD
 import utilities.enums.MemberType;
+=======
+import exception.verificationException.UserInexistException;
+import utilities.MemberType;
+>>>>>>> master
 import vo.MarketVO;
 
 public class MemberLevelPromotion {
@@ -13,7 +18,7 @@ public class MemberLevelPromotion {
 
 	}
 
-	public double getDiscount(String guestID){
+	public double getDiscount(String guestID) throws UserInexistException{
 		Market market = new Market();
 		List<MarketVO> commonMemberRegulations = market.getMemberFormulation();
 		if(new Member().isMember(guestID, MemberType.COMMON)){

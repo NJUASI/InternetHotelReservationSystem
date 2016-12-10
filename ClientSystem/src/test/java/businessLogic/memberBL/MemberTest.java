@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import org.junit.Test;
 
+import exception.verificationException.UserInexistException;
 import utilities.*;
 import utilities.enums.MemberType;
 import utilities.enums.ResultMessage;
@@ -44,23 +45,36 @@ public class MemberTest {
 	public void testGetMemberInfo() {
 		//test the method getMemberInfo
 		LocalDate time = LocalDate.of(1995, 01, 01);
-		MemberVO memberVO = member.getMemberInfo("1234567890");
+		MemberVO memberVO;
+		try {
+			memberVO = member.getMemberInfo("1234567890");
+			assertEquals(memberVO.guestID, "1234567890");
+			assertEquals(memberVO.birthday, time);
+			assertEquals(memberVO.enterprise, "school");
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
 		
-		assertEquals(memberVO.guestID, "1234567890");
-		assertEquals(memberVO.birthday, time);
-		assertEquals(memberVO.enterprise, "school");
 	}
 	
 	@Test
 	public void testIsMember() {
 		//test the method isMember 
-		assertEquals(member.isMember("1234567890", MemberType.BOTH),true);
+		try {
+			assertEquals(member.isMember("1234567890", MemberType.BOTH),true);
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
 	public void testGetMemberType() {
 		//test the method getMemberType
-		assertEquals(member.getMemberType("1234567890"),MemberType.BOTH);
+		try {
+			assertEquals(member.getMemberType("1234567890"),MemberType.BOTH);
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

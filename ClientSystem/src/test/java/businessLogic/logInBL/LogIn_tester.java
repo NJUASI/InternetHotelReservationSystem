@@ -9,13 +9,14 @@ import org.junit.Test;
 import exception.inputException.InvalidInputException;
 import exception.inputException.InvalidLengthInputException;
 import exception.inputException.PasswordInputException;
+import exception.verificationException.ParameterInvalidException;
 import vo.GuestVO;
 
 public class LogIn_tester {
 
 	
 	@Test
-	public void test5() {
+	public void test5() throws ParameterInvalidException {
 		//test cooperation with class User
 		//test interface guestSignUp(GuestVO guestVO)
 		LogInController controller = LogInController.getInstance();

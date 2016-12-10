@@ -8,6 +8,9 @@ import businessLogic.userBL.userService.service.GuestCreditService;
 import businessLogic.userBL.userService.service.UserService;
 import dataService.guestDataService.GuestDataService;
 import dataService.guestDataService.GuestDataService_Stub;
+import exception.operationFailedException.AddFaidException;
+import exception.verificationException.ParameterInvalidException;
+import exception.verificationException.UserInexistException;
 import po.GuestPO;
 import utilities.Ciphertext;
 import utilities.enums.ResultMessage;
@@ -47,8 +50,10 @@ public class Guest implements UserService, GuestCreditService {
 	 * @param newUserVO
 	 *            从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加客户信息
+	 * @throws AddFaidException 
+	 * @throws ParameterInvalidException 
 	 */
-	public UserVO add(UserVO newUserVO) {
+	public UserVO add(UserVO newUserVO){
 
 		try {
 			GuestPO guestPO = convert(newUserVO);
@@ -92,8 +97,9 @@ public class Guest implements UserService, GuestCreditService {
 	 * @param userVO
 	 *            从userDoMain传下来的用户ID
 	 * @return UserVO 单一guestInfo载体
+	 * @throws UserInexistException 
 	 */
-	public UserVO getSingle(String userID) {
+	public UserVO getSingle(String userID) throws UserInexistException {
 
 		try {
 			return this.convert(guestDataService.getSingleGuest(userID));
@@ -127,12 +133,9 @@ public class Guest implements UserService, GuestCreditService {
 	 * @param userID
 	 *            从userDoMain传下来的指定用户ID
 	 * @return String 指定用户 的登录信息
+	 * @throws UserInexistException 
 	 */
-	public String getLogInInfo(String userID) {
-
-		if (!this.hasGuest(userID)) {
-			return null;
-		} // 指定的客户不存在，返回null
+	public String getLogInInfo(String userID) throws UserInexistException {
 
 		try {
 			return convert(guestDataService.getSingleGuest(userID)).password;
@@ -149,12 +152,14 @@ public class Guest implements UserService, GuestCreditService {
 	 * @param guestID,
 	 *            creditNum从userDoMain传下来的指定客户ID和需修改的信用值
 	 * @return ResultMessage 信用值是否添加成功
+	 * @throws UserInexistException 
 	 */
-	public ResultMessage modifyCredit(String guestID, double creditNum) {
+	public ResultMessage modifyCredit(String guestID, double creditNum) throws UserInexistException {
 
-		GuestPO guestPO;
+		GuestPO guestPO = null;
 		try {
 			guestPO = guestDataService.getSingleGuest(guestID);
+			
 			guestPO.setCredit(creditNum);
 			return guestDataService.modify(guestPO);
 		} catch (RemoteException e) {
@@ -225,13 +230,14 @@ public class Guest implements UserService, GuestCreditService {
 	}
 
 	public boolean hasGuest(String guestID) { // 放在后面，该方法一般只在本类使用，可以等同private,只有member会用到
-		UserVO guestVO = this.getSingle(guestID);
-
-		if (guestVO == null) {
+		
+		try {
+			UserVO guestVO = this.getSingle(guestID);
+		} catch (UserInexistException e) {
+			e.printStackTrace();
 			return false;
-		} else {
-			return true;
 		}
+		return true;
 	}
 
 	private GuestPO encrypt(GuestPO guestPO) {

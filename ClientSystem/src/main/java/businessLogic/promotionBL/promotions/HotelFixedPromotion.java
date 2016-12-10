@@ -10,6 +10,7 @@ import businessLogic.promotionBL.discountCalculation.CalculateDiscount;
 import businessLogic.promotionBL.discountCalculation.HotelFixedDiscountFactory;
 import dataService.promotionDataService.PromotionDataService;
 import dataService.promotionDataService.PromotionDataService_Stub;
+import exception.verificationException.UserInexistException;
 import po.HotelFixedPromotionPO;
 import utilities.PreOrder;
 import utilities.enums.PromotionType;
@@ -79,9 +80,10 @@ public class HotelFixedPromotion {
 	 * double
 	 * @author: Harvey Gong
 	 * @param today 
+	 * @throws UserInexistException 
 	 * @time:2016年12月1日 下午2:09:29
 	 */
-	public double getDiscountOneday(PreOrder preOrder, LocalDate today){
+	public double getDiscountOneday(PreOrder preOrder, LocalDate today) throws UserInexistException{
 		List<CalculateDiscount> calculateFixedPromotions = initCalculateFixedPromotions(preOrder,today);
 		double discount = 1;
 		for(int i = 0;i<calculateFixedPromotions.size();i++){

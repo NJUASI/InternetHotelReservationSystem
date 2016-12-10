@@ -13,6 +13,7 @@ import businessLogicService.orderBLService.WebMarketerOrderBLService;
 import businessLogicService.userBLService.UserBLService;
 import dataService.orderDataService.OrderDataService;
 import dataService.orderDataService.OrderDataService_Stub;
+import exception.verificationException.UserInexistException;
 import po.OrderGeneralPO;
 import utilities.enums.CreditRecord;
 import utilities.enums.OrderState;
@@ -92,7 +93,7 @@ public class WebMarketerOrder implements WebMarketerOrderBLService {
 				final CreditVO creditVO = new CreditVO(thisOrder.orderGeneralVO.guestID, time, 
 						thisOrder.orderGeneralVO.orderID, thisGuest.credit, afterCredit, CreditRecord.UNDO_ABNORMAL);
 				msg2 = creditBLService.addCreditRecord(creditVO);
-			} catch (RemoteException e) {
+			} catch (RemoteException | UserInexistException e) {
 				e.printStackTrace();
 			}
 		}

@@ -13,6 +13,7 @@ import businessLogicService.orderBLService.HotelWorkerOrderBLService;
 import businessLogicService.userBLService.UserBLService;
 import dataService.orderDataService.OrderDataService;
 import dataService.orderDataService.OrderDataService_Stub;
+import exception.verificationException.UserInexistException;
 import po.CheckInPO;
 import po.CheckOutPO;
 import utilities.enums.CreditRecord;
@@ -104,7 +105,7 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 							thisOrder.orderGeneralVO.orderID, thisGuest.credit, afterCredit, CreditRecord.ABNORMAL_EXECUTE);
 				}
 				msg2 = creditBLService.addCreditRecord(creditVO);
-			} catch (RemoteException e) {
+			} catch (RemoteException | UserInexistException e) {
 				e.printStackTrace();
 			}
 		}

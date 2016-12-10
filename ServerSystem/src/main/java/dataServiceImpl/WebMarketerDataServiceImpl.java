@@ -7,6 +7,7 @@ import java.util.List;
 import dataHelper.WebMarketerDataHelper;
 import dataHelperImpl.stub.WebMarketerDataHelperImpl_Stub;
 import dataService.webMarketerDataService.WebMarketerDataService;
+import exception.verificationException.UserInexistException;
 import po.WebMarketerPO;
 import utilities.enums.ResultMessage;
 
@@ -40,10 +41,14 @@ public class WebMarketerDataServiceImpl extends UnicastRemoteObject implements W
 	 * @updateTime 2016/12/1
 	 * @param webMarketerID 网站营销人员ID
 	 * @return WebMarketerPO webMarketerInfo载体
+	 * @throws UserInexistException 
 	 */
-	public WebMarketerPO getSingleWebMarketer(String webMarketerID) throws RemoteException {
+	public WebMarketerPO getSingleWebMarketer(String webMarketerID) throws RemoteException, UserInexistException {
 		WebMarketerPO webMarketerPO = this.webMarketerHelper.getSingle(webMarketerID);
 		// 从数据库中得到webMarketerPO，若不存在则为空
+		if(webMarketerPO==null){
+			throw new UserInexistException();
+		}
 		return webMarketerPO;
 	
 	}

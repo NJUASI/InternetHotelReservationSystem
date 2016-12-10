@@ -16,6 +16,7 @@ import businessLogicService.hotelBLService.HotelBLService;
 import businessLogicService.orderBLService.OrderBLService;
 import businessLogicService.sourceBLService.SourceBLService;
 import businessLogicService.userBLService.UserBLService;
+import exception.verificationException.UserInexistException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -39,7 +40,6 @@ import presentation.Table.HotelTable;
 import presentation.Table.OrderTable;
 import presentation.Table.TypeTable;
 import utilities.IDReserve;
-import utilities.enums.OrderState;
 import utilities.enums.ResultMessage;
 import utilities.enums.RoomType;
 import utilities.enums.SearchCriteriaType;
@@ -101,7 +101,7 @@ public class HotelSearchController {
 		
 		//gy 注意，可不可以把和最开始显示界面无关的东西放到后面再赋值，比如酒店搜索进去先要选城市商圈，我就只把这两个先赋值了，
 		// 这样的话感觉会有点儿优化,就感觉这个initEveryBox就把可以把她放到创建订单的时候再初始
-		//TODO gcm 有的是筛选酒店里的
+		//TODO gcm 有的是筛选酒店里的，可以拉到后面然后把城市的监听放在这里
 		
 		initEveryBox();
 
@@ -118,7 +118,11 @@ public class HotelSearchController {
 		int maxGuestNum = 3;
 		//TODO gcm注意，用客户选择得房间类型，去下面拿到该酒店该房型得剩余房间数量
 		//TODO gy注意 我怎么得到用户选择的房型
-		//		int maxRoomNum = hotelBLController.getRemainRoomNum(roomType);
+//		TODO gcm 我可以给你一个string  这是从详情界面roomTable.getSelectionModel().getSelectedItem().getRoomType()
+//		从订单界面得到类型是下面监听的那个方法、
+//		但是我觉得你没有必要去找他的剩余房间数量来规定可以订几间，因为可能同时有人订一个房间，这个人订完了会减少，另一个人虽然显示有那么多其实已经没了，也是定不了的，所以我觉得这个可以定死了就
+		
+//				int maxRoomNum = hotelBLController.getRemainRoomNum(roomType);
 		int maxRoomNum = 3;
 		int maxLevel = 5;
 		int maxScore = 5;
@@ -181,12 +185,13 @@ public class HotelSearchController {
 					roomCountInOrder.getItems().add(i);
 				}
 			}
-			
-			previousPriceInOrder.setText("1");
-			remainNumInOrder.setText("2");
 
 			// TODO fjj roomType为当前订单所选的房间类型，需要计算订单加个返回，即需要给preOrder的roomType重新赋值
-			// TODO gy 房间类型改变后此房间的单价会改变，显示在previousPriceInOrder的值需修改，你好像还没有实现，你改了我再改
+			// TODO gcm 房间类型改变后此房间的单价会改变，显示在previousPriceInOrder的值需修改，你好像还没有实现，你改了我再改
+//			能不能像获取这个房间类型的剩余数量这样得到他的价格，然后set到下面那一个   还有就是看我上面说的那些，不用改变	roomCountInOrder的值，而且把他设为空一开始;
+//			这样我们就只用通过监听改变房间数量来计算订单的价格, 就是改变房型之后必须选一次数量,才能计算到价格,不然计算价格的地方有点多其实;
+			previousPriceInOrder.setText("1");
+			remainNumInOrder.setText(remainRoomNum+"");
 			final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(),
 					LocalTime.of(hourInOrder.getValue(), minuteInOrder.getValue()));
 
@@ -323,8 +328,7 @@ public class HotelSearchController {
 
 	// HotelDetail界面
 	/*
-	 *  TODO gy注意:确定hotelDetail界面不分开吗和订单浏览界面不分开吗？不分的话，这个类太大了
-	 *  可以专门用一个类把这两个类联系起来，就可以保存现场了
+	 * 
 	 * 
 	 */
 
@@ -347,6 +351,7 @@ public class HotelSearchController {
 	protected void openHotelDetail() {
 		//TODO fjj注意： 酒店订单列表 酒店评价列表
 		//TODO 冯俊杰回复高源：酒店订单列表是指此客户在此酒店的所有订单吧？  不是所有酒店订单列表吧？确认一下  and我在fxml里面没找到这个地方
+//		TODO fjj 是的就是我在这个酒店有过哪些订单,看大作业需求.fxml找那个地方?你把下面的我测试的代码要的东西覆盖掉就行了
 		try{
 
 			String hotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
@@ -646,7 +651,12 @@ public class HotelSearchController {
 		hotelVO = hotelBLController.getHotelInfo(selectedHotelID);
 		rooms = hotelBLController.getHotelRoomInfo(selectedHotelID);
 
-		guestVO = (GuestVO) userBLController.getSingle(selectedHotelID);
+		try {
+			guestVO = (GuestVO) userBLController.getSingle(selectedHotelID);
+		} catch (UserInexistException e) {
+			// 该情况是不会出现的，保证编译能通过
+			e.printStackTrace();
+		}
 		nameInOrder.setText(guestVO.name);
 		phoneInOrder.setText(guestVO.phone);
 

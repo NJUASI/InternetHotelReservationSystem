@@ -38,7 +38,7 @@
                   <GridPane prefHeight="47.0" prefWidth="134.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="60.0" text=" 间" GridPane.columnIndex="1" />
-                        <TextField fx:id="roomNum2" focusTraversable="false" prefHeight="31.0" prefWidth="74.0" />
+                        <ComboBox fx:id="roomNum2" focusTraversable="false" prefWidth="150.0" />
                      </children>
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="82.0" minWidth="10.0" prefWidth="62.0" />
@@ -67,7 +67,7 @@
                   <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="71.0" text="间" GridPane.columnIndex="1" />
-                        <TextField fx:id="roomNum" focusTraversable="false" prefHeight="30.0" prefWidth="61.0" />
+                        <ComboBox fx:id="roomNum" focusTraversable="false" prefWidth="150.0" />
                      </children>
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="66.0" minWidth="10.0" prefWidth="65.0" />

@@ -28,7 +28,7 @@ public class HotelWorkerDataService_DriverTest {
 			HotelWorkerPO hotelWorkerPO = driver.hotelWorkerDataService.getSingleHotelWorker("00001111");
 			
 			assertEquals("123456", a.decode(hotelWorkerPO.getPassword()));
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

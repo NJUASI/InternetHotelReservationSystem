@@ -22,7 +22,7 @@ public class WebMarekterDataServiceImpl_Test {
 
 			assertEquals(webMarketerPO.getWebMarketerID(), "000001");
 			assertEquals(webMarketerPO.getPassword(), "123456");
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -51,7 +51,7 @@ public class WebMarekterDataServiceImpl_Test {
 
 			assertEquals(webMarketerPO.getWebMarketerID(), "000001");
 			assertEquals(webMarketerPO.getPassword(), "123456");
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

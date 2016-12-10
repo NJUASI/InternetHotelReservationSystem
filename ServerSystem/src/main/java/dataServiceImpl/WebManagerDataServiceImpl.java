@@ -7,6 +7,7 @@ import java.util.List;
 import dataHelper.WebManagerDataHelper;
 import dataHelperImpl.stub.WebManagerDataHelperImpl_Stub;
 import dataService.webManagerDataService.WebManagerDataService;
+import exception.verificationException.UserInexistException;
 import po.WebManagerPO;
 import utilities.enums.ResultMessage;
 
@@ -37,11 +38,16 @@ public class WebManagerDataServiceImpl extends UnicastRemoteObject implements We
 	 * @updateTime 2016/12/1
 	 * @param webManagerID 网站管理人员ID
 	 * @return WebManagerPO webManagerInfo载体
+	 * @throws UserInexistException 
 	 */
-	public WebManagerPO getSingleWebManager(String webManagerID) throws RemoteException {
-		WebManagerPO webMangerPO = this.webManagerHelper.getSingle(webManagerID);
+	public WebManagerPO getSingleWebManager(String webManagerID) throws RemoteException, UserInexistException {
+		WebManagerPO webManagerPO = this.webManagerHelper.getSingle(webManagerID);
 		// 从数据库中得到webManagrPO，若不存在则为空
-		return webMangerPO;
+
+		if(webManagerPO == null){
+			throw new UserInexistException();
+		}
+		return webManagerPO;
 	}
 
 	/**

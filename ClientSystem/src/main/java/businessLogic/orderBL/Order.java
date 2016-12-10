@@ -12,6 +12,7 @@ import businessLogic.promotionBL.DiscountInSpan;
 import businessLogic.promotionBL.MockPromotion;
 import dataService.orderDataService.OrderDataService;
 import dataService.orderDataService.OrderDataService_Stub;
+import exception.verificationException.UserInexistException;
 import po.CheckInPO;
 import po.CheckOutPO;
 import po.GuestEvaluationPO;
@@ -70,7 +71,12 @@ public class Order {
 	 * @return 若客户创建此订单，需要付的款项
 	 */
 	public double getTempPrice(OrderVO orderVO) {
-		Iterator<Double> discountsInSpan = discountCalculator.getDiscountInSpan(new PreOrder(orderVO));
+		Iterator<Double> discountsInSpan = null;
+		try {
+			discountsInSpan = discountCalculator.getDiscountInSpan(new PreOrder(orderVO));
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
 		final double prePrice = orderVO.previousPrice;
 		double result = 0;
 		while(discountsInSpan.hasNext()) {

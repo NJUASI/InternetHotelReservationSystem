@@ -45,7 +45,7 @@ public class WebMarketerDataService_DriverTest {
 		try {
 			webMarketerPO = driver.webMarketerDataService.getSingleWebMarketer("000001");
 			assertEquals("123456", a.decode(webMarketerPO.getPassword()));
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

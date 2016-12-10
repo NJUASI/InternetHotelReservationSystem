@@ -12,6 +12,7 @@ import businessLogic.userBL.userService.Guest;
 import businessLogic.userBL.userService.service.GuestCreditService;
 import utilities.enums.ResultMessage;
 import utilities.enums.UserType;
+import exception.verificationException.UserInexistException;
 import vo.GuestVO;
 import vo.HotelVO;
 import vo.HotelWorkerVO;
@@ -33,7 +34,8 @@ public class UserTest {
 		User user = new User();
 
 		LocalDate birthday = LocalDate.of(1995, 1, 1);
-		GuestVO guestVO = (GuestVO) user.add(
+		GuestVO guestVO;
+		guestVO = (GuestVO) user.add(
 				new GuestVO(null, birthday, "school", "zhangsan", "xiaosan", "000000", "13523456789", 100),
 				UserType.GUEST);
 		assertEquals(guestVO.userID, "1234567890");
@@ -60,28 +62,32 @@ public class UserTest {
 		// test the method getSingle
 		User user = new User();
 
-		GuestVO guestVO = (GuestVO) user.getSingle("1234567890");
-		assertEquals(guestVO.birthday, LocalDate.of(1995, 1, 1));
-		assertEquals(guestVO.credit, 100, 0);
-		assertEquals(guestVO.enterprise, "school");
-		assertEquals(guestVO.name, "zhangsan");
-		assertEquals(guestVO.nickName, "xiaosan");
-		assertEquals(guestVO.password, "000000");
-		assertEquals(guestVO.phone, "13523456789");
-		assertEquals(guestVO.userID, "1234567890");
+		try {
+			GuestVO guestVO = (GuestVO) user.getSingle("1234567890");
+			assertEquals(guestVO.birthday, LocalDate.of(1995, 1, 1));
+			assertEquals(guestVO.credit, 100, 0);
+			assertEquals(guestVO.enterprise, "school");
+			assertEquals(guestVO.name, "zhangsan");
+			assertEquals(guestVO.nickName, "xiaosan");
+			assertEquals(guestVO.password, "000000");
+			assertEquals(guestVO.phone, "13523456789");
+			assertEquals(guestVO.userID, "1234567890");
 
-		HotelWorkerVO hotelWorkerVO = (HotelWorkerVO) user.getSingle("00001111");
-		assertEquals(hotelWorkerVO.hotelName, "school");
-		assertEquals(hotelWorkerVO.password, "123456");
-		assertEquals(hotelWorkerVO.userID, "00001111");
+			HotelWorkerVO hotelWorkerVO = (HotelWorkerVO) user.getSingle("00001111");
+			assertEquals(hotelWorkerVO.hotelName, "school");
+			assertEquals(hotelWorkerVO.password, "123456");
+			assertEquals(hotelWorkerVO.userID, "00001111");
 
-		WebMarketerVO webMarketerVO = (WebMarketerVO) user.getSingle("000001");
-		assertEquals(webMarketerVO.password, "123456");
-		assertEquals(webMarketerVO.userID, "000001");
+			WebMarketerVO webMarketerVO = (WebMarketerVO) user.getSingle("000001");
+			assertEquals(webMarketerVO.password, "123456");
+			assertEquals(webMarketerVO.userID, "000001");
 
-		WebManagerVO webManagerVO = (WebManagerVO) user.getSingle("0001");
-		assertEquals(webManagerVO.password, "123456");
-		assertEquals(webManagerVO.userID, "0001");
+			WebManagerVO webManagerVO = (WebManagerVO) user.getSingle("0001");
+			assertEquals(webManagerVO.password, "123456");
+			assertEquals(webManagerVO.userID, "0001");
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -101,7 +107,11 @@ public class UserTest {
 		// test the method modifyCredit
 		GuestCreditService creditService = new Guest();
 
-		assertEquals(creditService.modifyCredit("1234567890", 100), ResultMessage.SUCCESS);
+		try {
+			assertEquals(creditService.modifyCredit("1234567890", 100), ResultMessage.SUCCESS);
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Test
@@ -126,10 +136,14 @@ public class UserTest {
 		// test the method getLoginInfo
 		User user = new User();
 
-		assertEquals(user.getLogInInfo("1234567890", UserType.GUEST), "000000");
-		assertEquals(user.getLogInInfo("00001111", UserType.HOTEL_WORKER), "123456");
-		assertEquals(user.getLogInInfo("000001", UserType.WEB_MARKETER), "123456");
-		assertEquals(user.getLogInInfo("0001", UserType.WEB_MANAGER), "123456");
+		try {
+			assertEquals(user.getLogInInfo("1234567890", UserType.GUEST), "000000");
+			assertEquals(user.getLogInInfo("00001111", UserType.HOTEL_WORKER), "123456");
+			assertEquals(user.getLogInInfo("000001", UserType.WEB_MARKETER), "123456");
+			assertEquals(user.getLogInInfo("0001", UserType.WEB_MANAGER), "123456");
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
 
 	}
 }
