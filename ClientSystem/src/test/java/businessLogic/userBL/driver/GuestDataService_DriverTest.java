@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import dataService.guestDataService.GuestDataService_Stub;
 import po.GuestPO;
+import utilities.Ciphertext;
 
 public class GuestDataService_DriverTest {
 
@@ -16,6 +17,7 @@ public class GuestDataService_DriverTest {
 	public void test1() {
 		//test interface getSingle
 		GuestDataService_Stub stub = null;
+		Ciphertext a= new Ciphertext();
 		try {
 			stub = new GuestDataService_Stub();
 		} catch (RemoteException e1) {
@@ -27,10 +29,10 @@ public class GuestDataService_DriverTest {
 			
 			assertEquals(LocalDate.of(1995, 1, 1), guestPO.getBirthday());
 			assertEquals("school", guestPO.getEnterprise());
-			assertEquals("zhangsan", guestPO.getName());
+			assertEquals("zhangsan",a.decode(guestPO.getName()));
 			assertEquals("xiaosan", guestPO.getNickName());
-			assertEquals("000000", guestPO.getPassword());
-			assertEquals("13523456789", guestPO.getPhone());
+			assertEquals("000000", a.decode(guestPO.getPassword()));
+			assertEquals("13523456789", a.decode(guestPO.getPhone()));
 			assertEquals(100, guestPO.getCredit(), 0);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -42,6 +44,7 @@ public class GuestDataService_DriverTest {
 	public void test2() {
 		//test interface add
 		GuestDataService_Stub stub = null;
+		Ciphertext s = new Ciphertext();
 		try {
 			stub = new GuestDataService_Stub();
 		} catch (RemoteException e1) {
@@ -56,10 +59,10 @@ public class GuestDataService_DriverTest {
 			
 			assertEquals(LocalDate.of(1995, 1, 1), guestPO.getBirthday());
 			assertEquals("school", guestPO.getEnterprise());
-			assertEquals("zhangsan", guestPO.getName());
+			assertEquals("zhangsan", s.decode(guestPO.getName()));
 			assertEquals("xiaosan", guestPO.getNickName());
-			assertEquals("000000", guestPO.getPassword());
-			assertEquals("13523456789", guestPO.getPhone());
+			assertEquals("000000", s.decode(guestPO.getPassword()));
+			assertEquals("13523456789", s.decode(guestPO.getPhone()));
 			assertEquals(100, guestPO.getCredit(), 0);
 			
 		} catch (RemoteException e1) {

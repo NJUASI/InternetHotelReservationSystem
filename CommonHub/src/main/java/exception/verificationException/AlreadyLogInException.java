@@ -10,7 +10,7 @@ public class AlreadyLogInException extends Exception {
 
 	@Override
 	public void printStackTrace() {
-		System.out.println("该用户已登录，不要重复登录");
+		System.out.println("该用户已登录，请勿重复登录");
 	}
 
 }
