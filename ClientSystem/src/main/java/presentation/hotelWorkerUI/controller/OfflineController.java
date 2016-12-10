@@ -43,9 +43,8 @@ public class OfflineController {
 	@FXML
 	protected void checkIn(){
 		
-		//TODO 将roomType改为roomName，roomNum改为comboBox，我把这种房间的剩余房间数量加载进来
 //		TODO fjj 不知道@谁
-//		TODO gcm 这个时间可能已经没有name了吧，房间类型没变，num已经变为box
+//		TODO gcm roomType显示和数据库存的不一样
 		hotelBLController.checkInOffline(hotelID, RoomType.valueOf(roomType.getValue()), Integer.valueOf(roomNum.getValue()));
 		roomType.setValue("");
 		roomNum.setValue(null);

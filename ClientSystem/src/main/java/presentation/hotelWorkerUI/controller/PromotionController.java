@@ -134,13 +134,16 @@ public class PromotionController {
 	@FXML
 	protected void savePromotion() {
 		try {
-//			TODO gcm 保存双十一
-//			preName 改之前的名字
-//			改之后的信息
-//			nameText.getText();
-			//			discountText.getText();
-			//			startDatePicker.getValue();
-			//			endDatePicker.getValue();
+			
+			SpecialSpanPromotionVO vo = new SpecialSpanPromotionVO();
+			vo.promotionName = nameText.getText();
+			vo.startDate = startDatePicker.getValue();
+			vo.discount = Double.valueOf(discountText.getText());
+			vo.endDate = endDatePicker.getValue();
+			vo.userID = hotelID;
+			// 调用promotionBLController的更新特定期间折扣的方法
+			promotionBLController.updateSpecialSpanPromotions(vo);
+
 			System.out.println("success");
 			modifyPane.setVisible(false);
 			addBt.setVisible(true);
@@ -200,8 +203,10 @@ public class PromotionController {
 	 */
 	@FXML
 	protected void deleteOne() {
-		//TODO gcm 通过name删除
-		//		table.getSelectionModel().getSelectedItem().getName();
+		//TODO gcm 到底哪些数据库存的和界面的显示不一样。。。 
+		String promotionType = table.getSelectionModel().getSelectedItem().getName(); 
+		promotionBLController.deleteSpecialSpanPromotion(hotelID, promotionType);
+		
 		initialize();	
 	}
 	
@@ -265,9 +270,12 @@ public class PromotionController {
 		 */
 	@FXML
 	protected void save(){
-		//TODO gcm 实现一下
-//		name.getText();String 需转换
-//		discountText1.getText();
+		
+		HotelFixedPromotionVO vo = new HotelFixedPromotionVO();
+		vo.hotelID = hotelID;
+		vo.promotionType = PromotionType.getEnum(name.getText());
+		
+		promotionBLController.updateHotelFixedPromotion(vo);
 	}
 	
 	

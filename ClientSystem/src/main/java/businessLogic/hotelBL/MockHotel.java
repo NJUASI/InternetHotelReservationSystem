@@ -43,7 +43,7 @@ public class MockHotel extends Hotel {
 		return ResultMessage.SUCCESS;
 	}
 	
-	public ResultMessage updateRemainRoomNum(String hotelID, RoomType roomType, int roomNum) {
+	public ResultMessage updateRemainRoomNumForUndoOrder(String hotelID, RoomType roomType, int roomNum) {
 		return ResultMessage.SUCCESS;
 	}
 }
