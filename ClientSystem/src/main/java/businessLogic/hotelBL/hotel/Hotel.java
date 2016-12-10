@@ -193,10 +193,11 @@ public class Hotel implements HotelInfoOperation{
 	 * int
 	 * @exception:
 	 * @author: Harvey Gong
+	 * @param hotelID 
 	 * @time:2016年12月4日 下午7:31:07
 	 */
-	public int getRemainNumOfSpecificType(RoomType roomType){
-		return rooms.getRemainNumOfSpecificType(roomType);
+	public int getRemainNumOfSpecificType(String hotelID, RoomType roomType){
+		return rooms.getRemainNumOfSpecificType(hotelID,roomType);
 	}
 
 	/**
@@ -253,14 +254,17 @@ public class Hotel implements HotelInfoOperation{
 	 * @param roomNum 此订单的房间数
 	 * @return ResultMessage 是否撤销成功
 	 * @author: charles
-	 * @lastChangedBy: charles
+	 * @lastChangedBy: Harvey
 	 * @time:2016/12/10
 	 * 
-	 * TODO 龚尘淼 具体实现
 	 */
 	@Override
-	public ResultMessage updateRemainRoomNum(String hotelID, RoomType roomType, int roomNum) {
-		return null;
+	public ResultMessage updateRemainRoomNumForUndoOrder(String hotelID, RoomType roomType, int roomNum) {
+		return rooms.updateRemainRoomNumForUndoOrder(hotelID,roomType,roomNum);
+	}
+
+	public double getOriginPrice(String hotelID, RoomType roomType) {
+		return rooms.getOriginPrice(hotelID,roomType);
 	}
 
 }

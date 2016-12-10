@@ -139,7 +139,7 @@ public class GuestOrder implements GuestOrderBLService {
 		 * new the mock one to test
 		 */
 		hotelInterface = new MockHotel();
-		msg2 = hotelInterface.updateRemainRoomNum(thisOrder.orderGeneralVO.hotelID, thisOrder.roomType, thisOrder.roomNumCount);
+		msg2 = hotelInterface.updateRemainRoomNumForUndoOrder(thisOrder.orderGeneralVO.hotelID, thisOrder.roomType, thisOrder.roomNumCount);
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
 			return ResultMessage.SUCCESS;
 		}else {
