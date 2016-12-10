@@ -26,7 +26,7 @@ public class MemberController implements MemberBLService {
 	 */
 	private MemberController() {
 		//new the mock object
-		member = new MockMember();
+		member = new Member();
 	}
 	
 	/**

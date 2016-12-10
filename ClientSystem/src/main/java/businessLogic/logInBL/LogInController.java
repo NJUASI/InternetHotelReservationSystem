@@ -1,6 +1,11 @@
 package businessLogic.logInBL;
 
 import businessLogicService.logInBLService.LogInBLService;
+import exception.inputException.InvalidInputException;
+import exception.inputException.InvalidLengthInputException;
+import exception.inputException.PasswordInputException;
+import exception.inputException.SpecialCharacterException;
+import exception.verificationException.WrongPasswordException;
 import utilities.UserType;
 import vo.GuestVO;
 import vo.UserVO;
@@ -25,7 +30,7 @@ public final class LogInController implements LogInBLService {
 	 */
 	private LogInController() {
 		// new the mock object
-		logIn = new MockLogIn();
+		logIn = new LogIn();
 	}
 	
 	/**
@@ -46,8 +51,11 @@ public final class LogInController implements LogInBLService {
 	 * @param guestVO
 	 *           从注册界面层传下来的guestVO
 	 * @return 客户是否成功注册
+	 * @throws InvalidLengthInputException 
+	 * @throws PasswordInputException 
+	 * @throws InvalidInputException 
 	 */
-	public GuestVO guestSignUp(UserVO guestVO) {
+	public GuestVO guestSignUp(UserVO guestVO) throws InvalidInputException, PasswordInputException, InvalidLengthInputException {
 		return logIn.guestSignUp(guestVO);
 	}
 
@@ -60,9 +68,11 @@ public final class LogInController implements LogInBLService {
 	 * @param password
 	 *           从登录界面层传下来的password
 	 * @return 用户是否成功登录
+	 * @throws InvalidLengthInputException 
+	 * @throws SpecialCharacterException 
 	 */
 	@Override
-	public UserType logIn(String userID, String password) {
+	public UserType logIn(String userID, String password) throws WrongPasswordException, SpecialCharacterException, InvalidLengthInputException{
 		return logIn.logIn(userID, password);
 	}
 

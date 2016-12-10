@@ -6,6 +6,11 @@ import com.sun.javafx.robot.impl.FXRobotHelper;
 
 import businessLogic.logInBL.LogInController;
 import businessLogicService.logInBLService.LogInBLService;
+import exception.inputException.InvalidInputException;
+import exception.inputException.InvalidLengthInputException;
+import exception.inputException.PasswordInputException;
+import exception.inputException.SpecialCharacterException;
+import exception.verificationException.WrongPasswordException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -110,24 +115,28 @@ public class LogInViewController {
 	 */
 	@FXML
 	protected void logIn() {
-		try {
-			UserType userType = logInBLController.logIn(ID.getText(), password.getText());
-//			TODO djy  這樣改行不行，你自己改
-			// if(userType==null){
-			// new PopUp("请检查你的账号或密码", "登录失败");
-			// // TODO 细化啊你倒是，关于失败原因这里暂时没有，后面细化，此处需要界面处理if之后不跳转界面
-			// }
-			IDReserve.getInstance().setUserID(ID.getText());
-			Parent root = factory.createRoot(userType);
-			ObservableList<Stage> stage = FXRobotHelper.getStages();
+		
+			UserType userType = null;;
+				try {
+					userType = logInBLController.logIn(ID.getText(), password.getText());
+					
+					IDReserve.getInstance().setUserID(ID.getText());
+					Parent root = factory.createRoot(userType);
+					ObservableList<Stage> stage = FXRobotHelper.getStages();
 
-			Scene scene = new Scene(root);
-			stage.get(0).setScene(scene);
-
-		} catch (Exception e) {
-			new PopUp("请检查你的账号或密码", "登录失败");
-		}
-
+					Scene scene = new Scene(root);
+					stage.get(0).setScene(scene);
+				} catch (SpecialCharacterException e) {
+					e.printStackTrace();
+					new PopUp("账号中含有不合法符号", "登录失败");
+				} catch (WrongPasswordException e) {
+					e.printStackTrace();
+					new PopUp("请检查你的账号或密码", "登录失败");
+				} catch (InvalidLengthInputException e) {
+					e.printStackTrace();
+					new PopUp("账号长度无效", "登录失败");
+				}
+				
 	}
 
 	/**
@@ -141,18 +150,24 @@ public class LogInViewController {
 		
 		GuestVO guestVO = null;
 		if(password2.getText().equals(password3.getText())){
-		GuestVO userVO = new GuestVO("",LocalDate.of(1,1,1),"",name.getText(), nickName.getText(),password2.getText()
-				,phone.getText(),0);
-		guestVO = logInBLController.guestSignUp(userVO);
-		// TODO gy 此处返回了界面需要的自动递增的ID，后续操作由界面完成
-			
+			GuestVO userVO = new GuestVO("",LocalDate.of(1,1,1),"",name.getText(), nickName.getText(),password2.getText()
+					,phone.getText(),0);
+			try {
+				guestVO = logInBLController.guestSignUp(userVO);
+				new PopUp("你的账号是"+guestVO.userID, "注册成功");
+			} catch (InvalidInputException e) {
+				e.printStackTrace();
+				new PopUp("无效输入", "注册失败");
+			} catch(PasswordInputException e){
+				e.printStackTrace();
+				new PopUp("密码必须是数字与字母的结合", "注册失败");
+			}catch (InvalidLengthInputException e){
+				e.printStackTrace();
+				new PopUp("输入的长度无效", "注册失败");
+			}
 		}
-		
-		if(guestVO==null){
+		else{
 			new PopUp("密码输入不一致", "注册失败");
-//			System.out.println("密码不一致");;
-		}else{
-			new PopUp("你的账号是"+guestVO.userID, "注册成功");
 		}
 	}
 	/**

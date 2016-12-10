@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import exception.inputException.InvalidInputException;
 import exception.inputException.InvalidLengthInputException;
 import exception.inputException.PasswordInputException;
+import exception.inputException.SpecialCharacterException;
 
 /**
  * 
@@ -26,11 +27,18 @@ public class Detector {
 	 *            id的长度
 	 * @return boolean 是否符合要求规范
 	 */
-	public  boolean idDetector(String express, int length){
+	public  boolean idDetector(String express, int length) throws SpecialCharacterException,InvalidLengthInputException{
+
+		if(express.length()!=length){
+			throw new InvalidLengthInputException(); //得到与指定长度匹配的数字
+		}
 		
 		expression = "[0-9]{"+String.valueOf(length)+"}";
 		
-		return this.getResultOfDetector(express); //得到与指定长度匹配的数字
+		if(!this.getResultOfDetector(express)){
+			throw new SpecialCharacterException();
+		} 
+		return true;
 	}
 	
 	/**
