@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import dataService.hotelWorkerDataService.HotelWorkerDataService_Stub;
 import po.HotelWorkerPO;
+import utilities.Ciphertext;
 
 public class HotelWorkerDataService_DriverTest {
 
@@ -15,6 +16,7 @@ public class HotelWorkerDataService_DriverTest {
 	public void test1() {
 		//test interface getSingle
 		HotelWorkerDataService_Stub stub = null;
+		Ciphertext a =new Ciphertext();
 		try {
 			stub = new HotelWorkerDataService_Stub();
 		} catch (RemoteException e1) {
@@ -25,7 +27,7 @@ public class HotelWorkerDataService_DriverTest {
 		try {
 			HotelWorkerPO hotelWorkerPO = driver.hotelWorkerDataService.getSingleHotelWorker("00001111");
 			
-			assertEquals("123456", hotelWorkerPO.getPassword());
+			assertEquals("123456", a.decode(hotelWorkerPO.getPassword()));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -37,6 +39,7 @@ public class HotelWorkerDataService_DriverTest {
 	public void test2() {
 		//test interface add
 		HotelWorkerDataService_Stub stub = null;
+		Ciphertext a = new Ciphertext();
 		try {
 			stub = new HotelWorkerDataService_Stub();
 		} catch (RemoteException e1) {
@@ -47,7 +50,7 @@ public class HotelWorkerDataService_DriverTest {
 		
 		try {	
 			hotelWorkerPO = driver.hotelWorkerDataService.add(new HotelWorkerPO("00001111", "123456"));
-			assertEquals("123456", hotelWorkerPO.getPassword());
+			assertEquals("123456", a.decode(hotelWorkerPO.getPassword()));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

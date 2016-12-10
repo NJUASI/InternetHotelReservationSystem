@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import dataService.webManagerDataService.WebManagerDataService_Stub;
 import po.WebManagerPO;
+import utilities.Ciphertext;
 
 public class WebManagerDataService_DriveTest {
 
@@ -33,6 +34,7 @@ public class WebManagerDataService_DriveTest {
 	public void test2() {
 		//test interface getSingle
 		WebManagerDataService_Stub stub = null;
+		Ciphertext a = new Ciphertext();
 		try {
 			stub = new WebManagerDataService_Stub();
 		} catch (RemoteException e1) {
@@ -42,7 +44,7 @@ public class WebManagerDataService_DriveTest {
 		WebManagerPO webManagerPO;
 		try {
 			webManagerPO = driver.webManagerDataService.getSingleWebManager("0001");
-			assertEquals("123456", webManagerPO.getPassword());
+			assertEquals("123456",a.decode( webManagerPO.getPassword()));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

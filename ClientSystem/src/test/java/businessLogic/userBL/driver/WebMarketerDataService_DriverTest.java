@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import dataService.webMarketerDataService.WebMarketerDataService_Stub;
 import po.WebMarketerPO;
+import utilities.Ciphertext;
 
 public class WebMarketerDataService_DriverTest {
 
@@ -33,6 +34,7 @@ public class WebMarketerDataService_DriverTest {
 	public void test2() {
 		//test interface getSingle
 		WebMarketerDataService_Stub stub = null;
+		Ciphertext a = new Ciphertext();
 		try {
 			stub = new WebMarketerDataService_Stub();
 		} catch (RemoteException e1) {
@@ -42,7 +44,7 @@ public class WebMarketerDataService_DriverTest {
 		WebMarketerPO webMarketerPO;
 		try {
 			webMarketerPO = driver.webMarketerDataService.getSingleWebMarketer("000001");
-			assertEquals("123456", webMarketerPO.getPassword());
+			assertEquals("123456", a.decode(webMarketerPO.getPassword()));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
