@@ -67,7 +67,9 @@ public class User {
 		if(isExistence(user)){
 			return user.modify(userVO);
 		}
-		return ResultMessage.USER_UNEXISTENCE;
+		
+		//TODO 董金玉：USER_UNEXISTENCE
+		return ResultMessage.FAIL;
 	}
 
 	/**

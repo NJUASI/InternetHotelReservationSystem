@@ -45,7 +45,7 @@ public class CreditDataHelperImpl_Stub implements CreditDataHelper {
 	 */
 	@Override
 	public ResultMessage addCredit(CreditPO creditPO) {
-		return ResultMessage.CREDIT_CHARGE_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 
 	/**

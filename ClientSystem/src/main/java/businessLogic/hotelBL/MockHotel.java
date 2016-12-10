@@ -27,7 +27,7 @@ public class MockHotel extends Hotel {
 	}
 
 	public ResultMessage scoreUpdate(double score) {
-		return ResultMessage.HOTEL_SCORE_UPDATE_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 	
 	public Address getHotelAddress(String hotelID){
@@ -35,6 +35,6 @@ public class MockHotel extends Hotel {
 	}
 	
 	public ResultMessage checkIn(String hotelID, String roomName, int roomNum) {
-		return ResultMessage.CHECK_IN_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 }

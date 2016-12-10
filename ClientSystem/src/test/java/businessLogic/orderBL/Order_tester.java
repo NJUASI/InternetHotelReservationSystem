@@ -39,7 +39,7 @@ public class Order_tester {
 		final OrderGeneralVO createOrderGeneralVO = new OrderGeneralVO("1234567890", "12345678", "thisHotel", 
 				"nanjing", expectExecuteTime, expectLeaveTime, "zhangsan", "15012345678");
 		final OrderVO createOrderVO = new OrderVO(createOrderGeneralVO, 250, roomType, 1, 2, "no");
-		assertEquals(ResultMessage.ORDER_CREATE_SUCCESS, controller.createOrder(createOrderVO));
+		assertEquals(ResultMessage.SUCCESS, controller.createOrder(createOrderVO));
 				
 	}
 	
@@ -54,7 +54,7 @@ public class Order_tester {
 	@Test
 	public void test2() {
 		final OrderBLController controller = OrderBLController.getInstance();
-		assertEquals(ResultMessage.UPDATE_EVALUATION_SUCCESS, controller.addEvaluation(new GuestEvaluationVO("1234567890", 4.5, "good")));
+		assertEquals(ResultMessage.SUCCESS, controller.addEvaluation(new GuestEvaluationVO("1234567890", 4.5, "good")));
 				
 	}
 }

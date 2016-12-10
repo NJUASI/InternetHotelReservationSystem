@@ -35,7 +35,7 @@ public class OrderBLService_DriverTest {
 	public void testUndoAbnormalOrder() {
 		final OrderBLService_Stub stub = new OrderBLService_Stub();
 		final OrderBLService_Driver driver = new OrderBLService_Driver(stub);
-		assertEquals(ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS, driver.orderBLService.undoAbnormalOrder("123456789012", 0.5));
+		assertEquals(ResultMessage.SUCCESS, driver.orderBLService.undoAbnormalOrder("123456789012", 0.5));
 	}
 	
 	/**

@@ -64,7 +64,7 @@ public class OrderDataHelperImpl_Stub implements OrderDataHelper {
 	 * @return ResultMessage 是否成功修改orderInfo
 	 */
 	public ResultMessage setEvaluation(final String orderID, final double score, final String comment) {
-		return ResultMessage.UPDATE_EVALUATION_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class OrderDataHelperImpl_Stub implements OrderDataHelper {
 	 */
 	public ResultMessage setCheckIn(final String orderID, final String roomNumber, 
 			final LocalDateTime checkInTime, LocalDateTime expectLeaveTime) {
-		return ResultMessage.CHECK_IN_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 	
 	/**
@@ -90,7 +90,7 @@ public class OrderDataHelperImpl_Stub implements OrderDataHelper {
 	 * @return ResultMessage 是否成功修改orderInfo
 	 */
 	public ResultMessage setCheckOut(final String orderID, final LocalDateTime checkOutTime) {
-		return ResultMessage.CHECK_OUT_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 
 	/**

@@ -56,7 +56,7 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 */
 	public ResultMessage createOrder(final OrderPO order) throws RemoteException {
 		System.out.println("OrderDataService---------createOrder--------------Success!");
-		return ResultMessage.ORDER_CREATE_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 
 
@@ -70,7 +70,7 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 */
 	public ResultMessage executeOrder(final String orderID) throws RemoteException {
 		System.out.println("OrderDataService---------executeOrder--------------Success!");
-		return ResultMessage.ORDER_EXECUTE_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 
 
@@ -84,7 +84,7 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 */
 	public ResultMessage undoAbnormalOrder(final String orderID, final double percent) throws RemoteException {
 		System.out.println("OrderDataService---------undoAbnormal--------------Success!");
-		return ResultMessage.ABNORMAL_ORDER_UNDO_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 
 	
@@ -98,7 +98,7 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 */
 	public ResultMessage undoNormalOrder(final String orderID) throws RemoteException {
 		System.out.println("OrderDataService---------undoNormal--------------Success!");
-		return ResultMessage.NORMAL_ORDER_UNDO_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 	
 	
@@ -347,7 +347,7 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 */
 	public ResultMessage updateCheckIn(CheckInPO checkInPO) throws RemoteException {
 		System.out.println("OrderDataService---------checkIn--------------Success!");
-		return ResultMessage.CHECK_IN_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 
 	/**
@@ -360,7 +360,7 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 */
 	public ResultMessage updateCheckOut (CheckOutPO checkOutPO) throws RemoteException {
 		System.out.println("OrderDataService---------checkOut--------------Success!");
-		return ResultMessage.CHECK_OUT_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 	
 	
@@ -374,7 +374,7 @@ public class OrderDataService_Stub extends UnicastRemoteObject implements OrderD
 	 */
 	public ResultMessage addEvaluation(GuestEvaluationPO guestEvaluationPO) throws RemoteException {
 		System.out.println("OrderDataService---------evaluate--------------Success!");
-		return ResultMessage.UPDATE_EVALUATION_SUCCESS;
+		return ResultMessage.SUCCESS;
 	}
 	
 	

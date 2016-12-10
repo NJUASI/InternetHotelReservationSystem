@@ -279,7 +279,7 @@ public class OrderCheckController {
 
 		GuestEvaluationVO evaluationVO = new GuestEvaluationVO(orderID, score, comment);
 		final ResultMessage result = orderBLController.addEvaluation(evaluationVO);
-		if (result == ResultMessage.UPDATE_EVALUATION_SUCCESS) {
+		if (result == ResultMessage.SUCCESS) {
 			//TODO 高源——————状态栏显示已评价成功
 
 		}else {
