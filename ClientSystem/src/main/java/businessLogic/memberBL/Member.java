@@ -6,8 +6,10 @@ import businessLogic.userBL.userService.Guest;
 import businessLogicService.memberBLService.MemberBLService;
 import dataService.guestDataService.GuestDataService;
 import dataService.guestDataService.GuestDataService_Stub;
+import exception.inputException.InvalidInputException;
 import exception.verificationException.UserInexistException;
 import po.MemberPO;
+import utilities.Detector;
 import utilities.MemberType;
 import utilities.ResultMessage;
 import vo.GuestVO;
@@ -15,8 +17,8 @@ import vo.MemberVO;
 
 /**
  * 
- * @author 董金玉
- * lastChangedBy 董金玉
+ * @author Byron Dong
+ * lastChangedBy Byron Dong
  * updateTime 2016/11/27
  *
  */
@@ -28,8 +30,8 @@ public class Member implements MemberBLService{
 	private MemberInfo member;
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * 构造函数，初始化成员变量
 	 */
@@ -44,8 +46,8 @@ public class Member implements MemberBLService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param memberVO 从客户界面层传下来的MemberInfo载体
 	 * @return 客户是否成功添加会员信息
@@ -55,8 +57,8 @@ public class Member implements MemberBLService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param memberVO 从客户界面层传下来的MemberInfo载体
 	 * @return 客户是否成功修改会员信息
@@ -66,8 +68,8 @@ public class Member implements MemberBLService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param userID，memberType 从客户界面层传下来的用户ID和需要获取指定会员类型信息
 	 * @return memberVO MemberInfo载体
@@ -87,8 +89,8 @@ public class Member implements MemberBLService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param userID，memberType 从客户界面层传下来的用户ID和需要获取指定会员类型信息
 	 * @return boolean 该用户是否为指定会员类型
@@ -118,8 +120,8 @@ public class Member implements MemberBLService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param userID 从客户界面层传下来的用户ID
 	 * @return MemberType 指定用户的会员类型
@@ -141,8 +143,8 @@ public class Member implements MemberBLService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param memberVO 来自本类的member信息载体 
 	 * @return ResultMessage 添加会员信息是否成功
@@ -169,4 +171,8 @@ public class Member implements MemberBLService{
 		}
 		return true;
 	}
+	
+//	private boolean infoDetector(MemberVO memberVO) {
+//		if(memberVO.birthday==null&&)
+//	}
 }
