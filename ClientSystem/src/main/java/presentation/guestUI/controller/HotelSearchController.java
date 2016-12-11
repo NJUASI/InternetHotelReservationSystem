@@ -285,10 +285,10 @@ public class HotelSearchController {
 		while(hotels.hasNext()){
 			HotelVO temp = hotels.next();
 			dataList.add(new HotelTable(temp.hotelID, temp.hotelName,temp.address,
-					temp.city,temp.circle,temp.orderState.toString(),
+					temp.city,temp.circle,temp.orderState.getChineseOrderState(),
 					Double.toString(temp.minPrice),temp.level,Double.toString(temp.score)));
 		}
-
+		
 		ObservableList<HotelTable> data = FXCollections.observableArrayList();
 		for (int i = 0; i < dataList.size(); i++) {
 			data.add(dataList.get(i));
@@ -479,7 +479,7 @@ public class HotelSearchController {
 		checkOutTimeColumn.setCellValueFactory(cellData -> cellData.getValue().checkOutTime);
 		priceColumn1.setCellValueFactory(cellData -> cellData.getValue().price);
 		stateColumn.setCellValueFactory(cellData -> cellData.getValue().state);
-
+		
 		orderTable.setItems(data);
 	}
 	/**

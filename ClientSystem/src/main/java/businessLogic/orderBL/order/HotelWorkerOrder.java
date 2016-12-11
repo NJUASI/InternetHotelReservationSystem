@@ -65,9 +65,13 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 		
 		commonOrder = new CommonOrder();
 		
-		hotelInterface = new Hotel();
 		creditBLService = CreditController.getInstance();
 		userBLService = UserController.getInstance();
+
+		/*
+		 * hotel因为需要hotelID作为参数初始化，故不在此初始化，用到的时候再初始化
+		 */
+//		hotelInterface = new Hotel();
 	}
 	
 	/**
@@ -137,11 +141,8 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 		}
 		
 		//更新酒店剩余房间信息
-//		/*
-//		 * new the mock one to test
-//		 */
-//		hotelInterface = new MockHotel();
 		OrderVO thisOrder = commonOrder.getOrderDetail(checkInVO.orderID);
+		hotelInterface = new Hotel(thisOrder.orderGeneralVO.hotelID);
 		msg2 = hotelInterface.checkIn(thisOrder.orderGeneralVO.orderID, thisOrder.roomType, thisOrder.roomNumCount);
 		
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
@@ -170,11 +171,8 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 		}
 		
 		//更新酒店剩余房间信息
-//		/*
-//		 * new the mock one to test
-//		 */
-//		hotelInterface = new MockHotel();
 		OrderVO thisOrder = commonOrder.getOrderDetail(checkOutVO.orderID);
+		hotelInterface = new Hotel(thisOrder.orderGeneralVO.hotelID);
 		msg2 = hotelInterface.checkOut(thisOrder.orderGeneralVO.orderID, thisOrder.roomType, thisOrder.roomNumCount);
 		
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {

@@ -66,7 +66,11 @@ public class GuestOrder implements GuestOrderBLService {
 		 * TODO 龚尘淼：promotion没有无参数的初始化方法，不知道自己改初始化啥
 		 */
 		discountCalculator = new MockPromotion();
-		hotelInterface = new Hotel();
+
+		/*
+		 * hotel因为需要hotelID作为参数初始化，故不在此初始化，用到的时候再初始化
+		 */
+//		hotelInterface = new Hotel();
 	}
 	
 	/**
@@ -139,11 +143,9 @@ public class GuestOrder implements GuestOrderBLService {
 		}
 		
 		//更新此订单撤销后的酒店剩余房间数
-//		/*
-//		 * new the mock one to test
-//		 */
-//		hotelInterface = new MockHotel();
+		hotelInterface = new Hotel(thisOrder.orderGeneralVO.hotelID);
 		msg2 = hotelInterface.updateRemainRoomNumForUndoOrder(thisOrder.orderGeneralVO.hotelID, thisOrder.roomType, thisOrder.roomNumCount);
+		
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
 			return ResultMessage.SUCCESS;
 		}else {
@@ -165,10 +167,7 @@ public class GuestOrder implements GuestOrderBLService {
 		try {
 			msg1 = orderDataService.addEvaluation(new GuestEvaluationPO(evaluationVO));
 			
-//			/*
-//			 * new the mock one to test
-//			 */
-//			hotelInterface = new MockHotel();
+			hotelInterface = new Hotel(commonOrder.getOrderDetail(evaluationVO.orderID).orderGeneralVO.hotelID);
 			msg2 = hotelInterface.scoreUpdate(evaluationVO.score);
 		} catch (RemoteException e) {
 			e.printStackTrace();
