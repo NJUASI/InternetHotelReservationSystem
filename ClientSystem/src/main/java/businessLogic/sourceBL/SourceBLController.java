@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 import businessLogicService.sourceBLService.SourceBLService;
 import dataService.sourceDataService.SourceDataService;
-import dataService.sourceDataService.SourceDataService_Stub;
 import rmi.ClientRemoteHelper;
 
 public class SourceBLController implements SourceBLService {
@@ -16,11 +15,6 @@ public class SourceBLController implements SourceBLService {
 	
 	private SourceBLController() {
 		sourceDataService = ClientRemoteHelper.getInstance().getSourceDataService();
-//		try {
-//			sourceDataService = new SourceDataService_Stub();
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//		}
 	}
 	
 	public static SourceBLController getInstance(){
@@ -30,7 +24,7 @@ public class SourceBLController implements SourceBLService {
 	@Override
 	public Iterator<String> getCities() {
 		try {
-			return sourceDataService.getCities();
+			return sourceDataService.getCities().iterator();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -40,7 +34,7 @@ public class SourceBLController implements SourceBLService {
 	@Override
 	public Iterator<String> getLevels() {
 		try {
-			return sourceDataService.getLevels();
+			return sourceDataService.getLevels().iterator();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -50,7 +44,7 @@ public class SourceBLController implements SourceBLService {
 	@Override
 	public Iterator<String> getRoomTypes() {
 		try {
-			return sourceDataService.getRoomTypes();
+			return sourceDataService.getRoomTypes().iterator();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -60,7 +54,7 @@ public class SourceBLController implements SourceBLService {
 	@Override
 	public Iterator<String> getCircles(String city) {
 		try {
-			return sourceDataService.getCircles(city);
+			return sourceDataService.getCircles(city).iterator();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;

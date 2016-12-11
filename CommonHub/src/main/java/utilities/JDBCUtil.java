@@ -34,17 +34,6 @@ public class JDBCUtil {
 		}
 	}
 
-	public static Connection getGongConnection(){
-		try {
-			Class.forName(pros.getProperty("gongDriver"));
-			return DriverManager.getConnection(pros.getProperty("gongURL"),
-					pros.getProperty("gongUser"),pros.getProperty("gongPassword"));
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
 	public static void close(ResultSet rs, PreparedStatement ps, Connection conn){
 		try{
 			if(ps!=null){
