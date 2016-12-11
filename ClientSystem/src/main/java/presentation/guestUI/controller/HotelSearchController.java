@@ -350,18 +350,23 @@ public class HotelSearchController {
 
 			String hotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
 
+			System.out.println(hotelID);
 			// 获取hotelVO，调用hotelBL的方法
 			hotelVO = hotelBLController.getHotelInfo(hotelID);
 			hotelCheck.setVisible(false);
 			hotelDetail.setVisible(true);
+			initHotelDetail(hotelVO);
+			
 			rooms = hotelBLController.getHotelRoomInfo(hotelID);
+			initRoomTable(rooms);
 
-			// 此客户在此酒店的所有订单
+			// 此客户在此目标酒店的所有订单
 			orderVOlist = new ArrayList<OrderGeneralVO>();
 			Iterator<OrderGeneralVO> myOrdersOfThisHotel = orderBLController.getMyOrdersOfThisHotel(IDReserve.getInstance().getUserID(), hotelID);
 			while (myOrdersOfThisHotel.hasNext()) {
 				orderVOlist.add(myOrdersOfThisHotel.next());
 			}
+			initOrderCheck(orderVOlist);
 
 			// 初始化此酒店的评论
 			commentList = new ArrayList<HotelEvaluationVO>();
@@ -369,11 +374,7 @@ public class HotelSearchController {
 			while (thisHotelEvaluation.hasNext()) {
 				commentList.add(thisHotelEvaluation.next());
 			}
-
-			initRoomTable(rooms);
 			initCommentTable(commentList);
-			initHotelDetail(hotelVO);
-			initOrderCheck(orderVOlist);
 		} catch (Exception e) {
 			new PopUp("请选定酒店", "");
 		}
@@ -464,7 +465,7 @@ public class HotelSearchController {
 		for (int i = 0; i < orderVOlist.size(); i++) {
 			OrderGeneralVO temp = orderVOlist.get(i);
 			orderList.add(new OrderTable(temp.orderID, temp.hotelName, temp.hotelAddress,
-					temp.expectExecuteTime.toString(),temp.expectLeaveTime.toString(),temp.price + "", temp.state.toString()));
+					temp.expectExecuteTime.toString(),temp.expectLeaveTime.toString(),temp.price + "", temp.state.getChineseOrderState()));
 		}
 
 		ObservableList<OrderTable> data = FXCollections.observableArrayList();
@@ -646,7 +647,7 @@ public class HotelSearchController {
 		rooms = hotelBLController.getHotelRoomInfo(selectedHotelID);
 
 		try {
-			guestVO = (GuestVO) userBLController.getSingle(selectedHotelID);
+			guestVO = (GuestVO) userBLController.getSingle(IDReserve.getInstance().getUserID());
 		} catch (UserInexistException e) {
 			// 该情况是不会出现的，保证编译能通过
 			e.printStackTrace();
