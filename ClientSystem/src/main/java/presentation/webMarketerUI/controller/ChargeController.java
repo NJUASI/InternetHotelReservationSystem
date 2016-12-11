@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import presentation.PopUp.PopUp;
 import utilities.enums.CreditRecord;
 import vo.CreditVO;
 import vo.GuestVO;
@@ -76,16 +77,18 @@ public class ChargeController {
 	 */	
 	@FXML
 	protected void search() {
-		chargePane.setVisible(true);
+		
 		try {
 			guestVO = (GuestVO) userBLService.getSingle(searchGuestID.getText());
+			chargePane.setVisible(true);
+			guestID.setText(guestVO.userID);
+			name.setText(guestVO.name);
+			credit.setText(Double.toString(guestVO.credit));
 		} catch (UserInexistException e) {
 			e.printStackTrace();
 			// 为了保证编译能通过
+			new PopUp("该用户不存在", "搜索失败");
 		}
-		guestID.setText(guestVO.userID);
-		name.setText(guestVO.name);
-		credit.setText(Double.toString(guestVO.credit));
 	}
 	
 	/**
