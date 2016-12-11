@@ -142,7 +142,7 @@ public class RoomController {
 		//打包好一个vo，通过hotelBLContoller调用update的方法
 		vo.hotelID = hotelID;
 		//gcm roomType与数据库存的不一样
-		vo.roomType = RoomType.valueOf(roomType.getValue());
+		vo.roomType = RoomType.getEnum(roomType.getValue());
 		vo.roomNum = Integer.parseInt(roomNum.getText());
 		vo.price = Integer.parseInt(price.getText());
 		
@@ -150,6 +150,7 @@ public class RoomController {
 	
 		modifyPane.setVisible(false);
 		addBt.setVisible(true);
+		//roomType是枚举，不是 String啊，转string调getChinese方法
 		setModifyText("","","");
 		initialize();
 	}
@@ -177,7 +178,7 @@ public class RoomController {
 		 */
 		RoomInfoVO vo = new RoomInfoVO();
 		vo.hotelID = hotelID;
-		vo.roomType = RoomType.valueOf(roomType.getValue());
+		vo.roomType = RoomType.getEnum(roomType.getValue());
 		vo.remainNum=Integer.parseInt(roomNum.getText());
 		vo.price = Integer.valueOf(price.getText());
 		initialize();
