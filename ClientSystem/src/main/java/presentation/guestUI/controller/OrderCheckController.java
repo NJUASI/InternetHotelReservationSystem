@@ -4,6 +4,7 @@ package presentation.guestUI.controller;
 import java.util.Iterator;
 
 import businessLogic.orderBL.OrderBLController;
+import businessLogic.orderBL.stub.OrderBLService_Stub;
 import businessLogicService.orderBLService.OrderBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -74,9 +75,11 @@ public class OrderCheckController {
 		//通过guestID得到orderGeneralVOs list
 		undoBt.setVisible(false);
 		orderBLController = OrderBLController.getInstance();
-
+		
 		Iterator<OrderGeneralVO> orderGenerals = orderBLController.getAllOrderGenerals(guestID, guest);
-		initOrderCheck(orderGenerals);
+		if (orderGenerals != null) {
+			initOrderCheck(orderGenerals);
+		}
 	}
 
 
@@ -218,7 +221,7 @@ public class OrderCheckController {
 		while(orderGenerals.hasNext()){
 			OrderGeneralVO vo = orderGenerals.next();
 			OrderTable orderTable = new OrderTable(vo.orderID, vo.hotelName, vo.hotelAddress,
-					vo.expectExecuteTime.toString(),vo.expectLeaveTime.toString(),vo.price + "", vo.state.toString());
+					vo.expectExecuteTime.toString(),vo.expectLeaveTime.toString(),vo.price + "", vo.state.getChineseOrderState());
 			data.add(orderTable);
 		}
 
