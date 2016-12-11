@@ -186,7 +186,7 @@ public class HotelSearchController {
 			double originPrice = hotelBLController.getOriginPrice(selectedHotelID,RoomType.getEnum(roomType));
 			//			能不能像获取这个房间类型的剩余数量这样得到他的价格，然后set到下面那一个   还有就是看我上面说的那些，不用改变	roomCountInOrder的值，而且把他设为空一开始;
 			//			这样我们就只用通过监听改变房间数量来计算订单的价格, 就是改变房型之后必须选一次数量,才能计算到价格,不然计算价格的地方有点多其实;
-			previousPriceInOrder.setText("1");
+			previousPriceInOrder.setText(Double.toString(originPrice));
 			remainNumInOrder.setText(remainRoomNum+"");
 			final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(),
 					LocalTime.of(hourInOrder.getValue(), minuteInOrder.getValue()));
