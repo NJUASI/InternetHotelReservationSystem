@@ -8,8 +8,8 @@ import java.util.List;
 
 import businessLogic.hotelBL.HotelInfoOperation;
 import businessLogic.hotelBL.MockHotel;
+import businessLogic.promotionBL.DiscountCalculator;
 import businessLogic.promotionBL.DiscountInSpan;
-import businessLogic.promotionBL.MockPromotion;
 import dataService.orderDataService.OrderDataService;
 import exception.verificationException.UserInexistException;
 import po.CheckInPO;
@@ -51,16 +51,7 @@ public class Order {
 	 */
 	public Order() {
 		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
-		
-//		try {
-//			orderDataService = new OrderDataService_Stub();
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//		}
-		
-		
-		discountCalculator = new MockPromotion();
-		//hotel的协作类需要hotelID，故在此不能初始化
+		discountCalculator = new DiscountCalculator();
 	}
 
 	/**
@@ -622,11 +613,11 @@ public class Order {
 				}
 			}
 		}else {
-			return null;
+			return OrderState.NULL;
 		}
 		
 		if (states.size() == 0) {
-			return null;
+			return OrderState.NULL;
 		}else {
 			return getMaxOrderState(states);
 		}

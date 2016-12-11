@@ -31,6 +31,8 @@ public interface HotelBLService {
 	
 	public double getOriginPrice(String hotelID, RoomType roomType);
 	
+	public void setGuestID(String guestID);
+	
 	public Iterator<HotelVO> getHotels(String city,String circle);
 	
 	public Iterator<HotelVO> sortHotels(SortStrategy sortStategy);
