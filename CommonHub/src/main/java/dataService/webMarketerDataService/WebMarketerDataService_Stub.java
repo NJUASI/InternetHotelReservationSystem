@@ -7,7 +7,7 @@ import java.util.List;
 
 import po.WebMarketerPO;
 import utilities.Ciphertext;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class WebMarketerDataService_Stub extends UnicastRemoteObject implements WebMarketerDataService{
 

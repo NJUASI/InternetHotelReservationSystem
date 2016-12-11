@@ -11,7 +11,7 @@ import java.util.List;
 import dataHelper.HotelDataHelper;
 import po.HotelPO;
 import utilities.JDBCUtil;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class HotelDataHelperImpl implements HotelDataHelper{
 

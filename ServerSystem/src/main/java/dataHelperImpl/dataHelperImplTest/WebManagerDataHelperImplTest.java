@@ -10,7 +10,7 @@ import org.junit.Test;
 import dataHelper.WebManagerDataHelper;
 import dataHelperImpl.WebManagerDataHelperImpl;
 import po.WebManagerPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class WebManagerDataHelperImplTest {
 

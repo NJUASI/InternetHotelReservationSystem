@@ -10,7 +10,7 @@ import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import exception.verificationException.WrongPasswordException;
 import utilities.Detector;
-import utilities.UserType;
+import utilities.enums.UserType;
 import vo.GuestVO;
 import vo.UserVO;
 

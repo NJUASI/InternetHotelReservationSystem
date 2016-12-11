@@ -9,7 +9,7 @@ import java.util.List;
 
 import po.SpecialSpanPromotionPO;
 import utilities.JDBCUtil;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class SpecialSpanPromotionDataHelperImpl implements dataHelper.SpecialSpanPromotionDataHelper {
 

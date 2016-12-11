@@ -8,8 +8,8 @@ import org.junit.Test;
 
 import businessLogic.userBL.stub.UserBLService_Stub;
 import exception.verificationException.ParameterInvalidException;
-import utilities.ResultMessage;
-import utilities.UserType;
+import utilities.enums.ResultMessage;
+import utilities.enums.UserType;
 import vo.GuestVO;
 import vo.UserVO;
 

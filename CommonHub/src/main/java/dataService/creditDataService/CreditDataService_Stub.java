@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.CreditPO;
-import utilities.CreditRecord;
-import utilities.ResultMessage;
+import utilities.enums.CreditRecord;
+import utilities.enums.ResultMessage;
 
 public class CreditDataService_Stub extends UnicastRemoteObject implements CreditDataService {
 

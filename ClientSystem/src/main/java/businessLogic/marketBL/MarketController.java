@@ -4,7 +4,7 @@ import java.util.List;
 
 import businessLogicService.marketBLService.MarketBLService;
 import exception.verificationException.UserInexistException;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.MarketVO;
 
 /**

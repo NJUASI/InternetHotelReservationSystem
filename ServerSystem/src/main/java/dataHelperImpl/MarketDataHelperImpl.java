@@ -10,7 +10,7 @@ import java.util.List;
 import dataHelper.MarketDataHelper;
 import po.MarketPO;
 import utilities.JDBCUtil;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 /**
  * 

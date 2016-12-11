@@ -5,7 +5,7 @@ import java.util.List;
 
 import dataHelper.HotelWorkerDataHelper;
 import po.HotelWorkerPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 /**
  * 

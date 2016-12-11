@@ -10,7 +10,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import businessLogic.hotelBL.hotel.Hotel;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.HotelVO;
 import vo.RoomInfoVO;
 

@@ -2,7 +2,7 @@ package po;
 
 import java.io.Serializable;
 
-import utilities.RoomType;
+import utilities.enums.RoomType;
 import vo.RoomInfoVO;
 
 /**

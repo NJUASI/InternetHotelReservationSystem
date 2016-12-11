@@ -7,7 +7,7 @@ import java.util.List;
 import po.AddressPO;
 import po.HotelFixedPromotionPO;
 import po.SpecialSpanPromotionPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public interface PromotionDataService extends Remote{
 	

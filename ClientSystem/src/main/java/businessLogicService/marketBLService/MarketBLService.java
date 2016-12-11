@@ -3,7 +3,7 @@ package businessLogicService.marketBLService;
 import java.util.List;
 
 import exception.verificationException.UserInexistException;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.MarketVO;
 
 /**

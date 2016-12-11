@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import businessLogicService.promotionBLService.PromotionBLService;
 import utilities.PreOrder;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.AddressVO;
 import vo.HotelFixedPromotionVO;
 import vo.SpecialSpanPromotionVO;

@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import po.CreditPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public interface CreditDataService extends Remote{
 	/**

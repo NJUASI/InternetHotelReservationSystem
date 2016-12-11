@@ -3,10 +3,10 @@ package businessLogicService.hotelBLService;
 import java.util.Iterator;
 import java.util.List;
 
-import utilities.ResultMessage;
-import utilities.RoomType;
-import utilities.SearchCriteriaType;
-import utilities.SortStrategy;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
+import utilities.enums.SearchCriteriaType;
+import utilities.enums.SortStrategy;
 import vo.HotelVO;
 import vo.RoomInfoVO;
 import vo.SearchCriteriaVO;

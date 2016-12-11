@@ -6,7 +6,7 @@ import businessLogic.memberBL.Member;
 import businessLogic.memberBL.MockMember;
 import businessLogic.promotionBL.discountCalculation.CalculateDiscount;
 import exception.verificationException.UserInexistException;
-import utilities.MemberType;
+import utilities.enums.MemberType;
 
 public class VIPBirthdayDiscount implements CalculateDiscount{
 

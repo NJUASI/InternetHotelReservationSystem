@@ -8,8 +8,8 @@ import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelPO;
 import utilities.Address;
-import utilities.ResultMessage;
-import utilities.RoomType;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
 import vo.HotelVO;
 import vo.RoomInfoVO;
 

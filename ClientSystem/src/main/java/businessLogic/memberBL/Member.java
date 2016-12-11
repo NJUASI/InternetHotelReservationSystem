@@ -6,12 +6,10 @@ import businessLogic.userBL.userService.Guest;
 import businessLogicService.memberBLService.MemberBLService;
 import dataService.guestDataService.GuestDataService;
 import dataService.guestDataService.GuestDataService_Stub;
-import exception.inputException.InvalidInputException;
 import exception.verificationException.UserInexistException;
 import po.MemberPO;
-import utilities.Detector;
-import utilities.MemberType;
-import utilities.ResultMessage;
+import utilities.enums.MemberType;
+import utilities.enums.ResultMessage;
 import vo.GuestVO;
 import vo.MemberVO;
 

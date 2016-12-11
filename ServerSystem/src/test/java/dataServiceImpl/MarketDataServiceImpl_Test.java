@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import dataService.marketDataService.MarketDataService;
 import po.MarketPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class MarketDataServiceImpl_Test {
 

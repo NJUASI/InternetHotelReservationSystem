@@ -6,7 +6,7 @@ import java.util.List;
 
 import exception.verificationException.UserInexistException;
 import po.WebManagerPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public interface WebManagerDataService extends Remote{
 

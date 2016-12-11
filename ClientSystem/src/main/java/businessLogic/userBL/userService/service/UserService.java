@@ -3,7 +3,7 @@ package businessLogic.userBL.userService.service;
 import java.util.List;
 
 import exception.verificationException.UserInexistException;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.UserVO;
 
 public interface UserService {

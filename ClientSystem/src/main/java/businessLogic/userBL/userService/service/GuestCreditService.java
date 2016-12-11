@@ -1,7 +1,7 @@
 package businessLogic.userBL.userService.service;
 
 import exception.verificationException.UserInexistException;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public interface GuestCreditService {
 	

@@ -18,7 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import presentation.Table.DatePromotionTable;
 import utilities.IDReserve;
-import utilities.PromotionType;
+import utilities.enums.PromotionType;
 import vo.HotelFixedPromotionVO;
 import vo.SpecialSpanPromotionVO;
 
@@ -76,10 +76,10 @@ public class PromotionController {
 		initDatePromotion(datePromotion);
 		
 		fixedPromotion= new LinkedList<>();
-		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.三间及以上预订折扣,9.3));
-		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.企业会员折扣,9.3));
-		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.三间及以上预订折扣,9.3));
-		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.三间及以上预订折扣,9.3));
+		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.HOTEL_ABOVE_THREE_ROOMS,9.3));
+		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.HOTEL_ABOVE_THREE_ROOMS,9.3));
+		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.HOTEL_ABOVE_THREE_ROOMS,9.3));
+		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.HOTEL_ABOVE_THREE_ROOMS,9.3));
 		initFixedPromotion(fixedPromotion);
 	}
 	/**

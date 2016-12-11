@@ -13,7 +13,7 @@ import dataHelper.RoomDataHelper;
 import dataHelperImpl.stub.HotelDataHelperImpl_Stub;
 import dataHelperImpl.stub.RoomInfoDataHelperImpl_Stub;
 import po.HotelPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class HotelDataServiceImplTest {
 

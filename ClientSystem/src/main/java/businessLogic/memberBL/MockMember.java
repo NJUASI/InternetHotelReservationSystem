@@ -2,8 +2,8 @@ package businessLogic.memberBL;
 
 import java.time.LocalDate;
 
-import utilities.MemberType;
-import utilities.ResultMessage;
+import utilities.enums.MemberType;
+import utilities.enums.ResultMessage;
 import vo.MemberVO;
 
 public class MockMember extends Member {

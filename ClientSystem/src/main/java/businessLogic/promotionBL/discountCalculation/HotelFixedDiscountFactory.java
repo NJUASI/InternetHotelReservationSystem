@@ -6,7 +6,7 @@ import businessLogic.promotionBL.discountCalculation.discountOfPromotions.Enterp
 import businessLogic.promotionBL.discountCalculation.discountOfPromotions.ThreeAndAboveDiscount;
 import businessLogic.promotionBL.discountCalculation.discountOfPromotions.VIPBirthdayDiscount;
 import utilities.PreOrder;
-import utilities.PromotionType;
+import utilities.enums.PromotionType;
 
 /**
  * @Description:创建酒店无特定期间的促销策略的工厂
@@ -26,11 +26,11 @@ public class HotelFixedDiscountFactory {
 
 	public CalculateDiscount createCalculateDiscount(PromotionType promotionType,double discount){
 		switch(promotionType){
-		case 会员生日折扣:
+		case HOTEL_BIRTHDAY:
 			return new VIPBirthdayDiscount(discount,preOrder.guestID,today);
-		case 三间及以上预订折扣:
+		case HOTEL_ABOVE_THREE_ROOMS:
 			return new ThreeAndAboveDiscount(discount,preOrder.roomNum);
-		case 企业会员折扣:
+		case HOTEL_ENTERPRISE:
 			return new EnterpriseMemberDiscount(discount,preOrder.guestID);
 		default:
 			return null;

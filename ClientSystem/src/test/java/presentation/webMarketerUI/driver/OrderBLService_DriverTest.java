@@ -9,9 +9,9 @@ import java.util.List;
 import org.junit.Test;
 
 import businessLogic.orderBL.stub.OrderBLService_Stub;
-import utilities.OrderState;
-import utilities.ResultMessage;
-import utilities.RoomType;
+import utilities.enums.OrderState;
+import utilities.enums.ResultMessage;
+import utilities.enums.RoomType;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
 
@@ -61,7 +61,7 @@ public class OrderBLService_DriverTest {
 		assertEquals(LocalDateTime.of(2016, 2, 3, 14, 00), orderVO.orderGeneralVO.expectExecuteTime);
 		assertEquals(LocalDateTime.of(2016, 2, 4, 12, 00), orderVO.orderGeneralVO.expectLeaveTime);
 		assertEquals(OrderState.EXECUTED, orderVO.orderGeneralVO.state);
-		assertEquals(RoomType.商务套房, orderVO.roomType);
+		assertEquals(RoomType.BUSINESS_SUITE, orderVO.roomType);
 		assertEquals(2, orderVO.roomNumCount);
 		assertEquals("301  302", orderVO.roomNumber);
 		assertEquals("zhangsan", orderVO.orderGeneralVO.name);

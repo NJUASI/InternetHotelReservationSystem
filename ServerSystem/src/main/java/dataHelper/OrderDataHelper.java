@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import po.OrderPO;
-import utilities.OrderState;
-import utilities.ResultMessage;
+import utilities.enums.OrderState;
+import utilities.enums.ResultMessage;
 
 /**
  * 

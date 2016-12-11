@@ -24,7 +24,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.PopUp.PopUp;
 import utilities.IDReserve;
-import utilities.UserType;
+import utilities.enums.UserType;
 import vo.GuestVO;
 	
 @SuppressWarnings("restriction")

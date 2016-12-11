@@ -5,7 +5,7 @@ import java.util.List;
 import businessLogic.marketBL.Market;
 import businessLogic.memberBL.Member;
 import exception.verificationException.UserInexistException;
-import utilities.MemberType;
+import utilities.enums.MemberType;
 import vo.MarketVO;
 
 public class MemberLevelPromotion {

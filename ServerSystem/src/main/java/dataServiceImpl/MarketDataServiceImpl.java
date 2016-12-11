@@ -8,7 +8,7 @@ import dataHelper.MarketDataHelper;
 import dataHelperImpl.stub.MarketDataHelperImpl_Stub;
 import dataService.marketDataService.MarketDataService;
 import po.MarketPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 /**
  * 

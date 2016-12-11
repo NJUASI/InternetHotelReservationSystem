@@ -1,6 +1,6 @@
 package businessLogicService.orderBLService;
 
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 import vo.CheckInVO;
 import vo.CheckOutVO;
 

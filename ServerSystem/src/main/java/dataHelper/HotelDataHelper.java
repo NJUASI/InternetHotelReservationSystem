@@ -3,7 +3,7 @@ package dataHelper;
 import java.util.List;
 
 import po.HotelPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 /**
  * @Description:对数据库中hotel表的操作

@@ -2,7 +2,7 @@ package po;
 
 import java.time.LocalDate;
 
-import utilities.PromotionType;
+import utilities.enums.PromotionType;
 import vo.SpecialSpanPromotionVO;
 
 public class SpecialSpanPromotionPO {

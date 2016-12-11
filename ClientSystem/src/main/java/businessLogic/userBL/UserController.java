@@ -7,8 +7,8 @@ import businessLogic.userBL.userService.service.GuestCreditService;
 import businessLogicService.userBLService.UserBLService;
 import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
-import utilities.ResultMessage;
-import utilities.UserType;
+import utilities.enums.ResultMessage;
+import utilities.enums.UserType;
 import vo.HotelVO;
 import vo.UserVO;
 

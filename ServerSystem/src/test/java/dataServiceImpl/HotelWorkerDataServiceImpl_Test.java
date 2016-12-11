@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import dataService.hotelWorkerDataService.HotelWorkerDataService;
 import po.HotelWorkerPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class HotelWorkerDataServiceImpl_Test {
 
