@@ -7,6 +7,10 @@ import java.time.LocalDate;
 import org.junit.Test;
 
 import businessLogic.userBL.stub.UserBLService_Stub;
+import exception.inputException.InvalidInputException;
+import exception.inputException.InvalidLengthInputException;
+import exception.inputException.PasswordInputException;
+import exception.operationFailedException.UpdateFaiedException;
 import exception.verificationException.ParameterInvalidException;
 import utilities.enums.ResultMessage;
 import utilities.enums.UserType;
@@ -34,7 +38,12 @@ public class UserBLService_DriverTest {
 		//test interface modify
 		UserBLService_Stub stub = new UserBLService_Stub();
 		UserBLService_Driver driver = new UserBLService_Driver(stub);
-		assertEquals(ResultMessage.SUCCESS, driver.userBLService.modify(new UserVO("1234567890", "000000")));
+		try {
+			assertEquals(ResultMessage.SUCCESS, driver.userBLService.modify(new UserVO("1234567890", "000000")));
+		} catch (InvalidLengthInputException | InvalidInputException | PasswordInputException
+				| UpdateFaiedException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

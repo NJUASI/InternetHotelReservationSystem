@@ -7,13 +7,17 @@ import java.util.List;
 import businessLogic.userBL.userService.service.GuestCreditService;
 import businessLogic.userBL.userService.service.UserService;
 import dataService.guestDataService.GuestDataService;
-import dataService.guestDataService.GuestDataService_Stub;
+import exception.inputException.InvalidInputException;
+import exception.inputException.InvalidLengthInputException;
+import exception.inputException.PasswordInputException;
 import exception.operationFailedException.AddFaidException;
+import exception.operationFailedException.UpdateFaiedException;
 import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import po.GuestPO;
 import rmi.ClientRemoteHelper;
 import utilities.Ciphertext;
+import utilities.Detector;
 import utilities.enums.ResultMessage;
 import vo.GuestVO;
 import vo.UserVO;
@@ -71,17 +75,19 @@ public class Guest implements UserService, GuestCreditService {
 	 * @param newUserVO
 	 *            从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功修改客户信息
+	 * @throws PasswordInputException 
+	 * @throws InvalidInputException 
+	 * @throws InvalidLengthInputException 
+	 * @throws UpdateFaiedException 
 	 */
-	public ResultMessage modify(UserVO userVO) {
+	public ResultMessage modify(UserVO userVO) throws InvalidLengthInputException, InvalidInputException, PasswordInputException, UpdateFaiedException {
 
-		//TODO 董金玉：USER_INFO_UPDATE_FAILURE
 		ResultMessage msg = ResultMessage.FAIL;
 
-		if (!this.hasGuest(userVO.userID)) {
-			return msg;
-		} // 不存在ID对应项
-
 		try {
+			if(!this.infoDetector(userVO)){
+				throw new UpdateFaiedException();
+			}
 			GuestPO guestPO = convert(userVO);
 			msg = guestDataService.modify(guestPO);
 		} catch (RemoteException e) {
@@ -238,6 +244,20 @@ public class Guest implements UserService, GuestCreditService {
 			return false;
 		}
 		return true;
+	}
+	
+	private boolean infoDetector(UserVO userVO) throws InvalidLengthInputException, InvalidInputException, PasswordInputException{
+		Detector detector = new Detector();
+		GuestVO guestVO = (GuestVO)userVO;
+		
+		detector.infoDetector(guestVO.name);
+		detector.phoneDetector(guestVO.phone);
+		detector.passwordDetector(guestVO.password);
+		
+		if(guestVO.nickName.equals("")){return false;}
+		
+		return true;
+		
 	}
 
 	private GuestPO encrypt(GuestPO guestPO) {

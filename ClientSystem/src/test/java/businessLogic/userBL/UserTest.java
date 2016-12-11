@@ -12,6 +12,10 @@ import businessLogic.userBL.userService.Guest;
 import businessLogic.userBL.userService.service.GuestCreditService;
 import utilities.enums.ResultMessage;
 import utilities.enums.UserType;
+import exception.inputException.InvalidInputException;
+import exception.inputException.InvalidLengthInputException;
+import exception.inputException.PasswordInputException;
+import exception.operationFailedException.UpdateFaiedException;
 import exception.verificationException.UserInexistException;
 import vo.GuestVO;
 import vo.HotelVO;
@@ -44,17 +48,27 @@ public class UserTest {
 	@Test
 	public void testModify() {
 		// test the method modify
-		User user = new User();
+		try {
+			User user = new User();
 
-		UserVO guestVO = new GuestVO("1234567890", LocalDate.of(1995, 1, 1), "school", "zhangsan", "xiaosan", "000000",
-				"13523456789", 100);
-		UserVO hotelWorkerVO = new HotelWorkerVO("00001111", "123456", "school");
-		UserVO webMarketerVO = new WebMarketerVO("000001", "123456");
-		UserVO webManagerVO = new WebManagerVO("0001", "123456");
-		assertEquals(user.modify(guestVO), ResultMessage.SUCCESS);
-		assertEquals(user.modify(hotelWorkerVO), ResultMessage.SUCCESS);
-		assertEquals(user.modify(webMarketerVO), ResultMessage.SUCCESS);
-		assertEquals(user.modify(webManagerVO), ResultMessage.SUCCESS);
+			UserVO guestVO = new GuestVO("1234567890", LocalDate.of(1995, 1, 1), "school", "zhangsan", "xiaosan", "000000",
+					"13523456789", 100);
+			UserVO hotelWorkerVO = new HotelWorkerVO("00001111", "123456", "school");
+			UserVO webMarketerVO = new WebMarketerVO("000001", "123456");
+			UserVO webManagerVO = new WebManagerVO("0001", "123456");
+			assertEquals(user.modify(guestVO), ResultMessage.SUCCESS);
+			assertEquals(user.modify(hotelWorkerVO), ResultMessage.SUCCESS);
+			assertEquals(user.modify(webMarketerVO), ResultMessage.SUCCESS);
+			assertEquals(user.modify(webManagerVO), ResultMessage.SUCCESS);
+		} catch (InvalidLengthInputException e) {
+			e.printStackTrace();
+		} catch (InvalidInputException e) {
+			e.printStackTrace();
+		} catch (PasswordInputException e) {
+			e.printStackTrace();
+		} catch (UpdateFaiedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Test

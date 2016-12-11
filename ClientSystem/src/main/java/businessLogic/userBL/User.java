@@ -6,7 +6,11 @@ import businessLogic.hotelBL.hotel.Hotel;
 import businessLogic.userBL.userService.UserFactory;
 import businessLogic.userBL.userService.UserLengthFactory;
 import businessLogic.userBL.userService.service.UserService;
+import exception.inputException.InvalidInputException;
+import exception.inputException.InvalidLengthInputException;
+import exception.inputException.PasswordInputException;
 import exception.operationFailedException.AddFaidException;
+import exception.operationFailedException.UpdateFaiedException;
 import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import utilities.enums.ResultMessage;
@@ -65,8 +69,12 @@ public class User {
 	 * @updateTime 2016/12/5
 	 * @param userVO 从客户界面层传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功修改用户信息
+	 * @throws UpdateFaiedException 
+	 * @throws PasswordInputException 
+	 * @throws InvalidInputException 
+	 * @throws InvalidLengthInputException 
 	 */
-	public ResultMessage modify(UserVO userVO) {
+	public ResultMessage modify(UserVO userVO) throws InvalidLengthInputException, InvalidInputException, PasswordInputException, UpdateFaiedException {
 
 		user = lengthFactory.createUser(userVO.userID.length());
 		if(isExistence(user)){

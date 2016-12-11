@@ -6,11 +6,12 @@ import java.util.List;
 
 import businessLogic.userBL.userService.service.UserService;
 import dataService.webManagerDataService.WebManagerDataService;
-import dataService.webManagerDataService.WebManagerDataService_Stub;
+import exception.inputException.PasswordInputException;
 import exception.verificationException.UserInexistException;
 import po.WebManagerPO;
 import rmi.ClientRemoteHelper;
 import utilities.Ciphertext;
+import utilities.Detector;
 import utilities.enums.ResultMessage;
 import vo.UserVO;
 import vo.WebManagerVO;
@@ -67,17 +68,15 @@ public class WebManager implements UserService {
 	 * @param newUserVO
 	 *            从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功修改网站管理人员信息
+	 * @throws PasswordInputException 
 	 */
-	public ResultMessage modify(UserVO userVO) {
+	public ResultMessage modify(UserVO userVO) throws PasswordInputException {
 
-		//TODO 董金玉：USER_INFO_UPDATE_FAILURE
 		ResultMessage msg = ResultMessage.FAIL;
 
-		if (!this.hasWebManager(userVO.userID)) {
-			return msg;
-		} // 不存在ID对应项
 
 		try {
+			this.infoDetector(userVO);
 			WebManagerPO webManagerPO = this.convert(userVO);
 			msg = webManagerDataService.modify(webManagerPO);
 		} catch (RemoteException e) {
@@ -187,15 +186,15 @@ public class WebManager implements UserService {
 		return result;
 	}
 
-	private boolean hasWebManager(String webManagerID) {
-		try {
-			UserVO webManagerVO = this.getSingle(webManagerID);
-		} catch (UserInexistException e) {
-			e.printStackTrace();
-			return false;
-		}
-
+	
+	private boolean infoDetector(UserVO userVO) throws PasswordInputException{
+		Detector detector = new Detector();
+		WebManagerVO webManagerVO = (WebManagerVO)userVO;
+		
+		detector.passwordDetector(webManagerVO.password);
+		
 		return true;
+		
 	}
 
 	private WebManagerPO encrypt(WebManagerPO webManagerPO) {
