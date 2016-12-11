@@ -84,8 +84,10 @@ public class HotelSearchController {
 	public HotelSearchController() {
 		orderBLController = OrderBLController.getInstance();
 		sourceBLController = SourceBLController.getInstance();
-		hotelBLController = HotelBLController.getInstance();
 		userBLController = UserController.getInstance();
+		//将hotelBL的浏览的guestID设置为当前用户的id
+		hotelBLController = HotelBLController.getInstance();
+		hotelBLController.setGuestID(IDReserve.getInstance().getUserID());
 	}
 
 	@FXML
@@ -152,11 +154,11 @@ public class HotelSearchController {
 		maxScoreInput.setValue(5.0);
 		expectExecuteDateInOrder.setValue(LocalDate.now());
 		expectLeaveDateInOrder.setValue(LocalDate.now());
-		
+
 		String fistCity = sourceBLController.getCities().next();
 		cityChoose.setValue(fistCity);
 		cycleChoose.setValue(sourceBLController.getCircles(fistCity).next());
-		
+
 		cityChoose.setOnShowing(new CityChooseHandler());
 		cityChoose.valueProperty().addListener(new CityChangedListener());
 		roomTypeInOrder.valueProperty().addListener(new RoomTypeChangeListener());
@@ -264,35 +266,26 @@ public class HotelSearchController {
 	protected void openHotelCheck() {
 
 		//通过城市和商圈,调用hotelBL的方法获得所有的酒店
-		try {
+		Iterator<HotelVO> hotels = hotelBLController.getHotels(cityChoose.getValue(), cycleChoose.getValue());
 
-			Iterator<HotelVO> hotels = hotelBLController.getHotels(cityChoose.getValue(), cycleChoose.getValue());
+		cityAndCircle.setVisible(false);
+		hotelCheck.setVisible(true);
+		hotelChoose.setVisible(false);
 
-			cityAndCircle.setVisible(false);
-			hotelCheck.setVisible(true);
-			hotelChoose.setVisible(false);
-
-			initHotelTable(hotels);
-		} catch (Exception e) {
-			new PopUp("城市商圈有误", "错误提醒");
-		}
+		initHotelTable(hotels);
 	}
 
 	private void initHotelTable(Iterator<HotelVO> hotels){
 		hotelTable.getItems().clear();
-		List<HotelTable> dataList = new ArrayList<HotelTable>();
 
+		ObservableList<HotelTable> data = FXCollections.observableArrayList();
 		while(hotels.hasNext()){
 			HotelVO temp = hotels.next();
-			dataList.add(new HotelTable(temp.hotelID, temp.hotelName,temp.address,
-					temp.city,temp.circle,temp.orderState.getChineseOrderState(),
+			data.add(new HotelTable(temp.hotelID, temp.hotelName,temp.address,
+					cityChoose.getValue(),cycleChoose.getValue(),temp.orderState.getChineseOrderState(),
 					Double.toString(temp.minPrice),temp.level,Double.toString(temp.score)));
 		}
 		
-		ObservableList<HotelTable> data = FXCollections.observableArrayList();
-		for (int i = 0; i < dataList.size(); i++) {
-			data.add(dataList.get(i));
-		}
 		hotelIDColumn3.setCellValueFactory(cellData -> cellData.getValue().hotelID);
 		hotelNameColumn3.setCellValueFactory(cellData -> cellData.getValue().hotelName);
 		addressColumn3.setCellValueFactory(cellData -> cellData.getValue().address);
@@ -302,7 +295,7 @@ public class HotelSearchController {
 		hasOrderColumn3.setCellValueFactory(cellData -> cellData.getValue().hasOrder);
 		levelColumn3.setCellValueFactory(cellData -> cellData.getValue().level);
 		scoreColumn3.setCellValueFactory(cellData -> cellData.getValue().score);
-
+		
 		hotelTable.setItems(data);
 	}
 
@@ -356,7 +349,7 @@ public class HotelSearchController {
 			hotelCheck.setVisible(false);
 			hotelDetail.setVisible(true);
 			initHotelDetail(hotelVO);
-			
+
 			rooms = hotelBLController.getHotelRoomInfo(hotelID);
 			initRoomTable(rooms);
 
@@ -479,7 +472,7 @@ public class HotelSearchController {
 		checkOutTimeColumn.setCellValueFactory(cellData -> cellData.getValue().checkOutTime);
 		priceColumn1.setCellValueFactory(cellData -> cellData.getValue().price);
 		stateColumn.setCellValueFactory(cellData -> cellData.getValue().state);
-		
+
 		orderTable.setItems(data);
 	}
 	/**

@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 public enum OrderState implements Serializable{
 	
-	CANCELLED("已撤销"), ABNORMAL("异常"), UNEXECUTED("未执行"), EXECUTED("已执行");
+	CANCELLED("已撤销"), ABNORMAL("异常"), UNEXECUTED("未执行"), EXECUTED("已执行"),NULL("");
 	
 	private String thisOrderStateString;
 	

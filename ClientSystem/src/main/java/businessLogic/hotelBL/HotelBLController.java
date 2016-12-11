@@ -26,11 +26,19 @@ public class HotelBLController implements HotelBLService {
 	private static HotelBLController hotelController = new HotelBLController();
 	private Hotel hotel;
 	private HotelScan hotelScan;
-	private String guestID;
+
 	
 	private HotelBLController() {
 		hotel = new Hotel();
 		hotelScan = new HotelScan();
+	}
+	
+	public void setGuestID(String guestID){
+		initHotelsScan(guestID);
+	}
+	
+	public void setHotelID(String hotelID){
+		initHotel(hotelID);
 	}
 	
 	/**
@@ -43,7 +51,7 @@ public class HotelBLController implements HotelBLService {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月6日 下午5:08:48
 	 */
-	public void initHotel(String hotelID){
+	private void initHotel(String hotelID){
 		hotel = new Hotel(hotelID);
 	}
 	
@@ -51,7 +59,7 @@ public class HotelBLController implements HotelBLService {
 	 * 当用户或者网站管理人员登陆时，则调用此初始化方法
 	 * @param addressVO
 	 */
-	public void initHotelsScan(){
+	private void initHotelsScan(String guestID){
 		hotelScan = new HotelScan(guestID);
 	}
 

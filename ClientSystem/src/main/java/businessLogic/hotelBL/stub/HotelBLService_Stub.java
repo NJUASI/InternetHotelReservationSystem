@@ -105,5 +105,11 @@ public class HotelBLService_Stub implements HotelBLService{
 		return 0;
 	}
 
+	@Override
+	public void setGuestID(String guestID) {
+		// TODO 自动生成的方法存根
+		
+	}
+
 
 }
