@@ -5,15 +5,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import businessLogic.hotelBL.MockHotel;
-import businessLogic.memberBL.MockMember;
+import businessLogic.hotelBL.hotel.Hotel;
+import businessLogic.memberBL.Member;
 import dataService.promotionDataService.PromotionDataService;
+import exception.verificationException.UserInexistException;
 import po.AddressPO;
 import rmi.ClientRemoteHelper;
 import utilities.Address;
 import utilities.enums.MemberType;
 import utilities.enums.ResultMessage;
 import vo.AddressVO;
+import vo.SpecialSpanPromotionVO;
 
 /**
  * @Description:对于VIP会员特定商圈专属折扣
@@ -74,8 +76,7 @@ public class SpecialCirclePromotion {
 	 */
 	public double getDiscount(String guestID,String hotelID){
 		if(isVIP(guestID)){
-			//TODO 龚尘淼：mock，修改实现
-			Address hotelAddress = new MockHotel().getHotelAddress(hotelID);
+			Address hotelAddress = new Hotel().getHotelAddress(hotelID);
 			String city = hotelAddress.city;
 			String cycle = hotelAddress.circle;
 			try {
@@ -88,8 +89,11 @@ public class SpecialCirclePromotion {
 	}
 		
 	private boolean isVIP(String guestID){
-		//TODO 龚尘淼：mock，修改实现
-		return new MockMember().isMember(guestID, MemberType.COMMON);
+		try {
+			return new Member().isMember(guestID, MemberType.COMMON);
+		} catch (UserInexistException e) {
+			return false;
+		}
 	}
 	
 	private Iterator<AddressVO> convertPOListToVOListIterator(List<AddressPO> POList){
@@ -106,5 +110,15 @@ public class SpecialCirclePromotion {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public double getSpecialCirclePromoiton(String city, String newCircle) {
+		initSpecialCirclePromotions(city);
+		for(AddressPO po : specialCirclePromotions){
+			if(po.getCircle().equals(newCircle)){
+				return po.getDiscout();
+			}
+		}
+		return 1;
 	}
 }

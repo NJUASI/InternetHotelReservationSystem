@@ -41,9 +41,6 @@ public class PromotionController {
 	private TextField nameText,discountText;
 	@FXML
 	private DatePicker startDatePicker, endDatePicker;
-	
-	List<SpecialSpanPromotionVO> datePromotion;
-	List<HotelFixedPromotionVO> fixedPromotion;
 
 	PromotionBLController promotionBLController;
 	String hotelID;
@@ -66,22 +63,8 @@ public class PromotionController {
 	 */
 	@FXML
 	private void initialize() {
-		//TODO 折扣显示有问题
-		Iterator<SpecialSpanPromotionVO> spanPromotionItr = promotionBLController.getHotelSpecialSpanPromotions(hotelID);
-		datePromotion = new LinkedList<SpecialSpanPromotionVO>();
-		while (spanPromotionItr.hasNext()) {
-			SpecialSpanPromotionVO vo = spanPromotionItr.next();
-			datePromotion.add(new SpecialSpanPromotionVO(vo.promotionName,vo.discount,vo.startDate,vo.endDate));	
-		}
-		initDatePromotion(datePromotion);
-		
-		//TODO gcm 这里怎么还是这个样子的。。。。。
-		fixedPromotion= new LinkedList<>();
-		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.HOTEL_ABOVE_THREE_ROOMS,9.3));
-		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.HOTEL_ABOVE_THREE_ROOMS,9.3));
-		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.HOTEL_ABOVE_THREE_ROOMS,9.3));
-		fixedPromotion.add(new HotelFixedPromotionVO("1231231231",PromotionType.HOTEL_ABOVE_THREE_ROOMS,9.3));
-		initFixedPromotion(fixedPromotion);
+		initDatePromotion();
+		initFixedPromotion();
 	}
 	/**
 	 * @description 初始化特定期间折扣的tableView
@@ -89,11 +72,15 @@ public class PromotionController {
 	 * @lastChangedBy Harvey
 	 * @updateTime 2016/12/7
 	 */
-	protected void initDatePromotion(List<SpecialSpanPromotionVO> datePromotion){
+	protected void initDatePromotion(){
+
+		Iterator<SpecialSpanPromotionVO> spanVOs = promotionBLController.getHotelSpecialSpanPromotions(hotelID);
+
 		table.getItems().clear();
 		ObservableList<DatePromotionTable> data = FXCollections.observableArrayList();
-		for (int i = 0; i < datePromotion.size(); i++) {
-			data.add(new DatePromotionTable(datePromotion.get(i).promotionName,Double.toString(datePromotion.get(i).discount),datePromotion.get(i).startDate,datePromotion.get(i).endDate));
+		while(spanVOs.hasNext()){
+			SpecialSpanPromotionVO spanVO = spanVOs.next();
+			data.add(new DatePromotionTable(spanVO.promotionName,Double.toString(spanVO.discount),spanVO.startDate,spanVO.endDate));
 		}
 		nameColumn.setCellValueFactory(cellData -> cellData.getValue().name);
 		startDateColumn.setCellValueFactory(cellData -> cellData.getValue().startDate);
@@ -104,7 +91,6 @@ public class PromotionController {
 	}
 
 
-	String preName;
 	/**
 	 * @description 获取表中内容直接修改双十一  
 	 * @author 61990
@@ -118,7 +104,6 @@ public class PromotionController {
 					table.getSelectionModel().getSelectedItem().getDiscount(),
 					table.getSelectionModel().getSelectedItem().getStartDate(),
 					table.getSelectionModel().getSelectedItem().getEndDate());
-			preName=table.getSelectionModel().getSelectedItem().getName();
 			modifyPane.setVisible(true);
 			addBt.setVisible(false);
 		} catch (Exception e) {
@@ -135,7 +120,7 @@ public class PromotionController {
 	@FXML
 	protected void savePromotion() {
 		try {
-			
+
 			SpecialSpanPromotionVO vo = new SpecialSpanPromotionVO();
 			vo.promotionName = nameText.getText();
 			vo.startDate = startDatePicker.getValue();
@@ -207,10 +192,10 @@ public class PromotionController {
 		//TODO gcm 到底哪些数据库存的和界面的显示不一样。。。 
 		String promotionType = table.getSelectionModel().getSelectedItem().getName(); 
 		promotionBLController.deleteSpecialSpanPromotion(hotelID, promotionType);
-		
+
 		initialize();	
 	}
-	
+
 
 	@FXML
 	private TableView<DatePromotionTable> table1;
@@ -228,12 +213,15 @@ public class PromotionController {
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/12/7
 	 */
-	protected void initFixedPromotion(List<HotelFixedPromotionVO> fixedPromotion){
+	protected void initFixedPromotion(){
 		table1.getItems().clear();
+		Iterator<HotelFixedPromotionVO> fixedVOs = promotionBLController.getHotelFixedPromotions(hotelID);
 		ObservableList<DatePromotionTable> data = FXCollections.observableArrayList();
-		for (int i = 0; i < fixedPromotion.size(); i++) {
-			data.add(new DatePromotionTable(fixedPromotion.get(i).promotionType.getChinesePromotiontype(),Double.toString(fixedPromotion.get(i).discount)));
+		while(fixedVOs.hasNext()){
+			HotelFixedPromotionVO fixedVO = fixedVOs.next();
+			data.add(new DatePromotionTable(fixedVO.promotionType.getChinesePromotiontype(),Double.toString(fixedVO.discount)));			
 		}
+
 		nameColumn1.setCellValueFactory(cellData -> cellData.getValue().name);
 		discountColumn1.setCellValueFactory(cellData -> cellData.getValue().discount);
 
@@ -252,11 +240,11 @@ public class PromotionController {
 		modifyPane1.setVisible(true);
 	}
 	/**
-		 * @description 取消修改三种策略
-		 * @author 61990
-		 * @lastChangedBy 61990
-		 * @updateTime 2016/12/7
-		 */
+	 * @description 取消修改三种策略
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @updateTime 2016/12/7
+	 */
 	@FXML
 	protected void cancel(){
 		modifyPane1.setVisible(false);
@@ -264,21 +252,21 @@ public class PromotionController {
 		discountText1.setText("");
 	}
 	/**
-		 * @description 保存三种策略之一的折扣
-		 * @author 61990
-		 * @lastChangedBy 61990
-		 * @updateTime 2016/12/7
-		 */
+	 * @description 保存三种策略之一的折扣
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @updateTime 2016/12/7
+	 */
 	@FXML
 	protected void save(){
-		
+
 		HotelFixedPromotionVO vo = new HotelFixedPromotionVO();
 		vo.hotelID = hotelID;
 		vo.promotionType = PromotionType.getEnum(name.getText());
-		
+
 		promotionBLController.updateHotelFixedPromotion(vo);
 	}
-	
-	
-	
+
+
+
 }

@@ -172,6 +172,11 @@ public class HotelController {
 		cityText.setOnShowing(new CityShowingHandler());
 		cityText.valueProperty().addListener(new CityChangedListener());
 		levelText.setOnShowing(new LevelShowingHandler());
+		
+		Iterator<String> circles = sourceBLController.getCircles(hotelVO.city);
+		while(circles.hasNext()){
+			cycleText.getItems().add(circles.next());
+		}
 
 		hotelModifyPane.setVisible(true);
 		hotelInfoPane.setVisible(false);

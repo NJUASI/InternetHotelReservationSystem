@@ -34,10 +34,20 @@ public class HotelInfoController {
 	public HotelInfoController() {
 		sourceBLController = SourceBLController.getInstance();
 		userBLController = UserController.getInstance();
-		//TODO gcm
-//		cityInput.setOnShowing(new CityShowingHandler());
-//		cityInput.valueProperty().addListener(new CityChangedListener());
-//		levelInput.setOnShowing(new LevelShowingHandler());
+	}
+	
+	@FXML
+	private void initialize() {
+		
+		String firstCity = sourceBLController.getCities().next();
+		String firstCircle = sourceBLController.getCircles(firstCity).next();
+		cityInput.setValue(firstCity);
+		cycleInput.setValue(firstCircle);
+		levelInput.setValue("1");
+		
+		cityInput.setOnShowing(new CityShowingHandler());
+		cityInput.valueProperty().addListener(new CityChangedListener());
+		levelInput.setOnShowing(new LevelShowingHandler());
 	}
 
 	/**
@@ -50,10 +60,10 @@ public class HotelInfoController {
 	protected void addHotel(){
 		
 		HotelVO newHotel = new HotelVO();
+		//TODO djy 怎么获得被添加酒店的id，你说根据酒店工作人员来，但是我不知道酒店工作人员的id
 		newHotel.hotelName = hotelName.getText();
 		newHotel.city = cityInput.getValue();
 		newHotel.circle = cycleInput.getValue();
-		//TODO 还是将levelInput的改为返回String
 		newHotel.level = String.valueOf(levelInput.getValue());
 		newHotel.address = address.getText();
 		HotelVO hotelVO = userBLController.addHotel(newHotel);
