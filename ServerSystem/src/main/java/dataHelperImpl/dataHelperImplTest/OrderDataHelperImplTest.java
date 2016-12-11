@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Random;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -31,7 +30,7 @@ public class OrderDataHelperImplTest {
 		ciphertext = new Ciphertext();
 	}
 
-//	@Ignore
+	@Ignore
 	@Test
 	public void testAdd() {
 		
@@ -68,7 +67,7 @@ public class OrderDataHelperImplTest {
 		assertEquals(ResultMessage.SUCCESS,helper.setEvaluation("13342016112", 3, "notGood"));
 	}
 
-	@Ignore
+//	@Ignore
 	@Test
 	public void testGetSingleOrder() {
 		OrderPO orderPO = helper.getSingleOrder("123420161201");
