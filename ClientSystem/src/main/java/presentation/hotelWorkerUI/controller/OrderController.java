@@ -193,7 +193,7 @@ public class OrderController {
 		while(orderGenerals.hasNext()){
 			OrderGeneralVO vo = orderGenerals.next();
 			OrderTable orderTable = new OrderTable(vo.orderID,vo.guestID, vo.name, vo.phone,
-					vo.expectExecuteTime.toString(),vo.expectLeaveTime.toString(),vo.price + "", vo.state.toString());
+					vo.expectExecuteTime.toString(),vo.expectLeaveTime.toString(),vo.price + "", vo.state.getChineseOrderState());
 			data.add(orderTable);
 		}
 
