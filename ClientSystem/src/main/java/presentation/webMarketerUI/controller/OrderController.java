@@ -271,7 +271,7 @@ public class OrderController {
 		detail_ID.setText(orderVO.orderGeneralVO.hotelID);
 		detail_Hotel.setText(orderVO.orderGeneralVO.hotelName);
 		detail_address.setText(orderVO.orderGeneralVO.hotelAddress);
-		detail_roomType.setText(orderVO.roomType.toString());
+		detail_roomType.setText(orderVO.roomType.getChineseRoomType());
 		detail_roomNum.setText(orderVO.roomNumCount + "");
 		detail_personNum.setText(orderVO.expectGuestNumCount + "");
 		detail_personName.setText(orderVO.orderGeneralVO.name);
@@ -280,7 +280,7 @@ public class OrderController {
 		detail_expectTime.setText(orderVO.orderGeneralVO.expectExecuteTime.toString());
 		detail_expectLeaveTime.setText(orderVO.orderGeneralVO.expectLeaveTime.toString());
 		detail_price.setText(Double.toString(orderVO.orderGeneralVO.price));
-		detail_state.setText(orderVO.orderGeneralVO.state.toString());
+		detail_state.setText(orderVO.orderGeneralVO.state.getChineseOrderState());
 		detail_message.setText(orderVO.message);
 	}
 	/**
@@ -295,7 +295,7 @@ public class OrderController {
 		List<OrderTable> orderList = new LinkedList<OrderTable>();
 		for (int i = 0; i < orderGenerals.size(); i++) {
 			OrderGeneralVO temp = orderGenerals.get(i);
-			orderList.add(new OrderTable(temp.orderID ,temp.guestID,temp.name,temp.phone, temp.hotelName,temp.hotelAddress,	temp.expectExecuteTime.toString(),temp.expectLeaveTime.toString(),temp.price + "", temp.state.toString()));
+			orderList.add(new OrderTable(temp.orderID ,temp.guestID,temp.name,temp.phone, temp.hotelName,temp.hotelAddress,	temp.expectExecuteTime.toString(),temp.expectLeaveTime.toString(),temp.price + "", temp.state.getChineseOrderState()));
 					
 		}
 

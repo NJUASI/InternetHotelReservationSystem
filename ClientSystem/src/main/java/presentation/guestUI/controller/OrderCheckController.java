@@ -322,7 +322,7 @@ public class OrderCheckController {
 		detail_ID.setText(orderVO.orderGeneralVO.hotelID);
 		detail_Hotel.setText(orderVO.orderGeneralVO.hotelName);
 		detail_address.setText(orderVO.orderGeneralVO.hotelAddress);
-		detail_roomType.setText(orderVO.roomType.toString());
+		detail_roomType.setText(orderVO.roomType.getChineseRoomType());
 		detail_roomNum.setText(orderVO.roomNumCount + "");
 		detail_roomNumber.setText(orderVO.roomNumber);
 		detail_personNum.setText(orderVO.expectGuestNumCount + "");
@@ -334,7 +334,7 @@ public class OrderCheckController {
 		detail_checkInTime.setText(orderVO.checkInTime.toString());
 		detail_checkOutTime.setText(orderVO.checkOutTime.toString());
 		detail_price.setText(Double.toString(orderVO.orderGeneralVO.price));
-		detail_state.setText(orderVO.orderGeneralVO.state.toString());
+		detail_state.setText(orderVO.orderGeneralVO.state.getChineseOrderState());
 		detail_message.setText(orderVO.message);
 		orderComment.setText(orderVO.comment);
 		orderScore.setText(Double.toString(orderVO.score));

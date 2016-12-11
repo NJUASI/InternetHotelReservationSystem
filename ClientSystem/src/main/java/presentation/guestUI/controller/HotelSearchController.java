@@ -435,7 +435,7 @@ public class HotelSearchController {
 		while(rooms.hasNext()){
 			RoomInfoVO temp = rooms.next();
 
-			dataList.add(new TypeTable(temp.roomType.toString(),
+			dataList.add(new TypeTable(temp.roomType.getChineseRoomType(), 
 					String.valueOf(temp.roomNum),String.valueOf(temp.remainNum),
 					Double.toString(temp.price)));
 		}
@@ -656,7 +656,7 @@ public class HotelSearchController {
 
 		while(rooms.hasNext()){
 			RoomInfoVO temp = rooms.next();
-			roomTypeInOrder.getItems().add(temp.roomType.toString());
+			roomTypeInOrder.getItems().add(temp.roomType.getChineseRoomType());
 		}
 
 		hotelNameInOrder.setText(hotelVO.hotelName);

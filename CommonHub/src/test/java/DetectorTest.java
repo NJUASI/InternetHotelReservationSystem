@@ -1,7 +1,6 @@
 import static org.junit.Assert.*;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import exception.inputException.InvalidInputException;
@@ -20,7 +19,6 @@ public class DetectorTest {
 		
 	}
 
-	@Ignore
 	@Test
 	public void testIdDetector() {
 		try {
@@ -48,7 +46,6 @@ public class DetectorTest {
 		}
 	}
 	
-	@Ignore
 	@Test
 	public void testPhoneDetector() {
 		try {
@@ -61,7 +58,6 @@ public class DetectorTest {
 		}
 	}
 	
-	@Ignore
 	@Test
 	public void testInfoDetector() {
 		try {
@@ -69,12 +65,12 @@ public class DetectorTest {
 			assertEquals(true,this.detector.infoDetector("如家"));
 			assertEquals(true,this.detector.infoDetector("AS"));
 			assertEquals(false,this.detector.infoDetector("12345*****"));
+			assertEquals(false,this.detector.infoDetector(""));
 		} catch (InvalidInputException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	@Ignore
 	@Test
 	public void testDiscoutDetector() {
 		try {
