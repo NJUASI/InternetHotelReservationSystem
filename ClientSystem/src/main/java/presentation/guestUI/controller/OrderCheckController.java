@@ -163,7 +163,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchAbnormalOrder() {
-		undoBt.setVisible(false);
+		undoBt.setVisible(true);
 		orderGenerals = orderBLController.getSpecialOrderGenerals(guestID, guest, OrderState.ABNORMAL);
 		initOrderCheck(orderGenerals);
 	}
@@ -340,22 +340,27 @@ public class OrderCheckController {
 		detail_state.setText(orderVO.orderGeneralVO.state.getChineseOrderState());
 		detail_message.setText(orderVO.message);
 		orderComment.setText(orderVO.comment);
-		orderScore.setText(Double.toString(orderVO.score));
+		if(orderVO.score==-1.0){
+			orderScore.setText("订单未评价");
+		}else{
+			orderScore.setText(Double.toString(orderVO.score));
+			orderComment.setText(orderVO.comment);
+		}
 		// 是否可以撤销
 		if (orderVO.orderGeneralVO.state==OrderState.UNEXECUTED){
-			undoBt2.setDisable(true);
-		}else{
 			undoBt2.setDisable(false);
+		}else{
+			undoBt2.setDisable(true);
 		}
 		// 是否可以评论
-		if (!orderVO.orderGeneralVO.hasCommented) {
-			orderComment.setDisable(true);
-			orderScore.setDisable(true);
-			commitBt.setDisable(true);
-		} else {
+		if (!orderVO.orderGeneralVO.hasCommented && orderVO.orderGeneralVO.state == OrderState.EXECUTED) {
 			orderComment.setDisable(false);
 			orderScore.setDisable(false);
 			commitBt.setDisable(false);
+		} else {
+			orderComment.setDisable(true);
+			orderScore.setDisable(true);
+			commitBt.setDisable(true);
 		}
 	}
 }
