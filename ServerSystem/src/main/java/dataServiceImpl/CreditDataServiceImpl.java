@@ -5,6 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import dataHelper.CreditDataHelper;
+import dataHelperImpl.CreditDataHelperImpl;
 import dataHelperImpl.stub.CreditDataHelperImpl_Stub;
 import dataService.creditDataService.CreditDataService;
 import po.CreditPO;
@@ -17,8 +18,8 @@ public class CreditDataServiceImpl extends UnicastRemoteObject implements Credit
 	
 	public CreditDataServiceImpl() throws RemoteException {
 		super();
-		creditDataHelper = new CreditDataHelperImpl_Stub();
-//		creditDataHelper = new CreditDataHelperImpl();
+		creditDataHelper = new CreditDataHelperImpl();
+//		creditDataHelper = new CreditDataHelperImpl_Stub();
 	}
 
 	@Override

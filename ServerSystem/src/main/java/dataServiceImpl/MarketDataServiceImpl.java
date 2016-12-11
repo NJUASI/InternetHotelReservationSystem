@@ -5,6 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import dataHelper.MarketDataHelper;
+import dataHelperImpl.MarketDataHelperImpl;
 import dataHelperImpl.stub.MarketDataHelperImpl_Stub;
 import dataService.marketDataService.MarketDataService;
 import po.MarketPO;
@@ -27,8 +28,8 @@ public class MarketDataServiceImpl extends UnicastRemoteObject implements Market
 	 * @updateTime 2016/12/1 构造函数，从工厂中获取marketDataHlper对象
 	 */
 	public MarketDataServiceImpl() throws RemoteException {
-//		marketHelper = new MarketDataHelperImpl();
-		marketHelper = new MarketDataHelperImpl_Stub();
+		marketHelper = new MarketDataHelperImpl();
+//		marketHelper = new MarketDataHelperImpl_Stub();
 	}
 
 	/**

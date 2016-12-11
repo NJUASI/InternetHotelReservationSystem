@@ -7,6 +7,7 @@ import businessLogic.hotelBL.HotelInfoOperation;
 import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelPO;
+import rmi.ClientRemoteHelper;
 import utilities.Address;
 import utilities.enums.ResultMessage;
 import utilities.enums.RoomType;
@@ -54,12 +55,12 @@ public class Hotel implements HotelInfoOperation{
 	}
 
 	private void initHotelDataService() {
-//		hotelDataService = ClientRemoteHelper.getInstance().getHotelDataService();
-		try {
-			hotelDataService = new HotelDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		hotelDataService = ClientRemoteHelper.getInstance().getHotelDataService();
+//		try {
+//			hotelDataService = new HotelDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 

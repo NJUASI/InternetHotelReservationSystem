@@ -9,6 +9,7 @@ import dataService.hotelWorkerDataService.HotelWorkerDataService;
 import dataService.hotelWorkerDataService.HotelWorkerDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.HotelWorkerPO;
+import rmi.ClientRemoteHelper;
 import utilities.Ciphertext;
 import utilities.enums.ResultMessage;
 import vo.HotelWorkerVO;
@@ -31,13 +32,12 @@ public class HotelWorker implements UserService {
 	 * @updateTime 2016/11/28 构造函数，初始化成员变量
 	 */
 	public HotelWorker() {
-		// hotelWorkerDataService =
-		// ClientRemoteHelper.getInstance().getHotelWorkerDataService();
-		try {
-			hotelWorkerDataService = new HotelWorkerDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		hotelWorkerDataService = ClientRemoteHelper.getInstance().getHotelWorkerDataService();
+//		try {
+//			hotelWorkerDataService = new HotelWorkerDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	/**

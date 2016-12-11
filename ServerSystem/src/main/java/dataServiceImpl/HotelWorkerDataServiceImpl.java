@@ -5,6 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import dataHelper.HotelWorkerDataHelper;
+import dataHelperImpl.HotelWorkerDataHelperImpl;
 import dataHelperImpl.stub.HotelWorkerDataHelperImpl_Stub;
 import dataService.hotelWorkerDataService.HotelWorkerDataService;
 import exception.verificationException.UserInexistException;
@@ -28,8 +29,8 @@ public class HotelWorkerDataServiceImpl extends UnicastRemoteObject implements H
 	 * @updateTime 2016/12/1 构造函数，从工厂中获取hotelWorkerDataHlper对象
 	 */
 	public HotelWorkerDataServiceImpl() throws RemoteException {
-//		hotelWorkerHelper = new HotelWorkerDataHelperImpl();
-		hotelWorkerHelper = new HotelWorkerDataHelperImpl_Stub();
+		hotelWorkerHelper = new HotelWorkerDataHelperImpl();
+//		hotelWorkerHelper = new HotelWorkerDataHelperImpl_Stub();
 	}
 
 	/**

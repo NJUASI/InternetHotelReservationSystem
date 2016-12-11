@@ -6,6 +6,8 @@ import java.util.List;
 
 import dataHelper.HotelDataHelper;
 import dataHelper.RoomDataHelper;
+import dataHelperImpl.HotelDataHelperImpl;
+import dataHelperImpl.RoomDataHelperImpl;
 import dataHelperImpl.stub.HotelDataHelperImpl_Stub;
 import dataHelperImpl.stub.RoomInfoDataHelperImpl_Stub;
 import dataService.hotelDataService.HotelDataService;
@@ -31,10 +33,10 @@ public class HotelDataServiceImpl extends UnicastRemoteObject implements HotelDa
 	
 	public HotelDataServiceImpl() throws RemoteException {
 		super();
-//		roomDataHelper = new RoomDataHelperImpl();
-//		hotelDataHelper = new HotelDataHelperImpl();
-		roomDataHelper = new RoomInfoDataHelperImpl_Stub();
-		hotelDataHelper = new HotelDataHelperImpl_Stub();
+		roomDataHelper = new RoomDataHelperImpl();
+		hotelDataHelper = new HotelDataHelperImpl();
+//		roomDataHelper = new RoomInfoDataHelperImpl_Stub();
+//		hotelDataHelper = new HotelDataHelperImpl_Stub();
 	}
 
 	@Override

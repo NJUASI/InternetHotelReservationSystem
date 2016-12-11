@@ -12,6 +12,7 @@ import dataService.creditDataService.CreditDataService;
 import dataService.creditDataService.CreditDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.CreditPO;
+import rmi.ClientRemoteHelper;
 import utilities.enums.ResultMessage;
 import vo.CreditVO;
 
@@ -35,12 +36,12 @@ public class Credit implements CreditBLService{
 	 */
 	public Credit() {
 		guest = new Guest();
-//		creditDataService = ClientRemoteHelper.getInstance().getCreditDataService();
-		try {
-			creditDataService = new CreditDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		creditDataService = ClientRemoteHelper.getInstance().getCreditDataService();
+//		try {
+//			creditDataService = new CreditDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	/**

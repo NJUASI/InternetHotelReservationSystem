@@ -80,7 +80,7 @@ public class RoomController {
 		List<TypeTable> dataList = new LinkedList<TypeTable>();
 		while(rooms.hasNext()){
 			RoomInfoVO temp = rooms.next();
-			dataList.add(new TypeTable(temp.roomType.toString(), temp.roomNum + "", temp.remainNum + "", Double.toString(temp.price)));
+			dataList.add(new TypeTable(temp.roomType.getChineseRoomType(), temp.roomNum + "", temp.remainNum + "", Double.toString(temp.price)));
 		}
 
 		ObservableList<TypeTable> data = FXCollections.observableArrayList();

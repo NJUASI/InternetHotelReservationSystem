@@ -10,6 +10,7 @@ import businessLogic.memberBL.MockMember;
 import dataService.promotionDataService.PromotionDataService;
 import dataService.promotionDataService.PromotionDataService_Stub;
 import po.AddressPO;
+import rmi.ClientRemoteHelper;
 import utilities.Address;
 import utilities.enums.MemberType;
 import utilities.enums.ResultMessage;
@@ -26,11 +27,12 @@ public class SpecialCirclePromotion {
 	private List<AddressPO> specialCirclePromotions;
 
 	public SpecialCirclePromotion() {
-		try {
-			promotionDataService = new PromotionDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		promotionDataService = ClientRemoteHelper.getInstance().getPromotionDataService();
+//		try {
+//			promotionDataService = new PromotionDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	/**
@@ -73,6 +75,7 @@ public class SpecialCirclePromotion {
 	 */
 	public double getDiscount(String guestID,String hotelID){
 		if(isVIP(guestID)){
+			//TODO 龚尘淼：mock，修改实现
 			Address hotelAddress = new MockHotel().getHotelAddress(hotelID);
 			String city = hotelAddress.city;
 			String cycle = hotelAddress.circle;
@@ -86,6 +89,7 @@ public class SpecialCirclePromotion {
 	}
 		
 	private boolean isVIP(String guestID){
+		//TODO 龚尘淼：mock，修改实现
 		return new MockMember().isMember(guestID, MemberType.COMMON);
 	}
 	

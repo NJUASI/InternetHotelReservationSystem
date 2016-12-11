@@ -23,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.PopUp.PopUp;
+import rmi.ClientRemoteHelper;
 import utilities.IDReserve;
 import utilities.enums.UserType;
 import vo.GuestVO;
@@ -188,7 +189,8 @@ public class LogInViewController {
 	 */
 	@FXML
 	protected void link() {
-		System.out.println(rmiText.getText());
+		ClientRemoteHelper.getInstance().init();
+		System.out.println("Connect to: " + rmiText.getText());
 		new PopUp("连接成功", "rmi连接");
 	}
 

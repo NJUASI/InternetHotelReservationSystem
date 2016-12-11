@@ -11,6 +11,7 @@ import dataService.marketDataService.MarketDataService;
 import dataService.marketDataService.MarketDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.MarketPO;
+import rmi.ClientRemoteHelper;
 import utilities.enums.ResultMessage;
 import vo.GuestVO;
 import vo.MarketVO;
@@ -31,11 +32,12 @@ public class Market implements MarketBLService{
 	 * @构造函数，初始化成员变量
 	 */
 	public Market() {
-		try {
-			marketDataService = new MarketDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		marketDataService = ClientRemoteHelper.getInstance().getMarketDataService();
+//		try {
+//			marketDataService = new MarketDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	/**

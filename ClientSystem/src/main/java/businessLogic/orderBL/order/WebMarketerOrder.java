@@ -15,6 +15,7 @@ import dataService.orderDataService.OrderDataService;
 import dataService.orderDataService.OrderDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.OrderGeneralPO;
+import rmi.ClientRemoteHelper;
 import utilities.enums.CreditRecord;
 import utilities.enums.OrderState;
 import utilities.enums.ResultMessage;
@@ -49,13 +50,13 @@ public class WebMarketerOrder implements WebMarketerOrderBLService {
 	 * 构造函数，初始化成员变量
 	 */
 	public WebMarketerOrder() {
-//		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
+		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
 		
-		try {
-			orderDataService = new OrderDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			orderDataService = new OrderDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 		
 		commonOrder = new CommonOrder();
 		

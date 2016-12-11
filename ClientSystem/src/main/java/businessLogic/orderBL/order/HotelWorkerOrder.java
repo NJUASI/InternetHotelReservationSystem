@@ -16,6 +16,7 @@ import dataService.orderDataService.OrderDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.CheckInPO;
 import po.CheckOutPO;
+import rmi.ClientRemoteHelper;
 import utilities.enums.CreditRecord;
 import utilities.enums.OrderState;
 import utilities.enums.ResultMessage;
@@ -54,13 +55,13 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 	 * 构造函数，初始化成员变量
 	 */
 	public HotelWorkerOrder() {
-//		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
+		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
 		
-		try {
-			orderDataService = new OrderDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			orderDataService = new OrderDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 		
 		commonOrder = new CommonOrder();
 		
@@ -136,10 +137,10 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 		}
 		
 		//更新酒店剩余房间信息
-		/*
-		 * new the mock one to test
-		 */
-		hotelInterface = new MockHotel();
+//		/*
+//		 * new the mock one to test
+//		 */
+//		hotelInterface = new MockHotel();
 		OrderVO thisOrder = commonOrder.getOrderDetail(checkInVO.orderID);
 		msg2 = hotelInterface.checkIn(thisOrder.orderGeneralVO.orderID, thisOrder.roomType, thisOrder.roomNumCount);
 		
@@ -169,10 +170,10 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 		}
 		
 		//更新酒店剩余房间信息
-		/*
-		 * new the mock one to test
-		 */
-		hotelInterface = new MockHotel();
+//		/*
+//		 * new the mock one to test
+//		 */
+//		hotelInterface = new MockHotel();
 		OrderVO thisOrder = commonOrder.getOrderDetail(checkOutVO.orderID);
 		msg2 = hotelInterface.checkOut(thisOrder.orderGeneralVO.orderID, thisOrder.roomType, thisOrder.roomNumCount);
 		

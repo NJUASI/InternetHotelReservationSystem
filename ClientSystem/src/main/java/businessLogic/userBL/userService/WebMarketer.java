@@ -9,6 +9,7 @@ import dataService.webMarketerDataService.WebMarketerDataService;
 import dataService.webMarketerDataService.WebMarketerDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.WebMarketerPO;
+import rmi.ClientRemoteHelper;
 import utilities.Ciphertext;
 import utilities.enums.ResultMessage;
 import vo.UserVO;
@@ -31,13 +32,12 @@ public class WebMarketer implements UserService {
 	 * @updateTime 2016/11/28 构造函数，初始化成员变量
 	 */
 	public WebMarketer() {
-		// webMarketerDataService =
-		// ClientRemoteHelper.getInstance().getWebMarketerDataService();
-		try {
-			webMarketerDataService = new WebMarketerDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		webMarketerDataService = ClientRemoteHelper.getInstance().getWebMarketerDataService();
+//		try {
+//			webMarketerDataService = new WebMarketerDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	/**
