@@ -21,13 +21,14 @@
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Button layoutX="15.0" layoutY="150.0" mnemonicParsing="false" onMouseClicked="#openHotel" prefHeight="40.0" prefWidth="70.0" text="酒店" />
-                  <Button layoutX="15.0" layoutY="230.0" mnemonicParsing="false" onMouseClicked="#openOrder" prefHeight="40.0" prefWidth="70.0" text="订单" />
-                  <Button layoutX="15.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#openMember" prefHeight="40.0" prefWidth="70.0" text="会员" />
-                  <Label layoutX="36.0" layoutY="94.0" text="昵称" />
-                  <Button layoutX="15.0" layoutY="390.0" mnemonicParsing="false" onMouseClicked="#openCredit" prefHeight="40.0" prefWidth="70.0" text="信用" />
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#openGuestInfo" prefHeight="80.0" prefWidth="80.0" text="Button" />
-                  <Button layoutX="15.0" layoutY="540.0" mnemonicParsing="false" onMouseClicked="#openMain" prefHeight="40.0" prefWidth="70.0" text="主页" />
+                  <Button layoutX="13.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#openHotel" prefHeight="40.0" prefWidth="70.0" text="酒店" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" />
+                  <Button layoutX="13.0" layoutY="246.0" mnemonicParsing="false" onMouseClicked="#openOrder" prefHeight="40.0" prefWidth="70.0" text="订单" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" />
+                  <Button layoutX="13.0" layoutY="328.0" mnemonicParsing="false" onMouseClicked="#openMember" prefHeight="40.0" prefWidth="70.0" text="会员" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" />
+                  <Label layoutX="35.0" layoutY="90.0" text="昵称" />
+                  <Button layoutX="15.0" layoutY="410.0" mnemonicParsing="false" onMouseClicked="#openCredit" prefHeight="40.0" prefWidth="70.0" text="信用" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#openGuestInfo" prefHeight="80.0" prefWidth="80.0" text="Button" AnchorPane.bottomAnchor="511.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="10.0" />
+                  <Button layoutX="15.0" layoutY="546.0" mnemonicParsing="false" onMouseClicked="#openMain" prefHeight="34.0" prefWidth="70.0" text="主页" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="546.0" />
+                  <Button layoutX="15.0" layoutY="512.0" mnemonicParsing="false" onAction="#logout" prefHeight="34.0" prefWidth="70.0" text="注销" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="512.0" />
                </children>
             </AnchorPane>
             <StackPane fx:id="right" prefHeight="150.0" prefWidth="200.0">

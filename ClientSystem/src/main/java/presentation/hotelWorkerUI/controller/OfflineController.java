@@ -10,8 +10,6 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
 import utilities.IDReserve;
 import utilities.enums.RoomType;
 import vo.RoomInfoVO;
@@ -22,11 +20,7 @@ public class OfflineController {
 	private ComboBox<String> roomType,roomType2;
 	@FXML
 	private ComboBox<Integer> roomNum,roomNum2;
-	@FXML
-	private DatePicker date1,date2;
-	@FXML
-	private TextField phone;
-
+	
 	HotelBLService hotelBLController;
 	String hotelID;
 	private int maxRoomNum = 3;
@@ -47,6 +41,7 @@ public class OfflineController {
 	class RoomTypeShowingEventHandler implements EventHandler<Event>{
 		@Override
 		public void handle(Event arg0) {
+			roomType.getItems().clear();
 			Iterator<RoomInfoVO> rooms = hotelBLController.getHotelRoomInfo(hotelID);
 			roomType.getItems().clear();
 			while(rooms.hasNext()){
