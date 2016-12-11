@@ -40,7 +40,7 @@ public class RoomController {
 	@FXML
 	private ComboBox<String> roomType;
 	@FXML
-	private TextField roomName,roomNum,price;
+	private TextField roomNum,price;
 
 
 	private HotelBLService hotelBLController;
@@ -156,7 +156,6 @@ public class RoomController {
 	}
 	void setModifyText(String roomType,String roomNum,String price){
 		this.roomType.setValue(roomType);
-		this.roomNum.setText(roomNum);
 		this.price.setText(price);
 	}
 
