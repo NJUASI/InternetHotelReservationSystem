@@ -10,6 +10,7 @@ import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import exception.verificationException.WrongPasswordException;
 import utilities.Detector;
+import utilities.IDReserve;
 import utilities.enums.UserType;
 import vo.GuestVO;
 import vo.UserVO;
@@ -17,7 +18,7 @@ import vo.UserVO;
 /**
  * 
  * @author 61990
- * @lastChangedBy Byron Dong
+ * @lastChangedBy charles
  *
  */
 public class LogIn implements LogInBLService{
@@ -122,5 +123,18 @@ public class LogIn implements LogInBLService{
 		if(!phone){throw new InvalidLengthInputException();}
 		
 		return true;
+	}
+
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/11
+	 * @param userID 当前客户端登录的用户编号 
+	 * 
+	 * TODO 根据后期确定检查重复登录
+	 */
+	@Override
+	public void logOut(String userID) {
+		IDReserve.getInstance().setUserID("");
 	}
 }
