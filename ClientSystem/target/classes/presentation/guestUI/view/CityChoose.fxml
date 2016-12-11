@@ -330,7 +330,7 @@
                   <Pane layoutX="6.0" layoutY="62.0" prefHeight="541.0" prefWidth="895.0">
                      <children>
                         <Label layoutX="512.0" layoutY="88.0" text="剩余数量：" />
-                        <Label fx:id="remainNumInOrder" layoutX="597.0" layoutY="87.0" text="ss">
+                        <Label fx:id="remainNumInOrder" layoutX="597.0" layoutY="87.0">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -411,7 +411,7 @@
                            </font>
                         </Label>
                         <Label layoutX="662.0" layoutY="88.0" text="房间价格：" />
-                        <Label fx:id="previousPriceInOrder" layoutX="743.0" layoutY="87.0" text="ss">
+                        <Label fx:id="previousPriceInOrder" layoutX="743.0" layoutY="87.0">
                            <font>
                               <Font size="16.0" />
                            </font>
