@@ -111,5 +111,10 @@ public class HotelBLService_Stub implements HotelBLService{
 		
 	}
 
+	@Override
+	public void setHotelID(String hotelID) {
+		
+	}
+
 
 }

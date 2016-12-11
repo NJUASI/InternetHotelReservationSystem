@@ -5,8 +5,6 @@ import java.util.List;
 import businessLogic.hotelBL.hotel.Hotel;
 import businessLogic.hotelBL.hotelScan.HotelScan;
 import businessLogicService.hotelBLService.HotelBLService;
-import exception.operationFailedException.GetFailedException;
-import exception.verificationException.RMILinkFailedException;
 import utilities.enums.ResultMessage;
 import utilities.enums.RoomType;
 import utilities.enums.SearchCriteriaType;
@@ -33,34 +31,27 @@ public class HotelBLController implements HotelBLService {
 		hotelScan = new HotelScan();
 	}
 	
-	public void setGuestID(String guestID){
-		initHotelsScan(guestID);
-	}
-	
-	public void setHotelID(String hotelID){
-		initHotel(hotelID);
-	}
-	
 	/**
-	 * @Description:当酒店工作人员登录时调用此方法
-	 * @param hotelID
-	 * void
+	 * @Description:当客户需要查看酒店时调用该方法
+	 * @param guestID
 	 * @author: Harvey Gong
-	 * @throws GetFailedException 
-	 * @throws RMILinkFailedException 
 	 * @lastChangedBy: Harvey Gong
-	 * @time:2016年12月6日 下午5:08:48
+	 * @time:2016年12月12日 上午1:13:38
 	 */
-	private void initHotel(String hotelID){
-		hotel = new Hotel(hotelID);
+	public void setGuestID(String guestID){
+		hotelScan = new HotelScan(guestID);
 	}
 	
+	
 	/**
-	 * 当用户或者网站管理人员登陆时，则调用此初始化方法
-	 * @param addressVO
+	 * @Description:当酒店工作人员登录酒店时调用该方法
+	 * @param hotelID
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月12日 上午1:17:10
 	 */
-	private void initHotelsScan(String guestID){
-		hotelScan = new HotelScan(guestID);
+	public void setHotelID(String hotelID){
+		hotel = new Hotel(hotelID);
 	}
 
 	public static HotelBLController getInstance(){
@@ -119,6 +110,7 @@ public class HotelBLController implements HotelBLService {
 	public ResultMessage checkOutOffline(String hotelID,RoomType roomType, int roomNum) {
 		return hotel.checkOut(hotelID,roomType,roomNum);
 	}
+	
 	// 浏览概况时的操作
 	public Iterator<HotelVO> getHotels(String city,String circle) {
 		return hotelScan.getHotels(city,circle);

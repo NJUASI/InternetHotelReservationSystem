@@ -6,7 +6,6 @@ import java.util.List;
 
 import dataHelper.WebMarketerDataHelper;
 import dataHelperImpl.WebMarketerDataHelperImpl;
-import dataHelperImpl.stub.WebMarketerDataHelperImpl_Stub;
 import dataService.webMarketerDataService.WebMarketerDataService;
 import exception.verificationException.UserInexistException;
 import po.WebMarketerPO;
@@ -32,8 +31,6 @@ public class WebMarketerDataServiceImpl extends UnicastRemoteObject implements W
 	 */
 	public WebMarketerDataServiceImpl() throws RemoteException {
 		webMarketerHelper = new WebMarketerDataHelperImpl();
-//		webMarketerHelper = new WebMarketerDataHelperImpl_Stub();
-	
 	}
 
 	/**

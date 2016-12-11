@@ -7,8 +7,8 @@ import java.util.List;
 
 import businessLogic.hotelBL.HotelInfoOperation;
 import businessLogic.hotelBL.hotel.Hotel;
+import businessLogic.promotionBL.DiscountCalculator;
 import businessLogic.promotionBL.DiscountInSpan;
-import businessLogic.promotionBL.MockPromotion;
 import businessLogicService.orderBLService.GuestOrderBLService;
 import dataService.orderDataService.OrderDataService;
 import exception.verificationException.UserInexistException;
@@ -63,7 +63,7 @@ public class GuestOrder implements GuestOrderBLService {
 		 * new the mock one to test
 		 * TODO 龚尘淼：promotion没有无参数的初始化方法，不知道自己改初始化啥
 		 */
-		discountCalculator = new MockPromotion();
+		discountCalculator = new DiscountCalculator();
 
 		/*
 		 * hotel因为需要hotelID作为参数初始化，故不在此初始化，用到的时候再初始化

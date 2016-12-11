@@ -6,7 +6,6 @@ import java.util.List;
 
 import dataHelper.HotelWorkerDataHelper;
 import dataHelperImpl.HotelWorkerDataHelperImpl;
-import dataHelperImpl.stub.HotelWorkerDataHelperImpl_Stub;
 import dataService.hotelWorkerDataService.HotelWorkerDataService;
 import exception.verificationException.UserInexistException;
 import po.HotelWorkerPO;
@@ -30,7 +29,6 @@ public class HotelWorkerDataServiceImpl extends UnicastRemoteObject implements H
 	 */
 	public HotelWorkerDataServiceImpl() throws RemoteException {
 		hotelWorkerHelper = new HotelWorkerDataHelperImpl();
-//		hotelWorkerHelper = new HotelWorkerDataHelperImpl_Stub();
 	}
 
 	/**

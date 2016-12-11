@@ -540,8 +540,9 @@ public class HotelSearchController {
 		//获取到各种搜索条件和用了哪些搜索方法
 		setVOAndCriteria();
 
-		//调用hotelBL的方法，根据搜索标准列表搜索酒店
-		hotelBLController.searchHotels(criteria, vo);
+		//调用hotelBL的方法，根据搜索标准列表搜索酒店,并初始化酒店列表
+		Iterator<HotelVO> searchedHotels = hotelBLController.searchHotels(criteria, vo);
+		initHotelTable(searchedHotels);
 
 		hotelCheck.setVisible(true);
 		hotelChoose.setVisible(false);
