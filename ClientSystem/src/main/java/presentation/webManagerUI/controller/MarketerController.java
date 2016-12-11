@@ -26,11 +26,11 @@ public class MarketerController {
 	WebMarketerVO marketerVO;
 	
 	@FXML
-	private Pane modifyPane,marketerInfoPane;
+	private Pane modifyPane,marketerInfoPane,pane;
 	@FXML
 	private TextField inputID, password2;
 	@FXML
-	private Label password, marketerID, marketerID2;
+	private Label password, marketerID, marketerID2,yourID,yourPassword;
 	
 	private UserBLService userBLController;
 
@@ -126,7 +126,6 @@ public class MarketerController {
 	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/12/7
 	 * @添加营销人員信息
-	 * 是否需要待议
 	 */
 	@FXML
 	protected void addMarketer() {
@@ -134,8 +133,20 @@ public class MarketerController {
 		WebMarketerVO webMarketerVO = new WebMarketerVO("","");
 		try {
 			webMarketerVO = (WebMarketerVO) userBLController.add(webMarketerVO, UserType.WEB_MARKETER);
+			yourID.setText(webMarketerVO.userID);
+			yourPassword.setText(webMarketerVO.password);
 		} catch (ParameterInvalidException e) {
 			e.printStackTrace();
 		}
+	}
+	/**
+	 * @author 61990
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/7
+	 * @隐藏营销人員信息
+	 */
+	@FXML
+	protected void cancel() {
+		pane.setVisible(false);
 	}
 }
