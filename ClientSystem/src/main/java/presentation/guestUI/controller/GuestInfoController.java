@@ -14,7 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import presentation.PopUp.PopUp;
 import utilities.IDReserve;
-import utilities.enums.ResultMessage;
 import vo.GuestVO;
 
 /**
@@ -95,21 +94,6 @@ public class GuestInfoController {
 	@FXML
 	protected void saveGuestInfo() {
 
-		try {
-			
-			GuestVO tempGuestVO = guestVO;
-			tempGuestVO.name = name2.getText();
-			tempGuestVO.nickName = nickname2.getText();
-			tempGuestVO.phone = phone2.getText();
-			tempGuestVO.password = password2.getText();
-			
-			System.out.println(password2.getText().equals(password3.getText()));
-			if(password2.getText().equals(password3.getText())){
-				ResultMessage message = userBLController.modify(tempGuestVO);
-			}else{
-				new PopUp("请检查你的密码", "更改失败");
-			}
-
 		GuestVO tempGuestVO = guestVO;
 		tempGuestVO.name = name2.getText();
 		tempGuestVO.nickName = nickname2.getText();
@@ -118,7 +102,7 @@ public class GuestInfoController {
 		
 		if (password2.getText().equals(password3.getText())) {
 			try {
-				ResultMessage message = userBLController.modify(tempGuestVO);
+				userBLController.modify(tempGuestVO);
 
 				new PopUp("您已经成功修改信息", "更改成功");
 				
