@@ -197,8 +197,8 @@ public class LogInViewController {
 			ClientRemoteHelper.setLocalhost();
 		}else if(!ip.equals("") && !port.equals("")) {
 			System.out.println("Connect to: " + ip + " : " + port);
-//			ClientRemoteHelper.setIPandPort(ip, port);
-			ClientRemoteHelper.setIPandPort("172.28.21.131", "8889");
+			ClientRemoteHelper.setIPandPort(ip, port);
+//			ClientRemoteHelper.setIPandPort("172.28.21.131", "8889");
 			
 			new PopUp("连接成功", "rmi连接");
 		}else {

@@ -18,12 +18,12 @@ import dataService.webMarketerDataService.WebMarketerDataService;
 
 public class ClientRemoteHelper {
 
+	static String ip = "";
+	static String port = ""; 
+	static String url = "rmi://localhost:8889/";
+	
 	final static String localhost = "rmi://localhost:8889/";
 	final static String defaultPort = "8889";
-	
-	static String ip = "";
-	static String port = defaultPort; 
-	static String url = localhost;
 
 	GuestDataService guestDataService;
 	HotelDataService hotelDataService;

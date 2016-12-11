@@ -16,8 +16,8 @@ import javafx.stage.WindowEvent;
 public class ServerRunner extends Application{
 
 	public ServerRunner() {
-//		ServerRemoteHelper.setLocalhost();
-		ServerRemoteHelper.setIPandPort("172.28.21.131", "8889");
+		ServerRemoteHelper.setLocalhost();
+//		ServerRemoteHelper.setIPandPort("172.28.21.131", "8889");
 		new ServerRemoteHelper();
 	}
 	
