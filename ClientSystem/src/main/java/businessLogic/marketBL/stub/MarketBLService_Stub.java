@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import businessLogicService.marketBLService.MarketBLService;
+import exception.verificationException.UserInexistException;
 import utilities.enums.ResultMessage;
 import vo.MarketVO;
 
@@ -35,6 +36,12 @@ public class MarketBLService_Stub implements MarketBLService {
 	@Override
 	public int getLevel(String guestID) {
 		return 0;
+	}
+
+	@Override
+	public String getLevelName(String userID) throws UserInexistException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

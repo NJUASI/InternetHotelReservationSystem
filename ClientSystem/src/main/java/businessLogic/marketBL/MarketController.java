@@ -71,4 +71,9 @@ public final class MarketController implements MarketBLService {
 		return market.getLevel(guestID);
 	}
 
+	@Override
+	public String getLevelName(String userID) throws UserInexistException {
+		return market.getLevelName(userID);
+	}
+
 }
