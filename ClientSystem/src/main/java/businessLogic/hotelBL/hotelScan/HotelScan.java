@@ -11,7 +11,6 @@ import businessLogic.hotelBL.hotelScan.searchCriteria.SearchCriteriaFactory;
 import businessLogic.hotelBL.hotelScan.sortComparator.SortComparatorFactory;
 import businessLogic.orderBL.MockOrder;
 import dataService.hotelDataService.HotelDataService;
-import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelPO;
 import rmi.ClientRemoteHelper;
 import utilities.enums.OrderState;

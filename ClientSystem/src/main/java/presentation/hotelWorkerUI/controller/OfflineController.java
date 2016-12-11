@@ -3,7 +3,6 @@ package presentation.hotelWorkerUI.controller;
 import businessLogic.hotelBL.HotelBLController;
 import businessLogicService.hotelBLService.HotelBLService;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;

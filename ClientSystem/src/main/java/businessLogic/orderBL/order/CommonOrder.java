@@ -7,7 +7,6 @@ import java.util.List;
 
 import businessLogicService.orderBLService.CommonOrderBLService;
 import dataService.orderDataService.OrderDataService;
-import dataService.orderDataService.OrderDataService_Stub;
 import po.HotelEvaluationPO;
 import po.OrderGeneralPO;
 import rmi.ClientRemoteHelper;

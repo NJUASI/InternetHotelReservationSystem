@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import dataService.hotelDataService.HotelDataService;
-import dataService.hotelDataService.HotelDataService_Stub;
 import po.RoomInfoPO;
 import rmi.ClientRemoteHelper;
 import utilities.enums.Operation;

@@ -8,7 +8,6 @@ import java.util.List;
 import businessLogic.hotelBL.MockHotel;
 import businessLogic.memberBL.MockMember;
 import dataService.promotionDataService.PromotionDataService;
-import dataService.promotionDataService.PromotionDataService_Stub;
 import po.AddressPO;
 import rmi.ClientRemoteHelper;
 import utilities.Address;

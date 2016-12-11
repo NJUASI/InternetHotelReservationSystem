@@ -6,13 +6,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.hotelBL.HotelInfoOperation;
-import businessLogic.hotelBL.MockHotel;
 import businessLogic.hotelBL.hotel.Hotel;
 import businessLogic.promotionBL.DiscountInSpan;
 import businessLogic.promotionBL.MockPromotion;
 import businessLogicService.orderBLService.GuestOrderBLService;
 import dataService.orderDataService.OrderDataService;
-import dataService.orderDataService.OrderDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.GuestEvaluationPO;
 import po.OrderPO;

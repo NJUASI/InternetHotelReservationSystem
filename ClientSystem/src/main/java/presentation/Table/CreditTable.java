@@ -1,7 +1,6 @@
 package presentation.Table;
 
 import javafx.beans.property.SimpleStringProperty;
-import utilities.enums.CreditRecord;
 
 public class CreditTable {
 		public final SimpleStringProperty guestID;

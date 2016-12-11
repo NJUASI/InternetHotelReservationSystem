@@ -9,7 +9,6 @@ import java.util.List;
 import businessLogic.promotionBL.discountCalculation.CalculateDiscount;
 import businessLogic.promotionBL.discountCalculation.discountOfPromotions.SpecialSpanDiscount;
 import dataService.promotionDataService.PromotionDataService;
-import dataService.promotionDataService.PromotionDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.SpecialSpanPromotionPO;
 import rmi.ClientRemoteHelper;

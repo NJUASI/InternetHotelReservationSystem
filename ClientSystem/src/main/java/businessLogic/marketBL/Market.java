@@ -8,7 +8,6 @@ import businessLogic.userBL.UserController;
 import businessLogicService.marketBLService.MarketBLService;
 import businessLogicService.userBLService.UserBLService;
 import dataService.marketDataService.MarketDataService;
-import dataService.marketDataService.MarketDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.MarketPO;
 import rmi.ClientRemoteHelper;

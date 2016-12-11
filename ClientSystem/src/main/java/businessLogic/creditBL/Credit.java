@@ -9,7 +9,6 @@ import businessLogic.userBL.userService.Guest;
 import businessLogic.userBL.userService.service.GuestCreditService;
 import businessLogicService.creditBLService.CreditBLService;
 import dataService.creditDataService.CreditDataService;
-import dataService.creditDataService.CreditDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.CreditPO;
 import rmi.ClientRemoteHelper;
