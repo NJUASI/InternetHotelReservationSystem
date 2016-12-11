@@ -27,7 +27,7 @@
                   <Button focusTraversable="false" layoutX="7.0" layoutY="410.0" mnemonicParsing="false" onMouseClicked="#openPromotion" prefHeight="53.0" prefWidth="82.0" text="促销策略" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" />
                   <Button focusTraversable="false" layoutX="8.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#openHotelInfo" prefHeight="82.0" prefWidth="80.0" wrapText="true" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" />
                   <Button focusTraversable="false" layoutX="7.0" layoutY="322.0" mnemonicParsing="false" onMouseClicked="#openRoomInfo" prefHeight="53.0" prefWidth="82.0" text="客房信息" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" />
-                  <Button focusTraversable="false" layoutX="8.0" layoutY="500.0" mnemonicParsing="false" onAction="#logout" onMouseClicked="#openMain" prefHeight="40.0" prefWidth="80.0" text="注销" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="500.0" />
+                  <Button focusTraversable="false" layoutX="8.0" layoutY="500.0" mnemonicParsing="false" onAction="#logout" prefHeight="40.0" prefWidth="80.0" text="注销" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="500.0" />
                   <Button focusTraversable="false" layoutX="9.0" layoutY="540.0" mnemonicParsing="false" onMouseClicked="#openMain" prefHeight="40.0" prefWidth="80.0" text="主页" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="540.0" />
                </children>
             </AnchorPane>
