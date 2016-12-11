@@ -158,6 +158,12 @@ public class HotelSearchController {
 		String fistCity = sourceBLController.getCities().next();
 		cityChoose.setValue(fistCity);
 		cycleChoose.setValue(sourceBLController.getCircles(fistCity).next());
+		
+		//初始化商圈列表
+		Iterator<String> circles = sourceBLController.getCircles(fistCity);
+		while(circles.hasNext()){
+			cycleChoose.getItems().add(circles.next());
+		}
 
 		cityChoose.setOnShowing(new CityChooseHandler());
 		cityChoose.valueProperty().addListener(new CityChangedListener());
@@ -515,7 +521,6 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void openChoose() {
-
 		hotelCheck.setVisible(false);
 		hotelChoose.setVisible(true);
 	}
@@ -554,11 +559,11 @@ public class HotelSearchController {
 		vo = new SearchCriteriaVO();
 		criteria = new ArrayList<SearchCriteriaType>();
 
-		if(vo.keyHotelName!=null){
+		if(hotelNameInput.getText()!=""){
 			criteria.add(SearchCriteriaType.HOTEL_NAME);
 			vo.keyHotelName = hotelNameInput.getText();
 		}
-		if(vo.bookedOnly){
+		if(boxOnly.isSelected()){
 			criteria.add(SearchCriteriaType.BOOKED_ONLY);
 			vo.bookedOnly = boxOnly.isSelected();
 		}
