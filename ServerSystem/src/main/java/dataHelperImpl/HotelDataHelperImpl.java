@@ -51,10 +51,10 @@ public class HotelDataHelperImpl implements HotelDataHelper{
 			rs = ps.executeQuery();
 
 			while(rs.next()){
-				generalPO = setHotelPO(rs);
+				generalPO = setHotelPO();
 				list.add(generalPO);
 			}
-
+			rs = null;
 			return list;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -81,8 +81,9 @@ public class HotelDataHelperImpl implements HotelDataHelper{
 			ps.setString(1, hotelID);
 			rs = ps.executeQuery();
 			if(rs.next()){
-				hotelPO = setHotelPO(rs);
+				hotelPO = setHotelPO();
 			}
+			rs = null;
 		} catch (SQLException e) {
 		}
 		return hotelPO;
@@ -168,7 +169,7 @@ public class HotelDataHelperImpl implements HotelDataHelper{
 		}
 	}
 	
-	private HotelPO setHotelPO(ResultSet rs){
+	private HotelPO setHotelPO(){
 		HotelPO po = new HotelPO();
 		try {
 			po.setHotelID(rs.getString(1));

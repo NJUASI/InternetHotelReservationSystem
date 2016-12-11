@@ -22,4 +22,6 @@ public interface MarketBLService {
 	
 	public int getLevel(String guestID) throws UserInexistException;
 	
+	public String getLevelName(String userID) throws UserInexistException;
+	
 }

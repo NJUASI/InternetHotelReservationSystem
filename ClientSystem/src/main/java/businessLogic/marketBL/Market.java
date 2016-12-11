@@ -108,4 +108,9 @@ public class Market implements MarketBLService{
 		
 		return level;
 	}
+	
+	public String getLevelName(String userID) throws UserInexistException{
+		int level = this.getLevel(userID);
+		return "Lv"+String.valueOf(level);
+	}
 }

@@ -2,6 +2,10 @@ package presentation.webManagerUI.controller;
 
 import businessLogic.userBL.UserController;
 import businessLogicService.userBLService.UserBLService;
+import exception.inputException.InvalidInputException;
+import exception.inputException.InvalidLengthInputException;
+import exception.inputException.PasswordInputException;
+import exception.operationFailedException.UpdateFaiedException;
 import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -101,13 +105,25 @@ public class HotelWorkerController {
 		tempHotelWorkerVO.hotelName = hotelName2.getText();
 		tempHotelWorkerVO.password = password2.getText();
 		
-		ResultMessage message = userBLController.modify(tempHotelWorkerVO);
+		ResultMessage message;
+		try {
+			message = userBLController.modify(tempHotelWorkerVO);
+			
+			new PopUp(message.toString(), "congratulation");	
+
+			hotelModifyPane.setVisible(false);
+			hotelInfoPane.setVisible(true);
+			
+		} catch (InvalidInputException e) {
+			e.printStackTrace();
+			new PopUp("酒店名称不能含有无效标识符或不能为空", "更改失败");
+		} catch (PasswordInputException e) {
+			e.printStackTrace();
+			new PopUp("密码必须含有一个数字和密码或不能为空", "更改失败");
+		} catch (UpdateFaiedException |InvalidLengthInputException e) {
+			e.printStackTrace();
+		}
 		
-		new PopUp(message.toString(), "congratulation");	
-
-
-		hotelModifyPane.setVisible(false);
-		hotelInfoPane.setVisible(true);
 	}
 
 	/**

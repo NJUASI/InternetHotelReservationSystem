@@ -27,6 +27,7 @@ public class Main extends Application {
 	 * @param stage 界面主载体
 	 * @throws IOException 界面初始化
 	 */
+//	@SuppressWarnings("restriction")
 	public void start(final Stage stage) throws IOException {
 		final Parent root = FXMLLoader.load(getClass().getResource("/presentation/signUpUI/view/logIn.fxml"));
 		

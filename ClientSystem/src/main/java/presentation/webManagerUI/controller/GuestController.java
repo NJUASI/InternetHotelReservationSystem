@@ -2,6 +2,10 @@ package presentation.webManagerUI.controller;
 
 import businessLogic.userBL.UserController;
 import businessLogicService.userBLService.UserBLService;
+import exception.inputException.InvalidInputException;
+import exception.inputException.InvalidLengthInputException;
+import exception.inputException.PasswordInputException;
+import exception.operationFailedException.UpdateFaiedException;
 import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -142,14 +146,30 @@ public class GuestController {
 		tempGuestVO.nickName=nickNameText.getText();
 		tempGuestVO.password=passwordText.getText();
 		
-		ResultMessage message = userBLController.modify(tempGuestVO);
+		ResultMessage message = null;
+		try {
+			message = userBLController.modify(tempGuestVO);
+			
+			new PopUp(message.toString(), "congratulation");	
+			
+			modifyBt.setVisible(true);
+			modifyPane.setVisible(false);
+			
+			initialize();
+		} catch (InvalidLengthInputException e) {
+			e.printStackTrace();
+			new PopUp("请勿输入无效电话", "更改失败");
+		} catch (InvalidInputException e) {
+			e.printStackTrace();
+			new PopUp("请勿输入不合法标识符或不能为空", "更改失败");
+		} catch (PasswordInputException e) {
+			e.printStackTrace();
+			new PopUp("密码必须含有一个数字和密码或不能为空", "更改失败");
+		} catch (UpdateFaiedException e) {
+			e.printStackTrace();
+			new PopUp("填写内容不能为空", "更改失败");
+		}
 		
-		new PopUp(message.toString(), "congratulation");	
-		
-		modifyBt.setVisible(true);
-		modifyPane.setVisible(false);
-		
-		initialize();
 	}
 
 }

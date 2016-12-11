@@ -133,6 +133,12 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 			result.add(new OrderGeneralPO(guestOrder));
 		}
 
+		if (guestOrders == null) {
+			System.out.println("orderDataHelper get data fail");
+		}else {
+			System.out.println("orderDataHelper get data success");
+		}
+		
 		return result;
 	}
 

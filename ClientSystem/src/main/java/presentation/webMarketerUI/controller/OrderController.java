@@ -110,15 +110,15 @@ public class OrderController {
 	 */
 	@FXML
 	protected void searchOneOrder() {
-		back1.setVisible(false);
-		back2.setVisible(true);
-		orderDetail.setVisible(true);
-		searchPane.setVisible(false);
+		
 	
 		orderID = searchID.getText();
 		orderVO = orderBLController.getOrderDetail(orderID);
 		initOrderDetail(orderVO);
-		
+		back1.setVisible(false);
+		back2.setVisible(true);
+		orderDetail.setVisible(true);
+		searchPane.setVisible(false);
 		if (orderVO.orderGeneralVO.state == OrderState.ABNORMAL) {
 			cancelOrderPane.setDisable(false);
 		} else {
@@ -154,8 +154,7 @@ public class OrderController {
 	 */
 	@FXML
 	protected void searchDateOrder() {
-		orderCheck.setVisible(true);
-		searchPane.setVisible(false);
+		
 		
 //		LocalDate date = searchDate.getValue();
 //		List<OrderGeneralVO> abnormalOrderGenerals = orderBLController.getAllAbnormalOrderGeneral(date);
@@ -171,7 +170,8 @@ public class OrderController {
 		
 		orderGenerals = orderBLController.getAllAbnormalOrderGeneral(date);
 		initOrderCheck(orderGenerals);
-		
+		orderCheck.setVisible(true);
+		searchPane.setVisible(false);
 		cancelOrderPaneInCheck.setDisable(false);
 	}
 

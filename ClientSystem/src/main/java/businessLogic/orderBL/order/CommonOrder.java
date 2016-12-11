@@ -67,7 +67,7 @@ public class CommonOrder implements CommonOrderBLService {
 			e.printStackTrace();
 		}
 		
-		
+		//添加数据饿的时候解密
 		Ciphertext ciphertext = new Ciphertext();
 		if (orderGeneralPOs != null) {
 			for (OrderGeneralPO orderGeneralPO : orderGeneralPOs) {
@@ -132,6 +132,11 @@ public class CommonOrder implements CommonOrderBLService {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+
+		//解密
+		Ciphertext ciphertext = new Ciphertext();
+		thisOrderVO.orderGeneralVO.name = ciphertext.decode(thisOrderVO.orderGeneralVO.name);
+		thisOrderVO.orderGeneralVO.phone = ciphertext.decode(thisOrderVO.orderGeneralVO.phone);
 
 		return thisOrderVO;
 	}

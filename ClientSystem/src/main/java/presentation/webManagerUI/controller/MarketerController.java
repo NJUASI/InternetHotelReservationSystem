@@ -2,6 +2,10 @@ package presentation.webManagerUI.controller;
 
 import businessLogic.userBL.UserController;
 import businessLogicService.userBLService.UserBLService;
+import exception.inputException.InvalidInputException;
+import exception.inputException.InvalidLengthInputException;
+import exception.inputException.PasswordInputException;
+import exception.operationFailedException.UpdateFaiedException;
 import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
@@ -91,13 +95,20 @@ public class MarketerController {
 		
 		tempMarketerVO.password = password2.getText();
 		
-		ResultMessage message = userBLController.modify(tempMarketerVO);
+		ResultMessage message;
+		try {
+			message = userBLController.modify(tempMarketerVO);
+			
+			new PopUp(message.toString(), "congratulation");	
+
+			modifyPane.setVisible(false);
+			marketerInfoPane.setVisible(true);
+		} catch (InvalidLengthInputException | InvalidInputException | PasswordInputException
+				| UpdateFaiedException e) {
+			e.printStackTrace();
+			new PopUp("密码必须含有一个数字和密码或不能为空", "更改失败");
+		}
 		 		
-		new PopUp(message.toString(), "congratulation");	
-
-
-		modifyPane.setVisible(false);
-		marketerInfoPane.setVisible(true);
 	}
 	/**
 	 * @author 61990

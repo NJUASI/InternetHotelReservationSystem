@@ -6,11 +6,13 @@ import java.util.List;
 
 import businessLogic.userBL.userService.service.UserService;
 import dataService.hotelWorkerDataService.HotelWorkerDataService;
-import dataService.hotelWorkerDataService.HotelWorkerDataService_Stub;
+import exception.inputException.InvalidInputException;
+import exception.inputException.PasswordInputException;
 import exception.verificationException.UserInexistException;
 import po.HotelWorkerPO;
 import rmi.ClientRemoteHelper;
 import utilities.Ciphertext;
+import utilities.Detector;
 import utilities.enums.ResultMessage;
 import vo.HotelWorkerVO;
 import vo.UserVO;
@@ -66,17 +68,15 @@ public class HotelWorker implements UserService {
 	 * @param newUserVO
 	 *            从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功修改酒店工作人员信息
+	 * @throws InvalidInputException 
+	 * @throws PasswordInputException 
 	 */
-	public ResultMessage modify(UserVO userVO) {
+	public ResultMessage modify(UserVO userVO) throws PasswordInputException, InvalidInputException {
 
-		//TODO: 董金玉USER_INFO_UPDATE_FAILURE
 		ResultMessage msg = ResultMessage.FAIL;
 
-		if (!this.hasHotelWorker(userVO.userID)) {
-			return msg;
-		} // 不存在ID对应项
-
 		try {
+			this.infoDetector(userVO);
 			HotelWorkerPO hotelWorkerPO = this.convert(userVO);
 			msg = hotelWorkerDataService.modify(hotelWorkerPO);
 		} catch (RemoteException e) {
@@ -186,13 +186,13 @@ public class HotelWorker implements UserService {
 		return result;
 	}
 
-	private boolean hasHotelWorker(String hotelWorkerID) {
-		try {
-			UserVO hotelWorkerVO = this.getSingle(hotelWorkerID);
-		} catch (UserInexistException e) {
-			e.printStackTrace();
-			return false;
-		}
+	private boolean infoDetector(UserVO userVO) throws PasswordInputException, InvalidInputException{
+		Detector detector = new Detector();
+		HotelWorkerVO hotelWorkerVO = (HotelWorkerVO)userVO;
+		
+		detector.passwordDetector(hotelWorkerVO.password);
+		detector.infoDetector(hotelWorkerVO.hotelName);
+		
 		return true;
 	}
 
