@@ -2,7 +2,7 @@ package dataService.sourceDataService;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.Iterator;
+import java.util.List;
 
 public interface SourceDataService extends Remote {
 	
@@ -15,7 +15,7 @@ public interface SourceDataService extends Remote {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月7日 下午4:59:17
 	 */
-	public Iterator<String> getCities() throws RemoteException;
+	public List<String> getCities() throws RemoteException;
 	
 	
 	/**
@@ -27,7 +27,7 @@ public interface SourceDataService extends Remote {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月7日 下午6:46:45
 	 */
-	public Iterator<String> getCircles(String city) throws RemoteException;
+	public List<String> getCircles(String city) throws RemoteException;
 
 	/**
 	 * @Description:获取该系统支持的所有酒店的星级
@@ -37,7 +37,7 @@ public interface SourceDataService extends Remote {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月7日 下午4:59:54
 	 */
-	public Iterator<String> getLevels() throws RemoteException;
+	public List<String> getLevels() throws RemoteException;
 
 	
 	/**
@@ -48,5 +48,5 @@ public interface SourceDataService extends Remote {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月7日 下午5:00:19
 	 */
-	public Iterator<String> getRoomTypes() throws RemoteException;
+	public List<String> getRoomTypes() throws RemoteException;
 }
