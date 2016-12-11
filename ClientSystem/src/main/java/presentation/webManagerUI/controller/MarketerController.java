@@ -2,6 +2,7 @@ package presentation.webManagerUI.controller;
 
 import businessLogic.userBL.UserController;
 import businessLogicService.userBLService.UserBLService;
+import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import presentation.PopUp.PopUp;
 import utilities.enums.ResultMessage;
+import utilities.enums.UserType;
 import vo.WebMarketerVO;
 
 /**
@@ -117,8 +119,12 @@ public class MarketerController {
 	 */
 	@FXML
 	protected void addMarketer() {
-		//TODO 返回初始的标号和密码
-		// TODO djy 这个方法是添加酒店工作人员还是营销？
-//		营销人员的VO
+		
+		WebMarketerVO webMarketerVO = new WebMarketerVO("","");
+		try {
+			webMarketerVO = (WebMarketerVO) userBLController.add(webMarketerVO, UserType.WEB_MARKETER);
+		} catch (ParameterInvalidException e) {
+			e.printStackTrace();
+		}
 	}
 }
