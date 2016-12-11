@@ -22,11 +22,7 @@ public class OfflineController {
 	private ComboBox<String> roomType,roomType2;
 	@FXML
 	private ComboBox<Integer> roomNum,roomNum2;
-	@FXML
-	private DatePicker date1,date2;
-	@FXML
-	private TextField phone;
-
+	
 	HotelBLService hotelBLController;
 	String hotelID;
 	
@@ -35,8 +31,11 @@ public class OfflineController {
 		hotelID = IDReserve.getInstance().getUserID();
 	}
 	@FXML
-	void Initialize(){
+	void initialize(){
 		roomType.setValue("单人间");
+		roomType2.setValue("单人间");
+		 roomNum.setValue(1);
+		 roomNum2.setValue(1);
 		roomType.setOnShowing(new RoomTypeShowingEventHandler());
 		roomType2.setOnShowing(new RoomTypeShowingEventHandler());
 		roomType.valueProperty().addListener(new RoomTypeChangedListener());
@@ -45,6 +44,7 @@ public class OfflineController {
 	class RoomTypeShowingEventHandler implements EventHandler<Event>{
 		@Override
 		public void handle(Event arg0) {
+			roomType.getItems().clear();
 			Iterator<RoomInfoVO> rooms = hotelBLController.getHotelRoomInfo(hotelID);
 			while(rooms.hasNext()){
 				roomType.getItems().add(rooms.next().roomType.getChineseRoomType());
