@@ -182,8 +182,8 @@ public class Hotel implements HotelInfoOperation{
 	 * @author: Harvey Gong
 	 * @time:2016年12月4日 下午7:25:02
 	 */
-	public double getLowestPrice(){
-		return rooms.getLowestPrice();
+	public double getLowestPrice(String hotelID){
+		return rooms.getLowestPrice(hotelID);
 	}
 
 	/**

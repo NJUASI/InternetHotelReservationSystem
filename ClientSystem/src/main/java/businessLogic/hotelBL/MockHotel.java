@@ -21,12 +21,6 @@ public class MockHotel extends Hotel {
 	public ResultMessage addHotelInfo(HotelVO hotelVO) {
 		return ResultMessage.SUCCESS;
 	}
-
-	@Override
-	public double getLowestPrice() {
-		return 100;
-	}
-
 	public ResultMessage scoreUpdate(double score) {
 		return ResultMessage.SUCCESS;
 	}

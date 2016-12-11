@@ -221,7 +221,8 @@ class Rooms {
 	 * @author: Harvey Gong
 	 * @time:2016年12月4日 下午2:11:12
 	 */
-	public double getLowestPrice() {
+	public double getLowestPrice(String hotelID) {
+		initRoomInfoPO(hotelID);
 		double min = roomInfoPOList.get(0).getPrice();
 		for (int i = 1; i < roomInfoPOList.size(); i++) {
 			if (min > roomInfoPOList.get(i).getPrice()) {
