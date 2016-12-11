@@ -5,7 +5,6 @@ import java.rmi.RemoteException;
 import businessLogic.userBL.userService.Guest;
 import businessLogicService.memberBLService.MemberBLService;
 import dataService.guestDataService.GuestDataService;
-import dataService.guestDataService.GuestDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.MemberPO;
 import rmi.ClientRemoteHelper;

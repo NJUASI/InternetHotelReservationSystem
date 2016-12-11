@@ -1,7 +1,5 @@
 package presentation.PopUp;
 
-import java.io.IOException;
-
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;

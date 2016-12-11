@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 import businessLogic.hotelBL.HotelInfoOperation;
 import dataService.hotelDataService.HotelDataService;
-import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelPO;
 import rmi.ClientRemoteHelper;
 import utilities.Address;

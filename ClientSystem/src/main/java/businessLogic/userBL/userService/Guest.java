@@ -238,7 +238,7 @@ public class Guest implements UserService, GuestCreditService {
 	public boolean hasGuest(String guestID) { // 放在后面，该方法一般只在本类使用，可以等同private,只有member会用到
 		
 		try {
-			UserVO guestVO = this.getSingle(guestID);
+			this.getSingle(guestID);
 		} catch (UserInexistException e) {
 			e.printStackTrace();
 			return false;

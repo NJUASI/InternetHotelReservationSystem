@@ -12,7 +12,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import presentation.PopUp.PopUp;
 import vo.HotelVO;
 
@@ -25,7 +25,9 @@ public class HotelInfoController {
 	private ComboBox<String>levelInput;
 	@FXML
 	private TextField hotelName,address;
-
+	@FXML
+	private TextArea equipment;
+//TODO equipment的你直接用
 	private SourceBLService sourceBLController;
 	private UserBLService userBLController;
 	

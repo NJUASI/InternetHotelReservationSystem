@@ -12,7 +12,6 @@ import businessLogicService.creditBLService.CreditBLService;
 import businessLogicService.orderBLService.WebMarketerOrderBLService;
 import businessLogicService.userBLService.UserBLService;
 import dataService.orderDataService.OrderDataService;
-import dataService.orderDataService.OrderDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.OrderGeneralPO;
 import rmi.ClientRemoteHelper;
