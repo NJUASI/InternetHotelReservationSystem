@@ -40,9 +40,9 @@ public class LogInViewController {
 	private TextField ID;
 	@FXML
 	private PasswordField password;
-	//登录信息
+	//RMI信息
 	@FXML
-	private TextField rmiText;
+	private TextField rmiIpText, rmiPortText;
 	//注册信息
 	@FXML
 	private PasswordField password2,password3;
@@ -188,9 +188,22 @@ public class LogInViewController {
 	 */
 	@FXML
 	protected void link() {
-		ClientRemoteHelper.getInstance().init();
-		System.out.println("Connect to: " + rmiText.getText());
-		new PopUp("连接成功", "rmi连接");
+		final String ip =  rmiIpText.getText();
+		final String port = rmiPortText.getText();
+		
+		System.out.println(ip.equals("") && port.equals(""));
+		if (ip.equals("") && port.equals("")) {
+			System.out.println("Link to localhost");
+			ClientRemoteHelper.setLocalhost();
+		}else if(!ip.equals("") && !port.equals("")) {
+			System.out.println("Connect to: " + ip + " : " + port);
+//			ClientRemoteHelper.setIPandPort(ip, port);
+			ClientRemoteHelper.setIPandPort("172.28.21.131", "8889");
+			
+			new PopUp("连接成功", "rmi连接");
+		}else {
+			new PopUp("连接失败", "rmi连接");
+		}
 	}
 
 }

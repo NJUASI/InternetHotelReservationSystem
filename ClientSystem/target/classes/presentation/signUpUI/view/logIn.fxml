@@ -75,16 +75,28 @@
                </children>
             </Pane>
             <Button focusTraversable="false" layoutX="35.0" layoutY="508.0" mnemonicParsing="false" onMouseClicked="#openRMI" prefHeight="23.0" prefWidth="102.0" text="RMI" />
-            <Pane fx:id="rmiPane" layoutX="336.0" layoutY="187.0" prefHeight="304.0" prefWidth="361.0" visible="false">
+            <Pane fx:id="rmiPane" layoutX="203.0" layoutY="195.0" prefHeight="294.0" prefWidth="658.0" visible="false">
                <children>
                   <Label layoutX="54.0" layoutY="125.0" />
-                  <TextField fx:id="rmiText" focusTraversable="false" layoutX="47.0" layoutY="120.0" prefHeight="30.0" prefWidth="239.0" />
-                  <Button focusTraversable="false" layoutX="141.0" layoutY="258.0" mnemonicParsing="false" onAction="#link" text="连接" />
-                  <Label layoutX="144.0" layoutY="30.0" text="RMI">
+                  <Button focusTraversable="false" layoutX="307.0" layoutY="253.0" mnemonicParsing="false" onAction="#link" text="连接" />
+                  <Label layoutX="308.0" layoutY="35.0" text="RMI">
                      <font>
                         <Font size="23.0" />
                      </font>
                   </Label>
+                  <Label layoutX="129.0" layoutY="140.0" />
+                  <TextField fx:id="rmiPortText" focusTraversable="false" layoutX="254.0" layoutY="148.0" prefHeight="30.0" prefWidth="239.0" />
+                  <Label layoutX="129.0" layoutY="89.0" text="IP">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="119.0" layoutY="149.0" text="PORT">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="rmiIpText" focusTraversable="false" layoutX="254.0" layoutY="88.0" prefHeight="30.0" prefWidth="239.0" />
                </children>
             </Pane>
          </children>

@@ -19,13 +19,30 @@ import dataServiceImpl.WebMarketerDataServiceImpl;
 
 public class ServerRemoteHelper {
 
-	String url = "rmi://localhost:8889/";
+	final static String localhost = "rmi://localhost:8889/";
+	final static String defaultPort = "8889";
+	
+	static String ip = "";
+	static String port = defaultPort; 
+	static String url = localhost;
 	
 	public ServerRemoteHelper() {
 		initServer();
 	}
 	
-	public void initServer(){
+	public static void setIPandPort(String ip, String port) {
+		ServerRemoteHelper.ip = ip;
+		ServerRemoteHelper.port = port;
+		ServerRemoteHelper.url = "rmi://" + ip + ":" + port + "/";
+	}
+	
+	public static void setLocalhost() {
+		ServerRemoteHelper.ip = "localhost";
+		ServerRemoteHelper.port = defaultPort;
+		ServerRemoteHelper.url = localhost;
+	}
+	
+	private void initServer(){
 		try {
 			LocateRegistry.createRegistry(8889);
 			Naming.bind(url+"GuestDataService", new GuestDataServiceImpl());

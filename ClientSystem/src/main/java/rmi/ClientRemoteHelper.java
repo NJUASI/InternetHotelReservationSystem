@@ -18,7 +18,12 @@ import dataService.webMarketerDataService.WebMarketerDataService;
 
 public class ClientRemoteHelper {
 
-	String url = "rmi://localhost:8889/";
+	final static String localhost = "rmi://localhost:8889/";
+	final static String defaultPort = "8889";
+	
+	static String ip = "";
+	static String port = defaultPort; 
+	static String url = localhost;
 
 	GuestDataService guestDataService;
 	HotelDataService hotelDataService;
@@ -34,15 +39,26 @@ public class ClientRemoteHelper {
 	private static ClientRemoteHelper remoteHelper = new ClientRemoteHelper();
 
 	public static ClientRemoteHelper getInstance(){
-		remoteHelper.init();//方便测试用
 		return remoteHelper;
 	}
 
+	public static void setIPandPort(String ip, String port) {
+		ClientRemoteHelper.ip = ip;
+		ClientRemoteHelper.port = port;
+		ClientRemoteHelper.url = "rmi://" + ip + ":" + port + "/";
+	}
+	
+	public static void setLocalhost() {
+		ClientRemoteHelper.ip = "localhost";
+		ClientRemoteHelper.port = defaultPort;
+		ClientRemoteHelper.url = localhost;
+	}
+	
 	private ClientRemoteHelper() {
-
+		init();
 	}
 
-	public void init(){
+	private void init(){
 		try {
 
 			guestDataService = (GuestDataService) 
