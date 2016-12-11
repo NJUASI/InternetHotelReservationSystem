@@ -120,7 +120,7 @@ public class RoomController {
 			preType=roomTable.getSelectionModel().getSelectedItem().getRoomType();
 			preRoomNum=roomTable.getSelectionModel().getSelectedItem().getRoomNum();
 			preRemainNum=roomTable.getSelectionModel().getSelectedItem().getRemainRoomNum();
-			setModifyText(selectedRoomVO.getRoomType(),selectedRoomVO.getRoomType(),selectedRoomVO.getPrice());
+			setModifyText(selectedRoomVO.getRoomType(),selectedRoomVO.getRoomNum(),selectedRoomVO.getPrice());
 			modifyPane.setVisible(true);
 			addBt.setVisible(false);
 		} catch (Exception e) {
@@ -156,6 +156,7 @@ public class RoomController {
 	}
 	void setModifyText(String roomType,String roomNum,String price){
 		this.roomType.setValue(roomType);
+		this.roomNum.setText(roomNum);
 		this.price.setText(price);
 	}
 
