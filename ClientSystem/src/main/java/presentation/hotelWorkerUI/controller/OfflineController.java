@@ -1,14 +1,20 @@
 package presentation.hotelWorkerUI.controller;
 
+import java.util.Iterator;
+
 import businessLogic.hotelBL.HotelBLController;
 import businessLogicService.hotelBLService.HotelBLService;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import utilities.IDReserve;
 import utilities.enums.RoomType;
+import vo.RoomInfoVO;
 
 public class OfflineController {
 
@@ -23,15 +29,43 @@ public class OfflineController {
 
 	HotelBLService hotelBLController;
 	String hotelID;
+	
 	public OfflineController() {
 		hotelBLController = HotelBLController.getInstance();
 		hotelID = IDReserve.getInstance().getUserID();
 	}
 	@FXML
 	void Initialize(){
-		for (int i = 0; i < 5; i++) {
-			roomNum.getItems().add(i);
-			roomNum2.getItems().add(i);
+		roomType.setValue("单人间");
+		roomType.setOnShowing(new RoomTypeShowingEventHandler());
+		roomType2.setOnShowing(new RoomTypeShowingEventHandler());
+		roomType.valueProperty().addListener(new RoomTypeChangedListener());
+	}
+	
+	class RoomTypeShowingEventHandler implements EventHandler<Event>{
+		@Override
+		public void handle(Event arg0) {
+			Iterator<RoomInfoVO> rooms = hotelBLController.getHotelRoomInfo(hotelID);
+			while(rooms.hasNext()){
+				roomType.getItems().add(rooms.next().roomType.getChineseRoomType());
+			}
+		}
+	}
+	
+	class RoomTypeChangedListener implements ChangeListener<String> {
+		@Override
+		public void changed(ObservableValue<? extends String> arg0, String preRoomType, String newRoomType) {
+			int remainRoomNum = hotelBLController.getRemainRoomNum(hotelID, RoomType.getEnum(newRoomType));
+			roomNum.getItems().clear();
+			for(int i = 1;i<= remainRoomNum;i++){
+				roomNum.getItems().add(i);
+			}
+			if(remainRoomNum == 0){
+				roomNum.setValue(0);
+			}
+			else{
+				roomNum.setValue(1);
+			}
 		}
 	}
 	/**
@@ -42,10 +76,7 @@ public class OfflineController {
 	 */
 	@FXML
 	protected void checkIn(){
-		
-//		TODO fjj 不知道@谁
-//		TODO gcm roomType显示和数据库存的不一样
-		hotelBLController.checkInOffline(hotelID, RoomType.valueOf(roomType.getValue()), Integer.valueOf(roomNum.getValue()));
+		hotelBLController.checkInOffline(hotelID, RoomType.getEnum(roomType.getValue()), Integer.valueOf(roomNum.getValue()));
 		roomType.setValue("");
 		roomNum.setValue(null);
 	}

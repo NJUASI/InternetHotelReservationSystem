@@ -51,7 +51,7 @@ public class CyclePromotionController {
 	private void initialize() {
 		cityInput.setOnShowing(new CityShowingHandler());
 		cityInput.valueProperty().addListener(new CityChangedListener());
-		
+		cycleInput.valueProperty().addListener(new CycleChangedListener());
 	}
 	
 	class CityShowingHandler implements EventHandler<Event>{
@@ -76,6 +76,14 @@ public class CyclePromotionController {
 			}
 			cycleInput.setValue(cycleInput.getItems().get(0));
 			searchInfo();
+		}
+	}
+	
+	class CycleChangedListener implements ChangeListener<String> {
+		@Override
+		public void changed(ObservableValue<? extends String> arg0, String preCircle, String newCircle) {
+			//当切换商圈时，修改下面的折扣显示
+			cycleDiscount.setText(String.valueOf(promotionBLController.getSpecialCirclePromotion(cityInput.getValue(),newCircle)));
 		}
 	}
 	

@@ -64,5 +64,10 @@ public class PromotionBLService_Stub implements PromotionBLService{
 	public ResultMessage deleteSpecialSpanPromotion(String userID, String promotionName) {
 		return null;
 	}
+
+	@Override
+	public double getSpecialCirclePromotion(String value, String newCircle) {
+		return 0;
+	}
 	
 }

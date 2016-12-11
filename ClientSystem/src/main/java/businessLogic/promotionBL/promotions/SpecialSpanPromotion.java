@@ -28,11 +28,6 @@ public class SpecialSpanPromotion {
 
 	public SpecialSpanPromotion() {
 		promotionDataService = ClientRemoteHelper.getInstance().getPromotionDataService();
-//		try {
-//			promotionDataService = new PromotionDataService_Stub();
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	/**
@@ -175,5 +170,4 @@ public class SpecialSpanPromotion {
 		}
 		return specialSpanPromotions.iterator();
 	}
-
 }

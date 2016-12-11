@@ -1,9 +1,11 @@
 package po;
 
+import java.io.Serializable;
+
 import utilities.enums.PromotionType;
 import vo.HotelFixedPromotionVO;
 
-public class HotelFixedPromotionPO {
+public class HotelFixedPromotionPO implements Serializable{
 
 	private String hotelID;
 	private PromotionType promotionType;

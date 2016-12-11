@@ -60,18 +60,14 @@ public class DatePromotionController {
 
 		//调用promotion的方法获取网站的特定期间策略
 		Iterator<SpecialSpanPromotionVO> specialSpanPromotions = promotionController.getWebSpecialSpanPromotions();
-		List<DatePromotionTable> datePromotion = new ArrayList<DatePromotionTable>();
-
-		while(specialSpanPromotions.hasNext()){
-			SpecialSpanPromotionVO vo = specialSpanPromotions.next();
-			datePromotion.add(new DatePromotionTable(vo.promotionName,String.valueOf(vo.discount),
-					vo.startDate, vo.endDate));
-		}
 
 		ObservableList<DatePromotionTable> data = FXCollections.observableArrayList();
-		for (int i = 0; i < datePromotion.size(); i++) {
-			data.add(datePromotion.get(i));
+		while(specialSpanPromotions.hasNext()){
+			SpecialSpanPromotionVO vo = specialSpanPromotions.next();
+			data.add(new DatePromotionTable(vo.promotionName,String.valueOf(vo.discount),
+					vo.startDate, vo.endDate));
 		}
+		
 		nameColumn.setCellValueFactory(cellData -> cellData.getValue().name);
 		startDateColumn.setCellValueFactory(cellData -> cellData.getValue().startDate);
 		endDateColumn.setCellValueFactory(cellData -> cellData.getValue().endDate);

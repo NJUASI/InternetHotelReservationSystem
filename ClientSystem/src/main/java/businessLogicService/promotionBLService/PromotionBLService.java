@@ -29,5 +29,7 @@ public interface PromotionBLService {
 	public Iterator<AddressVO> getSpecialCirclePromotions(String city);
 
 	public ResultMessage updateSpecialCirclePromotions(AddressVO addressVO);
+	
+	public double getSpecialCirclePromotion(String value, String newCircle);
 
 }

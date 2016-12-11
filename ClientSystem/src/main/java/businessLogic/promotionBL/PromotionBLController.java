@@ -73,5 +73,19 @@ public class PromotionBLController implements PromotionBLService {
 	public ResultMessage updateSpecialCirclePromotions(AddressVO addressVO) {
 		return specialCirclePromotion.updateSpecialCirclePromotion(addressVO);
 	}
+
+	/**
+	 * @Description:根据city和circle获得该城市商圈的折扣
+	 * @param city
+	 * @param newCircle
+	 * @return
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月11日 下午6:44:58
+	 */
+	@Override
+	public double getSpecialCirclePromotion(String city, String newCircle) {
+		return specialCirclePromotion.getSpecialCirclePromoiton(city,newCircle);
+	}
 	
 }

@@ -1,11 +1,12 @@
 package po;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import utilities.enums.PromotionType;
 import vo.SpecialSpanPromotionVO;
 
-public class SpecialSpanPromotionPO {
+public class SpecialSpanPromotionPO implements Serializable{
 
 	private String userID;
 	private String promotionName;
