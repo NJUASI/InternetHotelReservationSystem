@@ -8,6 +8,7 @@ import dataService.guestDataService.GuestDataService;
 import dataService.guestDataService.GuestDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.MemberPO;
+import rmi.ClientRemoteHelper;
 import utilities.enums.MemberType;
 import utilities.enums.ResultMessage;
 import vo.GuestVO;
@@ -34,12 +35,12 @@ public class Member implements MemberBLService{
 	 * 构造函数，初始化成员变量
 	 */
 	public Member() {
-//		guestDataService = ClientRemoteHelper.getInstance().getGuestDataService();
-		try {
-			guestDataService = new GuestDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		guestDataService = ClientRemoteHelper.getInstance().getGuestDataService();
+//		try {
+//			guestDataService = new GuestDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 		member = new MemberInfo();
 	}
 

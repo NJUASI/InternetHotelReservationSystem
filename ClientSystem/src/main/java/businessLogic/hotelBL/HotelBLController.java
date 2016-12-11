@@ -81,9 +81,15 @@ public class HotelBLController implements HotelBLService {
 		return hotel.addHotelInfo(hotelVO);
 	}
 	
-	public int getRemainRoomNum(RoomType roomType){
-		return hotel.getRemainNumOfSpecificType(roomType);
+	public int getRemainRoomNum(String hotelID,RoomType roomType){
+		return hotel.getRemainNumOfSpecificType(hotelID,roomType);
 	}
+	
+	@Override
+	public double getOriginPrice(String hotelID, RoomType roomType) {
+		return hotel.getOriginPrice(hotelID,roomType);
+	}
+
 
 	
 	/**

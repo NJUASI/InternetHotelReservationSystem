@@ -16,6 +16,7 @@ import dataService.orderDataService.OrderDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.GuestEvaluationPO;
 import po.OrderPO;
+import rmi.ClientRemoteHelper;
 import utilities.PreOrder;
 import utilities.enums.OrderState;
 import utilities.enums.ResultMessage;
@@ -50,16 +51,20 @@ public class GuestOrder implements GuestOrderBLService {
 	 * 构造函数，初始化成员变量
 	 */
 	public GuestOrder() {
-//		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
+		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
 		
-		try {
-			orderDataService = new OrderDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			orderDataService = new OrderDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 		
 		commonOrder = new CommonOrder();
 		
+		/*
+		 * new the mock one to test
+		 * TODO 龚尘淼：promotion没有无参数的初始化方法，不知道自己改初始化啥
+		 */
 		discountCalculator = new MockPromotion();
 		hotelInterface = new Hotel();
 	}
@@ -77,7 +82,6 @@ public class GuestOrder implements GuestOrderBLService {
 		try {
 			discountsInSpan = discountCalculator.getDiscountInSpan(new PreOrder(orderVO));
 		} catch (UserInexistException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		final double prePrice = orderVO.previousPrice;
@@ -99,9 +103,9 @@ public class GuestOrder implements GuestOrderBLService {
 	public ResultMessage createOrder(final OrderVO orderVO) {
 		ResultMessage resultMessage = ResultMessage.FAIL;
 		
-		if (orderVO.orderGeneralVO.orderID == null && orderVO.orderGeneralVO.price == -1
+		if (orderVO.orderGeneralVO.orderID == "" && orderVO.orderGeneralVO.price == -1
 				&& orderVO.checkInTime == null && orderVO.checkOutTime == null 
-				&& orderVO.roomNumber == null && orderVO.score == -1 && orderVO.comment == null) {
+				&& orderVO.roomNumber == "" && orderVO.score == -1 && orderVO.comment == "") {
 			try {
 				orderVO.orderGeneralVO.price = getTempPrice(orderVO);
 				resultMessage = orderDataService.createOrder(new OrderPO(orderVO));
@@ -135,11 +139,11 @@ public class GuestOrder implements GuestOrderBLService {
 		}
 		
 		//更新此订单撤销后的酒店剩余房间数
-		/*
-		 * new the mock one to test
-		 */
-		hotelInterface = new MockHotel();
-		msg2 = hotelInterface.updateRemainRoomNum(thisOrder.orderGeneralVO.hotelID, thisOrder.roomType, thisOrder.roomNumCount);
+//		/*
+//		 * new the mock one to test
+//		 */
+//		hotelInterface = new MockHotel();
+		msg2 = hotelInterface.updateRemainRoomNumForUndoOrder(thisOrder.orderGeneralVO.hotelID, thisOrder.roomType, thisOrder.roomNumCount);
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
 			return ResultMessage.SUCCESS;
 		}else {
@@ -161,10 +165,10 @@ public class GuestOrder implements GuestOrderBLService {
 		try {
 			msg1 = orderDataService.addEvaluation(new GuestEvaluationPO(evaluationVO));
 			
-			/*
-			 * new the mock one to test
-			 */
-			hotelInterface = new MockHotel();
+//			/*
+//			 * new the mock one to test
+//			 */
+//			hotelInterface = new MockHotel();
 			msg2 = hotelInterface.scoreUpdate(evaluationVO.score);
 		} catch (RemoteException e) {
 			e.printStackTrace();

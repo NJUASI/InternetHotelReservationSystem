@@ -6,6 +6,7 @@ import java.util.Iterator;
 import businessLogicService.sourceBLService.SourceBLService;
 import dataService.sourceDataService.SourceDataService;
 import dataService.sourceDataService.SourceDataService_Stub;
+import rmi.ClientRemoteHelper;
 
 public class SourceBLController implements SourceBLService {
 
@@ -14,8 +15,12 @@ public class SourceBLController implements SourceBLService {
 	SourceDataService sourceDataService;
 	
 	private SourceBLController() {
-//		sourceDataService = ClientRemoteHelper.getInstance().getSourceDataService();
-		sourceDataService = new SourceDataService_Stub();
+		sourceDataService = ClientRemoteHelper.getInstance().getSourceDataService();
+//		try {
+//			sourceDataService = new SourceDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	public static SourceBLController getInstance(){

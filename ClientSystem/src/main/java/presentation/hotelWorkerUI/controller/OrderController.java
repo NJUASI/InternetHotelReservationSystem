@@ -315,22 +315,26 @@ public class OrderController {
 	 */
 	@FXML
 	protected void sureCheckIn(){
-		final LocalDateTime checkInTime = LocalDateTime.now();
-		final LocalDateTime expectLeaveTime = LocalDateTime.of(checkInLeaveDate.getValue(), 
-				LocalTime.of(Integer.parseInt(checkInHour.getText()), Integer.parseInt(checkInMinute.getText())));
-		
-		final CheckInVO checkInVO = new CheckInVO(checkInOrderID.getText(), checkInRoomNum.getText(), checkInTime, expectLeaveTime);
-		final ResultMessage result = orderBLController.updateCheckIn(checkInVO);
-		if (result == ResultMessage.SUCCESS) {
-			new PopUp("入住成功", "congratulation");			
+		if (checkInLeaveDate != null) {
+			final LocalDateTime checkInTime = LocalDateTime.now();
+			final LocalDateTime expectLeaveTime = LocalDateTime.of(checkInLeaveDate.getValue(), 
+					LocalTime.of(Integer.parseInt(checkInHour.getText()), Integer.parseInt(checkInMinute.getText())));
 			
-			//此客户入住成功，将填写的房间号置为空，预计离开时间置为明日正午（全部恢复为默认值）
-			checkInRoomNum.setText("");
-			checkInHour.setText("12");
-			checkInMinute.setText("00");
+			final CheckInVO checkInVO = new CheckInVO(checkInOrderID.getText(), checkInRoomNum.getText(), checkInTime, expectLeaveTime);
+			final ResultMessage result = orderBLController.updateCheckIn(checkInVO);
+			if (result == ResultMessage.SUCCESS) {
+				new PopUp("入住成功", "congratulation");			
+				
+				//TODO 高源：此客户入住成功，将填写的房间号置为空，预计离开时间置为明日正午（全部恢复为默认值）
+				checkInRoomNum.setText("");
+				checkInHour.setText("12");
+				checkInMinute.setText("00");
+			}else {
+				new PopUp("入住失败", "so sorry");	
+				
+			}
 		}else {
-			new PopUp("入住失败", "so sorry");	
-			
+			new PopUp("请填写相关信息，谢谢！", "so soory");
 		}
 	}
 	@FXML

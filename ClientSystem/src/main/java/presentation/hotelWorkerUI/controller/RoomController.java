@@ -80,7 +80,7 @@ public class RoomController {
 		List<TypeTable> dataList = new LinkedList<TypeTable>();
 		while(rooms.hasNext()){
 			RoomInfoVO temp = rooms.next();
-			dataList.add(new TypeTable(temp.roomType.toString(), temp.roomNum + "", temp.remainNum + "", Double.toString(temp.price)));
+			dataList.add(new TypeTable(temp.roomType.getChineseRoomType(), temp.roomNum + "", temp.remainNum + "", Double.toString(temp.price)));
 		}
 
 		ObservableList<TypeTable> data = FXCollections.observableArrayList();
@@ -138,15 +138,13 @@ public class RoomController {
 	protected void save() {
 		
 		RoomInfoVO vo = new RoomInfoVO();
+		
 		//打包好一个vo，通过hotelBLContoller调用update的方法
 		vo.hotelID = hotelID;
-		
-//		TODO gcm 意思是这里的roomtype不改变了呗,如果不用变我就界面让他不可改,这里是维护,也没增加增加剩余房间的数量
-//		也没改变房间总数
-//		
-//		int i= Integer.parseInt(preRemainNum)-Integer.parseInt(roomNum.getText());为增加或减少的房间数量
+		//gcm roomType与数据库存的不一样
 		vo.roomType = RoomType.valueOf(roomType.getValue());
-		vo.price = Integer.valueOf(price.getText());
+		vo.roomNum = Integer.parseInt(roomNum.getText());
+		vo.price = Integer.parseInt(price.getText());
 		
 		hotelBLController.updateHotelRoomInfo(vo);
 	

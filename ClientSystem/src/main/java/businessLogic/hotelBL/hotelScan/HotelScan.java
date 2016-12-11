@@ -13,6 +13,7 @@ import businessLogic.orderBL.MockOrder;
 import dataService.hotelDataService.HotelDataService;
 import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelPO;
+import rmi.ClientRemoteHelper;
 import utilities.enums.OrderState;
 import utilities.enums.SearchCriteriaType;
 import utilities.enums.SortStrategy;
@@ -47,12 +48,12 @@ public class HotelScan {
 	}
 
 	private void initHotelDataService(){
-		try {
-//			hotelDataService = ClientRemoteHelper.getInstance().getHotelDataService();
-			hotelDataService = new HotelDataService_Stub();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		hotelDataService = ClientRemoteHelper.getInstance().getHotelDataService();
+//		try {
+//			hotelDataService = new HotelDataService_Stub();
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	public HotelScan() {
@@ -117,6 +118,7 @@ public class HotelScan {
 	private List<HotelVO> convertPOListToVOList(List<HotelPO> POList){
 		List<HotelVO> hotelVOList = new ArrayList<HotelVO>();
 		for(HotelPO hotelPO:currentPOList){
+			//TODO gcm 修改Mock实现
 			double minPrice = new MockHotel(hotelPO.getHotelID()).getLowestPrice();
 			OrderState orderState = new MockOrder().getOrderState(guestID, hotelPO.getHotelID());
 			hotelVOList.add(new HotelVO(hotelPO,minPrice,orderState));
