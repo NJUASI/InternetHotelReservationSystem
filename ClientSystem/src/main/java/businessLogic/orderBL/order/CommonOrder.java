@@ -11,6 +11,7 @@ import dataService.orderDataService.OrderDataService_Stub;
 import po.HotelEvaluationPO;
 import po.OrderGeneralPO;
 import rmi.ClientRemoteHelper;
+import utilities.Ciphertext;
 import utilities.enums.OrderState;
 import utilities.enums.UserType;
 import vo.HotelEvaluationVO;
@@ -66,11 +67,17 @@ public class CommonOrder implements CommonOrderBLService {
 			e.printStackTrace();
 		}
 		
+		
+		Ciphertext ciphertext = new Ciphertext();
 		if (orderGeneralPOs != null) {
 			for (OrderGeneralPO orderGeneralPO : orderGeneralPOs) {
+				orderGeneralPO.setName(ciphertext.decode(orderGeneralPO.getName()));
+				orderGeneralPO.setPhone(ciphertext.decode(orderGeneralPO.getPhone()));
 				result.add(new OrderGeneralVO(orderGeneralPO));
 			}
 		}
+		
+		
 		
 		return result.iterator();
 	}

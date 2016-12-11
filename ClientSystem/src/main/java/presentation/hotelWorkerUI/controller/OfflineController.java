@@ -64,7 +64,7 @@ public class OfflineController {
 		 * roomNum.getItems().add(i);for循环
 		 */
 		
-		hotelBLController.checkOutOffline(hotelID,RoomType.valueOf(roomType2.getValue()), Integer.valueOf(roomNum2.getValue()));
+		hotelBLController.checkOutOffline(hotelID,RoomType.getEnum(roomType2.getValue()), Integer.valueOf(roomNum2.getValue()));
 		roomType2.setValue("");
 		roomNum2.setValue(null);;
 	}
