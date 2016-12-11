@@ -265,6 +265,10 @@ public class PromotionController {
 		vo.promotionType = PromotionType.getEnum(name.getText());
 
 		promotionBLController.updateHotelFixedPromotion(vo);
+		initFixedPromotion();
+		 modifyPane1.setVisible(false);
+		 name.setText("");
+		 discountText1.setText("");
 	}
 
 
