@@ -60,7 +60,12 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 				final CreditPO creditPO = new CreditPO();
 				creditPO.setGuestID(guestID);
 				creditPO.setTime(rs.getTimestamp(2).toLocalDateTime()); //此处硬编码2-6对应表项中元素的位置，已确定
-				creditPO.setOrderID(String.valueOf(rs.getObject(3)));
+				if(String.valueOf(rs.getObject(3)).equals("0")) {
+					creditPO.setOrderID("");
+				}else {
+					creditPO.setOrderID(String.valueOf(rs.getObject(3)));					
+				}
+				
 				creditPO.setPreCredit(rs.getDouble(4));
 				creditPO.setCredit(rs.getDouble(5));
 				creditPO.setCreditRecord(CreditRecord.getEnum(rs.getString(6)));
@@ -91,7 +96,11 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 
 			ps = conn.prepareStatement(sql);
 			ps.setObject(1, creditPO.getGuestID()); //此处硬编码1-6对应语句中元素的位置，已确定
-			ps.setObject(2, creditPO.getOrderID());
+			if(creditPO.getOrderID().equals("")) {
+				ps.setObject(2, "0");
+			} else {
+				ps.setObject(2, creditPO.getOrderID());				
+			}
 			ps.setObject(3, creditPO.getTime());
 			ps.setDouble(4, creditPO.getPreCredit()); 
 			ps.setDouble(5, creditPO.getCredit());

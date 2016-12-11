@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import dataHelper.CreditDataHelper;
@@ -23,6 +24,7 @@ public class CreditDataHelperImplTest {
 		helper = new CreditDataHelperImpl();
 	}
 
+	@Ignore
 	@Test
 	public void testGetAll() {
 		
@@ -38,7 +40,7 @@ public class CreditDataHelperImplTest {
 
 	@Test
 	public void testAdd() {
-		CreditPO creditPO = new CreditPO("1000000002",LocalDateTime.of(2016, 12, 07, 18, 14,21),"445620161212",111,444,CreditRecord.EXECUTE);
+		CreditPO creditPO = new CreditPO("1234567900",LocalDateTime.of(2016, 12, 07, 18, 14,21),"",111,444,CreditRecord.CHARGE);
 		
 		assertEquals(ResultMessage.SUCCESS,helper.addCredit(creditPO));
 	}
