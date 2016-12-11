@@ -16,10 +16,13 @@ import javafx.stage.WindowEvent;
 public class ServerRunner extends Application{
 
 	public ServerRunner() {
+		ServerRemoteHelper.setLocalhost();
+//		ServerRemoteHelper.setIPandPort("172.28.21.131", "8889");
 		new ServerRemoteHelper();
 	}
+	
 	public void start(final Stage stage) throws IOException {
-		StackPane root =new StackPane();
+		StackPane root = new StackPane();
 		final Scene scene = new Scene(root, 500, 300);
 		Label label = new Label("welcome");
 		root.getChildren().add(label);
@@ -36,10 +39,9 @@ public class ServerRunner extends Application{
 		});
 	}
 	public static void main(String[] args) {
+		
 		launch(args);
+		
 		new ServerRunner();
-		
-		
-		
 	}
 }
