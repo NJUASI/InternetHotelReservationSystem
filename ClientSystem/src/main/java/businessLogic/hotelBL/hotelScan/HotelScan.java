@@ -111,7 +111,7 @@ public class HotelScan {
 	
 	private List<HotelVO> convertPOListToVOList(List<HotelPO> POList){
 		List<HotelVO> hotelVOList = new ArrayList<HotelVO>();
-		for(HotelPO hotelPO:currentPOList){
+		for(HotelPO hotelPO:POList){
 			double minPrice = new Hotel().getLowestPrice(hotelPO.getHotelID());
 			OrderState orderState = new Order().getOrderState(guestID, hotelPO.getHotelID());
 			hotelVOList.add(new HotelVO(hotelPO,minPrice,orderState));
