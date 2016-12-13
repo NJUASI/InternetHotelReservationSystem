@@ -17,10 +17,12 @@ public class ScoreSpanCriteria implements SearchCriteria {
 	
 	@Override
 	public List<HotelVO> meetCriteria(List<HotelVO> hotelVOList) {
-		for(int i = 0;i<hotelVOList.size();i++){
+		for(int i = 0;i<hotelVOList.size();){
 			if(notInScoreSpan(hotelVOList.get(i).score)){
 				hotelVOList.remove(i);
+				continue;
 			}
+			i++;
 		}
 		return hotelVOList;
 	}

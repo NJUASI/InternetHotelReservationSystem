@@ -2,8 +2,6 @@ package presentation.hotelWorkerUI.controller;
 
 import java.time.LocalDate;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 
 import businessLogic.promotionBL.PromotionBLController;
 import javafx.collections.FXCollections;
@@ -128,13 +126,12 @@ public class PromotionController {
 			vo.endDate = endDatePicker.getValue();
 			vo.userID = hotelID;
 			// 调用promotionBLController的更新特定期间折扣的方法
-			promotionBLController.updateSpecialSpanPromotions(vo);
+			promotionBLController.updateHotelSpecialSpanPromotion(vo);
 
-			System.out.println("success");
 			modifyPane.setVisible(false);
 			addBt.setVisible(true);
 			setModifyText("","",null,null);
-			initialize();
+			initDatePromotion();
 		} catch (Exception e) {
 			System.out.println("保存失败");
 		}
@@ -148,12 +145,13 @@ public class PromotionController {
 	@FXML
 	protected void addPromotion() {
 		try {
-			//			nameText.getText();
-			//			discountText.getText();
-			//			startDatePicker.getValue();
-			//			endDatePicker.getValue();
-			System.out.println("success");
-
+			SpecialSpanPromotionVO vo = new SpecialSpanPromotionVO();
+			vo.userID = hotelID;
+			vo.promotionName = nameText.getText();
+			vo.discount = Double.valueOf(discountText.getText());
+			vo.startDate = startDatePicker.getValue();
+			vo.endDate = endDatePicker.getValue();
+			promotionBLController.addHotelSpecialSpanPromotion(vo);
 		} catch (Exception e) {
 			System.out.println("保存失败");
 		}
@@ -190,10 +188,9 @@ public class PromotionController {
 	@FXML
 	protected void deleteOne() {
 		//TODO gcm 到底哪些数据库存的和界面的显示不一样。。。 
-		String promotionType = table.getSelectionModel().getSelectedItem().getName(); 
-		promotionBLController.deleteSpecialSpanPromotion(hotelID, promotionType);
-
-		initialize();	
+		String promotionName = table.getSelectionModel().getSelectedItem().getName(); 
+		promotionBLController.deleteHotelSpecialSpanPromotion(hotelID, promotionName);
+		initDatePromotion();	
 	}
 
 
@@ -238,6 +235,7 @@ public class PromotionController {
 		name.setText(table1.getSelectionModel().getSelectedItem().getName());
 		discountText1.setText(table1.getSelectionModel().getSelectedItem().getDiscount());
 		modifyPane1.setVisible(true);
+		initFixedPromotion();
 	}
 	/**
 	 * @description 取消修改三种策略
@@ -263,6 +261,7 @@ public class PromotionController {
 		HotelFixedPromotionVO vo = new HotelFixedPromotionVO();
 		vo.hotelID = hotelID;
 		vo.promotionType = PromotionType.getEnum(name.getText());
+		vo.discount = Double.valueOf(discountText1.getText());
 
 		promotionBLController.updateHotelFixedPromotion(vo);
 		initFixedPromotion();

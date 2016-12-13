@@ -15,7 +15,6 @@ import utilities.Address;
 import utilities.enums.MemberType;
 import utilities.enums.ResultMessage;
 import vo.AddressVO;
-import vo.SpecialSpanPromotionVO;
 
 /**
  * @Description:对于VIP会员特定商圈专属折扣
@@ -29,11 +28,6 @@ public class SpecialCirclePromotion {
 
 	public SpecialCirclePromotion() {
 		promotionDataService = ClientRemoteHelper.getInstance().getPromotionDataService();
-//		try {
-//			promotionDataService = new PromotionDataService_Stub();
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//		}
 	}
 	
 	/**

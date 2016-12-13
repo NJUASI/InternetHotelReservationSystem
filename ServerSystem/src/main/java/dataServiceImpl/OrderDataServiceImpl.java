@@ -8,7 +8,6 @@ import java.util.List;
 
 import dataHelper.OrderDataHelper;
 import dataHelperImpl.OrderDataHelperImpl;
-import dataHelperImpl.stub.OrderDataHelperImpl_Stub;
 import dataService.orderDataService.OrderDataService;
 import po.CheckInPO;
 import po.CheckOutPO;
@@ -31,7 +30,6 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	public OrderDataServiceImpl() throws RemoteException {
 		super();
 		orderDataHelper = new OrderDataHelperImpl();
-//		orderDataHelper = new OrderDataHelperImpl_Stub();
 	}
 
 	/**

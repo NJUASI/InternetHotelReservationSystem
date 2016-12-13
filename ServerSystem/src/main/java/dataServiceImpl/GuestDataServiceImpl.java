@@ -6,7 +6,6 @@ import java.util.List;
 
 import dataHelper.GuestDataHelper;
 import dataHelperImpl.GuestDataHelperImpl;
-import dataHelperImpl.stub.GuestDataHelperImpl_Stub;
 import dataService.guestDataService.GuestDataService;
 import exception.operationFailedException.AddFaidException;
 import exception.verificationException.ParameterInvalidException;
@@ -33,7 +32,6 @@ public class GuestDataServiceImpl extends UnicastRemoteObject implements GuestDa
 	 */
 	public GuestDataServiceImpl() throws RemoteException {
 		guestHelper = new GuestDataHelperImpl();
-//		guestHelper = new GuestDataHelperImpl_Stub();
 	}
 
 	/**

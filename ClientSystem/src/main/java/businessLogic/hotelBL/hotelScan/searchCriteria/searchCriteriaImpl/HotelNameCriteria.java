@@ -23,10 +23,12 @@ public class HotelNameCriteria implements SearchCriteria {
 	 */
 	@Override
 	public List<HotelVO> meetCriteria(List<HotelVO> hotelGeneralVOList) {
-		for(int i = 0;i < hotelGeneralVOList.size();i++){
+		for(int i = 0;i < hotelGeneralVOList.size();){
 			if(!hotelGeneralVOList.get(i).hotelName.contains(keyHotelName)){
 				hotelGeneralVOList.remove(i);
+				continue;
 			}
+			i++;
 		}
 		return hotelGeneralVOList;
 	}

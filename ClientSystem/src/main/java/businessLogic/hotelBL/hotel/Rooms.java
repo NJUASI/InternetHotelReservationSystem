@@ -22,14 +22,10 @@ class Rooms {
 
 	List<RoomInfoPO> roomInfoPOList;
 	private HotelDataService hotelDataService;
+	String hotelID;
 
 	public Rooms() {
-		this.hotelDataService = ClientRemoteHelper.getInstance().getHotelDataService();
-//		try {
-//			hotelDataService = new HotelDataService_Stub();
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//		}
+		hotelDataService = ClientRemoteHelper.getInstance().getHotelDataService();
 	}
 
 	/**

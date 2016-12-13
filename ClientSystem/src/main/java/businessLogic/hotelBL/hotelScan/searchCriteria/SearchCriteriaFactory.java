@@ -1,5 +1,6 @@
 package businessLogic.hotelBL.hotelScan.searchCriteria;
 
+import businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl.BookedOnlyCriteria;
 import businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl.HotelNameCriteria;
 import businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl.LevelSpanCriteria;
 import businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl.NullCriteria;
@@ -24,13 +25,16 @@ public class SearchCriteriaFactory {
 			return new OriginPriceSpanCriteria(vo.minPrice, vo.maxPrice);
 		}
 		else if(searchCriteriaType == SearchCriteriaType.SCORE_SPAN){
-			return new ScoreSpanCriteria(vo.minScore, vo.maxPrice);
+			return new ScoreSpanCriteria(vo.minScore, vo.maxScore);
 		}
 		else if(searchCriteriaType == SearchCriteriaType.ROOM_TYPE){
 			return new RoomTypeCriteria(vo.roomTypes);
 		}
 		else if(searchCriteriaType == SearchCriteriaType.REMAIN_ROOM_NUM){
 			return new RemainRoomNumCriteria(vo.remainRoomNum);
+		}
+		else if(searchCriteriaType == SearchCriteriaType.BOOKED_ONLY){
+			return new BookedOnlyCriteria();
 		}
 		return new NullCriteria();
 	}

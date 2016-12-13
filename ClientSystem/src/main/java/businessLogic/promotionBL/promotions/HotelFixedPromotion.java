@@ -19,7 +19,7 @@ import vo.HotelFixedPromotionVO;
 
 /**
  * @Description:对于酒店会员生日折扣，企业会员折扣以及三间及以上预订的促销策略操作的具体实现
- * 只有get和update，没有添加的功能
+ * 只有get和update，没有添加、删除的功能
  * @author:Harvey Gong
  * @time:2016年12月1日 下午2:08:44
  */
@@ -30,11 +30,6 @@ public class HotelFixedPromotion {
 
 	public HotelFixedPromotion() {
 		promotionDataService = ClientRemoteHelper.getInstance().getPromotionDataService();
-//		try {
-//			promotionDataService = new PromotionDataService_Stub();
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	/**
@@ -46,11 +41,7 @@ public class HotelFixedPromotion {
 	 * @time:2016年12月1日 下午2:07:11
 	 */
 	public Iterator<HotelFixedPromotionVO> getHotelFixedPromotions(String hotelWorkerID){
-		try {
-			hotelFixedPromotions = promotionDataService.getHotelFixedPromotion(hotelWorkerID);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		initHotelFixedPromotions(hotelWorkerID);
 		return convertPOListToVOListIterator(hotelFixedPromotions);
 	}
 

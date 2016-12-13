@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.hotelBL.HotelInfoOperation;
-import businessLogic.hotelBL.MockHotel;
+import businessLogic.hotelBL.hotel.Hotel;
 import businessLogic.promotionBL.DiscountCalculator;
 import businessLogic.promotionBL.DiscountInSpan;
 import dataService.orderDataService.OrderDataService;
@@ -525,10 +525,7 @@ public class Order {
 		ResultMessage msg2 = ResultMessage.FAIL;
 		try {
 			msg1 = orderDataService.addEvaluation(new GuestEvaluationPO(evaluationVO));
-			/*
-			 * ！！！！！！！！！！！！MockHotel初始化！！！！！！！！！！！！！
-			 */
-			hotelInterface = new MockHotel(orderDataService.getOrderDetail(evaluationVO.orderID).getHotelID());
+			hotelInterface = new Hotel(orderDataService.getOrderDetail(evaluationVO.orderID).getHotelID());
 			msg2 = hotelInterface.scoreUpdate(evaluationVO.score);
 		} catch (RemoteException e) {
 			e.printStackTrace();

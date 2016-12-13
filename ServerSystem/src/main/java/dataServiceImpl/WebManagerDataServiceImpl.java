@@ -6,7 +6,6 @@ import java.util.List;
 
 import dataHelper.WebManagerDataHelper;
 import dataHelperImpl.WebManagerDataHelperImpl;
-import dataHelperImpl.stub.WebManagerDataHelperImpl_Stub;
 import dataService.webManagerDataService.WebManagerDataService;
 import exception.verificationException.UserInexistException;
 import po.WebManagerPO;
@@ -30,7 +29,6 @@ public class WebManagerDataServiceImpl extends UnicastRemoteObject implements We
 	 */
 	public WebManagerDataServiceImpl() throws RemoteException {
 		webManagerHelper = new WebManagerDataHelperImpl();
-//		webManagerHelper = new WebManagerDataHelperImpl_Stub();
 	}
 
 	/**

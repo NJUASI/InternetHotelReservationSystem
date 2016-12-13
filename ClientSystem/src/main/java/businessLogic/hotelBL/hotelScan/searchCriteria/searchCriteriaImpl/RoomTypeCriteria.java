@@ -1,5 +1,6 @@
 package businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.hotelBL.HotelInfoOperation;
@@ -27,12 +28,29 @@ public class RoomTypeCriteria implements SearchCriteria {
 	 */
 	public List<HotelVO> meetCriteria(List<HotelVO> hotelVOList) {
 		HotelInfoOperation hotel = new Hotel();
-		for(int i = 0;i<hotelVOList.size();i++){
-			for(int j = 0;j<roomTypes.size();j++){
-
+		for(int i = 0;i<hotelVOList.size();){
+			Iterator<RoomType> roomTypesOfHotel = hotel.getRoomType(hotelVOList.get(i).hotelID);
+			if(!hasRoomType(roomTypesOfHotel)){
+				hotelVOList.remove(i);
+				continue;
 			}
+			i++;
 		}
 		return hotelVOList;
+	}
+
+	
+	//判断该酒店是否有所选房型中的一种
+	private boolean hasRoomType(Iterator<RoomType> roomTypesOfHotel) {
+		boolean hasRoomType = false;
+		while(roomTypesOfHotel.hasNext()){
+			for(int i = 0;i<roomTypes.size();i++){
+				if(roomTypesOfHotel.next() == roomTypes.get(i)){
+					return true;
+				}
+			}
+		}			
+		return hasRoomType;
 	}
 
 }

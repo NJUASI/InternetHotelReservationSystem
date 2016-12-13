@@ -1,9 +1,7 @@
 package presentation.webMarketerUI.controller;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import businessLogic.promotionBL.PromotionBLController;
 import businessLogicService.promotionBLService.PromotionBLService;
@@ -109,7 +107,7 @@ public class DatePromotionController {
 		try {
 
 			// 调用promotion的更新特定期间策略的方法
-			promotionController.updateSpecialSpanPromotions(encapsulateVO());
+			promotionController.updateHotelSpecialSpanPromotion(encapsulateVO());
 
 			modifyPane.setVisible(false);
 			addBt.setVisible(true);
@@ -131,7 +129,7 @@ public class DatePromotionController {
 	@FXML
 	protected void addPromotion() {
 		try {
-			promotionController.addSpecialSpanPromotion(encapsulateVO());
+			promotionController.addHotelSpecialSpanPromotion(encapsulateVO());
 		} catch (Exception e) {
 			System.out.println("保存失败");
 		}
@@ -160,7 +158,7 @@ public class DatePromotionController {
 	protected void deleteOne() {
 		String promotionName = table.getSelectionModel().getSelectedItem().getName(); 
 		//通过hotelID和唯一promotionName删除此条promotion
-		promotionController.deleteSpecialSpanPromotion(hotelID, promotionName);
+		promotionController.deleteHotelSpecialSpanPromotion(hotelID, promotionName);
 		initialize();	
 	}
 	

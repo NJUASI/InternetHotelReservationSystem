@@ -6,7 +6,6 @@ import java.util.List;
 
 import dataHelper.CreditDataHelper;
 import dataHelperImpl.CreditDataHelperImpl;
-import dataHelperImpl.stub.CreditDataHelperImpl_Stub;
 import dataService.creditDataService.CreditDataService;
 import po.CreditPO;
 import utilities.enums.ResultMessage;
