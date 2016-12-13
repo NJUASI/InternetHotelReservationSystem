@@ -13,5 +13,9 @@ public interface SourceDataHelper {
 	public List<String> getLevels();
 
 	public List<String> getRoomTypes();
+	
+	public int getMaxGuestNumEachOrder();
+	
+	public int getMaxRoomNumEachOrder();
 
 }

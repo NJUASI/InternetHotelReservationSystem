@@ -61,4 +61,22 @@ public class SourceBLController implements SourceBLService {
 		}
 	}
 
+	@Override
+	public int getMaxGuestNumEachOrder() {
+		try {
+			return sourceDataService.getMaxGuestNumEachOrder();
+		} catch (RemoteException e) {
+			return 0;
+		}
+	}
+
+	@Override
+	public int getMaxRoomNumEachOrder() {
+		try {
+			return sourceDataService.getMaxRoomNumEachOrder();
+		} catch (RemoteException e) {
+			return 0;
+		}
+	}
+
 }

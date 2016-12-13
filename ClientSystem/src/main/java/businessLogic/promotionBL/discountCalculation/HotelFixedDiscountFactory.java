@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import businessLogic.promotionBL.discountCalculation.discountOfPromotions.EnterpriseMemberDiscount;
 import businessLogic.promotionBL.discountCalculation.discountOfPromotions.ThreeAndAboveDiscount;
 import businessLogic.promotionBL.discountCalculation.discountOfPromotions.VIPBirthdayDiscount;
-import utilities.PreOrder;
 import utilities.enums.PromotionType;
+import vo.PreOrderVO;
 
 /**
  * @Description:创建酒店无特定期间的促销策略的工厂
@@ -15,11 +15,11 @@ import utilities.enums.PromotionType;
  */
 public class HotelFixedDiscountFactory {
 
-	PreOrder preOrder;
+	PreOrderVO preOrder;
 	LocalDate today;
 	
 
-	public HotelFixedDiscountFactory(PreOrder preOrder, LocalDate today) {
+	public HotelFixedDiscountFactory(PreOrderVO preOrder, LocalDate today) {
 		this.preOrder = preOrder;
 		this.today = today;
 	}

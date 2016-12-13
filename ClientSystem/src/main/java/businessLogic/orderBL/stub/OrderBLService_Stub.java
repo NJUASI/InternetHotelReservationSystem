@@ -17,6 +17,7 @@ import vo.GuestEvaluationVO;
 import vo.HotelEvaluationVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
+import vo.PreOrderVO;
 
 /**
  * 
@@ -479,6 +480,12 @@ public class OrderBLService_Stub implements OrderBLService {
 	public Iterator<OrderGeneralVO> getSpecialOrderGenerals(String userID, UserType userType, OrderState orderState) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public double getCalculatedPrice(PreOrderVO preOrderVO) {
+		// TODO 自动生成的方法存根
+		return 0;
 	}
 
 }

@@ -1,10 +1,10 @@
-package utilities;
+package vo;
 
 import java.time.LocalDate;
 
-import vo.OrderVO;
+import utilities.enums.RoomType;
 
-public class PreOrder {
+public class PreOrderVO {
 	
 	// 客户编号
 	public String guestID;
@@ -24,7 +24,10 @@ public class PreOrder {
 	//入住天数
 	public int lastDays;
 	
-	public PreOrder(OrderVO orderVO){
+	//选择的房间类型;
+	public RoomType roomType;
+	
+	public PreOrderVO(OrderVO orderVO){
 		this.guestID = orderVO.orderGeneralVO.guestID;
 		this.hotelID = orderVO.orderGeneralVO.hotelID;
 //		this.expectExecuteTime = orderVO.orderGeneralVO.expectExecuteTime;
@@ -35,13 +38,17 @@ public class PreOrder {
 		
 	}
 
-	public PreOrder(String guestID, String hotelID, LocalDate expectExecuteDate, int roomNum, int lastDays) {
+	public PreOrderVO(String guestID, String hotelID, LocalDate expectExecuteDate, int roomNum, int lastDays) {
 		super();
 		this.guestID = guestID;
 		this.hotelID = hotelID;
 		this.expectExecuteDate = expectExecuteDate;
 		this.roomNum = roomNum;
 		this.lastDays = lastDays;
+	}
+
+	public PreOrderVO() {
+		// TODO 自动生成的构造函数存根
 	}
 	
 	

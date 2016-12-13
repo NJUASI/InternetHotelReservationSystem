@@ -15,13 +15,13 @@ import exception.verificationException.UserInexistException;
 import po.GuestEvaluationPO;
 import po.OrderPO;
 import rmi.ClientRemoteHelper;
-import utilities.PreOrder;
 import utilities.enums.OrderState;
 import utilities.enums.ResultMessage;
 import utilities.enums.UserType;
 import vo.GuestEvaluationVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
+import vo.PreOrderVO;
 
 /**
  * 
@@ -82,7 +82,7 @@ public class GuestOrder implements GuestOrderBLService {
 	public double getTempPrice(OrderVO orderVO) {
 		Iterator<Double> discountsInSpan = null;
 		try {
-			discountsInSpan = discountCalculator.getDiscountInSpan(new PreOrder(orderVO));
+			discountsInSpan = discountCalculator.getDiscountInSpan(new PreOrderVO(orderVO));
 		} catch (UserInexistException e) {
 			e.printStackTrace();
 		}
