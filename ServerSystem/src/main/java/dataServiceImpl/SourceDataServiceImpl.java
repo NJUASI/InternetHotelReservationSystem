@@ -42,4 +42,14 @@ public class SourceDataServiceImpl extends UnicastRemoteObject implements Source
 		return sourceDataHelper.getRoomTypes();
 	}
 
+	@Override
+	public int getMaxGuestNumEachOrder() {
+		return sourceDataHelper.getMaxGuestNumEachOrder();
+	}
+
+	@Override
+	public int getMaxRoomNumEachOrder() {
+		return sourceDataHelper.getMaxRoomNumEachOrder();
+	}
+
 }

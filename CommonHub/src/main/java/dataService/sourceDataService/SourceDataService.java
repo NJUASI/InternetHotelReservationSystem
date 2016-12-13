@@ -5,8 +5,8 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 public interface SourceDataService extends Remote {
-	
-	
+
+
 	/**
 	 * @Description:获取该系统覆盖的所有城市
 	 * @return
@@ -16,8 +16,8 @@ public interface SourceDataService extends Remote {
 	 * @time:2016年12月7日 下午4:59:17
 	 */
 	public List<String> getCities() throws RemoteException;
-	
-	
+
+
 	/**
 	 * @Description:根据选中的城市，获取该城市内，系统支持的所有商圈
 	 * @param city
@@ -39,7 +39,7 @@ public interface SourceDataService extends Remote {
 	 */
 	public List<String> getLevels() throws RemoteException;
 
-	
+
 	/**
 	 * @Description:获取该系统支持的所有房间类型
 	 * @return
@@ -49,4 +49,24 @@ public interface SourceDataService extends Remote {
 	 * @time:2016年12月7日 下午5:00:19
 	 */
 	public List<String> getRoomTypes() throws RemoteException;
+
+	/**
+	 * @Description:获取系统允许的每一订单最大人数
+	 * @return
+	 * int
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月13日 下午6:50:26
+	 */
+	public int getMaxGuestNumEachOrder() throws RemoteException;
+
+	/**
+	 * @Description:获取系统允许的每一订单最大房间数
+	 * @return
+	 * int
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月13日 下午6:50:47
+	 */
+	public int getMaxRoomNumEachOrder()throws RemoteException;
 }

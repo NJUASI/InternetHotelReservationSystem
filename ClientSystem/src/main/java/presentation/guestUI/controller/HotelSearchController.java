@@ -81,7 +81,7 @@ public class HotelSearchController {
 
 	//用于存储客户入住的天数，当入住日期和退房日期改变时，改变此变量的值
 	private int lastDays;
-	
+
 	//当房型改变时，改变此originPrice的值
 	private double originPrice;
 
@@ -90,7 +90,7 @@ public class HotelSearchController {
 	private SourceBLService sourceBLController;
 	private HotelBLService hotelBLController;
 	private UserBLService userBLController;
-	
+
 	public HotelSearchController() {
 		orderBLController = OrderBLController.getInstance();
 		sourceBLController = SourceBLController.getInstance();
@@ -129,7 +129,7 @@ public class HotelSearchController {
 		cityChoose.valueProperty().addListener(new CityChangedListener());
 	}
 
-	
+
 
 	/**
 	 * @Description:点击城市选择框时，初始化城市列表
@@ -450,17 +450,17 @@ public class HotelSearchController {
 	}
 
 	private void initLevelAndScore() {
-		
+
 		int maxLevel = 5;
 		int maxScore = 5;
-		
+
 		for (int i = 1; i <= maxLevel; i++) {
 			minLevelInput.getItems().add(i);
 			maxLevelInput.getItems().add(i);	
 		}
 		minLevelInput.setValue(1);
 		maxLevelInput.setValue(5);
-		
+
 		for (int i = 0; i <= maxScore; i++) {
 			minScoreInput.getItems().add(i+0.0);
 			maxScoreInput.getItems().add(i+0.0);	
@@ -571,6 +571,7 @@ public class HotelSearchController {
 		roomTypeInOrder.setValue(selectedRoomType);
 		remainNumInOrder.setText(remainNumOfselectedRoomType);
 		previousPriceInOrder.setText(previousPrice);
+
 		initCreateOrder();
 		initEveryBox();
 	}
@@ -654,13 +655,11 @@ public class HotelSearchController {
 			new PopUp("订单生成失败", "订单");
 		}
 	}
-	
+
 	private void initEveryBox(){
 
 		int minutes = 60;
 		int hours = 24;
-		int maxGuestNum = 3;
-		int maxRoomNum = 3;
 
 		for (int i = 0; i < minutes; i++) {
 			minuteInOrder.getItems().add(i);
@@ -668,23 +667,24 @@ public class HotelSearchController {
 		}
 		minuteInOrder.setValue(0);
 		minuteInOrder2.setValue(0);
-		
+
 		for (int i = 0; i < hours; i++) {
 			hourInOrder.getItems().add(i);
 			hourInOrder2.getItems().add(i);
 		}
 		hourInOrder.setValue(0);
 		hourInOrder2.setValue(0);
-		
-		for (int i = 1; i <= maxGuestNum; i++) {
+
+		for (int i = 1; i <= sourceBLController.getMaxGuestNumEachOrder(); i++) {
 			guestNumInOrder.getItems().add(i);	
 		}
 		guestNumInOrder.setValue(1);
-		
-		for (int i = 1; i < maxRoomNum; i++) {
+
+		for (int i = 1; i <= sourceBLController.getMaxRoomNumEachOrder(); i++) {
 			roomCountInOrder.getItems().add(i);	
 		}
-		
+		roomCountInOrder.setValue(1);
+
 		expectExecuteDateInOrder.setValue(LocalDate.now());
 		expectLeaveDateInOrder.setValue(LocalDate.now().plusDays(1));
 		lastDays = 1;
@@ -694,7 +694,7 @@ public class HotelSearchController {
 		expectExecuteDateInOrder.valueProperty().addListener(new ExpectExecuteDateChangedListener());
 		expectLeaveDateInOrder.valueProperty().addListener(new ExpectLeaveDateChangedListener());
 	}
-	
+
 	class ExpectExecuteDateChangedListener implements ChangeListener<LocalDate> {
 
 		@Override
@@ -702,14 +702,14 @@ public class HotelSearchController {
 			//TODO 计算入住的持续时间 lastDays，并计算价格
 		}
 	}
-	
+
 	class ExpectLeaveDateChangedListener implements ChangeListener<LocalDate> {
 		@Override
 		public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
 			//TODO 计算入住的持续时间lastDays，并计算价格
 		}
 	}
-	
+
 	/**
 	 * @Description:改变房间类型时，改变房间剩余数目，并改变价格的显示
 	 * @author:Harvey Gong
@@ -718,27 +718,24 @@ public class HotelSearchController {
 	 */
 	class RoomTypeChangeListener implements ChangeListener<String>{
 		public void changed(ObservableValue ov, String oldValue, String roomType) {
-
-			//根据改变的房型，改变可预订的房间数量
-			roomCountInOrder.getItems().clear();
-
-			int remainRoomNum = hotelBLController.getRemainRoomNum(selectedHotelID,RoomType.getEnum(roomType));
-			if(remainRoomNum<1){
-				roomCountInOrder.setValue(remainRoomNum);
-			}
-			else{
-				roomCountInOrder.setValue(1);
-				for(int i = 1;i<=remainRoomNum;i++){
-					roomCountInOrder.getItems().add(i);
-				}
-			}
 			
+			int remainRoomNum = hotelBLController.getRemainRoomNum(selectedHotelID,RoomType.getEnum(roomType));
+			//显示还剩多少房间
+			remainNumInOrder.setText(remainRoomNum+"");
+			
+			roomCountInOrder.setValue(1);
+
 			originPrice = hotelBLController.getOriginPrice(selectedHotelID,RoomType.getEnum(roomType));
 
-			//显示原始价格
-			previousPriceInOrder.setText(Double.toString(originPrice*lastDays));
-			remainNumInOrder.setText(remainRoomNum+"");
+			showPrice();
 		}    
+	}
+	
+	private void showPrice(){
+		//显示原始价格
+		previousPriceInOrder.setText(Double.toString(originPrice*lastDays));
+		//显示计算的价格
+		priceOfOrder.setText(Double.toString(originPrice*lastDays));
 	}
 
 	/**

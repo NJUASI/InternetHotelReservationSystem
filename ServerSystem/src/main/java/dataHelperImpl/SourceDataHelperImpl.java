@@ -17,7 +17,7 @@ import dataHelper.SourceDataHelper;
 public class SourceDataHelperImpl implements SourceDataHelper {
 	
 	/**
-	 * @Description:TODO gcm
+	 * @Description:获取系统支持酒店星级
 	 * @return
 	 * List<String>
 	 * @author: Harvey Gong
@@ -40,6 +40,38 @@ public class SourceDataHelperImpl implements SourceDataHelper {
 	@Override
 	public List<String> getRoomTypes() {
 		return getSources("roomType");
+	}
+	
+	/**
+	 * @Description:获取系统允许的每一订单的最大人数
+	 * @return
+	 * int
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月13日 下午6:46:25
+	 */
+	public int getMaxGuestNumEachOrder(){
+		return getMaxNum().get(0);
+	}
+	
+	/**
+	 * @Description:获取系统允许的每一订单的最大房间数
+	 * @return
+	 * int
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月13日 下午6:46:59
+	 */
+	public int getMaxRoomNumEachOrder(){
+		return getMaxNum().get(1);
+	}
+	
+	private List<Integer> getMaxNum(){
+		List<Integer> list = new ArrayList<Integer>();
+		for(String string: getSources("maxNum")){
+			list.add(Integer.valueOf(string));
+		}
+		return list;
 	}
 	
 	private List<String> getSources(String sourceName){
