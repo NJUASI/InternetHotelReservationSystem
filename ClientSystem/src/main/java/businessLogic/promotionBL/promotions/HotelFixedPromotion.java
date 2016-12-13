@@ -12,10 +12,10 @@ import dataService.promotionDataService.PromotionDataService;
 import exception.verificationException.UserInexistException;
 import po.HotelFixedPromotionPO;
 import rmi.ClientRemoteHelper;
-import utilities.PreOrder;
 import utilities.enums.PromotionType;
 import utilities.enums.ResultMessage;
 import vo.HotelFixedPromotionVO;
+import vo.PreOrderVO;
 
 /**
  * @Description:对于酒店会员生日折扣，企业会员折扣以及三间及以上预订的促销策略操作的具体实现
@@ -75,7 +75,7 @@ public class HotelFixedPromotion {
 	 * @throws UserInexistException 
 	 * @time:2016年12月1日 下午2:09:29
 	 */
-	public double getDiscountOneday(PreOrder preOrder, LocalDate today) throws UserInexistException{
+	public double getDiscountOneday(PreOrderVO preOrder, LocalDate today) throws UserInexistException{
 		List<CalculateDiscount> calculateFixedPromotions = initCalculateFixedPromotions(preOrder,today);
 		double discount = 1;
 		for(int i = 0;i<calculateFixedPromotions.size();i++){
@@ -84,7 +84,7 @@ public class HotelFixedPromotion {
 		return discount;
 	}
 
-	private List<CalculateDiscount> initCalculateFixedPromotions(PreOrder preOrder, LocalDate today){
+	private List<CalculateDiscount> initCalculateFixedPromotions(PreOrderVO preOrder, LocalDate today){
 		List<CalculateDiscount> calculateFixedPromotions = new ArrayList<CalculateDiscount>();
 		initHotelFixedPromotions(preOrder.hotelID);
 		HotelFixedDiscountFactory factory = new HotelFixedDiscountFactory(preOrder,today);

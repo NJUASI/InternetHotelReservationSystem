@@ -48,6 +48,7 @@ import vo.HotelEvaluationVO;
 import vo.HotelVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
+import vo.PreOrderVO;
 import vo.RoomInfoVO;
 import vo.SearchCriteriaVO;
 /**
@@ -73,11 +74,12 @@ public class HotelSearchController {
 	@FXML
 	private ComboBox<String> cityChoose;
 
+	private String guestID;
+
 	//当点击酒店详情或直接在酒店列表预订酒店时，保存当前选择的酒店的id
 	private String selectedHotelID ;
 	private String selectedRoomType ;
 	private String remainNumOfselectedRoomType;
-	private String previousPrice;
 
 	//用于存储客户入住的天数，当入住日期和退房日期改变时，改变此变量的值
 	private int lastDays;
@@ -92,13 +94,15 @@ public class HotelSearchController {
 	private UserBLService userBLController;
 
 	public HotelSearchController() {
+		guestID = IDReserve.getInstance().getUserID();
+
 		orderBLController = OrderBLController.getInstance();
 		sourceBLController = SourceBLController.getInstance();
 		userBLController = UserController.getInstance();
 
 		//将hotelBL的浏览的guestID设置为当前用户的id
 		hotelBLController = HotelBLController.getInstance();
-		hotelBLController.setGuestID(IDReserve.getInstance().getUserID());
+		hotelBLController.setGuestID(guestID);
 	}
 
 	@FXML
@@ -566,17 +570,17 @@ public class HotelSearchController {
 		selectedHotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
 		selectedRoomType = roomTable.getSelectionModel().getSelectedItem().getRoomType();
 		remainNumOfselectedRoomType = roomTable.getSelectionModel().getSelectedItem().getRemainRoomNum();
-		previousPrice = roomTable.getSelectionModel().getSelectedItem().getPrice();
 
 		roomTypeInOrder.setValue(selectedRoomType);
 		remainNumInOrder.setText(remainNumOfselectedRoomType);
-		previousPriceInOrder.setText(previousPrice);
 
 		initCreateOrder();
 		initEveryBox();
+		
+		//显示原始价格和计算折扣后的价格
+		showPrice();
+
 	}
-
-
 
 	/**
 	 * @author 61990
@@ -620,42 +624,7 @@ public class HotelSearchController {
 		hotelCheck.setVisible(false);
 	}
 
-	/**
-	 * @author 61990
-	 * @lastChangedBy 61990
-	 * @updateTime 2016/11/27
-	 * @点击提交订单按钮
-	 */
-	OrderVO orderVO;
-
-	@FXML 
-	StackPane right;
-
-	@FXML
-	protected void commitOrder() {
-
-		final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(), 
-				LocalTime.of(hourInOrder.getValue(), minuteInOrder.getValue()));
-		final LocalDateTime expectLeaveTime = LocalDateTime.of(expectLeaveDateInOrder.getValue(), 
-				LocalTime.of(hourInOrder2.getValue(), minuteInOrder2.getValue()));
-
-		OrderGeneralVO createOrderGeneral = new OrderGeneralVO(IDReserve.getInstance().getUserID(), hotelIDInOrder.getText(), 
-				hotelNameInOrder.getText(), hotelAddressInOrder.getText(), expectExecuteTime, expectLeaveTime, 
-				nameInOrder.getText(), phoneInOrder.getText());
-
-		OrderVO createVO = new OrderVO(createOrderGeneral, Double.parseDouble(previousPriceInOrder.getText()), 
-				RoomType.getEnum(roomTypeInOrder.getValue()), roomCountInOrder.getValue(), guestNumInOrder.getValue(), 
-				messageInOrder.getText());
-
-		final ResultMessage msg = orderBLController.createOrder(createVO);
-
-		if (msg == ResultMessage.SUCCESS) {
-			new PopUp("订单生成成功", "订单");
-		}else {
-			new PopUp("订单生成失败", "订单");
-		}
-	}
-
+	//初始化订单生成界面中的combobox：预计最晚执行时间、预计离店时间、入住日期、离店日期、
 	private void initEveryBox(){
 
 		int minutes = 60;
@@ -695,8 +664,44 @@ public class HotelSearchController {
 		expectLeaveDateInOrder.valueProperty().addListener(new ExpectLeaveDateChangedListener());
 	}
 
-	class ExpectExecuteDateChangedListener implements ChangeListener<LocalDate> {
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @updateTime 2016/11/27
+	 * @点击提交订单按钮
+	 */
+	OrderVO orderVO;
 
+	@FXML 
+	StackPane right;
+
+	@FXML
+	protected void commitOrder() {
+
+		final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(), 
+				LocalTime.of(hourInOrder.getValue(), minuteInOrder.getValue()));
+		final LocalDateTime expectLeaveTime = LocalDateTime.of(expectLeaveDateInOrder.getValue(), 
+				LocalTime.of(hourInOrder2.getValue(), minuteInOrder2.getValue()));
+
+		OrderGeneralVO createOrderGeneral = new OrderGeneralVO(IDReserve.getInstance().getUserID(), hotelIDInOrder.getText(), 
+				hotelNameInOrder.getText(), hotelAddressInOrder.getText(), expectExecuteTime, expectLeaveTime, 
+				nameInOrder.getText(), phoneInOrder.getText());
+
+		OrderVO createVO = new OrderVO(createOrderGeneral, Double.parseDouble(previousPriceInOrder.getText()), 
+				RoomType.getEnum(roomTypeInOrder.getValue()), roomCountInOrder.getValue(), guestNumInOrder.getValue(), 
+				messageInOrder.getText());
+
+		final ResultMessage msg = orderBLController.createOrder(createVO);
+
+		if (msg == ResultMessage.SUCCESS) {
+			new PopUp("订单生成成功", "订单");
+		}else {
+			new PopUp("订单生成失败", "订单");
+		}
+	}
+
+
+	class ExpectExecuteDateChangedListener implements ChangeListener<LocalDate> {
 		@Override
 		public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
 			//TODO 计算入住的持续时间 lastDays，并计算价格
@@ -718,24 +723,17 @@ public class HotelSearchController {
 	 */
 	class RoomTypeChangeListener implements ChangeListener<String>{
 		public void changed(ObservableValue ov, String oldValue, String roomType) {
-			
+
 			int remainRoomNum = hotelBLController.getRemainRoomNum(selectedHotelID,RoomType.getEnum(roomType));
 			//显示还剩多少房间
 			remainNumInOrder.setText(remainRoomNum+"");
-			
+
 			roomCountInOrder.setValue(1);
 
 			originPrice = hotelBLController.getOriginPrice(selectedHotelID,RoomType.getEnum(roomType));
 
 			showPrice();
 		}    
-	}
-	
-	private void showPrice(){
-		//显示原始价格
-		previousPriceInOrder.setText(Double.toString(originPrice*lastDays));
-		//显示计算的价格
-		priceOfOrder.setText(Double.toString(originPrice*lastDays));
 	}
 
 	/**
@@ -746,21 +744,40 @@ public class HotelSearchController {
 	 */
 	class RoomNumChangeListener implements ChangeListener<Integer>{
 		public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer roomNum) {
-			final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(), 
-					LocalTime.of(hourInOrder.getValue(), minuteInOrder.getValue()));
-
-			final OrderGeneralVO createOrderGeneral = new OrderGeneralVO(IDReserve.getInstance().getUserID(), 
-					hotelIDInOrder.getText(), expectExecuteTime);
-
-			final OrderVO tempOrder = new OrderVO(createOrderGeneral, Double.parseDouble(previousPriceInOrder.getText()), 
-					RoomType.getEnum(roomTypeInOrder.getValue()), roomCountInOrder.getValue());
-
-			final double tempPrice = orderBLController.getTempPrice(tempOrder);
-
-			priceOfOrder.setText(String.valueOf(tempPrice));
-			//显示原始价格
-			previousPriceInOrder.setText(originPrice*roomNum*lastDays+"");
+			showPrice();
 		}    
+	}
+
+
+	/**
+	 * @Description:显示最新价格
+	 * void
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 上午12:43:24
+	 */
+	private void showPrice(){
+		//显示原始价格
+		previousPriceInOrder.setText(Double.toString(calculateOriginPrice()));
+		//显示计算的价格
+		priceOfOrder.setText(Double.toString(calculatePrice()));
+	}
+
+	//根据客户id，选择的酒店id，入住天数，预计入住时间以及房间数量计算打折后的价格
+	private double calculatePrice(){
+		PreOrderVO preOrderVO = new PreOrderVO();
+		preOrderVO.guestID = guestID;
+		preOrderVO.hotelID = selectedHotelID;
+		preOrderVO.lastDays = lastDays;
+		preOrderVO.expectExecuteDate = expectExecuteDateInOrder.getValue();
+		preOrderVO.roomNum = roomCountInOrder.getValue();
+		preOrderVO.roomType = RoomType.getEnum(selectedRoomType);
+		return orderBLController.getCalculatedPrice(preOrderVO);
+	}
+	
+	private double calculateOriginPrice(){
+		originPrice = hotelBLController.getOriginPrice(selectedHotelID, RoomType.getEnum(selectedRoomType));
+		return originPrice*lastDays*roomCountInOrder.getValue();
 	}
 }
 

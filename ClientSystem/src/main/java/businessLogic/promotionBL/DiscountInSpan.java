@@ -3,7 +3,7 @@ package businessLogic.promotionBL;
 import java.util.Iterator;
 
 import exception.verificationException.UserInexistException;
-import utilities.PreOrder;
+import vo.PreOrderVO;
 
 public interface DiscountInSpan {
 	/**
@@ -16,5 +16,5 @@ public interface DiscountInSpan {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月8日 上午2:01:44
 	 */
-	public Iterator<Double> getDiscountInSpan(PreOrder preOrder) throws UserInexistException;
+	public Iterator<Double> getDiscountInSpan(PreOrderVO preOrder) throws UserInexistException;
 }

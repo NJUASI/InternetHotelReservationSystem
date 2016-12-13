@@ -19,7 +19,6 @@ import po.HotelEvaluationPO;
 import po.OrderGeneralPO;
 import po.OrderPO;
 import rmi.ClientRemoteHelper;
-import utilities.PreOrder;
 import utilities.enums.OrderState;
 import utilities.enums.ResultMessage;
 import vo.CheckInVO;
@@ -28,6 +27,7 @@ import vo.GuestEvaluationVO;
 import vo.HotelEvaluationVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
+import vo.PreOrderVO;
 
 /**
  * 
@@ -65,7 +65,7 @@ public class Order {
 	public double getTempPrice(OrderVO orderVO) {
 		Iterator<Double> discountsInSpan = null;
 		try {
-			discountsInSpan = discountCalculator.getDiscountInSpan(new PreOrder(orderVO));
+			discountsInSpan = discountCalculator.getDiscountInSpan(new PreOrderVO(orderVO));
 		} catch (UserInexistException e) {
 			e.printStackTrace();
 		}

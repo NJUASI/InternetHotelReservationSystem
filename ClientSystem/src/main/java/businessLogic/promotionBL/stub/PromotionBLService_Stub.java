@@ -3,10 +3,10 @@ package businessLogic.promotionBL.stub;
 import java.util.Iterator;
 
 import businessLogicService.promotionBLService.PromotionBLService;
-import utilities.PreOrder;
 import utilities.enums.ResultMessage;
 import vo.AddressVO;
 import vo.HotelFixedPromotionVO;
+import vo.PreOrderVO;
 import vo.SpecialSpanPromotionVO;
 
 public class PromotionBLService_Stub implements PromotionBLService{
@@ -15,7 +15,7 @@ public class PromotionBLService_Stub implements PromotionBLService{
 	public PromotionBLService_Stub() {
 	}
 
-	public double getDiscout(PreOrder preOrder) {
+	public double getDiscout(PreOrderVO preOrder) {
 		return 0.8;
 	}
 

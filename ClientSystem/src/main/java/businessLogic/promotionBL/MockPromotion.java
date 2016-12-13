@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import utilities.PreOrder;
+import vo.PreOrderVO;
 
 public class MockPromotion extends DiscountCalculator {
 
 	
 	@Override
-	public Iterator<Double> getDiscountInSpan(PreOrder preOrder) {
+	public Iterator<Double> getDiscountInSpan(PreOrderVO preOrder) {
 
 		List<Double> discounts = new ArrayList<Double>();
 		discounts.add(0.8);
