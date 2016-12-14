@@ -65,13 +65,39 @@ public class SpecialSpanPromotion {
 	 * @time:2016年12月2日 下午6:56:05
 	 */
 	public ResultMessage addSpecialSpanPromotion(SpecialSpanPromotionVO specialSpanPromotionVO){
-		try {
-			return promotionDataService.addSpecialSpanPromotion(new SpecialSpanPromotionPO(specialSpanPromotionVO));
-		} catch (RemoteException e) {
+		if(!isExist(specialSpanPromotionVO)){
+			try {
+				return promotionDataService.addSpecialSpanPromotion(new SpecialSpanPromotionPO(specialSpanPromotionVO));
+			} catch (RemoteException e) {
+				return ResultMessage.FAIL;
+			}
+		}
+		else
+		{
 			return ResultMessage.FAIL;
 		}
+
 	}
-	
+
+	/**
+	 * @Description:检查是否重复添加
+	 * @return
+	 * boolean
+	 * @author: Harvey Gong
+	 * @param vo 
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 下午10:36:48
+	 */
+	private boolean isExist(SpecialSpanPromotionVO vo) {
+		initSpecialSpanPromotions(vo.userID);
+		for(int i = 0;i<specialSpanPromotions.size();i++){
+			if(specialSpanPromotions.get(i).getPromotionName().equals(vo.promotionName)){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	/**
 	 * @Description:添加网站的特定期间策略
 	 * @param specialSpanPromotionVO
@@ -85,7 +111,7 @@ public class SpecialSpanPromotion {
 		specialSpanPromotionVO.userID = webID;
 		return addSpecialSpanPromotion(specialSpanPromotionVO);
 	}
-	
+
 	/**
 	 * @Description:更新特定期间的促销策略
 	 * @param list
@@ -102,7 +128,7 @@ public class SpecialSpanPromotion {
 			return ResultMessage.FAIL;
 		}
 	}
-	
+
 	/**
 	 * @Description:更新网站的特定期间折扣
 	 * @param specialSpanPromotionVO
@@ -116,9 +142,9 @@ public class SpecialSpanPromotion {
 		specialSpanPromotionVO.userID = webID;
 		return updateSpecialSpanPromotion(specialSpanPromotionVO);
 	}
-	
-	
-	
+
+
+
 	/**
 	 * @Description:根据userID和策略名称，将数据库里对应的一条promotion删除
 	 * @param specialSpanPromotionVO
@@ -134,7 +160,7 @@ public class SpecialSpanPromotion {
 			return ResultMessage.FAIL;
 		}	
 	}
-	
+
 	/**
 	 * @Description:删除网站的特定期间折扣
 	 * @param promotionName
@@ -147,8 +173,8 @@ public class SpecialSpanPromotion {
 	public ResultMessage deleteWebSpecialSpanPromotion(String promotionName) {
 		return deleteSpecialSpanPromotion(webID, promotionName);
 	}
-	
-	
+
+
 	/**
 	 * @Description:根据传入的订单信息和需要计算策略的日期，
 	 * 计算酒店和网站特定期间的促销策略的折扣
@@ -215,5 +241,5 @@ public class SpecialSpanPromotion {
 		}
 		return specialSpanPromotions.iterator();
 	}
-	
+
 }
