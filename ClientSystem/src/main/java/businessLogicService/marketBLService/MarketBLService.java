@@ -2,6 +2,7 @@ package businessLogicService.marketBLService;
 
 import java.util.List;
 
+import exception.verificationException.MemberInexistException;
 import exception.verificationException.UserInexistException;
 import utilities.enums.ResultMessage;
 import vo.MarketVO;
@@ -20,8 +21,9 @@ public interface MarketBLService {
 	
 	public ResultMessage setMemberFormulation(List<MarketVO> marketVOList);
 	
-	public int getLevel(String guestID) throws UserInexistException;
+	public int getLevel(String guestID) throws UserInexistException, MemberInexistException;
 	
-	public String getLevelName(String userID) throws UserInexistException;
+	public String getLevelName(String userID) throws UserInexistException, MemberInexistException;
 	
+	public double getMemberDiscout(String userID) throws UserInexistException, MemberInexistException;
 }

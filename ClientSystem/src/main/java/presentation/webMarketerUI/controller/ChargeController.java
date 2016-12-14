@@ -8,15 +8,16 @@ import businessLogic.userBL.UserController;
 import businessLogic.userBL.userService.Guest;
 import businessLogic.userBL.userService.service.GuestCreditService;
 import businessLogicService.userBLService.UserBLService;
+import exception.inputException.InvalidInputException;
 import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.PopUp.PopUp;
+import utilities.Detector;
 import utilities.enums.CreditRecord;
 import vo.CreditVO;
 import vo.GuestVO;
@@ -84,7 +85,6 @@ public class ChargeController {
 			credit.setText(Double.toString(guestVO.credit));
 		} catch (UserInexistException e) {
 			e.printStackTrace();
-			// 为了保证编译能通过
 			new PopUp("该用户不存在", "搜索失败");
 		}
 	}
@@ -104,33 +104,30 @@ public class ChargeController {
 		
 		if (credit.getText() != null) {
 			/*
-			 * TODO 董金玉：因为user里的modifyCredit只是单纯的将信用值改变为期望值，crredit里面没有相关接口
+			 * 因为user里的modifyCredit只是单纯的将信用值改变为期望值，crredit里面没有相关接口
 			 * 故此处逻辑暴露，要不就这样，要不还是得新增接口Credit.charge(args)
+			 * TODO @龚尘淼 Charge回复 ，可以啊，但Credit不是我的模块
 			 */
-			final LocalDateTime time = LocalDateTime.now();
-			final double preCredit = Double.parseDouble(chargeNum.getText());
-			double afterCredit = preCredit +  Double.parseDouble(credit.getText());
-			CreditVO creditVO = new CreditVO(guestID.getText(), time, "", preCredit, afterCredit, CreditRecord.CHARGE);
+			LocalDateTime time = LocalDateTime.now();
 			try {
+				new Detector().chargeDetector(chargeNum.getText());
+				final double preCredit = Double.parseDouble(chargeNum.getText());
+				double afterCredit = preCredit +  Double.parseDouble(credit.getText());
+				CreditVO creditVO = new CreditVO(guestID.getText(), time, "", preCredit, afterCredit, CreditRecord.CHARGE);
+		
 				creditController.addCreditRecord(creditVO);
 				credit.setText(Double.toString(afterCredit));
 				chargeNum.setText("");
+			} catch (InvalidInputException e1) {
+				e1.printStackTrace();
+				new PopUp("请勿输入无效符号", "充值失败");
 			} catch (UserInexistException e) {
 				e.printStackTrace();
+				new PopUp("该用户不存在，请检查输入的ID", "充值失败");
 			}
-//			try {
-//				afterCredit = Double.parseDouble(chargeNum.getText()) +  Double.parseDouble(credit.getText());
-//				creditVO = new CreditVO(guestID.getText(), time, 
-//						"", thisGuest.credit, afterCredit, CreditRecord.CHARGE);
-//			} catch (NumberFormatException e) {
-//				e.printStackTrace();
-//			} catch (UserInexistException e) {
-//				e.printStackTrace();
-//				// TODO 弹窗提示，需要充值的客户不存在
-//			}
 		}
 	}
-	
+	 
 	/**
 	 * @author 61990
 	 * @throws IOException
