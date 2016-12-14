@@ -10,7 +10,6 @@ import businessLogic.userBL.userService.service.GuestCreditService;
 import businessLogicService.userBLService.UserBLService;
 import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -84,7 +83,6 @@ public class ChargeController {
 			credit.setText(Double.toString(guestVO.credit));
 		} catch (UserInexistException e) {
 			e.printStackTrace();
-			// 为了保证编译能通过
 			new PopUp("该用户不存在", "搜索失败");
 		}
 	}
@@ -104,8 +102,9 @@ public class ChargeController {
 		
 		if (credit.getText() != null) {
 			/*
-			 * TODO 董金玉：因为user里的modifyCredit只是单纯的将信用值改变为期望值，crredit里面没有相关接口
+			 * 因为user里的modifyCredit只是单纯的将信用值改变为期望值，crredit里面没有相关接口
 			 * 故此处逻辑暴露，要不就这样，要不还是得新增接口Credit.charge(args)
+			 * TODO @龚尘淼 Charge回复 ，可以啊，但Credit不是我的模块
 			 */
 			final LocalDateTime time = LocalDateTime.now();
 			final double preCredit = Double.parseDouble(chargeNum.getText());
@@ -118,16 +117,6 @@ public class ChargeController {
 			} catch (UserInexistException e) {
 				e.printStackTrace();
 			}
-//			try {
-//				afterCredit = Double.parseDouble(chargeNum.getText()) +  Double.parseDouble(credit.getText());
-//				creditVO = new CreditVO(guestID.getText(), time, 
-//						"", thisGuest.credit, afterCredit, CreditRecord.CHARGE);
-//			} catch (NumberFormatException e) {
-//				e.printStackTrace();
-//			} catch (UserInexistException e) {
-//				e.printStackTrace();
-//				// TODO 弹窗提示，需要充值的客户不存在
-//			}
 		}
 	}
 	
