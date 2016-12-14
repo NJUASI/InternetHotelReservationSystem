@@ -18,6 +18,13 @@ public class ServerRunner extends Application{
 		ServerRemoteHelper.setLocalhost();
 		//		ServerRemoteHelper.setIPandPort("172.28.21.131", "8889");
 		new ServerRemoteHelper();
+		
+		//启动自动检查的线程
+		System.out.println("线程已启动");
+		CheckThread check = new CheckThread();
+		while(true){
+			check.run();
+		}
 	}
 
 	public void start(final Stage stage) throws IOException {
@@ -36,12 +43,6 @@ public class ServerRunner extends Application{
 				System.exit(0); 
 			}
 		});
-
-		//启动自动检查的线程
-		CheckThread checkThread = new CheckThread();
-		Thread check = new Thread(checkThread);
-		System.out.println("线程已启动");
-		check.start();
 	}
 	public static void main(String[] args) {
 
