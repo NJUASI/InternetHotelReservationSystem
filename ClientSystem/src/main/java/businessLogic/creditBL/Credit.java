@@ -7,7 +7,6 @@ import java.util.List;
 
 import businessLogic.userBL.userService.Guest;
 import businessLogic.userBL.userService.service.GuestCreditService;
-import businessLogicService.creditBLService.CreditBLService;
 import dataService.creditDataService.CreditDataService;
 import exception.verificationException.UserInexistException;
 import po.CreditPO;
@@ -22,7 +21,7 @@ import vo.CreditVO;
  * updateTime 2016/12/5
  *
  */
-public class Credit implements CreditBLService{
+public class Credit{
 
 	private GuestCreditService guest;
 	
@@ -36,13 +35,8 @@ public class Credit implements CreditBLService{
 	public Credit() {
 		guest = new Guest();
 		creditDataService = ClientRemoteHelper.getInstance().getCreditDataService();
-//		try {
-//			creditDataService = new CreditDataService_Stub();
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//		}
 	}
-
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy Harvey Gong

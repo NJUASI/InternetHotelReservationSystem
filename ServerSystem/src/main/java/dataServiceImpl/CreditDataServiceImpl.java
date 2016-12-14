@@ -18,7 +18,6 @@ public class CreditDataServiceImpl extends UnicastRemoteObject implements Credit
 	public CreditDataServiceImpl() throws RemoteException {
 		super();
 		creditDataHelper = new CreditDataHelperImpl();
-//		creditDataHelper = new CreditDataHelperImpl_Stub();
 	}
 
 	@Override
