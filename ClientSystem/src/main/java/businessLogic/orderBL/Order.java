@@ -7,14 +7,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.hotelBL.HotelInfoOperation;
-import businessLogic.hotelBL.hotel.Hotel;
 import businessLogic.promotionBL.DiscountCalculator;
 import businessLogic.promotionBL.DiscountInSpan;
 import dataService.orderDataService.OrderDataService;
 import exception.verificationException.UserInexistException;
 import po.CheckInPO;
 import po.CheckOutPO;
-import po.GuestEvaluationPO;
 import po.HotelEvaluationPO;
 import po.OrderGeneralPO;
 import po.OrderPO;
@@ -23,7 +21,6 @@ import utilities.enums.OrderState;
 import utilities.enums.ResultMessage;
 import vo.CheckInVO;
 import vo.CheckOutVO;
-import vo.GuestEvaluationVO;
 import vo.HotelEvaluationVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
@@ -510,33 +507,6 @@ public class Order {
 			e.printStackTrace();
 		}
 		return resultMessage;
-	}
-	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/2
-	 * @param evaluationVO 客户评价单个订单时产生的订单
-	 * @return 客户是否成功评价该订单
-	 */
-	public ResultMessage addEvaluation(GuestEvaluationVO evaluationVO) {
-		ResultMessage msg1 = ResultMessage.FAIL;
-		
-		ResultMessage msg2 = ResultMessage.FAIL;
-		try {
-			msg1 = orderDataService.addEvaluation(new GuestEvaluationPO(evaluationVO));
-			hotelInterface = new Hotel(orderDataService.getOrderDetail(evaluationVO.orderID).getHotelID());
-			msg2 = hotelInterface.scoreUpdate(evaluationVO.score);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		
-		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
-			return ResultMessage.SUCCESS;
-		}else {
-			return ResultMessage.FAIL;
-		}
-		
 	}
 	
 	/**

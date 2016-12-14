@@ -64,12 +64,12 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			ps.setObject(3, orderPO.getHotelID());
 			ps.setString(4, orderPO.getHotelName());
 			ps.setObject(5, orderPO.getHotelAddress());
-			ps.setDouble(6, orderPO.getPrice());
+			ps.setInt(6, orderPO.getPrice());
 			ps.setString(9, orderPO.getState().getChineseOrderState());
 			ps.setString(10, String.valueOf(orderPO.getHasCommented()));
 			ps.setString(11, orderPO.getName());
 			ps.setString(12, orderPO.getPhone());
-			ps.setDouble(13, orderPO.getPreviousPrice());
+			ps.setInt(13, orderPO.getPreviousPrice());
 			ps.setString(17, orderPO.getRoomType().getChineseRoomType());
 			ps.setInt(18, orderPO.getRoomNumCount());
 			ps.setString(19, orderPO.getRoomNumber());
@@ -312,7 +312,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	 * @return List<OrderPO> 指定日期的所有异常orderInfo载体
 	 */
 	public List<OrderPO> getAbnormal() {
-		sql = "SELECT * FROM `order` WHERE `order`.state = 'ABNORMAL'";
+		sql = "SELECT * FROM `order` WHERE `order`.state = '异常'";
 		final List<OrderPO> result = new ArrayList<OrderPO>();
 		
 		try {
@@ -332,7 +332,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 
 	/**
 	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
+	 * @lastChangedBy Harvey
 	 * @updateTime 2016/11/30
 	 * @return List<OrderPO> 指定日期的所有未执行orderInfo载体
 	 */

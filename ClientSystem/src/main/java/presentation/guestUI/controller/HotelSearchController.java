@@ -792,9 +792,13 @@ public class HotelSearchController {
 	class RoomTypeChangeListener implements ChangeListener<String>{
 		public void changed(ObservableValue ov, String oldValue, String roomType) {
 
-			int remainRoomNum = hotelBLController.getRemainRoomNum(selectedHotelID,RoomType.getEnum(roomType));
+			//变更所选的房间类型
+			selectedRoomType = roomType;
+			
 			//显示还剩多少房间
+			int remainRoomNum = hotelBLController.getRemainRoomNum(selectedHotelID,RoomType.getEnum(selectedRoomType));
 			remainNumInOrder.setText(remainRoomNum+"");
+			
 			//预订房间数量初始为1
 			roomCountInOrder.setValue(1);
 

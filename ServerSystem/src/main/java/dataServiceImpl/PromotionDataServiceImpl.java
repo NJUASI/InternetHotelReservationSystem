@@ -29,9 +29,6 @@ public class PromotionDataServiceImpl extends UnicastRemoteObject implements Pro
 		hotelFixedPromotionDataHelper = new HotelFixedPromotionDataHelperImpl();
 		specialSpanPromotionDataHelper = new SpecialSpanPromotionDataHelperImpl();
 		addressDataHelper = new AddressDataHelperImpl();
-//		hotelFixedPromotionDataHelper = new HotelFixedPromotionDataHelperImpl_Stub();
-//		specialSpanPromotionDataHelper = new SpecialSpanPromotionImplDataHelper_Stub();
-//		addressDataHelper = new AddressDataHelperImpl_Stub();
 	}
 
 
