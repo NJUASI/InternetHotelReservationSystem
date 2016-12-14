@@ -100,7 +100,7 @@ public class HotelBLService_Stub implements HotelBLService{
 	}
 
 	@Override
-	public double getOriginPrice(String hotelID, RoomType roomType) {
+	public int getOriginPrice(String hotelID, RoomType roomType) {
 		// TODO 自动生成的方法存根
 		return 0;
 	}

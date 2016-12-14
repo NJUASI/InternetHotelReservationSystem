@@ -263,7 +263,7 @@ public class Hotel implements HotelInfoOperation{
 		return rooms.updateRemainRoomNumForUndoOrder(hotelID,roomType,roomNum);
 	}
 
-	public double getOriginPrice(String hotelID, RoomType roomType) {
+	public int getOriginPrice(String hotelID, RoomType roomType) {
 		return rooms.getOriginPrice(hotelID,roomType);
 	}
 

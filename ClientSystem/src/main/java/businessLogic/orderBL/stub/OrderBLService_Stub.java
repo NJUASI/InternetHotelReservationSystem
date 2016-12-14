@@ -483,7 +483,7 @@ public class OrderBLService_Stub implements OrderBLService {
 	}
 
 	@Override
-	public double getCalculatedPrice(PreOrderVO preOrderVO) {
+	public int getCalculatedPrice(PreOrderVO preOrderVO) {
 		// TODO 自动生成的方法存根
 		return 0;
 	}

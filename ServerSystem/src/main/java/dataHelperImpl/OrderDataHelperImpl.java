@@ -101,7 +101,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	 * @param state 需要被修改的状态
 	 * @return ResultMessage 是否成功修改订单状态
 	 */
-	public ResultMessage setState(final String orderID, final OrderState state) {
+	public synchronized ResultMessage setState(final String orderID, final OrderState state) {
 		sql = "UPDATE `order` SET `order`.state = ? WHERE `order`.orderID = ?";
 		
 		try {
@@ -336,7 +336,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	 * @updateTime 2016/11/30
 	 * @return List<OrderPO> 指定日期的所有未执行orderInfo载体
 	 */
-	public List<OrderPO> getUnexecuted() {
+	public synchronized List<OrderPO> getUnexecuted() {
 		sql = "SELECT * FROM `order` WHERE `order`.state = 'UNEXECUTED'";
 		final List<OrderPO> result = new ArrayList<OrderPO>();
 		
@@ -381,12 +381,12 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			orderPO.setHotelID(String.valueOf(rs.getObject(3)));
 			orderPO.setHotelName(rs.getString(4));
 			orderPO.setHotelAddress(String.valueOf(rs.getObject(5)));
-			orderPO.setPrice(rs.getDouble(6));
+			orderPO.setPrice(rs.getInt(6));
 			orderPO.setState(OrderState.getEnum(rs.getString(9)));
 			orderPO.setHasCommented(convertBooleanString2Boolean(rs.getString(10)));
 			orderPO.setName(rs.getString(11));
 			orderPO.setPhone(rs.getString(12));
-			orderPO.setPreviousPrice(rs.getDouble(13));
+			orderPO.setPreviousPrice(rs.getInt(13));
 			orderPO.setRoomType(RoomType.getEnum(rs.getString(17)));
 			orderPO.setRoomNumCount(rs.getInt(18));
 			orderPO.setRoomNumber(rs.getString(19));

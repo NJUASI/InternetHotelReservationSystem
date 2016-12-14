@@ -85,7 +85,7 @@ public class HotelBLController implements HotelBLService {
 	}
 	
 	@Override
-	public double getOriginPrice(String hotelID, RoomType roomType) {
+	public int getOriginPrice(String hotelID, RoomType roomType) {
 		return hotel.getOriginPrice(hotelID,roomType);
 	}
 

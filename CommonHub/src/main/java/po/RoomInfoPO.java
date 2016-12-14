@@ -32,9 +32,9 @@ public class RoomInfoPO implements Serializable{
 	private int remainNum;
 	
 	// 价格
-	private double price;
+	private int price;
 	
-	public RoomInfoPO(String hotelID,RoomType roomType, int roomNumCount, int remainNum, double price) {
+	public RoomInfoPO(String hotelID,RoomType roomType, int roomNumCount, int remainNum, int price) {
 		super();
 		this.hotelID = hotelID;
 		this.roomType = roomType;	
@@ -80,11 +80,11 @@ public class RoomInfoPO implements Serializable{
 		this.remainNum = remainNum;
 	}
 	
-	public double getPrice() {			
+	public int getPrice() {			
 		return price;
 	}
 	
-	public void setPrice(double price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 

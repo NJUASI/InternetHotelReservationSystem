@@ -26,7 +26,7 @@ public class OrderPO implements Serializable{
 	private OrderGeneralPO orderGeneralPO;
 	
 	//	原价
-	private double previousPrice;
+	private int previousPrice;
 	
 	//	订单生成时间(create时无)
 	private LocalDateTime createTime;
@@ -79,7 +79,7 @@ public class OrderPO implements Serializable{
 	}
 
 	public OrderPO(String orderID, String guestID, String hotelID, String hotelName, String hotelAddress, 
-			double previousPrice, double price, LocalDateTime createTime, LocalDateTime checkInTime,
+			int previousPrice, int price, LocalDateTime createTime, LocalDateTime checkInTime,
 			LocalDateTime checkOutTime, LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime, 
 			OrderState state, boolean hasCommented, RoomType roomType, int roomNumCount, String roomNumber, 
 			int expectGuestNumCount, String name, String phone, String message, double score, String comment) {
@@ -100,7 +100,7 @@ public class OrderPO implements Serializable{
 		this.comment = comment;
 	}
 
-	public OrderPO(OrderGeneralPO orderGeneralPO, double previousPrice, LocalDateTime createTime, 
+	public OrderPO(OrderGeneralPO orderGeneralPO, int previousPrice, LocalDateTime createTime, 
 			LocalDateTime checkInTime, LocalDateTime checkOutTime, RoomType roomType, int roomNumCount, 
 			String roomNumber, int expectGuestNumCount, String message, double score, String comment) {
 		super();
@@ -167,19 +167,19 @@ public class OrderPO implements Serializable{
 		orderGeneralPO.setHotelAddress(hotelAddress);
 	}
 
-	public double getPrice() {
+	public int getPrice() {
 		return orderGeneralPO.getPrice();
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(int price) {
 		orderGeneralPO.setPrice(price);
 	}
 
-	public double getPreviousPrice() {
+	public int getPreviousPrice() {
 		return previousPrice;
 	}
 
-	public void setPreviousPrice(double previousPrice) {
+	public void setPreviousPrice(int previousPrice) {
 		this.previousPrice = previousPrice;
 	}
 	
