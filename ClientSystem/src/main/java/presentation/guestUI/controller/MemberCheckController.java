@@ -4,6 +4,7 @@ import businessLogic.marketBL.MarketController;
 import businessLogic.memberBL.MemberController;
 import businessLogicService.marketBLService.MarketBLService;
 import businessLogicService.memberBLService.MemberBLService;
+import exception.verificationException.MemberInexistException;
 import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -46,8 +47,13 @@ public class MemberCheckController {
 
 		try {
 			memberVO = memberBLController.getMemberInfo(IDReserve.getInstance().getUserID());
-			String levelName = marketBLController.getLevelName(IDReserve.getInstance().getUserID());
-			marketVO = new MarketVO(levelName, 0, 0);
+			String levelName = null;
+			try {
+				levelName = marketBLController.getLevelName(IDReserve.getInstance().getUserID());
+				marketVO = new MarketVO(levelName, 0, 0);
+			} catch (MemberInexistException e) {
+				e.printStackTrace();
+			}
 			
 			if (memberVO.enterprise != null) {
 				enterprise.setText(memberVO.enterprise);
