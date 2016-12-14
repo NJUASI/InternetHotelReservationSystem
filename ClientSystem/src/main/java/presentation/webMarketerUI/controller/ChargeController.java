@@ -113,6 +113,8 @@ public class ChargeController {
 			CreditVO creditVO = new CreditVO(guestID.getText(), time, "", preCredit, afterCredit, CreditRecord.CHARGE);
 			try {
 				creditController.addCreditRecord(creditVO);
+				credit.setText(Double.toString(afterCredit));
+				chargeNum.setText("");
 			} catch (UserInexistException e) {
 				e.printStackTrace();
 			}
@@ -126,21 +128,9 @@ public class ChargeController {
 //				e.printStackTrace();
 //				// TODO 弹窗提示，需要充值的客户不存在
 //			}
-			showResult();
 		}
 	}
-	//弹窗
-	void showResult() throws IOException{
-			Pane root = new Pane();
-			Label result = new Label("save successfully");
-			result.setLayoutY(50);
-			result.setLayoutX(50);
-			root.getChildren().add(result);
-			Scene scene = new Scene(root,200,100); // 创建场景；
-			Stage message = new Stage();// 创建舞台；
-			message.setScene(scene); // 将场景载入舞台；
-			message.show(); // 显示窗口；
-	}
+	
 	/**
 	 * @author 61990
 	 * @throws IOException

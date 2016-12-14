@@ -9,11 +9,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.util.Callback;
 import presentation.Table.DatePromotionTable;
 import utilities.IDReserve;
 import vo.SpecialSpanPromotionVO;
@@ -72,8 +74,53 @@ public class DatePromotionController {
 		discountColumn.setCellValueFactory(cellData -> cellData.getValue().discount);
 
 		table.setItems(data);
+		initDatePicker();
+		
+	}
+	void initDatePicker(){
+		Callback<DatePicker, DateCell> dayCellFactory1 = 
+	            new Callback<DatePicker, DateCell>() {
+	                @Override
+	                public DateCell call(final DatePicker datePicker) {
+	                    return new DateCell() {
+	                        @Override
+	                        public void updateItem(LocalDate item, boolean empty) {
+	                            super.updateItem(item, empty);
 
+	                            if (item.isBefore(
+	                            		LocalDate.now())
+	                                ) {
+	                                    setDisable(true);
+	                                    setStyle("-fx-background-color: #ffc0cb;");
+	                            }   
+	                    }
+	                };
+	            }
+	       };
+	    startDatePicker.setDayCellFactory(dayCellFactory1);
+	       
+		startDatePicker.setValue(LocalDate.now());
+		Callback<DatePicker, DateCell> dayCellFactory = 
+	            new Callback<DatePicker, DateCell>() {
+	                @Override
+	                public DateCell call(final DatePicker datePicker) {
+	                    return new DateCell() {
+	                        @Override
+	                        public void updateItem(LocalDate item, boolean empty) {
+	                            super.updateItem(item, empty);
 
+	                            if (item.isBefore(
+	                            		startDatePicker.getValue().plusDays(1))
+	                                ) {
+	                                    setDisable(true);
+	                                    setStyle("-fx-background-color: #ffc0cb;");
+	                            }   
+	                    }
+	                };
+	            }
+	       };
+	       endDatePicker.setDayCellFactory(dayCellFactory);
+	       endDatePicker.setValue(LocalDate.now().plusDays(1));
 	}
 	String preName;
 	/**
@@ -111,7 +158,7 @@ public class DatePromotionController {
 
 			modifyPane.setVisible(false);
 			addBt.setVisible(true);
-			setModifyText("","",null,null);
+			setModifyText("","", LocalDate.now(), LocalDate.now().plusDays(1));
 			initialize();
 		} catch (Exception e) {
 			System.out.println("保存失败");
@@ -130,9 +177,11 @@ public class DatePromotionController {
 	protected void addPromotion() {
 		try {
 			promotionController.addHotelSpecialSpanPromotion(encapsulateVO());
-		} catch (Exception e) {
+			initialize();
+			} catch (Exception e) {
 			System.out.println("保存失败");
 		}
+	
 	}
 
 	/**
@@ -145,7 +194,8 @@ public class DatePromotionController {
 	protected void cancelModifyPromotion() {
 		modifyPane.setVisible(false);
 		addBt.setVisible(true);
-		setModifyText("","",null,null);
+		setModifyText("","", LocalDate.now(), LocalDate.now().plusDays(1));
+		initialize();	
 	}
 	
 	/**
@@ -183,6 +233,7 @@ public class DatePromotionController {
 
 		//TODO gcm注意：这里使用了魔数，应该换一种方式，商讨之后决定
 		vo.userID = "99999999";
+		vo.discount=Double.parseDouble(discountText.getText());
 		vo.promotionName = nameText.getText();
 		vo.startDate =  startDatePicker.getValue();
 		vo.endDate = endDatePicker.getValue();

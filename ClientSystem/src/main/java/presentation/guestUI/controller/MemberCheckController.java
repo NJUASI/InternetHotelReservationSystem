@@ -82,15 +82,18 @@ public class MemberCheckController {
 	protected void register() {
 		memberCheck.setVisible(false);
 		memberModify.setVisible(true);
-		if (birthday.getText() != null) {
-			//TODO 此处getText得到是什么，你这一直实现不了
+		
+		if (birthday.getText() != "") {
 			commonPane.setDisable(true);
 			birthdayPicker.setValue(memberVO.birthday);
+		}else{
+			commonPane.setDisable(false);
 		}
-		if (enterprise.getText() != null) {
-			//TODO 此处getText得到是什么，你这一直实现不了
+		if (enterprise.getText() != "") {
 			enterprisePane.setDisable(true);
 			enterpriseText.setText(memberVO.enterprise);
+		}else{
+			enterprisePane.setDisable(false);
 		}
 	}
 

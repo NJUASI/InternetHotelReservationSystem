@@ -106,7 +106,7 @@ public class OrderController {
 	@FXML
 	protected void searchOneOrder() {
 		
-	
+	try{
 		orderID = searchID.getText();
 		orderVO = orderBLController.getOrderDetail(orderID);
 		initOrderDetail(orderVO);
@@ -119,6 +119,10 @@ public class OrderController {
 		} else {
 			cancelOrderPane.setDisable(true);
 		}
+		}catch (Exception e) {
+		// TODO: handle exception
+	}
+		
 	}
 
 	/**
@@ -160,7 +164,7 @@ public class OrderController {
 //		
 //		//TODO 冯俊杰：按时间排序
 //		initOrderCheck(orderGenerals);
-		
+		try{
 		LocalDate date = searchDate.getValue();
 		
 		orderGenerals = orderBLController.getAllAbnormalOrderGeneral(date);
@@ -168,6 +172,10 @@ public class OrderController {
 		orderCheck.setVisible(true);
 		searchPane.setVisible(false);
 		cancelOrderPaneInCheck.setDisable(false);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 
 	/**
