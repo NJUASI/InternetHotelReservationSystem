@@ -312,7 +312,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	 * @return List<OrderPO> 指定日期的所有异常orderInfo载体
 	 */
 	public List<OrderPO> getAbnormal() {
-		sql = "SELECT * FROM `order` WHERE `order`.state = 'ABNORMAL'";
+		sql = "SELECT * FROM `order` WHERE `order`.state = '异常'";
 		final List<OrderPO> result = new ArrayList<OrderPO>();
 		
 		try {
