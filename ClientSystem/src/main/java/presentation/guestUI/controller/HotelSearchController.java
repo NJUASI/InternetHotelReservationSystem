@@ -26,6 +26,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -34,6 +35,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.util.Callback;
 import presentation.PopUp.PopUp;
 import presentation.Table.EvaluationTable;
 import presentation.Table.HotelTable;
@@ -650,8 +652,8 @@ public class HotelSearchController {
 			hourInOrder.getItems().add(i);
 			hourInOrder2.getItems().add(i);
 		}
-		hourInOrder.setValue(0);
-		hourInOrder2.setValue(0);
+		hourInOrder.setValue(18);
+		hourInOrder2.setValue(12);
 
 		for (int i = 1; i <= sourceBLController.getMaxGuestNumEachOrder(); i++) {
 			guestNumInOrder.getItems().add(i);	
@@ -670,7 +672,46 @@ public class HotelSearchController {
 		
 		expectExecuteDateInOrder.setValue(executeDate);
 		expectLeaveDateInOrder.setValue(leaveDate);
+		Callback<DatePicker, DateCell> dayCellFactory1 = 
+	            new Callback<DatePicker, DateCell>() {
+	                @Override
+	                public DateCell call(final DatePicker datePicker) {
+	                    return new DateCell() {
+	                        @Override
+	                        public void updateItem(LocalDate item, boolean empty) {
+	                            super.updateItem(item, empty);
 
+	                            if (item.isBefore(
+	                            		LocalDate.now())
+	                                ) {
+	                                    setDisable(true);
+	                                    setStyle("-fx-background-color: #ffc0cb;");
+	                            }   
+	                    }
+	                };
+	            }
+	        };
+	        expectExecuteDateInOrder.setDayCellFactory(dayCellFactory1);
+		Callback<DatePicker, DateCell> dayCellFactory = 
+	            new Callback<DatePicker, DateCell>() {
+	                @Override
+	                public DateCell call(final DatePicker datePicker) {
+	                    return new DateCell() {
+	                        @Override
+	                        public void updateItem(LocalDate item, boolean empty) {
+	                            super.updateItem(item, empty);
+
+	                            if (item.isBefore(
+	                            		expectExecuteDateInOrder.getValue().plusDays(1))
+	                                ) {
+	                                    setDisable(true);
+	                                    setStyle("-fx-background-color: #ffc0cb;");
+	                            }   
+	                    }
+	                };
+	            }
+	        };
+	    expectLeaveDateInOrder.setDayCellFactory(dayCellFactory);
 		roomTypeInOrder.valueProperty().addListener(new RoomTypeChangeListener());
 		roomCountInOrder.valueProperty().addListener(new RoomNumChangeListener());
 		expectExecuteDateInOrder.valueProperty().addListener(new ExpectExecuteDateChangedListener());
