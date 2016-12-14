@@ -45,16 +45,15 @@ public class GuestDataHelperImpl implements GuestDataHelper {
 	 * @return guestPO 是否成功添加到数据库中
 	 */
 	public GuestPO add(GuestPO guestPO) {
-		sql = "INSERT INTO guest(guest.`name`,guest.birthday,guest.nickName,guest.`password`,guest.phone)"
-				+ "values(?,?,?,?,?)";
+		sql = "INSERT INTO guest(guest.`name`,guest.nickName,guest.`password`,guest.phone)"
+				+ "values(?,?,?,?)";
 
 		try {
 			ps = conn.prepareStatement(sql); // 插入数据的准备工作，1-8对应sql语句中问号的顺序
-			ps.setString(1, guestPO.getName()); 
-			ps.setObject(2, LocalDate.of(1, 1, 1));// 虽然Object可以替代所有该set方法，但会影响效率
-			ps.setString(3, guestPO.getNickName()); // 所以尽量使用对应数据类型的set方法
-			ps.setString(4, guestPO.getPassword());// 在使用setObject方法是必须注意，
-			ps.setString(5, guestPO.getPhone());// 我们应该使用对应数据类型
+			ps.setString(1, guestPO.getName()); // 虽然Object可以替代所有该set方法，但会影响效率
+			ps.setString(2, guestPO.getNickName()); // 所以尽量使用对应数据类型的set方法
+			ps.setString(3, guestPO.getPassword());// 在使用setObject方法是必须注意，
+			ps.setString(4, guestPO.getPhone());// 我们应该使用对应数据类型
 
 			ps.execute(); // 执行sql语句，返回值为boolean
 			
@@ -74,7 +73,7 @@ public class GuestDataHelperImpl implements GuestDataHelper {
 	 * @param guestPO guestInfo载体
 	 * @return ResultMessage 是否成功修改数据库中的指定guestInfo
 	 */
-	public ResultMessage modify(final GuestPO guestPO) {
+	public ResultMessage modify(GuestPO guestPO) {
 		sql = "UPDATE guest SET guest.birthday= ?,guest.enterprise = ?,guest.`name`= ?,guest.nickName = ?,"
 				+ "guest.`password` = ?,guest.credit = ?,guest.phone = ? WHERE guest.guestID = ?";
 		try {
@@ -200,7 +199,7 @@ public class GuestDataHelperImpl implements GuestDataHelper {
 	
 	private GuestPO change(GuestPO guestPO){
 		GuestPO resultPO = guestPO;
-		if(resultPO.getBirthday().isEqual(LocalDate.of(1, 1, 1))){
+		if(resultPO.getBirthday().isEqual(LocalDate.of(2, 2, 2))){
 			resultPO.setBirthday(null);
 		}
 		if(resultPO.getEnterprise().equals("")){

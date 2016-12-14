@@ -119,7 +119,7 @@ public class Detector {
 	 * @return boolean 是否符合要求规范
 	 */
 	public boolean chargeDetector(String express) throws InvalidInputException{
-		expression = "[0-9]";
+		expression = "[0-9]{1,10}";
 		
 		if(!this.getResultOfDetector(express)){
 			throw new InvalidInputException();
