@@ -152,7 +152,6 @@ public class CyclePromotionController {
 		
 		//调用promotionController的更新特定商圈策略的方法
 		promotionBLController.updateSpecialCirclePromotions(addressVO);
-		cycleDiscount.setText("");
 		searchInfo();
 	}
 }

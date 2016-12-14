@@ -121,7 +121,7 @@
                                  </children>
                               </Pane>
                               <Button focusTraversable="false" layoutX="315.0" layoutY="29.0" mnemonicParsing="false" onAction="#registerCommon" text="提交" />
-                              <DatePicker fx:id="birthdayPicker" layoutX="55.0" layoutY="29.0" prefHeight="23.0" prefWidth="226.0" />
+                              <DatePicker fx:id="birthdayPicker" editable="false" focusTraversable="false" layoutX="55.0" layoutY="29.0" prefHeight="23.0" prefWidth="226.0" />
                            </children>
                         </AnchorPane>
                      </content>
