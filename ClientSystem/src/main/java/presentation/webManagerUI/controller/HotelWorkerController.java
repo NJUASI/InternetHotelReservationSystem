@@ -109,7 +109,8 @@ public class HotelWorkerController {
 
 			hotelModifyPane.setVisible(false);
 			hotelInfoPane.setVisible(true);
-			
+			hotelName.setText(hotelName2.getText());
+			password.setText(password2.getText());
 		} catch (InvalidInputException e) {
 			e.printStackTrace();
 			new PopUp("酒店名称不能含有无效标识符或不能为空", "更改失败");
