@@ -4,6 +4,7 @@ import businessLogic.marketBL.MarketController;
 import businessLogic.memberBL.MemberController;
 import businessLogicService.marketBLService.MarketBLService;
 import businessLogicService.memberBLService.MemberBLService;
+import exception.verificationException.MemberInexistException;
 import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -46,16 +47,21 @@ public class MemberCheckController {
 
 		try {
 			memberVO = memberBLController.getMemberInfo(IDReserve.getInstance().getUserID());
-			String levelName = marketBLController.getLevelName(IDReserve.getInstance().getUserID());
-			marketVO = new MarketVO(levelName, 0, 0);
+			String levelName = null;
+			try {
+				levelName = marketBLController.getLevelName(IDReserve.getInstance().getUserID());
+				marketVO = new MarketVO(levelName, 0, 0);
+			} catch (MemberInexistException e) {
+				e.printStackTrace();
+			}
 			
-			enterprise.setText(memberVO.enterprise);
 			if (memberVO.enterprise != null) {
+				enterprise.setText(memberVO.enterprise);
 				market.setText(marketVO.marketName);
 			}
-			birthday.setText(memberVO.birthday.toString());
 
 			if (memberVO.birthday != null) {
+				birthday.setText(memberVO.birthday.toString());
 				market2.setText(marketVO.marketName);
 			}
 		} catch (UserInexistException e) {
@@ -82,7 +88,7 @@ public class MemberCheckController {
 	protected void register() {
 		memberCheck.setVisible(false);
 		memberModify.setVisible(true);
-		System.out.println(enterprise.getText());
+		
 		if (birthday.getText() != "") {
 			commonPane.setDisable(true);
 			birthdayPicker.setValue(memberVO.birthday);

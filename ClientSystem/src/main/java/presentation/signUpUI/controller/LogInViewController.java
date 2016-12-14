@@ -162,7 +162,7 @@ public class LogInViewController {
 		GuestVO guestVO = null;
 		if(password2.getText().equals(password3.getText())){
 			GuestVO userVO = new GuestVO("",LocalDate.of(1,1,1),"",name.getText(), nickName.getText(),password2.getText()
-					,phone.getText(),0);
+					,phone.getText(),1000);
 			try {
 				guestVO = logInBLController.guestSignUp(userVO);
 				new PopUp("你的账号是"+guestVO.userID, "注册成功");

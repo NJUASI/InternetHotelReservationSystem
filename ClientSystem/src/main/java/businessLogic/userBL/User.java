@@ -81,7 +81,6 @@ public class User {
 			return user.modify(userVO);
 		}
 		
-		//TODO 董金玉：USER_UNEXISTENCE
 		return ResultMessage.FAIL;
 	}
 
