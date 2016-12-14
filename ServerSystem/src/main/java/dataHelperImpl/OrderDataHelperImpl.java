@@ -381,12 +381,12 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			orderPO.setHotelID(String.valueOf(rs.getObject(3)));
 			orderPO.setHotelName(rs.getString(4));
 			orderPO.setHotelAddress(String.valueOf(rs.getObject(5)));
-			orderPO.setPrice(rs.getDouble(6));
+			orderPO.setPrice(rs.getInt(6));
 			orderPO.setState(OrderState.getEnum(rs.getString(9)));
 			orderPO.setHasCommented(convertBooleanString2Boolean(rs.getString(10)));
 			orderPO.setName(rs.getString(11));
 			orderPO.setPhone(rs.getString(12));
-			orderPO.setPreviousPrice(rs.getDouble(13));
+			orderPO.setPreviousPrice(rs.getInt(13));
 			orderPO.setRoomType(RoomType.getEnum(rs.getString(17)));
 			orderPO.setRoomNumCount(rs.getInt(18));
 			orderPO.setRoomNumber(rs.getString(19));

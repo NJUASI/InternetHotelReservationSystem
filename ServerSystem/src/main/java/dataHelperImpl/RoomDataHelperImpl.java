@@ -56,7 +56,7 @@ public class RoomDataHelperImpl implements RoomDataHelper {
 				po.setRoomType(RoomType.getEnum(rs.getString(2)));
 				po.setRoomNum(rs.getInt(3));
 				po.setRemainNum(rs.getInt(4));
-				po.setPrice(rs.getDouble(5));
+				po.setPrice(rs.getInt(5));
 				list.add(po);
 			}
 

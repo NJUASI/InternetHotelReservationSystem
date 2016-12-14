@@ -241,7 +241,7 @@ class Rooms {
 		return updateRemainRoomNum(hotelID, roomType, roomNum, Operation.UNDO_ORDER);
 	}
 
-	public double getOriginPrice(String hotelID, RoomType roomType) {
+	public int getOriginPrice(String hotelID, RoomType roomType) {
 		initRoomInfoPO(hotelID);
 		return roomInfoPOList.get(findPO(roomType)).getPrice();
 	}

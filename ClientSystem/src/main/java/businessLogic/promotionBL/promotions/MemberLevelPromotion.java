@@ -15,7 +15,7 @@ public class MemberLevelPromotion {
 		 * TODO djy 提供一个返回折扣的接口，我把客户的id传给你，你判断是否是会员、会员等级，再获取对应的折扣
 		 * 然后把折扣返回给我
 		 */
-		return 0;
+		return 1;
 	}
 
 }

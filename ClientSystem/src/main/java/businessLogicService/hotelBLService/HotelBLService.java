@@ -142,7 +142,7 @@ public interface HotelBLService {
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月12日 上午1:04:04
 	 */
-	public double getOriginPrice(String hotelID, RoomType roomType);
+	public int getOriginPrice(String hotelID, RoomType roomType);
 	
 	/**
 	 * @Description:根据所选城市、商圈得到该城市商圈的所有酒店

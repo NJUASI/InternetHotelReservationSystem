@@ -321,7 +321,7 @@ public final class OrderBLController implements OrderBLService {
 	 * @time:2016年12月14日 上午12:25:05
 	 */
 	@Override
-	public double getCalculatedPrice(PreOrderVO preOrderVO) {
+	public int getCalculatedPrice(PreOrderVO preOrderVO) {
 		/*
 		 * TODO fjj我把你那个计算价格的改写了一下，感觉你那个要的参数太多了，你看这个方法放哪里比较好
 		 * 我不知道放哪里
@@ -338,7 +338,7 @@ public final class OrderBLController implements OrderBLService {
 		while(discounts.hasNext()){
 			total = total + originPrice*discounts.next()*preOrderVO.roomNum;
 		}
-		return total;
+		return (int)total;
 	}
 
 }

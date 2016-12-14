@@ -62,7 +62,7 @@ public class Order {
 	 * @param orderVO 从客户界面层传下来的Order载体
 	 * @return 若客户创建此订单，需要付的款项
 	 */
-	public double getTempPrice(OrderVO orderVO) {
+	public int getTempPrice(OrderVO orderVO) {
 		Iterator<Double> discountsInSpan = null;
 		try {
 			discountsInSpan = discountCalculator.getDiscountInSpan(new PreOrderVO(orderVO));
@@ -74,7 +74,7 @@ public class Order {
 		while(discountsInSpan.hasNext()) {
 			result += prePrice * discountsInSpan.next();
 		}
-		return result;
+		return (int)result;
 	}
 	
 	/**

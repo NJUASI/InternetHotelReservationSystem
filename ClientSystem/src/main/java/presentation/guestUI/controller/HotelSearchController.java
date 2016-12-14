@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -83,7 +82,7 @@ public class HotelSearchController {
 	private String remainNumOfselectedRoomType;
 
 	//当房型改变时，改变此originPrice的值
-	private double originPrice;
+	private int originPrice;
 	
 	//预期执行时间
 	private LocalDate executeDate;
@@ -697,13 +696,13 @@ public class HotelSearchController {
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(expectLeaveDateInOrder.getValue(), 
 				LocalTime.of(hourInOrder2.getValue(), minuteInOrder2.getValue()));
 
-		double price = Double.valueOf(priceOfOrder.getText());
+		int price = Integer.valueOf(priceOfOrder.getText());
 		OrderGeneralVO createOrderGeneral = new OrderGeneralVO(IDReserve.getInstance().getUserID(), hotelIDInOrder.getText(), 
 				hotelNameInOrder.getText(), hotelAddressInOrder.getText(), expectExecuteTime, expectLeaveTime, 
 				nameInOrder.getText(), phoneInOrder.getText());
 		createOrderGeneral.price = price;
 
-		double previousPrice = Double.valueOf(previousPriceInOrder.getText());
+		int previousPrice = Integer.valueOf(previousPriceInOrder.getText());
 		
 		OrderVO createVO = new OrderVO(createOrderGeneral,previousPrice, 
 				RoomType.getEnum(roomTypeInOrder.getValue()), roomCountInOrder.getValue(), guestNumInOrder.getValue(), 
@@ -794,13 +793,13 @@ public class HotelSearchController {
 	 */
 	private void showPrice(){
 		//显示原始价格
-		previousPriceInOrder.setText(Double.toString(calculateOriginPrice()));
+		previousPriceInOrder.setText(Integer.toString(calculateOriginPrice()));
 		//显示计算的价格
-		priceOfOrder.setText(Double.toString(calculatePrice()));
+		priceOfOrder.setText(Integer.toString(calculatePrice()));
 	}
 
 	//根据客户id，选择的酒店id，入住天数，预计入住时间以及房间数量计算打折后的价格
-	private double calculatePrice(){
+	private int calculatePrice(){
 		PreOrderVO preOrderVO = new PreOrderVO();
 		preOrderVO.guestID = guestID;
 		preOrderVO.hotelID = selectedHotelID;
@@ -812,7 +811,7 @@ public class HotelSearchController {
 	}
 	
 	//根据选择的酒店id，房间类型和入住天数，计算原始价格（打折前）
-	private double calculateOriginPrice(){
+	private int calculateOriginPrice(){
 		originPrice = hotelBLController.getOriginPrice(selectedHotelID, RoomType.getEnum(selectedRoomType));
 		return originPrice*lastDays*roomCountInOrder.getValue();
 	}

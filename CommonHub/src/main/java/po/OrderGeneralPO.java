@@ -30,7 +30,7 @@ public class OrderGeneralPO implements Serializable{
 	private String hotelAddress;
 	
 	// 最后预定价格
-	private double price;
+	private int price;
 	
 	// 最晚订单执行时间／预计入住时间
 	private LocalDateTime expectExecuteTime;
@@ -53,7 +53,7 @@ public class OrderGeneralPO implements Serializable{
 	public OrderGeneralPO(){}
 
 	public OrderGeneralPO(String orderID, String guestID, String hotelID, String hotelName, 
-			String hotelAddress, double price, LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime, 
+			String hotelAddress, int price, LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime, 
 			OrderState state, boolean hasCommented, String name, String phone) {
 		super();
 		this.orderID = orderID;
@@ -140,11 +140,11 @@ public class OrderGeneralPO implements Serializable{
 		this.hotelAddress = hotelAddress;
 	}
 
-	public double getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 

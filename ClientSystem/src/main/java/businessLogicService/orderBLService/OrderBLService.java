@@ -13,6 +13,6 @@ import vo.PreOrderVO;
 public interface OrderBLService extends CommonOrderBLService, GuestOrderBLService, HotelWorkerOrderBLService, 
 WebMarketerOrderBLService, OrderForHotelModuleBLService {
 
-	public double getCalculatedPrice(PreOrderVO preOrderVO);
+	public int getCalculatedPrice(PreOrderVO preOrderVO);
 	
 }

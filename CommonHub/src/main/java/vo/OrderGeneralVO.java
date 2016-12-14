@@ -29,7 +29,7 @@ public class OrderGeneralVO {
 	public String hotelAddress;
 
 	//	最后预定价格
-	public double price;
+	public int price;
 
 	//	最晚订单执行时间／预计入住时间
 	public LocalDateTime expectExecuteTime;
@@ -56,7 +56,7 @@ public class OrderGeneralVO {
 	 * updateTime 2016/12/5
 	 */
 	public OrderGeneralVO(String orderID, String guestID, String hotelID, String hotelName, 
-			String hotelAddress, double price, LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime, 
+			String hotelAddress, int price, LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime, 
 			OrderState state, boolean hasCommented, String name, String phone) {
 		this.orderID = orderID;
 		this.guestID = guestID;
