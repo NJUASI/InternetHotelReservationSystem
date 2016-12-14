@@ -125,10 +125,14 @@ public class OrderCheckController {
 	@FXML
 	protected void undoNormalOrder(){
 		undoOrder(table.getSelectionModel().getSelectedItem().getOrderID());
+		searchUnexecutedOrder();
 	}
 	@FXML
 	protected void undoInDetail(){
 		undoOrder(orderVO.orderGeneralVO.orderID);
+		orderDetail();
+		searchUnexecutedOrder();
+		
 	}
 	
 	private void undoOrder(String orderID){
@@ -162,7 +166,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void searchAbnormalOrder() {
-		undoBt.setVisible(true);
+		undoBt.setVisible(false);
 		orderGenerals = orderBLController.getSpecialOrderGenerals(guestID, guest, OrderState.ABNORMAL);
 		initOrderCheck(orderGenerals);
 	}
