@@ -42,7 +42,7 @@ public class HotelFixedPromotion {
 	 */
 	public Iterator<HotelFixedPromotionVO> getHotelFixedPromotions(String hotelWorkerID){
 		initHotelFixedPromotions(hotelWorkerID);
-		return convertPOListToVOListIterator(hotelFixedPromotions);
+		return convertPOListToVOIterator(hotelFixedPromotions);
 	}
 
 
@@ -89,14 +89,20 @@ public class HotelFixedPromotion {
 		initHotelFixedPromotions(preOrder.hotelID);
 		HotelFixedDiscountFactory factory = new HotelFixedDiscountFactory(preOrder,today);
 		for(int i = 0;i<hotelFixedPromotions.size();i++){
-			HotelFixedPromotionPO tempHotelFixedPromotion = hotelFixedPromotions.get(i);
-			PromotionType promotionType = tempHotelFixedPromotion.getPromotionType();
-			double discount = tempHotelFixedPromotion.getDiscount();
-			calculateFixedPromotions.add(factory.createCalculateDiscount(promotionType,discount));
+			HotelFixedPromotionPO po = hotelFixedPromotions.get(i);
+			calculateFixedPromotions.add(factory.createCalculateDiscount(po.getPromotionType(),po.getDiscount()));
 		}
 		return calculateFixedPromotions;
 	}
 
+	/**
+	 * @Description:根据酒店id从数据层获取该酒店固定策略
+	 * @param hotelID
+	 * void
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 上午11:46:53
+	 */
 	private void initHotelFixedPromotions(String hotelID) {
 		try {
 			hotelFixedPromotions = promotionDataService.getHotelFixedPromotion(hotelID);
@@ -105,7 +111,16 @@ public class HotelFixedPromotion {
 		}
 	}
 
-	private Iterator<HotelFixedPromotionVO> convertPOListToVOListIterator(List<HotelFixedPromotionPO> POList){
+	/**
+	 * @Description:将poList转化为vo的iterator
+	 * @param POList
+	 * @return
+	 * Iterator<HotelFixedPromotionVO>
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 上午11:47:24
+	 */
+	private Iterator<HotelFixedPromotionVO> convertPOListToVOIterator(List<HotelFixedPromotionPO> POList){
 		List<HotelFixedPromotionVO> hotelFixedPromotionVOList = new ArrayList<HotelFixedPromotionVO>();
 		for(HotelFixedPromotionPO hotelFixedPromotion: POList){
 			hotelFixedPromotionVOList.add(new HotelFixedPromotionVO(hotelFixedPromotion));

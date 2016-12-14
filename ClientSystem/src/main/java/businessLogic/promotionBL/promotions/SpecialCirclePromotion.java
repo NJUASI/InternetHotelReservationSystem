@@ -40,7 +40,7 @@ public class SpecialCirclePromotion {
 	 */
 	public Iterator<AddressVO> getSpecialCirclePromoitons(String city){
 		initSpecialCirclePromotions(city);
-		return convertPOListToVOListIterator(specialCirclePromotions);
+		return convertPOListToVOIterator(specialCirclePromotions);
 	}
 	
 	/**
@@ -82,6 +82,15 @@ public class SpecialCirclePromotion {
 		return 1;
 	}
 		
+	/**
+	 * @Description:判断是否是普通会员
+	 * @param guestID
+	 * @return
+	 * boolean
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 上午11:57:14
+	 */
 	private boolean isVIP(String guestID){
 		try {
 			return new Member().isMember(guestID, MemberType.COMMON);
@@ -90,7 +99,16 @@ public class SpecialCirclePromotion {
 		}
 	}
 	
-	private Iterator<AddressVO> convertPOListToVOListIterator(List<AddressPO> POList){
+	/**
+	 * @Description:将poList转化为vo的iterator
+	 * @param POList
+	 * @return
+	 * Iterator<AddressVO>
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 上午11:57:34
+	 */
+	private Iterator<AddressVO> convertPOListToVOIterator(List<AddressPO> POList){
 		List<AddressVO> specialCirclePromotionVOList = new ArrayList<AddressVO>();
 		for(AddressPO specialCirclePromotion: POList){
 			specialCirclePromotionVOList.add(new AddressVO(specialCirclePromotion));
@@ -98,6 +116,14 @@ public class SpecialCirclePromotion {
 		return specialCirclePromotionVOList.iterator();
 	}
 	
+	/**
+	 * @Description:根据city获取该城市的所有vip特定商圈的策略
+	 * @param city
+	 * void
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 上午11:58:08
+	 */
 	private void initSpecialCirclePromotions(String city) {
 		try {
 			specialCirclePromotions = promotionDataService.getSpecialCirclePromotion(city);
@@ -106,6 +132,16 @@ public class SpecialCirclePromotion {
 		}
 	}
 
+	/**
+	 * @Description:根据城市、商圈获取该特定商圈的折扣
+	 * @param city
+	 * @param newCircle
+	 * @return
+	 * double
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 上午11:58:44
+	 */
 	public double getSpecialCirclePromoiton(String city, String newCircle) {
 		initSpecialCirclePromotions(city);
 		for(AddressPO po : specialCirclePromotions){

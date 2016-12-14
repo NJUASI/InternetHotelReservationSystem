@@ -15,16 +15,6 @@ import vo.OrderVO;
  *
  */
 public interface GuestOrderBLService {
-
-	/**
-	 * 
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/4
-	 * @param orderVO 从客户界面层传下来的Order载体
-	 * @return 若客户创建此订单，需要付的款项
-	 */
-	double getTempPrice(OrderVO orderVO);
 	
 	/**
 	 * 
