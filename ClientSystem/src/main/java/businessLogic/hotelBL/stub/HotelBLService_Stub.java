@@ -116,5 +116,17 @@ public class HotelBLService_Stub implements HotelBLService{
 		
 	}
 
+	@Override
+	public ResultMessage addRoomType(RoomInfoVO vo) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
+	@Override
+	public ResultMessage deleteRoomType(String hotelID, RoomType roomType) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
 
 }

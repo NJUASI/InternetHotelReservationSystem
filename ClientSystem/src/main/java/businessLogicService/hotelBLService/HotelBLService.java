@@ -73,7 +73,7 @@ public interface HotelBLService {
 	public ResultMessage addHotel (HotelVO hotelVO);
 	
 	/**
-	 * @Description:线下入住,酒店工作人员操作，不需要传入hotelid
+	 * @Description:线下入住,酒店工作人员操作
 	 * @param hotelID
 	 * @param RoomType
 	 * @param roomNum
@@ -86,7 +86,7 @@ public interface HotelBLService {
 	public ResultMessage checkInOffline (String hotelID,RoomType RoomType,int roomNum);
 	
 	/**
-	 * @Description:线下退房，酒店工作人员操作，不需要传入hotelid
+	 * @Description:线下退房，酒店工作人员操作
 	 * @param hotelID
 	 * @param RoomType
 	 * @param roomNum
@@ -99,7 +99,7 @@ public interface HotelBLService {
 	public ResultMessage checkOutOffline (String hotelID,RoomType RoomType,int roomNum);
 
 	/**
-	 * @Description:获取
+	 * @Description:获取酒店所有的客房信息
 	 * @param hotelID
 	 * @return
 	 * Iterator<RoomInfoVO>
@@ -109,6 +109,27 @@ public interface HotelBLService {
 	 */
 	public Iterator<RoomInfoVO> getHotelRoomInfo (String hotelID);
 
+	/**
+	 * @Description:添加房间类型
+	 * @param roomInfoVO
+	 * void
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 下午4:51:34
+	 */
+	public ResultMessage addRoomType(RoomInfoVO roomInfoVO);
+	
+	/**
+	 * @Description:删除房间类型
+	 * @param roomType
+	 * @return
+	 * ResultMessage
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 下午5:26:08
+	 */
+	public ResultMessage deleteRoomType(String hotelID,RoomType roomType);
+	
 	/**
 	 * @Description:更新客房信息
 	 * @param roomInfoVO
@@ -121,7 +142,7 @@ public interface HotelBLService {
 	public ResultMessage updateHotelRoomInfo (RoomInfoVO roomInfoVO);
 	
 	/**
-	 * @Description:TODO 待商议，可定死，现在我也偏向定死，然后订的时候到逻辑层检查一下，根据酒店id和所选房间类型获取该房间剩余数量，客户生成订单时会用到
+	 * @Description:TODO 根据酒店id和所选房间类型获取该房间剩余数量，客户生成订单时会用到
 	 * @param hotelID
 	 * @param roomType
 	 * @return
@@ -133,7 +154,7 @@ public interface HotelBLService {
 	public int getRemainRoomNum(String hotelID,RoomType roomType);
 	
 	/**
-	 * @Description:根据酒店id和所选房间类型，得到该房型的原始价格
+	 * @Description:根据酒店id和所选房间类型，得到该房型的原始价格,订单生成时需要显示
 	 * @param hotelID
 	 * @param roomType
 	 * @return
@@ -178,5 +199,5 @@ public interface HotelBLService {
 	 * @time:2016年12月12日 上午1:07:29
 	 */
 	public Iterator<HotelVO> searchHotels(List<SearchCriteriaType> searchCriteriaTypes,SearchCriteriaVO vo);
-	
+
 }

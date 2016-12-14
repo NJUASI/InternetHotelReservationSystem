@@ -14,7 +14,6 @@ import utilities.enums.RoomType;
  */
 public interface HotelInfoOperation {
 
-
 	/**
 	 * @Description:更新酒店评分
 	 * @param score
@@ -24,7 +23,7 @@ public interface HotelInfoOperation {
 	 * lastChangedBy: charles
 	 * @time:2016年12月4日 22:55:56
 	 */
-	public ResultMessage scoreUpdate(double score);
+	public ResultMessage scoreUpdate(String hotelID,double score);
 
 	/**
 	 * @Description:获取酒店所在的城市商圈

@@ -152,6 +152,10 @@ public class PromotionController {
 			vo.startDate = startDatePicker.getValue();
 			vo.endDate = endDatePicker.getValue();
 			promotionBLController.addHotelSpecialSpanPromotion(vo);
+			
+			//更新显示特定期间策略
+			initDatePromotion();
+			setModifyText("","",null,null);
 		} catch (Exception e) {
 			System.out.println("保存失败");
 		}
@@ -173,7 +177,6 @@ public class PromotionController {
 		}
 	}
 	private void setModifyText(String name,String discount,LocalDate startDate ,LocalDate endDate) {
-
 		nameText.setText(name);
 		discountText.setText(discount);
 		startDatePicker.setValue(startDate);
@@ -192,7 +195,6 @@ public class PromotionController {
 		promotionBLController.deleteHotelSpecialSpanPromotion(hotelID, promotionName);
 		initDatePromotion();	
 	}
-
 
 	@FXML
 	private TableView<DatePromotionTable> table1;

@@ -29,7 +29,7 @@ class Rooms {
 	}
 
 	/**
-	 * @Description:当Rooms初始化以及酒店客房信息被添加或者更新时，调用此方法， 获得最新的酒店客房信息 void
+	 * @Description: 获得最新的酒店客房信息 
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月6日 上午11:16:21
@@ -75,9 +75,14 @@ class Rooms {
 	public ResultMessage addRoomInfo(RoomInfoVO roomInfoVO) {
 
 		try {
-			hotelDataService.addRoomInfo(new RoomInfoPO(roomInfoVO));
-			initRoomInfoPO(roomInfoVO.hotelID);
-			return ResultMessage.SUCCESS;
+			//判断该类型的客房是否已存在
+			if(!roomTypeExist(roomInfoVO.hotelID,roomInfoVO.roomType)){
+				hotelDataService.addRoomInfo(new RoomInfoPO(roomInfoVO));
+				return ResultMessage.SUCCESS;
+			}
+			else{
+				return ResultMessage.FAIL;
+			}
 		} catch (RemoteException e) {
 			return ResultMessage.FAIL;
 		}
@@ -92,10 +97,8 @@ class Rooms {
 	 * @time:2016年12月4日 上午11:21:31
 	 */
 	public ResultMessage deleteRoomInfo(String hotelID, RoomType roomType) {
-
 		try {
 			hotelDataService.deleteRoomInfo(hotelID, roomType);
-			initRoomInfoPO(hotelID);
 			return ResultMessage.SUCCESS;
 		} catch (RemoteException e) {
 			return ResultMessage.FAIL;
@@ -121,38 +124,14 @@ class Rooms {
 			roomInfoVO.remainNum = remainRoomNum + roomInfoVO.roomNum - roomNum;
 
 			hotelDataService.updateRoomInfo(new RoomInfoPO(roomInfoVO));
-			initRoomInfoPO(roomInfoVO.hotelID);
+			
 			return ResultMessage.SUCCESS;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.FAIL;
 		}
 	}
-
-	/**
-	 * @Description:
-	 * @param roomType
-	 * @param operationedNum
-	 * @param operation
-	 * @return ResultMessage
-	 * @exception:
-	 * @author: Harvey Gong
-	 * @param roomName
-	 * @time:2016年12月4日 下午8:05:19
-	 */
-	private ResultMessage updateRemainRoomNum(String hotelID, RoomType roomType, int operationedNum,
-			Operation operation) {
-
-		initRoomInfoPO(hotelID);
-		RoomInfoPO po = roomInfoPOList.get(findPO(roomType));
-		if (operation == Operation.CHECK_IN) {
-			po.setRemainNum(po.getRemainNum() - operationedNum);
-		} else {
-			po.setRemainNum(po.getRemainNum() + operationedNum);
-		}
-		return updateHotelRoomInfo(new RoomInfoVO(po));
-	}
-
+	
 	/**
 	 * @Description:获得该酒店所有房间类型
 	 * @return Iterator<String>
@@ -183,6 +162,15 @@ class Rooms {
 		return roomInfoPOList.get(findPO(roomType)).getRemainNum();
 	}
 
+	/**
+	 * @Description:根据酒店id获取该酒店所有剩余房间数量
+	 * @param hotelID
+	 * @return
+	 * int
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 下午5:03:56
+	 */
 	public int getRemainRoomNum(String hotelID) {
 		initRoomInfoPO(hotelID);
 		int remainRoomNum = 0;
@@ -211,6 +199,20 @@ class Rooms {
 	}
 
 	/**
+	 * @Description:提供对外的接口，客户撤销订单时调用，更新该房型的剩余房间数量
+	 * @param hotelID
+	 * @param roomType
+	 * @param roomNum
+	 * @return
+	 * ResultMessage
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 下午5:08:26
+	 */
+	public ResultMessage updateRemainRoomNumForUndoOrder(String hotelID, RoomType roomType, int roomNum) {
+		return updateRemainRoomNum(hotelID, roomType, roomNum, Operation.UNDO_ORDER);
+	}
+	/**
 	 * @Description:获取该酒店最低价格
 	 * @return double
 	 * @exception:
@@ -227,7 +229,55 @@ class Rooms {
 		}
 		return min;
 	}
+	
+	/**
+	 * @Description:根据酒店id获取该房型的原始价格
+	 * @param hotelID
+	 * @param roomType
+	 * @return
+	 * int
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 下午5:08:51
+	 */
+	public int getOriginPrice(String hotelID, RoomType roomType) {
+		initRoomInfoPO(hotelID);
+		return roomInfoPOList.get(findPO(roomType)).getPrice();
+	}
+	
+	/**
+	 * @Description:更新剩余客房的数量
+	 * @param roomType
+	 * @param operationedNum
+	 * @param operation
+	 * @return ResultMessage
+	 * @exception:
+	 * @author: Harvey Gong
+	 * @param roomName
+	 * @time:2016年12月4日 下午8:05:19
+	 */
+	private ResultMessage updateRemainRoomNum(String hotelID, RoomType roomType, int operationedNum,
+			Operation operation) {
 
+		initRoomInfoPO(hotelID);
+		RoomInfoPO po = roomInfoPOList.get(findPO(roomType));
+		if (operation == Operation.CHECK_IN) {
+			po.setRemainNum(po.getRemainNum() - operationedNum);
+		} else {
+			po.setRemainNum(po.getRemainNum() + operationedNum);
+		}
+		return updateHotelRoomInfo(new RoomInfoVO(po));
+	}
+	
+	/**
+	 * @Description:根据房间类型找到该po在列表中的位置
+	 * @param roomType
+	 * @return
+	 * int
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 下午5:07:20
+	 */
 	private int findPO(RoomType roomType) {
 		for (int i = 0; i < roomInfoPOList.size(); i++) {
 			if (roomInfoPOList.get(i).getRoomType() == roomType) {
@@ -236,13 +286,24 @@ class Rooms {
 		}
 		return -1;
 	}
-
-	public ResultMessage updateRemainRoomNumForUndoOrder(String hotelID, RoomType roomType, int roomNum) {
-		return updateRemainRoomNum(hotelID, roomType, roomNum, Operation.UNDO_ORDER);
-	}
-
-	public int getOriginPrice(String hotelID, RoomType roomType) {
-		initRoomInfoPO(hotelID);
-		return roomInfoPOList.get(findPO(roomType)).getPrice();
+	
+	/**
+	 * @Description:判断添加的房间类型是否已存在
+	 * @param roomType
+	 * @return
+	 * boolean
+	 * @author: Harvey Gong
+	 * @param hotelID 
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 下午4:56:49
+	 */
+	private boolean roomTypeExist(String hotelID, RoomType roomType) {
+		Iterator<RoomType> roomTypes = getRoomType(hotelID);
+		while(roomTypes.hasNext()){
+			if(roomTypes.next()==roomType){
+				return true;
+			}
+		}
+		return false;
 	}
 }

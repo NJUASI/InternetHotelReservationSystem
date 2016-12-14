@@ -10,6 +10,8 @@ import businessLogicService.hotelBLService.HotelBLService;
 import businessLogicService.sourceBLService.SourceBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -66,8 +68,22 @@ public class RoomController {
 		//获取该酒店的所有客房信息
 		Iterator<RoomInfoVO> rooms = hotelBLController.getHotelRoomInfo(hotelID);
 		initRoomTable(rooms);
+		
+		roomType.setOnShowing(new roomTypeShowingEventHandler());
 	}
 
+	
+	class roomTypeShowingEventHandler implements EventHandler<Event>{
+
+		@Override
+		public void handle(Event arg0) {
+			roomType.getItems().clear();
+			Iterator<String> roomTypes = sourceBLController.getRoomTypes();
+			while(roomTypes.hasNext()){
+				roomType.getItems().add(roomTypes.next());
+			}
+		}
+	}
 	/**
 	 * @description 初始化客房信息列表
 	 * @author 61990
@@ -80,7 +96,7 @@ public class RoomController {
 		List<TypeTable> dataList = new LinkedList<TypeTable>();
 		while(rooms.hasNext()){
 			RoomInfoVO temp = rooms.next();
-			dataList.add(new TypeTable(temp.roomType.getChineseRoomType(), temp.roomNum + "", temp.remainNum + "", Double.toString(temp.price)));
+			dataList.add(new TypeTable(temp.roomType.getChineseRoomType(), temp.roomNum + "", temp.remainNum + "", Integer.toString(temp.price)));
 		}
 
 		ObservableList<TypeTable> data = FXCollections.observableArrayList();
@@ -107,12 +123,6 @@ public class RoomController {
 	@FXML
 	protected void modifyOne() {
 		roomType.getItems().clear();
-		
-		//
-		Iterator<String> roomTypes = sourceBLController.getRoomTypes();
-		while(roomTypes.hasNext()){
-			roomType.getItems().add(roomTypes.next());
-		}
 		
 		TypeTable selectedRoomVO = null;
 		try{
@@ -141,7 +151,7 @@ public class RoomController {
 		
 		//打包好一个vo，通过hotelBLContoller调用update的方法
 		vo.hotelID = hotelID;
-		//gcm roomType与数据库存的不一样
+
 		vo.roomType = RoomType.getEnum(roomType.getValue());
 		vo.roomNum = Integer.parseInt(roomNum.getText());
 		vo.price = Integer.parseInt(price.getText());
@@ -150,7 +160,7 @@ public class RoomController {
 	
 		modifyPane.setVisible(false);
 		addBt.setVisible(true);
-		//roomType是枚举，不是 String啊，转string调getChinese方法
+		
 		setModifyText("","","");
 		initialize();
 	}
@@ -181,6 +191,8 @@ public class RoomController {
 		vo.roomType = RoomType.getEnum(roomType.getValue());
 		vo.remainNum=Integer.parseInt(roomNum.getText());
 		vo.price = Integer.valueOf(price.getText());
+
+		hotelBLController.addRoomType(vo);
 		initialize();
 	}
 
