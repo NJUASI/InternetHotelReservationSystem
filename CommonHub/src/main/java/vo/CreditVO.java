@@ -39,7 +39,7 @@ public class CreditVO {
 		this.time = creditPO.getTime();
 		this.orderID = creditPO.getOrderID();
 		this.previousCredit = creditPO.getPreCredit();
-		this.afterCredit = creditPO.getCredit();
+		this.afterCredit = creditPO.getAfterCredit();
 		this.reason = creditPO.getCreditRecord();
 	}
 

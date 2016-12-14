@@ -49,6 +49,7 @@ public class CreditCheckController {
 					Double.toString(credit.previousCredit),Double.toString(credit.afterCredit),
 					credit.time.toString(),credit.reason.getChineseCreditRecord()));
 		}
+		
 		guestIDColumn.setCellValueFactory(cellData -> cellData.getValue().guestID);
 		orderIDColumn.setCellValueFactory(cellData -> cellData.getValue().orderID);
 		previousCreditColumn.setCellValueFactory(cellData -> cellData.getValue().previousCredit);
