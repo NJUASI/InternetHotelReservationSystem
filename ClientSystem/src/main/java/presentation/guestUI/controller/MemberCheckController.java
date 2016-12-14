@@ -49,13 +49,13 @@ public class MemberCheckController {
 			String levelName = marketBLController.getLevelName(IDReserve.getInstance().getUserID());
 			marketVO = new MarketVO(levelName, 0, 0);
 			
-			enterprise.setText(memberVO.enterprise);
 			if (memberVO.enterprise != null) {
+				enterprise.setText(memberVO.enterprise);
 				market.setText(marketVO.marketName);
 			}
-			birthday.setText(memberVO.birthday.toString());
 
 			if (memberVO.birthday != null) {
+				birthday.setText(memberVO.birthday.toString());
 				market2.setText(marketVO.marketName);
 			}
 		} catch (UserInexistException e) {
@@ -83,10 +83,12 @@ public class MemberCheckController {
 		memberCheck.setVisible(false);
 		memberModify.setVisible(true);
 		if (birthday.getText() != null) {
+			//TODO 此处getText得到是什么，你这一直实现不了
 			commonPane.setDisable(true);
 			birthdayPicker.setValue(memberVO.birthday);
 		}
 		if (enterprise.getText() != null) {
+			//TODO 此处getText得到是什么，你这一直实现不了
 			enterprisePane.setDisable(true);
 			enterpriseText.setText(memberVO.enterprise);
 		}
