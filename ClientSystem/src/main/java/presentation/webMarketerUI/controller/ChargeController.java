@@ -99,6 +99,7 @@ public class ChargeController {
 	@FXML
 	protected void saveCharge() throws IOException {
 		//TODO djy/gcm注意：通过guestID保存   guestID.getText()得到ID
+		//我不是很懂
 //		通过得到改变后的信用值 Double.parseDouble(chargeNum.getText()) + Double.parseDouble(credit.getText())
 		
 		if (credit.getText() != null) {

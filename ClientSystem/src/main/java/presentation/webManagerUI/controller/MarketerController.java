@@ -51,12 +51,7 @@ public class MarketerController {
 			marketerVO = (WebMarketerVO) userBLController.getSingle(inputID.getText());
 		} catch (UserInexistException e) {
 			e.printStackTrace();
-			// 为了保证编译能通过
-		}
-		
-		if(marketerVO == null){
-//			TODO djy得不到不是可以直接弄到异常里吗
-				new PopUp("请检查输入内容", "sorry");
+			new PopUp("请检查输入内容", "sorry");
 		}
 		
 		marketerID.setText(marketerVO.userID);

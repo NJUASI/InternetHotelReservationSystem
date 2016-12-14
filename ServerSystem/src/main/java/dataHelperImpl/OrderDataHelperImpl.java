@@ -337,7 +337,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	 * @return List<OrderPO> 指定日期的所有未执行orderInfo载体
 	 */
 	public synchronized List<OrderPO> getUnexecuted() {
-		sql = "SELECT * FROM `order` WHERE `order`.state = 'UNEXECUTED'";
+		sql = "SELECT * FROM `order` WHERE `order`.state = '未执行'";
 		final List<OrderPO> result = new ArrayList<OrderPO>();
 		
 		try {
