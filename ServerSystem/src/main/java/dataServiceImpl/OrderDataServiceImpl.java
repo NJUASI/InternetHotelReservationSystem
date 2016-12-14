@@ -173,7 +173,7 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	 *             RMI
 	 */
 	@Override
-	public List<OrderGeneralPO> getAllAbnormalOrderGeneral(final LocalDate date) throws RemoteException {
+	public List<OrderGeneralPO> getAllAbnormalOrderGeneral(final LocalDate date) throws RemoteException {		
 		List<OrderPO> abnormalOrders = orderDataHelper.getAbnormal();
 		List<OrderGeneralPO> result = new ArrayList<OrderGeneralPO>();
 
@@ -230,7 +230,7 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 				result.add(new OrderGeneralPO(unexecutedOrder));
 			}
 		}
-
+		
 		return result;
 	}
 

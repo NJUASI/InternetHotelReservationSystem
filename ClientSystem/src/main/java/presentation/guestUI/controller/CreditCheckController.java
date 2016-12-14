@@ -47,7 +47,7 @@ public class CreditCheckController {
 			CreditVO credit = creditChanges.next();
 			data.add(new CreditTable(credit.guestID, credit.orderID, 
 					Double.toString(credit.previousCredit),Double.toString(credit.afterCredit),
-					credit.time.toString(),credit.reason.toString()));
+					credit.time.toString(),credit.reason.getChineseCreditRecord()));
 		}
 		
 		guestIDColumn.setCellValueFactory(cellData -> cellData.getValue().guestID);
