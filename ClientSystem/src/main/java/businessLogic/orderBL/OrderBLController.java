@@ -130,18 +130,6 @@ public final class OrderBLController implements OrderBLService {
 	/*
 	 * guestOrder的接口
 	 */
-	/**
-	 * 
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/4
-	 * @param orderVO 从客户界面层传下来的Order载体
-	 * @return 若客户创建此订单，需要付的款项
-	 */
-	@Override
-	public double getTempPrice(OrderVO orderVO) {
-		return guestOrder.getTempPrice(orderVO);
-	}
 
 	/**
 	 * @author charles
@@ -348,7 +336,7 @@ public final class OrderBLController implements OrderBLService {
 			e.printStackTrace();
 		}
 		while(discounts.hasNext()){
-			total = total + originPrice*discounts.next();
+			total = total + originPrice*discounts.next()*preOrderVO.roomNum;
 		}
 		return total;
 	}
