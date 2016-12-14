@@ -42,10 +42,9 @@ public class DatePromotionController {
 	private DatePicker startDatePicker, endDatePicker;
 
 	private PromotionBLService promotionController;
-	private String hotelID;
+
 	public DatePromotionController() {
 		promotionController = PromotionBLController.getInstance();
-		hotelID = IDReserve.getInstance().getUserID();
 	}
 
 	/**
@@ -67,7 +66,7 @@ public class DatePromotionController {
 			data.add(new DatePromotionTable(vo.promotionName,String.valueOf(vo.discount),
 					vo.startDate, vo.endDate));
 		}
-		
+
 		nameColumn.setCellValueFactory(cellData -> cellData.getValue().name);
 		startDateColumn.setCellValueFactory(cellData -> cellData.getValue().startDate);
 		endDateColumn.setCellValueFactory(cellData -> cellData.getValue().endDate);
@@ -75,52 +74,52 @@ public class DatePromotionController {
 
 		table.setItems(data);
 		initDatePicker();
-		
+
 	}
 	void initDatePicker(){
 		Callback<DatePicker, DateCell> dayCellFactory1 = 
-	            new Callback<DatePicker, DateCell>() {
-	                @Override
-	                public DateCell call(final DatePicker datePicker) {
-	                    return new DateCell() {
-	                        @Override
-	                        public void updateItem(LocalDate item, boolean empty) {
-	                            super.updateItem(item, empty);
+				new Callback<DatePicker, DateCell>() {
+			@Override
+			public DateCell call(final DatePicker datePicker) {
+				return new DateCell() {
+					@Override
+					public void updateItem(LocalDate item, boolean empty) {
+						super.updateItem(item, empty);
 
-	                            if (item.isBefore(
-	                            		LocalDate.now())
-	                                ) {
-	                                    setDisable(true);
-	                                    setStyle("-fx-background-color: #ffc0cb;");
-	                            }   
-	                    }
-	                };
-	            }
-	       };
-	    startDatePicker.setDayCellFactory(dayCellFactory1);
-	       
+						if (item.isBefore(
+								LocalDate.now())
+								) {
+							setDisable(true);
+							setStyle("-fx-background-color: #ffc0cb;");
+						}   
+					}
+				};
+			}
+		};
+		startDatePicker.setDayCellFactory(dayCellFactory1);
+
 		startDatePicker.setValue(LocalDate.now());
 		Callback<DatePicker, DateCell> dayCellFactory = 
-	            new Callback<DatePicker, DateCell>() {
-	                @Override
-	                public DateCell call(final DatePicker datePicker) {
-	                    return new DateCell() {
-	                        @Override
-	                        public void updateItem(LocalDate item, boolean empty) {
-	                            super.updateItem(item, empty);
+				new Callback<DatePicker, DateCell>() {
+			@Override
+			public DateCell call(final DatePicker datePicker) {
+				return new DateCell() {
+					@Override
+					public void updateItem(LocalDate item, boolean empty) {
+						super.updateItem(item, empty);
 
-	                            if (item.isBefore(
-	                            		startDatePicker.getValue().plusDays(1))
-	                                ) {
-	                                    setDisable(true);
-	                                    setStyle("-fx-background-color: #ffc0cb;");
-	                            }   
-	                    }
-	                };
-	            }
-	       };
-	       endDatePicker.setDayCellFactory(dayCellFactory);
-	       endDatePicker.setValue(LocalDate.now().plusDays(1));
+						if (item.isBefore(
+								startDatePicker.getValue().plusDays(1))
+								) {
+							setDisable(true);
+							setStyle("-fx-background-color: #ffc0cb;");
+						}   
+					}
+				};
+			}
+		};
+		endDatePicker.setDayCellFactory(dayCellFactory);
+		endDatePicker.setValue(LocalDate.now().plusDays(1));
 	}
 	String preName;
 	/**
@@ -154,7 +153,7 @@ public class DatePromotionController {
 		try {
 
 			// 调用promotion的更新特定期间策略的方法
-			promotionController.updateHotelSpecialSpanPromotion(encapsulateVO());
+			promotionController.updateWebSpecialSpanPromotion(encapsulateVO());
 
 			modifyPane.setVisible(false);
 			addBt.setVisible(true);
@@ -176,12 +175,12 @@ public class DatePromotionController {
 	@FXML
 	protected void addPromotion() {
 		try {
-			promotionController.addHotelSpecialSpanPromotion(encapsulateVO());
+			promotionController.addWebSpecialSpanPromotion(encapsulateVO());
 			initialize();
-			} catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("保存失败");
 		}
-	
+
 	}
 
 	/**
@@ -197,7 +196,7 @@ public class DatePromotionController {
 		setModifyText("","", LocalDate.now(), LocalDate.now().plusDays(1));
 		initialize();	
 	}
-	
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -208,10 +207,11 @@ public class DatePromotionController {
 	protected void deleteOne() {
 		String promotionName = table.getSelectionModel().getSelectedItem().getName(); 
 		//通过hotelID和唯一promotionName删除此条promotion
-		promotionController.deleteHotelSpecialSpanPromotion(hotelID, promotionName);
+		promotionController.deleteWebSpecialSpanPromotion(promotionName);
+
 		initialize();	
 	}
-	
+
 	private void setModifyText(String name,String discount,LocalDate startDate ,LocalDate endDate) {
 
 		nameText.setText(name);
@@ -231,8 +231,6 @@ public class DatePromotionController {
 	private SpecialSpanPromotionVO encapsulateVO(){
 		SpecialSpanPromotionVO vo = new SpecialSpanPromotionVO();
 
-		//TODO gcm注意：这里使用了魔数，应该换一种方式，商讨之后决定
-		vo.userID = "99999999";
 		vo.discount=Double.parseDouble(discountText.getText());
 		vo.promotionName = nameText.getText();
 		vo.startDate =  startDatePicker.getValue();
