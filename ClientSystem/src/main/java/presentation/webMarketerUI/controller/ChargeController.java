@@ -8,6 +8,7 @@ import businessLogic.userBL.UserController;
 import businessLogic.userBL.userService.Guest;
 import businessLogic.userBL.userService.service.GuestCreditService;
 import businessLogicService.userBLService.UserBLService;
+import exception.inputException.InvalidInputException;
 import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.PopUp.PopUp;
+import utilities.Detector;
 import utilities.enums.CreditRecord;
 import vo.CreditVO;
 import vo.GuestVO;
@@ -106,20 +108,26 @@ public class ChargeController {
 			 * 故此处逻辑暴露，要不就这样，要不还是得新增接口Credit.charge(args)
 			 * TODO @龚尘淼 Charge回复 ，可以啊，但Credit不是我的模块
 			 */
-			final LocalDateTime time = LocalDateTime.now();
-			final double preCredit = Double.parseDouble(chargeNum.getText());
-			double afterCredit = preCredit +  Double.parseDouble(credit.getText());
-			CreditVO creditVO = new CreditVO(guestID.getText(), time, "", preCredit, afterCredit, CreditRecord.CHARGE);
+			LocalDateTime time = LocalDateTime.now();
 			try {
+				new Detector().chargeDetector(chargeNum.getText());
+				final double preCredit = Double.parseDouble(chargeNum.getText());
+				double afterCredit = preCredit +  Double.parseDouble(credit.getText());
+				CreditVO creditVO = new CreditVO(guestID.getText(), time, "", preCredit, afterCredit, CreditRecord.CHARGE);
+		
 				creditController.addCreditRecord(creditVO);
 				credit.setText(Double.toString(afterCredit));
 				chargeNum.setText("");
+			} catch (InvalidInputException e1) {
+				e1.printStackTrace();
+				new PopUp("请勿输入无效符号", "充值失败");
 			} catch (UserInexistException e) {
 				e.printStackTrace();
+				new PopUp("该用户不存在，请检查输入的ID", "充值失败");
 			}
 		}
 	}
-	
+	 
 	/**
 	 * @author 61990
 	 * @throws IOException
