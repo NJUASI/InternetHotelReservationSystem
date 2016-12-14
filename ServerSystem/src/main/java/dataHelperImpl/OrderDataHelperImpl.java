@@ -64,12 +64,12 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			ps.setObject(3, orderPO.getHotelID());
 			ps.setString(4, orderPO.getHotelName());
 			ps.setObject(5, orderPO.getHotelAddress());
-			ps.setDouble(6, orderPO.getPrice());
+			ps.setInt(6, orderPO.getPrice());
 			ps.setString(9, orderPO.getState().getChineseOrderState());
 			ps.setString(10, String.valueOf(orderPO.getHasCommented()));
 			ps.setString(11, orderPO.getName());
 			ps.setString(12, orderPO.getPhone());
-			ps.setDouble(13, orderPO.getPreviousPrice());
+			ps.setInt(13, orderPO.getPreviousPrice());
 			ps.setString(17, orderPO.getRoomType().getChineseRoomType());
 			ps.setInt(18, orderPO.getRoomNumCount());
 			ps.setString(19, orderPO.getRoomNumber());

@@ -164,8 +164,9 @@ public class GuestOrder implements GuestOrderBLService {
 		try {
 			msg1 = orderDataService.addEvaluation(new GuestEvaluationPO(evaluationVO));
 			
-			hotelInterface = new Hotel(commonOrder.getOrderDetail(evaluationVO.orderID).orderGeneralVO.hotelID);
-			msg2 = hotelInterface.scoreUpdate(evaluationVO.score);
+			String hotelID = commonOrder.getOrderDetail(evaluationVO.orderID).orderGeneralVO.hotelID;
+			hotelInterface = new Hotel();
+			msg2 = hotelInterface.scoreUpdate(hotelID,evaluationVO.score);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

@@ -58,37 +58,60 @@ public class HotelBLController implements HotelBLService {
 		return hotelController;
 	}
 
-	// 对单个hotel的操作
+	/**
+	 *  对单个hotel的操作
+	 */
 	
-	public HotelVO getHotelInfo(String hotelID) {
-		return hotel.getHotelInfo(hotelID);
-	}
-
-	public ResultMessage updateHotelInfo(HotelVO hotelVO) {
-		return hotel.updateHotelInfo(hotelVO);
-	}
-
-	public Iterator<RoomInfoVO> getHotelRoomInfo(String hotelWorkerID) {
-		return hotel.getHotelRoomInfo(hotelWorkerID);
-	}
-
-	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO) {
-		return hotel.updateHotelRoomInfo(roomInfoVO);
-	}
-
+	//增
 	public ResultMessage addHotel(HotelVO hotelVO) {
 		return hotel.addHotelInfo(hotelVO);
 	}
+	//改
+	public ResultMessage updateHotelInfo(HotelVO hotelVO) {
+		return hotel.updateHotelInfo(hotelVO);
+	}
+	//查
+	public HotelVO getHotelInfo(String hotelID) {
+		return hotel.getHotelInfo(hotelID);
+	}
 	
+	
+	/**
+	 * 对room的操作
+	 */
+
+	//增
+	@Override
+	public ResultMessage addRoomType(RoomInfoVO roomInfoVO) {
+		return hotel.addRoomInfo(roomInfoVO);
+	}
+	
+	//删
+	@Override
+	public ResultMessage deleteRoomType(String hotelID,RoomType roomType) {
+		return hotel.deleteRoomInfo(hotelID, roomType);
+	}
+	
+	//改
+	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO) {
+		return hotel.updateHotelRoomInfo(roomInfoVO);
+	}
+	
+	//查
+	public Iterator<RoomInfoVO> getHotelRoomInfo(String hotelID) {
+		return hotel.getHotelRoomInfo(hotelID);
+	}
+	
+	//指定房型的剩余房间数量
 	public int getRemainRoomNum(String hotelID,RoomType roomType){
 		return hotel.getRemainNumOfSpecificType(hotelID,roomType);
 	}
 	
+	//指定房型的原始价格
 	@Override
 	public int getOriginPrice(String hotelID, RoomType roomType) {
 		return hotel.getOriginPrice(hotelID,roomType);
 	}
-
 
 	
 	/**
@@ -111,17 +134,23 @@ public class HotelBLController implements HotelBLService {
 		return hotel.checkOut(hotelID,roomType,roomNum);
 	}
 	
-	// 浏览概况时的操作
+	/**
+	 *  浏览概况时的操作
+	 */
+	
+	//获得该城市商圈的所有酒店
 	public Iterator<HotelVO> getHotels(String city,String circle) {
 		return hotelScan.getHotels(city,circle);
 	}
-	
+	//筛选
 	public Iterator<HotelVO> sortHotels(SortStrategy sortStrategy) {
 		return hotelScan.sortHotels(sortStrategy);
 	}
-	
+	//排序
 	public Iterator<HotelVO> searchHotels(List<SearchCriteriaType> searchCriteriaTypes,SearchCriteriaVO vo) {
 		return hotelScan.searchHotels(searchCriteriaTypes,vo);
 	}
+
+	
 
 }

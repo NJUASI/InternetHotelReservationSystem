@@ -47,6 +47,7 @@ public class RoomInfoPO implements Serializable{
 		this.hotelID = roomInfoVO.hotelID;
 		this.roomType = roomInfoVO.roomType;
 		this.roomNum = roomInfoVO.roomNum;
+		this.remainNum = roomInfoVO.remainNum;
 		this.price = roomInfoVO.price;
 	}
 	public RoomInfoPO() {

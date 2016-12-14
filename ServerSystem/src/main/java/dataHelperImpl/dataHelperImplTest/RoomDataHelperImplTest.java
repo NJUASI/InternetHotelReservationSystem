@@ -1,7 +1,5 @@
 package dataHelperImpl.dataHelperImplTest;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.List;
 
 import org.junit.After;
@@ -11,6 +9,8 @@ import org.junit.Test;
 import dataHelper.RoomDataHelper;
 import dataHelperImpl.RoomDataHelperImpl;
 import po.RoomInfoPO;
+import utilities.enums.RoomType;
+import vo.RoomInfoVO;
 
 public class RoomDataHelperImplTest {
 
@@ -28,11 +28,18 @@ public class RoomDataHelperImplTest {
 	}
 
 	@Test
-	public void testGetRoomInfo() {
-		list = helper.getRoomInfo("12345678");
+	public void testUpdateRoomInfo() {
+		RoomInfoVO vo = new RoomInfoVO();
+		vo.hotelID = "98765441";
+		vo.price = 300;
+		vo.roomNum = 20;
+		vo.remainNum = 20;
+		vo.roomType = RoomType.SINGLE_BED;
+		RoomInfoPO po = new RoomInfoPO(vo);
 		
-		assertEquals("高级双床房",list.get(0).getRoomType());
-		assertEquals("单人间",list.get(1).getRoomType());
+		helper.updateRoomInfo(po);
 	}
+	
+	
 
 }

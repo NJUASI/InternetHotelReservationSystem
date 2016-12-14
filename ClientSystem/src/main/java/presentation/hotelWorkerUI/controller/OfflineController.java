@@ -20,7 +20,7 @@ public class OfflineController {
 	private ComboBox<String> roomType,roomType2;
 	@FXML
 	private ComboBox<Integer> roomNum,roomNum2;
-	
+
 	HotelBLService hotelBLController;
 	String hotelID;
 	private int maxRoomNum = 3;
@@ -65,21 +65,25 @@ public class OfflineController {
 		@Override
 		public void changed(ObservableValue<? extends String> arg0, String preRoomType, String newRoomType) {
 			roomNum.getItems().clear();
-			for(int i = 1;i <= maxRoomNum;i++){
-				roomNum.getItems().add(i);
+			if(newRoomType!=null){
+				for(int i = 1;i <= maxRoomNum;i++){
+					roomNum.getItems().add(i);
+				}
+				roomNum.setValue(1);
 			}
-			roomNum.setValue(1);
 		}
 	}
 
 	class RoomType2ChangedListener implements ChangeListener<String> {
 		@Override
-		public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
+		public void changed(ObservableValue<? extends String> arg0, String arg1, String newRoomType) {
 			roomNum2.getItems().clear();
-			for(int i = 1;i <= maxRoomNum;i++){
-				roomNum2.getItems().add(i);
+			if(newRoomType!=null){
+				for(int i = 1;i <= maxRoomNum;i++){
+					roomNum2.getItems().add(i);
+				}
+				roomNum2.setValue(1);
 			}
-			roomNum2.setValue(1);
 		}
 	}
 	/**
