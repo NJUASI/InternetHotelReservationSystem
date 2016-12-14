@@ -16,7 +16,7 @@ public class OrderTable {
 	public SimpleStringProperty price;
 	public SimpleStringProperty state;
 	
-	public OrderTable(String guestID ,String orderID,String name,String phone, String hotelName,String address, String checkInTime,String checkOutTime,String price, String state) {
+	public OrderTable(String orderID,String guestID ,String name,String phone, String hotelName,String address, String checkInTime,String checkOutTime,String price, String state) {
 		this.guestID = new SimpleStringProperty(guestID);
 		this.orderID = new SimpleStringProperty(orderID);
 		this.name = new SimpleStringProperty(name);

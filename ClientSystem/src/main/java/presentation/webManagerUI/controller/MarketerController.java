@@ -128,6 +128,7 @@ public class MarketerController {
 		WebMarketerVO webMarketerVO = new WebMarketerVO("","");
 		try {
 			webMarketerVO = (WebMarketerVO) userBLController.add(webMarketerVO, UserType.WEB_MARKETER);
+			pane.setVisible(true);
 			yourID.setText(webMarketerVO.userID);
 			yourPassword.setText(webMarketerVO.password);
 		} catch (ParameterInvalidException e) {

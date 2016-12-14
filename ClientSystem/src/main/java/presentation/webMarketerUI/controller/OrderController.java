@@ -143,7 +143,7 @@ public class OrderController {
 		}
 		undoAbnormalOrder(orderID, percent);
 		OrderDetail();
-		cancelAbnormalOrderInCheck();
+		searchAbnormalOrder();
 	}
 	
 	/**
@@ -264,7 +264,7 @@ public class OrderController {
 		}
 
 		undoAbnormalOrder(orderID, percent);
-		cancelAbnormalOrderInCheck();
+		searchAbnormalOrder();
 	}
 	/**
 	 * @author 61990
@@ -333,7 +333,7 @@ public class OrderController {
 	 */
 	private void undoAbnormalOrder(String orderID, double percent) {
 		ResultMessage result = orderBLController.undoAbnormalOrder(orderID, percent);
-		
+
 		if (result == ResultMessage.SUCCESS) {
 			new PopUp("撤销成功", "congratulation");	
 			
