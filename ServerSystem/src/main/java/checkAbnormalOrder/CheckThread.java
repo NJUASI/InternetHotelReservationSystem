@@ -2,7 +2,6 @@ package checkAbnormalOrder;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.concurrent.SynchronousQueue;
 
 import dataHelper.OrderDataHelper;
 import dataHelperImpl.DataFactoryImpl;
@@ -21,6 +20,8 @@ public class CheckThread implements Runnable {
 		
 		List<OrderPO> unexecutedOrders = orderDateHelper.getUnexecuted();
 		
+		System.out.println(unexecutedOrders.size()+" "+LocalDateTime.now());
+		
 		for(int i = 0;i < unexecutedOrders.size();i++){
 			OrderPO po = unexecutedOrders.get(i);
 			System.out.println(po.getGuestID()+"  "+po.getState());
@@ -32,7 +33,7 @@ public class CheckThread implements Runnable {
 		
 		try {
 			//每10s运行一次
-			Thread.sleep(10000);
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
