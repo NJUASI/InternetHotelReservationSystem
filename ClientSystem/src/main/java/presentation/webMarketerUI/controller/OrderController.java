@@ -142,6 +142,8 @@ public class OrderController {
 			percent = 1.0;
 		}
 		undoAbnormalOrder(orderID, percent);
+		OrderDetail();
+		cancelAbnormalOrderInCheck();
 	}
 	
 	/**
@@ -262,6 +264,7 @@ public class OrderController {
 		}
 
 		undoAbnormalOrder(orderID, percent);
+		cancelAbnormalOrderInCheck();
 	}
 	/**
 	 * @author 61990
