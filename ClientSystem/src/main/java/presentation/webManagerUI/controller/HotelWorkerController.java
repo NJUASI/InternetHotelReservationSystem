@@ -51,15 +51,11 @@ public class HotelWorkerController {
 			hotelWorkerVO = (HotelWorkerVO) userBLController.getSingle(inputID.getText());
 		} catch (UserInexistException e1) {
 			e1.printStackTrace();
-			// 为了保证编译能通过
+			new PopUp("请检查输入内容", "sorry");
+			//TODO 龚尘淼 看此处的修改
 		}
 		
 		hotelInfoPane.setVisible(true);
-		
-		if(hotelWorkerVO == null){
-//			TODO djy得不到不是可以直接弄到异常里吗
-				new PopUp("请检查输入内容", "sorry");
-		}
 		
 		
 		try {
