@@ -101,7 +101,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	 * @param state 需要被修改的状态
 	 * @return ResultMessage 是否成功修改订单状态
 	 */
-	public ResultMessage setState(final String orderID, final OrderState state) {
+	public synchronized ResultMessage setState(final String orderID, final OrderState state) {
 		sql = "UPDATE `order` SET `order`.state = ? WHERE `order`.orderID = ?";
 		
 		try {
@@ -336,7 +336,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	 * @updateTime 2016/11/30
 	 * @return List<OrderPO> 指定日期的所有未执行orderInfo载体
 	 */
-	public List<OrderPO> getUnexecuted() {
+	public synchronized List<OrderPO> getUnexecuted() {
 		sql = "SELECT * FROM `order` WHERE `order`.state = 'UNEXECUTED'";
 		final List<OrderPO> result = new ArrayList<OrderPO>();
 		
