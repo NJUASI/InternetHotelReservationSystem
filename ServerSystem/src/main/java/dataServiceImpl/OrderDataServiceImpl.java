@@ -26,6 +26,8 @@ import utilities.enums.ResultMessage;
  */
 public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDataService {
 
+	private static final long serialVersionUID = -1210458390069208485L;
+
 	private OrderDataHelper orderDataHelper;
 
 	// utilities
@@ -162,73 +164,68 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
-	 * @param date
-	 *            网站营销人员撤销异常订单时输入的指定日期
+	 * @updateTime 2016/12/5
+	 * @param date 网站营销人员撤销异常订单时输入的指定日期
 	 * @return 网站营销人员需要查看的当天所有的异常订单
-	 * @throws RemoteException
-	 *             RMI
+	 * @throws RemoteException RMI
+	 * 
+	 * 直接从本层getAllAbnormalOrderGeneral()走
 	 */
 	@Override
 	public List<OrderGeneralPO> getAllAbnormalOrderGeneral(final LocalDate date) throws RemoteException {
-		List<OrderPO> abnormalOrders = orderDataHelper.getAbnormal();
-		List<OrderGeneralPO> result = new ArrayList<OrderGeneralPO>();
-
-		for (OrderPO abnormalOrder : abnormalOrders) {
-			LocalDate temp = abnormalOrder.getExpectExecuteTime().toLocalDate();
-			if (temp.getYear() == date.getYear() && temp.getMonth() == date.getMonth()
-					&& temp.getDayOfMonth() == date.getDayOfMonth()) {
-				result.add(new OrderGeneralPO(abnormalOrder));
+		List<OrderGeneralPO> abnormalGenerals = getAllAbnormalOrderGeneral();
+		
+		for (int i = 0; i < abnormalGenerals.size(); i++) {
+			LocalDate temp = abnormalGenerals.get(i).getExpectExecuteTime().toLocalDate();
+			if (!(temp.getYear() == date.getYear() && temp.getMonth() == date.getMonth()
+					&& temp.getDayOfMonth() == date.getDayOfMonth())) {
+				abnormalGenerals.remove(abnormalGenerals.get(i));
+				System.out.println("remove: " +abnormalGenerals.get(i).getOrderID());
+				//因为移除此结点，序数下标恢复
+				i--;
 			}
 		}
 
-		return result;
+		return abnormalGenerals;
 	}
 
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
+	 * @updateTime 2016/12/5
 	 * @return 网站营销人员需要查看的所有的异常订单，按倒序排列
-	 * @throws RemoteException
-	 *             RMI
+	 * @throws RemoteException RMI
 	 */
 	@Override
 	public List<OrderGeneralPO> getAllAbnormalOrderGeneral() throws RemoteException {
-		List<OrderPO> abnormalOrders = orderDataHelper.getAbnormal();
-		List<OrderGeneralPO> result = new ArrayList<OrderGeneralPO>();
-
-		for (OrderPO abnormalOrder : abnormalOrders) {
-			result.add(new OrderGeneralPO(abnormalOrder));
-		}
-
-		return result;
+		return convertPOsToDecodedGenerals(orderDataHelper.getAbnormal());
 	}
 
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/29
-	 * @param date
-	 *            网站营销人员查看未执行订单时输入的指定日期
+	 * @updateTime 2016/12/5
+	 * @param date 网站营销人员查看未执行订单时输入的指定日期
 	 * @return 网站营销人员需要查看的当天所有的未执行订单
-	 * @throws RemoteException
-	 *             RMI
+	 * @throws RemoteException RMI
 	 */
 	@Override
 	public List<OrderGeneralPO> getAllUnexecutedOrderGeneral(final LocalDate date) throws RemoteException {
-		List<OrderPO> unexecutedOrders = orderDataHelper.getUnexecuted();
-		List<OrderGeneralPO> result = new ArrayList<OrderGeneralPO>();
+		List<OrderGeneralPO> unexecutedGenerals = convertPOsToDecodedGenerals(orderDataHelper.getUnexecuted());
 
-		for (OrderPO unexecutedOrder : unexecutedOrders) {
-			LocalDate temp = unexecutedOrder.getExpectExecuteTime().toLocalDate();
-			if (temp.getYear() == date.getYear() && temp.getMonth() == date.getMonth()
-					&& temp.getDayOfMonth() == date.getDayOfMonth()) {
-				result.add(new OrderGeneralPO(unexecutedOrder));
+		for (int i = 0; i < unexecutedGenerals.size(); i++) {
+			LocalDate temp = unexecutedGenerals.get(i).getExpectExecuteTime().toLocalDate();
+			if (!(temp.getYear() == date.getYear() && temp.getMonth() == date.getMonth()
+					&& temp.getDayOfMonth() == date.getDayOfMonth())) {
+				unexecutedGenerals.remove(unexecutedGenerals.get(i));
+
+				//因为移除此结点，序数下标恢复
+				i--;
 			}
+			
 		}
 
-		return result;
+		return unexecutedGenerals;
 	}
 
 	/**
@@ -383,8 +380,7 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/15
-	 * @param orders
-	 *            需要被转换的List<orderPO>
+	 * @param orders 需要被转换的List<orderPO>
 	 * @return 数据解密之后的订单概况们
 	 */
 	private List<OrderGeneralPO> convertPOsToDecodedGenerals(List<OrderPO> orders) {
