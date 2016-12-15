@@ -390,6 +390,7 @@ public class OrderController {
 		final CheckOutVO checkOutVO = new CheckOutVO(checkInOrderID.getText(), checkOutTime);
 		
 		final ResultMessage result = orderBLController.updateCheckOut(checkOutVO);
+		searchExecutedOrder();
 //	TODO 后期可以把这些放在界面里，不弹框
 		if (result == ResultMessage.SUCCESS) {
 			new PopUp("退房成功", "congratulation");	

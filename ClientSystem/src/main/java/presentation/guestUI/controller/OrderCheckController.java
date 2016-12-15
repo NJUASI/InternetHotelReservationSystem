@@ -291,6 +291,8 @@ public class OrderCheckController {
 
 		final GuestEvaluationVO evaluationVO = new GuestEvaluationVO(orderID, score, comment);
 		final ResultMessage result = orderBLController.addEvaluation(evaluationVO);
+		orderDetail();
+		searchUncommentedOrder();
 		if (result == ResultMessage.SUCCESS) {
 			new PopUp("评价成功", "评价");
 

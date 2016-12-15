@@ -18,6 +18,7 @@ import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -63,6 +64,7 @@ public class HotelController {
 	private Pane hotelModifyPane;
 	@FXML
 	private Pane hotelInfoPane;
+
 
 	@FXML
 	private Label hotelNameInDetail, hotelIDInDetail, cityInDetail, levelInDetail, scoreInDetail, cycleInDetail,

@@ -71,6 +71,8 @@ public class HotelInfoController {
 		
 		if(hotelVO == null){
 			new PopUp("添加失败", "congratulation");	
+		}else{
+			new PopUp("添加成功\n你的账号是"+hotelVO.hotelID+"\n你的密码是qwertyuiop123456", "congratulation");	
 		}
 		//然后 hotelVO里有添加成功后的参数,没有密码，我需要的是登录的方式，也就是hotelWorker的账号密码
 		//TODO gcm add不可能失败，一旦失败hotelVO 就不会传过来，在user那里就抛异常了

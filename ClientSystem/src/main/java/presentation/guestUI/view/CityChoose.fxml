@@ -139,9 +139,13 @@
                         <Label text="简介：" />
                         <Label fx:id="introductionInDetail" prefHeight="20.0" prefWidth="353.0" GridPane.columnIndex="1" />
                         <Label text="设施：" GridPane.rowIndex="1" />
-                        <Label fx:id="equipmentInDetail" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="地址：" GridPane.rowIndex="2" />
                         <Label fx:id="hotelAddressInDetail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <ScrollPane focusTraversable="false" hbarPolicy="NEVER" prefHeight="102.0" prefWidth="401.0" vbarPolicy="ALWAYS" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <content>
+                              <Label fx:id="equipmentInDetail" focusTraversable="false" prefWidth="383.0" wrapText="true" />
+                           </content>
+                        </ScrollPane>
                      </children>
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="0.0" prefWidth="54.0" />
