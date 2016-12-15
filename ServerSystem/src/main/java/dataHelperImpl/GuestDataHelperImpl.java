@@ -79,9 +79,20 @@ public class GuestDataHelperImpl implements GuestDataHelper {
 		try {
 			ps = conn.prepareStatement(sql);
 
-			ps.setObject(1, guestPO.getBirthday()); //此处硬编码1-8对应sql语句中元素的位置，已确定
-			ps.setString(2, guestPO.getEnterprise());
-			ps.setString(3, guestPO.getName());
+			
+			
+			if(guestPO.getBirthday()==null){
+				ps.setObject(1, LocalDate.of(2, 2, 3)); 
+			} else {
+				ps.setObject(1, guestPO.getBirthday()); 
+			}
+			
+			if(guestPO.getEnterprise()==null){
+				ps.setString(2, "");
+			} else{
+				ps.setString(2, guestPO.getEnterprise());
+			}
+			ps.setString(3, guestPO.getName());//此处硬编码1-8对应sql语句中元素的位置，已确定
 			ps.setString(4, guestPO.getNickName());
 			ps.setString(5, guestPO.getPassword());
 			ps.setDouble(6, guestPO.getCredit());
@@ -118,6 +129,7 @@ public class GuestDataHelperImpl implements GuestDataHelper {
 
 				guestPO.setGuestID(guestID);
 				guestPO.setBirthday(rs.getDate(2).toLocalDate()); // 此处硬编码2-8对应sql语句中元素
+				System.out.println("error:"+rs.getString(3));
 				guestPO.setEnterprise(rs.getString(3));
 				guestPO.setName(rs.getString(4));
 				guestPO.setNickName(rs.getString(5));
