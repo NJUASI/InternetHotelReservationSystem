@@ -756,6 +756,8 @@ public class HotelSearchController {
 		}else {
 			new PopUp("订单生成失败", "订单");
 		}
+		 hotelCheck.setVisible(true); 
+		 createPane.setVisible(false);
 	}
 
 
