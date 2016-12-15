@@ -61,13 +61,26 @@ public class OrderDataHelperImplTest {
 		assertEquals(ResultMessage.SUCCESS,helper.setState("13342016112", OrderState.ABNORMAL));
 	}
 
+	@Test
+	public void testCheckIn() {
+		LocalDateTime checkInTime = LocalDateTime.now();
+		LocalDateTime expectLeaveTime = LocalDateTime.of(2016, 12, 16, 13, 55, 1);
+		assertEquals(ResultMessage.SUCCESS,helper.setCheckIn("779920161215", "233", checkInTime, expectLeaveTime));
+	}
+	
+	@Test
+	public void testCheckOut() {
+		LocalDateTime checkOutTime = LocalDateTime.now();
+		assertEquals(ResultMessage.SUCCESS,helper.setCheckOut("779920161215", checkOutTime));
+	}
+	
 	@Ignore
 	@Test
 	public void testSetComment() {
 		assertEquals(ResultMessage.SUCCESS,helper.setEvaluation("13342016112", 3, "notGood"));
 	}
 
-//	@Ignore
+	@Ignore
 	@Test
 	public void testGetSingleOrder() {
 		OrderPO orderPO = helper.getSingleOrder("123420161201");

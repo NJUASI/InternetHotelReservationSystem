@@ -63,91 +63,118 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 		
 		commonOrder = new CommonOrder();
 		
+		hotelInterface = new Hotel();
 		creditBLService = CreditController.getInstance();
 		userBLService = UserController.getInstance();
-
-		/*
-		 * hotel因为需要hotelID作为参数初始化，故不在此初始化，用到的时候再初始化
-		 */
-//		hotelInterface = new Hotel();
 	}
+	
+//	/**
+//	 * @author charles
+//	 * @lastChangedBy charles
+//	 * @updateTime 2016/12/9
+//	 * @param orderID 酒店工作人员当前需要执行订单的订单号
+//	 * @return 酒店工作人员是否成功执行此订单
+//	 */
+//	public ResultMessage executeOrder(final String orderID) {
+//		ResultMessage msg1 = ResultMessage.FAIL;
+//		ResultMessage msg2 = ResultMessage.FAIL;
+//		
+//		OrderState thisOrderState = commonOrder.getOrderDetail(orderID).orderGeneralVO.state;
+//		if (thisOrderState == OrderState.UNEXECUTED || thisOrderState == OrderState.ABNORMAL) {
+//			try {
+//				//执行订单，修改订单状态
+//				msg1 = orderDataService.executeOrder(orderID);
+//				
+//				//添加信用记录
+//				final OrderVO thisOrder = commonOrder.getOrderDetail(orderID);
+//				final GuestVO thisGuest = (GuestVO) userBLService.getSingle(thisOrder.orderGeneralVO.guestID);
+//				
+//				final LocalDateTime time = LocalDateTime.now();
+//				
+//				CreditVO creditVO = null;
+//				double afterCredit = 0;
+//				if (thisOrderState == OrderState.UNEXECUTED) {
+//					afterCredit = thisGuest.credit + thisOrder.orderGeneralVO.price;
+//					creditVO = new CreditVO(thisOrder.orderGeneralVO.guestID, time, 
+//							thisOrder.orderGeneralVO.orderID, thisGuest.credit, afterCredit, CreditRecord.EXECUTE);
+//				}else {
+//					//因为置为异常时被扣了相应的信用值，故在此先加回来再增加
+//					afterCredit = thisGuest.credit + 2*thisOrder.orderGeneralVO.price;
+//					creditVO = new CreditVO(thisOrder.orderGeneralVO.guestID, time, 
+//							thisOrder.orderGeneralVO.orderID, thisGuest.credit, afterCredit, CreditRecord.ABNORMAL_EXECUTE);
+//				}
+//				msg2 = creditBLService.addCreditRecord(creditVO);
+//			} catch (RemoteException | UserInexistException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		
+//		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
+//			return ResultMessage.SUCCESS;
+//		}else {
+//			return ResultMessage.FAIL;
+//		}
+//	}
 	
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/9
-	 * @param orderID 酒店工作人员当前需要执行订单的订单号
-	 * @return 酒店工作人员是否成功执行此订单
-	 */
-	public ResultMessage executeOrder(final String orderID) {
-		ResultMessage msg1 = ResultMessage.FAIL;
-		ResultMessage msg2 = ResultMessage.FAIL;
-		
-		OrderState thisOrderState = commonOrder.getOrderDetail(orderID).orderGeneralVO.state;
-		if (thisOrderState == OrderState.UNEXECUTED || thisOrderState == OrderState.ABNORMAL) {
-			try {
-				//执行订单，修改订单状态
-				msg1 = orderDataService.executeOrder(orderID);
-				
-				//添加信用记录
-				final OrderVO thisOrder = commonOrder.getOrderDetail(orderID);
-				final GuestVO thisGuest = (GuestVO) userBLService.getSingle(thisOrder.orderGeneralVO.guestID);
-				
-				final LocalDateTime time = LocalDateTime.now();
-				
-				CreditVO creditVO = null;
-				double afterCredit = 0;
-				if (thisOrderState == OrderState.UNEXECUTED) {
-					afterCredit = thisGuest.credit + thisOrder.orderGeneralVO.price;
-					creditVO = new CreditVO(thisOrder.orderGeneralVO.guestID, time, 
-							thisOrder.orderGeneralVO.orderID, thisGuest.credit, afterCredit, CreditRecord.EXECUTE);
-				}else {
-					//因为置为异常时被扣了相应的信用值，故在此先加回来再增加
-					afterCredit = thisGuest.credit + 2*thisOrder.orderGeneralVO.price;
-					creditVO = new CreditVO(thisOrder.orderGeneralVO.guestID, time, 
-							thisOrder.orderGeneralVO.orderID, thisGuest.credit, afterCredit, CreditRecord.ABNORMAL_EXECUTE);
-				}
-				msg2 = creditBLService.addCreditRecord(creditVO);
-			} catch (RemoteException | UserInexistException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
-			return ResultMessage.SUCCESS;
-		}else {
-			return ResultMessage.FAIL;
-		}
-	}
-	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/8
+	 * @updateTime 2016/12/15
 	 * @param checkInVO 酒店工作人员更新订单入住信息
 	 * @return 是否成功更新
 	 */
 	public ResultMessage updateCheckIn (CheckInVO checkInVO) {
 		ResultMessage msg1 = ResultMessage.FAIL;
 		ResultMessage msg2 = ResultMessage.FAIL;
+		ResultMessage msg3 = ResultMessage.FAIL;
 		
-		//更新订单
-		try {
-			msg1 = orderDataService.updateCheckIn(new CheckInPO(checkInVO));
-		} catch (RemoteException e) {
-			e.printStackTrace();
+		final OrderVO thisOrder = commonOrder.getOrderDetail(checkInVO.orderID);
+		final OrderState thisOrderState = thisOrder.orderGeneralVO.state;
+		
+		if (thisOrderState == OrderState.UNEXECUTED || thisOrderState == OrderState.ABNORMAL) {
+			try {
+		
+				//更新订单入住信息和状态
+				msg1 = orderDataService.updateCheckIn(new CheckInPO(checkInVO));
+
+				// 添加信用记录
+				final GuestVO thisGuest = (GuestVO) userBLService.getSingle(thisOrder.orderGeneralVO.guestID);
+
+				final LocalDateTime time = LocalDateTime.now();
+
+				CreditVO creditVO = null;
+				double afterCredit = 0;
+				if (thisOrderState == OrderState.UNEXECUTED) {
+					afterCredit = thisGuest.credit + thisOrder.orderGeneralVO.price;
+					creditVO = new CreditVO(thisOrder.orderGeneralVO.guestID, time, thisOrder.orderGeneralVO.orderID,
+							thisGuest.credit, afterCredit, CreditRecord.EXECUTE);
+				} else {
+					// 因为置为异常时被扣了相应的信用值，故在此先加回来再增加
+					afterCredit = thisGuest.credit + 2 * thisOrder.orderGeneralVO.price;
+					creditVO = new CreditVO(thisOrder.orderGeneralVO.guestID, time, thisOrder.orderGeneralVO.orderID,
+							thisGuest.credit, afterCredit, CreditRecord.ABNORMAL_EXECUTE);
+				}
+				msg2 = creditBLService.addCreditRecord(creditVO);
+
+				// 更新酒店剩余房间信息
+				System.out.println(thisOrder.orderGeneralVO.orderID);
+				System.out.println(thisOrder.roomType);
+				System.out.println(thisOrder.roomNumCount);
+				
+				hotelInterface = new Hotel();
+				msg3 = hotelInterface.checkIn(thisOrder.orderGeneralVO.orderID, thisOrder.roomType,
+						thisOrder.roomNumCount);
+			} catch (RemoteException | UserInexistException e) {
+				e.printStackTrace();
+			}
 		}
 		
-		//更新酒店剩余房间信息
-		OrderVO thisOrder = commonOrder.getOrderDetail(checkInVO.orderID);
-		hotelInterface = new Hotel(thisOrder.orderGeneralVO.hotelID);
-		msg2 = hotelInterface.checkIn(thisOrder.orderGeneralVO.orderID, thisOrder.roomType, thisOrder.roomNumCount);
-		
-		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
+		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS && msg3 == ResultMessage.SUCCESS) {
 			return ResultMessage.SUCCESS;
-		}else {
+		} else {
 			return ResultMessage.FAIL;
 		}
+		
 	}
 
 	/**

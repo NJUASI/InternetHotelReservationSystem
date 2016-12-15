@@ -15,6 +15,7 @@ import po.GuestEvaluationPO;
 import po.HotelEvaluationPO;
 import po.OrderGeneralPO;
 import po.OrderPO;
+import utilities.Ciphertext;
 import utilities.enums.OrderState;
 import utilities.enums.ResultMessage;
 
@@ -25,11 +26,18 @@ import utilities.enums.ResultMessage;
  */
 public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDataService {
 
+	private static final long serialVersionUID = -1210458390069208485L;
+
 	private OrderDataHelper orderDataHelper;
+
+	// utilities
+	private Ciphertext ciphertext;
 
 	public OrderDataServiceImpl() throws RemoteException {
 		super();
 		orderDataHelper = DataFactoryImpl.getInstance().getOrderDataHelper();
+
+		ciphertext = new Ciphertext();
 	}
 
 	/**
@@ -49,6 +57,11 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 		String date = formateDate(order.getCreateTime().toLocalDate());
 
 		order.setOrderID(random + date);
+
+		// 对写入的订单数据项加密
+		order.setName(ciphertext.encrypt(order.getName()));
+		order.setPhone(ciphertext.encrypt(order.getPhone()));
+
 		return orderDataHelper.add(order);
 	}
 
@@ -109,7 +122,13 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	 */
 	@Override
 	public OrderPO getOrderDetail(final String orderID) throws RemoteException {
-		return orderDataHelper.getSingleOrder(orderID);
+		OrderPO resultPO = orderDataHelper.getSingleOrder(orderID);
+
+		// 解密
+		resultPO.setName(ciphertext.decode(resultPO.getName()));
+		resultPO.setPhone(ciphertext.decode(resultPO.getPhone()));
+
+		return resultPO;
 	}
 
 	/**
@@ -124,20 +143,7 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	 */
 	@Override
 	public List<OrderGeneralPO> getAllGuestOrderGeneral(final String guestID) throws RemoteException {
-		List<OrderPO> guestOrders = orderDataHelper.getAllOrderOfGuest(guestID);
-		List<OrderGeneralPO> result = new ArrayList<OrderGeneralPO>();
-
-		for (OrderPO guestOrder : guestOrders) {
-			result.add(new OrderGeneralPO(guestOrder));
-		}
-
-		if (guestOrders == null) {
-			System.out.println("orderDataHelper get data fail");
-		}else {
-			System.out.println("orderDataHelper get data success");
-		}
-		
-		return result;
+		return convertPOsToDecodedGenerals(orderDataHelper.getAllOrderOfGuest(guestID));
 	}
 
 	/**
@@ -152,86 +158,74 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	 */
 	@Override
 	public List<OrderGeneralPO> getAllHotelOrderGeneral(final String hotelID) throws RemoteException {
-		List<OrderPO> hotelOrders = orderDataHelper.getAllOrderOfHotel(hotelID);
-		List<OrderGeneralPO> result = new ArrayList<OrderGeneralPO>();
-
-		for (OrderPO hotelOrder : hotelOrders) {
-			result.add(new OrderGeneralPO(hotelOrder));
-		}
-
-		return result;
+		return convertPOsToDecodedGenerals(orderDataHelper.getAllOrderOfHotel(hotelID));
 	}
 
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
-	 * @param date
-	 *            网站营销人员撤销异常订单时输入的指定日期
+	 * @updateTime 2016/12/5
+	 * @param date 网站营销人员撤销异常订单时输入的指定日期
 	 * @return 网站营销人员需要查看的当天所有的异常订单
-	 * @throws RemoteException
-	 *             RMI
+	 * @throws RemoteException RMI
+	 * 
+	 * 直接从本层getAllAbnormalOrderGeneral()走
 	 */
 	@Override
-	public List<OrderGeneralPO> getAllAbnormalOrderGeneral(final LocalDate date) throws RemoteException {		
-		List<OrderPO> abnormalOrders = orderDataHelper.getAbnormal();
-		List<OrderGeneralPO> result = new ArrayList<OrderGeneralPO>();
-
-		for (OrderPO abnormalOrder : abnormalOrders) {
-			LocalDate temp = abnormalOrder.getExpectExecuteTime().toLocalDate();
-			if (temp.getYear() == date.getYear() && temp.getMonth() == date.getMonth()
-					&& temp.getDayOfMonth() == date.getDayOfMonth()) {
-				result.add(new OrderGeneralPO(abnormalOrder));
+	public List<OrderGeneralPO> getAllAbnormalOrderGeneral(final LocalDate date) throws RemoteException {
+		List<OrderGeneralPO> abnormalGenerals = getAllAbnormalOrderGeneral();
+		
+		for (int i = 0; i < abnormalGenerals.size(); i++) {
+			LocalDate temp = abnormalGenerals.get(i).getExpectExecuteTime().toLocalDate();
+			if (!(temp.getYear() == date.getYear() && temp.getMonth() == date.getMonth()
+					&& temp.getDayOfMonth() == date.getDayOfMonth())) {
+				abnormalGenerals.remove(abnormalGenerals.get(i));
+				System.out.println("remove: " +abnormalGenerals.get(i).getOrderID());
+				//因为移除此结点，序数下标恢复
+				i--;
 			}
 		}
 
-		return result;
+		return abnormalGenerals;
 	}
 
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
+	 * @updateTime 2016/12/5
 	 * @return 网站营销人员需要查看的所有的异常订单，按倒序排列
-	 * @throws RemoteException
-	 *             RMI
+	 * @throws RemoteException RMI
 	 */
 	@Override
 	public List<OrderGeneralPO> getAllAbnormalOrderGeneral() throws RemoteException {
-		List<OrderPO> abnormalOrders = orderDataHelper.getAbnormal();
-		List<OrderGeneralPO> result = new ArrayList<OrderGeneralPO>();
-
-		for (OrderPO abnormalOrder : abnormalOrders) {
-			result.add(new OrderGeneralPO(abnormalOrder));
-		}
-
-		return result;
+		return convertPOsToDecodedGenerals(orderDataHelper.getAbnormal());
 	}
 
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/29
-	 * @param date
-	 *            网站营销人员查看未执行订单时输入的指定日期
+	 * @updateTime 2016/12/5
+	 * @param date 网站营销人员查看未执行订单时输入的指定日期
 	 * @return 网站营销人员需要查看的当天所有的未执行订单
-	 * @throws RemoteException
-	 *             RMI
+	 * @throws RemoteException RMI
 	 */
 	@Override
 	public List<OrderGeneralPO> getAllUnexecutedOrderGeneral(final LocalDate date) throws RemoteException {
-		List<OrderPO> unexecutedOrders = orderDataHelper.getUnexecuted();
-		List<OrderGeneralPO> result = new ArrayList<OrderGeneralPO>();
+		List<OrderGeneralPO> unexecutedGenerals = convertPOsToDecodedGenerals(orderDataHelper.getUnexecuted());
 
-		for (OrderPO unexecutedOrder : unexecutedOrders) {
-			LocalDate temp = unexecutedOrder.getExpectExecuteTime().toLocalDate();
-			if (temp.getYear() == date.getYear() && temp.getMonth() == date.getMonth()
-					&& temp.getDayOfMonth() == date.getDayOfMonth()) {
-				result.add(new OrderGeneralPO(unexecutedOrder));
+		for (int i = 0; i < unexecutedGenerals.size(); i++) {
+			LocalDate temp = unexecutedGenerals.get(i).getExpectExecuteTime().toLocalDate();
+			if (!(temp.getYear() == date.getYear() && temp.getMonth() == date.getMonth()
+					&& temp.getDayOfMonth() == date.getDayOfMonth())) {
+				unexecutedGenerals.remove(unexecutedGenerals.get(i));
+
+				//因为移除此结点，序数下标恢复
+				i--;
 			}
+			
 		}
-		
-		return result;
+
+		return unexecutedGenerals;
 	}
 
 	/**
@@ -244,13 +238,17 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	 */
 	@Override
 	public ResultMessage updateCheckIn(CheckInPO checkInPO) throws RemoteException {
+		// 更新订单的入住信息
 		ResultMessage msg1 = orderDataHelper.setCheckIn(checkInPO.getOrderID(), checkInPO.getRoomNumber(),
 				checkInPO.getCheckInTime(), checkInPO.getExpectLeaveTime());
+		// 更新订单状态
 		ResultMessage msg2 = orderDataHelper.setState(checkInPO.getOrderID(), OrderState.EXECUTED);
 
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
+			System.out.println("Success");
 			return ResultMessage.SUCCESS;
 		} else {
+			System.out.println("FAIl");
 			return ResultMessage.FAIL;
 		}
 	}
@@ -380,5 +378,22 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	private String formateDate(LocalDate localDate) {
 		String temp = localDate.toString();
 		return temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8);
+	}
+
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/15
+	 * @param orders 需要被转换的List<orderPO>
+	 * @return 数据解密之后的订单概况们
+	 */
+	private List<OrderGeneralPO> convertPOsToDecodedGenerals(List<OrderPO> orders) {
+		List<OrderGeneralPO> result = new ArrayList<OrderGeneralPO>();
+		for (OrderPO guestOrder : orders) {
+			guestOrder.setName(ciphertext.decode(guestOrder.getName()));
+			guestOrder.setPhone(ciphertext.decode(guestOrder.getPhone()));
+			result.add(new OrderGeneralPO(guestOrder));
+		}
+		return result;
 	}
 }

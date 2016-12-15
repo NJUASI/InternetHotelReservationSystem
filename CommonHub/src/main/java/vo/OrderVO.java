@@ -122,9 +122,9 @@ public class OrderVO {
 		this.createTime = LocalDateTime.now();
 		this.checkInTime = null;
 		this.checkOutTime = null;
-		this.roomNumber = null;
+		this.roomNumber = "";
 		this.score = -1;
-		this.comment = null;
+		this.comment = "";
 		
 		this.previousPrice = previousPrice;
 		this.roomType = roomType;

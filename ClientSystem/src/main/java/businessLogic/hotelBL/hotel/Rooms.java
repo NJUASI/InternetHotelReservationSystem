@@ -116,12 +116,15 @@ class Rooms {
 	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO) {
 
 		try {
-			// 当房间总数被修改时，需要更新一下剩余房间数量
+			
 			initRoomInfoPO(roomInfoVO.hotelID);
 			RoomInfoPO po = roomInfoPOList.get(findPO(roomInfoVO.roomType));
 			int roomNum = po.getRoomNum();
-			int remainRoomNum = po.getRemainNum();
-			roomInfoVO.remainNum = remainRoomNum + roomInfoVO.roomNum - roomNum;
+			// 当房间总数被修改时，需要更新一下剩余房间数量
+			if(roomNum != roomInfoVO.roomNum){
+				int remainRoomNum = po.getRemainNum();
+				roomInfoVO.remainNum = roomInfoVO.roomNum-(roomNum - remainRoomNum);
+			}
 
 			hotelDataService.updateRoomInfo(new RoomInfoPO(roomInfoVO));
 			
@@ -177,7 +180,7 @@ class Rooms {
 		for (int i = 0; i < roomInfoPOList.size(); i++) {
 			remainRoomNum = remainRoomNum + roomInfoPOList.get(i).getRemainNum();
 		}
-		return 0;
+		return remainRoomNum;
 	}
 
 	/**

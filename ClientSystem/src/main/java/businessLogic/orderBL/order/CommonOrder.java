@@ -10,7 +10,6 @@ import dataService.orderDataService.OrderDataService;
 import po.HotelEvaluationPO;
 import po.OrderGeneralPO;
 import rmi.ClientRemoteHelper;
-import utilities.Ciphertext;
 import utilities.enums.OrderState;
 import utilities.enums.UserType;
 import vo.HotelEvaluationVO;
@@ -66,12 +65,8 @@ public class CommonOrder implements CommonOrderBLService {
 			e.printStackTrace();
 		}
 		
-		//添加数据饿的时候解密
-		Ciphertext ciphertext = new Ciphertext();
 		if (orderGeneralPOs != null) {
 			for (OrderGeneralPO orderGeneralPO : orderGeneralPOs) {
-				orderGeneralPO.setName(ciphertext.decode(orderGeneralPO.getName()));
-				orderGeneralPO.setPhone(ciphertext.decode(orderGeneralPO.getPhone()));
 				result.add(new OrderGeneralVO(orderGeneralPO));
 			}
 		}
@@ -131,11 +126,6 @@ public class CommonOrder implements CommonOrderBLService {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-
-		//解密
-		Ciphertext ciphertext = new Ciphertext();
-		thisOrderVO.orderGeneralVO.name = ciphertext.decode(thisOrderVO.orderGeneralVO.name);
-		thisOrderVO.orderGeneralVO.phone = ciphertext.decode(thisOrderVO.orderGeneralVO.phone);
 
 		return thisOrderVO;
 	}

@@ -167,7 +167,7 @@
                   <TableColumn fx:id="addressColumn" prefWidth="170.0" text="地址" />
                   <TableColumn fx:id="checkInTimeColumn" prefWidth="153.0" text="预计入住时间" />
                   <TableColumn fx:id="checkOutTimeColumn" prefWidth="150.0" text="预计离开时间" />
-                  <TableColumn fx:id="priceColumn" prefWidth="83.0" resizable="false" text="价格" />
+                  <TableColumn fx:id="priceColumn" prefWidth="83.0" resizable="false" sortType="DESCENDING" text="价格" />
                   <TableColumn fx:id="stateColumn" prefWidth="98.0" text="订单状态" />
                </columns>
             </TableView>

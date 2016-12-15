@@ -71,13 +71,13 @@
                                                 <Label text="最晚执行时间：" GridPane.rowIndex="1" />
                                                 <Label fx:id="detail_expectTime" text="2016-10-2 14：00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                                 <Label fx:id="detail_createTime" text="2016-10-2 14：00" GridPane.columnIndex="1" />
-                                                <Label text="预计离开时间：" GridPane.rowIndex="3" />
-                                                <Label text="客户入住时间：" GridPane.rowIndex="2" />
+                                                <Label text="预计离开时间：" GridPane.rowIndex="2" />
+                                                <Label text="客户入住时间：" GridPane.rowIndex="3" />
                                                 <Label text="客户退房时间：" GridPane.rowIndex="4" />
-                                                <Label fx:id="detail_checkOutTime" text="2016-10-2 14：00" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                                 <Label fx:id="detail_checkInTime" text="2016-10-2 14：00" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                                 <Label text="订单生成时间：" />
                                                 <Label fx:id="detail_expectLeaveTime" text="2016-10-2 14：00" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label fx:id="detail_checkOutTime" text="2016-10-2 14：00" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                              </children>
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.0" minWidth="10.0" prefWidth="71.0" />

@@ -115,6 +115,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			e.printStackTrace();
 			return ResultMessage.FAIL;
 		}
+		
 		return ResultMessage.SUCCESS;
 	}
 
@@ -180,13 +181,14 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	public ResultMessage setCheckIn(final String orderID, final String roomNumber, 
 			final LocalDateTime checkInTime, LocalDateTime expectLeaveTime) {
 		
-		sql = "update order set roomNumber = ?,checkInTime = ?,expectLeaveTime = ? where orderID = ?";
+		sql = "UPDATE `order` SET `order`.`roomNumber` = ?,`order`.`checkInTime` = ?,expectLeaveTime = ? WHERE `order`.orderID = ?";
 		
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, roomNumber);
 			ps.setString(2, TimeChange.dateTime2String(checkInTime));
 			ps.setString(3, TimeChange.dateTime2String(expectLeaveTime));
+			ps.setObject(4, orderID);
 			
 			ps.execute();
 		} catch (SQLException e) {
@@ -205,8 +207,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	 * @return ResultMessage 是否成功修改orderInfo
 	 */
 	public ResultMessage setCheckOut(final String orderID, final LocalDateTime checkOutTime) {
-		
-		sql = "update order set checkOutTime = ? where orderID = ?";
+		sql = "UPDATE `order` SET `order`.`checkOutTime` = ? WHERE `order`.orderID = ?";
 		
 		try {
 			ps = conn.prepareStatement(sql);
