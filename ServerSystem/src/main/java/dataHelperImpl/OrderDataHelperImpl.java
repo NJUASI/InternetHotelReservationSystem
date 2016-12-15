@@ -11,6 +11,7 @@ import java.util.List;
 import dataHelper.OrderDataHelper;
 import po.OrderPO;
 import utilities.JDBCUtil;
+import utilities.TimeChange;
 import utilities.enums.OrderState;
 import utilities.enums.ResultMessage;
 import utilities.enums.RoomType;
@@ -22,7 +23,7 @@ import utilities.enums.RoomType;
  */
 public class OrderDataHelperImpl implements OrderDataHelper {
 
-	private static LocalDateTime DefaultTime = LocalDateTime.of(1, 1, 1, 1, 1);
+	private static LocalDateTime DefaultTime = LocalDateTime.of(2, 2, 2, 2, 2, 2);
 	
 	private Connection conn;
 
@@ -79,11 +80,11 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			ps.setDouble(23, orderPO.getScore());
 			
 			//检查相关时间，若不存在，即将其置为默认时间
-			ps.setObject(7, convertRealToDatabase(orderPO.getExpectExecuteTime()));
-			ps.setObject(8, convertRealToDatabase(orderPO.getExpectLeaveTime()));
-			ps.setObject(14, convertRealToDatabase(orderPO.getCreateTime()));
-			ps.setObject(15, convertRealToDatabase(orderPO.getCheckInTime()));
-			ps.setObject(16, convertRealToDatabase(orderPO.getCheckOutTime()));
+			ps.setString(7, TimeChange.dateTime2String(convertRealToDatabase(orderPO.getExpectExecuteTime())));
+			ps.setString(8, TimeChange.dateTime2String(convertRealToDatabase(orderPO.getExpectLeaveTime())));
+			ps.setString(14, TimeChange.dateTime2String(convertRealToDatabase(orderPO.getCreateTime())));
+			ps.setString(15, TimeChange.dateTime2String(convertRealToDatabase(orderPO.getCheckInTime())));
+			ps.setString(16, TimeChange.dateTime2String(convertRealToDatabase(orderPO.getCheckOutTime())));
 			
 			ps.execute();
 		} catch (SQLException e) {
@@ -184,8 +185,8 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, roomNumber);
-			ps.setObject(2, checkInTime);
-			ps.setObject(3, expectLeaveTime);
+			ps.setString(2, TimeChange.dateTime2String(checkInTime));
+			ps.setString(3, TimeChange.dateTime2String(expectLeaveTime));
 			
 			ps.execute();
 		} catch (SQLException e) {
@@ -209,7 +210,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setObject(1, checkOutTime);
+			ps.setString(1, TimeChange.dateTime2String(checkOutTime));
 			ps.setObject(2, orderID);
 			
 			ps.execute();
@@ -395,11 +396,11 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			orderPO.setComment(rs.getString(22));
 			orderPO.setScore(rs.getDouble(23));
 			
-			orderPO.setExpectExecuteTime(convertDatabaseToReal(rs.getTimestamp(7).toLocalDateTime()));
-			orderPO.setExpectLeaveTime(convertDatabaseToReal(rs.getTimestamp(8).toLocalDateTime()));
-			orderPO.setCreateTime(convertDatabaseToReal(rs.getTimestamp(14).toLocalDateTime()));
-			orderPO.setCheckInTime(convertDatabaseToReal(rs.getTimestamp(15).toLocalDateTime()));
-			orderPO.setCheckOutTime(convertDatabaseToReal(rs.getTimestamp(16).toLocalDateTime()));
+			orderPO.setExpectExecuteTime(convertDatabaseToReal(TimeChange.string2DateTime(rs.getString(7))));
+			orderPO.setExpectLeaveTime(convertDatabaseToReal(TimeChange.string2DateTime(rs.getString(8))));
+			orderPO.setCreateTime(convertDatabaseToReal(TimeChange.string2DateTime(rs.getString(14))));
+			orderPO.setCheckInTime(convertDatabaseToReal(TimeChange.string2DateTime(rs.getString(15))));
+			orderPO.setCheckOutTime(convertDatabaseToReal(TimeChange.string2DateTime(rs.getString(16))));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

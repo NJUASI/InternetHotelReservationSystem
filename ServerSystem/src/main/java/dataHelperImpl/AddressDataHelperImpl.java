@@ -84,7 +84,6 @@ public class AddressDataHelperImpl implements AddressDataHelper {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("enter");
 		}
 		JDBCUtil.close(rs, ps);
 		return result;  //若未找到对应项，返回空list

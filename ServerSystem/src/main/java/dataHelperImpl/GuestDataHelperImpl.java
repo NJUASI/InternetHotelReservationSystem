@@ -11,6 +11,7 @@ import java.util.List;
 import dataHelper.GuestDataHelper;
 import po.GuestPO;
 import utilities.JDBCUtil;
+import utilities.TimeChange;
 import utilities.enums.ResultMessage;
 
 /**
@@ -82,9 +83,9 @@ public class GuestDataHelperImpl implements GuestDataHelper {
 			
 			
 			if(guestPO.getBirthday()==null){
-				ps.setObject(1, LocalDate.of(2, 2, 3)); 
+				ps.setString(1, "0002-02-02"); 
 			} else {
-				ps.setObject(1, guestPO.getBirthday()); 
+				ps.setString(1, TimeChange.date2String(guestPO.getBirthday())); 
 			}
 			
 			if(guestPO.getEnterprise()==null){
@@ -128,8 +129,7 @@ public class GuestDataHelperImpl implements GuestDataHelper {
 				guestPO = new GuestPO();
 
 				guestPO.setGuestID(guestID);
-				guestPO.setBirthday(rs.getDate(2).toLocalDate()); // 此处硬编码2-8对应sql语句中元素
-				System.out.println("error:"+rs.getString(3));
+				guestPO.setBirthday(TimeChange.string2Date(rs.getString(2))); // 此处硬编码2-8对应sql语句中元素
 				guestPO.setEnterprise(rs.getString(3));
 				guestPO.setName(rs.getString(4));
 				guestPO.setNickName(rs.getString(5));
@@ -164,7 +164,7 @@ public class GuestDataHelperImpl implements GuestDataHelper {
 			while (rs.next()) {
 				GuestPO result = new GuestPO(); // 封装一条数据
 				result.setGuestID(String.valueOf(rs.getObject(1))); // 1-8的硬编码对应表中的表项
-				result.setBirthday(rs.getDate(2).toLocalDate());
+				result.setBirthday(TimeChange.string2Date(rs.getString(2)));
 				result.setEnterprise(rs.getString(3));
 				result.setName(rs.getString(4));
 				result.setNickName(rs.getString(5));

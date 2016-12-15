@@ -10,6 +10,7 @@ import java.util.List;
 import dataHelper.CreditDataHelper;
 import po.CreditPO;
 import utilities.JDBCUtil;
+import utilities.TimeChange;
 import utilities.enums.CreditRecord;
 import utilities.enums.ResultMessage;
 
@@ -60,7 +61,7 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 				
 				final CreditPO creditPO = new CreditPO();
 				creditPO.setGuestID(guestID);
-				creditPO.setTime(rs.getTimestamp(2).toLocalDateTime()); //此处硬编码2-6对应表项中元素的位置，已确定
+				creditPO.setTime(TimeChange.string2DateTime(rs.getString(2))); //此处硬编码2-6对应表项中元素的位置，已确定
 				if(String.valueOf(rs.getObject(3)).equals("0")) {
 					creditPO.setOrderID("");
 				}else {
@@ -102,7 +103,7 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 			} else {
 				ps.setObject(2, creditPO.getOrderID());				
 			}
-			ps.setObject(3, creditPO.getTime());
+			ps.setString(3, TimeChange.dateTime2String(creditPO.getTime()));
 			ps.setDouble(4, creditPO.getPreCredit()); 
 			ps.setDouble(5, creditPO.getAfterCredit());
 			ps.setObject(6, creditPO.getCreditRecord().getChineseCreditRecord());
@@ -128,7 +129,7 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 			while (rs.next()) {
 				final CreditPO creditPO = new CreditPO();
 				creditPO.setGuestID(orderID);
-				creditPO.setTime(rs.getTimestamp(2).toLocalDateTime()); //此处硬编码2-6对应表项中元素的位置，已确定
+				creditPO.setTime(TimeChange.string2DateTime(rs.getString(2))); //此处硬编码2-6对应表项中元素的位置，已确定
 				creditPO.setOrderID(String.valueOf(rs.getObject(3)));
 				creditPO.setPreCredit(rs.getDouble(4));
 				creditPO.setAfterCredit(rs.getDouble(5));
