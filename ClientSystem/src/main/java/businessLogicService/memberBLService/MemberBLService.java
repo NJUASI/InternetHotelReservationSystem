@@ -7,9 +7,9 @@ import vo.MemberVO;
 
 public interface MemberBLService {
 
-	public ResultMessage add(MemberVO memberVO);
+	public ResultMessage add(MemberVO memberVO) throws UserInexistException;
 	
-	public ResultMessage modify(MemberVO memberVO);
+	public ResultMessage modify(MemberVO memberVO) throws UserInexistException;
 	
 	public MemberVO getMemberInfo(String userID) throws UserInexistException;
 	

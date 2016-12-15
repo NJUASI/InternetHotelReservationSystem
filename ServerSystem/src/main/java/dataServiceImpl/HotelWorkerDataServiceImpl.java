@@ -7,7 +7,6 @@ import java.util.List;
 import dataHelper.HotelWorkerDataHelper;
 import dataHelperImpl.HotelWorkerDataHelperImpl;
 import dataService.hotelWorkerDataService.HotelWorkerDataService;
-import exception.verificationException.UserInexistException;
 import po.HotelWorkerPO;
 import utilities.enums.ResultMessage;
 
@@ -39,13 +38,9 @@ public class HotelWorkerDataServiceImpl extends UnicastRemoteObject implements H
 	 * @return HotelWorkerPO hotelWokerInfo载体
 	 * @throws UserInexistException 
 	 */
-	public HotelWorkerPO getSingleHotelWorker(String hotelWorkerID) throws RemoteException, UserInexistException {
+	public HotelWorkerPO getSingleHotelWorker(String hotelWorkerID) throws RemoteException{
 		HotelWorkerPO hotelWorkerPO = this.hotelWorkerHelper.getSingle(hotelWorkerID);
-		// 从数据库中得到一个按ID索引的PO，若不存在则为空
-		if(hotelWorkerPO==null){
-			throw new UserInexistException();
-		}
-		return hotelWorkerPO;
+		return hotelWorkerPO;// 从数据库中得到一个按ID索引的PO，若不存在则为空
 	}
 
 	/**

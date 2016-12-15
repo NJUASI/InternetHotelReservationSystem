@@ -9,7 +9,6 @@ import dataHelperImpl.GuestDataHelperImpl;
 import dataService.guestDataService.GuestDataService;
 import exception.operationFailedException.AddFaidException;
 import exception.verificationException.ParameterInvalidException;
-import exception.verificationException.UserInexistException;
 import po.GuestPO;
 import po.MemberPO;
 import utilities.enums.ResultMessage;
@@ -41,14 +40,11 @@ public class GuestDataServiceImpl extends UnicastRemoteObject implements GuestDa
 	 * @param guestID 客户ID
 	 * @return GuestPO guestInfo载体
 	 */
-	public GuestPO getSingleGuest(String guestID) throws RemoteException ,UserInexistException{
+	public GuestPO getSingleGuest(String guestID) throws RemoteException {
 		
 		GuestPO guestPO = guestHelper.getSingle(guestID);
 		
-		if(guestPO==null){
-			throw new UserInexistException(); //从数据库中得到一个按ID索引的PO，若不存在则为空
-		}
-		return guestPO;
+		return guestPO;//从数据库中得到一个按ID索引的PO，若不存在则为空
 	}
 
 	/**

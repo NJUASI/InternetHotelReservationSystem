@@ -4,13 +4,12 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import exception.verificationException.UserInexistException;
 import po.WebMarketerPO;
 import utilities.enums.ResultMessage;
 
 public interface WebMarketerDataService extends Remote {
 
-	public WebMarketerPO getSingleWebMarketer(String webMarketID) throws RemoteException, UserInexistException;
+	public WebMarketerPO getSingleWebMarketer(String webMarketID) throws RemoteException;
 	
 	public List<WebMarketerPO> getAllWebMarketer () throws RemoteException;
 

@@ -11,6 +11,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import presentation.PopUp.PopUp;
 import utilities.IDReserve;
 import vo.MarketVO;
 import vo.MemberVO;
@@ -44,17 +45,19 @@ public class MemberCheckController {
 	 */
 	@FXML
 	private void initialize() {
+		String levelName = null;
+		try {
+			levelName = marketBLController.getLevelName(IDReserve.getInstance().getUserID());
+			marketVO = new MarketVO(levelName, 0, 0);
+		} catch (MemberInexistException e) {
+			marketVO = new MarketVO("Lv0", 0, 0);
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
 
 		try {
 			memberVO = memberBLController.getMemberInfo(IDReserve.getInstance().getUserID());
-			String levelName = null;
-			try {
-				levelName = marketBLController.getLevelName(IDReserve.getInstance().getUserID());
-				marketVO = new MarketVO(levelName, 0, 0);
-			} catch (MemberInexistException e) {
-				e.printStackTrace();
-			}
-			
+
 			if (memberVO.enterprise != null) {
 				enterprise.setText(memberVO.enterprise);
 				market.setText(marketVO.marketName);
@@ -67,7 +70,6 @@ public class MemberCheckController {
 		} catch (UserInexistException e) {
 			e.printStackTrace();
 		}
-
 
 	}
 
@@ -88,17 +90,17 @@ public class MemberCheckController {
 	protected void register() {
 		memberCheck.setVisible(false);
 		memberModify.setVisible(true);
-		
+
 		if (birthday.getText() != "") {
 			commonPane.setDisable(true);
 			birthdayPicker.setValue(memberVO.birthday);
-		}else{
+		} else {
 			commonPane.setDisable(false);
 		}
 		if (enterprise.getText() != "") {
 			enterprisePane.setDisable(true);
 			enterpriseText.setText(memberVO.enterprise);
-		}else{
+		} else {
 			enterprisePane.setDisable(false);
 		}
 	}
@@ -116,11 +118,15 @@ public class MemberCheckController {
 	 */
 	@FXML
 	protected void registerEnterprise() {
+		try {
 
-		MemberVO tempMemberVO = memberVO;
-		tempMemberVO.enterprise = enterprise.getText();
-		memberBLController.add(tempMemberVO);
-		initialize();
+			MemberVO tempMemberVO = memberVO;
+			tempMemberVO.enterprise = enterprise.getText();
+			memberBLController.add(tempMemberVO);
+			initialize();
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -132,10 +138,14 @@ public class MemberCheckController {
 	@FXML
 	protected void registerCommon() {
 
-		MemberVO tempMemberVO = memberVO;
-		tempMemberVO.birthday = birthdayPicker.getValue();
-		memberBLController.add(tempMemberVO);
-		initialize();
+		try {
+			MemberVO tempMemberVO = memberVO;
+			tempMemberVO.birthday = birthdayPicker.getValue();
+			memberBLController.add(tempMemberVO);
+			initialize();
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
