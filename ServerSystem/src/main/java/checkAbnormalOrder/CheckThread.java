@@ -35,6 +35,8 @@ public class CheckThread implements Runnable {
 				orderDateHelper.setState(po.getOrderID(), OrderState.ABNORMAL);
 				//添加一条异常信用记录
 				addAbnormalCredit(po.getGuestID(),po.getOrderID(),po.getPrice());
+				
+				System.out.println("有订单异常");
 			}
 		}
 		try {

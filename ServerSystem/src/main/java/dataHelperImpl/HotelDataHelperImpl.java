@@ -101,10 +101,8 @@ public class HotelDataHelperImpl implements HotelDataHelper{
 	 */
 	@Override
 	public ResultMessage updateHotelInfo(HotelPO hotelPO){
-		sql = "update hotel set hotelName = ?,city = ?,circle = ?,address = ?, "
-				+ "level = ?,score = ?, introduction = ?,equipment = ?,commentsNum = ?"
-				+ "where hotelID = ?";
-				
+		sql = "update hotel set hotelName = ?,city = ?,circle = ?,address = ?,level = ?,"
+				+"score = ?, introduction = ?,equipment = ?,commentsNum = ? where hotelID = ?";
 
 		try {
 			ps = conn.prepareStatement(sql);
@@ -115,8 +113,8 @@ public class HotelDataHelperImpl implements HotelDataHelper{
 			ps.setString(4, hotelPO.getAddress());
 			ps.setString(5, hotelPO.getLevel());
 			ps.setDouble(6, hotelPO.getScore());
-			ps.setString(7, hotelPO.getIntroduction());
-			ps.setString(8, hotelPO.getEquipment());
+			ps.setObject(7, hotelPO.getIntroduction());
+			ps.setObject(8, hotelPO.getEquipment());
 			ps.setInt(9, hotelPO.getCommentsNum());
 			ps.setString(10, hotelPO.getHotelID());
 
