@@ -4,14 +4,20 @@ import java.io.IOException;
 
 import com.sun.javafx.robot.impl.FXRobotHelper;
 
+import businessLogic.userBL.UserController;
+import businessLogicService.userBLService.UserBLService;
+import exception.verificationException.UserInexistException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import utilities.IDReserve;
+import vo.GuestVO;
 
 /**
  * @author 61990
@@ -20,19 +26,34 @@ import javafx.stage.Stage;
  */
 public class GuestViewController {
 
-
+	String userID = IDReserve.getInstance().getUserID();
+	UserBLService userBLController = UserController.getInstance();
 	@FXML
 	private StackPane right;
 
 	@FXML
 	private Pane mainPane;
 
+	@FXML
+	private Button nickName;
+	
 	private Parent currentParent ;
 
 	public GuestViewController() {
 		currentParent = mainPane;
 	}
-
+	/**
+	 * @author 61990
+	 * @throws UserInexistException 
+	 * @lastChangedBy 61990
+	 * @updateTime 2016/12/7 构造函数，初始化成员变量
+	 */
+	@FXML
+	private void initialize() throws UserInexistException {
+		GuestVO guestVO = (GuestVO) userBLController.getSingle(userID);
+		nickName.setText(guestVO.nickName);
+	}
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy Harvey
