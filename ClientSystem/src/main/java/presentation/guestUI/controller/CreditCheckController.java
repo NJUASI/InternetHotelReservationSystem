@@ -26,10 +26,8 @@ public class CreditCheckController {
 	private TableColumn<CreditTable, String> guestIDColumn, orderIDColumn, previousCreditColumn,afterCreditColumn,timeColumn,reasonColumn;
 
 	private CreditBLService creditBLController;
-	private String guestID;
 	public CreditCheckController() {
 		creditBLController = CreditController.getInstance();
-		guestID = IDReserve.getInstance().getUserID();
 	}
 	
 	/**
@@ -42,15 +40,16 @@ public class CreditCheckController {
 	private void initialize() {
 
 		// 调用creditBL的方法，通过guest获得该用户所有的信用变化
-		Iterator<CreditVO> creditChanges = creditBLController.getAllCreditDetail(guestID);
+		Iterator<CreditVO> creditChanges = creditBLController.getAllCreditDetail(IDReserve.getInstance().getUserID());
 		
 		ObservableList<CreditTable> data = FXCollections.observableArrayList();
 		while(creditChanges.hasNext()){
 			CreditVO credit = creditChanges.next();
 			data.add(new CreditTable(credit.guestID, credit.orderID, 
 					Double.toString(credit.previousCredit),Double.toString(credit.afterCredit),
-					credit.time.toString(),credit.reason.toString()));
+					credit.time.toString(),credit.reason.getChineseCreditRecord()));
 		}
+		
 		guestIDColumn.setCellValueFactory(cellData -> cellData.getValue().guestID);
 		orderIDColumn.setCellValueFactory(cellData -> cellData.getValue().orderID);
 		previousCreditColumn.setCellValueFactory(cellData -> cellData.getValue().previousCredit);

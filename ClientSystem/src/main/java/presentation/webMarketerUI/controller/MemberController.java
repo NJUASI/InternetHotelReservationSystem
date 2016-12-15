@@ -27,12 +27,16 @@ public class MemberController {
 
 	//加载查看的显示框
 	@FXML
-	private Label name1, name2, name3, name4, name5, credit1, credit2, credit3, credit4, credit5, discount1, discount2,
-			discount3, discount4, discount5;
+	private Label name1, name2, name3, name4, name5,  name6, name7, name8,
+	credit1, credit2, credit3, credit4, credit5,credit6, credit7, credit8,
+	discount1, discount2,discount3, discount4, discount5, discount6, discount7, discount8;
+			
 	
 	//加载维护的输入框
 	@FXML
-	private TextField market1,market2,market3,market4,market5,needCredit1,needCredit2,needCredit3,needCredit4,needCredit5,modifyDiscount1,modifyDiscount2,modifyDiscount3,modifyDiscount4,modifyDiscount5;
+	private TextField market1,market2,market3,market4,market5,market6,market7,market8,
+	needCredit1,needCredit2,needCredit3,needCredit4,needCredit5,needCredit6,needCredit7,needCredit8,
+	modifyDiscount1,modifyDiscount2,modifyDiscount3,modifyDiscount4,modifyDiscount5,modifyDiscount6,modifyDiscount7,modifyDiscount8;
 	private MarketBLService marketBLController = MarketController.getInstance();
 
 	/**
@@ -42,26 +46,32 @@ public class MemberController {
 	 */
 	@FXML
 	private void initialize() {
-		
-		//TODO gy注意：你fjj说要8个等级
-//		TODO fjj get  完了做
-		
+
 		List<MarketVO> listMarket = marketBLController.getMemberFormulation();
 		name1.setText(listMarket.get(0).marketName);
 		name2.setText(listMarket.get(1).marketName);
 		name3.setText(listMarket.get(2).marketName);
 		name4.setText(listMarket.get(3).marketName);
 		name5.setText(listMarket.get(4).marketName);
+		name6.setText(listMarket.get(5).marketName);
+		name7.setText(listMarket.get(6).marketName);
+		name8.setText(listMarket.get(7).marketName);
 		credit1.setText(Double.toString(listMarket.get(0).marketCredit));
 		credit2.setText(Double.toString(listMarket.get(1).marketCredit));
 		credit3.setText(Double.toString(listMarket.get(2).marketCredit));
 		credit4.setText(Double.toString(listMarket.get(3).marketCredit));
 		credit5.setText(Double.toString(listMarket.get(4).marketCredit));
+		credit6.setText(Double.toString(listMarket.get(5).marketCredit));
+		credit7.setText(Double.toString(listMarket.get(6).marketCredit));
+		credit8.setText(Double.toString(listMarket.get(7).marketCredit));
 		discount1.setText(Double.toString(listMarket.get(0).marketBenefit));
 		discount2.setText(Double.toString(listMarket.get(1).marketBenefit));
 		discount3.setText(Double.toString(listMarket.get(2).marketBenefit));
 		discount4.setText(Double.toString(listMarket.get(3).marketBenefit));
 		discount5.setText(Double.toString(listMarket.get(4).marketBenefit));
+		discount6.setText(Double.toString(listMarket.get(7).marketBenefit));
+		discount7.setText(Double.toString(listMarket.get(6).marketBenefit));
+		discount8.setText(Double.toString(listMarket.get(5).marketBenefit));
 	}
 	
 	/**
@@ -77,16 +87,25 @@ public class MemberController {
 		market3.setText(name3.getText());
 		market4.setText(name4.getText());
 		market5.setText(name5.getText());
+		market6.setText(name6.getText());
+		market7.setText(name7.getText());
+		market8.setText(name8.getText());
 		needCredit1.setText(credit1.getText());
 		needCredit2.setText(credit2.getText());
 		needCredit3.setText(credit3.getText());
 		needCredit4.setText(credit4.getText());
 		needCredit5.setText(credit5.getText());
+		needCredit6.setText(credit6.getText());
+		needCredit7.setText(credit7.getText());
+		needCredit8.setText(credit8.getText());
 		modifyDiscount1.setText(discount1.getText());
 		modifyDiscount2.setText(discount2.getText());
 		modifyDiscount3.setText(discount3.getText());
 		modifyDiscount4.setText(discount4.getText());
 		modifyDiscount5.setText(discount5.getText());
+		modifyDiscount6.setText(discount6.getText());
+		modifyDiscount7.setText(discount7.getText());
+		modifyDiscount8.setText(discount8.getText());
 		
 		marketModifyPane.setVisible(true);
 		marketCheckPane.setVisible(false);
@@ -119,10 +138,12 @@ public class MemberController {
 		list.add(new MarketVO(market3.getText(), Double.parseDouble(needCredit3.getText()) , Double.parseDouble(modifyDiscount3.getText())));
 		list.add(new MarketVO(market4.getText(), Double.parseDouble(needCredit4.getText()) , Double.parseDouble(modifyDiscount4.getText())));
 		list.add(new MarketVO(market5.getText(), Double.parseDouble(needCredit5.getText()) , Double.parseDouble(modifyDiscount5.getText())));
-		
+		list.add(new MarketVO(market6.getText(), Double.parseDouble(needCredit6.getText()) , Double.parseDouble(modifyDiscount6.getText())));
+		list.add(new MarketVO(market7.getText(), Double.parseDouble(needCredit7.getText()) , Double.parseDouble(modifyDiscount7.getText())));
+		list.add(new MarketVO(market8.getText(), Double.parseDouble(needCredit8.getText()) , Double.parseDouble(modifyDiscount8.getText())));
 		ResultMessage message = marketBLController.setMemberFormulation(list);
-
-			new PopUp(message.toString(), "");
+		if(message==ResultMessage.FAIL)
+			new PopUp("请确认填写格式", "");
 		
 		initialize();
 		marketCheckPane.setVisible(true);

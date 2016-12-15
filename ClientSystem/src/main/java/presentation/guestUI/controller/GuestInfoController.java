@@ -2,6 +2,10 @@ package presentation.guestUI.controller;
 
 import businessLogic.userBL.UserController;
 import businessLogicService.userBLService.UserBLService;
+import exception.inputException.InvalidInputException;
+import exception.inputException.InvalidLengthInputException;
+import exception.inputException.PasswordInputException;
+import exception.operationFailedException.UpdateFaiedException;
 import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -10,7 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import presentation.PopUp.PopUp;
 import utilities.IDReserve;
-import utilities.enums.ResultMessage;
 import vo.GuestVO;
 
 /**
@@ -35,10 +38,10 @@ public class GuestInfoController {
 	@FXML
 	private TextField name2, nickname2, phone2;
 	@FXML
-	private PasswordField password2,password3;
-	
-	private String userID =  IDReserve.getInstance().getUserID();;
-	
+	private PasswordField password2, password3;
+
+	private String userID = IDReserve.getInstance().getUserID();;
+
 	private UserBLService userBLController = UserController.getInstance();
 
 	/**
@@ -48,12 +51,11 @@ public class GuestInfoController {
 	 */
 	@FXML
 	private void initialize() {
-		
+
 		try {
 			guestVO = (GuestVO) userBLController.getSingle(userID);
 		} catch (UserInexistException e) {
 			e.printStackTrace();
-			// 主要登录该情况是不出现的，只是为了编译通过
 		}
 		guestID.setText(guestVO.userID);
 		name.setText(guestVO.name);
@@ -91,26 +93,39 @@ public class GuestInfoController {
 	@FXML
 	protected void saveGuestInfo() {
 
-		try {
-			
-			GuestVO tempGuestVO = guestVO;
-			tempGuestVO.name = name2.getText();
-			tempGuestVO.nickName = nickname2.getText();
-			tempGuestVO.phone = phone2.getText();
-			tempGuestVO.password = password2.getText();
-			if(password2.getText()==password3.getText()){
-			ResultMessage message = userBLController.modify(tempGuestVO);
-			}else{
-				new PopUp("请检查你的密码", "更改失败");
-			}
-				new PopUp("您已经成功修改信息", "更改成功");
-			guestModify.setVisible(false);
-			guestCheck.setVisible(true);
+		GuestVO tempGuestVO = guestVO;
+		tempGuestVO.name = name2.getText();
+		tempGuestVO.nickName = nickname2.getText();
+		tempGuestVO.phone = phone2.getText();
+		tempGuestVO.password = password2.getText();
+		
+		if (password2.getText().equals(password3.getText())) {
+			try {
+				userBLController.modify(tempGuestVO);
 
-			//再次初始化界面
-			initialize();
-		} catch (Exception e) {
-			// TODO: handle exception
+				new PopUp("您已经成功修改信息", "更改成功");
+				
+				guestModify.setVisible(false);
+				guestCheck.setVisible(true);
+				
+				// 再次初始化界面
+				initialize();
+			} catch (InvalidLengthInputException e) {
+				e.printStackTrace();
+				new PopUp("请勿输入无效电话", "更改失败");
+			} catch (InvalidInputException e) {
+				e.printStackTrace();
+				new PopUp("请勿输入不合法标识符或不能为空", "更改失败");
+			} catch (PasswordInputException e) {
+				e.printStackTrace();
+				new PopUp("密码必须含有一个数字和密码或不能为空", "更改失败");
+			} catch (UpdateFaiedException e) {
+				e.printStackTrace();
+				new PopUp("填写内容不能为空", "更改失败");
+			}
+		}
+		else{
+			new PopUp("请检查你的密码", "更改失败");
 		}
 
 	}

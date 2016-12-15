@@ -15,6 +15,7 @@ import vo.UserVO;
 /**
  * 
  * @author 61990
+ * lastChangedBy charles
  *
  */
 public final class LogInController implements LogInBLService {
@@ -31,7 +32,6 @@ public final class LogInController implements LogInBLService {
 	 * 构造函数，初始化成员变量
 	 */
 	private LogInController() {
-		// new the mock object
 		logIn = new LogIn();
 	}
 	
@@ -78,6 +78,19 @@ public final class LogInController implements LogInBLService {
 	@Override
 	public UserType logIn(String userID, String password) throws WrongPasswordException, SpecialCharacterException, InvalidLengthInputException, UserInexistException{
 		return logIn.logIn(userID, password);
+	}
+
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/11
+	 * @param userID 当前客户端登录的用户编号 
+	 * 
+	 * TODO 根据后期确定检查重复登录
+	 */
+	@Override
+	public void logOut(String userID) {
+		logIn.logOut(userID);		
 	}
 
 }

@@ -5,6 +5,10 @@ import java.util.List;
 import businessLogic.userBL.userService.Guest;
 import businessLogic.userBL.userService.service.GuestCreditService;
 import businessLogicService.userBLService.UserBLService;
+import exception.inputException.InvalidInputException;
+import exception.inputException.InvalidLengthInputException;
+import exception.inputException.PasswordInputException;
+import exception.operationFailedException.UpdateFaiedException;
 import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import utilities.enums.ResultMessage;
@@ -66,8 +70,12 @@ public class UserController implements UserBLService{
 	 * @updateTime 2016/11/27
 	 * @param userVO 从客户界面层传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功修改用户信息
+	 * @throws UpdateFaiedException 
+	 * @throws PasswordInputException 
+	 * @throws InvalidInputException 
+	 * @throws InvalidLengthInputException 
 	 */
-	public ResultMessage modify(UserVO userVO) {
+	public ResultMessage modify(UserVO userVO) throws InvalidLengthInputException, InvalidInputException, PasswordInputException, UpdateFaiedException {
 		return user.modify(userVO);
 	}
 

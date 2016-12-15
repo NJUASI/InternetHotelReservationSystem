@@ -10,6 +10,7 @@ import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import exception.verificationException.WrongPasswordException;
 import utilities.Detector;
+import utilities.IDReserve;
 import utilities.enums.UserType;
 import vo.GuestVO;
 import vo.UserVO;
@@ -17,10 +18,10 @@ import vo.UserVO;
 /**
  * 
  * @author 61990
- * @lastChangedBy Byron Dong
+ * @lastChangedBy charles
  *
  */
-public class LogIn implements LogInBLService{
+public class LogIn implements LogInBLService {
 
 	private User user;
 	private LogInFactory factory;
@@ -28,8 +29,7 @@ public class LogIn implements LogInBLService{
 	/**
 	 * @author 61990
 	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/12/7
-	 * 构造函数，初始化成员变量
+	 * @updateTime 2016/12/7 构造函数，初始化成员变量
 	 */
 	public LogIn() {
 		user = new User();
@@ -40,17 +40,17 @@ public class LogIn implements LogInBLService{
 	 * @Description:根据用户id获取用户的密码，并验证登录
 	 * @param userID
 	 * @param password
-	 * @return
-	 * ResultMessage
+	 * @return ResultMessage
 	 * @author: Harvey Gong
-	 * @throws SpecialCharacterException 
-	 * @throws InvalidLengthInputException 
-	 * @throws UserInexistException 
+	 * @throws SpecialCharacterException
+	 * @throws InvalidLengthInputException
+	 * @throws UserInexistException
 	 * @lastChangedBy: Byron Dong
-	 * @time:2016年12月7日 
+	 * @time:2016年12月7日
 	 */
-	public UserType logIn(String userID,String password) throws WrongPasswordException, SpecialCharacterException, InvalidLengthInputException, UserInexistException{
-		
+	public UserType logIn(String userID, String password) throws WrongPasswordException, SpecialCharacterException,
+			InvalidLengthInputException, UserInexistException {
+
 		UserType userType = null;
 		try {
 			userType = this.factory.getUserType(userID);
@@ -61,15 +61,17 @@ public class LogIn implements LogInBLService{
 			e.printStackTrace();
 			throw new InvalidLengthInputException();
 		}
-		
-		if(!this.hasUserType(userType)){return null;} //
-		
-		String tempPassword = user.getLogInInfo(userID,userType); 
-		
-		if(!tempPassword.equals(password)){
+
+		if (!this.hasUserType(userType)) {
+			return null;
+		} //
+
+		String tempPassword = user.getLogInInfo(userID, userType);
+
+		if (!tempPassword.equals(password)) {
 			throw new WrongPasswordException();
-		} //密码不正确, 登录失败
-		
+		} // 密码不正确, 登录失败
+
 		return userType;
 	}
 
@@ -78,49 +80,56 @@ public class LogIn implements LogInBLService{
 	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/12/10
 	 * @param guestVO
-	 *           从注册界面层传下来的guestVO
+	 *            从注册界面层传下来的guestVO
 	 * @return 客户是否成功注册
-	 * @throws InvalidInputException,PasswordInputException 
-	 * @throws ParameterInvalidException 
+	 * @throws InvalidInputException,PasswordInputException
+	 * @throws ParameterInvalidException
 	 */
-	public GuestVO guestSignUp(UserVO guestVO) throws InvalidInputException,PasswordInputException,InvalidLengthInputException{
-		
-		try {
-			this.infoDetector(guestVO);
-			return (GuestVO)user.add(guestVO ,UserType.GUEST);
-		} catch (InvalidInputException e) {
-			e.printStackTrace();
-			throw new InvalidInputException();
-		} catch (PasswordInputException e) {
-			e.printStackTrace();
-			throw new PasswordInputException();
-		} catch (InvalidLengthInputException e) {
-			e.printStackTrace();
-			throw new InvalidLengthInputException();
-		} //检查内容是否符合规范，不符合返回null
+	public GuestVO guestSignUp(UserVO guestVO)throws InvalidInputException, PasswordInputException, InvalidLengthInputException {
+		this.infoDetector(guestVO);
+		return (GuestVO) user.add(guestVO, UserType.GUEST);
 	}
-	
-	private boolean hasUserType(UserType userType){
-		if(userType==null){
+
+	private boolean hasUserType(UserType userType) {
+		if (userType == null) {
 			return false;
-		}
-		else{
+		} else {
 			return true;
 		}
 	}
-	
-	private boolean infoDetector(UserVO userVO) throws InvalidInputException, PasswordInputException, InvalidLengthInputException{
-		GuestVO guestVO = (GuestVO)userVO;
+
+	private boolean infoDetector(UserVO userVO)throws InvalidInputException, PasswordInputException, InvalidLengthInputException {
+		GuestVO guestVO = (GuestVO) userVO;
 		Detector detector = new Detector();
 		boolean name = detector.infoDetector(guestVO.name);
-		if(!name){throw new InvalidInputException();}
-		
+		if (!name) {
+			throw new InvalidInputException();
+		}
+
 		boolean password = detector.passwordDetector(guestVO.password);
-		if(!password){throw new PasswordInputException();}
-		
+		if (!password) {
+			throw new PasswordInputException();
+		}
+
 		boolean phone = detector.phoneDetector(guestVO.phone);
-		if(!phone){throw new InvalidLengthInputException();}
-		
+		if (!phone) {
+			throw new InvalidLengthInputException();
+		}
+
 		return true;
+	}
+
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/11
+	 * @param userID
+	 *            当前客户端登录的用户编号
+	 * 
+	 *            TODO 根据后期确定检查重复登录
+	 */
+	@Override
+	public void logOut(String userID) {
+		IDReserve.getInstance().setUserID("");
 	}
 }

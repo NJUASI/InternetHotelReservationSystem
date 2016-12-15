@@ -3,10 +3,10 @@ package businessLogic.promotionBL.stub;
 import java.util.Iterator;
 
 import businessLogicService.promotionBLService.PromotionBLService;
-import utilities.PreOrder;
 import utilities.enums.ResultMessage;
 import vo.AddressVO;
 import vo.HotelFixedPromotionVO;
+import vo.PreOrderVO;
 import vo.SpecialSpanPromotionVO;
 
 public class PromotionBLService_Stub implements PromotionBLService{
@@ -15,7 +15,7 @@ public class PromotionBLService_Stub implements PromotionBLService{
 	public PromotionBLService_Stub() {
 	}
 
-	public double getDiscout(PreOrder preOrder) {
+	public double getDiscout(PreOrderVO preOrder) {
 		return 0.8;
 	}
 
@@ -40,12 +40,12 @@ public class PromotionBLService_Stub implements PromotionBLService{
 	}
 
 	@Override
-	public ResultMessage addSpecialSpanPromotion(SpecialSpanPromotionVO specialSpanPromotionVO) {
+	public ResultMessage addHotelSpecialSpanPromotion(SpecialSpanPromotionVO specialSpanPromotionVO) {
 		return null;
 	}
 
 	@Override
-	public ResultMessage updateSpecialSpanPromotions(SpecialSpanPromotionVO specialSpanPromotionVO) {
+	public ResultMessage updateHotelSpecialSpanPromotion(SpecialSpanPromotionVO specialSpanPromotionVO) {
 		return null;
 	}
 
@@ -61,7 +61,30 @@ public class PromotionBLService_Stub implements PromotionBLService{
 	}
 
 	@Override
-	public ResultMessage deleteSpecialSpanPromotion(String userID, String promotionName) {
+	public ResultMessage deleteHotelSpecialSpanPromotion(String userID, String promotionName) {
+		return null;
+	}
+
+	@Override
+	public double getSpecialCirclePromotion(String value, String newCircle) {
+		return 0;
+	}
+
+	@Override
+	public ResultMessage addWebSpecialSpanPromotion(SpecialSpanPromotionVO specialSpanPromotionVO) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
+	@Override
+	public ResultMessage updateWebSpecialSpanPromotion(SpecialSpanPromotionVO specialSpanPromotionVO) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
+	@Override
+	public ResultMessage deleteWebSpecialSpanPromotion(String promotionName) {
+		// TODO 自动生成的方法存根
 		return null;
 	}
 	

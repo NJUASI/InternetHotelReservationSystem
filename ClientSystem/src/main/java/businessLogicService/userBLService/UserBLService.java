@@ -2,6 +2,10 @@ package businessLogicService.userBLService;
 
 import java.util.List;
 
+import exception.inputException.InvalidInputException;
+import exception.inputException.InvalidLengthInputException;
+import exception.inputException.PasswordInputException;
+import exception.operationFailedException.UpdateFaiedException;
 import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import utilities.enums.ResultMessage;
@@ -13,7 +17,7 @@ public interface UserBLService {
 
 	public UserVO add(UserVO newUserVO ,UserType userType) throws ParameterInvalidException;
 
-	public ResultMessage modify(UserVO userVO);
+	public ResultMessage modify(UserVO userVO) throws InvalidLengthInputException, InvalidInputException, PasswordInputException, UpdateFaiedException;
 	
 	public UserVO getSingle(String userID) throws UserInexistException;
 	

@@ -4,11 +4,11 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import businessLogic.memberBL.MemberController;
 import businessLogic.userBL.UserController;
 import businessLogicService.marketBLService.MarketBLService;
-import businessLogicService.userBLService.UserBLService;
 import dataService.marketDataService.MarketDataService;
-import dataService.marketDataService.MarketDataService_Stub;
+import exception.verificationException.MemberInexistException;
 import exception.verificationException.UserInexistException;
 import po.MarketPO;
 import rmi.ClientRemoteHelper;
@@ -25,6 +25,10 @@ public class Market implements MarketBLService{
 	
 	private MarketDataService marketDataService;
 	
+	private MemberController member;
+	
+	private UserController user;
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -33,6 +37,8 @@ public class Market implements MarketBLService{
 	 */
 	public Market() {
 		marketDataService = ClientRemoteHelper.getInstance().getMarketDataService();
+		member = MemberController.getInstance();
+		user = UserController.getInstance();
 //		try {
 //			marketDataService = new MarketDataService_Stub();
 //		} catch (RemoteException e) {
@@ -90,9 +96,14 @@ public class Market implements MarketBLService{
 	 * @param guestID 需要获取等级客户ID
 	 * @return int 获取客户当前会员等级（需要处理未达最低信用值的情况，此时返回值为0）
 	 * @throws UserInexistException 
+	 * @throws MemberInexistException 
 	 */
-	public int getLevel(String guestID) throws UserInexistException{
-		UserBLService user = UserController.getInstance();
+	public int getLevel(String guestID) throws UserInexistException, MemberInexistException{
+		
+		if(member.getMemberType(guestID)==null){
+			throw new MemberInexistException();
+		}
+		
 		double credit = ((GuestVO)user.getSingle(guestID)).credit;
 		List<MarketVO> list = this.getMemberFormulation();
 		
@@ -107,5 +118,35 @@ public class Market implements MarketBLService{
 		}
 		
 		return level;
+	}
+	
+	/**
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/14
+	 * @param guestID 需要获取等级客户ID
+	 * @return String 获取客户当前会员等级名称（需要处理未达最低信用值的情况，此时返回值为Lv0）
+	 * @throws UserInexistException 
+	 * @throws MemberInexistException 
+	 */
+	public String getLevelName(String userID) throws UserInexistException, MemberInexistException{
+		int level = this.getLevel(userID);
+		return "Lv"+String.valueOf(level);
+	}
+	
+	/**
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/14
+	 * @param guestID 需要获取等级客户ID
+	 * @return double 获取客户当前会员折扣
+	 * @throws UserInexistException （需要处理未达最低信用值的情况，此时返回值为1）
+	 * @throws MemberInexistException 
+	 */
+	public double getMemberDiscout(String userID) throws UserInexistException, MemberInexistException{
+		int level = this.getLevel(userID);
+		List<MarketVO> list = this.getMemberFormulation();
+		if(level==0){return 1;}
+		return list.get(level-1).marketBenefit;
 	}
 }

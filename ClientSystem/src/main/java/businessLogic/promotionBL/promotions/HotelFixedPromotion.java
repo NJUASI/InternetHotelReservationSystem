@@ -9,18 +9,16 @@ import java.util.List;
 import businessLogic.promotionBL.discountCalculation.CalculateDiscount;
 import businessLogic.promotionBL.discountCalculation.HotelFixedDiscountFactory;
 import dataService.promotionDataService.PromotionDataService;
-import dataService.promotionDataService.PromotionDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.HotelFixedPromotionPO;
 import rmi.ClientRemoteHelper;
-import utilities.PreOrder;
-import utilities.enums.PromotionType;
 import utilities.enums.ResultMessage;
 import vo.HotelFixedPromotionVO;
+import vo.PreOrderVO;
 
 /**
  * @Description:对于酒店会员生日折扣，企业会员折扣以及三间及以上预订的促销策略操作的具体实现
- * 只有get和update，没有添加的功能
+ * 只有get和update，没有添加、删除的功能
  * @author:Harvey Gong
  * @time:2016年12月1日 下午2:08:44
  */
@@ -31,11 +29,6 @@ public class HotelFixedPromotion {
 
 	public HotelFixedPromotion() {
 		promotionDataService = ClientRemoteHelper.getInstance().getPromotionDataService();
-//		try {
-//			promotionDataService = new PromotionDataService_Stub();
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	/**
@@ -47,12 +40,8 @@ public class HotelFixedPromotion {
 	 * @time:2016年12月1日 下午2:07:11
 	 */
 	public Iterator<HotelFixedPromotionVO> getHotelFixedPromotions(String hotelWorkerID){
-		try {
-			hotelFixedPromotions = promotionDataService.getHotelFixedPromotion(hotelWorkerID);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return convertPOListToVOListIterator(hotelFixedPromotions);
+		initHotelFixedPromotions(hotelWorkerID);
+		return convertPOListToVOIterator(hotelFixedPromotions);
 	}
 
 
@@ -85,7 +74,7 @@ public class HotelFixedPromotion {
 	 * @throws UserInexistException 
 	 * @time:2016年12月1日 下午2:09:29
 	 */
-	public double getDiscountOneday(PreOrder preOrder, LocalDate today) throws UserInexistException{
+	public double getDiscountOneday(PreOrderVO preOrder, LocalDate today) throws UserInexistException{
 		List<CalculateDiscount> calculateFixedPromotions = initCalculateFixedPromotions(preOrder,today);
 		double discount = 1;
 		for(int i = 0;i<calculateFixedPromotions.size();i++){
@@ -94,19 +83,25 @@ public class HotelFixedPromotion {
 		return discount;
 	}
 
-	private List<CalculateDiscount> initCalculateFixedPromotions(PreOrder preOrder, LocalDate today){
+	private List<CalculateDiscount> initCalculateFixedPromotions(PreOrderVO preOrder, LocalDate today){
 		List<CalculateDiscount> calculateFixedPromotions = new ArrayList<CalculateDiscount>();
 		initHotelFixedPromotions(preOrder.hotelID);
 		HotelFixedDiscountFactory factory = new HotelFixedDiscountFactory(preOrder,today);
 		for(int i = 0;i<hotelFixedPromotions.size();i++){
-			HotelFixedPromotionPO tempHotelFixedPromotion = hotelFixedPromotions.get(i);
-			PromotionType promotionType = tempHotelFixedPromotion.getPromotionType();
-			double discount = tempHotelFixedPromotion.getDiscount();
-			calculateFixedPromotions.add(factory.createCalculateDiscount(promotionType,discount));
+			HotelFixedPromotionPO po = hotelFixedPromotions.get(i);
+			calculateFixedPromotions.add(factory.createCalculateDiscount(po.getPromotionType(),po.getDiscount()));
 		}
 		return calculateFixedPromotions;
 	}
 
+	/**
+	 * @Description:根据酒店id从数据层获取该酒店固定策略
+	 * @param hotelID
+	 * void
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 上午11:46:53
+	 */
 	private void initHotelFixedPromotions(String hotelID) {
 		try {
 			hotelFixedPromotions = promotionDataService.getHotelFixedPromotion(hotelID);
@@ -115,7 +110,16 @@ public class HotelFixedPromotion {
 		}
 	}
 
-	private Iterator<HotelFixedPromotionVO> convertPOListToVOListIterator(List<HotelFixedPromotionPO> POList){
+	/**
+	 * @Description:将poList转化为vo的iterator
+	 * @param POList
+	 * @return
+	 * Iterator<HotelFixedPromotionVO>
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 上午11:47:24
+	 */
+	private Iterator<HotelFixedPromotionVO> convertPOListToVOIterator(List<HotelFixedPromotionPO> POList){
 		List<HotelFixedPromotionVO> hotelFixedPromotionVOList = new ArrayList<HotelFixedPromotionVO>();
 		for(HotelFixedPromotionPO hotelFixedPromotion: POList){
 			hotelFixedPromotionVOList.add(new HotelFixedPromotionVO(hotelFixedPromotion));

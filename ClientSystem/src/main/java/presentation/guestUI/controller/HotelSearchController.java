@@ -26,6 +26,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -34,6 +35,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.util.Callback;
 import presentation.PopUp.PopUp;
 import presentation.Table.EvaluationTable;
 import presentation.Table.HotelTable;
@@ -48,6 +50,7 @@ import vo.HotelEvaluationVO;
 import vo.HotelVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
+import vo.PreOrderVO;
 import vo.RoomInfoVO;
 import vo.SearchCriteriaVO;
 /**
@@ -64,28 +67,49 @@ import vo.SearchCriteriaVO;
 public class HotelSearchController {
 
 	// 加载HotelSearch相关界面
-
 	@FXML
 	private Pane cityAndCircle, hotelCheck, hotelDetail, hotelChoose, createPane;
 
 	// city and cycle choose 内容
-
 	@FXML
 	private ComboBox<String> cycleChoose;
-
 	@FXML
 	private ComboBox<String> cityChoose;
 
+	private String guestID;
+
+	//当点击酒店详情或直接在酒店列表预订酒店时，保存当前选择的酒店的id
+	private String selectedHotelID ;
+	private String selectedRoomType ;
+	private String remainNumOfselectedRoomType;
+
+	//当房型改变时，改变此originPrice的值
+	private int originPrice;
+	
+	//预期执行时间
+	private LocalDate executeDate;
+	//预期离开时间
+	private LocalDate leaveDate;
+	//用于存储客户入住的天数，当入住日期和退房日期改变时，改变此变量的值
+	private int lastDays;
+
+	
+	//BLcontroller
 	private OrderBLService orderBLController;
 	private SourceBLService sourceBLController;
 	private HotelBLService hotelBLController;
 	private UserBLService userBLController;
 
 	public HotelSearchController() {
+		guestID = IDReserve.getInstance().getUserID();
+
 		orderBLController = OrderBLController.getInstance();
 		sourceBLController = SourceBLController.getInstance();
-		hotelBLController = HotelBLController.getInstance();
 		userBLController = UserController.getInstance();
+
+		//将hotelBL的浏览的guestID设置为当前用户的id
+		hotelBLController = HotelBLController.getInstance();
+		hotelBLController.setGuestID(guestID);
 	}
 
 	@FXML
@@ -98,133 +122,30 @@ public class HotelSearchController {
 	 */
 	@FXML
 	private void initialize() {
-
-		//gy 注意，可不可以把和最开始显示界面无关的东西放到后面再赋值，比如酒店搜索进去先要选城市商圈，我就只把这两个先赋值了，
-		// 这样的话感觉会有点儿优化,就感觉这个initEveryBox就把可以把她放到创建订单的时候再初始
-		//TODO gcm 有的是筛选酒店里的，可以拉到后面然后把城市的监听放在这里
-
-		initEveryBox();
-
-		//		cityChoose.setOnShowing(new CityChooseHandler());
-		//		cityChoose.valueProperty().addListener(new CityChangedListener());
-		//
-		//		cityChoose.setValue(cityChoose.getItems().get(0));
+		initCityAndCircles();
 	}
 
-	void initEveryBox(){
+	private void initCityAndCircles() {
+		String fistCity = sourceBLController.getCities().next();
+		cityChoose.setValue(fistCity);
+		cycleChoose.setValue(sourceBLController.getCircles(fistCity).next());
 
-		int minutes = 60;
-		int hours = 24;
-		int maxGuestNum = 3;
-		//TODO gcm注意，用客户选择得房间类型，去下面拿到该酒店该房型得剩余房间数量
-		//TODO gy注意 我怎么得到用户选择的房型
-		//		TODO gcm 我可以给你一个string  这是从详情界面roomTable.getSelectionModel().getSelectedItem().getRoomType()
-		//		从订单界面得到类型是下面监听的那个方法、
-		//		但是我觉得你没有必要去找他的剩余房间数量来规定可以订几间，因为可能同时有人订一个房间，这个人订完了会减少，另一个人虽然显示有那么多其实已经没了，也是定不了的，所以我觉得这个可以定死了就
-		//TODO gy注意：这里订单始终要是活的，就是我进入订单生成时得检查一遍 ，创建订单的时候还得检查一遍，这里肯定是个考察点
-		//				int maxRoomNum = hotelBLController.getRemainRoomNum(roomType);
-		int maxRoomNum = 3;
-		int maxLevel = 5;
-		int maxScore = 5;
+		//初始化商圈列表
+		Iterator<String> circles = sourceBLController.getCircles(fistCity);
+		while(circles.hasNext()){
+			cycleChoose.getItems().add(circles.next());
+		}
 
-		for (int i = 0; i < minutes; i++) {
-			minuteInOrder.getItems().add(i);
-			minuteInOrder2.getItems().add(i);
-		}
-		minuteInOrder.setValue(0);
-		minuteInOrder2.setValue(0);
-		for (int i = 0; i < hours; i++) {
-			hourInOrder.getItems().add(i);
-			hourInOrder2.getItems().add(i);
-		}
-		hourInOrder.setValue(0);
-		hourInOrder2.setValue(0);
-		for (int i = 1; i <= maxGuestNum; i++) {
-			guestNumInOrder.getItems().add(i);	
-		}
-		guestNumInOrder.setValue(1);
-		for (int i = 1; i < maxRoomNum; i++) {
-			roomCountInOrder.getItems().add(i);	
-		}
-		//		房间必须选不初始
-		//		roomCountInOrder.setValue(1);
-		for (int i = 1; i <= maxLevel; i++) {
-			minLevelInput.getItems().add(i);
-			maxLevelInput.getItems().add(i);	
-		}
-		minLevelInput.setValue(1);
-		maxLevelInput.setValue(5);
-		for (int i = 0; i <= maxScore; i++) {
-			minScoreInput.getItems().add(i+0.0);
-			maxScoreInput.getItems().add(i+0.0);	
-		}
-		minScoreInput.setValue(0.0);
-		maxScoreInput.setValue(5.0);
-		expectExecuteDateInOrder.setValue(LocalDate.now());
-		expectLeaveDateInOrder.setValue(LocalDate.now());
-
-		//		cityChoose.setOnShowing(new CityChooseHandler());
-		//		cityChoose.valueProperty().addListener(new CityChangedListener());
-		//		roomTypeInOrder.valueProperty().addListener(new RoomTypeChangeListener());
-		//		roomCountInOrder.valueProperty().addListener(new RoomNumChangeListener());
-
+		cityChoose.setOnShowing(new CityChooseHandler());
+		cityChoose.valueProperty().addListener(new CityChangedListener());
 	}
 
-	class RoomTypeChangeListener implements ChangeListener<String>{
-		public void changed(ObservableValue ov, String oldValue, String roomType) {
-
-			//根据改变的房型，改变可预订的房间数量
-			roomCountInOrder.getItems().clear();
-
-			int remainRoomNum = hotelBLController.getRemainRoomNum(selectedHotelID,RoomType.getEnum(roomType));
-			if(remainRoomNum<1){
-				roomCountInOrder.setValue(remainRoomNum);
-			}
-			else{
-				roomCountInOrder.setValue(1);
-				for(int i = 2;i<=remainRoomNum;i++){
-					roomCountInOrder.getItems().add(i);
-				}
-			}
-
-			// TODO fjj 原始价格已取到，roomType为当前订单所选的房间类型，需要计算订单加个返回，即需要给preOrder的roomType重新赋值
-			double originPrice = hotelBLController.getOriginPrice(selectedHotelID,RoomType.getEnum(roomType));
-			//			能不能像获取这个房间类型的剩余数量这样得到他的价格，然后set到下面那一个   还有就是看我上面说的那些，不用改变	roomCountInOrder的值，而且把他设为空一开始;
-			//			这样我们就只用通过监听改变房间数量来计算订单的价格, 就是改变房型之后必须选一次数量,才能计算到价格,不然计算价格的地方有点多其实;
-			previousPriceInOrder.setText("1");
-			remainNumInOrder.setText(remainRoomNum+"");
-			final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(),
-					LocalTime.of(hourInOrder.getValue(), minuteInOrder.getValue()));
-
-			final OrderGeneralVO createOrderGeneral = new OrderGeneralVO(IDReserve.getInstance().getUserID(),
-					hotelIDInOrder.getText(), expectExecuteTime);
-
-			final OrderVO tempOrder = new OrderVO(createOrderGeneral,
-					Double.parseDouble(previousPriceInOrder.getText()),
-					RoomType.getEnum(roomTypeInOrder.getValue()), roomCountInOrder.getValue());
-
-			final double tempPrice = orderBLController.getTempPrice(tempOrder);
-
-		}    
-	}
-
-	class RoomNumChangeListener implements ChangeListener<Integer>{
-		public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer roomNum) {
-			final LocalDateTime expectExecuteTime = LocalDateTime.of(expectExecuteDateInOrder.getValue(), 
-					LocalTime.of(hourInOrder.getValue(), minuteInOrder.getValue()));
-
-			final OrderGeneralVO createOrderGeneral = new OrderGeneralVO(IDReserve.getInstance().getUserID(), 
-					hotelIDInOrder.getText(), expectExecuteTime);
-
-			final OrderVO tempOrder = new OrderVO(createOrderGeneral, Double.parseDouble(previousPriceInOrder.getText()), 
-					RoomType.getEnum(roomTypeInOrder.getValue()), roomCountInOrder.getValue());
-
-			final double tempPrice = orderBLController.getTempPrice(tempOrder);
-
-			priceOfOrder.setText(String.valueOf(tempPrice));
-		}    
-	}
-
+	/**
+	 * @Description:点击城市选择框时，初始化城市列表
+	 * @author:Harvey Gong
+	 * @lastChangedBy:Harvey Gong
+	 * @time:2016年12月12日 下午12:33:24
+	 */
 	class CityChooseHandler implements EventHandler<Event>{
 		@Override
 		public void handle(Event arg0) {
@@ -237,6 +158,12 @@ public class HotelSearchController {
 		}
 	}
 
+	/**
+	 * @Description:当改变城市时，同时改变商圈combobox的值
+	 * @author:Harvey Gong
+	 * @lastChangedBy:Harvey Gong
+	 * @time:2016年12月12日 下午12:32:44
+	 */
 	class CityChangedListener implements ChangeListener<String>{
 		@Override
 		public void changed(ObservableValue<? extends String> arg0, String preCity, String newCity) {
@@ -249,13 +176,18 @@ public class HotelSearchController {
 		}
 	}
 
+	
+	// Hotel概况浏览界面
+	
+	/**
+	 * 返回城市商圈的选择
+	 */
 	@FXML
 	protected void openSwitchCityCircle(){
 		cityAndCircle.setVisible(true);
 		hotelCheck.setVisible(false);
 	}
-	// Hotel概况浏览界面
-
+	
 	@FXML
 	TableView<HotelTable> hotelTable;
 	@FXML
@@ -271,35 +203,26 @@ public class HotelSearchController {
 	protected void openHotelCheck() {
 
 		//通过城市和商圈,调用hotelBL的方法获得所有的酒店
-		try {
+		Iterator<HotelVO> hotels = hotelBLController.getHotels(cityChoose.getValue(), cycleChoose.getValue());
 
-			Iterator<HotelVO> hotels = hotelBLController.getHotels(cityChoose.getValue(), cycleChoose.getValue());
+		cityAndCircle.setVisible(false);
+		hotelCheck.setVisible(true);
+		hotelChoose.setVisible(false);
 
-			cityAndCircle.setVisible(false);
-			hotelCheck.setVisible(true);
-			hotelChoose.setVisible(false);
-
-			initHotelTable(hotels);
-		} catch (Exception e) {
-			new PopUp("城市商圈有误", "错误提醒");
-		}
+		initHotelTable(hotels);
 	}
 
 	private void initHotelTable(Iterator<HotelVO> hotels){
 		hotelTable.getItems().clear();
-		List<HotelTable> dataList = new ArrayList<HotelTable>();
 
+		ObservableList<HotelTable> data = FXCollections.observableArrayList();
 		while(hotels.hasNext()){
 			HotelVO temp = hotels.next();
-			dataList.add(new HotelTable(temp.hotelID, temp.hotelName,temp.address,
-					temp.city,temp.circle,temp.orderState.toString(),
+			data.add(new HotelTable(temp.hotelID, temp.hotelName,temp.address,
+					cityChoose.getValue(),cycleChoose.getValue(),temp.orderState.getChineseOrderState(),
 					Double.toString(temp.minPrice),temp.level,Double.toString(temp.score)));
 		}
 
-		ObservableList<HotelTable> data = FXCollections.observableArrayList();
-		for (int i = 0; i < dataList.size(); i++) {
-			data.add(dataList.get(i));
-		}
 		hotelIDColumn3.setCellValueFactory(cellData -> cellData.getValue().hotelID);
 		hotelNameColumn3.setCellValueFactory(cellData -> cellData.getValue().hotelName);
 		addressColumn3.setCellValueFactory(cellData -> cellData.getValue().address);
@@ -327,9 +250,8 @@ public class HotelSearchController {
 	}
 
 
-	// HotelDetail界面
 	/*
-	 * 
+	 * HotelDetail界面
 	 * 
 	 */
 
@@ -342,6 +264,8 @@ public class HotelSearchController {
 	Iterator<RoomInfoVO> rooms;
 	List<OrderGeneralVO> orderVOlist;
 	HotelVO hotelVO;
+
+
 	/**
 	 * @description 初始化酒店详情界面
 	 * @author 61990
@@ -355,37 +279,36 @@ public class HotelSearchController {
 		//		TODO fjj 是的就是我在这个酒店有过哪些订单,看大作业需求.fxml找那个地方?你把下面的我测试的代码要的东西覆盖掉就行了
 		try{
 
-			String hotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
+			selectedHotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
 
 			// 获取hotelVO，调用hotelBL的方法
-			hotelVO = hotelBLController.getHotelInfo(hotelID);
+			hotelVO = hotelBLController.getHotelInfo(selectedHotelID);
 			hotelCheck.setVisible(false);
 			hotelDetail.setVisible(true);
-			rooms = hotelBLController.getHotelRoomInfo(hotelID);
+			initHotelDetail(hotelVO);
 
-			// 此客户在此酒店的所有订单
+			rooms = hotelBLController.getHotelRoomInfo(selectedHotelID);
+			initRoomTable(rooms);
+
+			// 此客户在此目标酒店的所有订单
 			orderVOlist = new ArrayList<OrderGeneralVO>();
-			Iterator<OrderGeneralVO> myOrdersOfThisHotel = orderBLController.getMyOrdersOfThisHotel(IDReserve.getInstance().getUserID(), hotelID);
+			Iterator<OrderGeneralVO> myOrdersOfThisHotel = orderBLController.getMyOrdersOfThisHotel(IDReserve.getInstance().getUserID(), selectedHotelID);
 			while (myOrdersOfThisHotel.hasNext()) {
 				orderVOlist.add(myOrdersOfThisHotel.next());
 			}
+			initOrderCheck(orderVOlist);
 
 			// 初始化此酒店的评论
 			commentList = new ArrayList<HotelEvaluationVO>();
-			Iterator<HotelEvaluationVO> thisHotelEvaluation = orderBLController.getEvaluations(hotelID);
+			Iterator<HotelEvaluationVO> thisHotelEvaluation = orderBLController.getEvaluations(selectedHotelID);
 			while (thisHotelEvaluation.hasNext()) {
 				commentList.add(thisHotelEvaluation.next());
 			}
-
-			initRoomTable(rooms);
 			initCommentTable(commentList);
-			initHotelDetail(hotelVO);
-			initOrderCheck(orderVOlist);
 		} catch (Exception e) {
 			new PopUp("请选定酒店", "");
 		}
 	}
-
 
 	@FXML
 	TableView<TypeTable> roomTable;
@@ -402,6 +325,37 @@ public class HotelSearchController {
 	@FXML
 	private TableColumn<OrderTable, String> orderIDColumn, hotelNameColumn, addressColumn, priceColumn1,
 	checkInTimeColumn, stateColumn,checkOutTimeColumn;
+
+
+	/**
+	 * @description 初始化房间详情界面
+	 * @author 61990
+	 * @lastChangedBy Harvey
+	 * @updateTime 2016/12/7
+	 * @param Iterator<RoomInfoVO> rooms
+	 */
+	private void initRoomTable(Iterator<RoomInfoVO> rooms) { 	
+		roomTable.getItems().clear();
+		List<TypeTable> dataList = new ArrayList<TypeTable>();
+		while(rooms.hasNext()){
+			RoomInfoVO temp = rooms.next();
+
+			dataList.add(new TypeTable(temp.roomType.getChineseRoomType(), 
+					String.valueOf(temp.roomNum),String.valueOf(temp.remainNum),
+					Double.toString(temp.price)));
+		}
+
+		ObservableList<TypeTable> data = FXCollections.observableArrayList();
+		for (int i = 0; i < dataList.size(); i++) {
+			data.add(dataList.get(i));
+		}
+		typeColumn.setCellValueFactory(cellData -> cellData.getValue().roomType);
+		roomNumColumn.setCellValueFactory(cellData -> cellData.getValue().roomNum);
+		remainRoomColumn.setCellValueFactory(cellData -> cellData.getValue().remainRoomNum);
+		priceColumn.setCellValueFactory(cellData -> cellData.getValue().price);
+
+		roomTable.setItems(data);
+	}
 
 
 	/**
@@ -429,35 +383,8 @@ public class HotelSearchController {
 
 		evaluationTable.setItems(data);
 	}
-	/**
-	 * @description 初始化房间详情界面
-	 * @author 61990
-	 * @lastChangedBy Harvey
-	 * @updateTime 2016/12/7
-	 * @param Iterator<RoomInfoVO> rooms
-	 */
-	private void initRoomTable(Iterator<RoomInfoVO> rooms) { 	
-		roomTable.getItems().clear();
-		List<TypeTable> dataList = new ArrayList<TypeTable>();
-		while(rooms.hasNext()){
-			RoomInfoVO temp = rooms.next();
 
-			dataList.add(new TypeTable(temp.roomType.toString(),
-					String.valueOf(temp.roomNum),String.valueOf(temp.remainNum),
-					Double.toString(temp.price)));
-		}
 
-		ObservableList<TypeTable> data = FXCollections.observableArrayList();
-		for (int i = 0; i < dataList.size(); i++) {
-			data.add(dataList.get(i));
-		}
-		typeColumn.setCellValueFactory(cellData -> cellData.getValue().roomType);
-		roomNumColumn.setCellValueFactory(cellData -> cellData.getValue().roomNum);
-		remainRoomColumn.setCellValueFactory(cellData -> cellData.getValue().remainRoomNum);
-		priceColumn.setCellValueFactory(cellData -> cellData.getValue().price);
-
-		roomTable.setItems(data);
-	}
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -471,7 +398,7 @@ public class HotelSearchController {
 		for (int i = 0; i < orderVOlist.size(); i++) {
 			OrderGeneralVO temp = orderVOlist.get(i);
 			orderList.add(new OrderTable(temp.orderID, temp.hotelName, temp.hotelAddress,
-					temp.expectExecuteTime.toString(),temp.expectLeaveTime.toString(),temp.price + "", temp.state.toString()));
+					temp.expectExecuteTime.toString(),temp.expectLeaveTime.toString(),temp.price + "", temp.state.getChineseOrderState()));
 		}
 
 		ObservableList<OrderTable> data = FXCollections.observableArrayList();
@@ -488,6 +415,8 @@ public class HotelSearchController {
 
 		orderTable.setItems(data);
 	}
+	
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -508,7 +437,10 @@ public class HotelSearchController {
 		introductionInDetail.setText(hotelVO.introduction);
 	}
 
-	// Hotel筛选界面
+
+	/*
+	 *  Hotel筛选界面
+	 */
 
 	@FXML
 	private CheckBox box1,box2,box3,box4,box5,boxOnly;
@@ -528,9 +460,29 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void openChoose() {
-
 		hotelCheck.setVisible(false);
 		hotelChoose.setVisible(true);
+		initLevelAndScore();
+	}
+
+	private void initLevelAndScore() {
+
+		int maxLevel = 5;
+		int maxScore = 5;
+
+		for (int i = 1; i <= maxLevel; i++) {
+			minLevelInput.getItems().add(i);
+			maxLevelInput.getItems().add(i);	
+		}
+		minLevelInput.setValue(1);
+		maxLevelInput.setValue(5);
+
+		for (int i = 0; i <= maxScore; i++) {
+			minScoreInput.getItems().add(i+0.0);
+			maxScoreInput.getItems().add(i+0.0);	
+		}
+		minScoreInput.setValue(0.0);
+		maxScoreInput.setValue(5.0);		
 	}
 
 	List<SearchCriteriaType> criteria;
@@ -548,8 +500,9 @@ public class HotelSearchController {
 		//获取到各种搜索条件和用了哪些搜索方法
 		setVOAndCriteria();
 
-		//调用hotelBL的方法，根据搜索标准列表搜索酒店
-		hotelBLController.searchHotels(criteria, vo);
+		//调用hotelBL的方法，根据搜索标准列表搜索酒店,并初始化酒店列表
+		Iterator<HotelVO> searchedHotels = hotelBLController.searchHotels(criteria, vo);
+		initHotelTable(searchedHotels);
 
 		hotelCheck.setVisible(true);
 		hotelChoose.setVisible(false);
@@ -567,11 +520,11 @@ public class HotelSearchController {
 		vo = new SearchCriteriaVO();
 		criteria = new ArrayList<SearchCriteriaType>();
 
-		if(vo.keyHotelName!=null){
+		if(hotelNameInput.getText()!=""){
 			criteria.add(SearchCriteriaType.HOTEL_NAME);
 			vo.keyHotelName = hotelNameInput.getText();
 		}
-		if(vo.bookedOnly){
+		if(boxOnly.isSelected()){
 			criteria.add(SearchCriteriaType.BOOKED_ONLY);
 			vo.bookedOnly = boxOnly.isSelected();
 		}
@@ -603,7 +556,9 @@ public class HotelSearchController {
 	}
 
 
-	// 订单生成界面
+	/*
+	 *  订单生成界面
+	 */
 	@FXML
 	private ComboBox<String> roomTypeInOrder;
 	@FXML
@@ -624,11 +579,19 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void openCreateOrder() {
+		selectedHotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
+		selectedRoomType = roomTable.getSelectionModel().getSelectedItem().getRoomType();
+		remainNumOfselectedRoomType = roomTable.getSelectionModel().getSelectedItem().getRemainRoomNum();
 
-		roomTypeInOrder.setValue(roomTable.getSelectionModel().getSelectedItem().getRoomType());
-		remainNumInOrder.setText(roomTable.getSelectionModel().getSelectedItem().getRemainRoomNum());
-		previousPriceInOrder.setText(roomTable.getSelectionModel().getSelectedItem().getPrice());
+		roomTypeInOrder.setValue(selectedRoomType);
+		remainNumInOrder.setText(remainNumOfselectedRoomType);
+
 		initCreateOrder();
+		initEveryBox();
+		
+		//显示原始价格和计算折扣后的价格
+		showPrice();
+
 	}
 
 	/**
@@ -639,31 +602,28 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void createOrderIncheck(){
+		selectedHotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
 		initCreateOrder();
+		initEveryBox();
 	}
 
-
-	private String selectedHotelID ;
-
 	private void initCreateOrder(){	
-		selectedHotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
+
 		roomTypeInOrder.getItems().clear();
 
 		hotelVO = hotelBLController.getHotelInfo(selectedHotelID);
 		rooms = hotelBLController.getHotelRoomInfo(selectedHotelID);
 
 		try {
-			guestVO = (GuestVO) userBLController.getSingle(selectedHotelID);
+			guestVO = (GuestVO) userBLController.getSingle(IDReserve.getInstance().getUserID());
 		} catch (UserInexistException e) {
-			// 该情况是不会出现的，保证编译能通过
 			e.printStackTrace();
 		}
 		nameInOrder.setText(guestVO.name);
 		phoneInOrder.setText(guestVO.phone);
 
 		while(rooms.hasNext()){
-			RoomInfoVO temp = rooms.next();
-			roomTypeInOrder.getItems().add(temp.roomType.toString());
+			roomTypeInOrder.getItems().add(rooms.next().roomType.getChineseRoomType());
 		}
 
 		hotelNameInOrder.setText(hotelVO.hotelName);
@@ -673,6 +633,89 @@ public class HotelSearchController {
 		hotelDetail.setVisible(false);
 		createPane.setVisible(true);
 		hotelCheck.setVisible(false);
+	}
+
+	//初始化订单生成界面中的combobox：预计最晚执行时间、预计离店时间、入住日期、离店日期、
+	private void initEveryBox(){
+
+		int minutes = 60;
+		int hours = 24;
+
+		for (int i = 0; i < minutes; i++) {
+			minuteInOrder.getItems().add(i);
+			minuteInOrder2.getItems().add(i);
+		}
+		minuteInOrder.setValue(0);
+		minuteInOrder2.setValue(0);
+
+		for (int i = 0; i < hours; i++) {
+			hourInOrder.getItems().add(i);
+			hourInOrder2.getItems().add(i);
+		}
+		hourInOrder.setValue(18);
+		hourInOrder2.setValue(12);
+
+		for (int i = 1; i <= sourceBLController.getMaxGuestNumEachOrder(); i++) {
+			guestNumInOrder.getItems().add(i);	
+		}
+		guestNumInOrder.setValue(1);
+
+		for (int i = 1; i <= sourceBLController.getMaxRoomNumEachOrder(); i++) {
+			roomCountInOrder.getItems().add(i);	
+		}
+		roomCountInOrder.setValue(1);
+
+		//初始入住日期和离店日期,初始入住天数为1
+		executeDate = LocalDate.now();
+		leaveDate = LocalDate.now().plusDays(1);
+		lastDays = 1;
+		
+		expectExecuteDateInOrder.setValue(executeDate);
+		expectLeaveDateInOrder.setValue(leaveDate);
+		Callback<DatePicker, DateCell> dayCellFactory1 = 
+	            new Callback<DatePicker, DateCell>() {
+	                @Override
+	                public DateCell call(final DatePicker datePicker) {
+	                    return new DateCell() {
+	                        @Override
+	                        public void updateItem(LocalDate item, boolean empty) {
+	                            super.updateItem(item, empty);
+
+	                            if (item.isBefore(
+	                            		LocalDate.now())
+	                                ) {
+	                                    setDisable(true);
+	                                    setStyle("-fx-background-color: #ffc0cb;");
+	                            }   
+	                    }
+	                };
+	            }
+	        };
+	        expectExecuteDateInOrder.setDayCellFactory(dayCellFactory1);
+		Callback<DatePicker, DateCell> dayCellFactory = 
+	            new Callback<DatePicker, DateCell>() {
+	                @Override
+	                public DateCell call(final DatePicker datePicker) {
+	                    return new DateCell() {
+	                        @Override
+	                        public void updateItem(LocalDate item, boolean empty) {
+	                            super.updateItem(item, empty);
+
+	                            if (item.isBefore(
+	                            		expectExecuteDateInOrder.getValue().plusDays(1))
+	                                ) {
+	                                    setDisable(true);
+	                                    setStyle("-fx-background-color: #ffc0cb;");
+	                            }   
+	                    }
+	                };
+	            }
+	        };
+	    expectLeaveDateInOrder.setDayCellFactory(dayCellFactory);
+		roomTypeInOrder.valueProperty().addListener(new RoomTypeChangeListener());
+		roomCountInOrder.valueProperty().addListener(new RoomNumChangeListener());
+		expectExecuteDateInOrder.valueProperty().addListener(new ExpectExecuteDateChangedListener());
+		expectLeaveDateInOrder.valueProperty().addListener(new ExpectLeaveDateChangedListener());
 	}
 
 	/**
@@ -694,11 +737,15 @@ public class HotelSearchController {
 		final LocalDateTime expectLeaveTime = LocalDateTime.of(expectLeaveDateInOrder.getValue(), 
 				LocalTime.of(hourInOrder2.getValue(), minuteInOrder2.getValue()));
 
+		int price = Integer.valueOf(priceOfOrder.getText());
 		OrderGeneralVO createOrderGeneral = new OrderGeneralVO(IDReserve.getInstance().getUserID(), hotelIDInOrder.getText(), 
 				hotelNameInOrder.getText(), hotelAddressInOrder.getText(), expectExecuteTime, expectLeaveTime, 
 				nameInOrder.getText(), phoneInOrder.getText());
+		createOrderGeneral.price = price;
 
-		OrderVO createVO = new OrderVO(createOrderGeneral, Double.parseDouble(previousPriceInOrder.getText()), 
+		int previousPrice = Integer.valueOf(previousPriceInOrder.getText());
+		
+		OrderVO createVO = new OrderVO(createOrderGeneral,previousPrice, 
 				RoomType.getEnum(roomTypeInOrder.getValue()), roomCountInOrder.getValue(), guestNumInOrder.getValue(), 
 				messageInOrder.getText());
 
@@ -709,6 +756,111 @@ public class HotelSearchController {
 		}else {
 			new PopUp("订单生成失败", "订单");
 		}
+		 hotelCheck.setVisible(true); 
+		 createPane.setVisible(false);
+	}
+
+
+	class ExpectExecuteDateChangedListener implements ChangeListener<LocalDate> {
+		@Override
+		public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
+			//更改执行时间
+			executeDate = newValue;
+			//计算入住天数
+			calculateLastDays();
+			//重新显示价格
+			showPrice();
+		}
+	}
+	
+	class ExpectLeaveDateChangedListener implements ChangeListener<LocalDate> {
+		@Override
+		public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
+			//更改离店时间
+			leaveDate = newValue;
+			//计算入住天数
+			calculateLastDays();
+			//重新显示价格
+			showPrice();
+		}
+	}
+
+	/**
+	 * @Description:改变房间类型时，改变房间剩余数目，并改变价格的显示
+	 * @author:Harvey Gong
+	 * @lastChangedBy:Harvey Gong
+	 * @time:2016年12月12日 下午12:34:27
+	 */
+	class RoomTypeChangeListener implements ChangeListener<String>{
+		public void changed(ObservableValue ov, String oldValue, String roomType) {
+
+			//变更所选的房间类型
+			selectedRoomType = roomType;
+			
+			//显示还剩多少房间
+			int remainRoomNum = hotelBLController.getRemainRoomNum(selectedHotelID,RoomType.getEnum(selectedRoomType));
+			remainNumInOrder.setText(remainRoomNum+"");
+			
+			//预订房间数量初始为1
+			roomCountInOrder.setValue(1);
+
+			showPrice();
+		}    
+	}
+
+	/**
+	 * @Description:改变预订的房间数目时，改变价格显示
+	 * @author:Harvey Gong
+	 * @lastChangedBy:Harvey Gong
+	 * @time:2016年12月12日 下午12:33:49
+	 */
+	class RoomNumChangeListener implements ChangeListener<Integer>{
+		public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer roomNum) {
+			showPrice();
+		}    
+	}
+
+	/**
+	 * @Description:计算入住天数
+	 * void
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 上午11:40:23
+	 */
+	private void calculateLastDays(){
+		lastDays = executeDate.until(leaveDate).getDays();
+	}
+	
+	/**
+	 * @Description:显示最新价格
+	 * void
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 上午12:43:24
+	 */
+	private void showPrice(){
+		//显示原始价格
+		previousPriceInOrder.setText(Integer.toString(calculateOriginPrice()));
+		//显示计算的价格
+		priceOfOrder.setText(Integer.toString(calculatePrice()));
+	}
+
+	//根据客户id，选择的酒店id，入住天数，预计入住时间以及房间数量计算打折后的价格
+	private int calculatePrice(){
+		PreOrderVO preOrderVO = new PreOrderVO();
+		preOrderVO.guestID = guestID;
+		preOrderVO.hotelID = selectedHotelID;
+		preOrderVO.lastDays = lastDays;
+		preOrderVO.expectExecuteDate = expectExecuteDateInOrder.getValue();
+		preOrderVO.roomNum = roomCountInOrder.getValue();
+		preOrderVO.roomType = RoomType.getEnum(selectedRoomType);
+		return orderBLController.getCalculatedPrice(preOrderVO);
+	}
+	
+	//根据选择的酒店id，房间类型和入住天数，计算原始价格（打折前）
+	private int calculateOriginPrice(){
+		originPrice = hotelBLController.getOriginPrice(selectedHotelID, RoomType.getEnum(selectedRoomType));
+		return originPrice*lastDays*roomCountInOrder.getValue();
 	}
 }
 

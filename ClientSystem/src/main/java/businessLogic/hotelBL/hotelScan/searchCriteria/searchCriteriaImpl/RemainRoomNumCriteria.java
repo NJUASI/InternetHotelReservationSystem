@@ -18,10 +18,12 @@ public class RemainRoomNumCriteria implements SearchCriteria {
 	@Override
 	public List<HotelVO> meetCriteria(List<HotelVO> hotelVOList) {
 		HotelInfoOperation hotel = new Hotel();
-		for(int i = 0;i<hotelVOList.size();i++){
+		for(int i = 0;i<hotelVOList.size();){
 			if(notHasEnoughRemainRoom(hotel.getRemainRoomNum(hotelVOList.get(i).hotelID))){
 				hotelVOList.remove(i);
+				continue;
 			}
+			i++;
 		}
 		return hotelVOList;
 	}

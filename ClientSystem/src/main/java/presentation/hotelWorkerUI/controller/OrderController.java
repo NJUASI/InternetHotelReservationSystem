@@ -193,7 +193,7 @@ public class OrderController {
 		while(orderGenerals.hasNext()){
 			OrderGeneralVO vo = orderGenerals.next();
 			OrderTable orderTable = new OrderTable(vo.orderID,vo.guestID, vo.name, vo.phone,
-					vo.expectExecuteTime.toString(),vo.expectLeaveTime.toString(),vo.price + "", vo.state.toString());
+					vo.expectExecuteTime.toString(),vo.expectLeaveTime.toString(),vo.price + "", vo.state.getChineseOrderState());
 			data.add(orderTable);
 		}
 
@@ -390,6 +390,7 @@ public class OrderController {
 		final CheckOutVO checkOutVO = new CheckOutVO(checkInOrderID.getText(), checkOutTime);
 		
 		final ResultMessage result = orderBLController.updateCheckOut(checkOutVO);
+		searchExecutedOrder();
 //	TODO 后期可以把这些放在界面里，不弹框
 		if (result == ResultMessage.SUCCESS) {
 			new PopUp("退房成功", "congratulation");	
@@ -422,8 +423,9 @@ public class OrderController {
 		detail_ID.setText(orderVO.orderGeneralVO.hotelID);
 		detail_Hotel.setText(orderVO.orderGeneralVO.hotelName);
 		detail_address.setText(orderVO.orderGeneralVO.hotelAddress);
-		detail_roomType.setText(orderVO.roomType.toString());
+		detail_roomType.setText(orderVO.roomType.getChineseRoomType());
 		detail_roomNum.setText(orderVO.roomNumCount + "");
+		detail_roomNumber.setText(orderVO.roomNumber);
 		detail_personNum.setText(orderVO.expectGuestNumCount + "");
 		detail_personName.setText(orderVO.orderGeneralVO.name);
 		detail_phone.setText(orderVO.orderGeneralVO.phone);
@@ -433,9 +435,14 @@ public class OrderController {
 		detail_checkInTime.setText(orderVO.checkInTime.toString());
 		detail_checkOutTime.setText(orderVO.checkOutTime.toString());
 		detail_price.setText(Double.toString(orderVO.orderGeneralVO.price));
-		detail_state.setText(orderVO.orderGeneralVO.state.toString());
+		detail_state.setText(orderVO.orderGeneralVO.state.getChineseOrderState());
 		detail_message.setText(orderVO.message);
-		orderComment.setText(orderVO.comment);
-		orderScore.setText(Double.toString(orderVO.score));
+		
+		if(orderVO.score==-1.0){
+			orderScore.setText("订单未评价");
+		}else{
+			orderScore.setText(Double.toString(orderVO.score));
+			orderComment.setText(orderVO.comment);
+		}
 	}
 }

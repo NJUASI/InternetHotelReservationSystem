@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 import businessLogic.hotelBL.HotelInfoOperation;
 import dataService.hotelDataService.HotelDataService;
-import dataService.hotelDataService.HotelDataService_Stub;
 import po.HotelPO;
 import rmi.ClientRemoteHelper;
 import utilities.Address;
@@ -56,13 +55,7 @@ public class Hotel implements HotelInfoOperation{
 
 	private void initHotelDataService() {
 		hotelDataService = ClientRemoteHelper.getInstance().getHotelDataService();
-//		try {
-//			hotelDataService = new HotelDataService_Stub();
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//		}
 	}
-
 
 	/**
 	 * @Description:根据酒店工作人员id获取酒店的基本信息
@@ -122,7 +115,23 @@ public class Hotel implements HotelInfoOperation{
 		}
 	}
 
-
+	/**
+	 * @Description:当有该酒店的订单的评价时，更新酒店的评分
+	 * @param score
+	 * @return
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月6日 上午11:11:51
+	 */
+	@Override
+	public ResultMessage scoreUpdate(String hotelID,double score) {
+		initHotelPO(hotelID);
+		int commentsNum = hotelPO.getCommentsNum();
+		hotelPO.setScore((commentsNum*hotelPO.getScore()+score)/commentsNum+1);
+		return updateHotelInfo(new HotelVO(hotelPO));
+	}
+	
+	
 	/**
 	 * @Description:委托给room，获取客房信息
 	 * @param hotelWorkerID
@@ -183,8 +192,8 @@ public class Hotel implements HotelInfoOperation{
 	 * @author: Harvey Gong
 	 * @time:2016年12月4日 下午7:25:02
 	 */
-	public double getLowestPrice(){
-		return rooms.getLowestPrice();
+	public double getLowestPrice(String hotelID){
+		return rooms.getLowestPrice(hotelID);
 	}
 
 	/**
@@ -200,45 +209,33 @@ public class Hotel implements HotelInfoOperation{
 	public int getRemainNumOfSpecificType(String hotelID, RoomType roomType){
 		return rooms.getRemainNumOfSpecificType(hotelID,roomType);
 	}
-
-	/**
-	 * 方便测试用，严格来说不能暴露，后期删除
-	 * @return
-	 */
-	public HotelPO getHotelPO(){
-		return hotelPO;
-	}
-
+	
+	//获取指定酒店的城市商圈
 	@Override
 	public Address getHotelAddress(String hotelID){
 		initHotelPO(hotelID);
 		return new Address(hotelPO.getCity(), hotelPO.getCircle());
 	}
 
-	/**
-	 * @Description:当有该酒店的订单的评价时，更新酒店的评分
-	 * @param score
-	 * @return
-	 * @author: Harvey Gong
-	 * @lastChangedBy: Harvey Gong
-	 * @time:2016年12月6日 上午11:11:51
-	 */
-	@Override
-	public ResultMessage scoreUpdate(double score) {
-		int commentsNum = hotelPO.getCommentsNum();
-		hotelPO.setScore((commentsNum*hotelPO.getScore()+score)/commentsNum+1);
-		return updateHotelInfo(new HotelVO(hotelPO));
-	}
-
+	//获取指定酒店所有房型
 	@Override
 	public Iterator<RoomType> getRoomType(String hotelID){
 		return rooms.getRoomType(hotelID);
 	}
 
+	//获取指定酒店剩余房间总数
 	public int getRemainRoomNum(String hotelID) {
 		return rooms.getRemainRoomNum(hotelID);
 	}
+	
+	//获取指定房型原始价格
+	public int getOriginPrice(String hotelID, RoomType roomType) {
+		return rooms.getOriginPrice(hotelID,roomType);
+	}
 
+	/**
+	 * @Description:入住与退房
+	 */
 	public ResultMessage checkIn(String hotelID, RoomType roomType, int roomNum) {
 		return rooms.checkIn(hotelID,roomType,roomNum);
 		
@@ -262,10 +259,6 @@ public class Hotel implements HotelInfoOperation{
 	@Override
 	public ResultMessage updateRemainRoomNumForUndoOrder(String hotelID, RoomType roomType, int roomNum) {
 		return rooms.updateRemainRoomNumForUndoOrder(hotelID,roomType,roomNum);
-	}
-
-	public double getOriginPrice(String hotelID, RoomType roomType) {
-		return rooms.getOriginPrice(hotelID,roomType);
 	}
 
 }

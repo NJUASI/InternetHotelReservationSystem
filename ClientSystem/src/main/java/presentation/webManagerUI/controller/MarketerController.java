@@ -2,6 +2,11 @@ package presentation.webManagerUI.controller;
 
 import businessLogic.userBL.UserController;
 import businessLogicService.userBLService.UserBLService;
+import exception.inputException.InvalidInputException;
+import exception.inputException.InvalidLengthInputException;
+import exception.inputException.PasswordInputException;
+import exception.operationFailedException.UpdateFaiedException;
+import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import presentation.PopUp.PopUp;
 import utilities.enums.ResultMessage;
+import utilities.enums.UserType;
 import vo.WebMarketerVO;
 
 /**
@@ -20,11 +26,11 @@ public class MarketerController {
 	WebMarketerVO marketerVO;
 	
 	@FXML
-	private Pane modifyPane,marketerInfoPane;
+	private Pane modifyPane,marketerInfoPane,pane;
 	@FXML
 	private TextField inputID, password2;
 	@FXML
-	private Label password, marketerID, marketerID2;
+	private Label password, marketerID, marketerID2,yourID,yourPassword;
 	
 	private UserBLService userBLController;
 
@@ -45,12 +51,7 @@ public class MarketerController {
 			marketerVO = (WebMarketerVO) userBLController.getSingle(inputID.getText());
 		} catch (UserInexistException e) {
 			e.printStackTrace();
-			// 为了保证编译能通过
-		}
-		
-		if(marketerVO == null){
-//			TODO djy得不到不是可以直接弄到异常里吗
-				new PopUp("请检查输入内容", "sorry");
+			new PopUp("请检查输入内容", "sorry");
 		}
 		
 		marketerID.setText(marketerVO.userID);
@@ -89,13 +90,20 @@ public class MarketerController {
 		
 		tempMarketerVO.password = password2.getText();
 		
-		ResultMessage message = userBLController.modify(tempMarketerVO);
+		ResultMessage message;
+		try {
+			message = userBLController.modify(tempMarketerVO);
+			
+			new PopUp(message.toString(), "congratulation");	
+
+			modifyPane.setVisible(false);
+			marketerInfoPane.setVisible(true);
+		} catch (InvalidLengthInputException | InvalidInputException | PasswordInputException
+				| UpdateFaiedException e) {
+			e.printStackTrace();
+			new PopUp("密码必须含有一个数字和密码或不能为空", "更改失败");
+		}
 		 		
-		new PopUp(message.toString(), "congratulation");	
-
-
-		modifyPane.setVisible(false);
-		marketerInfoPane.setVisible(true);
 	}
 	/**
 	 * @author 61990
@@ -113,12 +121,28 @@ public class MarketerController {
 	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/12/7
 	 * @添加营销人員信息
-	 * 是否需要待议
 	 */
 	@FXML
 	protected void addMarketer() {
-		//TODO 返回初始的标号和密码
-		// TODO djy 这个方法是添加酒店工作人员还是营销？
-//		营销人员的VO
+		
+		WebMarketerVO webMarketerVO = new WebMarketerVO("","");
+		try {
+			webMarketerVO = (WebMarketerVO) userBLController.add(webMarketerVO, UserType.WEB_MARKETER);
+			pane.setVisible(true);
+			yourID.setText(webMarketerVO.userID);
+			yourPassword.setText(webMarketerVO.password);
+		} catch (ParameterInvalidException e) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * @author 61990
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/7
+	 * @隐藏营销人員信息
+	 */
+	@FXML
+	protected void cancel() {
+		pane.setVisible(false);
 	}
 }

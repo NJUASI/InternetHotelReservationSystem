@@ -10,9 +10,6 @@ import dataHelper.SpecialSpanPromotionDataHelper;
 import dataHelperImpl.AddressDataHelperImpl;
 import dataHelperImpl.HotelFixedPromotionDataHelperImpl;
 import dataHelperImpl.SpecialSpanPromotionDataHelperImpl;
-import dataHelperImpl.stub.AddressDataHelperImpl_Stub;
-import dataHelperImpl.stub.HotelFixedPromotionDataHelperImpl_Stub;
-import dataHelperImpl.stub.SpecialSpanPromotionImplDataHelper_Stub;
 import dataService.promotionDataService.PromotionDataService;
 import po.AddressPO;
 import po.HotelFixedPromotionPO;
@@ -32,9 +29,6 @@ public class PromotionDataServiceImpl extends UnicastRemoteObject implements Pro
 		hotelFixedPromotionDataHelper = new HotelFixedPromotionDataHelperImpl();
 		specialSpanPromotionDataHelper = new SpecialSpanPromotionDataHelperImpl();
 		addressDataHelper = new AddressDataHelperImpl();
-//		hotelFixedPromotionDataHelper = new HotelFixedPromotionDataHelperImpl_Stub();
-//		specialSpanPromotionDataHelper = new SpecialSpanPromotionImplDataHelper_Stub();
-//		addressDataHelper = new AddressDataHelperImpl_Stub();
 	}
 
 

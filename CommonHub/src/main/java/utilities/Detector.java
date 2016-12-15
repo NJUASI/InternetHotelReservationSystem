@@ -113,6 +113,23 @@ public class Detector {
 	/**
 	 * @author Byron Dong
 	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/14
+	 * @param express
+	 *            传入需要检查不合法符号的信用值
+	 * @return boolean 是否符合要求规范
+	 */
+	public boolean chargeDetector(String express) throws InvalidInputException{
+		expression = "[0-9]{1,10}";
+		
+		if(!this.getResultOfDetector(express)){
+			throw new InvalidInputException();
+		}
+		return true;
+	}
+	
+	/**
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/12/6
 	 * @param express
 	 *            传入需要检查不合法符号的表达式

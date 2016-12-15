@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.hotelWorkerUI.controller.PromotionController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="894.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.hotelWorkerUI.controller.PromotionController">
    <children>
       <Pane fx:id="promotion" layoutX="2.0" layoutY="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
          <children>
@@ -68,7 +68,7 @@
                   </TableView>
                   <Button focusTraversable="false" layoutX="265.0" layoutY="524.0" mnemonicParsing="false" onAction="#deleteOne" text="删除" />
                   <Button fx:id="addBt" focusTraversable="false" layoutX="675.0" layoutY="524.0" mnemonicParsing="false" onAction="#addPromotion" text="添加" />
-                  <Pane fx:id="modifyPane" layoutX="614.0" layoutY="510.0" prefHeight="58.0" prefWidth="172.0">
+                  <Pane fx:id="modifyPane" layoutX="614.0" layoutY="510.0" prefHeight="58.0" prefWidth="172.0" visible="false">
                      <children>
                         <Button focusTraversable="false" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#cancelModifyPromotion" text="取消" />
                         <Button focusTraversable="false" layoutX="106.0" layoutY="14.0" mnemonicParsing="false" onAction="#savePromotion" text="保存" />

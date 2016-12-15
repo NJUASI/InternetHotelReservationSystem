@@ -1,6 +1,6 @@
 package dataHelper;
 
-import java.util.Iterator;
+import java.util.List;
 
 /**
  * @Description:提供给dataService获取所有城市，所有星级，所有房间类型的方法
@@ -10,11 +10,12 @@ import java.util.Iterator;
  */
 public interface SourceDataHelper {
 	
-	public Iterator<String> getCities();
+	public List<String> getLevels();
 
-	public Iterator<String> getLevels();
+	public List<String> getRoomTypes();
+	
+	public int getMaxGuestNumEachOrder();
+	
+	public int getMaxRoomNumEachOrder();
 
-	public Iterator<String> getRoomTypes();
-
-	public Iterator<String> getCircles(String city);
 }

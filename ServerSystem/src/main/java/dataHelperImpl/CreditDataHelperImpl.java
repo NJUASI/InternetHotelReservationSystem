@@ -48,7 +48,7 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 	 */
 	@Override
 	public List<CreditPO> getAllCreditDetail(String guestID) {
-		sql = "SELECT * FROM credit WHERE credit.guestID = ?";
+		sql = "select * from credit where guestID = ?";
 		final List<CreditPO> result = new ArrayList<CreditPO>();
 
 		try {
@@ -57,14 +57,20 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
+				
 				final CreditPO creditPO = new CreditPO();
 				creditPO.setGuestID(guestID);
 				creditPO.setTime(rs.getTimestamp(2).toLocalDateTime()); //此处硬编码2-6对应表项中元素的位置，已确定
-				creditPO.setOrderID(String.valueOf(rs.getObject(3)));
+				if(String.valueOf(rs.getObject(3)).equals("0")) {
+					creditPO.setOrderID("");
+				}else {
+					creditPO.setOrderID(String.valueOf(rs.getObject(3)));					
+				}
+				
 				creditPO.setPreCredit(rs.getDouble(4));
-				creditPO.setCredit(rs.getDouble(5));
+				creditPO.setAfterCredit(rs.getDouble(5));
 				creditPO.setCreditRecord(CreditRecord.getEnum(rs.getString(6)));
-
+				
 				result.add(creditPO);
 			}
 		} catch (SQLException e) {
@@ -83,18 +89,22 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 	 */
 	@Override
 	public ResultMessage addCredit(CreditPO creditPO) {
-		sql = "INSERT INTO credit(credit.guestID,credit.orderID,credit.time,"
-				+ "credit.previousCredit,credit.afterCredit,credit.reason) "
-				+ "VALUES(?,?,?,?,?,?)";
+		sql = "insert into credit(guestID,orderID,time,"
+				+ "previousCredit,afterCredit,reason) "
+				+ "values(?,?,?,?,?,?)";
 
 		try {
 
 			ps = conn.prepareStatement(sql);
 			ps.setObject(1, creditPO.getGuestID()); //此处硬编码1-6对应语句中元素的位置，已确定
-			ps.setObject(2, creditPO.getOrderID());
+			if(creditPO.getOrderID().equals("")) {
+				ps.setObject(2, "0");
+			} else {
+				ps.setObject(2, creditPO.getOrderID());				
+			}
 			ps.setObject(3, creditPO.getTime());
 			ps.setDouble(4, creditPO.getPreCredit()); 
-			ps.setDouble(5, creditPO.getCredit());
+			ps.setDouble(5, creditPO.getAfterCredit());
 			ps.setObject(6, creditPO.getCreditRecord().getChineseCreditRecord());
 
 			ps.execute();
@@ -107,7 +117,7 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 
 	@Override
 	public List<CreditPO> getCreditOfOneOrder(String orderID) {
-		sql = "SELECT * FROM credit WHERE credit.guestID = ?";
+		sql = "select * from credit where guestID = ?";
 		final List<CreditPO> result = new ArrayList<CreditPO>();
 
 		try {
@@ -121,7 +131,7 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 				creditPO.setTime(rs.getTimestamp(2).toLocalDateTime()); //此处硬编码2-6对应表项中元素的位置，已确定
 				creditPO.setOrderID(String.valueOf(rs.getObject(3)));
 				creditPO.setPreCredit(rs.getDouble(4));
-				creditPO.setCredit(rs.getDouble(5));
+				creditPO.setAfterCredit(rs.getDouble(5));
 				creditPO.setCreditRecord(CreditRecord.getEnum(rs.getString(6)));
 
 				result.add(creditPO);

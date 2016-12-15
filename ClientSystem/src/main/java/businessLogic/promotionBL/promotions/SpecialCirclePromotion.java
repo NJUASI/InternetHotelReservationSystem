@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import businessLogic.hotelBL.MockHotel;
-import businessLogic.memberBL.MockMember;
+import businessLogic.hotelBL.hotel.Hotel;
+import businessLogic.memberBL.Member;
 import dataService.promotionDataService.PromotionDataService;
-import dataService.promotionDataService.PromotionDataService_Stub;
+import exception.verificationException.UserInexistException;
 import po.AddressPO;
 import rmi.ClientRemoteHelper;
 import utilities.Address;
@@ -28,11 +28,6 @@ public class SpecialCirclePromotion {
 
 	public SpecialCirclePromotion() {
 		promotionDataService = ClientRemoteHelper.getInstance().getPromotionDataService();
-//		try {
-//			promotionDataService = new PromotionDataService_Stub();
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//		}
 	}
 	
 	/**
@@ -45,7 +40,7 @@ public class SpecialCirclePromotion {
 	 */
 	public Iterator<AddressVO> getSpecialCirclePromoitons(String city){
 		initSpecialCirclePromotions(city);
-		return convertPOListToVOListIterator(specialCirclePromotions);
+		return convertPOListToVOIterator(specialCirclePromotions);
 	}
 	
 	/**
@@ -75,8 +70,7 @@ public class SpecialCirclePromotion {
 	 */
 	public double getDiscount(String guestID,String hotelID){
 		if(isVIP(guestID)){
-			//TODO 龚尘淼：mock，修改实现
-			Address hotelAddress = new MockHotel().getHotelAddress(hotelID);
+			Address hotelAddress = new Hotel().getHotelAddress(hotelID);
 			String city = hotelAddress.city;
 			String cycle = hotelAddress.circle;
 			try {
@@ -88,12 +82,33 @@ public class SpecialCirclePromotion {
 		return 1;
 	}
 		
+	/**
+	 * @Description:判断是否是普通会员
+	 * @param guestID
+	 * @return
+	 * boolean
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 上午11:57:14
+	 */
 	private boolean isVIP(String guestID){
-		//TODO 龚尘淼：mock，修改实现
-		return new MockMember().isMember(guestID, MemberType.COMMON);
+		try {
+			return new Member().isMember(guestID, MemberType.COMMON);
+		} catch (UserInexistException e) {
+			return false;
+		}
 	}
 	
-	private Iterator<AddressVO> convertPOListToVOListIterator(List<AddressPO> POList){
+	/**
+	 * @Description:将poList转化为vo的iterator
+	 * @param POList
+	 * @return
+	 * Iterator<AddressVO>
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 上午11:57:34
+	 */
+	private Iterator<AddressVO> convertPOListToVOIterator(List<AddressPO> POList){
 		List<AddressVO> specialCirclePromotionVOList = new ArrayList<AddressVO>();
 		for(AddressPO specialCirclePromotion: POList){
 			specialCirclePromotionVOList.add(new AddressVO(specialCirclePromotion));
@@ -101,11 +116,39 @@ public class SpecialCirclePromotion {
 		return specialCirclePromotionVOList.iterator();
 	}
 	
+	/**
+	 * @Description:根据city获取该城市的所有vip特定商圈的策略
+	 * @param city
+	 * void
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 上午11:58:08
+	 */
 	private void initSpecialCirclePromotions(String city) {
 		try {
 			specialCirclePromotions = promotionDataService.getSpecialCirclePromotion(city);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * @Description:根据城市、商圈获取该特定商圈的折扣
+	 * @param city
+	 * @param newCircle
+	 * @return
+	 * double
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 上午11:58:44
+	 */
+	public double getSpecialCirclePromoiton(String city, String newCircle) {
+		initSpecialCirclePromotions(city);
+		for(AddressPO po : specialCirclePromotions){
+			if(po.getCircle().equals(newCircle)){
+				return po.getDiscout();
+			}
+		}
+		return 1;
 	}
 }

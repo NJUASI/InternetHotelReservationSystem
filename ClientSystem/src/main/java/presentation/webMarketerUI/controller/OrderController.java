@@ -1,14 +1,10 @@
 package presentation.webMarketerUI.controller;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
 import businessLogic.orderBL.OrderBLController;
-import businessLogic.userBL.userService.Guest;
-import businessLogic.userBL.userService.service.GuestCreditService;
-import businessLogic.userBL.userService.service.UserService;
 import businessLogicService.orderBLService.OrderBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,7 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import presentation.PopUp.PopUp;
 import presentation.Table.OrderTable;
-import utilities.IDReserve;
 import utilities.enums.OrderState;
 import utilities.enums.ResultMessage;
 import vo.OrderGeneralVO;
@@ -110,20 +105,24 @@ public class OrderController {
 	 */
 	@FXML
 	protected void searchOneOrder() {
+		
+	try{
+		orderID = searchID.getText();
+		orderVO = orderBLController.getOrderDetail(orderID);
+		initOrderDetail(orderVO);
 		back1.setVisible(false);
 		back2.setVisible(true);
 		orderDetail.setVisible(true);
 		searchPane.setVisible(false);
-	
-		orderID = searchID.getText();
-		orderVO = orderBLController.getOrderDetail(orderID);
-		initOrderDetail(orderVO);
-		
 		if (orderVO.orderGeneralVO.state == OrderState.ABNORMAL) {
 			cancelOrderPane.setDisable(false);
 		} else {
 			cancelOrderPane.setDisable(true);
 		}
+		}catch (Exception e) {
+		// TODO: handle exception
+	}
+		
 	}
 
 	/**
@@ -143,6 +142,8 @@ public class OrderController {
 			percent = 1.0;
 		}
 		undoAbnormalOrder(orderID, percent);
+		OrderDetail();
+		searchAbnormalOrder();
 	}
 	
 	/**
@@ -154,8 +155,7 @@ public class OrderController {
 	 */
 	@FXML
 	protected void searchDateOrder() {
-		orderCheck.setVisible(true);
-		searchPane.setVisible(false);
+		
 		
 //		LocalDate date = searchDate.getValue();
 //		List<OrderGeneralVO> abnormalOrderGenerals = orderBLController.getAllAbnormalOrderGeneral(date);
@@ -166,13 +166,18 @@ public class OrderController {
 //		
 //		//TODO 冯俊杰：按时间排序
 //		initOrderCheck(orderGenerals);
-		
+		try{
 		LocalDate date = searchDate.getValue();
 		
 		orderGenerals = orderBLController.getAllAbnormalOrderGeneral(date);
 		initOrderCheck(orderGenerals);
-		
+		orderCheck.setVisible(true);
+		searchPane.setVisible(false);
 		cancelOrderPaneInCheck.setDisable(false);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 
 	/**
@@ -259,6 +264,7 @@ public class OrderController {
 		}
 
 		undoAbnormalOrder(orderID, percent);
+		searchAbnormalOrder();
 	}
 	/**
 	 * @author 61990
@@ -271,7 +277,7 @@ public class OrderController {
 		detail_ID.setText(orderVO.orderGeneralVO.hotelID);
 		detail_Hotel.setText(orderVO.orderGeneralVO.hotelName);
 		detail_address.setText(orderVO.orderGeneralVO.hotelAddress);
-		detail_roomType.setText(orderVO.roomType.toString());
+		detail_roomType.setText(orderVO.roomType.getChineseRoomType());
 		detail_roomNum.setText(orderVO.roomNumCount + "");
 		detail_personNum.setText(orderVO.expectGuestNumCount + "");
 		detail_personName.setText(orderVO.orderGeneralVO.name);
@@ -280,7 +286,7 @@ public class OrderController {
 		detail_expectTime.setText(orderVO.orderGeneralVO.expectExecuteTime.toString());
 		detail_expectLeaveTime.setText(orderVO.orderGeneralVO.expectLeaveTime.toString());
 		detail_price.setText(Double.toString(orderVO.orderGeneralVO.price));
-		detail_state.setText(orderVO.orderGeneralVO.state.toString());
+		detail_state.setText(orderVO.orderGeneralVO.state.getChineseOrderState());
 		detail_message.setText(orderVO.message);
 	}
 	/**
@@ -295,7 +301,7 @@ public class OrderController {
 		List<OrderTable> orderList = new LinkedList<OrderTable>();
 		for (int i = 0; i < orderGenerals.size(); i++) {
 			OrderGeneralVO temp = orderGenerals.get(i);
-			orderList.add(new OrderTable(temp.orderID ,temp.guestID,temp.name,temp.phone, temp.hotelName,temp.hotelAddress,	temp.expectExecuteTime.toString(),temp.expectLeaveTime.toString(),temp.price + "", temp.state.toString()));
+			orderList.add(new OrderTable(temp.orderID ,temp.guestID,temp.name,temp.phone, temp.hotelName,temp.hotelAddress,	temp.expectExecuteTime.toString(),temp.expectLeaveTime.toString(),temp.price + "", temp.state.getChineseOrderState()));
 					
 		}
 
@@ -327,7 +333,7 @@ public class OrderController {
 	 */
 	private void undoAbnormalOrder(String orderID, double percent) {
 		ResultMessage result = orderBLController.undoAbnormalOrder(orderID, percent);
-		
+
 		if (result == ResultMessage.SUCCESS) {
 			new PopUp("撤销成功", "congratulation");	
 			

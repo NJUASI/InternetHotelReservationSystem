@@ -20,7 +20,7 @@ public class OrderVO {
 	public OrderGeneralVO orderGeneralVO;
 	
 	//	原价
-	public double previousPrice;
+	public int previousPrice;
 	
 	//	订单生成时间(create时无)
 	public LocalDateTime createTime;
@@ -60,7 +60,7 @@ public class OrderVO {
 	 * updateTime 2016/12/5
 	 */
 	public OrderVO(String orderID, String guestID, String hotelID, String hotelName, String hotelAddress, 
-			double previousPrice, double price, LocalDateTime createTime, LocalDateTime checkInTime,
+			int previousPrice, int price, LocalDateTime createTime, LocalDateTime checkInTime,
 			LocalDateTime checkOutTime, LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime, 
 			OrderState state, boolean hasCommented, RoomType roomType, int roomNumCount, String roomNumber, 
 			int expectGuestNumCount, String name, String phone, String message, double score, String comment) {
@@ -87,7 +87,7 @@ public class OrderVO {
 	 * lastChangedBy charles
 	 * updateTime 2016/12/5
 	 */
-	public OrderVO(OrderGeneralVO orderGeneralVO, double previousPrice, LocalDateTime createTime, 
+	public OrderVO(OrderGeneralVO orderGeneralVO, int previousPrice, LocalDateTime createTime, 
 			LocalDateTime checkInTime, LocalDateTime checkOutTime, RoomType roomType, int roomNumCount, 
 			String roomNumber, int expectGuestNumCount, String message, double score, String comment) {
 		super();
@@ -115,7 +115,7 @@ public class OrderVO {
 	 * 因为订单的创建时间、入住时间、退房时间、房间号还未生成，不能从界面层直接得到，客户还未进行评论（评分、评价）
 	 * 所以order create的时候，提供一个专门的构造器
 	 */
-	public OrderVO (OrderGeneralVO orderGeneralVO, double previousPrice, RoomType roomType,
+	public OrderVO (OrderGeneralVO orderGeneralVO, int previousPrice, RoomType roomType,
 			int roomNumCount, int expectGuestNumCount, String message) {
 		this.orderGeneralVO = orderGeneralVO;
 		
@@ -141,7 +141,7 @@ public class OrderVO {
 	 * 
 	 * 便于界面监听getTempPrice()
 	 */
-	public OrderVO(OrderGeneralVO orderGeneralVO, double previousPrice, RoomType roomType,
+	public OrderVO(OrderGeneralVO orderGeneralVO, int previousPrice, RoomType roomType,
 			int roomNumCount) {
 		this.orderGeneralVO = orderGeneralVO;
 		

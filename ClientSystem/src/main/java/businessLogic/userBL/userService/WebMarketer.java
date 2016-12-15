@@ -6,11 +6,12 @@ import java.util.List;
 
 import businessLogic.userBL.userService.service.UserService;
 import dataService.webMarketerDataService.WebMarketerDataService;
-import dataService.webMarketerDataService.WebMarketerDataService_Stub;
+import exception.inputException.PasswordInputException;
 import exception.verificationException.UserInexistException;
 import po.WebMarketerPO;
 import rmi.ClientRemoteHelper;
 import utilities.Ciphertext;
+import utilities.Detector;
 import utilities.enums.ResultMessage;
 import vo.UserVO;
 import vo.WebMarketerVO;
@@ -66,17 +67,14 @@ public class WebMarketer implements UserService {
 	 * @param newUserVO
 	 *            从userDoMain传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功修改网站营销人员信息
+	 * @throws PasswordInputException 
 	 */
-	public ResultMessage modify(UserVO userVO) {
+	public ResultMessage modify(UserVO userVO) throws PasswordInputException {
 
-		//TODO 董金玉：USER_INFO_UPDATE_FAILURE
 		ResultMessage msg = ResultMessage.FAIL;
 
-		if (!this.hasWebMarketer(userVO.userID)) {
-			return msg;
-		} // 不存在ID对应项
-
 		try {
+			this.infoDetector(userVO);
 			WebMarketerPO webMarketerPO = this.convert(userVO);
 			msg = webMarketerDataService.modify(webMarketerPO);
 		} catch (RemoteException e) {
@@ -97,7 +95,12 @@ public class WebMarketer implements UserService {
 	public UserVO getSingle(String userID) throws UserInexistException {
 
 		try {
-			return this.convert(webMarketerDataService.getSingleWebMarketer(userID));
+			UserVO tempUserVO = this.convert(webMarketerDataService.getSingleWebMarketer(userID));
+		
+			if(tempUserVO==null){
+				throw new UserInexistException();
+			}
+			return tempUserVO;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -188,15 +191,11 @@ public class WebMarketer implements UserService {
 		return result;
 	}
 
-	private boolean hasWebMarketer(String webMarketerID) {
+	private boolean infoDetector(UserVO userVO) throws PasswordInputException{
+		Detector detector = new Detector();
+		WebMarketerVO webMarketerVO = (WebMarketerVO)userVO;
+		detector.passwordDetector(webMarketerVO.password);
 		
-		try {
-			UserVO webMarketerVO = this.getSingle(webMarketerID);
-		} catch (UserInexistException e) {
-			e.printStackTrace();
-			return false;
-		}
-
 		return true;
 	}
 

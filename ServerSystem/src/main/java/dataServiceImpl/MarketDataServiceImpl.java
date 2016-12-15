@@ -6,7 +6,6 @@ import java.util.List;
 
 import dataHelper.MarketDataHelper;
 import dataHelperImpl.MarketDataHelperImpl;
-import dataHelperImpl.stub.MarketDataHelperImpl_Stub;
 import dataService.marketDataService.MarketDataService;
 import po.MarketPO;
 import utilities.enums.ResultMessage;
@@ -29,7 +28,6 @@ public class MarketDataServiceImpl extends UnicastRemoteObject implements Market
 	 */
 	public MarketDataServiceImpl() throws RemoteException {
 		marketHelper = new MarketDataHelperImpl();
-//		marketHelper = new MarketDataHelperImpl_Stub();
 	}
 
 	/**

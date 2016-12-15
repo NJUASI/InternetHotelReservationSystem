@@ -5,7 +5,6 @@ import java.rmi.RemoteException;
 import businessLogic.userBL.userService.Guest;
 import businessLogicService.memberBLService.MemberBLService;
 import dataService.guestDataService.GuestDataService;
-import dataService.guestDataService.GuestDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.MemberPO;
 import rmi.ClientRemoteHelper;
@@ -16,8 +15,8 @@ import vo.MemberVO;
 
 /**
  * 
- * @author 董金玉
- * lastChangedBy 董金玉
+ * @author Byron Dong
+ * lastChangedBy Byron Dong
  * updateTime 2016/11/27
  *
  */
@@ -29,8 +28,8 @@ public class Member implements MemberBLService{
 	private MemberInfo member;
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * 构造函数，初始化成员变量
 	 */
@@ -45,30 +44,32 @@ public class Member implements MemberBLService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param memberVO 从客户界面层传下来的MemberInfo载体
 	 * @return 客户是否成功添加会员信息
+	 * @throws UserInexistException 
 	 */
-	public ResultMessage add(MemberVO memberVO) {
+	public ResultMessage add(MemberVO memberVO) throws UserInexistException {
 		return this.addMemberInfo(memberVO);
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param memberVO 从客户界面层传下来的MemberInfo载体
 	 * @return 客户是否成功修改会员信息
+	 * @throws UserInexistException 
 	 */
-	public ResultMessage modify(MemberVO memberVO) {
+	public ResultMessage modify(MemberVO memberVO) throws UserInexistException {
 		return addMemberInfo(memberVO);
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param userID，memberType 从客户界面层传下来的用户ID和需要获取指定会员类型信息
 	 * @return memberVO MemberInfo载体
@@ -88,8 +89,8 @@ public class Member implements MemberBLService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param userID，memberType 从客户界面层传下来的用户ID和需要获取指定会员类型信息
 	 * @return boolean 该用户是否为指定会员类型
@@ -119,8 +120,8 @@ public class Member implements MemberBLService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param userID 从客户界面层传下来的用户ID
 	 * @return MemberType 指定用户的会员类型
@@ -142,20 +143,23 @@ public class Member implements MemberBLService{
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/27
 	 * @param memberVO 来自本类的member信息载体 
 	 * @return ResultMessage 添加会员信息是否成功
+	 * @throws UserInexistException 
 	 */
-	private ResultMessage addMemberInfo(MemberVO memberVO) {
+	private ResultMessage addMemberInfo(MemberVO memberVO) throws UserInexistException {
 
-		if(!this.isQualified(memberVO.guestID)){
-			return ResultMessage.FAIL;
-		}
+//		if(!this.isQualified(memberVO.guestID)){
+//			return ResultMessage.FAIL;
+//		}
 
 		try {
 			MemberPO memberPO = new MemberPO(memberVO);
+			System.out.println(memberVO.enterprise);
+			//TODO 高源 此处打印了输入企业名称，我得到的结果空字符串，你看一下
 			return guestDataService.modifyMember(memberPO);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -163,11 +167,11 @@ public class Member implements MemberBLService{
 		}
 	}
 
-	private boolean isQualified(String userID){
+	private boolean isQualified(String userID) throws UserInexistException{
 		Guest tempGuest = new Guest();
-		if(!tempGuest.isGuest(userID.length())||!tempGuest.hasGuest(userID)){
-			return false;
-		}
+		if(!tempGuest.isGuest(userID.length())){return false;}
+		tempGuest.hasGuest(userID);
 		return true;
 	}
+	
 }

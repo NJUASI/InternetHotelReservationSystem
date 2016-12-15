@@ -83,11 +83,11 @@ public class CreditPO implements Serializable{
 		this.previousCredit = previousCredit;
 	}
 
-	public double getCredit() {
+	public double getAfterCredit() {
 		return afterCredit;
 	}
 
-	public void setCredit(double credit) {
+	public void setAfterCredit(double credit) {
 		this.afterCredit = credit;
 	}
 

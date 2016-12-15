@@ -2,7 +2,6 @@ package dataHelperImpl;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
@@ -18,58 +17,64 @@ import dataHelper.SourceDataHelper;
 public class SourceDataHelperImpl implements SourceDataHelper {
 	
 	/**
-	 * @Description:读取资源文件里的所有城市
-	 * @return 
-	 * Iterator<String>
-	 * @author: Harvey Gong
-	 * @lastChangedBy: Harvey Gong
-	 * @time:2016年12月8日 下午1:06:28
-	 */
-	@Override
-	public Iterator<String> getCities() {
-		return getSources("city");
-	}
-
-	/**
-	 * @Description:TODO gcm
+	 * @Description:获取系统支持酒店星级
 	 * @return
-	 * Iterator<String>
+	 * List<String>
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月8日 下午1:07:01
 	 */
 	@Override
-	public Iterator<String> getLevels() {
+	public List<String> getLevels() {
 		return getSources("level");
 	}
 
 	/**
 	 * @Description:获取系统支持的所有酒店客房类型
 	 * @return
-	 * Iterator<String>
+	 * List<String>
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月8日 下午1:10:44
 	 */
 	@Override
-	public Iterator<String> getRoomTypes() {
+	public List<String> getRoomTypes() {
 		return getSources("roomType");
 	}
 	
 	/**
-	 * @Description:根据传入的城市，到相应的资源文件中去找该城市的所有商圈
-	 * @param city
+	 * @Description:获取系统允许的每一订单的最大人数
 	 * @return
+	 * int
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
-	 * @time:2016年12月8日 下午1:16:27
+	 * @time:2016年12月13日 下午6:46:25
 	 */
-	@Override
-	public Iterator<String> getCircles(String city) {
-		return getSources("circle/"+city);
+	public int getMaxGuestNumEachOrder(){
+		return getMaxNum().get(0);
 	}
 	
-	private Iterator<String> getSources(String sourceName){
+	/**
+	 * @Description:获取系统允许的每一订单的最大房间数
+	 * @return
+	 * int
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月13日 下午6:46:59
+	 */
+	public int getMaxRoomNumEachOrder(){
+		return getMaxNum().get(1);
+	}
+	
+	private List<Integer> getMaxNum(){
+		List<Integer> list = new ArrayList<Integer>();
+		for(String string: getSources("maxNum")){
+			list.add(Integer.valueOf(string));
+		}
+		return list;
+	}
+	
+	private List<String> getSources(String sourceName){
 		Properties source = new Properties();
 		List<String> values = new ArrayList<String>();
 		try {
@@ -80,7 +85,7 @@ public class SourceDataHelperImpl implements SourceDataHelper {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return values.iterator();
+		return values;
 	}
 
 }

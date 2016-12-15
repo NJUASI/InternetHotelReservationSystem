@@ -9,7 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import rmi.ClientRemoteHelper;
 
 
 
@@ -19,7 +18,7 @@ import rmi.ClientRemoteHelper;
  */
 
 public class Main extends Application {
-	public static String userID;
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990

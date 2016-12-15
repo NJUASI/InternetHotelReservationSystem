@@ -1,12 +1,17 @@
 package presentation.guestUI.controller;
 
+import businessLogic.marketBL.MarketController;
 import businessLogic.memberBL.MemberController;
+import businessLogicService.marketBLService.MarketBLService;
 import businessLogicService.memberBLService.MemberBLService;
+import exception.verificationException.MemberInexistException;
+import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import presentation.PopUp.PopUp;
 import utilities.IDReserve;
 import vo.MarketVO;
 import vo.MemberVO;
@@ -22,49 +27,56 @@ public class MemberCheckController {
 	MarketVO marketVO;
 	@FXML
 	private Pane memberCheck;
-	
+
 	@FXML
 	private Pane memberModify;
 
 	@FXML
 	private Label enterprise, market, market2, birthday;
-	
-	private MemberBLService  memberBLController = MemberController.getInstance();
+
+	private MemberBLService memberBLController = MemberController.getInstance();
+
+	private MarketBLService marketBLController = MarketController.getInstance();
 
 	/**
 	 * @author 61990
 	 * @lastChangedBy Byron Dong
-	 * @updateTime 2016/12/7
-	 * 构造函数，初始化成员变量
+	 * @updateTime 2016/12/11构造函数，初始化成员变量
 	 */
 	@FXML
 	private void initialize() {
+		String levelName = null;
 		try {
-			
-			memberVO=memberBLController.getMemberInfo(IDReserve.getInstance().getUserID());
-			
-			marketVO = new MarketVO("LV4", 0, 0);
-			// TODO 认领一下 获取客户等级
-			enterprise.setText(memberVO.enterprise);
-			if(memberVO.enterprise!=null){
-			market.setText(marketVO.marketName);
-			}
-			birthday.setText(memberVO.birthday.toString());
-			
-			if(memberVO.birthday!=null){
-			market2.setText(marketVO.marketName);
-			}
-			
-		} catch (Exception e) {
-			// TODO: handle exception
+			levelName = marketBLController.getLevelName(IDReserve.getInstance().getUserID());
+			marketVO = new MarketVO(levelName, 0, 0);
+		} catch (MemberInexistException e) {
+			marketVO = new MarketVO("Lv0", 0, 0);
+		} catch (UserInexistException e) {
+			e.printStackTrace();
 		}
-		
+
+		try {
+			memberVO = memberBLController.getMemberInfo(IDReserve.getInstance().getUserID());
+
+			if (memberVO.enterprise != null) {
+				enterprise.setText(memberVO.enterprise);
+				market.setText(marketVO.marketName);
+			}
+
+			if (memberVO.birthday != null) {
+				birthday.setText(memberVO.birthday.toString());
+				market2.setText(marketVO.marketName);
+			}
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	// 注册界面
 	@FXML
 	private Pane commonPane;
-	
+
 	@FXML
 	private Pane enterprisePane;
 
@@ -78,20 +90,26 @@ public class MemberCheckController {
 	protected void register() {
 		memberCheck.setVisible(false);
 		memberModify.setVisible(true);
-		if (birthday.getText()!=null) {
+
+		if (birthday.getText() != "") {
 			commonPane.setDisable(true);
 			birthdayPicker.setValue(memberVO.birthday);
+		} else {
+			commonPane.setDisable(false);
 		}
-		if (enterprise.getText()!=null) {
+		if (enterprise.getText() != "") {
 			enterprisePane.setDisable(true);
 			enterpriseText.setText(memberVO.enterprise);
+		} else {
+			enterprisePane.setDisable(false);
 		}
 	}
+
 	@FXML
 	private TextField enterpriseText;
-	@FXML 
+	@FXML
 	private DatePicker birthdayPicker;
-	
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy Byron Dong
@@ -100,11 +118,16 @@ public class MemberCheckController {
 	 */
 	@FXML
 	protected void registerEnterprise() {
-		
-		MemberVO tempMemberVO = memberVO;
-		tempMemberVO.enterprise = enterprise.getText();
-		memberBLController.add(tempMemberVO);
-		initialize();
+		try {
+
+			MemberVO tempMemberVO = memberVO;
+			tempMemberVO.enterprise = enterprise.getText();
+			memberBLController.add(tempMemberVO);
+			//TODO 高源 此处开始获取了界面的内容，往下传
+			initialize();
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -115,11 +138,15 @@ public class MemberCheckController {
 	 */
 	@FXML
 	protected void registerCommon() {
-		
-		MemberVO tempMemberVO = memberVO;
-		tempMemberVO.birthday = birthdayPicker.getValue();
-		memberBLController.add(tempMemberVO);
-		initialize();
+
+		try {
+			MemberVO tempMemberVO = memberVO;
+			tempMemberVO.birthday = birthdayPicker.getValue();
+			memberBLController.add(tempMemberVO);
+			initialize();
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

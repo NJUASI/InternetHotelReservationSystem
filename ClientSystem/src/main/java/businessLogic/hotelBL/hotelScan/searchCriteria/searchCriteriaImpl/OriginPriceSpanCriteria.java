@@ -26,10 +26,12 @@ public class OriginPriceSpanCriteria implements SearchCriteria {
 	 */
 	@Override
 	public List<HotelVO> meetCriteria(List<HotelVO> hotelVOList) {
-		for(int i = 0;i<hotelVOList.size();i++){
+		for(int i = 0;i<hotelVOList.size();){
 			if(notInPriceSpan(hotelVOList.get(i).minPrice)){
 				hotelVOList.remove(i);
+				continue;
 			}
+			i++;
 		}
 		return hotelVOList;
 	}

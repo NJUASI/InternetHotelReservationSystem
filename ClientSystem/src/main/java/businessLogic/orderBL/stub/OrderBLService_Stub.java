@@ -17,6 +17,7 @@ import vo.GuestEvaluationVO;
 import vo.HotelEvaluationVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
+import vo.PreOrderVO;
 
 /**
  * 
@@ -456,14 +457,35 @@ public class OrderBLService_Stub implements OrderBLService {
 
 	@Override
 	public Iterator<OrderGeneralVO> getAllOrderGenerals(String userID, UserType userType) {
-		// TODO Auto-generated method stub
-		return null;
+		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.EXECUTED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.UNEXECUTED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.ABNORMAL, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.CANCELLED, false, "zhangsan","13554321234"));
+		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+				OrderState.EXECUTED, true, "zhangsan","13554321234"));
+		return orderGenerals.iterator();
 	}
 
 	@Override
 	public Iterator<OrderGeneralVO> getSpecialOrderGenerals(String userID, UserType userType, OrderState orderState) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int getCalculatedPrice(PreOrderVO preOrderVO) {
+		// TODO 自动生成的方法存根
+		return 0;
 	}
 
 }

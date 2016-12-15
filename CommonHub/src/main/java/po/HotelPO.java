@@ -80,6 +80,7 @@ public final class HotelPO implements Serializable{
 		this.introduction = hotelVO.introduction;
 		this.equipment = hotelVO.equipment;
 		this.commentsNum = hotelVO.commentsNum;
+		this.address = hotelVO.address;
 	}
 
 	public HotelPO() {

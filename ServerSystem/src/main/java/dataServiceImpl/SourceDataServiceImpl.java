@@ -2,7 +2,7 @@ package dataServiceImpl;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Iterator;
+import java.util.List;
 
 import dataHelper.AddressDataHelper;
 import dataHelper.SourceDataHelper;
@@ -23,23 +23,33 @@ public class SourceDataServiceImpl extends UnicastRemoteObject implements Source
 	}
 	
 	@Override
-	public Iterator<String> getCities() throws RemoteException {
-		return sourceDataHelper.getCities();
+	public List<String> getCities() throws RemoteException {
+		return addressDataHelper.getCity();
 	}
 	
 	@Override
-	public Iterator<String> getCircles(String city) throws RemoteException {
-		return sourceDataHelper.getCircles(city);
+	public List<String> getCircles(String city) throws RemoteException {
+		return addressDataHelper.getCircle(city);
 	}
 
 	@Override
-	public Iterator<String> getLevels() throws RemoteException{
+	public List<String> getLevels() throws RemoteException{
 		return sourceDataHelper.getLevels();
 	}
 
 	@Override
-	public Iterator<String> getRoomTypes() throws RemoteException{
+	public List<String> getRoomTypes() throws RemoteException{
 		return sourceDataHelper.getRoomTypes();
+	}
+
+	@Override
+	public int getMaxGuestNumEachOrder() {
+		return sourceDataHelper.getMaxGuestNumEachOrder();
+	}
+
+	@Override
+	public int getMaxRoomNumEachOrder() {
+		return sourceDataHelper.getMaxRoomNumEachOrder();
 	}
 
 }

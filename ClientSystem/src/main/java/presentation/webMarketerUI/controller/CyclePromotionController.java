@@ -51,6 +51,7 @@ public class CyclePromotionController {
 	private void initialize() {
 		cityInput.setOnShowing(new CityShowingHandler());
 		cityInput.valueProperty().addListener(new CityChangedListener());
+		cycleInput.valueProperty().addListener(new CycleChangedListener());
 	}
 	
 	class CityShowingHandler implements EventHandler<Event>{
@@ -74,6 +75,15 @@ public class CyclePromotionController {
 				cycleInput.getItems().add(circles.next());
 			}
 			cycleInput.setValue(cycleInput.getItems().get(0));
+			searchInfo();
+		}
+	}
+	
+	class CycleChangedListener implements ChangeListener<String> {
+		@Override
+		public void changed(ObservableValue<? extends String> arg0, String preCircle, String newCircle) {
+			//当切换商圈时，修改下面的折扣显示
+			cycleDiscount.setText(String.valueOf(promotionBLController.getSpecialCirclePromotion(cityInput.getValue(),newCircle)));
 		}
 	}
 	
@@ -100,7 +110,6 @@ public class CyclePromotionController {
 	 * @lastChangedBy Harvey
 	 * @updateTime 2016/12/7
 	 */
-	@FXML
 	protected void searchInfo() {
 		//根据获取到selectedCity，然后调用promotion接口获取特定商圈折扣
 		String selectedCity = cityInput.getValue();
@@ -143,6 +152,7 @@ public class CyclePromotionController {
 		
 		//调用promotionController的更新特定商圈策略的方法
 		promotionBLController.updateSpecialCirclePromotions(addressVO);
+		searchInfo();
 	}
 }
 

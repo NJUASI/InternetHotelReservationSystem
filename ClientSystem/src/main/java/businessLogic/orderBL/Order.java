@@ -7,28 +7,24 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.hotelBL.HotelInfoOperation;
-import businessLogic.hotelBL.MockHotel;
+import businessLogic.promotionBL.DiscountCalculator;
 import businessLogic.promotionBL.DiscountInSpan;
-import businessLogic.promotionBL.MockPromotion;
 import dataService.orderDataService.OrderDataService;
-import dataService.orderDataService.OrderDataService_Stub;
 import exception.verificationException.UserInexistException;
 import po.CheckInPO;
 import po.CheckOutPO;
-import po.GuestEvaluationPO;
 import po.HotelEvaluationPO;
 import po.OrderGeneralPO;
 import po.OrderPO;
 import rmi.ClientRemoteHelper;
-import utilities.PreOrder;
 import utilities.enums.OrderState;
 import utilities.enums.ResultMessage;
 import vo.CheckInVO;
 import vo.CheckOutVO;
-import vo.GuestEvaluationVO;
 import vo.HotelEvaluationVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
+import vo.PreOrderVO;
 
 /**
  * 
@@ -52,16 +48,7 @@ public class Order {
 	 */
 	public Order() {
 		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
-		
-//		try {
-//			orderDataService = new OrderDataService_Stub();
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//		}
-		
-		
-		discountCalculator = new MockPromotion();
-		//hotel的协作类需要hotelID，故在此不能初始化
+		discountCalculator = new DiscountCalculator();
 	}
 
 	/**
@@ -72,10 +59,10 @@ public class Order {
 	 * @param orderVO 从客户界面层传下来的Order载体
 	 * @return 若客户创建此订单，需要付的款项
 	 */
-	public double getTempPrice(OrderVO orderVO) {
+	public int getTempPrice(OrderVO orderVO) {
 		Iterator<Double> discountsInSpan = null;
 		try {
-			discountsInSpan = discountCalculator.getDiscountInSpan(new PreOrder(orderVO));
+			discountsInSpan = discountCalculator.getDiscountInSpan(new PreOrderVO(orderVO));
 		} catch (UserInexistException e) {
 			e.printStackTrace();
 		}
@@ -84,7 +71,7 @@ public class Order {
 		while(discountsInSpan.hasNext()) {
 			result += prePrice * discountsInSpan.next();
 		}
-		return result;
+		return (int)result;
 	}
 	
 	/**
@@ -524,36 +511,6 @@ public class Order {
 	
 	/**
 	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/2
-	 * @param evaluationVO 客户评价单个订单时产生的订单
-	 * @return 客户是否成功评价该订单
-	 */
-	public ResultMessage addEvaluation(GuestEvaluationVO evaluationVO) {
-		ResultMessage msg1 = ResultMessage.FAIL;
-		
-		ResultMessage msg2 = ResultMessage.FAIL;
-		try {
-			msg1 = orderDataService.addEvaluation(new GuestEvaluationPO(evaluationVO));
-			/*
-			 * ！！！！！！！！！！！！MockHotel初始化！！！！！！！！！！！！！
-			 */
-			hotelInterface = new MockHotel(orderDataService.getOrderDetail(evaluationVO.orderID).getHotelID());
-			msg2 = hotelInterface.scoreUpdate(evaluationVO.score);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		
-		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
-			return ResultMessage.SUCCESS;
-		}else {
-			return ResultMessage.FAIL;
-		}
-		
-	}
-	
-	/**
-	 * @author charles
 	 * @lastChangedBy Harvey
 	 * @updateTime 2016/12/7
 	 * @param hotelID 酒店工作人员／客户查看酒店的评论
@@ -623,11 +580,11 @@ public class Order {
 				}
 			}
 		}else {
-			return null;
+			return OrderState.NULL;
 		}
 		
 		if (states.size() == 0) {
-			return null;
+			return OrderState.NULL;
 		}else {
 			return getMaxOrderState(states);
 		}

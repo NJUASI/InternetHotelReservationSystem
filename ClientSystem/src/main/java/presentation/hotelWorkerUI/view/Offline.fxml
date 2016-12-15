@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.hotelWorkerUI.controller.OfflineController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.hotelWorkerUI.controller.OfflineController">
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
          <children>
@@ -59,7 +59,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
-            <Button fx:id="checkOut" focusTraversable="false" layoutX="634.0" layoutY="459.0" mnemonicParsing="false" text="确认" />
+            <Button focusTraversable="false" layoutX="634.0" layoutY="459.0" mnemonicParsing="false" onAction="#checkOut" text="确认" />
             <GridPane layoutX="135.0" layoutY="205.0" prefHeight="211.0" prefWidth="239.0" AnchorPane.bottomAnchor="185.0" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="521.0" AnchorPane.topAnchor="205.0">
                <children>
                   <Label text="入住房型：" />

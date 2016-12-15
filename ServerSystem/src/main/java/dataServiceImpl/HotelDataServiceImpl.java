@@ -8,8 +8,6 @@ import dataHelper.HotelDataHelper;
 import dataHelper.RoomDataHelper;
 import dataHelperImpl.HotelDataHelperImpl;
 import dataHelperImpl.RoomDataHelperImpl;
-import dataHelperImpl.stub.HotelDataHelperImpl_Stub;
-import dataHelperImpl.stub.RoomInfoDataHelperImpl_Stub;
 import dataService.hotelDataService.HotelDataService;
 import po.HotelPO;
 import po.RoomInfoPO;
@@ -35,8 +33,6 @@ public class HotelDataServiceImpl extends UnicastRemoteObject implements HotelDa
 		super();
 		roomDataHelper = new RoomDataHelperImpl();
 		hotelDataHelper = new HotelDataHelperImpl();
-//		roomDataHelper = new RoomInfoDataHelperImpl_Stub();
-//		hotelDataHelper = new HotelDataHelperImpl_Stub();
 	}
 
 	@Override

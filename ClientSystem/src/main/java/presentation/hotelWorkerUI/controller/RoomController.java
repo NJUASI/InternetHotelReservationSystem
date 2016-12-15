@@ -10,6 +10,8 @@ import businessLogicService.hotelBLService.HotelBLService;
 import businessLogicService.sourceBLService.SourceBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -40,7 +42,7 @@ public class RoomController {
 	@FXML
 	private ComboBox<String> roomType;
 	@FXML
-	private TextField roomName,roomNum,price;
+	private TextField roomNum,price;
 
 
 	private HotelBLService hotelBLController;
@@ -66,8 +68,22 @@ public class RoomController {
 		//获取该酒店的所有客房信息
 		Iterator<RoomInfoVO> rooms = hotelBLController.getHotelRoomInfo(hotelID);
 		initRoomTable(rooms);
+		
+		roomType.setOnShowing(new roomTypeShowingEventHandler());
 	}
 
+	
+	class roomTypeShowingEventHandler implements EventHandler<Event>{
+
+		@Override
+		public void handle(Event arg0) {
+			roomType.getItems().clear();
+			Iterator<String> roomTypes = sourceBLController.getRoomTypes();
+			while(roomTypes.hasNext()){
+				roomType.getItems().add(roomTypes.next());
+			}
+		}
+	}
 	/**
 	 * @description 初始化客房信息列表
 	 * @author 61990
@@ -80,7 +96,7 @@ public class RoomController {
 		List<TypeTable> dataList = new LinkedList<TypeTable>();
 		while(rooms.hasNext()){
 			RoomInfoVO temp = rooms.next();
-			dataList.add(new TypeTable(temp.roomType.getChineseRoomType(), temp.roomNum + "", temp.remainNum + "", Double.toString(temp.price)));
+			dataList.add(new TypeTable(temp.roomType.getChineseRoomType(), temp.roomNum + "", temp.remainNum + "", Integer.toString(temp.price)));
 		}
 
 		ObservableList<TypeTable> data = FXCollections.observableArrayList();
@@ -108,19 +124,13 @@ public class RoomController {
 	protected void modifyOne() {
 		roomType.getItems().clear();
 		
-		//
-		Iterator<String> roomTypes = sourceBLController.getRoomTypes();
-		while(roomTypes.hasNext()){
-			roomType.getItems().add(roomTypes.next());
-		}
-		
 		TypeTable selectedRoomVO = null;
 		try{
 			selectedRoomVO = roomTable.getSelectionModel().getSelectedItem();
 			preType=roomTable.getSelectionModel().getSelectedItem().getRoomType();
 			preRoomNum=roomTable.getSelectionModel().getSelectedItem().getRoomNum();
 			preRemainNum=roomTable.getSelectionModel().getSelectedItem().getRemainRoomNum();
-			setModifyText(selectedRoomVO.getRoomType(),selectedRoomVO.getRoomType(),selectedRoomVO.getPrice());
+			setModifyText(selectedRoomVO.getRoomType(),selectedRoomVO.getRoomNum(),selectedRoomVO.getPrice());
 			modifyPane.setVisible(true);
 			addBt.setVisible(false);
 		} catch (Exception e) {
@@ -141,8 +151,8 @@ public class RoomController {
 		
 		//打包好一个vo，通过hotelBLContoller调用update的方法
 		vo.hotelID = hotelID;
-		//gcm roomType与数据库存的不一样
-		vo.roomType = RoomType.valueOf(roomType.getValue());
+
+		vo.roomType = RoomType.getEnum(roomType.getValue());
 		vo.roomNum = Integer.parseInt(roomNum.getText());
 		vo.price = Integer.parseInt(price.getText());
 		
@@ -150,6 +160,7 @@ public class RoomController {
 	
 		modifyPane.setVisible(false);
 		addBt.setVisible(true);
+		
 		setModifyText("","","");
 		initialize();
 	}
@@ -177,9 +188,11 @@ public class RoomController {
 		 */
 		RoomInfoVO vo = new RoomInfoVO();
 		vo.hotelID = hotelID;
-		vo.roomType = RoomType.valueOf(roomType.getValue());
+		vo.roomType = RoomType.getEnum(roomType.getValue());
 		vo.remainNum=Integer.parseInt(roomNum.getText());
 		vo.price = Integer.valueOf(price.getText());
+
+		hotelBLController.addRoomType(vo);
 		initialize();
 	}
 

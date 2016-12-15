@@ -3,6 +3,7 @@ package businessLogic.marketBL;
 import java.util.List;
 
 import businessLogicService.marketBLService.MarketBLService;
+import exception.verificationException.MemberInexistException;
 import exception.verificationException.UserInexistException;
 import utilities.enums.ResultMessage;
 import vo.MarketVO;
@@ -67,8 +68,18 @@ public final class MarketController implements MarketBLService {
 	}
 
 	@Override
-	public int getLevel(String guestID) throws UserInexistException {
+	public int getLevel(String guestID) throws UserInexistException, MemberInexistException {
 		return market.getLevel(guestID);
+	}
+
+	@Override
+	public String getLevelName(String userID) throws UserInexistException, MemberInexistException {
+		return market.getLevelName(userID);
+	}
+
+	@Override
+	public double getMemberDiscout(String userID) throws UserInexistException, MemberInexistException {
+		return market.getMemberDiscout(userID);
 	}
 
 }

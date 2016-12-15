@@ -43,7 +43,7 @@ public class RoomDataHelperImpl implements RoomDataHelper {
 	 */
 	@Override
 	public List<RoomInfoPO> getRoomInfo(String hotelID) {
-		sql = "select * from roomInfo where hotelID = ?";
+		sql = "select * from roominfo where hotelID = ?";
 		List<RoomInfoPO> list = new ArrayList<RoomInfoPO>();
 		RoomInfoPO po;
 		try {
@@ -56,7 +56,7 @@ public class RoomDataHelperImpl implements RoomDataHelper {
 				po.setRoomType(RoomType.getEnum(rs.getString(2)));
 				po.setRoomNum(rs.getInt(3));
 				po.setRemainNum(rs.getInt(4));
-				po.setPrice(rs.getDouble(5));
+				po.setPrice(rs.getInt(5));
 				list.add(po);
 			}
 
@@ -79,21 +79,21 @@ public class RoomDataHelperImpl implements RoomDataHelper {
 	 */
 	@Override
 	public ResultMessage updateRoomInfo(RoomInfoPO roomInfoPO) {
-		sql = "update roomInfo set "
-				+ "roomNum = ? , remainNum = ? , price = ?"
-				+ "where hotelID = ? and roomType = ?";
+		sql = "update roominfo set roomNum = ? , remainRoomNum = ? , price = ? "
+				+"where hotelID = ? and roomType = ?";
 
 		try {
+			
 			ps = conn.prepareStatement(sql);
-
 			
 			ps.setInt(1, roomInfoPO.getRoomNum());
 			ps.setInt(2, roomInfoPO.getRemainNum());
-			ps.setDouble(3, roomInfoPO.getPrice());
+			ps.setInt(3, roomInfoPO.getPrice());
 			ps.setString(4, roomInfoPO.getHotelID());
 			ps.setString(5, roomInfoPO.getRoomType().getChineseRoomType());
 
 			ps.execute();
+			
 			return ResultMessage.SUCCESS;
 		} catch (SQLException e) {
 			return ResultMessage.FAIL;
@@ -110,8 +110,8 @@ public class RoomDataHelperImpl implements RoomDataHelper {
 	 */
 	@Override
 	public ResultMessage addRoomInfo(RoomInfoPO roomInfoPO) {
-		sql = "insert into roominfo(hotelID,roomType,roomNum,remainNum,price)"
-				+"values(?,?,?,?,?,?)";
+		sql = "insert into roominfo(hotelID,roomType,roomNum,remainRoomNum,price)"
+				+"values(?,?,?,?,?)";
 
 		try {
 
@@ -120,7 +120,7 @@ public class RoomDataHelperImpl implements RoomDataHelper {
 			ps.setString(2, roomInfoPO.getRoomType().getChineseRoomType());
 			ps.setInt(3, roomInfoPO.getRoomNum());
 			ps.setInt(4, roomInfoPO.getRemainNum());
-			ps.setDouble(5, roomInfoPO.getPrice());
+			ps.setInt(5, roomInfoPO.getPrice());
 			ps.execute();
 
 			return ResultMessage.SUCCESS;

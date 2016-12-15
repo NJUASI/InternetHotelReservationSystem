@@ -1,14 +1,18 @@
 package presentation.hotelWorkerUI.controller;
 
+import java.util.Iterator;
+
 import businessLogic.hotelBL.HotelBLController;
 import businessLogicService.hotelBLService.HotelBLService;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
 import utilities.IDReserve;
 import utilities.enums.RoomType;
+import vo.RoomInfoVO;
 
 public class OfflineController {
 
@@ -16,22 +20,70 @@ public class OfflineController {
 	private ComboBox<String> roomType,roomType2;
 	@FXML
 	private ComboBox<Integer> roomNum,roomNum2;
-	@FXML
-	private DatePicker date1,date2;
-	@FXML
-	private TextField phone;
 
 	HotelBLService hotelBLController;
 	String hotelID;
+	private int maxRoomNum = 3;
+
 	public OfflineController() {
 		hotelBLController = HotelBLController.getInstance();
 		hotelID = IDReserve.getInstance().getUserID();
 	}
+
 	@FXML
-	void Initialize(){
-		for (int i = 0; i < 5; i++) {
-			roomNum.getItems().add(i);
-			roomNum2.getItems().add(i);
+	void initialize(){
+		roomType.setOnShowing(new RoomTypeShowingEventHandler());
+		roomType2.setOnShowing(new RoomType2ShowingEventHandler());
+		roomType.valueProperty().addListener(new RoomTypeChangedListener());
+		roomType2.valueProperty().addListener(new RoomType2ChangedListener());
+	}
+
+	class RoomTypeShowingEventHandler implements EventHandler<Event>{
+		@Override
+		public void handle(Event arg0) {
+			roomType.getItems().clear();
+			Iterator<RoomInfoVO> rooms = hotelBLController.getHotelRoomInfo(hotelID);
+			roomType.getItems().clear();
+			while(rooms.hasNext()){
+				roomType.getItems().add(rooms.next().roomType.getChineseRoomType());
+			}
+		}
+	}
+
+	class RoomType2ShowingEventHandler implements EventHandler<Event>{
+		@Override
+		public void handle(Event arg0) {
+			Iterator<RoomInfoVO> rooms = hotelBLController.getHotelRoomInfo(hotelID);
+			roomType2.getItems().clear();
+			while(rooms.hasNext()){
+				roomType2.getItems().add(rooms.next().roomType.getChineseRoomType());
+			}
+		}
+	}
+
+	class RoomTypeChangedListener implements ChangeListener<String> {
+		@Override
+		public void changed(ObservableValue<? extends String> arg0, String preRoomType, String newRoomType) {
+			roomNum.getItems().clear();
+			if(newRoomType!=null){
+				for(int i = 1;i <= maxRoomNum;i++){
+					roomNum.getItems().add(i);
+				}
+				roomNum.setValue(1);
+			}
+		}
+	}
+
+	class RoomType2ChangedListener implements ChangeListener<String> {
+		@Override
+		public void changed(ObservableValue<? extends String> arg0, String arg1, String newRoomType) {
+			roomNum2.getItems().clear();
+			if(newRoomType!=null){
+				for(int i = 1;i <= maxRoomNum;i++){
+					roomNum2.getItems().add(i);
+				}
+				roomNum2.setValue(1);
+			}
 		}
 	}
 	/**
@@ -42,10 +94,7 @@ public class OfflineController {
 	 */
 	@FXML
 	protected void checkIn(){
-		
-//		TODO fjj 不知道@谁
-//		TODO gcm roomType显示和数据库存的不一样
-		hotelBLController.checkInOffline(hotelID, RoomType.valueOf(roomType.getValue()), Integer.valueOf(roomNum.getValue()));
+		hotelBLController.checkInOffline(hotelID, RoomType.getEnum(roomType.getValue()), Integer.valueOf(roomNum.getValue()));
 		roomType.setValue("");
 		roomNum.setValue(null);
 	}
@@ -63,8 +112,8 @@ public class OfflineController {
 		 * 我加了已经，房间的初始数目在前面初始化
 		 * roomNum.getItems().add(i);for循环
 		 */
-		
-		hotelBLController.checkOutOffline(hotelID,RoomType.valueOf(roomType2.getValue()), Integer.valueOf(roomNum2.getValue()));
+
+		hotelBLController.checkOutOffline(hotelID,RoomType.getEnum(roomType2.getValue()), Integer.valueOf(roomNum2.getValue()));
 		roomType2.setValue("");
 		roomNum2.setValue(null);;
 	}

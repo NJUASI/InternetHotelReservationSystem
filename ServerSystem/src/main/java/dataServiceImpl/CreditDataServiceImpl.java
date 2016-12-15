@@ -6,7 +6,6 @@ import java.util.List;
 
 import dataHelper.CreditDataHelper;
 import dataHelperImpl.CreditDataHelperImpl;
-import dataHelperImpl.stub.CreditDataHelperImpl_Stub;
 import dataService.creditDataService.CreditDataService;
 import po.CreditPO;
 import utilities.enums.ResultMessage;
@@ -19,7 +18,6 @@ public class CreditDataServiceImpl extends UnicastRemoteObject implements Credit
 	public CreditDataServiceImpl() throws RemoteException {
 		super();
 		creditDataHelper = new CreditDataHelperImpl();
-//		creditDataHelper = new CreditDataHelperImpl_Stub();
 	}
 
 	@Override

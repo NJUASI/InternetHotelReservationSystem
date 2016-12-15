@@ -48,6 +48,7 @@ public class OrderCheckController {
 	private Iterator<OrderGeneralVO> orderGenerals;
 	@FXML
 	private Button undoBt,undoBt2;
+	
 	/*
 	 * 订单详情
 	 */
@@ -74,9 +75,11 @@ public class OrderCheckController {
 		//通过guestID得到orderGeneralVOs list
 		undoBt.setVisible(false);
 		orderBLController = OrderBLController.getInstance();
-
+		
 		Iterator<OrderGeneralVO> orderGenerals = orderBLController.getAllOrderGenerals(guestID, guest);
-		initOrderCheck(orderGenerals);
+		if (orderGenerals != null) {
+			initOrderCheck(orderGenerals);
+		}
 	}
 
 
@@ -123,10 +126,14 @@ public class OrderCheckController {
 	@FXML
 	protected void undoNormalOrder(){
 		undoOrder(table.getSelectionModel().getSelectedItem().getOrderID());
+		searchUnexecutedOrder();
 	}
 	@FXML
 	protected void undoInDetail(){
 		undoOrder(orderVO.orderGeneralVO.orderID);
+		orderDetail();
+		searchUnexecutedOrder();
+		
 	}
 	
 	private void undoOrder(String orderID){
@@ -218,7 +225,7 @@ public class OrderCheckController {
 		while(orderGenerals.hasNext()){
 			OrderGeneralVO vo = orderGenerals.next();
 			OrderTable orderTable = new OrderTable(vo.orderID, vo.hotelName, vo.hotelAddress,
-					vo.expectExecuteTime.toString(),vo.expectLeaveTime.toString(),vo.price + "", vo.state.toString());
+					vo.expectExecuteTime.toString(),vo.expectLeaveTime.toString(),vo.price + "", vo.state.getChineseOrderState());
 			data.add(orderTable);
 		}
 
@@ -285,6 +292,8 @@ public class OrderCheckController {
 
 		final GuestEvaluationVO evaluationVO = new GuestEvaluationVO(orderID, score, comment);
 		final ResultMessage result = orderBLController.addEvaluation(evaluationVO);
+		orderDetail();
+		searchUncommentedOrder();
 		if (result == ResultMessage.SUCCESS) {
 			new PopUp("评价成功", "评价");
 
@@ -322,7 +331,7 @@ public class OrderCheckController {
 		detail_ID.setText(orderVO.orderGeneralVO.hotelID);
 		detail_Hotel.setText(orderVO.orderGeneralVO.hotelName);
 		detail_address.setText(orderVO.orderGeneralVO.hotelAddress);
-		detail_roomType.setText(orderVO.roomType.toString());
+		detail_roomType.setText(orderVO.roomType.getChineseRoomType());
 		detail_roomNum.setText(orderVO.roomNumCount + "");
 		detail_roomNumber.setText(orderVO.roomNumber);
 		detail_personNum.setText(orderVO.expectGuestNumCount + "");
@@ -334,25 +343,30 @@ public class OrderCheckController {
 		detail_checkInTime.setText(orderVO.checkInTime.toString());
 		detail_checkOutTime.setText(orderVO.checkOutTime.toString());
 		detail_price.setText(Double.toString(orderVO.orderGeneralVO.price));
-		detail_state.setText(orderVO.orderGeneralVO.state.toString());
+		detail_state.setText(orderVO.orderGeneralVO.state.getChineseOrderState());
 		detail_message.setText(orderVO.message);
 		orderComment.setText(orderVO.comment);
-		orderScore.setText(Double.toString(orderVO.score));
+		if(orderVO.score==-1.0){
+			orderScore.setText("订单未评价");
+		}else{
+			orderScore.setText(Double.toString(orderVO.score));
+			orderComment.setText(orderVO.comment);
+		}
 		// 是否可以撤销
 		if (orderVO.orderGeneralVO.state==OrderState.UNEXECUTED){
-			undoBt2.setDisable(true);
-		}else{
 			undoBt2.setDisable(false);
+		}else{
+			undoBt2.setDisable(true);
 		}
 		// 是否可以评论
-		if (!orderVO.orderGeneralVO.hasCommented) {
-			orderComment.setDisable(true);
-			orderScore.setDisable(true);
-			commitBt.setDisable(true);
-		} else {
+		if (!orderVO.orderGeneralVO.hasCommented && orderVO.orderGeneralVO.state == OrderState.EXECUTED) {
 			orderComment.setDisable(false);
 			orderScore.setDisable(false);
 			commitBt.setDisable(false);
+		} else {
+			orderComment.setDisable(true);
+			orderScore.setDisable(true);
+			commitBt.setDisable(true);
 		}
 	}
 }

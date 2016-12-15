@@ -4,12 +4,16 @@ import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 
+import businessLogic.hotelBL.hotel.Hotel;
 import businessLogic.orderBL.order.CommonOrder;
 import businessLogic.orderBL.order.GuestOrder;
 import businessLogic.orderBL.order.HotelWorkerOrder;
 import businessLogic.orderBL.order.OrderForHotelModule;
 import businessLogic.orderBL.order.WebMarketerOrder;
+import businessLogic.promotionBL.DiscountCalculator;
+import businessLogic.promotionBL.DiscountInSpan;
 import businessLogicService.orderBLService.OrderBLService;
+import exception.verificationException.UserInexistException;
 import utilities.enums.OrderState;
 import utilities.enums.ResultMessage;
 import utilities.enums.UserType;
@@ -19,6 +23,7 @@ import vo.GuestEvaluationVO;
 import vo.HotelEvaluationVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
+import vo.PreOrderVO;
 
 /**
  * 
@@ -35,9 +40,9 @@ public final class OrderBLController implements OrderBLService {
 	private HotelWorkerOrder hotelWorkerOrder;
 	private WebMarketerOrder webMarketerOrder;
 	private OrderForHotelModule orderForHotelModule;
-	
+
 	private static OrderBLController orderController = new OrderBLController();
-	
+
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
@@ -52,7 +57,7 @@ public final class OrderBLController implements OrderBLService {
 		webMarketerOrder = new WebMarketerOrder();
 		orderForHotelModule = new OrderForHotelModule();
 	}
-	
+
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
@@ -62,12 +67,7 @@ public final class OrderBLController implements OrderBLService {
 	public static OrderBLController getInstance() {
 		return orderController;
 	}
-	
-	
-	
-	
-	
-	
+
 	/*
 	 * commonOrder的接口
 	 */
@@ -97,7 +97,7 @@ public final class OrderBLController implements OrderBLService {
 	public Iterator<OrderGeneralVO> getSpecialOrderGenerals(String userID, UserType userType, OrderState orderState) {
 		return commonOrder.getSpecialOrderGenerals(userID, userType, orderState);
 	}
-	
+
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
@@ -121,28 +121,16 @@ public final class OrderBLController implements OrderBLService {
 	public Iterator<HotelEvaluationVO> getEvaluations(String hotelID) {
 		return commonOrder.getEvaluations(hotelID);
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	/*
 	 * guestOrder的接口
 	 */
-	/**
-	 * 
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/4
-	 * @param orderVO 从客户界面层传下来的Order载体
-	 * @return 若客户创建此订单，需要付的款项
-	 */
-	@Override
-	public double getTempPrice(OrderVO orderVO) {
-		return guestOrder.getTempPrice(orderVO);
-	}
-	
+
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
@@ -154,7 +142,7 @@ public final class OrderBLController implements OrderBLService {
 	public ResultMessage createOrder(final OrderVO orderVO) {
 		return guestOrder.createOrder(orderVO);
 	}
-	
+
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
@@ -166,7 +154,7 @@ public final class OrderBLController implements OrderBLService {
 	public ResultMessage undoNormalOrder(final String orderID) {
 		return guestOrder.undoNormalOrder(orderID);
 	}
-	
+
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
@@ -179,7 +167,7 @@ public final class OrderBLController implements OrderBLService {
 	public Iterator<OrderGeneralVO> getAllGuestCommentOrderGeneral(String guestID, boolean hasCommented) {
 		return guestOrder.getAllGuestCommentOrderGeneral(guestID, hasCommented);
 	}
-	
+
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
@@ -191,7 +179,7 @@ public final class OrderBLController implements OrderBLService {
 	public ResultMessage addEvaluation(GuestEvaluationVO evaluationVO) {
 		return guestOrder.addEvaluation(evaluationVO);
 	}
-	
+
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
@@ -204,12 +192,12 @@ public final class OrderBLController implements OrderBLService {
 	public Iterator<OrderGeneralVO> getMyOrdersOfThisHotel(String guestID, String hotelID) {
 		return guestOrder.getMyOrdersOfThisHotel(guestID, hotelID);
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	/*
 	 * hotelWorkerOrder的接口
 	 */
@@ -224,7 +212,7 @@ public final class OrderBLController implements OrderBLService {
 	public ResultMessage executeOrder(final String orderID) {
 		return hotelWorkerOrder.executeOrder(orderID);
 	}
-	
+
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
@@ -246,12 +234,12 @@ public final class OrderBLController implements OrderBLService {
 	public ResultMessage updateCheckOut (CheckOutVO checkOutVO) {
 		return hotelWorkerOrder.updateCheckOut(checkOutVO);
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	/*
 	 * webMarketerOrder的接口
 	 */
@@ -267,7 +255,7 @@ public final class OrderBLController implements OrderBLService {
 	public ResultMessage undoAbnormalOrder(final String orderID, double percent) {
 		return webMarketerOrder.undoAbnormalOrder(orderID, percent);
 	}
-	
+
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
@@ -291,12 +279,12 @@ public final class OrderBLController implements OrderBLService {
 	public List<OrderGeneralVO> getAllUnexecutedOrderGeneral(final LocalDate date) {
 		return webMarketerOrder.getAllUnexecutedOrderGeneral(date);
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	/*
 	 * 为酒店模块单独的接口
 	 * 也可单独提出来
@@ -311,7 +299,7 @@ public final class OrderBLController implements OrderBLService {
 	public List<String> getBookedHotels(final String guestID) {
 		return orderForHotelModule.getBookedHotels(guestID);
 	}
-	
+
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
@@ -323,5 +311,34 @@ public final class OrderBLController implements OrderBLService {
 	public OrderState getOrderState(String guestID, String hotelID) {
 		return orderForHotelModule.getOrderState(guestID, hotelID);
 	}
-	
+
+	/**
+	 * @Description:通过preOrderVO中的信息计算订单的总价格
+	 * @param preOrderVO
+	 * @return
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 上午12:25:05
+	 */
+	@Override
+	public int getCalculatedPrice(PreOrderVO preOrderVO) {
+		/*
+		 * TODO fjj我把你那个计算价格的改写了一下，感觉你那个要的参数太多了，你看这个方法放哪里比较好
+		 * 我不知道放哪里
+		 */
+		double total = 0;
+		double originPrice = new Hotel().getOriginPrice(preOrderVO.hotelID, preOrderVO.roomType);
+		DiscountInSpan discount = new DiscountCalculator();
+		Iterator<Double> discounts = null;
+		try {
+			discounts = discount.getDiscountInSpan(preOrderVO);
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
+		while(discounts.hasNext()){
+			total = total + originPrice*discounts.next()*preOrderVO.roomNum;
+		}
+		return (int)total;
+	}
+
 }

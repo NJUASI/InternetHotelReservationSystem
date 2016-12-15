@@ -12,7 +12,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import presentation.PopUp.PopUp;
 import vo.HotelVO;
 
@@ -25,17 +25,29 @@ public class HotelInfoController {
 	private ComboBox<String>levelInput;
 	@FXML
 	private TextField hotelName,address;
-
+	@FXML
+	private TextArea equipment;
+//TODO equipment的你直接用
 	private SourceBLService sourceBLController;
 	private UserBLService userBLController;
 	
 	public HotelInfoController() {
 		sourceBLController = SourceBLController.getInstance();
 		userBLController = UserController.getInstance();
-		//TODO gcm
-//		cityInput.setOnShowing(new CityShowingHandler());
-//		cityInput.valueProperty().addListener(new CityChangedListener());
-//		levelInput.setOnShowing(new LevelShowingHandler());
+	}
+	
+	@FXML
+	private void initialize() {
+		
+		String firstCity = sourceBLController.getCities().next();
+		String firstCircle = sourceBLController.getCircles(firstCity).next();
+		cityInput.setValue(firstCity);
+		cycleInput.setValue(firstCircle);
+		levelInput.setValue("1");
+		
+		cityInput.setOnShowing(new CityShowingHandler());
+		cityInput.valueProperty().addListener(new CityChangedListener());
+		levelInput.setOnShowing(new LevelShowingHandler());
 	}
 
 	/**
@@ -51,16 +63,20 @@ public class HotelInfoController {
 		newHotel.hotelName = hotelName.getText();
 		newHotel.city = cityInput.getValue();
 		newHotel.circle = cycleInput.getValue();
-		//TODO 还是将levelInput的改为返回String
 		newHotel.level = String.valueOf(levelInput.getValue());
 		newHotel.address = address.getText();
 		HotelVO hotelVO = userBLController.addHotel(newHotel);
+		//怎么获得被添加酒店的id，你说根据酒店工作人员来，但是我不知道酒店工作人员的id
+		// TODO 龚尘淼 hotelVO此处不是返回了ID吗
 		
 		if(hotelVO == null){
 			new PopUp("添加失败", "congratulation");	
+		}else{
+			new PopUp("添加成功\n你的账号是"+hotelVO.hotelID+"\n你的密码是qwertyuiop123456", "congratulation");	
 		}
-		//TODO djy 然后 hotelVO里有添加成功后的参数,没有密码，我需要的是登录的方式，也就是hotelWorker的账号密码
-//		new PopUp("撤销成功"+ hotelVO.hotelID+hotelVO.", "congratulation");	
+		//然后 hotelVO里有添加成功后的参数,没有密码，我需要的是登录的方式，也就是hotelWorker的账号密码
+		//TODO gcm add不可能失败，一旦失败hotelVO 就不会传过来，在user那里就抛异常了
+		//		new PopUp("撤销成功"+ hotelVO.hotelID+hotelVO.", "congratulation");	
 	}
 	
 	class CityShowingHandler implements EventHandler<Event>{

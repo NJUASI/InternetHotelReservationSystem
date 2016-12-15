@@ -22,6 +22,8 @@ import utilities.enums.RoomType;
  */
 public class OrderDataHelperImpl implements OrderDataHelper {
 
+	private static LocalDateTime DefaultTime = LocalDateTime.of(1, 1, 1, 1, 1);
+	
 	private Connection conn;
 
 	private PreparedStatement ps;
@@ -62,17 +64,12 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			ps.setObject(3, orderPO.getHotelID());
 			ps.setString(4, orderPO.getHotelName());
 			ps.setObject(5, orderPO.getHotelAddress());
-			ps.setDouble(6, orderPO.getPrice());
-			ps.setObject(7, orderPO.getExpectExecuteTime());
-			ps.setObject(8, orderPO.getExpectLeaveTime());
+			ps.setInt(6, orderPO.getPrice());
 			ps.setString(9, orderPO.getState().getChineseOrderState());
 			ps.setString(10, String.valueOf(orderPO.getHasCommented()));
 			ps.setString(11, orderPO.getName());
 			ps.setString(12, orderPO.getPhone());
-			ps.setDouble(13, orderPO.getPreviousPrice());
-			ps.setObject(14, orderPO.getCreateTime());
-			ps.setObject(15, orderPO.getCheckInTime());
-			ps.setObject(16, orderPO.getCheckOutTime());
+			ps.setInt(13, orderPO.getPreviousPrice());
 			ps.setString(17, orderPO.getRoomType().getChineseRoomType());
 			ps.setInt(18, orderPO.getRoomNumCount());
 			ps.setString(19, orderPO.getRoomNumber());
@@ -81,6 +78,12 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			ps.setString(22, orderPO.getComment());
 			ps.setDouble(23, orderPO.getScore());
 			
+			//检查相关时间，若不存在，即将其置为默认时间
+			ps.setObject(7, convertRealToDatabase(orderPO.getExpectExecuteTime()));
+			ps.setObject(8, convertRealToDatabase(orderPO.getExpectLeaveTime()));
+			ps.setObject(14, convertRealToDatabase(orderPO.getCreateTime()));
+			ps.setObject(15, convertRealToDatabase(orderPO.getCheckInTime()));
+			ps.setObject(16, convertRealToDatabase(orderPO.getCheckOutTime()));
 			
 			ps.execute();
 		} catch (SQLException e) {
@@ -98,7 +101,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	 * @param state 需要被修改的状态
 	 * @return ResultMessage 是否成功修改订单状态
 	 */
-	public ResultMessage setState(final String orderID, final OrderState state) {
+	public synchronized ResultMessage setState(final String orderID, final OrderState state) {
 		sql = "UPDATE `order` SET `order`.state = ? WHERE `order`.orderID = ?";
 		
 		try {
@@ -309,7 +312,7 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	 * @return List<OrderPO> 指定日期的所有异常orderInfo载体
 	 */
 	public List<OrderPO> getAbnormal() {
-		sql = "SELECT * FROM `order` WHERE `order`.state = 'ABNORMAL'";
+		sql = "SELECT * FROM `order` WHERE `order`.state = '异常'";
 		final List<OrderPO> result = new ArrayList<OrderPO>();
 		
 		try {
@@ -329,12 +332,12 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 
 	/**
 	 * @author Byron Dong
-	 * @lastChangedBy Byron Dong
+	 * @lastChangedBy Harvey
 	 * @updateTime 2016/11/30
 	 * @return List<OrderPO> 指定日期的所有未执行orderInfo载体
 	 */
-	public List<OrderPO> getUnexecuted() {
-		sql = "SELECT * FROM `order` WHERE `order`.state = 'UNEXECUTED'";
+	public synchronized List<OrderPO> getUnexecuted() {
+		sql = "SELECT * FROM `order` WHERE `order`.state = '未执行'";
 		final List<OrderPO> result = new ArrayList<OrderPO>();
 		
 		try {
@@ -378,17 +381,12 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			orderPO.setHotelID(String.valueOf(rs.getObject(3)));
 			orderPO.setHotelName(rs.getString(4));
 			orderPO.setHotelAddress(String.valueOf(rs.getObject(5)));
-			orderPO.setPrice(rs.getDouble(6));
-			orderPO.setExpectExecuteTime(rs.getTimestamp(7).toLocalDateTime());
-			orderPO.setExpectLeaveTime(rs.getTimestamp(8).toLocalDateTime());
+			orderPO.setPrice(rs.getInt(6));
 			orderPO.setState(OrderState.getEnum(rs.getString(9)));
 			orderPO.setHasCommented(convertBooleanString2Boolean(rs.getString(10)));
 			orderPO.setName(rs.getString(11));
 			orderPO.setPhone(rs.getString(12));
-			orderPO.setPreviousPrice(rs.getDouble(13));
-			orderPO.setCreateTime(rs.getTimestamp(14).toLocalDateTime());
-			orderPO.setCheckInTime(rs.getTimestamp(15).toLocalDateTime());
-			orderPO.setCheckOutTime(rs.getTimestamp(16).toLocalDateTime());
+			orderPO.setPreviousPrice(rs.getInt(13));
 			orderPO.setRoomType(RoomType.getEnum(rs.getString(17)));
 			orderPO.setRoomNumCount(rs.getInt(18));
 			orderPO.setRoomNumber(rs.getString(19));
@@ -396,6 +394,12 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			orderPO.setMessage(rs.getString(21));
 			orderPO.setComment(rs.getString(22));
 			orderPO.setScore(rs.getDouble(23));
+			
+			orderPO.setExpectExecuteTime(convertDatabaseToReal(rs.getTimestamp(7).toLocalDateTime()));
+			orderPO.setExpectLeaveTime(convertDatabaseToReal(rs.getTimestamp(8).toLocalDateTime()));
+			orderPO.setCreateTime(convertDatabaseToReal(rs.getTimestamp(14).toLocalDateTime()));
+			orderPO.setCheckInTime(convertDatabaseToReal(rs.getTimestamp(15).toLocalDateTime()));
+			orderPO.setCheckOutTime(convertDatabaseToReal(rs.getTimestamp(16).toLocalDateTime()));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -407,6 +411,24 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			return true;
 		}else {
 			return false;
+		}
+	}
+	
+	//po.get
+	private LocalDateTime convertRealToDatabase(LocalDateTime a) {
+		if (a == null) {
+			return DefaultTime;
+		}else {
+			return a;
+		}
+	}
+	
+	//po.set
+	private LocalDateTime convertDatabaseToReal(LocalDateTime a) {
+		if (a == DefaultTime) {
+			return null;
+		}else {
+			return a;
 		}
 	}
 }
