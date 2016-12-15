@@ -201,17 +201,17 @@ public final class OrderBLController implements OrderBLService {
 	/*
 	 * hotelWorkerOrder的接口
 	 */
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
-	 * @param orderID 酒店工作人员当前需要执行订单的订单号
-	 * @return 酒店工作人员是否成功执行此订单
-	 */
-	@Override
-	public ResultMessage executeOrder(final String orderID) {
-		return hotelWorkerOrder.executeOrder(orderID);
-	}
+//	/**
+//	 * @author charles
+//	 * @lastChangedBy charles
+//	 * @updateTime 2016/11/27
+//	 * @param orderID 酒店工作人员当前需要执行订单的订单号
+//	 * @return 酒店工作人员是否成功执行此订单
+//	 */
+//	@Override
+//	public ResultMessage executeOrder(final String orderID) {
+//		return hotelWorkerOrder.executeOrder(orderID);
+//	}
 
 	/**
 	 * @author charles
