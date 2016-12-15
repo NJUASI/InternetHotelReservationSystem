@@ -80,6 +80,8 @@ public class MemberCheckController {
 	@FXML
 	private Pane enterprisePane;
 
+	@FXML
+	private TextField enterpriseText;
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -106,8 +108,6 @@ public class MemberCheckController {
 	}
 
 	@FXML
-	private TextField enterpriseText;
-	@FXML
 	private DatePicker birthdayPicker;
 
 	/**
@@ -121,10 +121,12 @@ public class MemberCheckController {
 		try {
 
 			MemberVO tempMemberVO = memberVO;
-			tempMemberVO.enterprise = enterprise.getText();
+			tempMemberVO.enterprise = enterpriseText.getText();
 			memberBLController.add(tempMemberVO);
-			//TODO 高源 此处开始获取了界面的内容，往下传
+		
 			initialize();
+			memberCheck.setVisible(true);
+			memberModify.setVisible(false);
 		} catch (UserInexistException e) {
 			e.printStackTrace();
 		}

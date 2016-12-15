@@ -48,6 +48,7 @@ public class OrderCheckController {
 	private Iterator<OrderGeneralVO> orderGenerals;
 	@FXML
 	private Button undoBt,undoBt2;
+	
 	/*
 	 * 订单详情
 	 */

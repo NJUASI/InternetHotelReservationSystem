@@ -167,13 +167,13 @@ public class OrderController {
 //		//TODO 冯俊杰：按时间排序
 //		initOrderCheck(orderGenerals);
 		try{
-		LocalDate date = searchDate.getValue();
-		
-		orderGenerals = orderBLController.getAllAbnormalOrderGeneral(date);
-		initOrderCheck(orderGenerals);
-		orderCheck.setVisible(true);
-		searchPane.setVisible(false);
-		cancelOrderPaneInCheck.setDisable(false);
+			LocalDate date = searchDate.getValue();
+
+			orderGenerals = orderBLController.getAllAbnormalOrderGeneral(date);
+			initOrderCheck(orderGenerals);
+			orderCheck.setVisible(true);
+			searchPane.setVisible(false);
+			cancelOrderPaneInCheck.setDisable(false);
 		}catch (Exception e) {
 			// TODO: handle exception
 		}

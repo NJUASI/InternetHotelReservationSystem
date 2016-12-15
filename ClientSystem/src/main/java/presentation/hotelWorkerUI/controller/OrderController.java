@@ -322,10 +322,11 @@ public class OrderController {
 			
 			final CheckInVO checkInVO = new CheckInVO(checkInOrderID.getText(), checkInRoomNum.getText(), checkInTime, expectLeaveTime);
 			final ResultMessage result = orderBLController.updateCheckIn(checkInVO);
+			searchAlldOrder();
+			searchUnexecutedOrder();
 			if (result == ResultMessage.SUCCESS) {
 				new PopUp("入住成功", "congratulation");			
 				
-				//TODO 高源：此客户入住成功，将填写的房间号置为空，预计离开时间置为明日正午（全部恢复为默认值）
 				checkInRoomNum.setText("");
 				checkInHour.setText("12");
 				checkInMinute.setText("00");
@@ -344,6 +345,9 @@ public class OrderController {
 		orderDetail.setDisable(false);
 		orderCheck.setOpacity(1);
 		orderDetail.setOpacity(1);
+		checkInRoomNum.setText("");
+		checkInHour.setText("12");
+		checkInMinute.setText("00");
 	}
 	@FXML
 	private Label checkOutOrderID,checkOutName;
@@ -391,6 +395,7 @@ public class OrderController {
 		
 		final ResultMessage result = orderBLController.updateCheckOut(checkOutVO);
 		searchExecutedOrder();
+		searchAlldOrder();
 //	TODO 后期可以把这些放在界面里，不弹框
 		if (result == ResultMessage.SUCCESS) {
 			new PopUp("退房成功", "congratulation");	
