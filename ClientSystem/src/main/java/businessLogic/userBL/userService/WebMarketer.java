@@ -95,7 +95,12 @@ public class WebMarketer implements UserService {
 	public UserVO getSingle(String userID) throws UserInexistException {
 
 		try {
-			return this.convert(webMarketerDataService.getSingleWebMarketer(userID));
+			UserVO tempUserVO = this.convert(webMarketerDataService.getSingleWebMarketer(userID));
+		
+			if(tempUserVO==null){
+				throw new UserInexistException();
+			}
+			return tempUserVO;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

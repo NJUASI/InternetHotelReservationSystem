@@ -108,7 +108,11 @@ public class Guest implements UserService, GuestCreditService {
 	public UserVO getSingle(String userID) throws UserInexistException {
 
 		try {
-			return this.convert(guestDataService.getSingleGuest(userID));
+			UserVO tempUserVO = this.convert(guestDataService.getSingleGuest(userID));
+			if(tempUserVO==null){
+				throw new UserInexistException();
+			}
+			return tempUserVO;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -235,14 +239,8 @@ public class Guest implements UserService, GuestCreditService {
 		return result;
 	}
 
-	public boolean hasGuest(String guestID) { // 放在后面，该方法一般只在本类使用，可以等同private,只有member会用到
-		
-		try {
-			this.getSingle(guestID);
-		} catch (UserInexistException e) {
-			e.printStackTrace();
-			return false;
-		}
+	public boolean hasGuest(String guestID) throws UserInexistException { // 放在后面，该方法一般只在本类使用，可以等同private,只有member会用到
+		this.getSingle(guestID);
 		return true;
 	}
 	

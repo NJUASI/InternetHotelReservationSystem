@@ -48,8 +48,9 @@ public class MemberController implements MemberBLService {
 	 * @updateTime 2016/11/27
 	 * @param memberVO 从客户界面层传下来的memberInfo载体
 	 * @return 用户是否成功添加会员信息
+	 * @throws UserInexistException 
 	 */
-	public ResultMessage add(MemberVO memberVO) {
+	public ResultMessage add(MemberVO memberVO) throws UserInexistException {
 		return member.add(memberVO);
 	}
 
@@ -59,8 +60,9 @@ public class MemberController implements MemberBLService {
 	 * @updateTime 2016/11/27
 	 * @param memberVO 从客户界面层传下来的memberInfo载体
 	 * @return 用户是否成功修改会员信息
+	 * @throws UserInexistException 
 	 */
-	public ResultMessage modify(MemberVO memberVO) {
+	public ResultMessage modify(MemberVO memberVO) throws UserInexistException {
 		return member.modify(memberVO);
 	}
 

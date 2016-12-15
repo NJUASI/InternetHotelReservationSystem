@@ -14,6 +14,27 @@ import javafx.stage.WindowEvent;
 
 public class ServerRunner extends Application{
 
+
+
+	public void start(final Stage stage) throws IOException {
+		StackPane root = new StackPane();
+		final Scene scene = new Scene(root, 500, 300);
+		Label label = new Label("welcome");
+		root.getChildren().add(label);
+		stage.setTitle("酒店互联网预定系统");
+		stage.setScene(scene);
+		
+		stage.show();
+		
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>(){
+
+			@Override
+			public void handle(WindowEvent event) {
+				System.exit(0); 
+			}
+		});
+		
+	}	
 	public ServerRunner() {
 		ServerRemoteHelper.setLocalhost();
 		//		ServerRemoteHelper.setIPandPort("172.28.21.131", "8889");
@@ -26,29 +47,8 @@ public class ServerRunner extends Application{
 			check.run();
 		}
 	}
-
-	public void start(final Stage stage) throws IOException {
-		StackPane root = new StackPane();
-		final Scene scene = new Scene(root, 500, 300);
-		Label label = new Label("welcome");
-		root.getChildren().add(label);
-		stage.setTitle("酒店互联网预定系统");
-		stage.setScene(scene);
-
-		stage.show();
-		stage.setOnCloseRequest(new EventHandler<WindowEvent>(){
-
-			@Override
-			public void handle(WindowEvent event) {
-				System.exit(0); 
-			}
-		});
-	}
 	public static void main(String[] args) {
-
 		launch(args);
-
 		new ServerRunner();
-
 	}
 }

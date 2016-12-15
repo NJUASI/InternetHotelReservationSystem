@@ -97,7 +97,12 @@ public class WebManager implements UserService {
 	public UserVO getSingle(String userID) throws UserInexistException {
 
 		try {
-			return this.convert(webManagerDataService.getSingleWebManager(userID));
+			UserVO tempUserVO = this.convert(webManagerDataService.getSingleWebManager(userID));
+			
+			if(tempUserVO==null){
+				throw new UserInexistException();
+			}
+			return tempUserVO;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

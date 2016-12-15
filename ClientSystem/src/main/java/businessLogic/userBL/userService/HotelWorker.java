@@ -97,7 +97,11 @@ public class HotelWorker implements UserService {
 	public UserVO getSingle(String userID) throws UserInexistException {
 
 		try {
-			return this.convert(hotelWorkerDataService.getSingleHotelWorker(userID));
+			UserVO tempUserVO = this.convert(hotelWorkerDataService.getSingleHotelWorker(userID));
+			if(tempUserVO==null){
+				throw new UserInexistException();
+			}
+			return tempUserVO;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

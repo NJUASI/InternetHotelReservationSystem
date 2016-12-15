@@ -56,7 +56,6 @@ public class GuestInfoController {
 			guestVO = (GuestVO) userBLController.getSingle(userID);
 		} catch (UserInexistException e) {
 			e.printStackTrace();
-			// 主要登录该情况是不出现的，只是为了编译通过
 		}
 		guestID.setText(guestVO.userID);
 		name.setText(guestVO.name);

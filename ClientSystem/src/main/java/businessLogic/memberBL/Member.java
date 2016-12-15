@@ -49,8 +49,9 @@ public class Member implements MemberBLService{
 	 * @updateTime 2016/11/27
 	 * @param memberVO 从客户界面层传下来的MemberInfo载体
 	 * @return 客户是否成功添加会员信息
+	 * @throws UserInexistException 
 	 */
-	public ResultMessage add(MemberVO memberVO) {
+	public ResultMessage add(MemberVO memberVO) throws UserInexistException {
 		return this.addMemberInfo(memberVO);
 	}
 
@@ -60,8 +61,9 @@ public class Member implements MemberBLService{
 	 * @updateTime 2016/11/27
 	 * @param memberVO 从客户界面层传下来的MemberInfo载体
 	 * @return 客户是否成功修改会员信息
+	 * @throws UserInexistException 
 	 */
-	public ResultMessage modify(MemberVO memberVO) {
+	public ResultMessage modify(MemberVO memberVO) throws UserInexistException {
 		return addMemberInfo(memberVO);
 	}
 
@@ -146,15 +148,18 @@ public class Member implements MemberBLService{
 	 * @updateTime 2016/11/27
 	 * @param memberVO 来自本类的member信息载体 
 	 * @return ResultMessage 添加会员信息是否成功
+	 * @throws UserInexistException 
 	 */
-	private ResultMessage addMemberInfo(MemberVO memberVO) {
+	private ResultMessage addMemberInfo(MemberVO memberVO) throws UserInexistException {
 
-		if(!this.isQualified(memberVO.guestID)){
-			return ResultMessage.FAIL;
-		}
+//		if(!this.isQualified(memberVO.guestID)){
+//			return ResultMessage.FAIL;
+//		}
 
 		try {
 			MemberPO memberPO = new MemberPO(memberVO);
+			System.out.println(memberVO.enterprise);
+			//TODO 高源 此处打印了输入企业名称，我得到的结果空字符串，你看一下
 			return guestDataService.modifyMember(memberPO);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -162,15 +167,11 @@ public class Member implements MemberBLService{
 		}
 	}
 
-	private boolean isQualified(String userID){
+	private boolean isQualified(String userID) throws UserInexistException{
 		Guest tempGuest = new Guest();
-		if(!tempGuest.isGuest(userID.length())||!tempGuest.hasGuest(userID)){
-			return false;
-		}
+		if(!tempGuest.isGuest(userID.length())){return false;}
+		tempGuest.hasGuest(userID);
 		return true;
 	}
 	
-//	private boolean infoDetector(MemberVO memberVO) {
-//		if(memberVO.birthday==null&&)
-//	}
 }
