@@ -44,8 +44,9 @@ public class RoomTypeCriteria implements SearchCriteria {
 	private boolean hasRoomType(Iterator<RoomType> roomTypesOfHotel) {
 		boolean hasRoomType = false;
 		while(roomTypesOfHotel.hasNext()){
+			RoomType currentRoomType = roomTypesOfHotel.next();
 			for(int i = 0;i<roomTypes.size();i++){
-				if(roomTypesOfHotel.next() == roomTypes.get(i)){
+				if(currentRoomType == roomTypes.get(i)){
 					return true;
 				}
 			}

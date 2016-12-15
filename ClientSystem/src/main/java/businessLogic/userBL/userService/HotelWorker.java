@@ -35,11 +35,6 @@ public class HotelWorker implements UserService {
 	 */
 	public HotelWorker() {
 		hotelWorkerDataService = ClientRemoteHelper.getInstance().getHotelWorkerDataService();
-//		try {
-//			hotelWorkerDataService = new HotelWorkerDataService_Stub();
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	/**

@@ -87,7 +87,8 @@ public class Hotel implements HotelInfoOperation{
 
 		hotelPO = new HotelPO(hotelVO);
 		try {
-			return hotelDataService.updateHotelInfo(hotelPO);
+			ResultMessage msg = hotelDataService.updateHotelInfo(hotelPO);
+			return msg;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -127,7 +128,7 @@ public class Hotel implements HotelInfoOperation{
 	public ResultMessage scoreUpdate(String hotelID,double score) {
 		initHotelPO(hotelID);
 		int commentsNum = hotelPO.getCommentsNum();
-		hotelPO.setScore((commentsNum*hotelPO.getScore()+score)/commentsNum+1);
+		hotelPO.setScore((commentsNum*hotelPO.getScore()+score)/(commentsNum+1));
 		return updateHotelInfo(new HotelVO(hotelPO));
 	}
 	

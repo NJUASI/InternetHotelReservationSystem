@@ -39,11 +39,6 @@ public class Market implements MarketBLService{
 		marketDataService = ClientRemoteHelper.getInstance().getMarketDataService();
 		member = MemberController.getInstance();
 		user = UserController.getInstance();
-//		try {
-//			marketDataService = new MarketDataService_Stub();
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	/**

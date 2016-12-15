@@ -106,13 +106,6 @@ public class OfflineController {
 	 */
 	@FXML
 	protected void checkOut(){
-		/**
-		 * TODO fjj注意：这里将roomType2改为roomName2，roomNum2也改为选择的，
-		 * 我把已经入住的房间数量加载进来，不然又会加入条件检测；
-		 * 我加了已经，房间的初始数目在前面初始化
-		 * roomNum.getItems().add(i);for循环
-		 */
-
 		hotelBLController.checkOutOffline(hotelID,RoomType.getEnum(roomType2.getValue()), Integer.valueOf(roomNum2.getValue()));
 		roomType2.setValue("");
 		roomNum2.setValue(null);;

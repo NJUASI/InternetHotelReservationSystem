@@ -295,10 +295,8 @@ public class OrderCheckController {
 		searchUncommentedOrder();
 		if (result == ResultMessage.SUCCESS) {
 			new PopUp("评价成功", "评价");
-
 		}else {
 			new PopUp("评价失败", "评价");
-			
 		}
 		
 		//刷新订单详情界面

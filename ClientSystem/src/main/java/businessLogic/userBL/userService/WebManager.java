@@ -35,11 +35,6 @@ public class WebManager implements UserService {
 	 */
 	public WebManager() {
 		webManagerDataService = ClientRemoteHelper.getInstance().getWebManagerDataService();
-//		try {
-//			webManagerDataService = new WebManagerDataService_Stub();
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	/**

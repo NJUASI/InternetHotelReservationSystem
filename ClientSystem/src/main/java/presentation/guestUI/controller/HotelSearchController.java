@@ -452,6 +452,7 @@ public class HotelSearchController {
 
 	private TextField roomInput,minpriceInput,	maxpriceInput,hotelNameInput;
 
+	private List<CheckBox> roomTypeBox = new ArrayList<CheckBox>();
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -463,6 +464,19 @@ public class HotelSearchController {
 		hotelCheck.setVisible(false);
 		hotelChoose.setVisible(true);
 		initLevelAndScore();
+		initRoomTypeBox();
+	}
+
+	private void initRoomTypeBox() {
+		//先清空一次
+		roomTypeBox.clear();
+		
+		//将5种房型的box加进来
+		roomTypeBox.add(box1);
+		roomTypeBox.add(box2);
+		roomTypeBox.add(box3);
+		roomTypeBox.add(box4);
+		roomTypeBox.add(box5);		
 	}
 
 	private void initLevelAndScore() {
@@ -547,9 +561,18 @@ public class HotelSearchController {
 			criteria.add(SearchCriteriaType.REMAIN_ROOM_NUM);
 			vo.remainRoomNum = Integer.parseInt(roomInput.getText());
 		}
-		//TODO gy 我不能用一个for循环去取到已经被勾选的框，只能单个取，给我一种可以通过循环取的方案
-		//TODO gcm 容我考虑一下这个问题		
-		//		vo.roomTypes = new ArrayList<RoomType>();
+		
+		//选择房间类型
+		List<RoomType> selectedRoomTypes = new ArrayList<RoomType>();
+		for(int i = 0;i<roomTypeBox.size();i++){
+			if(roomTypeBox.get(i).isSelected()){
+				selectedRoomTypes.add(RoomType.getEnum(roomTypeBox.get(i).getText()));
+			}
+		}
+		if(selectedRoomTypes.size()>0){
+			vo.roomTypes = selectedRoomTypes;
+			criteria.add(SearchCriteriaType.ROOM_TYPE);
+		}
 
 		criteria.add(SearchCriteriaType.NULL);
 
