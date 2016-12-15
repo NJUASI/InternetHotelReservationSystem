@@ -159,6 +159,7 @@ public class Member implements MemberBLService{
 		try {
 			MemberPO memberPO = new MemberPO(memberVO);
 			System.out.println(memberVO.enterprise);
+			//TODO 高源 此处打印了输入企业名称，我得到的结果空字符串，你看一下
 			return guestDataService.modifyMember(memberPO);
 		} catch (RemoteException e) {
 			e.printStackTrace();
