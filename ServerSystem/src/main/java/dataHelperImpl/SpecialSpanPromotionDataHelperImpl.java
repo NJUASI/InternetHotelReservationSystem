@@ -9,6 +9,7 @@ import java.util.List;
 
 import po.SpecialSpanPromotionPO;
 import utilities.JDBCUtil;
+import utilities.TimeChange;
 import utilities.enums.ResultMessage;
 
 public class SpecialSpanPromotionDataHelperImpl implements dataHelper.SpecialSpanPromotionDataHelper {
@@ -71,8 +72,8 @@ public class SpecialSpanPromotionDataHelperImpl implements dataHelper.SpecialSpa
 			ps.setString(1, specialSpanPromotionPO.getUserID());
 			ps.setString(2, specialSpanPromotionPO.getPromotionName());
 			ps.setDouble(3, specialSpanPromotionPO.getDiscount());
-			ps.setObject(4, specialSpanPromotionPO.getStartDate());
-			ps.setObject(5, specialSpanPromotionPO.getEndDate());
+			ps.setString(4, TimeChange.date2String(specialSpanPromotionPO.getStartDate()));
+			ps.setString(5, TimeChange.date2String(specialSpanPromotionPO.getEndDate()));
 			ps.execute();
 			
 			return ResultMessage.SUCCESS;
@@ -100,8 +101,8 @@ public class SpecialSpanPromotionDataHelperImpl implements dataHelper.SpecialSpa
 			ps = conn.prepareStatement(sql);
 			
 			ps.setDouble(1, specialSpanPromotionPO.getDiscount());
-			ps.setObject(2, specialSpanPromotionPO.getStartDate());
-			ps.setObject(3, specialSpanPromotionPO.getEndDate());
+			ps.setString(2, TimeChange.date2String(specialSpanPromotionPO.getStartDate()));
+			ps.setString(3, TimeChange.date2String(specialSpanPromotionPO.getEndDate()));
 			ps.setString(4, specialSpanPromotionPO.getUserID());
 			ps.setString(5, specialSpanPromotionPO.getPromotionName());
 			
@@ -153,8 +154,8 @@ public class SpecialSpanPromotionDataHelperImpl implements dataHelper.SpecialSpa
 				specialSpanPromotionPO.setUserID(userID);
 				specialSpanPromotionPO.setPromotionName(rs.getString(2));
 				specialSpanPromotionPO.setDiscount(rs.getDouble(3));
-				specialSpanPromotionPO.setStartDate(rs.getDate(4).toLocalDate());
-				specialSpanPromotionPO.setEndDate(rs.getDate(5).toLocalDate());
+				specialSpanPromotionPO.setStartDate(TimeChange.string2Date(rs.getString(4)));
+				specialSpanPromotionPO.setEndDate(TimeChange.string2Date(rs.getString(5)));
 				
 				specialSpanPromotionPOList.add(specialSpanPromotionPO);
 			}
