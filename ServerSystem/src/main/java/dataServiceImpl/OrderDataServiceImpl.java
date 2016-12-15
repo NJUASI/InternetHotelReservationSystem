@@ -238,13 +238,17 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	 */
 	@Override
 	public ResultMessage updateCheckIn(CheckInPO checkInPO) throws RemoteException {
+		// 更新订单的入住信息
 		ResultMessage msg1 = orderDataHelper.setCheckIn(checkInPO.getOrderID(), checkInPO.getRoomNumber(),
 				checkInPO.getCheckInTime(), checkInPO.getExpectLeaveTime());
+		// 更新订单状态
 		ResultMessage msg2 = orderDataHelper.setState(checkInPO.getOrderID(), OrderState.EXECUTED);
 
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
+			System.out.println("Success");
 			return ResultMessage.SUCCESS;
 		} else {
+			System.out.println("FAIl");
 			return ResultMessage.FAIL;
 		}
 	}

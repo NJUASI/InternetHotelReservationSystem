@@ -106,14 +106,15 @@ public class GuestOrder implements GuestOrderBLService {
 		ResultMessage resultMessage = ResultMessage.FAIL;
 		
 		if (orderVO.orderGeneralVO.orderID == null && orderVO.checkInTime == null 
-				&& orderVO.checkOutTime == null && orderVO.roomNumber == null 
-				&& orderVO.score == -1 && orderVO.comment == null) {
+				&& orderVO.checkOutTime == null && orderVO.roomNumber == "" 
+				&& orderVO.score == -1 && orderVO.comment == "") {
 			try {
 				resultMessage = orderDataService.createOrder(new OrderPO(orderVO));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
 		}
+
 		return resultMessage;
 	}
 	
