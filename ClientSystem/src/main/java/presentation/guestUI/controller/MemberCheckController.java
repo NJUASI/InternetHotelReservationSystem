@@ -123,6 +123,7 @@ public class MemberCheckController {
 			MemberVO tempMemberVO = memberVO;
 			tempMemberVO.enterprise = enterprise.getText();
 			memberBLController.add(tempMemberVO);
+			//TODO 高源 此处开始获取了界面的内容，往下传
 			initialize();
 		} catch (UserInexistException e) {
 			e.printStackTrace();
