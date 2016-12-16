@@ -49,7 +49,7 @@ public class OrderDataHelperImplTest {
 		final String phone = ciphertext.encrypt("15205153110");
 		
 		OrderPO orderPO = new OrderPO(orderID, "1234567900", "98765443", "南京金陵饭店", "汉中路2号", 869, 869,
-				createTime, null, null, expectExecuteTime, expectLeaveTime, orderState, true, 
+				createTime, null, null, expectExecuteTime, expectLeaveTime, orderState, true, true,
 				roomType, 1, "5312", 2, name, phone, "无", 4.5, "地理位置特别好，交通、购物、吃饭、去景点都特别方便");
 		
 		assertEquals(ResultMessage.SUCCESS,helper.add(orderPO));
