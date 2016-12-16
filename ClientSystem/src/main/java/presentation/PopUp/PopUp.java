@@ -15,6 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 /**
  * @author 61990
  * @lastChangedBy 61990
@@ -62,7 +63,13 @@ public class PopUp {
 		root.getChildren().add(vbox);
 		
 		stage.setTitle(operation);
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>(){
 
+			@Override
+			public void handle(WindowEvent event) {
+				 stage2.get(0).setOpacity(1); 
+			}
+		});
 		
 	}
 
