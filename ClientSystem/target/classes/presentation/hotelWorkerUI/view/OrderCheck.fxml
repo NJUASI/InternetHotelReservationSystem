@@ -37,18 +37,19 @@
                   <TableColumn fx:id="stateColumn" prefWidth="98.0" text="订单状态" />
                </columns>
             </TableView>
-            <Label alignment="CENTER" layoutX="403.0" layoutY="14.0" prefHeight="39.0" prefWidth="90.0" text="订单列表">
+            <Label alignment="CENTER" focusTraversable="false" layoutX="403.0" layoutY="14.0" prefHeight="39.0" prefWidth="90.0" text="订单列表">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Button layoutX="112.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchExecutedOrder" text="已执行订单" />
-            <Button layoutX="214.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchUnexecutedOrder" text="未执行订单" />
-            <Button layoutX="420.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchAbnormalOrder" text="异常订单" />
-            <Button layoutX="318.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchCancelledOrder" text="已撤销订单" />
-            <Button fx:id="checkInBt1" layoutX="564.0" layoutY="70.0" mnemonicParsing="false" onAction="#checkIn2" text="入住" visible="false" />
-            <Button fx:id="checkOutBt1" layoutX="636.0" layoutY="70.0" mnemonicParsing="false" onAction="#checkOut2" text="退房" visible="false" />
-            <Button layoutX="23.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchAlldOrder" text="所有订单" />
+            <Button layoutX="14.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchAlldOrder" text="所有订单" />
+            <Button layoutX="102.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchExecutedOrder" text="已执行订单" />
+            <Button layoutX="308.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchUnexecutedOrder" text="未执行订单" />
+            <Button layoutX="515.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchAbnormalOrder" text="异常订单" />
+            <Button layoutX="410.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchCancelledOrder" text="已撤销订单" />
+            <Button fx:id="checkInBt1" layoutX="659.0" layoutY="70.0" mnemonicParsing="false" onAction="#checkIn2" text="入住" />
+            <Button fx:id="checkOutBt1" focusTraversable="false" layoutX="709.0" layoutY="70.0" mnemonicParsing="false" onAction="#checkOut2" text="退房" />
+            <Button layoutX="205.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchNotCheckOutOrder" text="未退房订单" />
          </children>
       </AnchorPane>
       <Pane fx:id="orderDetail" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" visible="false">

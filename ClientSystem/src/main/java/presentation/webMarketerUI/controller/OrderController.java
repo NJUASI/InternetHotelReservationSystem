@@ -88,7 +88,7 @@ public class OrderController {
 	private void initialize() {
 		
 		orderBLController = OrderBLController.getInstance();
-		
+		searchDate.setValue(LocalDate.now());
 		cancelPercent.setValue("50%");
 		cancelPercent.getItems().add("50%");
 		cancelPercent.getItems().add("100%");
@@ -166,16 +166,16 @@ public class OrderController {
 //		
 //		//TODO 冯俊杰：按时间排序
 //		initOrderCheck(orderGenerals);
+		orderCheck.setVisible(true);
+		searchPane.setVisible(false);
+		cancelOrderPaneInCheck.setDisable(false);
+		
 		try{
 			LocalDate date = searchDate.getValue();
 
 			orderGenerals = orderBLController.getAllAbnormalOrderGeneral(date);
 			initOrderCheck(orderGenerals);
-			if(orderGenerals.get(0)!=null){
-			orderCheck.setVisible(true);
-			searchPane.setVisible(false);
-			cancelOrderPaneInCheck.setDisable(false);
-			}
+			
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
