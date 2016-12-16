@@ -1,5 +1,8 @@
 package presentation.PopUp;
 
+import com.sun.javafx.robot.impl.FXRobotHelper;
+
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -29,6 +32,9 @@ public class PopUp {
 	 * @只显示一条提示信息的通用方法
 	 */
 	public PopUp(String message, String operation){
+		
+		ObservableList<Stage> stage2 = FXRobotHelper.getStages();
+		stage2.get(0).setOpacity(0.3);
 		initWindow();
 		Label result = new Label(message);
 		VBox vbox = new VBox(); 
@@ -46,6 +52,7 @@ public class PopUp {
 	           @Override
 	           public void handle(ActionEvent event) {
 	             stage.close();
+	             stage2.get(0).setOpacity(1);
 	           }
 	    });
 	  StackPane pane2=new StackPane();
@@ -60,7 +67,7 @@ public class PopUp {
 	}
 
 	private void initWindow() {
-
+		
 		root = new Pane();
 		scene = new Scene(root,300,150); // 创建场景；
 		stage = new Stage();// 创建舞台
