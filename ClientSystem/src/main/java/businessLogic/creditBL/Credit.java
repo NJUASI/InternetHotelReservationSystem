@@ -44,7 +44,7 @@ public class Credit{
 	 * @param guestID 从登录界面层传下来的ID
 	 * @return 客户个人所有信用记录
 	 */
-	public Iterator<CreditVO> getAllCreditDetail(final String guestID) {
+	public Iterator<CreditVO> getAllCreditDetail(String guestID) {
 		try {
 			return convertPOListToItr(creditDataService.getAllCreditDetail(guestID));
 		} catch (RemoteException e) {

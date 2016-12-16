@@ -57,7 +57,7 @@ public interface HotelInfoOperation {
 	public int getRemainRoomNum(String hotelID);
 
 	/**
-	 * @Description:办理入住，线上线下均调此方法
+	 * @Description:办理入住
 	 * @param hotelID
 	 * @param roomName
 	 * @param roomNum
@@ -70,7 +70,7 @@ public interface HotelInfoOperation {
 	public ResultMessage checkIn(String hotelID, RoomType roomType, int roomNum);
 
 	/**
-	 * @Description:办理退房，线上线下均调此方法
+	 * @Description:办理退房
 	 * @param hotelID
 	 * @param roomType
 	 * @param roomNum

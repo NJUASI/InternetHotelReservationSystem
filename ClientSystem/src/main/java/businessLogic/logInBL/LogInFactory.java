@@ -21,19 +21,19 @@ public class LogInFactory {
 	public UserType getUserType(String userID) throws SpecialCharacterException, InvalidLengthInputException{
 		
 		try {
-			if(this.detector.idDetector(userID, Guest.IDLength)){
+			if(detector.idDetector(userID, Guest.IDLength)){
 				return UserType.GUEST;
 			}
 			
-			if(this.detector.idDetector(userID, HotelWorker.IDLength)){
+			if(detector.idDetector(userID, HotelWorker.IDLength)){
 				return UserType.HOTEL_WORKER;
 			}
 			
-			if(this.detector.idDetector(userID, WebMarketer.IDLength)){
+			if(detector.idDetector(userID, WebMarketer.IDLength)){
 				return UserType.WEB_MARKETER;
 			}
 			
-			if(this.detector.idDetector(userID, WebManager.IDLength)){
+			if(detector.idDetector(userID, WebManager.IDLength)){
 				return UserType.WEB_MANAGER;
 			}
 		} catch (SpecialCharacterException e) {
