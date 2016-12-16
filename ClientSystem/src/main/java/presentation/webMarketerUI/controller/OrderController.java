@@ -171,9 +171,11 @@ public class OrderController {
 
 			orderGenerals = orderBLController.getAllAbnormalOrderGeneral(date);
 			initOrderCheck(orderGenerals);
+			if(orderGenerals.get(0)!=null){
 			orderCheck.setVisible(true);
 			searchPane.setVisible(false);
 			cancelOrderPaneInCheck.setDisable(false);
+			}
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
