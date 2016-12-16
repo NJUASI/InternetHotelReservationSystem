@@ -1,6 +1,7 @@
 package businessLogic.orderBL;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -235,6 +236,19 @@ public final class OrderBLController implements OrderBLService {
 		return hotelWorkerOrder.updateCheckOut(checkOutVO);
 	}
 
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/15
+	 * @param hotelID 酒店编号
+	 * @param hasCheckOut 状态：已退房／未退房
+	 * @return 客户<已退房／未退房>订单
+	 */
+	@Override
+	public Iterator<OrderGeneralVO> getAllHotelCheckOutOrderGeneral(String hotelID, boolean hasCheckOut) {
+		return hotelWorkerOrder.getAllHotelCheckOutOrderGeneral(hotelID, hasCheckOut);
+	}
+	
 
 
 
@@ -340,5 +354,4 @@ public final class OrderBLController implements OrderBLService {
 		}
 		return (int)total;
 	}
-
 }

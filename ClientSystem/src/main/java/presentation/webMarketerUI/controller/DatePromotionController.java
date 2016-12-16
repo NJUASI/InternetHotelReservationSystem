@@ -135,6 +135,7 @@ public class DatePromotionController {
 					table.getSelectionModel().getSelectedItem().getStartDate(),
 					table.getSelectionModel().getSelectedItem().getEndDate());
 			preName=table.getSelectionModel().getSelectedItem().getName();
+			nameText.setDisable(true);
 			modifyPane.setVisible(true);
 			addBt.setVisible(false);
 		} catch (Exception e) {
@@ -153,7 +154,7 @@ public class DatePromotionController {
 
 			// 调用promotion的更新特定期间策略的方法
 			promotionController.updateWebSpecialSpanPromotion(encapsulateVO());
-
+			nameText.setDisable(false);
 			modifyPane.setVisible(false);
 			addBt.setVisible(true);
 			setModifyText("","", LocalDate.now(), LocalDate.now().plusDays(1));
@@ -191,6 +192,7 @@ public class DatePromotionController {
 	@FXML
 	protected void cancelModifyPromotion() {
 		modifyPane.setVisible(false);
+		nameText.setDisable(false);
 		addBt.setVisible(true);
 		setModifyText("","", LocalDate.now(), LocalDate.now().plusDays(1));
 		initialize();	
