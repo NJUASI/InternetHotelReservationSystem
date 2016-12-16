@@ -247,6 +247,7 @@ public class HotelSearchController {
 		hotelCheck.setVisible(true);
 		hotelDetail.setVisible(false);
 		createPane.setVisible(false);
+		hotelChoose.setVisible(false);
 	}
 
 
@@ -449,8 +450,9 @@ public class HotelSearchController {
 	@FXML
 	private ComboBox<Double> minScoreInput,maxScoreInput;
 	@FXML
-
-	private TextField roomInput,minpriceInput,	maxpriceInput,hotelNameInput;
+	private ComboBox<Integer> roomInput;
+	@FXML
+	private TextField minpriceInput,maxpriceInput,hotelNameInput;
 
 	private List<CheckBox> roomTypeBox = new ArrayList<CheckBox>();
 	/**
@@ -465,6 +467,7 @@ public class HotelSearchController {
 		hotelChoose.setVisible(true);
 		initLevelAndScore();
 		initRoomTypeBox();
+		
 	}
 
 	private void initRoomTypeBox() {
@@ -484,6 +487,9 @@ public class HotelSearchController {
 		int maxLevel = 5;
 		int maxScore = 5;
 
+		for (int i = 1; i < 11; i++) {
+			roomInput.getItems().add(i);
+		}
 		for (int i = 1; i <= maxLevel; i++) {
 			minLevelInput.getItems().add(i);
 			maxLevelInput.getItems().add(i);	
@@ -557,9 +563,9 @@ public class HotelSearchController {
 			vo.minScore = minScoreInput.getValue();
 			vo.maxScore = maxScoreInput.getValue();
 		}
-		if(roomInput.getText()!=null){
+		if(roomInput.getValue()!=null){
 			criteria.add(SearchCriteriaType.REMAIN_ROOM_NUM);
-			vo.remainRoomNum = Integer.parseInt(roomInput.getText());
+			vo.remainRoomNum = roomInput.getValue();
 		}
 		
 		//选择房间类型
