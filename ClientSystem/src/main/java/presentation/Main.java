@@ -9,8 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
-
+import rmi.ClientRemoteHelper;
 
 /**
  * @author 61990
@@ -23,32 +22,43 @@ public class Main extends Application {
 	 * @author 61990
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/11/27
-	 * @param stage 界面主载体
-	 * @throws IOException 界面初始化
+	 * @param stage
+	 *            界面主载体
+	 * @throws IOException
+	 *             界面初始化
 	 */
 	public void start(final Stage stage) throws IOException {
 		final Parent root = FXMLLoader.load(getClass().getResource("/presentation/signUpUI/view/logIn.fxml"));
-		
+
 		final Scene scene = new Scene(root, 1000, 625);
 
 		stage.setTitle("酒店互联网预定系统");
 		stage.setScene(scene);
 		stage.setResizable(false);
 		stage.show();
-		stage.setOnCloseRequest(new EventHandler<WindowEvent>(){
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
 			@Override
 			public void handle(WindowEvent event) {
-				System.exit(0); 
+				System.exit(0);
 			}
 		});
 	}
 
 	/**
 	 * @author 61990
-	 * @param args ……
+	 * @param args
+	 *            ……
 	 */
 	public static void main(final String[] args) {
+
+		// 界面
 		launch(args);
+
+		
+		
+		// RMI
+		ClientRemoteHelper.getInstance().setLocalhost();
+		
 	}
 }

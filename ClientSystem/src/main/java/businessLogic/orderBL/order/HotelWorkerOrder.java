@@ -131,7 +131,6 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 	public ResultMessage updateCheckIn (CheckInVO checkInVO) {
 		ResultMessage msg1 = ResultMessage.FAIL;
 		ResultMessage msg2 = ResultMessage.FAIL;
-		ResultMessage msg3 = ResultMessage.FAIL;
 		
 		final OrderVO thisOrder = commonOrder.getOrderDetail(checkInVO.orderID);
 		final OrderState thisOrderState = thisOrder.orderGeneralVO.state;
@@ -161,20 +160,12 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 				}
 				msg2 = creditBLService.addCreditRecord(creditVO);
 
-				// 更新酒店剩余房间信息
-				System.out.println(thisOrder.orderGeneralVO.orderID);
-				System.out.println(thisOrder.roomType);
-				System.out.println(thisOrder.roomNumCount);
-				
-				hotelInterface = new Hotel();
-				msg3 = hotelInterface.checkIn(thisOrder.orderGeneralVO.orderID, thisOrder.roomType,
-						thisOrder.roomNumCount);
 			} catch (RemoteException | UserInexistException e) {
 				e.printStackTrace();
 			}
 		}
 		
-		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS && msg3 == ResultMessage.SUCCESS) {
+		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
 			return ResultMessage.SUCCESS;
 		} else {
 			return ResultMessage.FAIL;
