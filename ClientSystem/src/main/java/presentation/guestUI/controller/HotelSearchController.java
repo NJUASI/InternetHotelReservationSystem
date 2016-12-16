@@ -490,6 +490,7 @@ public class HotelSearchController {
 		for (int i = 1; i < 11; i++) {
 			roomInput.getItems().add(i);
 		}
+		roomInput.setValue(1);
 		for (int i = 1; i <= maxLevel; i++) {
 			minLevelInput.getItems().add(i);
 			maxLevelInput.getItems().add(i);	
