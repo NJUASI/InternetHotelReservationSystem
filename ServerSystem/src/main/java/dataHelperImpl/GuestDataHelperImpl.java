@@ -210,6 +210,9 @@ public class GuestDataHelperImpl implements GuestDataHelper {
 	}
 	
 	private GuestPO change(GuestPO guestPO){
+		
+		if(guestPO==null){return null;}
+		
 		GuestPO resultPO = guestPO;
 		if(resultPO.getBirthday().isEqual(LocalDate.of(2, 2, 2))){
 			resultPO.setBirthday(null);

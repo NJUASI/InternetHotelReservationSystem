@@ -84,7 +84,6 @@ public class ChargeController {
 			name.setText(guestVO.name);
 			credit.setText(Double.toString(guestVO.credit));
 		} catch (UserInexistException e) {
-			e.printStackTrace();
 			new PopUp("该用户不存在", "搜索失败");
 		}
 	}
