@@ -148,7 +148,11 @@ public class Guest implements UserService, GuestCreditService {
 	public String getLogInInfo(String userID) throws UserInexistException {
 
 		try {
-			return convert(guestDataService.getSingleGuest(userID)).password;
+			UserVO tempUserVO = convert(guestDataService.getSingleGuest(userID));
+			if(tempUserVO==null){
+				throw new UserInexistException();
+			}
+			return tempUserVO.password;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null; // 出现异常返回null

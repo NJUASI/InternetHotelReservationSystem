@@ -60,9 +60,11 @@ public class PopUp {
 	}
 
 	private void initWindow() {
+
 		root = new Pane();
 		scene = new Scene(root,300,150); // 创建场景；
 		stage = new Stage();// 创建舞台
+
 		stage.setScene(scene); // 将场景载入舞台；
 		stage.setAlwaysOnTop(true);
 		stage.setResizable(false);

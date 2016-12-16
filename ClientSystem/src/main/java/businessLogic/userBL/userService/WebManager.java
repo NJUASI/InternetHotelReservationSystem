@@ -133,7 +133,11 @@ public class WebManager implements UserService {
 	public String getLogInInfo(String userID) throws UserInexistException {
 		
 		try {
-			return convert(webManagerDataService.getSingleWebManager(userID)).password;
+			UserVO tempUserVO = convert(webManagerDataService.getSingleWebManager(userID));
+			if(tempUserVO==null){
+				throw new UserInexistException();
+			}
+			return tempUserVO.password;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
