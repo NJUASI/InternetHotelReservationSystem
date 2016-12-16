@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import presentation.PopUp.PopUp;
 import presentation.Table.DatePromotionTable;
 import utilities.IDReserve;
 import utilities.enums.PromotionType;
@@ -103,9 +104,10 @@ public class PromotionController {
 					table.getSelectionModel().getSelectedItem().getStartDate(),
 					table.getSelectionModel().getSelectedItem().getEndDate());
 			modifyPane.setVisible(true);
+			nameText.setDisable(true);
 			addBt.setVisible(false);
 		} catch (Exception e) {
-			System.out.println("请选定");
+			new PopUp("请选定","");
 		}
 	}
 
@@ -127,7 +129,7 @@ public class PromotionController {
 			vo.userID = hotelID;
 			// 调用promotionBLController的更新特定期间折扣的方法
 			promotionBLController.updateHotelSpecialSpanPromotion(vo);
-
+			nameText.setDisable(false);
 			modifyPane.setVisible(false);
 			addBt.setVisible(true);
 			setModifyText("","",null,null);
@@ -168,13 +170,12 @@ public class PromotionController {
 	 */
 	@FXML
 	protected void cancelModifyPromotion() {
-		try {
+	
 			modifyPane.setVisible(false);
+			nameText.setDisable(false);
 			addBt.setVisible(true);
 			setModifyText("","",null,null);
-		} catch (Exception e) {
-
-		}
+	
 	}
 	private void setModifyText(String name,String discount,LocalDate startDate ,LocalDate endDate) {
 		nameText.setText(name);

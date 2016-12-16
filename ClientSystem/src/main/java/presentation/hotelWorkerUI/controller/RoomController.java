@@ -131,6 +131,7 @@ public class RoomController {
 			preRoomNum=roomTable.getSelectionModel().getSelectedItem().getRoomNum();
 			preRemainNum=roomTable.getSelectionModel().getSelectedItem().getRemainRoomNum();
 			setModifyText(selectedRoomVO.getRoomType(),selectedRoomVO.getRoomNum(),selectedRoomVO.getPrice());
+			roomType.setVisible(true);
 			modifyPane.setVisible(true);
 			addBt.setVisible(false);
 		} catch (Exception e) {
@@ -157,7 +158,7 @@ public class RoomController {
 		vo.price = Integer.parseInt(price.getText());
 		
 		hotelBLController.updateHotelRoomInfo(vo);
-	
+		roomType.setVisible(false);
 		modifyPane.setVisible(false);
 		addBt.setVisible(true);
 		
@@ -205,6 +206,7 @@ public class RoomController {
 	@FXML
 	protected void cancelModify() {
 		modifyPane.setVisible(false);
+		roomType.setVisible(false);
 		addBt.setVisible(true);
 		setModifyText("","","");
 	}

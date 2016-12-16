@@ -138,11 +138,27 @@ public class OrderController {
 		orderGenerals = orderBLController.getSpecialOrderGenerals(hotelID, hotelWorker, OrderState.EXECUTED);
 
 		checkInBt1.setVisible(false);
+		checkOutBt1.setVisible(false);
+
+		initOrderCheck(orderGenerals);
+	}
+	/**
+	 * @author 61990
+	 * @lastChangedBy 619901
+	 * @updateTime 2016/12/16
+	 * @打开已执行订单概况
+	 */
+	@FXML
+	protected void searchNotCheckOutOrder() {
+//TODO fjj 上个接口不用变了，加一个筛选已执行的未退房订单!!!,你可以直接看退房时间来判断……
+		
+		orderGenerals = orderBLController.getSpecialOrderGenerals(hotelID, hotelWorker, OrderState.EXECUTED);
+
+		checkInBt1.setVisible(false);
 		checkOutBt1.setVisible(true);
 
 		initOrderCheck(orderGenerals);
 	}
-
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
@@ -394,7 +410,7 @@ public class OrderController {
 		final CheckOutVO checkOutVO = new CheckOutVO(checkInOrderID.getText(), checkOutTime);
 		
 		final ResultMessage result = orderBLController.updateCheckOut(checkOutVO);
-		searchExecutedOrder();
+		searchNotCheckOutOrder();
 		searchAlldOrder();
 //	TODO 后期可以把这些放在界面里，不弹框
 		if (result == ResultMessage.SUCCESS) {
