@@ -148,13 +148,11 @@ public class OrderController {
 	 * @author 61990
 	 * @lastChangedBy 619901
 	 * @updateTime 2016/12/16
-	 * @打开已执行订单概况
+	 * @打开未退房订单概况
 	 */
 	@FXML
-	protected void searchNotCheckOutOrder() {
-//TODO fjj 上个接口不用变了，加一个筛选已执行的未退房订单!!!,你可以直接看退房时间来判断……
-		
-		orderGenerals = orderBLController.getSpecialOrderGenerals(hotelID, hotelWorker, OrderState.EXECUTED);
+	protected void searchNotCheckOutOrder() {		
+		orderGenerals = orderBLController.getAllHotelCheckOutOrderGeneral(hotelID, false);
 
 		checkInBt1.setVisible(false);
 		checkOutBt1.setVisible(true);
@@ -269,10 +267,10 @@ public class OrderController {
 		if(orderVO.orderGeneralVO.state == OrderState.EXECUTED){
 			checkOutBt.setVisible(true);
 			checkInBt.setVisible(false);
-			if(orderVO.checkOutTime==LocalDateTime.of(2,2, 2, 2, 2)){
-				checkOutBt.setDisable(false);
-			}else{
+			if(orderVO.orderGeneralVO.hasCheckOut){
 				checkOutBt.setDisable(true);
+			}else{
+				checkOutBt.setDisable(false);
 			}
 		}
 		if(orderVO.orderGeneralVO.state == OrderState.UNEXECUTED 
@@ -414,7 +412,10 @@ public class OrderController {
 	@FXML
 	protected void sureCheckOut(){
 		final LocalDateTime checkOutTime = LocalDateTime.now();
-		final CheckOutVO checkOutVO = new CheckOutVO(checkInOrderID.getText(), checkOutTime);
+		final CheckOutVO checkOutVO = new CheckOutVO(checkOutOrderID.getText(), checkOutTime);
+		
+		System.out.println(checkOutVO.orderID);
+		System.out.println(checkOutVO.checkOutTime);
 		
 		final ResultMessage result = orderBLController.updateCheckOut(checkOutVO);
 		searchNotCheckOutOrder();

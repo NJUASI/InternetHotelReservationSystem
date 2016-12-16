@@ -1,8 +1,11 @@
 package businessLogicService.orderBLService;
 
+import java.util.Iterator;
+
 import utilities.enums.ResultMessage;
 import vo.CheckInVO;
 import vo.CheckOutVO;
+import vo.OrderGeneralVO;
 
 /**
  * 
@@ -39,4 +42,14 @@ public interface HotelWorkerOrderBLService {
 	 * @return 是否成功更新
 	 */
 	ResultMessage updateCheckOut(CheckOutVO checkOutVO);
+	
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/15
+	 * @param hotelID 酒店编号
+	 * @param hasCheckOut 状态：已退房／未退房
+	 * @return 客户<已退房／未退房>订单
+	 */
+	Iterator<OrderGeneralVO> getAllHotelCheckOutOrderGeneral(String hotelID, boolean hasCheckOut);
 }
