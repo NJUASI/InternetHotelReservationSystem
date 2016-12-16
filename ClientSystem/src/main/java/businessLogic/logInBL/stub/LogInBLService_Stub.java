@@ -104,8 +104,6 @@ public class LogInBLService_Stub implements LogInBLService {
 
 	@Override
 	public void logOut(String userID) {
-		// TODO Auto-generated method stub
 		
 	}
-
 }

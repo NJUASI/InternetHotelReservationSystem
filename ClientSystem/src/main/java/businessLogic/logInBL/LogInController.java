@@ -72,8 +72,8 @@ public final class LogInController implements LogInBLService {
 	 *           从登录界面层传下来的password
 	 * @return 用户是否成功登录
 	 * @throws InvalidLengthInputException 
-	 * @throws SpecialCharacterException 
-	 * @throws UserInexistException 
+	 * @throws SpecialCharacterException
+	 * @throws UserInexistException
 	 */
 	@Override
 	public UserType logIn(String userID, String password) throws WrongPasswordException, SpecialCharacterException, InvalidLengthInputException, UserInexistException{
@@ -92,5 +92,4 @@ public final class LogInController implements LogInBLService {
 	public void logOut(String userID) {
 		logIn.logOut(userID);		
 	}
-
 }
