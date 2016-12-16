@@ -1,7 +1,9 @@
 package businessLogic.logInBL;
 
+import java.rmi.RemoteException;
+
 import businessLogic.userBL.User;
-import businessLogicService.logInBLService.LogInBLService;
+import dataService.sourceDataService.SourceDataService;
 import exception.inputException.InvalidInputException;
 import exception.inputException.InvalidLengthInputException;
 import exception.inputException.PasswordInputException;
@@ -9,6 +11,7 @@ import exception.inputException.SpecialCharacterException;
 import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import exception.verificationException.WrongPasswordException;
+import rmi.ClientRemoteHelper;
 import utilities.Detector;
 import utilities.IDReserve;
 import utilities.enums.UserType;
@@ -21,10 +24,11 @@ import vo.UserVO;
  * @lastChangedBy charles
  *
  */
-public class LogIn implements LogInBLService {
+public class LogIn{
 
 	private User user;
 	private LogInFactory factory;
+	private SourceDataService sourceDataService;
 
 	/**
 	 * @author 61990
@@ -34,6 +38,7 @@ public class LogIn implements LogInBLService {
 	public LogIn() {
 		user = new User();
 		factory = new LogInFactory();
+		sourceDataService = ClientRemoteHelper.getInstance().getSourceDataService();
 	}
 
 	/**
@@ -128,8 +133,33 @@ public class LogIn implements LogInBLService {
 	 * 
 	 *            TODO 根据后期确定检查重复登录
 	 */
-	@Override
 	public void logOut(String userID) {
 		IDReserve.getInstance().setUserID("");
+	}
+	
+	
+	//TODO 查重
+	private void guestLogInRecord(String guestID) {
+		try {
+			sourceDataService.guestLogInRecord(guestID);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void guestLogOut(String guestID) {
+		try {
+			sourceDataService.guestLogOut(guestID);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private boolean guestHasLogged(String guestID) {
+		try {
+			return sourceDataService.guestHasLogged(guestID);
+		} catch (RemoteException e) {
+			return false;
+		}
 	}
 }

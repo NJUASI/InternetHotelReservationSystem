@@ -107,10 +107,20 @@ public class Hotel implements HotelInfoOperation{
 	 */
 	public ResultMessage addHotelInfo(HotelVO hotelVO){
 
-		hotelPO = new HotelPO(hotelVO);
-
 		try {
-			return hotelDataService.addHotelInfo(hotelPO);
+			
+			hotelPO = new HotelPO(hotelVO);
+			hotelDataService.addHotelInfo(hotelPO);
+			//默认添加1间单人间，价格为100块
+			RoomInfoVO roomVO = new RoomInfoVO();
+			roomVO.hotelID = hotelVO.hotelID;
+			roomVO.price = 100;
+			roomVO.roomNum = 1;
+			roomVO.remainNum = 1;
+			roomVO.roomType = RoomType.SINGLE_BED;
+			addRoomInfo(roomVO);
+			
+			return ResultMessage.SUCCESS;
 		} catch (RemoteException e) {
 			return ResultMessage.FAIL;
 		}

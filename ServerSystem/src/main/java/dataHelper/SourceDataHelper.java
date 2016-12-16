@@ -17,5 +17,10 @@ public interface SourceDataHelper {
 	public int getMaxGuestNumEachOrder();
 	
 	public int getMaxRoomNumEachOrder();
+	
+	public void guestLogInRecord(String guestID);
+	
+	public void guestLogOut(String guestID);
 
+	boolean guestHasLogged(String guestID);
 }

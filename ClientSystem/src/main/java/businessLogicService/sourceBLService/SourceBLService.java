@@ -70,4 +70,5 @@ public interface SourceBLService {
 	 * @time:2016年12月13日 下午6:52:41
 	 */
 	public int getMaxRoomNumEachOrder();
+
 }

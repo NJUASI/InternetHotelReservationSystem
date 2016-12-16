@@ -17,7 +17,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 import presentation.Table.DatePromotionTable;
-import utilities.IDReserve;
 import vo.SpecialSpanPromotionVO;
 
 
