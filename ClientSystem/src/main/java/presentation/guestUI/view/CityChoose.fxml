@@ -387,12 +387,12 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <TextField fx:id="roomInput" prefHeight="30.0" prefWidth="95.0" text="0" />
                               <Label alignment="CENTER" prefHeight="20.0" prefWidth="115.0" text="间以上" GridPane.columnIndex="1">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
+                              <ComboBox fx:id="roomInput" focusTraversable="false" prefHeight="31.0" prefWidth="110.0" />
                            </children>
                         </GridPane>
                         <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="139.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -418,11 +418,12 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <Button layoutX="663.0" layoutY="441.0" mnemonicParsing="false" onAction="#selectHotel" text="筛选" />
+                  <Button layoutX="481.0" layoutY="507.0" mnemonicParsing="false" onAction="#selectHotel" text="筛选" />
                   <Label layoutX="204.0" layoutY="86.0" text="酒店名称" />
                   <TextField fx:id="hotelNameInput" layoutX="326.0" layoutY="81.0" prefHeight="23.0" prefWidth="309.0" />
                   <Label layoutX="204.0" layoutY="130.0" text="只看预定" />
                   <CheckBox fx:id="boxOnly" focusTraversable="false" layoutX="338.0" layoutY="130.0" mnemonicParsing="false" text="是" />
+                  <Button layoutX="354.0" layoutY="506.0" mnemonicParsing="false" onAction="#returnHotelCheck" prefHeight="32.0" prefWidth="50.0" text="返回" />
                </children>
             </AnchorPane>
          </children>

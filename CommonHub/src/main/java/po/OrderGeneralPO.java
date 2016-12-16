@@ -6,9 +6,8 @@ import java.time.LocalDateTime;
 import utilities.enums.OrderState;
 import vo.OrderGeneralVO;
 
-public class OrderGeneralPO implements Serializable{
-	
-	
+public class OrderGeneralPO implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -16,45 +15,49 @@ public class OrderGeneralPO implements Serializable{
 
 	// 订单编号
 	private String orderID;
-	
+
 	// 客户编号
 	private String guestID;
-	
+
 	// 酒店编号
 	private String hotelID;
-	
+
 	// 酒店名
 	private String hotelName;
-	
+
 	// 酒店地址
 	private String hotelAddress;
-	
+
 	// 最后预定价格
 	private int price;
-	
+
 	// 最晚订单执行时间／预计入住时间
 	private LocalDateTime expectExecuteTime;
-	
+
 	// 预计离开时间
 	private LocalDateTime expectLeaveTime;
-	
+
 	// 订单状态
 	private OrderState state;
-	
-	//	已评论
-	private boolean hasCommented;
-	
-	//	入住人姓名
-	private String name;
-	
-	//	联系方式
-	private String phone;
-	
-	public OrderGeneralPO(){}
 
-	public OrderGeneralPO(String orderID, String guestID, String hotelID, String hotelName, 
-			String hotelAddress, int price, LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime, 
-			OrderState state, boolean hasCommented, String name, String phone) {
+	// 已评论
+	private boolean hasCommented;
+
+	// 已退房
+	private boolean hasCheckOut;
+
+	// 入住人姓名
+	private String name;
+
+	// 联系方式
+	private String phone;
+
+	public OrderGeneralPO() {
+	}
+
+	public OrderGeneralPO(String orderID, String guestID, String hotelID, String hotelName, String hotelAddress,
+			int price, LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime, OrderState state,
+			boolean hasCommented, boolean hasCheckOut, String name, String phone) {
 		super();
 		this.orderID = orderID;
 		this.guestID = guestID;
@@ -66,6 +69,7 @@ public class OrderGeneralPO implements Serializable{
 		this.expectLeaveTime = expectLeaveTime;
 		this.state = state;
 		this.hasCommented = hasCommented;
+		this.hasCheckOut = hasCheckOut;
 		this.name = name;
 		this.phone = phone;
 	}
@@ -81,10 +85,11 @@ public class OrderGeneralPO implements Serializable{
 		this.expectLeaveTime = orderGeneralVO.expectLeaveTime;
 		this.state = orderGeneralVO.state;
 		this.hasCommented = orderGeneralVO.hasCommented;
+		this.hasCheckOut = orderGeneralVO.hasCheckOut;
 		this.name = orderGeneralVO.name;
 		this.phone = orderGeneralVO.phone;
 	}
-	
+
 	public OrderGeneralPO(OrderPO orderPO) {
 		this.orderID = orderPO.getOrderID();
 		this.guestID = orderPO.getGuestID();
@@ -96,10 +101,11 @@ public class OrderGeneralPO implements Serializable{
 		this.expectLeaveTime = orderPO.getExpectLeaveTime();
 		this.state = orderPO.getState();
 		this.hasCommented = orderPO.getHasCommented();
+		this.hasCheckOut = orderPO.getHasCheckOut();
 		this.name = orderPO.getName();
 		this.phone = orderPO.getPhone();
 	}
-	
+
 	public String getOrderID() {
 		return orderID;
 	}
@@ -178,6 +184,14 @@ public class OrderGeneralPO implements Serializable{
 
 	public void setHasCommented(boolean hasCommented) {
 		this.hasCommented = hasCommented;
+	}
+
+	public boolean getHasCheckOut() {
+		return hasCheckOut;
+	}
+
+	public void setHasCheckOut(boolean hasCheckOut) {
+		this.hasCheckOut = hasCheckOut;
 	}
 
 	public String getName() {

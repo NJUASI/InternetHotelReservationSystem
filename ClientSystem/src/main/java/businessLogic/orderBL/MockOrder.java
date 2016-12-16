@@ -92,7 +92,7 @@ public class MockOrder extends Order {
 		
 		final OrderVO orderVO = new OrderVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
 				200, 200, createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, 
-				orderState, false, roomType, 2, "301  302", 2, "zhangsan","13554321234", "no", 4.3, "good");
+				orderState, false, true, roomType, 2, "301  302", 2, "zhangsan","13554321234", "no", 4.3, "good");
 		
 		return orderVO;
 
@@ -110,7 +110,7 @@ public class MockOrder extends Order {
 		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
 		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
 				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.EXECUTED, false, "zhangsan","13554321234"));
+				OrderState.EXECUTED, false, true, "zhangsan","13554321234"));
 		return orderGenerals;
 	}
 
@@ -126,7 +126,7 @@ public class MockOrder extends Order {
 		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
 		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 
 				LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.EXECUTED, false, "zhangsan","13554321234"));
+				OrderState.EXECUTED, false, true, "zhangsan","13554321234"));
 		return orderGenerals;
 	}
 
@@ -142,7 +142,7 @@ public class MockOrder extends Order {
 		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
 		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
 				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.ABNORMAL, false, "zhangsan","13554321234"));
+				OrderState.ABNORMAL, false, false, "zhangsan","13554321234"));
 		return orderGenerals;
 	}
 	
@@ -157,7 +157,7 @@ public class MockOrder extends Order {
 		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
 		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
 				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.ABNORMAL, false, "zhangsan","13554321234"));
+				OrderState.ABNORMAL, false, false, "zhangsan","13554321234"));
 		return orderGenerals;
 	}
 	
@@ -173,7 +173,7 @@ public class MockOrder extends Order {
 		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
 		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
 				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.UNEXECUTED, false, "zhangsan","13554321234"));
+				OrderState.UNEXECUTED, false, false, "zhangsan","13554321234"));
 		return orderGenerals;
 	}
 	

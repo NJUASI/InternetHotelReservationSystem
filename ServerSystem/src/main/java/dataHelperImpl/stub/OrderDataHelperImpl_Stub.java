@@ -112,7 +112,7 @@ public class OrderDataHelperImpl_Stub implements OrderDataHelper {
 		
 		
 		return new OrderPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
-				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, 
+				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, true, 
 				roomType, 2, "301  302", 2, "zhangsan","13554321234", "no", 4.3, "good");
 	}
 
@@ -136,10 +136,10 @@ public class OrderDataHelperImpl_Stub implements OrderDataHelper {
 		
 		
 		list.add(new OrderPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
-				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, 
+				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, true, 
 				roomType, 2, "301  302", 2, "zhangsan","13554321234", "no", 4.3, "good"));
 		list.add(new OrderPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
-				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, 
+				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, true, 
 				roomType, 2, "301  302", 2, "zhangsan","13554321234", "no", 4.3, "good"));
 		return list;
 	}
@@ -164,7 +164,7 @@ public class OrderDataHelperImpl_Stub implements OrderDataHelper {
 		
 		
 		list.add(new OrderPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
-				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, 
+				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, true, 
 				roomType, 2, "301  302", 2, "zhangsan","13554321234", "no", 4.3, "good"));
 		return list;
 	}
@@ -189,7 +189,7 @@ public class OrderDataHelperImpl_Stub implements OrderDataHelper {
 		
 		
 		list.add(new OrderPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
-				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, 
+				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, false, 
 				roomType, 2, "301  302", 2, "zhangsan","13554321234", "no", 4.3, "good"));
 		return list;
 	}
@@ -214,7 +214,7 @@ public class OrderDataHelperImpl_Stub implements OrderDataHelper {
 		
 		
 		list.add(new OrderPO("123456789012", "1234567890", "12345678", "thisHotel", "address", 200, 200,
-				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, 
+				createTime, checkInTime, checkOutTime, expectExecuteTime, expectLeaveTime, orderState, false, false,
 				roomType, 2, "301  302", 2, "zhangsan","13554321234", "no", 4.3, "good"));
 		return list;
 	}

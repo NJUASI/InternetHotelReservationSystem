@@ -137,8 +137,11 @@ public class WebMarketer implements UserService {
 	public String getLogInInfo(String userID) throws UserInexistException {
 
 		try {
-			return convert(webMarketerDataService.getSingleWebMarketer(userID)).password;
-
+			UserVO tempUserVO = convert(webMarketerDataService.getSingleWebMarketer(userID));
+			if(tempUserVO==null){
+				throw new UserInexistException();
+			}
+			return tempUserVO.password;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;

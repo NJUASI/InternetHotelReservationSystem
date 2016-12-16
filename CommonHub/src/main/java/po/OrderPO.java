@@ -81,11 +81,12 @@ public class OrderPO implements Serializable{
 	public OrderPO(String orderID, String guestID, String hotelID, String hotelName, String hotelAddress, 
 			int previousPrice, int price, LocalDateTime createTime, LocalDateTime checkInTime,
 			LocalDateTime checkOutTime, LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime, 
-			OrderState state, boolean hasCommented, RoomType roomType, int roomNumCount, String roomNumber, 
-			int expectGuestNumCount, String name, String phone, String message, double score, String comment) {
+			OrderState state, boolean hasCommented, boolean hasCheckOut, RoomType roomType, 
+			int roomNumCount, String roomNumber, int expectGuestNumCount, String name, String phone, 
+			String message, double score, String comment) {
 		super();
 		this.orderGeneralPO = new OrderGeneralPO(orderID, guestID, hotelID, hotelName, hotelAddress,
-				price, expectExecuteTime, expectLeaveTime, state, hasCommented, name, phone);
+				price, expectExecuteTime, expectLeaveTime, state, hasCommented, hasCheckOut, name, phone);
 		
 		this.previousPrice = previousPrice;
 		this.createTime = createTime;
@@ -205,6 +206,14 @@ public class OrderPO implements Serializable{
 
 	public void setHasCommented(boolean hasCommented) {
 		orderGeneralPO.setHasCommented(hasCommented);
+	}
+	
+	public boolean getHasCheckOut() {
+		return orderGeneralPO.getHasCheckOut();
+	}
+
+	public void setHasCheckOut(boolean hasCheckOut) {
+		orderGeneralPO.setHasCheckOut(hasCheckOut);
 	}
 	
 	public LocalDateTime getExpectLeaveTime() {

@@ -62,11 +62,12 @@ public class OrderVO {
 	public OrderVO(String orderID, String guestID, String hotelID, String hotelName, String hotelAddress, 
 			int previousPrice, int price, LocalDateTime createTime, LocalDateTime checkInTime,
 			LocalDateTime checkOutTime, LocalDateTime expectExecuteTime, LocalDateTime expectLeaveTime, 
-			OrderState state, boolean hasCommented, RoomType roomType, int roomNumCount, String roomNumber, 
-			int expectGuestNumCount, String name, String phone, String message, double score, String comment) {
+			OrderState state, boolean hasCommented, boolean hasCheckOut, RoomType roomType, 
+			int roomNumCount, String roomNumber, int expectGuestNumCount, String name, 
+			String phone, String message, double score, String comment) {
 		super();
 		this.orderGeneralVO = new OrderGeneralVO(orderID, guestID, hotelID, hotelName, hotelAddress,
-				price, expectExecuteTime, expectLeaveTime, state, hasCommented, name, phone);
+				price, expectExecuteTime, expectLeaveTime, state, hasCommented, hasCheckOut, name, phone);
 		
 		this.previousPrice = previousPrice;
 		this.createTime = createTime;
