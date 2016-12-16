@@ -85,7 +85,7 @@ public class HotelSearchController {
 
 	//当房型改变时，改变此originPrice的值
 	private int originPrice;
-	
+
 	//预期执行时间
 	private LocalDate executeDate;
 	//预期离开时间
@@ -93,7 +93,7 @@ public class HotelSearchController {
 	//用于存储客户入住的天数，当入住日期和退房日期改变时，改变此变量的值
 	private int lastDays;
 
-	
+
 	//BLcontroller
 	private OrderBLService orderBLController;
 	private SourceBLService sourceBLController;
@@ -176,9 +176,9 @@ public class HotelSearchController {
 		}
 	}
 
-	
+
 	// Hotel概况浏览界面
-	
+
 	/**
 	 * 返回城市商圈的选择
 	 */
@@ -187,7 +187,7 @@ public class HotelSearchController {
 		cityAndCircle.setVisible(true);
 		hotelCheck.setVisible(false);
 	}
-	
+
 	@FXML
 	TableView<HotelTable> hotelTable;
 	@FXML
@@ -416,8 +416,8 @@ public class HotelSearchController {
 
 		orderTable.setItems(data);
 	}
-	
-	
+
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -473,7 +473,7 @@ public class HotelSearchController {
 	private void initRoomTypeBox() {
 		//先清空一次
 		roomTypeBox.clear();
-		
+
 		//将5种房型的box加进来
 		roomTypeBox.add(box1);
 		roomTypeBox.add(box2);
@@ -568,7 +568,7 @@ public class HotelSearchController {
 			criteria.add(SearchCriteriaType.REMAIN_ROOM_NUM);
 			vo.remainRoomNum = roomInput.getValue();
 		}
-		
+
 		//选择房间类型
 		List<RoomType> selectedRoomTypes = new ArrayList<RoomType>();
 		for(int i = 0;i<roomTypeBox.size();i++){
@@ -613,11 +613,12 @@ public class HotelSearchController {
 		selectedRoomType = roomTable.getSelectionModel().getSelectedItem().getRoomType();
 		remainNumOfselectedRoomType = roomTable.getSelectionModel().getSelectedItem().getRemainRoomNum();
 
-		roomTypeInOrder.setValue(selectedRoomType);
 		remainNumInOrder.setText(remainNumOfselectedRoomType);
 
 		initCreateOrder();
 		initEveryBox();
+
+		roomTypeInOrder.setValue(selectedRoomType);
 		
 		//显示原始价格和计算折扣后的价格
 		showPrice();
@@ -699,49 +700,49 @@ public class HotelSearchController {
 		executeDate = LocalDate.now();
 		leaveDate = LocalDate.now().plusDays(1);
 		lastDays = 1;
-		
+
 		expectExecuteDateInOrder.setValue(executeDate);
 		expectLeaveDateInOrder.setValue(leaveDate);
 		Callback<DatePicker, DateCell> dayCellFactory1 = 
-	            new Callback<DatePicker, DateCell>() {
-	                @Override
-	                public DateCell call(final DatePicker datePicker) {
-	                    return new DateCell() {
-	                        @Override
-	                        public void updateItem(LocalDate item, boolean empty) {
-	                            super.updateItem(item, empty);
+				new Callback<DatePicker, DateCell>() {
+			@Override
+			public DateCell call(final DatePicker datePicker) {
+				return new DateCell() {
+					@Override
+					public void updateItem(LocalDate item, boolean empty) {
+						super.updateItem(item, empty);
 
-	                            if (item.isBefore(
-	                            		LocalDate.now())
-	                                ) {
-	                                    setDisable(true);
-	                                    setStyle("-fx-background-color: #ffc0cb;");
-	                            }   
-	                    }
-	                };
-	            }
-	        };
-	        expectExecuteDateInOrder.setDayCellFactory(dayCellFactory1);
+						if (item.isBefore(
+								LocalDate.now())
+								) {
+							setDisable(true);
+							setStyle("-fx-background-color: #ffc0cb;");
+						}   
+					}
+				};
+			}
+		};
+		expectExecuteDateInOrder.setDayCellFactory(dayCellFactory1);
 		Callback<DatePicker, DateCell> dayCellFactory = 
-	            new Callback<DatePicker, DateCell>() {
-	                @Override
-	                public DateCell call(final DatePicker datePicker) {
-	                    return new DateCell() {
-	                        @Override
-	                        public void updateItem(LocalDate item, boolean empty) {
-	                            super.updateItem(item, empty);
+				new Callback<DatePicker, DateCell>() {
+			@Override
+			public DateCell call(final DatePicker datePicker) {
+				return new DateCell() {
+					@Override
+					public void updateItem(LocalDate item, boolean empty) {
+						super.updateItem(item, empty);
 
-	                            if (item.isBefore(
-	                            		expectExecuteDateInOrder.getValue().plusDays(1))
-	                                ) {
-	                                    setDisable(true);
-	                                    setStyle("-fx-background-color: #ffc0cb;");
-	                            }   
-	                    }
-	                };
-	            }
-	        };
-	    expectLeaveDateInOrder.setDayCellFactory(dayCellFactory);
+						if (item.isBefore(
+								expectExecuteDateInOrder.getValue().plusDays(1))
+								) {
+							setDisable(true);
+							setStyle("-fx-background-color: #ffc0cb;");
+						}   
+					}
+				};
+			}
+		};
+		expectLeaveDateInOrder.setDayCellFactory(dayCellFactory);
 		roomTypeInOrder.valueProperty().addListener(new RoomTypeChangeListener());
 		roomCountInOrder.valueProperty().addListener(new RoomNumChangeListener());
 		expectExecuteDateInOrder.valueProperty().addListener(new ExpectExecuteDateChangedListener());
@@ -774,7 +775,7 @@ public class HotelSearchController {
 		createOrderGeneral.price = price;
 
 		int previousPrice = Integer.valueOf(previousPriceInOrder.getText());
-		
+
 		OrderVO createVO = new OrderVO(createOrderGeneral,previousPrice, 
 				RoomType.getEnum(roomTypeInOrder.getValue()), roomCountInOrder.getValue(), guestNumInOrder.getValue(), 
 				messageInOrder.getText());
@@ -786,8 +787,8 @@ public class HotelSearchController {
 		}else {
 			new PopUp("订单生成失败", "订单");
 		}
-		 hotelCheck.setVisible(true); 
-		 createPane.setVisible(false);
+		hotelCheck.setVisible(true); 
+		createPane.setVisible(false);
 	}
 
 
@@ -796,13 +797,17 @@ public class HotelSearchController {
 		public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
 			//更改执行时间
 			executeDate = newValue;
+
+			//将离店时间置为入住时间的前一天
+			expectLeaveDateInOrder.setValue(executeDate.plusDays(1));
+
 			//计算入住天数
 			calculateLastDays();
 			//重新显示价格
 			showPrice();
 		}
 	}
-	
+
 	class ExpectLeaveDateChangedListener implements ChangeListener<LocalDate> {
 		@Override
 		public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
@@ -824,17 +829,20 @@ public class HotelSearchController {
 	class RoomTypeChangeListener implements ChangeListener<String>{
 		public void changed(ObservableValue ov, String oldValue, String roomType) {
 
-			//变更所选的房间类型
-			selectedRoomType = roomType;
-			
-			//显示还剩多少房间
-			int remainRoomNum = hotelBLController.getRemainRoomNum(selectedHotelID,RoomType.getEnum(selectedRoomType));
-			remainNumInOrder.setText(remainRoomNum+"");
-			
-			//预订房间数量初始为1
-			roomCountInOrder.setValue(1);
 
-			showPrice();
+			if(roomType != null){
+				//变更所选的房间类型
+				selectedRoomType = roomType;
+
+				//显示还剩多少房间
+				int remainRoomNum = hotelBLController.getRemainRoomNum(selectedHotelID,RoomType.getEnum(selectedRoomType));
+				remainNumInOrder.setText(remainRoomNum+"");
+
+				//预订房间数量初始为1
+				roomCountInOrder.setValue(1);
+
+				showPrice();				
+			}
 		}    
 	}
 
@@ -860,7 +868,7 @@ public class HotelSearchController {
 	private void calculateLastDays(){
 		lastDays = executeDate.until(leaveDate).getDays();
 	}
-	
+
 	/**
 	 * @Description:显示最新价格
 	 * void
@@ -886,7 +894,7 @@ public class HotelSearchController {
 		preOrderVO.roomType = RoomType.getEnum(selectedRoomType);
 		return orderBLController.getCalculatedPrice(preOrderVO);
 	}
-	
+
 	//根据选择的酒店id，房间类型和入住天数，计算原始价格（打折前）
 	private int calculateOriginPrice(){
 		originPrice = hotelBLController.getOriginPrice(selectedHotelID, RoomType.getEnum(selectedRoomType));

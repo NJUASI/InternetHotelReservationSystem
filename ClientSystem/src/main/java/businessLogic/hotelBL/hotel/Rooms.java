@@ -161,8 +161,14 @@ class Rooms {
 	 * @time:2016年12月4日 下午7:20:02
 	 */
 	public int getRemainNumOfSpecificType(String hotelID, RoomType roomType) {
-		initRoomInfoPO(hotelID);
-		return roomInfoPOList.get(findPO(roomType)).getRemainNum();
+		if(roomType == null){
+			return 0;
+		}
+		else
+		{
+			initRoomInfoPO(hotelID);
+			return roomInfoPOList.get(findPO(roomType)).getRemainNum();			
+		}
 	}
 
 	/**
@@ -265,9 +271,23 @@ class Rooms {
 		initRoomInfoPO(hotelID);
 		RoomInfoPO po = roomInfoPOList.get(findPO(roomType));
 		if (operation == Operation.CHECK_IN) {
-			po.setRemainNum(po.getRemainNum() - operationedNum);
+			if((po.getRemainNum()-operationedNum)<0){
+				//当入住房间数多于剩余房间数的时候，则返回错误信息
+				return ResultMessage.FAIL;
+			}
+			else
+			{
+				po.setRemainNum(po.getRemainNum() - operationedNum);	
+			}
 		} else {
-			po.setRemainNum(po.getRemainNum() + operationedNum);
+			if((po.getRemainNum()+operationedNum)>po.getRoomNum()){
+				return ResultMessage.FAIL;
+			}
+			else
+			{
+				//当退房房间数与剩余房间数多余总房间数的时候，则返回错误信息
+				po.setRemainNum(po.getRemainNum() + operationedNum);	
+			}
 		}
 		return updateHotelRoomInfo(new RoomInfoVO(po));
 	}
