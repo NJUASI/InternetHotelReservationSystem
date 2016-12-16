@@ -33,7 +33,7 @@ public class Main extends Application {
 
 		stage.setTitle("酒店互联网预定系统");
 		stage.setScene(scene);
-
+		stage.setResizable(false);
 		stage.show();
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>(){
 
