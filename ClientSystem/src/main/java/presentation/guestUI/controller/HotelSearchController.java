@@ -606,12 +606,13 @@ public class HotelSearchController {
 		selectedRoomType = roomTable.getSelectionModel().getSelectedItem().getRoomType();
 		remainNumOfselectedRoomType = roomTable.getSelectionModel().getSelectedItem().getRemainRoomNum();
 
-		roomTypeInOrder.setValue(selectedRoomType);
 		remainNumInOrder.setText(remainNumOfselectedRoomType);
 
 		initCreateOrder();
 		initEveryBox();
 
+		roomTypeInOrder.setValue(selectedRoomType);
+		
 		//显示原始价格和计算折扣后的价格
 		showPrice();
 
@@ -632,9 +633,7 @@ public class HotelSearchController {
 
 	private void initCreateOrder(){	
 
-		if(roomTypeInOrder.getItems() != null){
-			roomTypeInOrder.getItems().clear();
-		}
+		roomTypeInOrder.getItems().clear();
 
 		hotelVO = hotelBLController.getHotelInfo(selectedHotelID);
 		rooms = hotelBLController.getHotelRoomInfo(selectedHotelID);
@@ -823,17 +822,20 @@ public class HotelSearchController {
 	class RoomTypeChangeListener implements ChangeListener<String>{
 		public void changed(ObservableValue ov, String oldValue, String roomType) {
 
-			//变更所选的房间类型
-			selectedRoomType = roomType;
 
-			//显示还剩多少房间
-			int remainRoomNum = hotelBLController.getRemainRoomNum(selectedHotelID,RoomType.getEnum(selectedRoomType));
-			remainNumInOrder.setText(remainRoomNum+"");
+			if(roomType != null){
+				//变更所选的房间类型
+				selectedRoomType = roomType;
 
-			//预订房间数量初始为1
-			roomCountInOrder.setValue(1);
+				//显示还剩多少房间
+				int remainRoomNum = hotelBLController.getRemainRoomNum(selectedHotelID,RoomType.getEnum(selectedRoomType));
+				remainNumInOrder.setText(remainRoomNum+"");
 
-			showPrice();
+				//预订房间数量初始为1
+				roomCountInOrder.setValue(1);
+
+				showPrice();				
+			}
 		}    
 	}
 

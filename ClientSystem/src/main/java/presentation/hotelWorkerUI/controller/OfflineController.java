@@ -10,7 +10,9 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import presentation.PopUp.PopUp;
 import utilities.IDReserve;
+import utilities.enums.ResultMessage;
 import utilities.enums.RoomType;
 import vo.RoomInfoVO;
 
@@ -94,9 +96,16 @@ public class OfflineController {
 	 */
 	@FXML
 	protected void checkIn(){
-		hotelBLController.checkInOffline(hotelID, RoomType.getEnum(roomType.getValue()), Integer.valueOf(roomNum.getValue()));
-		roomType.setValue("");
-		roomNum.setValue(null);
+		ResultMessage msg = hotelBLController.checkInOffline(hotelID, RoomType.getEnum(roomType.getValue()), Integer.valueOf(roomNum.getValue()));
+		if(msg == ResultMessage.SUCCESS){
+			new PopUp("入住办理成功","成功");
+			roomType.setValue("");
+			roomNum.setValue(null);
+		}
+		else
+		{
+			new PopUp("请检查入住房间数量","错误");
+		}
 	}
 	/**
 	 * @author 61990
@@ -106,8 +115,15 @@ public class OfflineController {
 	 */
 	@FXML
 	protected void checkOut(){
-		hotelBLController.checkOutOffline(hotelID,RoomType.getEnum(roomType2.getValue()), Integer.valueOf(roomNum2.getValue()));
-		roomType2.setValue("");
-		roomNum2.setValue(null);;
+		ResultMessage msg = hotelBLController.checkOutOffline(hotelID,RoomType.getEnum(roomType2.getValue()), Integer.valueOf(roomNum2.getValue()));
+		if(msg == ResultMessage.SUCCESS){
+			new PopUp("退房办理成功","成功");
+			roomType2.setValue("");
+			roomNum2.setValue(null);			
+		}
+		else
+		{
+			new PopUp("请检查退房房间数量","错误");
+		}
 	}
 }

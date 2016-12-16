@@ -137,8 +137,8 @@ public class HotelDataHelperImpl implements HotelDataHelper{
 	 */
 	@Override
 	public ResultMessage addHotelInfo(HotelPO hotelPO){
-		sql = "insert into hotel(hotelID,hotelName,city,circle,level,score,introduction,equipment)"
-				+"values(?,?,?,?,?,?,?,?)";
+		sql = "insert into hotel(hotelID,hotelName,city,circle,address,level,score,introduction,equipment,commentsNum)"
+				+"values(?,?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			ps = conn.prepareStatement(sql);
