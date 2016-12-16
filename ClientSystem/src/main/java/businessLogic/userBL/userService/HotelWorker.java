@@ -132,7 +132,11 @@ public class HotelWorker implements UserService {
 	public String getLogInInfo(String userID) throws UserInexistException {
 
 		try {
-			return convert(hotelWorkerDataService.getSingleHotelWorker(userID)).password;
+			UserVO tempUserVO = convert(hotelWorkerDataService.getSingleHotelWorker(userID));
+			if(tempUserVO==null){
+				throw new UserInexistException();
+			}
+			return tempUserVO.password;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null; // 需要后期处理，是决定继续采用null，还是换其他
