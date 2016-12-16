@@ -82,7 +82,9 @@ public class OrderController {
 		//通过hotelID得到orderGeneralVOs
 		Iterator<OrderGeneralVO> orderGenerals = orderBLController.getAllOrderGenerals(hotelID, hotelWorker);
 		initOrderCheck(orderGenerals);
-
+		
+		checkInBt1.setVisible(false);
+		checkOutBt1.setVisible(false);
 	}
 
 
@@ -267,6 +269,11 @@ public class OrderController {
 		if(orderVO.orderGeneralVO.state == OrderState.EXECUTED){
 			checkOutBt.setVisible(true);
 			checkInBt.setVisible(false);
+			if(orderVO.checkOutTime==LocalDateTime.of(2,2, 2, 2, 2)){
+				checkOutBt.setDisable(false);
+			}else{
+				checkOutBt.setDisable(true);
+			}
 		}
 		if(orderVO.orderGeneralVO.state == OrderState.UNEXECUTED 
 				|| orderVO.orderGeneralVO.state == OrderState.ABNORMAL){
