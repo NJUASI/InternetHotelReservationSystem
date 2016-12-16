@@ -26,10 +26,10 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <TextField fx:id="inputID" layoutX="371.0" layoutY="124.0" prefHeight="23.0" prefWidth="209.0" AnchorPane.bottomAnchor="447.0" AnchorPane.leftAnchor="371.0" AnchorPane.rightAnchor="315.0" AnchorPane.topAnchor="124.0" />
-            <Button focusTraversable="false" layoutX="606.0" layoutY="124.0" mnemonicParsing="false" onAction="#search" text="查询" AnchorPane.bottomAnchor="447.0" AnchorPane.leftAnchor="606.0" AnchorPane.rightAnchor="239.0" AnchorPane.topAnchor="124.0" />
+            <TextField fx:id="inputID" layoutX="356.0" layoutY="139.0" prefHeight="23.0" prefWidth="209.0" AnchorPane.bottomAnchor="432.0" AnchorPane.leftAnchor="356.0" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="139.0" />
+            <Button focusTraversable="false" layoutX="606.0" layoutY="124.0" mnemonicParsing="false" onAction="#search" text="查询" AnchorPane.bottomAnchor="432.0" AnchorPane.leftAnchor="577.0" AnchorPane.rightAnchor="268.0" AnchorPane.topAnchor="139.0" />
             <Separator layoutY="60.0" prefHeight="0.0" prefWidth="895.0" />
-            <Label layoutX="296.0" layoutY="129.0" text="编号：" AnchorPane.bottomAnchor="452.0" AnchorPane.leftAnchor="296.0" AnchorPane.rightAnchor="554.0" AnchorPane.topAnchor="129.0" />
+            <Label layoutX="297.0" layoutY="144.0" text="编号：" AnchorPane.bottomAnchor="437.0" AnchorPane.leftAnchor="297.0" AnchorPane.rightAnchor="553.0" AnchorPane.topAnchor="144.0" />
             <AnchorPane fx:id="guestInfoPane" layoutX="211.0" layoutY="230.0" prefHeight="285.0" prefWidth="530.0" visible="false">
                <children>
                   <GridPane layoutX="55.0" layoutY="19.0" prefHeight="159.0" prefWidth="430.0">

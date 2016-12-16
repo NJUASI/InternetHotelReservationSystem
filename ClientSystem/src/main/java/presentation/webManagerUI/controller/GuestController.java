@@ -148,7 +148,7 @@ public class GuestController {
 			modifyBt.setVisible(true);
 			modifyPane.setVisible(false);
 			
-			initialize();
+			search();
 		} catch (InvalidLengthInputException e) {
 			e.printStackTrace();
 			new PopUp("请勿输入无效电话", "更改失败");
