@@ -65,6 +65,7 @@ public class HotelInfoController {
 		newHotel.circle = cycleInput.getValue();
 		newHotel.level = String.valueOf(levelInput.getValue());
 		newHotel.address = address.getText();
+		newHotel.equipment=equipment.getText();
 		HotelVO hotelVO = userBLController.addHotel(newHotel);
 		//怎么获得被添加酒店的id，你说根据酒店工作人员来，但是我不知道酒店工作人员的id
 		// TODO 龚尘淼 hotelVO此处不是返回了ID吗
