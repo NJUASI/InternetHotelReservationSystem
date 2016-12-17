@@ -52,11 +52,11 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	public ResultMessage add(final OrderPO orderPO) {
 		sql = "INSERT INTO `order`(`order`.orderID,`order`.guestID,`order`.hotelID,`order`.hotelName,"
             + "`order`.hotelAddress,`order`.price,`order`.expectExecuteTime,`order`.expectLeaveTime,"
-            + "`order`.state,`order`.hasCommented,`order`.`name`,`order`.phone,`order`.previousPrice,"
-            + "`order`.createTime,`order`.checkInTime,`order`.checkOutTime,`order`.roomType,"
-            + "`order`.roomNumCount,`order`.roomNumber,`order`.expectGuestNumCount,`order`.message,"
-            + "`order`.`comment`,`order`.score) "
-            + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            + "`order`.state,`order`.hasCommented,`order`.hasCheckOut,`order`.`name`,`order`.phone,"
+            + "`order`.previousPrice,`order`.createTime,`order`.checkInTime,`order`.checkOutTime,"
+            + "`order`.roomType,`order`.roomNumCount,`order`.roomNumber,`order`.expectGuestNumCount,"
+            + "`order`.message,`order`.`comment`,`order`.score) "
+            + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -68,23 +68,24 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			ps.setInt(6, orderPO.getPrice());
 			ps.setString(9, orderPO.getState().getChineseOrderState());
 			ps.setString(10, String.valueOf(orderPO.getHasCommented()));
-			ps.setString(11, orderPO.getName());
-			ps.setString(12, orderPO.getPhone());
-			ps.setInt(13, orderPO.getPreviousPrice());
-			ps.setString(17, orderPO.getRoomType().getChineseRoomType());
-			ps.setInt(18, orderPO.getRoomNumCount());
-			ps.setString(19, orderPO.getRoomNumber());
-			ps.setInt(20, orderPO.getExpectGuestNumCount());
-			ps.setString(21, orderPO.getMessage());
-			ps.setString(22, orderPO.getComment());
-			ps.setDouble(23, orderPO.getScore());
+			ps.setString(11, String.valueOf(orderPO.getHasCheckOut()));
+			ps.setString(12, orderPO.getName());
+			ps.setString(13, orderPO.getPhone());
+			ps.setInt(14, orderPO.getPreviousPrice());
+			ps.setString(18, orderPO.getRoomType().getChineseRoomType());
+			ps.setInt(19, orderPO.getRoomNumCount());
+			ps.setString(20, orderPO.getRoomNumber());
+			ps.setInt(21, orderPO.getExpectGuestNumCount());
+			ps.setString(22, orderPO.getMessage());
+			ps.setString(23, orderPO.getComment());
+			ps.setDouble(24, orderPO.getScore());
 			
 			//检查相关时间，若不存在，即将其置为默认时间
 			ps.setString(7, TimeChange.dateTime2String(convertRealToDatabase(orderPO.getExpectExecuteTime())));
 			ps.setString(8, TimeChange.dateTime2String(convertRealToDatabase(orderPO.getExpectLeaveTime())));
-			ps.setString(14, TimeChange.dateTime2String(convertRealToDatabase(orderPO.getCreateTime())));
-			ps.setString(15, TimeChange.dateTime2String(convertRealToDatabase(orderPO.getCheckInTime())));
-			ps.setString(16, TimeChange.dateTime2String(convertRealToDatabase(orderPO.getCheckOutTime())));
+			ps.setString(15, TimeChange.dateTime2String(convertRealToDatabase(orderPO.getCreateTime())));
+			ps.setString(16, TimeChange.dateTime2String(convertRealToDatabase(orderPO.getCheckInTime())));
+			ps.setString(17, TimeChange.dateTime2String(convertRealToDatabase(orderPO.getCheckOutTime())));
 			
 			ps.execute();
 		} catch (SQLException e) {
@@ -207,19 +208,24 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 	 * @return ResultMessage 是否成功修改orderInfo
 	 */
 	public ResultMessage setCheckOut(final String orderID, final LocalDateTime checkOutTime) {
-		sql = "UPDATE `order` SET `order`.`checkOutTime` = ? WHERE `order`.orderID = ?";
+		System.out.println("orderID: " + orderID);
+		System.out.println();
+		
+		sql = "UPDATE `order` SET `order`.`checkOutTime` = ?,`order`.`hasCheckOut` = ? WHERE `order`.orderID = ?";
 		
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, TimeChange.dateTime2String(checkOutTime));
-			ps.setObject(2, orderID);
+			ps.setString(2, String.valueOf(true));
+			ps.setObject(3, orderID);
 			
 			ps.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println("---------------------check out fail--------------------");
 			return ResultMessage.FAIL;
 		}
-		
+		System.out.println("---------------------check out success--------------------");
 		return ResultMessage.SUCCESS;
 	}
 	
@@ -386,22 +392,23 @@ public class OrderDataHelperImpl implements OrderDataHelper {
 			orderPO.setPrice(rs.getInt(6));
 			orderPO.setState(OrderState.getEnum(rs.getString(9)));
 			orderPO.setHasCommented(convertBooleanString2Boolean(rs.getString(10)));
-			orderPO.setName(rs.getString(11));
-			orderPO.setPhone(rs.getString(12));
-			orderPO.setPreviousPrice(rs.getInt(13));
-			orderPO.setRoomType(RoomType.getEnum(rs.getString(17)));
-			orderPO.setRoomNumCount(rs.getInt(18));
-			orderPO.setRoomNumber(rs.getString(19));
-			orderPO.setExpectGuestNumCount(rs.getInt(20));
-			orderPO.setMessage(rs.getString(21));
-			orderPO.setComment(rs.getString(22));
-			orderPO.setScore(rs.getDouble(23));
+			orderPO.setHasCheckOut(convertBooleanString2Boolean(rs.getString(11)));
+			orderPO.setName(rs.getString(12));
+			orderPO.setPhone(rs.getString(13));
+			orderPO.setPreviousPrice(rs.getInt(14));
+			orderPO.setRoomType(RoomType.getEnum(rs.getString(18)));
+			orderPO.setRoomNumCount(rs.getInt(19));
+			orderPO.setRoomNumber(rs.getString(20));
+			orderPO.setExpectGuestNumCount(rs.getInt(21));
+			orderPO.setMessage(rs.getString(22));
+			orderPO.setComment(rs.getString(23));
+			orderPO.setScore(rs.getDouble(24));
 			
 			orderPO.setExpectExecuteTime(convertDatabaseToReal(TimeChange.string2DateTime(rs.getString(7))));
 			orderPO.setExpectLeaveTime(convertDatabaseToReal(TimeChange.string2DateTime(rs.getString(8))));
-			orderPO.setCreateTime(convertDatabaseToReal(TimeChange.string2DateTime(rs.getString(14))));
-			orderPO.setCheckInTime(convertDatabaseToReal(TimeChange.string2DateTime(rs.getString(15))));
-			orderPO.setCheckOutTime(convertDatabaseToReal(TimeChange.string2DateTime(rs.getString(16))));
+			orderPO.setCreateTime(convertDatabaseToReal(TimeChange.string2DateTime(rs.getString(15))));
+			orderPO.setCheckInTime(convertDatabaseToReal(TimeChange.string2DateTime(rs.getString(16))));
+			orderPO.setCheckOutTime(convertDatabaseToReal(TimeChange.string2DateTime(rs.getString(17))));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

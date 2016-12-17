@@ -42,16 +42,20 @@ public class ClientRemoteHelper {
 		return remoteHelper;
 	}
 
-	public static void setIPandPort(String ip, String port) {
+	public void setIPandPort(String ip, String port) {
 		ClientRemoteHelper.ip = ip;
 		ClientRemoteHelper.port = port;
 		ClientRemoteHelper.url = "rmi://" + ip + ":" + port + "/";
+		
+		init();
 	}
 	
-	public static void setLocalhost() {
+	public void setLocalhost() {
 		ClientRemoteHelper.ip = "localhost";
 		ClientRemoteHelper.port = defaultPort;
 		ClientRemoteHelper.url = localhost;
+		
+		init();
 	}
 	
 	private ClientRemoteHelper() {

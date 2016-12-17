@@ -69,4 +69,35 @@ public interface SourceDataService extends Remote {
 	 * @time:2016年12月13日 下午6:50:47
 	 */
 	public int getMaxRoomNumEachOrder()throws RemoteException;
+	
+	/**
+	 * @Description:客户登录，记录客户登录信息
+	 * @param guestID
+	 * void
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月16日 下午8:51:19
+	 */
+	public void guestLogInRecord(String guestID)throws RemoteException;
+
+	/**
+	 * @Description:客户注销，移除客户登录信息
+	 * @param guestID
+	 * void
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月16日 下午8:51:43
+	 */
+	public void guestLogOut(String guestID)throws RemoteException;
+
+	/**
+	 * @Description:检查客户是否登录
+	 * @param guestID
+	 * @return
+	 * boolean
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月16日 下午8:51:59
+	 */
+	public boolean guestHasLogged(String guestID)throws RemoteException;
 }

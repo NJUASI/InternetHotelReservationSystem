@@ -488,4 +488,10 @@ public class OrderBLService_Stub implements OrderBLService {
 		return 0;
 	}
 
+	@Override
+	public Iterator<OrderGeneralVO> getAllHotelCheckOutOrderGeneral(String hotelID, boolean hasCheckOut) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

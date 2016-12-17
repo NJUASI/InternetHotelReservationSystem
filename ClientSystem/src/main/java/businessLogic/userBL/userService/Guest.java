@@ -40,11 +40,6 @@ public class Guest implements UserService, GuestCreditService {
 	 */
 	public Guest() {
 		guestDataService = ClientRemoteHelper.getInstance().getGuestDataService();
-//		try {
-//			guestDataService = new GuestDataService_Stub();
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	/**

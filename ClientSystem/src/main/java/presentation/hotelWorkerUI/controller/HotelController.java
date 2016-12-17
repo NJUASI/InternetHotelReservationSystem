@@ -18,7 +18,6 @@ import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -232,6 +231,7 @@ public class HotelController {
 
 		HotelVO hotelVO = new HotelVO();
 
+		hotelVO.hotelID = hotelID;
 		hotelVO.hotelName=hotelNameText.getText();
 		hotelVO.address=hotelAddressText.getText();
 		hotelVO.city=cityText.getValue();
@@ -242,6 +242,7 @@ public class HotelController {
 
 		//TODO gcm注意：调用更新酒店信息的方法,可能会catch到exception，以后加入exception
 		hotelBLController.updateHotelInfo(hotelVO);
+		
 
 		initHotelDetail(hotelVO);
 

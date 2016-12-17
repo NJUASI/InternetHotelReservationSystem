@@ -2,6 +2,9 @@ package businessLogic.orderBL.order;
 
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import businessLogic.creditBL.CreditController;
 import businessLogic.hotelBL.HotelInfoOperation;
@@ -18,10 +21,12 @@ import rmi.ClientRemoteHelper;
 import utilities.enums.CreditRecord;
 import utilities.enums.OrderState;
 import utilities.enums.ResultMessage;
+import utilities.enums.UserType;
 import vo.CheckInVO;
 import vo.CheckOutVO;
 import vo.CreditVO;
 import vo.GuestVO;
+import vo.OrderGeneralVO;
 import vo.OrderVO;
 
 /**
@@ -126,7 +131,6 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 	public ResultMessage updateCheckIn (CheckInVO checkInVO) {
 		ResultMessage msg1 = ResultMessage.FAIL;
 		ResultMessage msg2 = ResultMessage.FAIL;
-		ResultMessage msg3 = ResultMessage.FAIL;
 		
 		final OrderVO thisOrder = commonOrder.getOrderDetail(checkInVO.orderID);
 		final OrderState thisOrderState = thisOrder.orderGeneralVO.state;
@@ -156,20 +160,12 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 				}
 				msg2 = creditBLService.addCreditRecord(creditVO);
 
-				// 更新酒店剩余房间信息
-				System.out.println(thisOrder.orderGeneralVO.orderID);
-				System.out.println(thisOrder.roomType);
-				System.out.println(thisOrder.roomNumCount);
-				
-				hotelInterface = new Hotel();
-				msg3 = hotelInterface.checkIn(thisOrder.orderGeneralVO.orderID, thisOrder.roomType,
-						thisOrder.roomNumCount);
 			} catch (RemoteException | UserInexistException e) {
 				e.printStackTrace();
 			}
 		}
 		
-		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS && msg3 == ResultMessage.SUCCESS) {
+		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
 			return ResultMessage.SUCCESS;
 		} else {
 			return ResultMessage.FAIL;
@@ -194,7 +190,7 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		
+
 		//更新酒店剩余房间信息
 		OrderVO thisOrder = commonOrder.getOrderDetail(checkOutVO.orderID);
 		hotelInterface = new Hotel(thisOrder.orderGeneralVO.hotelID);
@@ -205,5 +201,29 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 		}else {
 			return ResultMessage.FAIL;
 		}
+	}
+
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/15
+	 * @param hotelID 酒店编号
+	 * @param hasCheckOut 状态：已退房／未退房
+	 * @return 客户<已退房／未退房>订单
+	 */
+	@Override
+	public Iterator<OrderGeneralVO> getAllHotelCheckOutOrderGeneral(String hotelID, boolean hasCheckOut) {
+		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>(); 
+		System.out.println("HotelID: " + hotelID);
+		
+		final Iterator<OrderGeneralVO> orderGenerals = commonOrder.getAllOrderGenerals(hotelID, UserType.HOTEL_WORKER);
+
+		while(orderGenerals.hasNext()){
+			OrderGeneralVO thisOrderGeneral = orderGenerals.next();
+			if(thisOrderGeneral.state == OrderState.EXECUTED && thisOrderGeneral.hasCheckOut == hasCheckOut){
+				result.add(thisOrderGeneral);
+			}
+		}
+		return result.iterator();
 	}
 }

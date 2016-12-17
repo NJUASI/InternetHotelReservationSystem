@@ -16,17 +16,17 @@ public class SourceDataServiceImpl extends UnicastRemoteObject implements Source
 
 	SourceDataHelper sourceDataHelper;
 	AddressDataHelper addressDataHelper;
-	
+
 	public SourceDataServiceImpl() throws RemoteException {
 		sourceDataHelper = new SourceDataHelperImpl();
 		addressDataHelper = new AddressDataHelperImpl();
 	}
-	
+
 	@Override
 	public List<String> getCities() throws RemoteException {
 		return addressDataHelper.getCity();
 	}
-	
+
 	@Override
 	public List<String> getCircles(String city) throws RemoteException {
 		return addressDataHelper.getCircle(city);
@@ -50,6 +50,21 @@ public class SourceDataServiceImpl extends UnicastRemoteObject implements Source
 	@Override
 	public int getMaxRoomNumEachOrder() {
 		return sourceDataHelper.getMaxRoomNumEachOrder();
+	}
+
+	@Override
+	public void guestLogInRecord(String guestID) {
+		sourceDataHelper.guestLogInRecord(guestID);
+	}
+
+	@Override
+	public void guestLogOut(String guestID) {
+		sourceDataHelper.guestLogOut(guestID);
+	}
+
+	@Override
+	public boolean guestHasLogged(String guestID) {
+		return sourceDataHelper.guestHasLogged(guestID);
 	}
 
 }

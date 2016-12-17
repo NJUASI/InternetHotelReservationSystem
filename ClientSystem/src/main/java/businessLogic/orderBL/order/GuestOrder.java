@@ -25,9 +25,7 @@ import vo.PreOrderVO;
 
 /**
  * 
- * @author charles
- * lastChangedBy charles
- * updateTime 2016/12/10
+ * @author charles lastChangedBy charles updateTime 2016/12/10
  *
  */
 public class GuestOrder implements GuestOrderBLService {
@@ -35,48 +33,47 @@ public class GuestOrder implements GuestOrderBLService {
 	private OrderDataService orderDataService;
 
 	private CommonOrder commonOrder;
-	
-	//hotel
+
+	// hotel
 	private HotelInfoOperation hotelInterface;
-	
-	//promotion
+
+	// promotion
 	private DiscountInSpan discountCalculator;
-	
+
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
-	 * 构造函数，初始化成员变量
+	 * @updateTime 2016/11/27 构造函数，初始化成员变量
 	 */
 	public GuestOrder() {
 		orderDataService = ClientRemoteHelper.getInstance().getOrderDataService();
-		
-//		try {
-//			orderDataService = new OrderDataService_Stub();
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//		}
-		
+
+		// try {
+		// orderDataService = new OrderDataService_Stub();
+		// } catch (RemoteException e) {
+		// e.printStackTrace();
+		// }
+
 		commonOrder = new CommonOrder();
-		
+
 		/*
-		 * new the mock one to test
-		 * TODO 龚尘淼：promotion没有无参数的初始化方法，不知道自己改初始化啥
+		 * new the mock one to test TODO 龚尘淼：promotion没有无参数的初始化方法，不知道自己改初始化啥
 		 */
 		discountCalculator = new DiscountCalculator();
 
 		/*
 		 * hotel因为需要hotelID作为参数初始化，故不在此初始化，用到的时候再初始化
 		 */
-//		hotelInterface = new Hotel();
+		// hotelInterface = new Hotel();
 	}
-	
+
 	/**
 	 * 
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/4
-	 * @param orderVO 从客户界面层传下来的Order载体
+	 * @param orderVO
+	 *            从客户界面层传下来的Order载体
 	 * @return 若客户创建此订单，需要付的款项
 	 */
 	public double getTempPrice(OrderVO orderVO) {
@@ -88,49 +85,64 @@ public class GuestOrder implements GuestOrderBLService {
 		}
 		final double prePrice = orderVO.previousPrice;
 		double result = 0;
-		
-		while(discountsInSpan.hasNext()) {
+
+		while (discountsInSpan.hasNext()) {
 			result += prePrice * discountsInSpan.next();
 		}
 		return result;
 	}
-	
+
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/8
-	 * @param orderVO 从客户界面层传下来的Order载体
+	 * @param orderVO
+	 *            从客户界面层传下来的Order载体
 	 * @return 客户是否成功创建此订单
 	 */
 	public ResultMessage createOrder(final OrderVO orderVO) {
-		ResultMessage resultMessage = ResultMessage.FAIL;
-		
-		if (orderVO.orderGeneralVO.orderID == null && orderVO.checkInTime == null 
-				&& orderVO.checkOutTime == null && orderVO.roomNumber == "" 
-				&& orderVO.score == -1 && orderVO.comment == "") {
+		ResultMessage msg1 = ResultMessage.FAIL;
+		ResultMessage msg2 = ResultMessage.FAIL;
+
+		// 像数据层写入order数据
+		if (orderVO.orderGeneralVO.orderID == null && orderVO.checkInTime == null && orderVO.checkOutTime == null
+				&& orderVO.roomNumber == "" && orderVO.score == -1 && orderVO.comment == "") {
 			try {
-				resultMessage = orderDataService.createOrder(new OrderPO(orderVO));
+				msg1 = orderDataService.createOrder(new OrderPO(orderVO));
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
 		}
 
-		return resultMessage;
+		// 更新酒店剩余房间信息
+		System.out.println(orderVO.orderGeneralVO.orderID);
+		System.out.println(orderVO.roomType);
+		System.out.println(orderVO.roomNumCount);
+
+		hotelInterface = new Hotel();
+		msg2 = hotelInterface.checkIn(orderVO.orderGeneralVO.orderID, orderVO.roomType, orderVO.roomNumCount);
+
+		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
+			return ResultMessage.SUCCESS;
+		} else {
+			return ResultMessage.FAIL;
+		}
 	}
-	
+
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/8
-	 * @param orderID 客户当前需要撤销的正常订单的订单号
+	 * @param orderID
+	 *            客户当前需要撤销的正常订单的订单号
 	 * @return 客户是否成功撤销此正常订单
 	 */
 	public ResultMessage undoNormalOrder(final String orderID) {
 		ResultMessage msg1 = ResultMessage.FAIL;
 		ResultMessage msg2 = ResultMessage.FAIL;
-		
+
 		OrderVO thisOrder = commonOrder.getOrderDetail(orderID);
-		//撤销未执行订单，改变此订单状态
+		// 撤销未执行订单，改变此订单状态
 		final OrderState thisOrderState = thisOrder.orderGeneralVO.state;
 		if (thisOrderState == OrderState.UNEXECUTED) {
 			try {
@@ -139,86 +151,91 @@ public class GuestOrder implements GuestOrderBLService {
 				e.printStackTrace();
 			}
 		}
-		
-		//更新此订单撤销后的酒店剩余房间数
+
+		// 更新此订单撤销后的酒店剩余房间数
 		hotelInterface = new Hotel(thisOrder.orderGeneralVO.hotelID);
-		msg2 = hotelInterface.updateRemainRoomNumForUndoOrder(thisOrder.orderGeneralVO.hotelID, thisOrder.roomType, thisOrder.roomNumCount);
-		
+		msg2 = hotelInterface.updateRemainRoomNumForUndoOrder(thisOrder.orderGeneralVO.hotelID, thisOrder.roomType,
+				thisOrder.roomNumCount);
+
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
 			return ResultMessage.SUCCESS;
-		}else {
+		} else {
 			return ResultMessage.FAIL;
 		}
 	}
-	
+
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/8
-	 * @param evaluationVO 客户评价单个订单时产生的订单
+	 * @param evaluationVO
+	 *            客户评价单个订单时产生的订单
 	 * @return 客户是否成功评价该订单
 	 */
 	public ResultMessage addEvaluation(GuestEvaluationVO evaluationVO) {
 		ResultMessage msg1 = ResultMessage.FAIL;
 		ResultMessage msg2 = ResultMessage.FAIL;
-		
+
 		try {
 			msg1 = orderDataService.addEvaluation(new GuestEvaluationPO(evaluationVO));
-			
+
 			String hotelID = commonOrder.getOrderDetail(evaluationVO.orderID).orderGeneralVO.hotelID;
 			hotelInterface = new Hotel();
-			msg2 = hotelInterface.scoreUpdate(hotelID,evaluationVO.score);
+			msg2 = hotelInterface.scoreUpdate(hotelID, evaluationVO.score);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		
+
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
 			return ResultMessage.SUCCESS;
-		}else {
+		} else {
 			return ResultMessage.FAIL;
 		}
-		
+
 	}
 
 	/**
 	 * @author charles
 	 * @lastChangedBy Harvey
 	 * @updateTime 2016/12/8
-	 * @param guestID 客户要查看个人<已执行／未执行>订单时，客户的编号
+	 * @param guestID
+	 *            客户要查看个人<已执行／未执行>订单时，客户的编号
 	 * @return 客户个人<已执行／未执行>订订单
 	 * 
-	 * <<已执行／未执行>只包含一种
+	 *         <<已执行／未执行>只包含一种
 	 */
 	public Iterator<OrderGeneralVO> getAllGuestCommentOrderGeneral(String guestID, boolean hasCommented) {
-		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>(); 
+		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
 		System.out.println("guestID: " + guestID);
-		
+
 		final Iterator<OrderGeneralVO> orderGenerals = commonOrder.getAllOrderGenerals(guestID, UserType.GUEST);
 
-		while(orderGenerals.hasNext()){
+		while (orderGenerals.hasNext()) {
 			OrderGeneralVO thisOrderGeneral = orderGenerals.next();
-			if(thisOrderGeneral.state == OrderState.EXECUTED && thisOrderGeneral.hasCommented == hasCommented){
+			if (thisOrderGeneral.state == OrderState.EXECUTED && thisOrderGeneral.hasCommented == hasCommented) {
 				result.add(thisOrderGeneral);
 			}
 		}
 		return result.iterator();
 	}
-	
+
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/10
-	 * @param guestID 客户编号
-	 * @param hotelID 目标酒店编号
+	 * @param guestID
+	 *            客户编号
+	 * @param hotelID
+	 *            目标酒店编号
 	 * @return 客户在目标酒店的所有订单记录
 	 */
 	public Iterator<OrderGeneralVO> getMyOrdersOfThisHotel(String guestID, String hotelID) {
 		List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
 		final Iterator<OrderGeneralVO> orderGenerals = commonOrder.getAllOrderGenerals(guestID, UserType.GUEST);
 
-		while(orderGenerals.hasNext()){
+		while (orderGenerals.hasNext()) {
 			OrderGeneralVO thisOrderGeneral = orderGenerals.next();
-			if(thisOrderGeneral.hotelID.equals(hotelID)){
+			if (thisOrderGeneral.hotelID.equals(hotelID)) {
 				result.add(thisOrderGeneral);
 			}
 		}
