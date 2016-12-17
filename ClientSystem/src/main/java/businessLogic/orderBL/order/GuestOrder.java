@@ -9,7 +9,9 @@ import businessLogic.hotelBL.HotelInfoOperation;
 import businessLogic.hotelBL.hotel.Hotel;
 import businessLogic.promotionBL.DiscountCalculator;
 import businessLogic.promotionBL.DiscountInSpan;
+import businessLogic.userBL.UserController;
 import businessLogicService.orderBLService.GuestOrderBLService;
+import businessLogicService.userBLService.UserBLService;
 import dataService.orderDataService.OrderDataService;
 import exception.verificationException.UserInexistException;
 import po.GuestEvaluationPO;
@@ -19,6 +21,7 @@ import utilities.enums.OrderState;
 import utilities.enums.ResultMessage;
 import utilities.enums.UserType;
 import vo.GuestEvaluationVO;
+import vo.GuestVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
 import vo.PreOrderVO;
@@ -40,6 +43,9 @@ public class GuestOrder implements GuestOrderBLService {
 	// promotion
 	private DiscountInSpan discountCalculator;
 
+	// user
+	private UserBLService userBLService;
+
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
@@ -60,6 +66,7 @@ public class GuestOrder implements GuestOrderBLService {
 		 * new the mock one to test TODO 龚尘淼：promotion没有无参数的初始化方法，不知道自己改初始化啥
 		 */
 		discountCalculator = new DiscountCalculator();
+		userBLService = UserController.getInstance();
 
 		/*
 		 * hotel因为需要hotelID作为参数初始化，故不在此初始化，用到的时候再初始化
@@ -95,7 +102,7 @@ public class GuestOrder implements GuestOrderBLService {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/8
+	 * @updateTime 2016/12/18
 	 * @param orderVO
 	 *            从客户界面层传下来的Order载体
 	 * @return 客户是否成功创建此订单
@@ -104,28 +111,40 @@ public class GuestOrder implements GuestOrderBLService {
 		ResultMessage msg1 = ResultMessage.FAIL;
 		ResultMessage msg2 = ResultMessage.FAIL;
 
-		// 像数据层写入order数据
-		if (orderVO.orderGeneralVO.orderID == null && orderVO.checkInTime == null && orderVO.checkOutTime == null
-				&& orderVO.roomNumber == "" && orderVO.score == -1 && orderVO.comment == "") {
-			try {
-				msg1 = orderDataService.createOrder(new OrderPO(orderVO));
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
+		GuestVO thisGuest = null;
+		try {
+			thisGuest = (GuestVO) userBLService.getSingle(orderVO.orderGeneralVO.guestID);
+		} catch (UserInexistException e1) {
+			e1.printStackTrace();
 		}
 
-		// 更新酒店剩余房间信息
-		System.out.println(orderVO.orderGeneralVO.orderID);
-		System.out.println(orderVO.roomType);
-		System.out.println(orderVO.roomNumCount);
-
-		hotelInterface = new Hotel();
-		msg2 = hotelInterface.checkIn(orderVO.orderGeneralVO.orderID, orderVO.roomType, orderVO.roomNumCount);
-
-		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
-			return ResultMessage.SUCCESS;
-		} else {
+		if (thisGuest.credit < 0) {
+			// 信用值小于0时，不能预订酒店
 			return ResultMessage.FAIL;
+		} else {
+			// 向数据层写入order数据
+			if (orderVO.orderGeneralVO.orderID == null && orderVO.checkInTime == null && orderVO.checkOutTime == null
+					&& orderVO.roomNumber == "" && orderVO.score == -1 && orderVO.comment == "") {
+				try {
+					msg1 = orderDataService.createOrder(new OrderPO(orderVO));
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+			}
+
+			// 更新酒店剩余房间信息
+			System.out.println(orderVO.orderGeneralVO.hotelID);
+			System.out.println(orderVO.roomType);
+			System.out.println(orderVO.roomNumCount);
+
+			hotelInterface = new Hotel();
+			msg2 = hotelInterface.checkIn(orderVO.orderGeneralVO.hotelID, orderVO.roomType, orderVO.roomNumCount);
+
+			if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
+				return ResultMessage.SUCCESS;
+			} else {
+				return ResultMessage.FAIL;
+			}
 		}
 	}
 
@@ -176,22 +195,26 @@ public class GuestOrder implements GuestOrderBLService {
 		ResultMessage msg1 = ResultMessage.FAIL;
 		ResultMessage msg2 = ResultMessage.FAIL;
 
-		try {
-			msg1 = orderDataService.addEvaluation(new GuestEvaluationPO(evaluationVO));
-
-			String hotelID = commonOrder.getOrderDetail(evaluationVO.orderID).orderGeneralVO.hotelID;
-			hotelInterface = new Hotel();
-			msg2 = hotelInterface.scoreUpdate(hotelID, evaluationVO.score);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-
-		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
-			return ResultMessage.SUCCESS;
-		} else {
+		if (evaluationVO.score == -1) {
+			// 必须输入评分
 			return ResultMessage.FAIL;
-		}
+		}else {
+			try {
+				msg1 = orderDataService.addEvaluation(new GuestEvaluationPO(evaluationVO));
 
+				String hotelID = commonOrder.getOrderDetail(evaluationVO.orderID).orderGeneralVO.hotelID;
+				hotelInterface = new Hotel();
+				msg2 = hotelInterface.scoreUpdate(hotelID, evaluationVO.score);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+
+			if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
+				return ResultMessage.SUCCESS;
+			} else {
+				return ResultMessage.FAIL;
+			}
+		}
 	}
 
 	/**
