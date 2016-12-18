@@ -237,7 +237,7 @@ public class LogInViewController {
 	}
 	@FXML
 	protected void enterRMIBt(){
-		rmiBt.setImage(new Image("/presentation/signUpUI/picture/changeToRMI.png"));	
+		rmiBt.setImage(new Image("/presentation/signUpUI/picture/changeToRMIEnter.png"));	
 	}
 	@FXML
 	protected void exitedRMIBt(){

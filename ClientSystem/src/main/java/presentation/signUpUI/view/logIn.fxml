@@ -45,7 +45,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <ImageView fx:id="registerBT2" fitHeight="158.0" fitWidth="83.0" layoutX="124.0" layoutY="293.0" onMouseClicked="#register" onMouseEntered="#enter1" onMouseExited="#excited1" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="registerBT2" fitHeight="40.0" fitWidth="80.0" layoutX="105.0" layoutY="330.0" onMouseClicked="#register" onMouseEntered="#enter1" onMouseExited="#excited1" pickOnBounds="true">
                      <image>
                         <Image url="@../../../../../../../../../logIn/signUp.png" />
                      </image>
@@ -56,7 +56,7 @@
                <children>
                   <TextField fx:id="ID" focusTraversable="false" layoutX="96.0" layoutY="148.0" prefHeight="30.0" prefWidth="200.0" />
                   <PasswordField fx:id="password" focusTraversable="false" layoutX="96.0" layoutY="198.0" prefHeight="30.0" prefWidth="200.0" />
-                  <ImageView fx:id="loginBt" fitHeight="68.0" fitWidth="75.0" layoutX="131.0" layoutY="236.0" onMouseClicked="#logIn" onMouseEntered="#enterLoginBt" onMouseExited="#exitedLoginBt" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="loginBt" fitHeight="40.0" fitWidth="80.0" layoutX="127.0" layoutY="281.0" onMouseClicked="#logIn" onMouseEntered="#enterLoginBt" onMouseExited="#exitedLoginBt" pickOnBounds="true" smooth="false">
                      <image>
                         <Image url="@../../../../../../../../../logIn/logIn.png" />
                      </image>
@@ -69,24 +69,24 @@
                   <Label layoutX="129.0" layoutY="140.0" />
                   <TextField fx:id="rmiPortText" focusTraversable="false" layoutX="254.0" layoutY="187.0" prefHeight="30.0" prefWidth="239.0" />
                   <TextField fx:id="rmiIpText" focusTraversable="false" layoutX="254.0" layoutY="135.0" prefHeight="30.0" prefWidth="239.0" />
-                  <ImageView fx:id="rmiBT2" fitHeight="77.0" fitWidth="94.0" layoutX="254.0" layoutY="254.0" onMouseClicked="#link" onMouseEntered="#enter2" onMouseExited="#excited2" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="rmiBT2" fitHeight="40.0" fitWidth="80.0" layoutX="254.0" layoutY="285.0" onMouseClicked="#link" onMouseEntered="#enter2" onMouseExited="#excited2" pickOnBounds="true">
                      <image>
                         <Image url="@../../../../../../../../../logIn/connect.png" />
                      </image>
                   </ImageView>
                </children>
             </Pane>
-            <ImageView fx:id="rmiBt" fitHeight="63.0" fitWidth="145.0" layoutX="48.0" layoutY="458.0" onMouseClicked="#openRMI" onMouseEntered="#enterRMIBt" onMouseExited="#exitedRMIBt" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="rmiBt" fitHeight="49.0" fitWidth="106.0" layoutX="48.0" layoutY="472.0" onMouseClicked="#openRMI" onMouseEntered="#enterRMIBt" onMouseExited="#exitedRMIBt" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../../../../logIn/changeToRMI.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="registerBT" fitHeight="63.0" fitWidth="145.0" layoutX="48.0" layoutY="521.0" onMouseClicked="#openRegister" onMouseEntered="#enterRegisterBt" onMouseExited="#exitedRegisterBt" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="registerBT" fitHeight="57.0" fitWidth="98.0" layoutX="48.0" layoutY="527.0" onMouseClicked="#openRegister" onMouseEntered="#enterRegisterBt" onMouseExited="#exitedRegisterBt" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../../../../logIn/changeToSignUp.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="logInBT" fitHeight="63.0" fitWidth="145.0" layoutX="48.0" layoutY="521.0" onMouseClicked="#openLogIn" onMouseEntered="#enterLoginBt2" onMouseExited="#exitedLoginBt2" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="logInBT" fitHeight="56.0" fitWidth="98.0" layoutX="48.0" layoutY="528.0" onMouseClicked="#openLogIn" onMouseEntered="#enterLoginBt2" onMouseExited="#exitedLoginBt2" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../../../../../../../../../logIn/changeToLogIn.png" />
                </image>

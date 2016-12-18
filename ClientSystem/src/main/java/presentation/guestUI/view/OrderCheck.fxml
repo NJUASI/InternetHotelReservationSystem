@@ -21,6 +21,7 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.guestUI.controller.OrderCheckController">
    <children>
+      <ImageView fx:id="rightImage" fitHeight="601.0" fitWidth="895.0" pickOnBounds="true" preserveRatio="true" />
       <Pane fx:id="orderDetail" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" visible="false">
          <children>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="386.0" prefWidth="454.0">
