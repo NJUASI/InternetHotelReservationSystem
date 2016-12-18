@@ -115,9 +115,10 @@ public class MockLogIn extends LogIn {
 	 * @param guestVO
 	 *           从注册界面层传下来的guestVO
 	 * @return 客户是否成功注册
+	 * @throws UserInexistException 
 	 * @throws ParameterInvalidException 
 	 */
-	public GuestVO guestSignUp(UserVO guestVO) {
+	public GuestVO guestSignUp(UserVO guestVO) throws UserInexistException {
 		return (GuestVO)user.add(guestVO,UserType.GUEST);
 	}
 

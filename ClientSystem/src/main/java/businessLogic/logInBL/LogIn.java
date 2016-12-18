@@ -88,9 +88,10 @@ public class LogIn{
 	 *            从注册界面层传下来的guestVO
 	 * @return 客户是否成功注册
 	 * @throws InvalidInputException,PasswordInputException
+	 * @throws UserInexistException 
 	 * @throws ParameterInvalidException
 	 */
-	public GuestVO guestSignUp(UserVO guestVO)throws InvalidInputException, PasswordInputException, InvalidLengthInputException {
+	public GuestVO guestSignUp(UserVO guestVO)throws InvalidInputException, PasswordInputException, InvalidLengthInputException, UserInexistException {
 		this.infoDetector(guestVO);
 		return (GuestVO) user.add(guestVO, UserType.GUEST);
 	}

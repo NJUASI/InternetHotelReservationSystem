@@ -119,6 +119,9 @@ public class HotelWorkerController {
 			new PopUp("密码必须含有一个数字和密码或不能为空", "更改失败");
 		} catch (UpdateFaiedException |InvalidLengthInputException e) {
 			e.printStackTrace();
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+			new PopUp("请检查输入的编号", "sorry");
 		}
 		
 	}

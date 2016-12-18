@@ -15,13 +15,13 @@ import vo.UserVO;
 
 public interface UserBLService {
 
-	public UserVO add(UserVO newUserVO ,UserType userType) throws ParameterInvalidException;
+	public UserVO add(UserVO newUserVO ,UserType userType) throws ParameterInvalidException, UserInexistException;
 
-	public ResultMessage modify(UserVO userVO) throws InvalidLengthInputException, InvalidInputException, PasswordInputException, UpdateFaiedException;
+	public ResultMessage modify(UserVO userVO) throws InvalidLengthInputException, InvalidInputException, PasswordInputException, UpdateFaiedException, UserInexistException;
 	
 	public UserVO getSingle(String userID) throws UserInexistException;
 	
-	public HotelVO addHotel(HotelVO newHotelVO);
+	public HotelVO addHotel(HotelVO newHotelVO) throws UserInexistException;
 	
 	public List<UserVO> getAll(UserType userType);
 	

@@ -49,15 +49,16 @@ public class MarketerController {
 	protected void search() {
 		try {
 			marketerVO = (WebMarketerVO) userBLController.getSingle(inputID.getText());
+			
+			marketerID.setText(marketerVO.userID);
+			password.setText(marketerVO.password);
+
+			marketerInfoPane.setVisible(true);
 		} catch (UserInexistException e) {
 			e.printStackTrace();
-			new PopUp("请检查输入内容", "sorry");
+			new PopUp("请检查输入的编号", "sorry");
 		}
 		
-		marketerID.setText(marketerVO.userID);
-		password.setText(marketerVO.password);
-
-		marketerInfoPane.setVisible(true);
 	}
 
 	/**
@@ -102,6 +103,9 @@ public class MarketerController {
 				| UpdateFaiedException e) {
 			e.printStackTrace();
 			new PopUp("密码必须含有一个数字和密码或不能为空", "更改失败");
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+			new PopUp("请检查输入的编号", "sorry");
 		}
 		 		
 	}
@@ -133,6 +137,9 @@ public class MarketerController {
 			yourPassword.setText(webMarketerVO.password);
 		} catch (ParameterInvalidException e) {
 			e.printStackTrace();
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+			new PopUp("请检查输入的编号", "sorry");
 		}
 	}
 	/**

@@ -176,6 +176,9 @@ public class LogInViewController {
 			}catch (InvalidLengthInputException e){
 				e.printStackTrace();
 				new PopUp("输入的长度无效", "注册失败");
+			} catch (UserInexistException e) {
+				e.printStackTrace();
+				new PopUp("请检查输入的编号", "注册失败");
 			}
 		}
 		else{

@@ -14,7 +14,7 @@ public interface LogInBLService {
 
 	public UserType logIn (String userID, String password) throws WrongPasswordException, SpecialCharacterException, InvalidLengthInputException, UserInexistException;
 	
-	public GuestVO guestSignUp (UserVO guestVO) throws InvalidInputException, PasswordInputException, InvalidLengthInputException;
+	public GuestVO guestSignUp (UserVO guestVO) throws InvalidInputException, PasswordInputException, InvalidLengthInputException, UserInexistException;
 	
 	public void logOut(String userID);
 }
