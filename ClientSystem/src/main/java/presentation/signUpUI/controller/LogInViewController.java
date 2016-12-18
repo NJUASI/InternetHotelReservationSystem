@@ -195,7 +195,6 @@ public class LogInViewController {
 		final String ip =  rmiIpText.getText();
 		final String port = rmiPortText.getText();
 
-
 		System.out.println("Connect to: " + ip + " : " + port);
 		ClientRemoteHelper.getInstance().setIPandPort(ip, port);
 

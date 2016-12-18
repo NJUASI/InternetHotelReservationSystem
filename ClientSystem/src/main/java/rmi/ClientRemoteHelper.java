@@ -41,6 +41,7 @@ public class ClientRemoteHelper {
 	}
 
 	public void setIPandPort(String ip, String port) {
+		System.out.println("未初始化");
 		ClientRemoteHelper.ip = ip;
 		ClientRemoteHelper.port = port;
 		ClientRemoteHelper.url = "rmi://" + ip + ":" + port + "/";

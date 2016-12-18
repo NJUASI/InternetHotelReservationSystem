@@ -133,7 +133,7 @@ public class OrderController {
 	 */
 	@FXML
 	protected void cancelAbnormalOrder() {
-		orderID = orderVO.orderGeneralVO.guestID;
+		orderID = orderVO.orderGeneralVO.orderID;
 		
 		double percent = 1.0;
 		if (cancelPercentInCheck.getValue().equals("50%")) {
@@ -276,7 +276,7 @@ public class OrderController {
 	 * @describe 初始化订单详情界面
 	 */
 	private void initOrderDetail(OrderVO orderVO) {
-		detail_ID.setText(orderVO.orderGeneralVO.hotelID);
+		detail_ID.setText(orderVO.orderGeneralVO.orderID);
 		detail_Hotel.setText(orderVO.orderGeneralVO.hotelName);
 		detail_address.setText(orderVO.orderGeneralVO.hotelAddress);
 		detail_roomType.setText(orderVO.roomType.getChineseRoomType());
