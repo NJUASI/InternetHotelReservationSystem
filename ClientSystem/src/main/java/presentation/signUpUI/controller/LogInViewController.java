@@ -1,5 +1,6 @@
 package presentation.signUpUI.controller;
 
+import java.net.URL;
 import java.time.LocalDate;
 
 
@@ -18,6 +19,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.PopUp.PopUp;
@@ -32,8 +35,7 @@ public class LogInViewController {
 	//登录和注册界面
 	@FXML
 	private Pane logInPane,registerPane,rmiPane;
-	@FXML
-	private Button registerBT,logInBT;
+
 	//登录信息
 	@FXML
 	private TextField ID;
@@ -55,15 +57,71 @@ public class LogInViewController {
 	private LogInBLService logInBLController;
 	
 	private RootFactory factory;
-	
+	@FXML
+	private ImageView background,loginBt,rmiBt,registerBT,logInBT,registerBT2,rmiBT2;
 	
 	@FXML
 	private void initialize() {
 		this.logInBLController = LogInController.getInstance();
 		factory = new RootFactory();
+	
+		background.setImage(new Image("/presentation/signUpUI/picture/mainLogIn.png"));	
+		loginBt.setImage(new Image("/presentation/signUpUI/picture/logIn.png"));
+		registerBT.setImage(new Image("/presentation/signUpUI/picture/changeToSignUp.png"));	
+		logInBT.setImage(new Image("/presentation/signUpUI/picture/changeToLogIn.png"));	
+		rmiBt.setImage(new Image("/presentation/signUpUI/picture/changeToRMI.png"));	
+		registerBT2.setImage(new Image("/presentation/signUpUI/picture/signUp.png"));
+		rmiBT2.setImage(new Image("/presentation/signUpUI/picture/connect.png"));
 	}
 	
-	
+	@FXML
+	protected void enterLoginBt(){
+		loginBt.setImage(new Image("/presentation/signUpUI/picture/logInEnter.png"));	
+	}
+	@FXML
+	protected void exitedLoginBt(){
+		loginBt.setImage(new Image("/presentation/signUpUI/picture/logIn.png"));	
+	}
+	@FXML
+	protected void enterLoginBt2(){
+		logInBT.setImage(new Image("/presentation/signUpUI/picture/changeToLogInEnter.png"));	
+	}
+	@FXML
+	protected void exitedLoginBt2(){
+		logInBT.setImage(new Image("/presentation/signUpUI/picture/changeToLogIn.png"));	
+	}
+	@FXML
+	protected void enterRMIBt(){
+		rmiBt.setImage(new Image("/presentation/signUpUI/picture/changeToRMI.png"));	
+	}
+	@FXML
+	protected void exitedRMIBt(){
+		rmiBt.setImage(new Image("/presentation/signUpUI/picture/changeToRMI.png"));	
+	}
+	@FXML
+	protected void  enterRegisterBt(){
+		registerBT.setImage(new Image("/presentation/signUpUI/picture/changeToSignUpEnter.png"));	
+	}
+	@FXML
+	protected void  exitedRegisterBt(){
+		registerBT.setImage(new Image("/presentation/signUpUI/picture/changeToSignUp.png"));	
+	}
+	@FXML
+	protected void enter1(){
+		registerBT2.setImage(new Image("/presentation/signUpUI/picture/signUpEnter.png"));
+	}
+	@FXML
+	protected void excited1(){
+		registerBT2.setImage(new Image("/presentation/signUpUI/picture/signUp.png"));
+	}
+	@FXML
+	protected void enter2(){
+		rmiBT2.setImage(new Image("/presentation/signUpUI/picture/connect.png"));
+	}
+	@FXML
+	protected void excited2(){
+		rmiBT2.setImage(new Image("/presentation/signUpUI/picture/connectEnter.png"));
+	}
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -72,6 +130,7 @@ public class LogInViewController {
 	 */
 	@FXML
 	protected void openLogIn() {
+		background.setImage(new Image("/presentation/signUpUI/picture/mainLogIn.png"));	
 		registerPane.setVisible(false);
 		logInPane.setVisible(true);
 		rmiPane.setVisible(false);
@@ -86,6 +145,7 @@ public class LogInViewController {
 	 */
 	@FXML
 	public void openRegister() {
+		background.setImage(new Image("/presentation/signUpUI/picture/mainSignUp.png"));	
 		registerPane.setVisible(true);
 		logInPane.setVisible(false);
 		rmiPane.setVisible(false);
@@ -100,6 +160,7 @@ public class LogInViewController {
 	 */
 	@FXML
 	public void openRMI() {
+		background.setImage(new Image("/presentation/signUpUI/picture/mainRMI.png"));	
 		rmiPane.setVisible(true);
 		registerPane.setVisible(false);
 		logInPane.setVisible(false);
