@@ -6,6 +6,7 @@ import java.util.List;
 import businessLogic.marketBL.MarketController;
 import businessLogicService.marketBLService.MarketBLService;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -20,7 +21,7 @@ import vo.MarketVO;
 public class MemberController {
 
 	@FXML
-	private Pane marketCheckPane;
+	private Button modifyButton;
 
 	@FXML
 	private Pane marketModifyPane;
@@ -108,7 +109,7 @@ public class MemberController {
 		modifyDiscount8.setText(discount8.getText());
 		
 		marketModifyPane.setVisible(true);
-		marketCheckPane.setVisible(false);
+		modifyButton.setVisible(false);
 	}
 	
 	/**
@@ -119,7 +120,7 @@ public class MemberController {
 	 */
 	@FXML
 	protected void cancelModify() {
-		marketCheckPane.setVisible(true);
+		modifyButton.setVisible(true);
 		marketModifyPane.setVisible(false);
 	}
 
@@ -146,7 +147,7 @@ public class MemberController {
 			new PopUp("请确认填写格式", "");
 		
 		initialize();
-		marketCheckPane.setVisible(true);
+		modifyButton.setVisible(true);
 		marketModifyPane.setVisible(false);
 	}
 }

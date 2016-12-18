@@ -74,7 +74,7 @@
                         <Label fx:id="yourPassword" prefHeight="20.0" prefWidth="294.0" text="你的账号：" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
-                  <Button focusTraversable="false" layoutX="56.0" layoutY="89.0" mnemonicParsing="false" onAction="#cancel" prefHeight="23.0" prefWidth="88.0" text="取消" />
+                  <Button focusTraversable="false" layoutX="56.0" layoutY="89.0" mnemonicParsing="false" onAction="#cancel" prefHeight="23.0" prefWidth="88.0" text="确认" />
                </children>
             </Pane>
          </children>

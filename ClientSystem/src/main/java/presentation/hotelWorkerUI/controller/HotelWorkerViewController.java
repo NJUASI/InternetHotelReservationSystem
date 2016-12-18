@@ -29,8 +29,10 @@ public class HotelWorkerViewController {
 	private AnchorPane mainPane;
 	
 	private Parent currentParent;
+	
 	HotelBLService hotelBLController;
 	String hotelID = IDReserve.getInstance().getUserID();
+	
 	public HotelWorkerViewController() {
 		hotelBLController = HotelBLController.getInstance();
 	}

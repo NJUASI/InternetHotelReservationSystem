@@ -9,9 +9,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import utilities.IDReserve;
 
 public class WebManagerViewController {
 	@FXML
@@ -21,6 +23,16 @@ public class WebManagerViewController {
 	
 	private Parent currentParent;
 
+	@FXML
+	private Label ID;
+	
+	@FXML
+	void initialize(){
+			String userID = IDReserve.getInstance().getUserID();
+			ID.setText(userID);
+	}
+
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990

@@ -7,11 +7,14 @@ import com.sun.javafx.robot.impl.FXRobotHelper;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import utilities.IDReserve;
 
 /**
  * @author 61990
@@ -25,8 +28,19 @@ public class WebMarketerViewController {
 	@FXML
 	private Pane mainPane;
 	
+	@FXML
+	private Label ID;
+	
 	private Parent currentParent;
+	
+	@FXML
+	void initialize(){
+			String userID = IDReserve.getInstance().getUserID();
+			ID.setText(userID);
+	}
 
+	
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy Harvey

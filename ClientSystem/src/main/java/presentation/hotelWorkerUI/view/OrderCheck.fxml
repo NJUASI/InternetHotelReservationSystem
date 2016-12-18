@@ -42,14 +42,14 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <Button layoutX="14.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchAlldOrder" text="所有订单" />
-            <Button layoutX="102.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchExecutedOrder" text="已执行订单" />
-            <Button layoutX="308.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchUnexecutedOrder" text="未执行订单" />
-            <Button layoutX="515.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchAbnormalOrder" text="异常订单" />
-            <Button layoutX="410.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchCancelledOrder" text="已撤销订单" />
-            <Button fx:id="checkInBt1" layoutX="659.0" layoutY="70.0" mnemonicParsing="false" onAction="#checkIn2" text="入住" />
+            <Button focusTraversable="false" layoutX="14.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchAlldOrder" text="所有订单" />
+            <Button focusTraversable="false" layoutX="102.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchExecutedOrder" text="已执行订单" />
+            <Button focusTraversable="false" layoutX="308.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchUnexecutedOrder" text="未执行订单" />
+            <Button focusTraversable="false" layoutX="515.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchAbnormalOrder" text="异常订单" />
+            <Button focusTraversable="false" layoutX="410.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchCancelledOrder" text="已撤销订单" />
+            <Button fx:id="checkInBt1" focusTraversable="false" layoutX="659.0" layoutY="70.0" mnemonicParsing="false" onAction="#checkIn2" text="入住" />
             <Button fx:id="checkOutBt1" focusTraversable="false" layoutX="709.0" layoutY="70.0" mnemonicParsing="false" onAction="#checkOut2" text="退房" />
-            <Button layoutX="205.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchNotCheckOutOrder" text="未退房订单" />
+            <Button focusTraversable="false" layoutX="205.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchNotCheckOutOrder" text="未退房订单" />
          </children>
       </AnchorPane>
       <Pane fx:id="orderDetail" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" visible="false">
@@ -142,7 +142,7 @@
                                           <Label fx:id="detail_message" layoutX="263.0" layoutY="386.0" maxHeight="299.0" prefWidth="299.0" text="三个孩子，不要窗户ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss" wrapText="true" />
                                           <Button focusTraversable="false" layoutX="549.0" layoutY="168.0" mnemonicParsing="false" onAction="#cancel" text="返回" />
                                           <Button fx:id="checkOutBt" layoutX="629.0" layoutY="168.0" mnemonicParsing="false" onAction="#checkOut" text="退房" />
-                                          <Button fx:id="checkInBt" layoutX="629.0" layoutY="168.0" mnemonicParsing="false" onAction="#checkIn" text="入住" />
+                                          <Button fx:id="checkInBt" focusTraversable="false" layoutX="629.0" layoutY="168.0" mnemonicParsing="false" onAction="#checkIn" text="入住" />
                                        </children>
                                     </Pane>
                                  </children>
@@ -188,10 +188,10 @@
       </Pane>
       <Pane fx:id="checkInPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="361.0" prefWidth="500.0" visible="false">
          <children>
-            <Button layoutX="354.0" layoutY="166.0" mnemonicParsing="false" onAction="#cancelCheckIn" text="取消入住" />
+            <Button focusTraversable="false" layoutX="354.0" layoutY="166.0" mnemonicParsing="false" onAction="#cancelCheckIn" text="取消入住" />
             <Label layoutX="55.0" layoutY="259.0" text="预计离开时间：" />
             <Label layoutX="55.0" layoutY="204.0" text="预计离开日期：" />
-            <DatePicker fx:id="checkInLeaveDate" layoutX="176.0" layoutY="199.0" prefHeight="30.0" prefWidth="158.0" />
+            <DatePicker fx:id="checkInLeaveDate" focusTraversable="false" layoutX="176.0" layoutY="199.0" prefHeight="30.0" prefWidth="158.0" />
             <GridPane layoutX="55.0" layoutY="57.0" prefHeight="133.0" prefWidth="278.0">
                <children>
                   <Label text="订单号：" />
@@ -199,7 +199,7 @@
                   <Label text="房间号：" GridPane.rowIndex="2" />
                   <Label fx:id="checkInName" text="姓名" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label fx:id="checkInOrderID" text="订单号" GridPane.columnIndex="1" />
-                  <TextField fx:id="checkInRoomNum" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="checkInRoomNum" focusTraversable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="128.0" />
@@ -211,12 +211,12 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
-            <Button layoutX="353.0" layoutY="101.0" mnemonicParsing="false" onAction="#sureCheckIn" text="确定入住" />
+            <Button focusTraversable="false" layoutX="353.0" layoutY="101.0" mnemonicParsing="false" onAction="#sureCheckIn" text="确定入住" />
             <HBox layoutX="176.0" layoutY="254.0" prefHeight="30.0" prefWidth="194.0">
                <children>
-                  <TextField fx:id="checkInHour" prefHeight="30.0" prefWidth="46.0" />
+                  <TextField fx:id="checkInHour" focusTraversable="false" prefHeight="30.0" prefWidth="46.0" />
                   <Label prefHeight="30.0" prefWidth="22.0" text=" ：" />
-                  <TextField fx:id="checkInMinute" prefHeight="30.0" prefWidth="46.0" />
+                  <TextField fx:id="checkInMinute" focusTraversable="false" prefHeight="30.0" prefWidth="46.0" />
                </children>
             </HBox>
             <Label layoutX="209.0" layoutY="14.0" text="订单入住">
@@ -244,13 +244,13 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
-            <Button layoutX="353.0" layoutY="84.0" mnemonicParsing="false" onAction="#sureCheckOut" text="确定退房" />
+            <Button focusTraversable="false" layoutX="353.0" layoutY="84.0" mnemonicParsing="false" onAction="#sureCheckOut" text="确定退房" />
             <Label layoutX="204.0" layoutY="-1.0" text="订单退房">
                <font>
                   <Font size="23.0" />
                </font>
             </Label>
-            <Button layoutX="353.0" layoutY="150.0" mnemonicParsing="false" onAction="#cancelCheckOut" text="取消退房" />
+            <Button focusTraversable="false" layoutX="353.0" layoutY="150.0" mnemonicParsing="false" onAction="#cancelCheckOut" text="取消退房" />
          </children>
       </Pane>
    </children>

@@ -343,8 +343,9 @@ public class OrderController {
 			
 			final CheckInVO checkInVO = new CheckInVO(checkInOrderID.getText(), checkInRoomNum.getText(), checkInTime, expectLeaveTime);
 			final ResultMessage result = orderBLController.updateCheckIn(checkInVO);
-			searchAlldOrder();
 			searchUnexecutedOrder();
+			cancel();
+			cancelCheckIn();
 			if (result == ResultMessage.SUCCESS) {
 				new PopUp("入住成功", "congratulation");			
 				
@@ -419,7 +420,8 @@ public class OrderController {
 		
 		final ResultMessage result = orderBLController.updateCheckOut(checkOutVO);
 		searchNotCheckOutOrder();
-		searchAlldOrder();
+		cancel();
+		cancelCheckOut();
 //	TODO 后期可以把这些放在界面里，不弹框
 		if (result == ResultMessage.SUCCESS) {
 			new PopUp("退房成功", "congratulation");	
