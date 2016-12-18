@@ -17,8 +17,9 @@ import utilities.enums.ResultMessage;
  */
 public class HotelWorkerDataServiceImpl extends UnicastRemoteObject implements HotelWorkerDataService {
 
-	private static final long serialVersionUID = 3434060152387200042L;
 
+	private static final long serialVersionUID = -239584963488669189L;
+	
 	private HotelWorkerDataHelper hotelWorkerHelper;
 
 	/**

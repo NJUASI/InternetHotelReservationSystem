@@ -17,7 +17,8 @@ import utilities.enums.ResultMessage;
  */
 public class WebManagerDataServiceImpl extends UnicastRemoteObject implements WebManagerDataService{
 
-	private static final long serialVersionUID = 3434060152387200042L;
+	
+	private static final long serialVersionUID = 2148632582659628452L;
 	
 	private WebManagerDataHelper webManagerHelper;
 	

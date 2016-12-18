@@ -23,8 +23,8 @@ import utilities.enums.RoomType;
  * @time:2016年12月5日 上午12:42:53
  */
 public class HotelDataServiceImpl extends UnicastRemoteObject implements HotelDataService{
-
-	private static final long serialVersionUID = 3434060152387200042L;
+	
+	private static final long serialVersionUID = 7735555578683547312L;
 	
 	private RoomDataHelper roomDataHelper;
 	private HotelDataHelper hotelDataHelper;

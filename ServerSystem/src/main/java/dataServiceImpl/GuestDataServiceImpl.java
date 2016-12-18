@@ -20,7 +20,7 @@ import utilities.enums.ResultMessage;
  */
 public class GuestDataServiceImpl extends UnicastRemoteObject implements GuestDataService{
 
-	private static final long serialVersionUID = 3434060152387200042L;
+	private static final long serialVersionUID = 7861888931492257229L;
 	
 	private GuestDataHelper guestHelper;
 	

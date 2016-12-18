@@ -28,7 +28,7 @@ import rmi.ClientRemoteHelper;
 import utilities.IDReserve;
 import utilities.enums.UserType;
 import vo.GuestVO;
-	
+
 
 public class LogInViewController {
 	public static String userID;
@@ -53,17 +53,23 @@ public class LogInViewController {
 	private TextField nickName;
 	@FXML
 	private TextField phone;
-	
+
 	private LogInBLService logInBLController;
-	
+
 	private RootFactory factory;
+
 	@FXML
 	private ImageView background,loginBt,rmiBt,registerBT,logInBT,registerBT2,rmiBT2;
 	
+
 	@FXML
 	private void initialize() {
 		this.logInBLController = LogInController.getInstance();
 		factory = new RootFactory();
+		
+		rmiIpText.setText("localhost");
+		rmiPortText.setText("8889");
+
 	
 		background.setImage(new Image("/presentation/signUpUI/picture/mainLogIn.png"));	
 		loginBt.setImage(new Image("/presentation/signUpUI/picture/logIn.png"));
@@ -122,6 +128,10 @@ public class LogInViewController {
 	protected void excited2(){
 		rmiBT2.setImage(new Image("/presentation/signUpUI/picture/connectEnter.png"));
 	}
+
+	
+
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -167,7 +177,7 @@ public class LogInViewController {
 		logInBT.setVisible(true);
 		registerBT.setVisible(false);
 	}
-	
+
 
 	/**
 	 * @author 61990
@@ -177,36 +187,36 @@ public class LogInViewController {
 	 */
 	@FXML
 	protected void logIn() {
-		
-			UserType userType = null;;
-				try {
-					userType = logInBLController.logIn(ID.getText(), password.getText());
-					
-					IDReserve.getInstance().setUserID(ID.getText());
-					Parent root = factory.createRoot(userType);
-					
-					if(root==null){
-						new PopUp("账号长度无效", "登录失败");
-					}
-					else{
-						Stage stage=StageController.getInstance().getStage();
-						Scene scene = new Scene(root);
-						stage.setScene(scene);
-					}
-				} catch(UserInexistException e){
-					e.printStackTrace();
-					new PopUp("该用户不存在", "登录失败");
-				}catch (SpecialCharacterException e) {
-					e.printStackTrace();
-					new PopUp("账号中含有不合法符号", "登录失败");
-				} catch (WrongPasswordException e) {
-					e.printStackTrace();
-					new PopUp("请检查你的账号或密码", "登录失败");
-				} catch (InvalidLengthInputException e) {
-					e.printStackTrace();
-					new PopUp("账号长度无效", "登录失败");
-				}
-				
+
+		UserType userType = null;;
+		try {
+			userType = logInBLController.logIn(ID.getText(), password.getText());
+
+			IDReserve.getInstance().setUserID(ID.getText());
+			Parent root = factory.createRoot(userType);
+
+			if(root==null){
+				new PopUp("账号长度无效", "登录失败");
+			}
+			else{
+				Stage stage=StageController.getInstance().getStage();
+				Scene scene = new Scene(root);
+				stage.setScene(scene);
+			}
+		} catch(UserInexistException e){
+			e.printStackTrace();
+			new PopUp("该用户不存在", "登录失败");
+		}catch (SpecialCharacterException e) {
+			e.printStackTrace();
+			new PopUp("账号中含有不合法符号", "登录失败");
+		} catch (WrongPasswordException e) {
+			e.printStackTrace();
+			new PopUp("请检查你的账号或密码", "登录失败");
+		} catch (InvalidLengthInputException e) {
+			e.printStackTrace();
+			new PopUp("账号长度无效", "登录失败");
+		}
+
 	}
 
 	/**
@@ -217,7 +227,7 @@ public class LogInViewController {
 	 */
 	@FXML
 	protected void register() {
-		
+
 		GuestVO guestVO = null;
 		if(password2.getText().equals(password3.getText())){
 			GuestVO userVO = new GuestVO("",LocalDate.of(1,1,1),"",name.getText(), nickName.getText(),password2.getText()
@@ -253,18 +263,9 @@ public class LogInViewController {
 	protected void link() {
 		final String ip =  rmiIpText.getText();
 		final String port = rmiPortText.getText();
-		
-		if (ip.equals("") && port.equals("")) {
-			System.out.println("Link to localhost");
-			ClientRemoteHelper.getInstance().setLocalhost();
-		}else if(!ip.equals("") && !port.equals("")) {
-			System.out.println("Connect to: " + ip + " : " + port);
-			ClientRemoteHelper.getInstance().setIPandPort(ip, port);
-			
-			new PopUp("连接成功", "rmi连接");
-		}else {
-			new PopUp("连接失败", "rmi连接");
-		}
-	}
 
+		System.out.println("Connect to: " + ip + " : " + port);
+		ClientRemoteHelper.getInstance().setIPandPort(ip, port);
+
+	}
 }

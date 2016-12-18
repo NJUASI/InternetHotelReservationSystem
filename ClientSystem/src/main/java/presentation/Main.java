@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import presentation.signUpUI.controller.StageController;
-import rmi.ClientRemoteHelper;
 
 /**
  * @author 61990
@@ -55,6 +54,5 @@ public class Main extends Application {
 		// 界面
 		launch(args);
 		
-		ClientRemoteHelper.getInstance();
 	}
 }
