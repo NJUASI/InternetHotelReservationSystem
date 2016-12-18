@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import presentation.signUpUI.controller.StageController;
@@ -26,6 +28,8 @@ public class HotelWorkerViewController {
 	private AnchorPane right;
 	@FXML 
 	private AnchorPane mainPane;
+	@FXML
+	private ImageView leftImage,rightImage;
 	
 	private Parent currentParent;
 	
@@ -43,9 +47,11 @@ public class HotelWorkerViewController {
 	 */
 	@FXML
 	private void initialize() {
-
+		leftImage.setImage(new Image("/presentation/signUpUI/picture/left.png"));
+		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 		HotelVO hotelVO = hotelBLController.getHotelInfo(hotelID);
 		infoBt.setText(hotelVO.hotelName);
+		
 	}
 
 	@FXML

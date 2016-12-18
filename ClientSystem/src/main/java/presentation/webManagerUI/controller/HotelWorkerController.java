@@ -10,6 +10,8 @@ import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import presentation.PopUp.PopUp;
 import utilities.enums.ResultMessage;
@@ -32,10 +34,13 @@ public class HotelWorkerController {
 	private Label hotelID, hotelName, password, hotelID2;
 	
 	private UserBLService userBLController;
-
+	@FXML
+	private ImageView rightImage;
+	
 	@FXML
 	private void initialize() {
 		userBLController = UserController.getInstance();
+		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 	}
 
 	/**

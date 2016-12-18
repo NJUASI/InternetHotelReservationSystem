@@ -9,6 +9,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import presentation.Table.CreditTable;
 import utilities.IDReserve;
 import vo.CreditVO;
@@ -29,7 +31,8 @@ public class CreditCheckController {
 	public CreditCheckController() {
 		creditBLController = CreditController.getInstance();
 	}
-	
+	@FXML
+	private ImageView rightImage;
 	/**
 	 * @description 获取客户所有的信用变化记录
 	 * @author 61990
@@ -38,6 +41,8 @@ public class CreditCheckController {
 	 */
 	@FXML
 	private void initialize() {
+		
+		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 
 		// 调用creditBL的方法，通过guest获得该用户所有的信用变化
 		Iterator<CreditVO> creditChanges = creditBLController.getAllCreditDetail(IDReserve.getInstance().getUserID());

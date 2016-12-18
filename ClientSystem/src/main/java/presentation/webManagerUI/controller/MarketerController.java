@@ -11,6 +11,8 @@ import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import presentation.PopUp.PopUp;
 import utilities.enums.ResultMessage;
@@ -33,10 +35,13 @@ public class MarketerController {
 	private Label password, marketerID, marketerID2,yourID,yourPassword;
 	
 	private UserBLService userBLController;
-
+	@FXML
+	private ImageView rightImage;
 	@FXML
 	private void initialize() {
 		userBLController = UserController.getInstance();
+		
+		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 	}
 
 	/**

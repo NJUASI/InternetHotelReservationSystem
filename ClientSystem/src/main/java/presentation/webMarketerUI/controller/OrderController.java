@@ -16,6 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import presentation.PopUp.PopUp;
 import presentation.Table.OrderTable;
@@ -77,7 +79,9 @@ public class OrderController {
 	@FXML
 	private TableColumn<OrderTable, String> orderIDColumn,nameColumn, hotelNameColumn, addressColumn, priceColumn,
 			checkInTimeColumn, stateColumn,checkOutTimeColumn,guestIDColumn;
-
+	@FXML
+	private ImageView rightImage;
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
@@ -86,7 +90,7 @@ public class OrderController {
 	 */
 	@FXML
 	private void initialize() {
-		
+		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 		orderBLController = OrderBLController.getInstance();
 		searchDate.setValue(LocalDate.now());
 		cancelPercent.setValue("50%");

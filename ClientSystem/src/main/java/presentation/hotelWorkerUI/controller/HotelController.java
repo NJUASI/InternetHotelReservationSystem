@@ -24,6 +24,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import presentation.Table.EvaluationTable;
 import utilities.IDReserve;
@@ -45,7 +47,8 @@ public class HotelController {
 	private TextField hotelNameText,hotelAddressText,introductionText;
 	@FXML
 	private ComboBox<String> cityText,cycleText,levelText;
-
+	@FXML
+	private ImageView rightImage;
 
 
 	HotelBLService hotelBLController;
@@ -78,6 +81,7 @@ public class HotelController {
 	 */
 	@FXML
 	private void initialize() {
+		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 
 		//显示酒店详情
 		HotelVO hotelVO = hotelBLController.getHotelInfo(hotelID);

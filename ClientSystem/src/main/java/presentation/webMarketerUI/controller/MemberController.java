@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import presentation.PopUp.PopUp;
 import utilities.enums.ResultMessage;
@@ -31,7 +33,9 @@ public class MemberController {
 	private Label name1, name2, name3, name4, name5,  name6, name7, name8,
 	credit1, credit2, credit3, credit4, credit5,credit6, credit7, credit8,
 	discount1, discount2,discount3, discount4, discount5, discount6, discount7, discount8;
-			
+	@FXML
+	private ImageView rightImage;
+	
 	
 	//加载维护的输入框
 	@FXML
@@ -47,7 +51,7 @@ public class MemberController {
 	 */
 	@FXML
 	private void initialize() {
-
+		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 		List<MarketVO> listMarket = marketBLController.getMemberFormulation();
 		name1.setText(listMarket.get(0).marketName);
 		name2.setText(listMarket.get(1).marketName);

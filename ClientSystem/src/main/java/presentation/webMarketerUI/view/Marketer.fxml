@@ -30,6 +30,7 @@
                   <Button focusTraversable="false" layoutX="4.0" layoutY="154.0" mnemonicParsing="false" onMouseClicked="#openCommonPromotion" prefHeight="43.0" prefWidth="88.0" text="普通策略" AnchorPane.bottomAnchor="404.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="154.0" />
                   <Button focusTraversable="false" layoutX="8.0" layoutY="494.0" mnemonicParsing="false" onAction="#logout" prefHeight="36.0" prefWidth="80.0" text="注销" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="494.0" />
                   <Label layoutX="19.0" layoutY="14.0" text="营销人员" />
+                  <ImageView fx:id="leftImage" fitHeight="601.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
             <StackPane fx:id="right" prefHeight="150.0" prefWidth="200.0">
@@ -42,6 +43,7 @@
                               <Font size="41.0" />
                            </font>
                         </Label>
+                        <ImageView fx:id="rightImage" fitHeight="601.0" fitWidth="895.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
                </children>

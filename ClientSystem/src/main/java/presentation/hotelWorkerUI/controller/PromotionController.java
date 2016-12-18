@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import presentation.PopUp.PopUp;
 import presentation.Table.DatePromotionTable;
@@ -40,6 +42,8 @@ public class PromotionController {
 	private TextField nameText,discountText;
 	@FXML
 	private DatePicker startDatePicker, endDatePicker;
+	@FXML
+	private ImageView rightImage;
 
 	PromotionBLController promotionBLController;
 	String hotelID;
@@ -61,7 +65,8 @@ public class PromotionController {
 	 * @updateTime 2016/12/6
 	 */
 	@FXML
-	private void initialize() {
+	private void initialize() {	
+		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 		initDatePromotion();
 		initFixedPromotion();
 	}

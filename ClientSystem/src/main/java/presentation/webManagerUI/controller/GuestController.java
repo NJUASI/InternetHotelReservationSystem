@@ -12,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import presentation.PopUp.PopUp;
 import utilities.enums.ResultMessage;
@@ -38,7 +40,9 @@ public class GuestController {
 
 	@FXML
 	private DatePicker birthdayPicker;
-	
+	@FXML
+	private ImageView rightImage;
+
 	private UserBLService userBLController;
 
 	/**
@@ -47,7 +51,8 @@ public class GuestController {
 	 * @updateTime 2016/12/7构造函数，初始化成员变量
 	 */
 	@FXML
-	private void initialize() {
+	private void initialize() {	
+		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 		userBLController = UserController.getInstance();
 	}
 	/**

@@ -80,55 +80,6 @@ public class LogInViewController {
 		rmiBT2.setImage(new Image("/presentation/signUpUI/picture/connect.png"));
 	}
 	
-	@FXML
-	protected void enterLoginBt(){
-		loginBt.setImage(new Image("/presentation/signUpUI/picture/logInEnter.png"));	
-	}
-	@FXML
-	protected void exitedLoginBt(){
-		loginBt.setImage(new Image("/presentation/signUpUI/picture/logIn.png"));	
-	}
-	@FXML
-	protected void enterLoginBt2(){
-		logInBT.setImage(new Image("/presentation/signUpUI/picture/changeToLogInEnter.png"));	
-	}
-	@FXML
-	protected void exitedLoginBt2(){
-		logInBT.setImage(new Image("/presentation/signUpUI/picture/changeToLogIn.png"));	
-	}
-	@FXML
-	protected void enterRMIBt(){
-		rmiBt.setImage(new Image("/presentation/signUpUI/picture/changeToRMI.png"));	
-	}
-	@FXML
-	protected void exitedRMIBt(){
-		rmiBt.setImage(new Image("/presentation/signUpUI/picture/changeToRMI.png"));	
-	}
-	@FXML
-	protected void  enterRegisterBt(){
-		registerBT.setImage(new Image("/presentation/signUpUI/picture/changeToSignUpEnter.png"));	
-	}
-	@FXML
-	protected void  exitedRegisterBt(){
-		registerBT.setImage(new Image("/presentation/signUpUI/picture/changeToSignUp.png"));	
-	}
-	@FXML
-	protected void enter1(){
-		registerBT2.setImage(new Image("/presentation/signUpUI/picture/signUpEnter.png"));
-	}
-	@FXML
-	protected void excited1(){
-		registerBT2.setImage(new Image("/presentation/signUpUI/picture/signUp.png"));
-	}
-	@FXML
-	protected void enter2(){
-		rmiBT2.setImage(new Image("/presentation/signUpUI/picture/connect.png"));
-	}
-	@FXML
-	protected void excited2(){
-		rmiBT2.setImage(new Image("/presentation/signUpUI/picture/connectEnter.png"));
-	}
-
 	
 
 
@@ -268,4 +219,54 @@ public class LogInViewController {
 		ClientRemoteHelper.getInstance().setIPandPort(ip, port);
 
 	}
+	@FXML
+	protected void enterLoginBt(){
+		loginBt.setImage(new Image("/presentation/signUpUI/picture/logInEnter.png"));	
+	}
+	@FXML
+	protected void exitedLoginBt(){
+		loginBt.setImage(new Image("/presentation/signUpUI/picture/logIn.png"));	
+	}
+	@FXML
+	protected void enterLoginBt2(){
+		logInBT.setImage(new Image("/presentation/signUpUI/picture/changeToLogInEnter.png"));	
+	}
+	@FXML
+	protected void exitedLoginBt2(){
+		logInBT.setImage(new Image("/presentation/signUpUI/picture/changeToLogIn.png"));	
+	}
+	@FXML
+	protected void enterRMIBt(){
+		rmiBt.setImage(new Image("/presentation/signUpUI/picture/changeToRMI.png"));	
+	}
+	@FXML
+	protected void exitedRMIBt(){
+		rmiBt.setImage(new Image("/presentation/signUpUI/picture/changeToRMI.png"));	
+	}
+	@FXML
+	protected void  enterRegisterBt(){
+		registerBT.setImage(new Image("/presentation/signUpUI/picture/changeToSignUpEnter.png"));	
+	}
+	@FXML
+	protected void  exitedRegisterBt(){
+		registerBT.setImage(new Image("/presentation/signUpUI/picture/changeToSignUp.png"));	
+	}
+	@FXML
+	protected void enter1(){
+		registerBT2.setImage(new Image("/presentation/signUpUI/picture/signUpEnter.png"));
+	}
+	@FXML
+	protected void excited1(){
+		registerBT2.setImage(new Image("/presentation/signUpUI/picture/signUp.png"));
+	}
+	@FXML
+	protected void enter2(){
+		rmiBT2.setImage(new Image("/presentation/signUpUI/picture/connect.png"));
+	}
+	@FXML
+	protected void excited2(){
+		rmiBT2.setImage(new Image("/presentation/signUpUI/picture/connectEnter.png"));
+	}
+
+	
 }
