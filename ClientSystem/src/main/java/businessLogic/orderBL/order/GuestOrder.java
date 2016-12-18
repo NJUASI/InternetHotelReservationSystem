@@ -115,12 +115,12 @@ public class GuestOrder implements GuestOrderBLService {
 		}
 
 		// 更新酒店剩余房间信息
-		System.out.println(orderVO.orderGeneralVO.orderID);
+		System.out.println(orderVO.orderGeneralVO.hotelID);
 		System.out.println(orderVO.roomType);
 		System.out.println(orderVO.roomNumCount);
 
 		hotelInterface = new Hotel();
-		msg2 = hotelInterface.checkIn(orderVO.orderGeneralVO.orderID, orderVO.roomType, orderVO.roomNumCount);
+		msg2 = hotelInterface.checkIn(orderVO.orderGeneralVO.hotelID, orderVO.roomType, orderVO.roomNumCount);
 
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
 			return ResultMessage.SUCCESS;

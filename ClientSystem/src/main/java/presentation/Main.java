@@ -54,11 +54,7 @@ public class Main extends Application {
 
 		// 界面
 		launch(args);
-
 		
-		
-		// RMI
-		ClientRemoteHelper.getInstance().setLocalhost();
-		
+		ClientRemoteHelper.getInstance();
 	}
 }

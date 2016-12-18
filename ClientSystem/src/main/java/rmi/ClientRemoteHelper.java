@@ -43,6 +43,7 @@ public class ClientRemoteHelper {
 	}
 
 	public void setIPandPort(String ip, String port) {
+		System.out.println("未初始化");
 		ClientRemoteHelper.ip = ip;
 		ClientRemoteHelper.port = port;
 		ClientRemoteHelper.url = "rmi://" + ip + ":" + port + "/";
@@ -51,10 +52,7 @@ public class ClientRemoteHelper {
 	}
 	
 	public void setLocalhost() {
-		ClientRemoteHelper.ip = "localhost";
-		ClientRemoteHelper.port = defaultPort;
 		ClientRemoteHelper.url = localhost;
-		
 		init();
 	}
 	
