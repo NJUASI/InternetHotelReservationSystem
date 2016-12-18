@@ -161,6 +161,9 @@ public class GuestController {
 		} catch (UpdateFaiedException e) {
 			e.printStackTrace();
 			new PopUp("填写内容不能为空", "更改失败");
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+			new PopUp("请检查输入的编号", "sorry");
 		}
 		
 	}

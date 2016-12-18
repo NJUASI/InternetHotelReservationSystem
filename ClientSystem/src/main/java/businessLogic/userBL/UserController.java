@@ -58,9 +58,10 @@ public class UserController implements UserBLService{
 	 * @updateTime 2016/11/27
 	 * @param userVO 从客户界面层传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加用户信息
+	 * @throws UserInexistException 
 	 * @throws ParameterInvalidException 
 	 */
-	public UserVO add(UserVO newUserVO , UserType userType) {
+	public UserVO add(UserVO newUserVO , UserType userType) throws UserInexistException {
 		return user.add(newUserVO , userType);
 	}
 
@@ -74,8 +75,9 @@ public class UserController implements UserBLService{
 	 * @throws PasswordInputException 
 	 * @throws InvalidInputException 
 	 * @throws InvalidLengthInputException 
+	 * @throws UserInexistException 
 	 */
-	public ResultMessage modify(UserVO userVO) throws InvalidLengthInputException, InvalidInputException, PasswordInputException, UpdateFaiedException {
+	public ResultMessage modify(UserVO userVO) throws InvalidLengthInputException, InvalidInputException, PasswordInputException, UpdateFaiedException, UserInexistException {
 		return user.modify(userVO);
 	}
 
@@ -97,8 +99,9 @@ public class UserController implements UserBLService{
 	 * @updateTime 2016/12/9
 	 * @param newHotelVO 从客户界面层传下来的hotelInfo载体
 	 * @return HotelVO 酒店info载体
+	 * @throws UserInexistException 
 	 */
-	public HotelVO addHotel(HotelVO newHotelVO) {
+	public HotelVO addHotel(HotelVO newHotelVO) throws UserInexistException {
 		return user.addHotel(newHotelVO);
 	}
 	

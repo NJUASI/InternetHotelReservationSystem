@@ -56,9 +56,10 @@ public final class LogInController implements LogInBLService {
 	 * @throws InvalidLengthInputException 
 	 * @throws PasswordInputException 
 	 * @throws InvalidInputException 
+	 * @throws UserInexistException 
 	 * @throws ParameterInvalidException 
 	 */
-	public GuestVO guestSignUp(UserVO guestVO) throws InvalidInputException, PasswordInputException, InvalidLengthInputException {
+	public GuestVO guestSignUp(UserVO guestVO) throws InvalidInputException, PasswordInputException, InvalidLengthInputException, UserInexistException {
 		return logIn.guestSignUp(guestVO);
 	}
 

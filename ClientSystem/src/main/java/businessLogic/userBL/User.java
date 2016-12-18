@@ -50,10 +50,11 @@ public class User {
 	 * @updateTime 2016/12/5
 	 * @param userVO 从客户界面层传下来的userInfo载体
 	 * @return ResultMessage 用户是否成功添加用户信息
+	 * @throws UserInexistException 
 	 * @throws AddFaidException 
 	 * @throws ParameterInvalidException 
 	 */
-	public UserVO add(UserVO newUserVO,UserType userType) {
+	public UserVO add(UserVO newUserVO,UserType userType) throws UserInexistException {
 
 		user = factory.createUser(userType);
 		if(isExistence(user))
@@ -73,8 +74,9 @@ public class User {
 	 * @throws PasswordInputException 
 	 * @throws InvalidInputException 
 	 * @throws InvalidLengthInputException 
+	 * @throws UserInexistException 
 	 */
-	public ResultMessage modify(UserVO userVO) throws InvalidLengthInputException, InvalidInputException, PasswordInputException, UpdateFaiedException {
+	public ResultMessage modify(UserVO userVO) throws InvalidLengthInputException, InvalidInputException, PasswordInputException, UpdateFaiedException, UserInexistException {
 
 		user = lengthFactory.createUser(userVO.userID.length());
 		if(isExistence(user)){
@@ -108,9 +110,10 @@ public class User {
 	 * @updateTime 2016/12/9
 	 * @param newHotelVO 从客户界面层传下来的hotelInfo载体
 	 * @return ResultMessage 酒店是否添加成功
+	 * @throws UserInexistException 
 	 * @throws AddFaidException 
 	 */
-	public HotelVO addHotel(HotelVO newHotelVO) {
+	public HotelVO addHotel(HotelVO newHotelVO) throws UserInexistException {
 
 		if(newHotelVO==null){return null;}
 		
@@ -171,12 +174,13 @@ public class User {
 	 * @return
 	 * boolean
 	 * @author: Harvey Gong
+	 * @throws UserInexistException 
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月5日 上午11:17:45
 	 */
-	private boolean isExistence(UserService user){
+	private boolean isExistence(UserService user) throws UserInexistException{
 		if(user == null){
-			return false;
+			throw new UserInexistException();
 		}
 		return true;
 	}
