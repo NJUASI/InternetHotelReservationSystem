@@ -287,7 +287,11 @@ public class OrderCheckController {
 	 */
 	@FXML
 	protected void commitComment() {
-		final double score = Double.valueOf(orderScore.getText());
+		double score = -1;
+		if (orderScore.getText().equals("")) {
+			score = Double.valueOf(orderScore.getText());
+		}
+		
 		final String comment = orderComment.getText();
 
 		final GuestEvaluationVO evaluationVO = new GuestEvaluationVO(orderID, score, comment);

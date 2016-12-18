@@ -65,7 +65,7 @@
                      </rowConstraints>
                   </GridPane>
                   <Button fx:id="modifyBt" focusTraversable="false" layoutX="209.0" layoutY="242.0" mnemonicParsing="false" onAction="#modifyGuest" prefHeight="31.0" prefWidth="78.0" text="修改" />
-                  <Label fx:id="password" layoutX="102.0" layoutY="110.0" prefHeight="0.0" />
+                  <Label fx:id="password" layoutX="109.0" layoutY="110.0" prefHeight="0.0" />
                </children>
             </AnchorPane>
             <Pane fx:id="modifyPane" layoutX="195.0" layoutY="216.0" prefHeight="305.0" prefWidth="506.0" visible="false">

@@ -486,18 +486,22 @@ public class HotelSearchController {
 
 		int maxLevel = 5;
 		int maxScore = 5;
-
+		roomInput.getItems().clear();
 		for (int i = 1; i < 11; i++) {
 			roomInput.getItems().add(i);
 		}
 		roomInput.setValue(1);
+		minLevelInput.getItems().clear();
+		maxLevelInput.getItems().clear();
 		for (int i = 1; i <= maxLevel; i++) {
 			minLevelInput.getItems().add(i);
 			maxLevelInput.getItems().add(i);	
 		}
 		minLevelInput.setValue(1);
 		maxLevelInput.setValue(5);
-
+		
+		minScoreInput.getItems().clear();
+		maxScoreInput.getItems().clear();
 		for (int i = 0; i <= maxScore; i++) {
 			minScoreInput.getItems().add(i+0.0);
 			maxScoreInput.getItems().add(i+0.0);	
@@ -671,7 +675,8 @@ public class HotelSearchController {
 
 		int minutes = 60;
 		int hours = 24;
-
+		minuteInOrder.getItems().clear();
+		minuteInOrder2.getItems().clear();
 		for (int i = 0; i < minutes; i++) {
 			minuteInOrder.getItems().add(i);
 			minuteInOrder2.getItems().add(i);
@@ -679,6 +684,8 @@ public class HotelSearchController {
 		minuteInOrder.setValue(0);
 		minuteInOrder2.setValue(0);
 
+		hourInOrder.getItems().clear();
+		hourInOrder2.getItems().clear();
 		for (int i = 0; i < hours; i++) {
 			hourInOrder.getItems().add(i);
 			hourInOrder2.getItems().add(i);
@@ -686,11 +693,13 @@ public class HotelSearchController {
 		hourInOrder.setValue(18);
 		hourInOrder2.setValue(12);
 
+		guestNumInOrder.getItems().clear();
 		for (int i = 1; i <= sourceBLController.getMaxGuestNumEachOrder(); i++) {
 			guestNumInOrder.getItems().add(i);	
 		}
 		guestNumInOrder.setValue(1);
-
+	
+		roomCountInOrder.getItems().clear();
 		for (int i = 1; i <= sourceBLController.getMaxRoomNumEachOrder(); i++) {
 			roomCountInOrder.getItems().add(i);	
 		}

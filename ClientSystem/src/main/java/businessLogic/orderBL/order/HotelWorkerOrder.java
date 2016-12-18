@@ -194,7 +194,7 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 		//更新酒店剩余房间信息
 		OrderVO thisOrder = commonOrder.getOrderDetail(checkOutVO.orderID);
 		hotelInterface = new Hotel(thisOrder.orderGeneralVO.hotelID);
-		msg2 = hotelInterface.checkOut(thisOrder.orderGeneralVO.orderID, thisOrder.roomType, thisOrder.roomNumCount);
+		msg2 = hotelInterface.checkOut(thisOrder.orderGeneralVO.hotelID, thisOrder.roomType, thisOrder.roomNumCount);
 		
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
 			return ResultMessage.SUCCESS;
