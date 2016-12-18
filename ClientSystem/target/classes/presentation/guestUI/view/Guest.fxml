@@ -17,9 +17,9 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="998.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.guestUI.controller.GuestViewController">
    <children>
-      <SplitPane dividerPositions="0.1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="1000.0">
+      <SplitPane dividerPositions="0.1" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="1000.0">
          <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+            <AnchorPane maxHeight="601.0" maxWidth="100.0" minHeight="601.0" minWidth="100.0" prefHeight="601.0" prefWidth="100.0">
                <children>
                   <Button layoutX="13.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#openHotel" prefHeight="40.0" prefWidth="70.0" text="酒店" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" />
                   <Button layoutX="13.0" layoutY="246.0" mnemonicParsing="false" onMouseClicked="#openOrder" prefHeight="40.0" prefWidth="70.0" text="订单" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" />

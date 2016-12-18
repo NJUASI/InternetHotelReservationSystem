@@ -19,7 +19,7 @@
    <children>
       <SplitPane dividerPositions="0.1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="1000.0">
          <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+            <AnchorPane maxWidth="100.0" minHeight="0.0" minWidth="100.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <Button layoutX="10.0" layoutY="538.0" mnemonicParsing="false" onMouseClicked="#openMain" prefHeight="35.0" prefWidth="76.0" text="主页" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="538.0" />
                   <Button layoutX="5.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#openGuest" prefHeight="50.0" prefWidth="88.0" text="客户" AnchorPane.bottomAnchor="441.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="110.0" />
