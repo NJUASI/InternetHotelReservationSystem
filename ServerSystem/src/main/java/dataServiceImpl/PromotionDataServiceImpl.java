@@ -18,7 +18,7 @@ import utilities.enums.ResultMessage;
 
 public class PromotionDataServiceImpl extends UnicastRemoteObject implements PromotionDataService{
 
-	private static final long serialVersionUID = 3434060152387200042L;
+	private static final long serialVersionUID = -1787757905596672195L;
 	
 	private HotelFixedPromotionDataHelper hotelFixedPromotionDataHelper;
 	private SpecialSpanPromotionDataHelper specialSpanPromotionDataHelper;

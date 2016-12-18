@@ -15,15 +15,13 @@ import dataService.promotionDataService.PromotionDataService;
 import dataService.sourceDataService.SourceDataService;
 import dataService.webManagerDataService.WebManagerDataService;
 import dataService.webMarketerDataService.WebMarketerDataService;
+import presentation.PopUp.PopUp;
 
 public class ClientRemoteHelper {
 
 	static String ip = "";
 	static String port = ""; 
-	static String url = "rmi://localhost:8889/";
-	
-	final static String localhost = "rmi://localhost:8889/";
-	final static String defaultPort = "8889";
+	static String url = "";
 
 	GuestDataService guestDataService;
 	HotelDataService hotelDataService;
@@ -50,24 +48,17 @@ public class ClientRemoteHelper {
 		init();
 	}
 	
-	public void setLocalhost() {
-		ClientRemoteHelper.ip = "localhost";
-		ClientRemoteHelper.port = defaultPort;
-		ClientRemoteHelper.url = localhost;
-		
-		init();
-	}
-	
 	private ClientRemoteHelper() {
-		init();
+
 	}
 
 	private void init(){
 		try {
-
+			new PopUp("start", "tset");
 			guestDataService = (GuestDataService) 
-					Naming.lookup(url+"GuestDataService");
+					Naming.lookup("rmi://localhost:8889/GuestDataService");
 
+			new PopUp("guest", "tset");
 			hotelDataService = (HotelDataService) 
 					Naming.lookup(url+"HotelDataService");
 
@@ -95,7 +86,7 @@ public class ClientRemoteHelper {
 			sourceDataService = (SourceDataService)
 					Naming.lookup(url+"SourceDataService");
 
-			System.out.println("connect");
+			new PopUp("连接成功", "rmi连接");
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -103,6 +94,7 @@ public class ClientRemoteHelper {
 			e.printStackTrace();
 		} catch (NotBoundException e) {
 			e.printStackTrace();
+			new PopUp("连接失败", "rmi连接");
 		}
 	}
 

@@ -13,6 +13,8 @@ import utilities.enums.ResultMessage;
 public class CreditDataServiceImpl extends UnicastRemoteObject implements CreditDataService{
 
 	
+	private static final long serialVersionUID = -6982053870658551681L;
+	
 	CreditDataHelper creditDataHelper;
 	
 	public CreditDataServiceImpl() throws RemoteException {

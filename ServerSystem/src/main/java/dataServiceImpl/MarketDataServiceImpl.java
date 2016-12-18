@@ -17,8 +17,8 @@ import utilities.enums.ResultMessage;
  */
 public class MarketDataServiceImpl extends UnicastRemoteObject implements MarketDataService {
 
-	private static final long serialVersionUID = 3434060152387200042L;
-
+	private static final long serialVersionUID = 3142599779464574646L;
+	
 	private MarketDataHelper marketHelper;
 
 	/**
