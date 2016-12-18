@@ -2,7 +2,7 @@ package presentation.signUpUI.controller;
 
 import java.time.LocalDate;
 
-import com.sun.javafx.robot.impl.FXRobotHelper;
+
 
 import businessLogic.logInBL.LogInController;
 import businessLogicService.logInBLService.LogInBLService;
@@ -12,7 +12,6 @@ import exception.inputException.PasswordInputException;
 import exception.inputException.SpecialCharacterException;
 import exception.verificationException.UserInexistException;
 import exception.verificationException.WrongPasswordException;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,7 +26,7 @@ import utilities.IDReserve;
 import utilities.enums.UserType;
 import vo.GuestVO;
 	
-@SuppressWarnings("restriction")
+
 public class LogInViewController {
 	public static String userID;
 	//登录和注册界面
@@ -129,10 +128,9 @@ public class LogInViewController {
 						new PopUp("账号长度无效", "登录失败");
 					}
 					else{
-						ObservableList<Stage> stage = FXRobotHelper.getStages();
-
+						Stage stage=StageController.getInstance().getStage();
 						Scene scene = new Scene(root);
-						stage.get(0).setScene(scene);
+						stage.setScene(scene);
 					}
 				} catch(UserInexistException e){
 					e.printStackTrace();

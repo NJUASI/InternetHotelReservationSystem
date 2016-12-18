@@ -75,7 +75,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <Button layoutX="624.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#modify" text="编辑" />
+                  <Button focusTraversable="false" layoutX="624.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#modify" text="编辑" />
                   <TableView fx:id="evaluationTable" editable="true" focusTraversable="false" layoutY="343.0" prefHeight="258.0" prefWidth="895.0">
                      <columns>
                         <TableColumn fx:id="guestIDColumn" prefWidth="144.0" resizable="false" sortable="false" text="客户ID" />

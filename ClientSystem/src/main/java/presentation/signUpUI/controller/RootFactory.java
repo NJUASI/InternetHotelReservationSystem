@@ -14,11 +14,11 @@ public class RootFactory {
 
 		try {
 			if (userType == UserType.GUEST) {
-				root = FXMLLoader.load(getClass().getResource("/presentation/GuestUI/view/Guest.fxml"));
+				root = FXMLLoader.load(getClass().getResource("/presentation/guestUI/view/Guest.fxml"));
 			}
 			
 			if (userType == UserType.HOTEL_WORKER) {
-				root = FXMLLoader.load(getClass().getResource("/presentation/HotelWorkerUI/view/Hotel.fxml"));
+				root = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/Hotel.fxml"));
 			}
 			
 			if (userType == UserType.WEB_MARKETER) {

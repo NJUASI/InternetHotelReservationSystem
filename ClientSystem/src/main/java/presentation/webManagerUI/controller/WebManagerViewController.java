@@ -2,16 +2,16 @@ package presentation.webManagerUI.controller;
 
 import java.io.IOException;
 
-import com.sun.javafx.robot.impl.FXRobotHelper;
-
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import presentation.signUpUI.controller.StageController;
+import utilities.IDReserve;
 
 public class WebManagerViewController {
 	@FXML
@@ -21,6 +21,16 @@ public class WebManagerViewController {
 	
 	private Parent currentParent;
 
+	@FXML
+	private Label ID;
+	
+	@FXML
+	void initialize(){
+			String userID = IDReserve.getInstance().getUserID();
+			ID.setText(userID);
+	}
+
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -78,13 +88,13 @@ public class WebManagerViewController {
 	 * @updateTime 2016/12/11
 	 * @注销
 	 */  
-	@SuppressWarnings("restriction")
+
 	@FXML 
 	protected void logout() throws IOException{
-		ObservableList<Stage> stage = FXRobotHelper.getStages();
+		Stage stage=StageController.getInstance().getStage();
 		Parent root = FXMLLoader.load(getClass().getResource("/presentation/signUpUI/view/logIn.fxml"));
 		Scene scene = new Scene(root);
-		stage.get(0).setScene(scene);
+		stage.setScene(scene);
 	}
 	/**
 	 * @Description:封装跳转逻辑

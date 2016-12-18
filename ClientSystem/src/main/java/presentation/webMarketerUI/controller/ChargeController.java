@@ -76,14 +76,17 @@ public class ChargeController {
 	@FXML
 	protected void search() {
 		
-		try {
-			guestVO = (GuestVO) userBLService.getSingle(searchGuestID.getText());
-			chargePane.setVisible(true);
-			guestID.setText(guestVO.userID);
-			name.setText(guestVO.name);
-			credit.setText(Double.toString(guestVO.credit));
-		} catch (UserInexistException e) {
-			new PopUp("该用户不存在", "搜索失败");
+		if (!searchGuestID.getText().equals("")) {
+			//输入不为空时才响应
+			try {
+				guestVO = (GuestVO) userBLService.getSingle(searchGuestID.getText());
+				chargePane.setVisible(true);
+				guestID.setText(guestVO.userID);
+				name.setText(guestVO.name);
+				credit.setText(Double.toString(guestVO.credit));
+			} catch (UserInexistException e) {
+				new PopUp("该用户不存在", "搜索失败");
+			}
 		}
 	}
 	
@@ -100,7 +103,7 @@ public class ChargeController {
 		//我不是很懂
 //		通过得到改变后的信用值 Double.parseDouble(chargeNum.getText()) + Double.parseDouble(credit.getText())
 		
-		if (credit.getText() != null) {
+		if (!chargeNum.getText().equals("")) {
 			/*
 			 * 因为user里的modifyCredit只是单纯的将信用值改变为期望值，crredit里面没有相关接口
 			 * 故此处逻辑暴露，要不就这样，要不还是得新增接口Credit.charge(args)
@@ -109,8 +112,9 @@ public class ChargeController {
 			LocalDateTime time = LocalDateTime.now();
 			try {
 				new Detector().chargeDetector(chargeNum.getText());
-				final double preCredit = Double.parseDouble(chargeNum.getText());
-				double afterCredit = preCredit +  Double.parseDouble(credit.getText());
+				
+				final double preCredit = Double.parseDouble(credit.getText());
+				double afterCredit = preCredit +  Double.parseDouble(chargeNum.getText());
 				CreditVO creditVO = new CreditVO(guestID.getText(), time, "", preCredit, afterCredit, CreditRecord.CHARGE);
 		
 				creditController.addCreditRecord(creditVO);
