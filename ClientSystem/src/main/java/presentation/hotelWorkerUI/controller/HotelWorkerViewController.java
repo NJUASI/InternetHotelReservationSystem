@@ -2,11 +2,9 @@ package presentation.hotelWorkerUI.controller;
 
 import java.io.IOException;
 
-import com.sun.javafx.robot.impl.FXRobotHelper;
 
 import businessLogic.hotelBL.HotelBLController;
 import businessLogicService.hotelBLService.HotelBLService;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import presentation.signUpUI.controller.StageController;
 import utilities.IDReserve;
 import vo.HotelVO;
 /**
@@ -124,10 +123,10 @@ public class HotelWorkerViewController {
 	@SuppressWarnings("restriction")
 	@FXML 
 	protected void logout() throws IOException{
-		ObservableList<Stage> stage = FXRobotHelper.getStages();
+		Stage stage=StageController.getInstance().getStage();
 		Parent root = FXMLLoader.load(getClass().getResource("/presentation/signUpUI/view/logIn.fxml"));
 		Scene scene = new Scene(root);
-		stage.get(0).setScene(scene);
+		stage.setScene(scene);
 	}
 	
 	/**

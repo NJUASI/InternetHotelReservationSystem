@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import presentation.signUpUI.controller.StageController;
 import rmi.ClientRemoteHelper;
 
 /**
@@ -17,7 +18,6 @@ import rmi.ClientRemoteHelper;
  */
 
 public class Main extends Application {
-
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -27,7 +27,7 @@ public class Main extends Application {
 	 * @throws IOException
 	 *             界面初始化
 	 */
-	public void start(final Stage stage) throws IOException {
+	public void start(Stage stage) throws IOException {
 		final Parent root = FXMLLoader.load(getClass().getResource("/presentation/signUpUI/view/logIn.fxml"));
 
 		final Scene scene = new Scene(root, 1000, 625);
@@ -36,8 +36,8 @@ public class Main extends Application {
 		stage.setScene(scene);
 		stage.setResizable(false);
 		stage.show();
-		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-
+		StageController.getInstance().setStage(stage);
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {	
 			@Override
 			public void handle(WindowEvent event) {
 				System.exit(0);
