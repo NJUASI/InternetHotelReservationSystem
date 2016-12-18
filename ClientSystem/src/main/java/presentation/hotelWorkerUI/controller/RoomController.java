@@ -180,16 +180,12 @@ public class RoomController {
 	 */
 	@FXML
 	protected void addRoomType() {
-		/**
-		 * TODO gcm注意：需要获取所添加的酒店信息，在下面封装成vo
-		 * 添加的时候
-		 * 
-		 * 
-		 * 并根据该信息封装成一个vo，然后调用添加酒店客房信息的方法
-		 */
+	
+		// 并根据该信息封装成一个vo，然后调用添加酒店客房信息的方法
 		RoomInfoVO vo = new RoomInfoVO();
 		vo.hotelID = hotelID;
 		vo.roomType = RoomType.getEnum(roomType.getValue());
+		vo.roomNum = Integer.valueOf(roomNum.getText());
 		vo.remainNum=Integer.parseInt(roomNum.getText());
 		vo.price = Integer.valueOf(price.getText());
 

@@ -14,7 +14,7 @@ import utilities.enums.ResultMessage;
 
 /**
  * 
- * @author 董金玉 lastChangedBy 董金玉 updateTime 2016/11/30
+ * @author Byron Dong lastChangedBy Byron Dong updateTime 2016/11/30
  *
  */
 public class MarketDataHelperImpl implements MarketDataHelper {
@@ -28,8 +28,8 @@ public class MarketDataHelperImpl implements MarketDataHelper {
 	private String sql;
 	
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/30 构造函数，初始化成员变量conn
 	 */
 	public MarketDataHelperImpl() {
@@ -37,8 +37,8 @@ public class MarketDataHelperImpl implements MarketDataHelper {
 	}
 	
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/30
 	 * @return List<MarketPO> 所有marketInfo载体
 	 */
@@ -62,8 +62,8 @@ public class MarketDataHelperImpl implements MarketDataHelper {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/30
 	 * @param list 所有需要修改的marketInfo载体
 	 * @return ResultMessage 是否成功修改所有marketInfo
@@ -93,8 +93,8 @@ public class MarketDataHelperImpl implements MarketDataHelper {
 	}
 
 	/**
-	 * @author 董金玉
-	 * @lastChangedBy 董金玉
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
 	 * @updateTime 2016/11/30
 	 * @param
 	 * @return
