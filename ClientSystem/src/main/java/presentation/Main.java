@@ -29,7 +29,7 @@ public class Main extends Application {
 	public void start(Stage stage) throws IOException {
 		final Parent root = FXMLLoader.load(getClass().getResource("/presentation/signUpUI/view/logIn.fxml"));
 
-		final Scene scene = new Scene(root, 1000, 625);
+		final Scene scene = new Scene(root,989,589);
 
 		stage.setTitle("酒店互联网预定系统");
 		stage.setScene(scene);

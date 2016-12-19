@@ -13,6 +13,8 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.*;
 import presentation.PopUp.PopUp;
 import vo.HotelVO;
@@ -31,6 +33,8 @@ public class HotelInfoController {
 //TODO equipment的你直接用
 	private SourceBLService sourceBLController;
 	private UserBLService userBLController;
+	@FXML
+	private ImageView rightImage;
 	
 	public HotelInfoController() {
 		sourceBLController = SourceBLController.getInstance();
@@ -39,7 +43,7 @@ public class HotelInfoController {
 	
 	@FXML
 	private void initialize() {
-		
+		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 		String firstCity = sourceBLController.getCities().next();
 		String firstCircle = sourceBLController.getCircles(firstCity).next();
 		cityInput.setValue(firstCity);

@@ -18,6 +18,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import presentation.Table.TypeTable;
 import utilities.IDReserve;
@@ -43,7 +45,9 @@ public class RoomController {
 	private ComboBox<String> roomType;
 	@FXML
 	private TextField roomNum,price;
-
+	@FXML
+	private ImageView rightImage;
+	
 
 	private HotelBLService hotelBLController;
 	private SourceBLService sourceBLController;
@@ -63,7 +67,7 @@ public class RoomController {
 	 */
 	@FXML
 	private void initialize() {
-
+		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 		roomType.getItems().clear();
 		//获取该酒店的所有客房信息
 		Iterator<RoomInfoVO> rooms = hotelBLController.getHotelRoomInfo(hotelID);

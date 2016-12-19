@@ -10,6 +10,8 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import presentation.PopUp.PopUp;
 import utilities.IDReserve;
 import utilities.enums.ResultMessage;
@@ -22,6 +24,8 @@ public class OfflineController {
 	private ComboBox<String> roomType,roomType2;
 	@FXML
 	private ComboBox<Integer> roomNum,roomNum2;
+	@FXML
+	private ImageView rightImage;
 
 	HotelBLService hotelBLController;
 	String hotelID;
@@ -33,7 +37,8 @@ public class OfflineController {
 	}
 
 	@FXML
-	void initialize(){
+	void initialize(){	
+		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 		roomType.setOnShowing(new RoomTypeShowingEventHandler());
 		roomType2.setOnShowing(new RoomType2ShowingEventHandler());
 		roomType.valueProperty().addListener(new RoomTypeChangedListener());

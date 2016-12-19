@@ -19,6 +19,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import presentation.PopUp.PopUp;
 import presentation.Table.OrderTable;
@@ -67,7 +69,9 @@ public class OrderController {
 
 	@FXML
 	private TableView<OrderTable> table;
-
+	@FXML
+	private ImageView rightImage;
+	
 	List<OrderGeneralVO> orderVOlist;
 	/**
 	 * @author 61990
@@ -77,6 +81,7 @@ public class OrderController {
 	 */
 	@FXML
 	private void initialize() {
+		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 		orderBLController = OrderBLController.getInstance();
 
 		//通过hotelID得到orderGeneralVOs

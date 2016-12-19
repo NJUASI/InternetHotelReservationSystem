@@ -20,6 +20,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.webMarketerUI.controller.OrderController">
    <children>
+      <ImageView fx:id="rightImage" fitHeight="601.0" fitWidth="895.0" pickOnBounds="true" preserveRatio="true" />
       <AnchorPane fx:id="searchPane" minHeight="0.0" minWidth="0.0" prefHeight="601.0" prefWidth="895.0">
          <children>
             <Label layoutX="404.0" layoutY="14.0" prefHeight="39.0" text="异常订单" AnchorPane.topAnchor="14.0">
@@ -32,7 +33,7 @@
             <TextField fx:id="searchID" focusTraversable="false" layoutX="384.0" layoutY="155.0" prefHeight="29.0" prefWidth="155.0" />
             <Button focusTraversable="false" layoutX="576.0" layoutY="154.0" mnemonicParsing="false" onAction="#searchOneOrder" text="查询" />
             <Label layoutX="280.0" layoutY="411.0" prefHeight="23.0" prefWidth="48.0" text="日期：" />
-            <DatePicker fx:id="searchDate" focusTraversable="false" layoutX="372.0" layoutY="408.0" prefHeight="29.0" prefWidth="167.0" />
+            <DatePicker fx:id="searchDate" editable="false" focusTraversable="false" layoutX="372.0" layoutY="408.0" prefHeight="29.0" prefWidth="167.0" />
             <Button focusTraversable="false" layoutX="576.0" layoutY="408.0" mnemonicParsing="false" onAction="#searchDateOrder" text="查询" />
             <Separator layoutY="299.0" prefHeight="3.0" prefWidth="895.0" />
          </children>

@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -35,6 +37,9 @@ public class GuestViewController {
 	@FXML
 	private Button nickName;
 	
+	@FXML
+	private ImageView leftImage,rightImage;
+	
 	private Parent currentParent ;
 
 	public GuestViewController() {
@@ -50,6 +55,9 @@ public class GuestViewController {
 	private void initialize() throws UserInexistException {
 		GuestVO guestVO = (GuestVO) userBLController.getSingle(userID);
 		nickName.setText(guestVO.nickName);
+		
+		leftImage.setImage(new Image("/presentation/signUpUI/picture/left.png"));
+		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 	}
 	
 	/**

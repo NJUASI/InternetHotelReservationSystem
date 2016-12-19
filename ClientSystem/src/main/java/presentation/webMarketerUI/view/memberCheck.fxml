@@ -19,6 +19,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.webMarketerUI.controller.MemberController">
    <children>
+      <ImageView fx:id="rightImage" fitHeight="601.0" fitWidth="895.0" pickOnBounds="true" preserveRatio="true" />
       <AnchorPane fx:id="marketCheckPane" minHeight="0.0" minWidth="0.0" prefHeight="601.0" prefWidth="895.0">
          <children>
             <GridPane layoutX="307.0" layoutY="170.0" prefHeight="309.0" prefWidth="345.0">

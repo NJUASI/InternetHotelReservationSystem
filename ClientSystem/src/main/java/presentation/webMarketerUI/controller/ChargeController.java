@@ -14,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import presentation.PopUp.PopUp;
 import utilities.Detector;
@@ -48,6 +50,8 @@ public class ChargeController {
 	
 	@FXML
 	private Button searchBtn;
+	@FXML
+	private ImageView rightImage;
 	
 	/**
 	 * @author 61990
@@ -56,7 +60,7 @@ public class ChargeController {
 	 */
 	@FXML
 	private void initialize() {
-		
+		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 		//TODO 掉需要的接口
 		//	TODO	fjj 这个是谁的上面那句话
 		//TODO 冯俊杰回复：不归我啊，但顺手将其修改为实现

@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import utilities.IDReserve;
 import vo.MarketVO;
@@ -36,7 +38,9 @@ public class MemberCheckController {
 	private MemberBLService memberBLController = MemberController.getInstance();
 
 	private MarketBLService marketBLController = MarketController.getInstance();
-
+	@FXML
+	private ImageView rightImage;
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy Byron Dong
@@ -44,6 +48,7 @@ public class MemberCheckController {
 	 */
 	@FXML
 	private void initialize() {
+		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 		String levelName = null;
 		try {
 			levelName = marketBLController.getLevelName(IDReserve.getInstance().getUserID());

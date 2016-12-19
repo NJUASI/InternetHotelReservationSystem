@@ -14,6 +14,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 import presentation.Table.DatePromotionTable;
@@ -39,6 +41,8 @@ public class DatePromotionController {
 	private TextField nameText,discountText;
 	@FXML
 	private DatePicker startDatePicker, endDatePicker;
+	@FXML
+	private ImageView rightImage;
 
 	private PromotionBLService promotionController;
 
@@ -54,6 +58,7 @@ public class DatePromotionController {
 	 */
 	@FXML
 	private void initialize() {
+		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 		table.getItems().clear();
 
 		//调用promotion的方法获取网站的特定期间策略

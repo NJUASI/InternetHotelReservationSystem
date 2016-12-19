@@ -33,6 +33,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
@@ -92,7 +94,9 @@ public class HotelSearchController {
 	private LocalDate leaveDate;
 	//用于存储客户入住的天数，当入住日期和退房日期改变时，改变此变量的值
 	private int lastDays;
-
+	@FXML
+	private ImageView rightImage;
+	
 
 	//BLcontroller
 	private OrderBLService orderBLController;
@@ -123,6 +127,7 @@ public class HotelSearchController {
 	@FXML
 	private void initialize() {
 		initCityAndCircles();
+		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 	}
 
 	private void initCityAndCircles() {

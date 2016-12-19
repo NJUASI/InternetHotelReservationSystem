@@ -21,6 +21,7 @@
          <items>
             <AnchorPane maxHeight="601.0" maxWidth="100.0" minHeight="601.0" minWidth="100.0" prefHeight="601.0" prefWidth="100.0">
                <children>
+                  <ImageView fx:id="leftImage" fitHeight="601.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
                   <Button layoutX="13.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#openHotel" prefHeight="40.0" prefWidth="70.0" text="酒店" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" />
                   <Button layoutX="13.0" layoutY="246.0" mnemonicParsing="false" onMouseClicked="#openOrder" prefHeight="40.0" prefWidth="70.0" text="订单" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" />
                   <Button layoutX="13.0" layoutY="328.0" mnemonicParsing="false" onMouseClicked="#openMember" prefHeight="40.0" prefWidth="70.0" text="会员" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" />
@@ -32,9 +33,9 @@
             </AnchorPane>
             <StackPane fx:id="right" prefHeight="150.0" prefWidth="200.0">
                <children>
-                  <Pane fx:id="mainPane" disable="true" prefHeight="601.0" prefWidth="895.0">
+                  <Pane fx:id="mainPane" prefHeight="601.0" prefWidth="895.0">
                      <children>
-                        <Circle fill="#becbd7" layoutX="448.0" layoutY="301.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+                        <ImageView fx:id="rightImage" fitHeight="601.0" fitWidth="895.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true" />
                         <Label layoutX="417.0" layoutY="277.0" text="ASI">
                            <font>
                               <Font size="41.0" />

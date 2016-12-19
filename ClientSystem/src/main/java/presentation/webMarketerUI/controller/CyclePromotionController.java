@@ -19,6 +19,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import presentation.Table.AddressTable;
 import vo.AddressVO;
 
@@ -33,7 +35,9 @@ public class CyclePromotionController {
 	private TextField cycleDiscount;
 	@FXML
 	private ComboBox<String> cityInput,cycleInput;
-
+	@FXML
+	private ImageView rightImage;
+	
 	
 	SourceBLService sourceBLController;
 	PromotionBLService promotionBLController;
@@ -49,6 +53,7 @@ public class CyclePromotionController {
 	 */
 	@FXML
 	private void initialize() {
+		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 		cityInput.setOnShowing(new CityShowingHandler());
 		cityInput.valueProperty().addListener(new CityChangedListener());
 		cycleInput.valueProperty().addListener(new CycleChangedListener());

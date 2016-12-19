@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -18,6 +20,8 @@ public class WebManagerViewController {
 	private StackPane right;
 	@FXML
 	private Pane mainPane;
+	@FXML
+	private ImageView leftImage,rightImage;
 	
 	private Parent currentParent;
 
@@ -28,6 +32,9 @@ public class WebManagerViewController {
 	void initialize(){
 			String userID = IDReserve.getInstance().getUserID();
 			ID.setText(userID);
+
+			leftImage.setImage(new Image("/presentation/signUpUI/picture/left.png"));
+			rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
 	}
 
 	
