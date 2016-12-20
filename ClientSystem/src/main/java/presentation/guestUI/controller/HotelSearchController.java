@@ -799,7 +799,7 @@ public class HotelSearchController {
 		if (msg == ResultMessage.SUCCESS) {
 			new PopUp("订单生成成功", "订单");
 		}else {
-			new PopUp("订单生成失败", "订单");
+			new PopUp("房间不足或信用值不足", "订单");
 		}
 		hotelCheck.setVisible(true); 
 		createPane.setVisible(false);
