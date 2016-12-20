@@ -217,6 +217,7 @@ public class LogInViewController {
 
 		System.out.println("Connect to: " + ip + " : " + port);
 		ClientRemoteHelper.getInstance().setIPandPort(ip, port);
+		openLogIn();
 
 	}
 	@FXML

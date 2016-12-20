@@ -59,8 +59,7 @@ public class MarketerController {
 			password.setText(marketerVO.password);
 
 			marketerInfoPane.setVisible(true);
-		} catch (UserInexistException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
 			new PopUp("请检查输入的编号", "sorry");
 		}
 		
