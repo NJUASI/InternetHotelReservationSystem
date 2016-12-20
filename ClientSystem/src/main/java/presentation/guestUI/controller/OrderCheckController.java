@@ -366,7 +366,7 @@ public class OrderCheckController {
 			undoBt2.setDisable(true);
 		}
 		// 是否可以评论
-		if (!orderVO.orderGeneralVO.hasCommented && orderVO.orderGeneralVO.state == OrderState.EXECUTED) {
+		if (orderVO.orderGeneralVO.state == OrderState.EXECUTED && (!orderVO.orderGeneralVO.hasCommented)) {
 			orderComment.setDisable(false);
 			orderScore.setDisable(false);
 			commitBt.setDisable(false);
