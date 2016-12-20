@@ -19,9 +19,7 @@ import presentation.PopUp.PopUp;
 
 public class ClientRemoteHelper {
 
-	static String ip = "";
-	static String port = ""; 
-	static String url = "";
+	String url = "";
 
 	GuestDataService guestDataService;
 	HotelDataService hotelDataService;
@@ -41,10 +39,8 @@ public class ClientRemoteHelper {
 	}
 
 	public void setIPandPort(String ip, String port) {
-		System.out.println("未初始化");
-		ClientRemoteHelper.ip = ip;
-		ClientRemoteHelper.port = port;
-		ClientRemoteHelper.url = "rmi://" + ip + ":" + port + "/";
+
+		url = "rmi://" + ip + ":" + port + "/";
 		
 		init();
 	}
@@ -55,11 +51,9 @@ public class ClientRemoteHelper {
 
 	private void init(){
 		try {
-			new PopUp("start", "tset");
 			guestDataService = (GuestDataService) 
-					Naming.lookup("rmi://localhost:8889/GuestDataService");
+					Naming.lookup(url+"GuestDataService");
 
-			new PopUp("guest", "tset");
 			hotelDataService = (HotelDataService) 
 					Naming.lookup(url+"HotelDataService");
 

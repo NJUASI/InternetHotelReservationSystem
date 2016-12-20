@@ -550,7 +550,7 @@ public class HotelSearchController {
 		vo = new SearchCriteriaVO();
 		criteria = new ArrayList<SearchCriteriaType>();
 
-		if(hotelNameInput.getText()!=""){
+		if(hotelNameInput.getText().equals("")){
 			criteria.add(SearchCriteriaType.HOTEL_NAME);
 			vo.keyHotelName = hotelNameInput.getText();
 		}
@@ -563,7 +563,8 @@ public class HotelSearchController {
 			vo.minLevel = minLevelInput.getValue();
 			vo.maxLevel =  maxLevelInput.getValue();
 		}
-		if(minpriceInput.getText()!=null){
+
+		if(!minpriceInput.getText().equals("")){
 			criteria.add(SearchCriteriaType.ORGIN_PRICE_SPAN);
 			vo.minPrice = Double.valueOf(minpriceInput.getText());
 			vo.maxPrice = Double.valueOf(maxpriceInput.getText());
