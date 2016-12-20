@@ -118,7 +118,7 @@ public class ChargeController {
 				new Detector().chargeDetector(chargeNum.getText());
 				
 				final double preCredit = Double.parseDouble(credit.getText());
-				double afterCredit = preCredit +  Double.parseDouble(chargeNum.getText());
+				double afterCredit = preCredit +  Double.parseDouble(chargeNum.getText()) * 100;
 				CreditVO creditVO = new CreditVO(guestID.getText(), time, "", preCredit, afterCredit, CreditRecord.CHARGE);
 		
 				creditController.addCreditRecord(creditVO);

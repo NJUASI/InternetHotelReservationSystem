@@ -1,15 +1,18 @@
 package businessLogic.orderBL.order;
 
 import java.rmi.RemoteException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import businessLogic.creditBL.CreditController;
 import businessLogic.hotelBL.HotelInfoOperation;
 import businessLogic.hotelBL.hotel.Hotel;
 import businessLogic.promotionBL.DiscountCalculator;
 import businessLogic.promotionBL.DiscountInSpan;
 import businessLogic.userBL.UserController;
+import businessLogicService.creditBLService.CreditBLService;
 import businessLogicService.orderBLService.GuestOrderBLService;
 import businessLogicService.userBLService.UserBLService;
 import dataService.orderDataService.OrderDataService;
@@ -17,9 +20,11 @@ import exception.verificationException.UserInexistException;
 import po.GuestEvaluationPO;
 import po.OrderPO;
 import rmi.ClientRemoteHelper;
+import utilities.enums.CreditRecord;
 import utilities.enums.OrderState;
 import utilities.enums.ResultMessage;
 import utilities.enums.UserType;
+import vo.CreditVO;
 import vo.GuestEvaluationVO;
 import vo.GuestVO;
 import vo.OrderGeneralVO;
@@ -28,7 +33,7 @@ import vo.PreOrderVO;
 
 /**
  * 
- * @author charles lastChangedBy charles updateTime 2016/12/10
+ * @author charles lastChangedBy charles updateTime 2016/12/20
  *
  */
 public class GuestOrder implements GuestOrderBLService {
@@ -36,6 +41,9 @@ public class GuestOrder implements GuestOrderBLService {
 	private OrderDataService orderDataService;
 
 	private CommonOrder commonOrder;
+
+	// creidt
+	private CreditBLService creditBLService;
 
 	// hotel
 	private HotelInfoOperation hotelInterface;
@@ -62,6 +70,7 @@ public class GuestOrder implements GuestOrderBLService {
 
 		commonOrder = new CommonOrder();
 
+		creditBLService = CreditController.getInstance();
 		/*
 		 * new the mock one to test TODO 龚尘淼：promotion没有无参数的初始化方法，不知道自己改初始化啥
 		 */
@@ -151,7 +160,7 @@ public class GuestOrder implements GuestOrderBLService {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/8
+	 * @updateTime 2016/12/20
 	 * @param orderID
 	 *            客户当前需要撤销的正常订单的订单号
 	 * @return 客户是否成功撤销此正常订单
@@ -167,6 +176,21 @@ public class GuestOrder implements GuestOrderBLService {
 			try {
 				msg1 = orderDataService.undoNormalOrder(orderID);
 			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}
+
+		// 如果撤销时间距离订单最晚执行时间不足6小时，扣除订单价值一半的信用值
+		if (in6Hours(thisOrder.orderGeneralVO.expectExecuteTime)) {
+			try {
+				final GuestVO thisGuest = (GuestVO) userBLService.getSingle(thisOrder.orderGeneralVO.guestID);
+				final double previousCredit = thisGuest.credit;
+				final double afterCredit = previousCredit - thisOrder.orderGeneralVO.price / 2;
+				CreditVO creditVO = new CreditVO(thisOrder.orderGeneralVO.guestID, LocalDateTime.now(), orderID,
+						previousCredit, afterCredit, CreditRecord.CANCEL_IN_SIX_HOURS);
+
+				creditBLService.addCreditRecord(creditVO);
+			} catch (UserInexistException e) {
 				e.printStackTrace();
 			}
 		}
@@ -195,26 +219,22 @@ public class GuestOrder implements GuestOrderBLService {
 		ResultMessage msg1 = ResultMessage.FAIL;
 		ResultMessage msg2 = ResultMessage.FAIL;
 
-		if (evaluationVO.score == -1) {
-			// 必须输入评分
-			return ResultMessage.FAIL;
-		}else {
-			try {
-				msg1 = orderDataService.addEvaluation(new GuestEvaluationPO(evaluationVO));
+		try {
+			msg1 = orderDataService.addEvaluation(new GuestEvaluationPO(evaluationVO));
 
-				String hotelID = commonOrder.getOrderDetail(evaluationVO.orderID).orderGeneralVO.hotelID;
-				hotelInterface = new Hotel();
-				msg2 = hotelInterface.scoreUpdate(hotelID, evaluationVO.score);
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-
-			if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
-				return ResultMessage.SUCCESS;
-			} else {
-				return ResultMessage.FAIL;
-			}
+			String hotelID = commonOrder.getOrderDetail(evaluationVO.orderID).orderGeneralVO.hotelID;
+			hotelInterface = new Hotel();
+			msg2 = hotelInterface.scoreUpdate(hotelID, evaluationVO.score);
+		} catch (RemoteException e) {
+			e.printStackTrace();
 		}
+
+		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
+			return ResultMessage.SUCCESS;
+		} else {
+			return ResultMessage.FAIL;
+		}
+
 	}
 
 	/**
@@ -263,5 +283,31 @@ public class GuestOrder implements GuestOrderBLService {
 			}
 		}
 		return result.iterator();
+	}
+
+	private boolean in6Hours(LocalDateTime expectExecuteTime) {
+		final LocalDateTime last = LocalDateTime.now().plusHours(6);
+		if (last.getYear() < expectExecuteTime.getYear()) {
+			return false;
+		} else {
+			// 同一年
+			if (last.getDayOfYear() < expectExecuteTime.getDayOfYear()) {
+				return false;
+			} else if (last.getDayOfYear() > expectExecuteTime.getDayOfYear()) {
+				// 原本不足6小时，加了之后增加了一天
+				return true;
+			} else {
+				// 同一天
+				final int lastSecond = last.getHour() * 3600 + last.getMinute() * 60 + last.getSecond();
+				final int expectSecond = expectExecuteTime.getHour() * 3600 + expectExecuteTime.getMinute() * 60
+						+ expectExecuteTime.getSecond();
+				int differ = expectSecond - lastSecond;
+				if (differ >= 0) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+		}
 	}
 }
