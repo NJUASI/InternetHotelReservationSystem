@@ -1,9 +1,6 @@
 package presentation.signUpUI.controller;
 
-import java.net.URL;
 import java.time.LocalDate;
-
-
 
 import businessLogic.logInBL.LogInController;
 import businessLogicService.logInBLService.LogInBLService;
@@ -16,7 +13,6 @@ import exception.verificationException.WrongPasswordException;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;

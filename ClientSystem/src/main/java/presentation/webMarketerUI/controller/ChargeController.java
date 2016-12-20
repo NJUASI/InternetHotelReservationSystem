@@ -32,7 +32,6 @@ public class ChargeController {
 
 	//user
 	private UserBLService userBLService;
-	private GuestCreditService creditService;
 
 	//credit
 	private CreditController creditController;
@@ -65,8 +64,6 @@ public class ChargeController {
 		//	TODO	fjj 这个是谁的上面那句话
 		//TODO 冯俊杰回复：不归我啊，但顺手将其修改为实现
 		userBLService = UserController.getInstance();
-		creditService = new Guest();
-//		userBLService = new UserBLService_Stub();
 		
 		creditController = CreditController.getInstance();
 	}

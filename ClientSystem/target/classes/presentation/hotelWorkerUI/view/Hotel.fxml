@@ -36,6 +36,7 @@
                <children>
                   <AnchorPane fx:id="mainPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
+                        <ImageView fx:id="rightImage" fitHeight="601.0" fitWidth="895.0" layoutX="-2.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
                         <Label prefHeight="53.0" prefWidth="164.0" text="ASI" AnchorPane.bottomAnchor="273.0" AnchorPane.leftAnchor="415.0" AnchorPane.rightAnchor="311.0" AnchorPane.topAnchor="275.0">
                            <font>
                               <Font size="41.0" />
@@ -52,7 +53,6 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                         </GridPane>
-                        <ImageView fx:id="rightImage" fitHeight="601.0" fitWidth="895.0" layoutX="-2.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </AnchorPane>
                </children>
