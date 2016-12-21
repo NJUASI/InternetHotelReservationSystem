@@ -57,21 +57,19 @@ public class HotelWorkerController {
 		System.out.println(inputID.getText());
 		try {
 			hotelWorkerVO = (HotelWorkerVO) userBLController.getSingle(inputID.getText());
+			hotelInfoPane.setVisible(true);
 		} catch (UserInexistException e1) {
 			e1.printStackTrace();
 			new PopUp("请检查输入内容", "sorry");
 			//TODO 龚尘淼 看此处的修改
 		}
 		
-		hotelInfoPane.setVisible(true);
 		
 		
 		try {
 			hotelID.setText(hotelWorkerVO.userID);
 			hotelName.setText(hotelWorkerVO.hotelName);
 //			password.setText(hotelWorkerVO.password);
-
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

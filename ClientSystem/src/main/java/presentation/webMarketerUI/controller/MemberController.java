@@ -138,17 +138,21 @@ public class MemberController {
 	protected void saveModify() {
 		
 		List<MarketVO> list = new LinkedList<MarketVO>();
-		list.add(new MarketVO(market1.getText(), Double.parseDouble(needCredit1.getText()) , Double.parseDouble(modifyDiscount1.getText())));
-		list.add(new MarketVO(market2.getText(), Double.parseDouble(needCredit2.getText()) , Double.parseDouble(modifyDiscount2.getText())));
-		list.add(new MarketVO(market3.getText(), Double.parseDouble(needCredit3.getText()) , Double.parseDouble(modifyDiscount3.getText())));
-		list.add(new MarketVO(market4.getText(), Double.parseDouble(needCredit4.getText()) , Double.parseDouble(modifyDiscount4.getText())));
-		list.add(new MarketVO(market5.getText(), Double.parseDouble(needCredit5.getText()) , Double.parseDouble(modifyDiscount5.getText())));
-		list.add(new MarketVO(market6.getText(), Double.parseDouble(needCredit6.getText()) , Double.parseDouble(modifyDiscount6.getText())));
-		list.add(new MarketVO(market7.getText(), Double.parseDouble(needCredit7.getText()) , Double.parseDouble(modifyDiscount7.getText())));
-		list.add(new MarketVO(market8.getText(), Double.parseDouble(needCredit8.getText()) , Double.parseDouble(modifyDiscount8.getText())));
+		try {
+			list.add(new MarketVO(market1.getText(), Double.parseDouble(needCredit1.getText()) , Double.parseDouble(modifyDiscount1.getText())));
+			list.add(new MarketVO(market2.getText(), Double.parseDouble(needCredit2.getText()) , Double.parseDouble(modifyDiscount2.getText())));
+			list.add(new MarketVO(market3.getText(), Double.parseDouble(needCredit3.getText()) , Double.parseDouble(modifyDiscount3.getText())));
+			list.add(new MarketVO(market4.getText(), Double.parseDouble(needCredit4.getText()) , Double.parseDouble(modifyDiscount4.getText())));
+			list.add(new MarketVO(market5.getText(), Double.parseDouble(needCredit5.getText()) , Double.parseDouble(modifyDiscount5.getText())));
+			list.add(new MarketVO(market6.getText(), Double.parseDouble(needCredit6.getText()) , Double.parseDouble(modifyDiscount6.getText())));
+			list.add(new MarketVO(market7.getText(), Double.parseDouble(needCredit7.getText()) , Double.parseDouble(modifyDiscount7.getText())));
+			list.add(new MarketVO(market8.getText(), Double.parseDouble(needCredit8.getText()) , Double.parseDouble(modifyDiscount8.getText())));
+		} catch (NumberFormatException e) {
+			new PopUp("修改失败，请确认填写格式", "");
+		}
 		ResultMessage message = marketBLController.setMemberFormulation(list);
 		if(message==ResultMessage.FAIL)
-			new PopUp("请确认填写格式", "");
+			new PopUp("修改失败", "");
 		
 		initialize();
 		modifyButton.setVisible(true);
