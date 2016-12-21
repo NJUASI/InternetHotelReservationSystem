@@ -90,7 +90,7 @@ public class GuestViewController {
 	 */
 	@FXML
 	protected void openOrder() throws IOException {
-		jump("OrderCheck");
+		jump("GuestOrderCheck");
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class GuestViewController {
 	 */
 	@FXML
 	protected void openMember() throws IOException {
-		jump("MemberCheck");
+		jump("GuestMemberCheck");
 	}
 
 	/**

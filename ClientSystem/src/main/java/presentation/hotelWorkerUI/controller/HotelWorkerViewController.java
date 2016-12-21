@@ -75,7 +75,7 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openOrderInfo() throws IOException{
-		jump("OrderCheck");
+		jump("HotelOrderCheck");
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openPromotion() throws IOException{
-		jump("Promotion");
+		jump("HotelPromotion");
 	}
 	/**
 	 * @author 61990

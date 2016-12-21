@@ -76,7 +76,7 @@ public class WebManagerViewController {
 	 */
 	@FXML
 	protected void openHotelInfo() throws IOException {
-		jump("HotelInfo");
+		jump("HotelInfoModify");
 	}
 	/**
 	 * @author 61990
