@@ -47,8 +47,8 @@ public class HotelWorkerViewController {
 	 */
 	@FXML
 	private void initialize() {
-		leftImage.setImage(new Image("/presentation/signUpUI/picture/left.png"));
-		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
+		leftImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("left.png")));
+		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 		HotelVO hotelVO = hotelBLController.getHotelInfo(hotelID);
 		infoBt.setText(hotelVO.hotelName);
 		
@@ -75,7 +75,7 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openOrderInfo() throws IOException{
-		jump("OrderCheck");
+		jump("HotelOrderCheck");
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openPromotion() throws IOException{
-		jump("Promotion");
+		jump("HotelPromotion");
 	}
 	/**
 	 * @author 61990
@@ -130,7 +130,7 @@ public class HotelWorkerViewController {
 	@FXML 
 	protected void logout() throws IOException{
 		Stage stage=StageController.getInstance().getStage();
-		Parent root = FXMLLoader.load(getClass().getResource("/presentation/signUpUI/view/logIn.fxml"));
+		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("logIn.fxml"));
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 	}
@@ -147,7 +147,7 @@ public class HotelWorkerViewController {
 	private void jump(String path){
 		right.getChildren().clear();
 		try {
-			currentParent = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/"+path+".fxml"));
+			currentParent = FXMLLoader.load(getClass().getClassLoader().getResource(path+".fxml"));
 		} catch (IOException e) {
 		}
 		right.getChildren().add(currentParent);

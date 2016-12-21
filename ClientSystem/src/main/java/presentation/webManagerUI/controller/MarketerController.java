@@ -41,7 +41,7 @@ public class MarketerController {
 	private void initialize() {
 		userBLController = UserController.getInstance();
 		
-		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
+		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 	}
 
 	/**

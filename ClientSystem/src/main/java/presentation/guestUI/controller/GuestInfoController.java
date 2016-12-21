@@ -55,7 +55,7 @@ public class GuestInfoController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
+		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 		try {
 			guestVO = (GuestVO) userBLController.getSingle(userID);
 		} catch (UserInexistException e) {

@@ -58,7 +58,7 @@ public class DatePromotionController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
+		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 		table.getItems().clear();
 
 		//调用promotion的方法获取网站的特定期间策略

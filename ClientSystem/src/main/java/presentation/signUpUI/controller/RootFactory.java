@@ -14,19 +14,19 @@ public class RootFactory {
 
 		try {
 			if (userType == UserType.GUEST) {
-				root = FXMLLoader.load(getClass().getResource("/presentation/guestUI/view/Guest.fxml"));
+				root = FXMLLoader.load(getClass().getClassLoader().getResource("Guest.fxml"));
 			}
 			
 			if (userType == UserType.HOTEL_WORKER) {
-				root = FXMLLoader.load(getClass().getResource("/presentation/hotelWorkerUI/view/Hotel.fxml"));
+				root = FXMLLoader.load(getClass().getClassLoader().getResource("Hotel.fxml"));
 			}
 			
 			if (userType == UserType.WEB_MARKETER) {
-				root = FXMLLoader.load(getClass().getResource("/presentation/webMarketerUI/view/Marketer.fxml"));
+				root = FXMLLoader.load(getClass().getClassLoader().getResource("Marketer.fxml"));
 			}
 			
 			if (userType == UserType.WEB_MANAGER) {
-				root = FXMLLoader.load(getClass().getResource("/presentation/webManagerUI/view/Manager.fxml"));
+				root = FXMLLoader.load(getClass().getClassLoader().getResource("Manager.fxml"));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

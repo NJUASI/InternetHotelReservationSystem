@@ -42,7 +42,7 @@ public class CreditCheckController {
 	@FXML
 	private void initialize() {
 		
-		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
+		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 
 		// 调用creditBL的方法，通过guest获得该用户所有的信用变化
 		Iterator<CreditVO> creditChanges = creditBLController.getAllCreditDetail(IDReserve.getInstance().getUserID());

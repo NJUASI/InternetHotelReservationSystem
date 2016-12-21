@@ -39,8 +39,8 @@ public class WebMarketerViewController {
 			String userID = IDReserve.getInstance().getUserID();
 			ID.setText(userID);
 
-			leftImage.setImage(new Image("/presentation/signUpUI/picture/left.png"));
-			rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
+			leftImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("left.png")));
+			rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 	}
 
 	
@@ -127,7 +127,7 @@ public class WebMarketerViewController {
 	@FXML 
 	protected void logout() throws IOException{
 		Stage stage=StageController.getInstance().getStage();
-		Parent root = FXMLLoader.load(getClass().getResource("/presentation/signUpUI/view/logIn.fxml"));
+		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("logIn.fxml"));
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 	}
@@ -143,7 +143,7 @@ public class WebMarketerViewController {
 	private void jump(String path){
 		right.getChildren().clear();
 		try {
-			currentParent = FXMLLoader.load(getClass().getResource("/presentation/webMarketerUI/view/"+path+".fxml"));
+			currentParent = FXMLLoader.load(getClass().getClassLoader().getResource(path+".fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

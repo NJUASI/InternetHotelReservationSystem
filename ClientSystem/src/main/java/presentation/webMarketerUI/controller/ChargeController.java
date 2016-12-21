@@ -59,7 +59,7 @@ public class ChargeController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
+		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 		//TODO 掉需要的接口
 		//	TODO	fjj 这个是谁的上面那句话
 		//TODO 冯俊杰回复：不归我啊，但顺手将其修改为实现

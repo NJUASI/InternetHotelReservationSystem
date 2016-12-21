@@ -9,6 +9,7 @@ import exception.operationFailedException.UpdateFaiedException;
 import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -29,7 +30,9 @@ public class HotelWorkerController {
 	@FXML
 	private Pane hotelModifyPane;
 	@FXML
-	private TextField inputID, hotelName2, password2;
+	private TextField inputID, hotelName2;
+	@FXML
+	private PasswordField password2;
 	@FXML
 	private Label hotelID, hotelName, password, hotelID2;
 	
@@ -40,7 +43,7 @@ public class HotelWorkerController {
 	@FXML
 	private void initialize() {
 		userBLController = UserController.getInstance();
-		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
+		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 	}
 
 	/**
@@ -66,7 +69,7 @@ public class HotelWorkerController {
 		try {
 			hotelID.setText(hotelWorkerVO.userID);
 			hotelName.setText(hotelWorkerVO.hotelName);
-			password.setText(hotelWorkerVO.password);
+//			password.setText(hotelWorkerVO.password);
 
 			
 		} catch (Exception e) {
@@ -115,7 +118,7 @@ public class HotelWorkerController {
 			hotelModifyPane.setVisible(false);
 			hotelInfoPane.setVisible(true);
 			hotelName.setText(hotelName2.getText());
-			password.setText(password2.getText());
+//			password.setText(password2.getText());
 		} catch (InvalidInputException e) {
 			e.printStackTrace();
 			new PopUp("酒店名称不能含有无效标识符或不能为空", "更改失败");

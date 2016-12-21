@@ -51,7 +51,7 @@ public class MemberController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
+		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 		List<MarketVO> listMarket = marketBLController.getMemberFormulation();
 		name1.setText(listMarket.get(0).marketName);
 		name2.setText(listMarket.get(1).marketName);

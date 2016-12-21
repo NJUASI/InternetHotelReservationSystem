@@ -90,7 +90,7 @@ public class OrderController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
+		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 		orderBLController = OrderBLController.getInstance();
 		searchDate.setValue(LocalDate.now());
 		cancelPercent.setValue("50%");
