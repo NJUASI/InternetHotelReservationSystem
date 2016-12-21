@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -28,10 +29,14 @@ public class HotelWorkerViewController {
 	private AnchorPane right;
 	@FXML 
 	private AnchorPane mainPane;
+
 	@FXML
-	private ImageView leftImage,rightImage;
+	private ImageView leftImage,rightImage,hotelBT,orderBT,offlineBT,roomBT,promotionBT,signUpBT,mainBT;
 	
 	private Parent currentParent;
+	
+	@FXML
+	private Label infoBt;
 	
 	HotelBLService hotelBLController;
 	String hotelID = IDReserve.getInstance().getUserID();
@@ -47,15 +52,12 @@ public class HotelWorkerViewController {
 	 */
 	@FXML
 	private void initialize() {
-		leftImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("left.png")));
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 		HotelVO hotelVO = hotelBLController.getHotelInfo(hotelID);
-		infoBt.setText(hotelVO.hotelName);
 		
+		infoBt.setText(hotelVO.hotelName);
+		initImage();
 	}
 
-	@FXML
-	private Button infoBt;
 	/**
 	 * @author 61990
 	 * @lastChangedBy Harvey
@@ -152,4 +154,89 @@ public class HotelWorkerViewController {
 		}
 		right.getChildren().add(currentParent);
 	}
+	
+	/**
+	 * @author 61990
+	 * @lastChangedBy  61990
+	 * @updateTime 2016/12/21
+	 * @初始化界面的图标
+	 */  
+	private void initImage() {
+		changePicture(leftImage,"left.png");
+//		changePicture(rightImage,"right.png");
+		
+		changePicture(hotelBT,"hotelInfo.png");
+		changePicture(orderBT,"order.png");
+		changePicture(offlineBT,"offline.png");
+		changePicture(roomBT,"room.png");
+		changePicture(promotionBT,"promotion.png");
+		changePicture(signUpBT,"signOut.png");
+		changePicture(mainBT,"home.png");
+	}
+
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("hotelImage/mainPane/"+path)));	
+	}
+	@FXML
+	protected void enter1(){
+		changePicture(hotelBT,"hotelInfoEnter.png");
+	}
+	@FXML
+	protected void exited1(){
+		changePicture(hotelBT,"hotelInfo.png");
+	}
+	@FXML
+	protected void enter2(){
+		changePicture(orderBT,"orderEnter.png");
+	}
+	@FXML
+	protected void exited2(){
+		changePicture(orderBT,"order.png");
+	}
+	@FXML
+	protected void enter3(){
+		changePicture(offlineBT,"offlineEnter.png");
+	}
+	@FXML
+	protected void exited3(){
+		changePicture(offlineBT,"offline.png");
+	}
+	@FXML
+	protected void enter4(){
+		changePicture(roomBT,"roomEnter.png");
+	}
+	@FXML
+	protected void exited4(){
+		changePicture(roomBT,"room.png");
+	}
+	@FXML
+	protected void enter5(){
+		changePicture(promotionBT,"promotionEnter.png");
+	}
+	@FXML
+	protected void exited5(){
+		changePicture(promotionBT,"promotion.png");
+	}
+	@FXML
+	protected void enter6(){
+		changePicture(signUpBT,"signOutEnter.png");
+	}
+	@FXML
+	protected void exited6(){
+		changePicture(signUpBT,"signOut.png");
+	}
+	@FXML
+	protected void enter7(){
+		changePicture(mainBT,"homeEnter.png");
+	}
+	@FXML
+	protected void exited7(){
+		changePicture(mainBT,"home.png");
+	}
+	
 }

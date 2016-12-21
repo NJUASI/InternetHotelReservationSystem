@@ -55,7 +55,7 @@
                   <Label fx:id="hotelID2" layoutX="150.0" layoutY="15.0" />
                   <TextField fx:id="hotelName2" layoutX="150.0" layoutY="41.0" prefHeight="30.0" prefWidth="166.0" />
                   <Button focusTraversable="false" layoutX="78.0" layoutY="128.0" mnemonicParsing="false" onAction="#cancelModify" prefHeight="23.0" prefWidth="88.0" text="取消" />
-                  <PasswordField fx:id="password2" editable="false" layoutX="150.0" layoutY="76.0" prefHeight="30.0" prefWidth="166.0" />
+                  <PasswordField fx:id="password2" layoutX="150.0" layoutY="76.0" prefHeight="30.0" prefWidth="166.0" />
                </children>
             </Pane>
          </children>

@@ -15,37 +15,41 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="998.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.guestUI.controller.GuestViewController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.guestUI.controller.GuestViewController">
    <children>
-      <SplitPane dividerPositions="0.1" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="1000.0">
-         <items>
-            <AnchorPane maxHeight="601.0" maxWidth="100.0" minHeight="601.0" minWidth="100.0" prefHeight="601.0" prefWidth="100.0">
+      <StackPane fx:id="right" layoutX="105.0" prefHeight="601.0" prefWidth="895.0">
+         <children>
+            <Pane fx:id="mainPane" prefHeight="601.0" prefWidth="895.0">
                <children>
-                  <ImageView fx:id="leftImage" fitHeight="601.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button layoutX="13.0" layoutY="160.0" mnemonicParsing="false" onMouseClicked="#openHotel" prefHeight="40.0" prefWidth="70.0" text="酒店" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" />
-                  <Button layoutX="13.0" layoutY="246.0" mnemonicParsing="false" onMouseClicked="#openOrder" prefHeight="40.0" prefWidth="70.0" text="订单" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" />
-                  <Button layoutX="13.0" layoutY="328.0" mnemonicParsing="false" onMouseClicked="#openMember" prefHeight="40.0" prefWidth="70.0" text="会员" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" />
-                  <Button layoutX="15.0" layoutY="410.0" mnemonicParsing="false" onMouseClicked="#openCredit" prefHeight="40.0" prefWidth="70.0" text="信用" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" />
-                  <Button fx:id="nickName" layoutX="8.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#openGuestInfo" prefHeight="80.0" prefWidth="80.0" text="Button" AnchorPane.bottomAnchor="492.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="29.0" />
-                  <Button layoutX="15.0" layoutY="546.0" mnemonicParsing="false" onMouseClicked="#openMain" prefHeight="34.0" prefWidth="70.0" text="主页" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="546.0" />
-                  <Button layoutX="15.0" layoutY="512.0" mnemonicParsing="false" onAction="#logout" prefHeight="34.0" prefWidth="70.0" text="注销" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="512.0" />
+                  <Label layoutX="417.0" layoutY="277.0" text="ASI">
+                     <font>
+                        <Font size="41.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="rightImage" fitHeight="601.0" fitWidth="895.0" pickOnBounds="true" preserveRatio="true" />
                </children>
-            </AnchorPane>
-            <StackPane fx:id="right" prefHeight="150.0" prefWidth="200.0">
-               <children>
-                  <Pane fx:id="mainPane" prefHeight="601.0" prefWidth="895.0">
-                     <children>
-                        <ImageView fx:id="rightImage" fitHeight="601.0" fitWidth="895.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label layoutX="417.0" layoutY="277.0" text="ASI">
-                           <font>
-                              <Font size="41.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-               </children>
-            </StackPane>
-         </items>
-      </SplitPane>
+            </Pane>
+         </children>
+      </StackPane>
+      <AnchorPane maxHeight="601.0" maxWidth="105.0" minHeight="601.0" minWidth="105.0" prefHeight="601.0" prefWidth="105.0">
+         <children>
+            <ImageView fx:id="leftImage" fitHeight="601.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@guestImage/mainPane/left.png" />
+               </image></ImageView>
+            <ImageView fx:id="guestBT" fitHeight="35.0" fitWidth="105.0" layoutY="105.0" onMouseClicked="#openGuestInfo" onMouseEntered="#enter1" onMouseExited="#exited1" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="hotelBT" fitHeight="35.0" fitWidth="105.0" layoutY="185.0" onMouseClicked="#openHotel" onMouseEntered="#enter2" onMouseExited="#exited2" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="orderBT" fitHeight="35.0" fitWidth="105.0" layoutY="265.0" onMouseClicked="#openOrder" onMouseEntered="#enter3" onMouseExited="#exited3" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="memberBT" fitHeight="35.0" fitWidth="105.0" layoutY="345.0" onMouseClicked="#openMember" onMouseEntered="#enter4" onMouseExited="#exited4" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="creditBT" fitHeight="35.0" fitWidth="105.0" layoutY="425.0" onMouseClicked="#openCredit" onMouseEntered="#enter5" onMouseExited="#exited5" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="signUpBT" fitHeight="35.0" fitWidth="105.0" layoutY="505.0" onMouseClicked="#logout" onMouseEntered="#enter6" onMouseExited="#exited6" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="mainBT" fitHeight="35.0" fitWidth="105.0" layoutY="550.0" onMouseClicked="#openMain" onMouseEntered="#enter7" onMouseExited="#exited7" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="nickName" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="71.0" prefHeight="27.0" prefWidth="89.0" text="ASI">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </Pane>

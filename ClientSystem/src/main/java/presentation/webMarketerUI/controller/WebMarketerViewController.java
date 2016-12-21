@@ -30,8 +30,10 @@ public class WebMarketerViewController {
 	
 	@FXML
 	private Label ID;
+	
 	@FXML
-	private ImageView leftImage,rightImage;
+	private ImageView leftImage,rightImage,creditBT,commonBT,memberBT,cycleBT,orderBT,signUpBT,mainBT;
+	
 	private Parent currentParent;
 	
 	@FXML
@@ -39,8 +41,7 @@ public class WebMarketerViewController {
 			String userID = IDReserve.getInstance().getUserID();
 			ID.setText(userID);
 
-			leftImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("left.png")));
-			rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+			initImage();
 	}
 
 	
@@ -149,4 +150,88 @@ public class WebMarketerViewController {
 		}
 		right.getChildren().add(currentParent);
 	}
+	/**
+	 * @author 61990
+	 * @lastChangedBy  61990
+	 * @updateTime 2016/12/21
+	 * @初始化界面的图标
+	 */  
+	private void initImage() {
+		changePicture(leftImage,"left.png");
+//		changePicture(rightImage,"right.png");
+		
+		changePicture(creditBT,"charge.png");
+		changePicture(commonBT,"left.png");
+		changePicture(memberBT,"left.png");
+		changePicture(cycleBT,"circlePromotion.png");
+		changePicture(orderBT,"left.png");
+		changePicture(signUpBT,"left.png");
+		changePicture(mainBT,"left.png");
+	}
+	
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("marketerImage/mainPane/"+path)));	
+	}
+	@FXML
+	protected void enter1(){
+		changePicture(creditBT,"charge.png");
+	}
+	@FXML
+	protected void exited1(){
+		changePicture(creditBT,"chargeEnter.png");
+	}
+	@FXML
+	protected void enter2(){
+		changePicture(commonBT,"commonPromotion.png");
+	}
+	@FXML
+	protected void exited2(){
+		changePicture(commonBT,"commonPromotionEnter.png");
+	}
+	@FXML
+	protected void enter3(){
+		changePicture(memberBT,"market.png");
+	}
+	@FXML
+	protected void exited3(){
+		changePicture(memberBT,"marketEnter.png");
+	}
+	@FXML
+	protected void enter4(){
+		changePicture(cycleBT,"circlePromotion.png");
+	}
+	@FXML
+	protected void exited4(){
+		changePicture(cycleBT,"circlePromotionEnter.png");
+	}
+	@FXML
+	protected void enter5(){
+		changePicture(orderBT,"order.png");
+	}
+	@FXML
+	protected void exited5(){
+		changePicture(orderBT,"orderEnter.png");
+	}
+	@FXML
+	protected void enter6(){
+		changePicture(signUpBT,"signOut.png");
+	}
+	@FXML
+	protected void exited6(){
+		changePicture(signUpBT,"signOutEnter.png");
+	}
+	@FXML
+	protected void enter7(){
+		changePicture(mainBT,"home.png");
+	}
+	@FXML
+	protected void exited7(){
+		changePicture(mainBT,"homeEnter.png");
+	}
+	
 }
