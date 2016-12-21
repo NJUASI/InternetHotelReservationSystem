@@ -76,7 +76,7 @@ public class OrderCheckController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
+		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 		//通过guestID得到orderGeneralVOs list
 		undoBt.setVisible(false);
 		orderBLController = OrderBLController.getInstance();

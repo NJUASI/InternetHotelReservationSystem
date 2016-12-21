@@ -67,7 +67,7 @@ public class RoomController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
+		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 		roomType.getItems().clear();
 		//获取该酒店的所有客房信息
 		Iterator<RoomInfoVO> rooms = hotelBLController.getHotelRoomInfo(hotelID);

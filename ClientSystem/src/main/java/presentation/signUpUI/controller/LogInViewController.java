@@ -67,13 +67,13 @@ public class LogInViewController {
 		rmiPortText.setText("8889");
 
 	
-		background.setImage(new Image("/presentation/signUpUI/picture/mainLogIn.png"));	
-		loginBt.setImage(new Image("/presentation/signUpUI/picture/logIn.png"));
-		registerBT.setImage(new Image("/presentation/signUpUI/picture/changeToSignUp.png"));	
-		logInBT.setImage(new Image("/presentation/signUpUI/picture/changeToLogIn.png"));	
-		rmiBt.setImage(new Image("/presentation/signUpUI/picture/changeToRMI.png"));	
-		registerBT2.setImage(new Image("/presentation/signUpUI/picture/signUp.png"));
-		rmiBT2.setImage(new Image("/presentation/signUpUI/picture/connect.png"));
+		background.setImage(new Image(getClass().getClassLoader().getResourceAsStream("mainLogIn.png")));	
+		loginBt.setImage(new Image(getClass().getClassLoader().getResourceAsStream("logIn.png")));
+		registerBT.setImage(new Image(getClass().getClassLoader().getResourceAsStream("changeToSignUp.png")));	
+		logInBT.setImage(new Image(getClass().getClassLoader().getResourceAsStream("changeToLogIn.png")));	
+		rmiBt.setImage(new Image(getClass().getClassLoader().getResourceAsStream("changeToRMI.png")));	
+		registerBT2.setImage(new Image(getClass().getClassLoader().getResourceAsStream("signUp.png")));
+		rmiBT2.setImage(new Image(getClass().getClassLoader().getResourceAsStream("connect.png")));
 	}
 	
 	
@@ -87,7 +87,7 @@ public class LogInViewController {
 	 */
 	@FXML
 	protected void openLogIn() {
-		background.setImage(new Image("/presentation/signUpUI/picture/mainLogIn.png"));	
+		background.setImage(new Image(getClass().getClassLoader().getResourceAsStream("mainLogIn.png")));	
 		registerPane.setVisible(false);
 		logInPane.setVisible(true);
 		rmiPane.setVisible(false);
@@ -102,7 +102,7 @@ public class LogInViewController {
 	 */
 	@FXML
 	public void openRegister() {
-		background.setImage(new Image("/presentation/signUpUI/picture/mainSignUp.png"));	
+		background.setImage(new Image(getClass().getClassLoader().getResourceAsStream("mainSignUp.png")));	
 		registerPane.setVisible(true);
 		logInPane.setVisible(false);
 		rmiPane.setVisible(false);
@@ -117,7 +117,7 @@ public class LogInViewController {
 	 */
 	@FXML
 	public void openRMI() {
-		background.setImage(new Image("/presentation/signUpUI/picture/mainRMI.png"));	
+		background.setImage(new Image(getClass().getClassLoader().getResourceAsStream("mainRMI.png")));	
 		rmiPane.setVisible(true);
 		registerPane.setVisible(false);
 		logInPane.setVisible(false);
@@ -218,51 +218,51 @@ public class LogInViewController {
 	}
 	@FXML
 	protected void enterLoginBt(){
-		loginBt.setImage(new Image("/presentation/signUpUI/picture/logInEnter.png"));	
+		loginBt.setImage(new Image(getClass().getClassLoader().getResourceAsStream("logInEnter.png")));	
 	}
 	@FXML
 	protected void exitedLoginBt(){
-		loginBt.setImage(new Image("/presentation/signUpUI/picture/logIn.png"));	
+		loginBt.setImage(new Image(getClass().getClassLoader().getResourceAsStream("logIn.png")));	
 	}
 	@FXML
 	protected void enterLoginBt2(){
-		logInBT.setImage(new Image("/presentation/signUpUI/picture/changeToLogInEnter.png"));	
+		logInBT.setImage(new Image(getClass().getClassLoader().getResourceAsStream("changeToLogInEnter.png")));	
 	}
 	@FXML
 	protected void exitedLoginBt2(){
-		logInBT.setImage(new Image("/presentation/signUpUI/picture/changeToLogIn.png"));	
+		logInBT.setImage(new Image(getClass().getClassLoader().getResourceAsStream("changeToLogIn.png")));	
 	}
 	@FXML
 	protected void enterRMIBt(){
-		rmiBt.setImage(new Image("/presentation/signUpUI/picture/changeToRMIEnter.png"));	
+		rmiBt.setImage(new Image(getClass().getClassLoader().getResourceAsStream("changeToRMIEnter.png")));	
 	}
 	@FXML
 	protected void exitedRMIBt(){
-		rmiBt.setImage(new Image("/presentation/signUpUI/picture/changeToRMI.png"));	
+		rmiBt.setImage(new Image(getClass().getClassLoader().getResourceAsStream("changeToRMI.png")));	
 	}
 	@FXML
 	protected void  enterRegisterBt(){
-		registerBT.setImage(new Image("/presentation/signUpUI/picture/changeToSignUpEnter.png"));	
+		registerBT.setImage(new Image(getClass().getClassLoader().getResourceAsStream("changeToSignUpEnter.png")));	
 	}
 	@FXML
 	protected void  exitedRegisterBt(){
-		registerBT.setImage(new Image("/presentation/signUpUI/picture/changeToSignUp.png"));	
+		registerBT.setImage(new Image(getClass().getClassLoader().getResourceAsStream("changeToSignUp.png")));	
 	}
 	@FXML
 	protected void enter1(){
-		registerBT2.setImage(new Image("/presentation/signUpUI/picture/signUpEnter.png"));
+		registerBT2.setImage(new Image(getClass().getClassLoader().getResourceAsStream("signUpEnter.png")));
 	}
 	@FXML
 	protected void excited1(){
-		registerBT2.setImage(new Image("/presentation/signUpUI/picture/signUp.png"));
+		registerBT2.setImage(new Image(getClass().getClassLoader().getResourceAsStream("signUp.png")));
 	}
 	@FXML
 	protected void enter2(){
-		rmiBT2.setImage(new Image("/presentation/signUpUI/picture/connect.png"));
+		rmiBT2.setImage(new Image(getClass().getClassLoader().getResourceAsStream("connect.png")));
 	}
 	@FXML
 	protected void excited2(){
-		rmiBT2.setImage(new Image("/presentation/signUpUI/picture/connectEnter.png"));
+		rmiBT2.setImage(new Image(getClass().getClassLoader().getResourceAsStream("connectEnter.png")));
 	}
 
 	

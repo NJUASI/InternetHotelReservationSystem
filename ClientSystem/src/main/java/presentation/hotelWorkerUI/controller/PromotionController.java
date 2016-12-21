@@ -66,7 +66,7 @@ public class PromotionController {
 	 */
 	@FXML
 	private void initialize() {	
-		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
+		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 		initDatePromotion();
 		initFixedPromotion();
 	}

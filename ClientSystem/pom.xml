@@ -35,46 +35,37 @@
 					</configuration>
 				</plugin>
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>2.2-beta-4</version>
 					<configuration>
 						<archive>
 							<manifest>
-								<addClasspath>true</addClasspath>
-								<classpathPrefix></classpathPrefix>
 								<mainClass>presentation.Main</mainClass>
 							</manifest>
 						</archive>
+						<descriptorRefs>
+							<descriptorRef>jar-with-dependencies</descriptorRef>
+						</descriptorRefs>
 					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-dependency-plugin</artifactId>
 					<executions>
 						<execution>
-							<id>copy</id>
-							<phase>install</phase>
+							<id>make-assembly</id>
+							<phase>package</phase>
 							<goals>
-								<goal>copy-dependencies</goal>
+								<goal>single</goal>
 							</goals>
-							<configuration>
-								<outputDirectory>
-									${project.build.directory}
-								</outputDirectory>
-							</configuration>
 						</execution>
 					</executions>
 				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.4</version>
-					<configuration>
-						<encoding>UTF-8</encoding>
-					</configuration>
-				</plugin>
 			</plugins>
 		</pluginManagement>
+		<plugins> 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+            </plugin>
+        </plugins>
 	</build>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

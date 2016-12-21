@@ -27,7 +27,7 @@ public class Main extends Application {
 	 *             界面初始化
 	 */
 	public void start(Stage stage) throws IOException {
-		final Parent root = FXMLLoader.load(getClass().getResource("/presentation/signUpUI/view/logIn.fxml"));
+		final Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("logIn.fxml"));
 
 		final Scene scene = new Scene(root,989,589);
 

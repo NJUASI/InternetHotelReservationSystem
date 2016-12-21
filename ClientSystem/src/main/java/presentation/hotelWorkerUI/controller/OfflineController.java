@@ -38,7 +38,7 @@ public class OfflineController {
 
 	@FXML
 	void initialize(){	
-		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
+		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 		roomType.setOnShowing(new RoomTypeShowingEventHandler());
 		roomType2.setOnShowing(new RoomType2ShowingEventHandler());
 		roomType.valueProperty().addListener(new RoomTypeChangedListener());

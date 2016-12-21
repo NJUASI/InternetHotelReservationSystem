@@ -81,7 +81,7 @@ public class HotelController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
+		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 
 		//显示酒店详情
 		HotelVO hotelVO = hotelBLController.getHotelInfo(hotelID);

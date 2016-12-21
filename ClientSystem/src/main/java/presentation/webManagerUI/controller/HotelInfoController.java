@@ -43,7 +43,7 @@ public class HotelInfoController {
 	
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
+		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 		String firstCity = sourceBLController.getCities().next();
 		String firstCircle = sourceBLController.getCircles(firstCity).next();
 		cityInput.setValue(firstCity);

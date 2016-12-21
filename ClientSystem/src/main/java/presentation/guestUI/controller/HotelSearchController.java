@@ -127,7 +127,7 @@ public class HotelSearchController {
 	@FXML
 	private void initialize() {
 		initCityAndCircles();
-		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
+		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 	}
 
 	private void initCityAndCircles() {

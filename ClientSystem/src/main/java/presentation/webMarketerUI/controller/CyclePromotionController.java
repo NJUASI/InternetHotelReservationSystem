@@ -53,7 +53,7 @@ public class CyclePromotionController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
+		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 		cityInput.setOnShowing(new CityShowingHandler());
 		cityInput.valueProperty().addListener(new CityChangedListener());
 		cycleInput.valueProperty().addListener(new CycleChangedListener());

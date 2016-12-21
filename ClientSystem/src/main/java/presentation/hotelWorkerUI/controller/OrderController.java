@@ -81,7 +81,7 @@ public class OrderController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image("/presentation/signUpUI/picture/right.png"));
+		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
 		orderBLController = OrderBLController.getInstance();
 
 		//通过hotelID得到orderGeneralVOs
