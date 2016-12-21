@@ -299,22 +299,23 @@ public class OrderCheckController {
 				if (score < 0 || score > 5) {
 					throw new NumberFormatException();
 				}
+				
+
+				final String comment = orderComment.getText();
+
+				final GuestEvaluationVO evaluationVO = new GuestEvaluationVO(orderID, score, comment);
+				final ResultMessage result = orderBLController.addEvaluation(evaluationVO);
+				orderDetail();
+				searchUncommentedOrder();
+				if (result == ResultMessage.SUCCESS) {
+					new PopUp("评价成功", "评价");
+				} else {
+					new PopUp("评价失败", "评价");
+				}
+
 			} else {
 				new PopUp("请输入评分", "评价");
 			}
-
-			final String comment = orderComment.getText();
-
-			final GuestEvaluationVO evaluationVO = new GuestEvaluationVO(orderID, score, comment);
-			final ResultMessage result = orderBLController.addEvaluation(evaluationVO);
-			orderDetail();
-			searchUncommentedOrder();
-			if (result == ResultMessage.SUCCESS) {
-				new PopUp("评价成功", "评价");
-			} else {
-				new PopUp("评价失败", "评价");
-			}
-
 		} catch (NumberFormatException e) {
 			new PopUp("请输入数字评分（0-5）", "评价");
 		}
