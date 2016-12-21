@@ -46,7 +46,7 @@ public class WebManagerViewController {
 	 */
 	@FXML
 	protected void openGuest() throws IOException {
-		jump("GuestModify");
+		jump("ModifyGuest");
 	}
 	/**
 	 * @author 61990
@@ -56,7 +56,7 @@ public class WebManagerViewController {
 	 */
 	@FXML
 	protected void openHotel() throws IOException {
-		jump("HotelWorkerModify");
+		jump("ModifyHotelWorker");
 	}
 	/**
 	 * @author 61990
@@ -66,7 +66,7 @@ public class WebManagerViewController {
 	 */
 	@FXML
 	protected void openMarketer() throws IOException {
-		jump("MarketerModify");
+		jump("ModifyMarketer");
 	}
 	/**
 	 * @author 61990
@@ -76,7 +76,7 @@ public class WebManagerViewController {
 	 */
 	@FXML
 	protected void openHotelInfo() throws IOException {
-		jump("HotelInfoModify");
+		jump("ModifyHotelInfo");
 	}
 	/**
 	 * @author 61990

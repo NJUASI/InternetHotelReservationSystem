@@ -79,7 +79,7 @@ public class GuestViewController {
 	 */
 	@FXML
 	protected void openHotel() throws IOException {
-		jump("CityChoose");
+		jump("GuestSearchHotel");
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class GuestViewController {
 	 */
 	@FXML
 	protected void openCredit() throws IOException {
-		jump("Credit");
+		jump("GuestCredit");
 	}
 
 	/**

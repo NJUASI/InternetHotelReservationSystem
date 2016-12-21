@@ -51,14 +51,14 @@
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <TabPane layoutY="200.0" prefHeight="401.0" prefWidth="895.0" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane layoutY="309.0" prefHeight="292.0" prefWidth="895.0" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab text="房型列表">
                            <content>
                               <Pane prefHeight="349.0" prefWidth="895.0">
                                  <children>
                                     <Button layoutX="765.0" layoutY="171.0" mnemonicParsing="false" onAction="#openCreateOrder" text="预定" />
-                                    <TableView fx:id="roomTable" editable="true" focusTraversable="false" prefHeight="362.0" prefWidth="673.0">
+                                    <TableView fx:id="roomTable" editable="true" focusTraversable="false" prefHeight="264.0" prefWidth="673.0">
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
@@ -78,7 +78,7 @@
                            <content>
                               <Pane prefHeight="349.0" prefWidth="895.0">
                                  <children>
-                                    <TableView fx:id="evaluationTable" editable="true" focusTraversable="false" prefHeight="363.0" prefWidth="895.0" tableMenuButtonVisible="true">
+                                    <TableView fx:id="evaluationTable" editable="true" focusTraversable="false" prefHeight="255.0" prefWidth="895.0" tableMenuButtonVisible="true">
                                        <columns>
                                           <TableColumn fx:id="guestIDColumn" prefWidth="144.0" resizable="false" text="客户ID" />
                                           <TableColumn fx:id="scoreColumn" prefWidth="130.0" resizable="false" text="评分" />
@@ -96,7 +96,7 @@
                            <content>
                               <Pane prefHeight="349.0" prefWidth="895.0">
                                  <children>
-                                    <TableView fx:id="orderTable" focusTraversable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="362.0" prefWidth="895.0">
+                                    <TableView fx:id="orderTable" focusTraversable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="255.0" prefWidth="895.0">
                                        <columns>
                                           <TableColumn fx:id="orderIDColumn" prefWidth="113.0" sortable="false" text="订单编号" />
                                           <TableColumn fx:id="hotelNameColumn" prefWidth="122.0" text="酒店名" visible="false" />
@@ -113,7 +113,7 @@
                         </Tab>
                      </tabs>
                   </TabPane>
-                  <GridPane layoutX="39.0" layoutY="116.0" prefHeight="68.0" prefWidth="286.0">
+                  <GridPane layoutX="111.0" layoutY="112.0" prefHeight="68.0" prefWidth="353.0">
                      <children>
                         <Label text="城市： " />
                         <Label fx:id="cityInDetail" GridPane.columnIndex="1" />
@@ -127,22 +127,22 @@
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="87.0" minWidth="10.0" prefWidth="66.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="81.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="67.0" minWidth="10.0" prefWidth="57.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="89.0" minWidth="10.0" prefWidth="86.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="67.0" minWidth="10.0" prefWidth="47.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="109.0" minWidth="10.0" prefWidth="109.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <GridPane layoutX="324.0" layoutY="77.0" prefHeight="110.0" prefWidth="445.0">
+                  <GridPane layoutX="111.0" layoutY="180.0" prefHeight="110.0" prefWidth="445.0">
                      <children>
                         <Label text="简介：" />
                         <Label fx:id="introductionInDetail" prefHeight="20.0" prefWidth="353.0" GridPane.columnIndex="1" />
-                        <Label text="设施：" GridPane.rowIndex="1" />
-                        <Label text="地址：" GridPane.rowIndex="2" />
-                        <Label fx:id="hotelAddressInDetail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <ScrollPane focusTraversable="false" hbarPolicy="NEVER" prefHeight="102.0" prefWidth="401.0" vbarPolicy="ALWAYS" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label text="设施：" GridPane.rowIndex="2" />
+                        <Label text="地址：" GridPane.rowIndex="1" />
+                        <Label fx:id="hotelAddressInDetail" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ScrollPane focusTraversable="false" hbarPolicy="NEVER" prefHeight="102.0" prefWidth="401.0" vbarPolicy="ALWAYS" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <content>
                               <Label fx:id="equipmentInDetail" focusTraversable="false" prefWidth="383.0" wrapText="true" />
                            </content>
@@ -158,8 +158,8 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <Button layoutX="791.0" layoutY="146.0" mnemonicParsing="false" onAction="#returnHotelCheck" prefHeight="32.0" prefWidth="50.0" text="返回" />
-                  <Label layoutX="39.0" layoutY="83.0" text="编号：" />
+                  <Button layoutX="729.0" layoutY="250.0" mnemonicParsing="false" onAction="#returnHotelCheck" prefHeight="32.0" prefWidth="50.0" text="返回" />
+                  <Label layoutX="111.0" layoutY="85.0" text="编号：" />
                   <Label fx:id="hotelIDInDetail" layoutX="111.0" layoutY="85.0" />
                </children>
             </AnchorPane>
@@ -176,20 +176,20 @@
                      </font>
                   </Label>
                   <Button layoutX="27.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#openSwitchCityCircle" text="切换城市商圈" />
-                  <Button layoutX="176.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#openChoose" text="筛选" />
+                  <Button layoutX="151.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#openChoose" text="筛选" />
                   <Pane layoutY="106.0" prefHeight="493.0" prefWidth="895.0">
                      <children>
                         <TableView fx:id="hotelTable" editable="true" focusTraversable="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="493.0" prefWidth="895.0">
                            <columns>
-                              <TableColumn fx:id="hotelIDColumn3" prefWidth="113.0" sortable="false" text="酒店编号" />
+                              <TableColumn fx:id="hotelIDColumn3" prefWidth="113.0" sortable="false" text="酒店编号" visible="false" />
                               <TableColumn fx:id="hotelNameColumn3" prefWidth="108.0" sortable="false" text="酒店名" />
-                              <TableColumn fx:id="addressColumn3" prefWidth="135.0" sortable="false" text="地址" />
-                              <TableColumn fx:id="cityColumn3" prefWidth="103.0" sortable="false" text="城市" />
-                              <TableColumn fx:id="cycleColumn3" prefWidth="109.0" sortable="false" text="商圈" />
-                              <TableColumn fx:id="hasOrderColumn3" prefWidth="81.0" resizable="false" sortable="false" text="以前预定" />
-                              <TableColumn fx:id="minPriceColumn3" prefWidth="97.0" resizable="false" text="最低价格" />
-                              <TableColumn fx:id="levelColumn3" prefWidth="74.0" resizable="false" text="星级" />
-                              <TableColumn fx:id="scoreColumn3" prefWidth="72.0" text="评分" />
+                              <TableColumn fx:id="addressColumn3" prefWidth="136.0" sortable="false" text="地址" />
+                              <TableColumn fx:id="cityColumn3" prefWidth="107.0" sortable="false" text="城市" />
+                              <TableColumn fx:id="cycleColumn3" prefWidth="95.0" sortable="false" text="商圈" />
+                              <TableColumn fx:id="hasOrderColumn3" prefWidth="119.0" resizable="false" sortable="false" text="以前预定" />
+                              <TableColumn fx:id="minPriceColumn3" prefWidth="139.0" resizable="false" text="最低价格" />
+                              <TableColumn fx:id="levelColumn3" prefWidth="100.0" resizable="false" text="星级" />
+                              <TableColumn fx:id="scoreColumn3" prefWidth="90.0" text="评分" />
                            </columns>
                         </TableView>
                      </children>
@@ -197,6 +197,7 @@
                   <Separator layoutY="106.0" prefWidth="895.0" />
                   <Button layoutX="652.0" layoutY="68.0" mnemonicParsing="false" onAction="#openHotelDetail" text="查看详情" />
                   <Button layoutX="747.0" layoutY="68.0" mnemonicParsing="false" onAction="#createOrderIncheck" text="立即预定" />
+                  <Button layoutX="215.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#openChoose" text="查看以往预定酒店" />
                </children>
             </AnchorPane>
          </children>
@@ -422,8 +423,8 @@
                   <Button layoutX="481.0" layoutY="507.0" mnemonicParsing="false" onAction="#selectHotel" text="筛选" />
                   <Label layoutX="204.0" layoutY="86.0" text="酒店名称" />
                   <TextField fx:id="hotelNameInput" layoutX="326.0" layoutY="81.0" prefHeight="23.0" prefWidth="309.0" />
-                  <Label layoutX="204.0" layoutY="130.0" text="只看预定" />
-                  <CheckBox fx:id="boxOnly" focusTraversable="false" layoutX="338.0" layoutY="130.0" mnemonicParsing="false" text="是" />
+                  <Label layoutX="204.0" layoutY="130.0" text="只看入住酒店" />
+                  <CheckBox fx:id="boxOnly" focusTraversable="false" layoutX="338.0" layoutY="130.0" mnemonicParsing="false" />
                   <Button layoutX="354.0" layoutY="506.0" mnemonicParsing="false" onAction="#returnHotelCheck" prefHeight="32.0" prefWidth="50.0" text="返回" />
                </children>
             </AnchorPane>

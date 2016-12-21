@@ -66,7 +66,7 @@ public class WebMarketerViewController {
 	 */
 	@FXML
 	protected void openCharge(){
-		jump("Charge");
+		jump("MarketerCharge");
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class WebMarketerViewController {
 	 */
 	@FXML
 	protected void openMarket(){
-		jump("MemberCheck");
+		jump("MarketerMemberCheck");
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class WebMarketerViewController {
 	 */
 	@FXML
 	protected void openPromotion(){
-		jump("CyclePromotion");
+		jump("MarketerCyclePromotion");
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class WebMarketerViewController {
 	 */
 	@FXML
 	protected void openCommonPromotion(){
-		jump("DatePromotion");
+		jump("MarketerDatePromotion");
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class WebMarketerViewController {
 	 */
 	@FXML
 	protected void openOrder(){
-		jump("orderSearch");
+		jump("MarketerOrderSearch");
 	}
 	
 	/**

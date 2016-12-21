@@ -86,7 +86,7 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openOffline() throws IOException{
-		jump("Offline");
+		jump("HotelOffline");
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class HotelWorkerViewController {
 	 */    
 	@FXML 
 	protected void openRoomInfo() throws IOException{
-		jump("RoomInfo");
+		jump("HotelRoomInfo");
 	}
 	/**
 	 * @author 61990
