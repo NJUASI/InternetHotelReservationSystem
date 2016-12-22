@@ -161,12 +161,12 @@ public class WebMarketerViewController {
 //		changePicture(rightImage,"right.png");
 		
 		changePicture(creditBT,"charge.png");
-		changePicture(commonBT,"left.png");
-		changePicture(memberBT,"left.png");
+		changePicture(commonBT,"commonPromotion.png");
+		changePicture(memberBT,"market.png");
 		changePicture(cycleBT,"circlePromotion.png");
-		changePicture(orderBT,"left.png");
-		changePicture(signUpBT,"left.png");
-		changePicture(mainBT,"left.png");
+		changePicture(orderBT,"order.png");
+		changePicture(signUpBT,"signOut.png");
+		changePicture(mainBT,"home.png");
 	}
 	
 	/**

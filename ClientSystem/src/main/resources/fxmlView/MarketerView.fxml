@@ -41,6 +41,11 @@
             <ImageView fx:id="orderBT" fitHeight="35.0" fitWidth="105.0" layoutY="425.0" onMouseClicked="#openOrder" onMouseEntered="#enter5" onMouseExited="#exited5" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="signUpBT" fitHeight="35.0" fitWidth="105.0" layoutY="515.0" onMouseClicked="#logout" onMouseEntered="#enter6" onMouseExited="#exited6" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="mainBT" fitHeight="35.0" fitWidth="105.0" layoutY="555.0" onMouseClicked="#openMain" onMouseEntered="#enter7" onMouseExited="#exited7" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="ID" alignment="CENTER" focusTraversable="false" layoutY="75.0" prefHeight="29.0" prefWidth="105.0" text="ASI">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>
