@@ -10,6 +10,7 @@ import exception.verificationException.ParameterInvalidException;
 import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -30,7 +31,9 @@ public class MarketerController {
 	@FXML
 	private Pane modifyPane,marketerInfoPane,pane;
 	@FXML
-	private TextField inputID, password2;
+	private TextField inputID;
+	@FXML
+	private PasswordField password2;
 	@FXML
 	private Label password, marketerID, marketerID2,yourID,yourPassword;
 	
@@ -40,8 +43,7 @@ public class MarketerController {
 	@FXML
 	private void initialize() {
 		userBLController = UserController.getInstance();
-		
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+		changePicture(rightImage, "mainWebMarketerAfter.png");
 	}
 
 	/**
@@ -56,7 +58,7 @@ public class MarketerController {
 			marketerVO = (WebMarketerVO) userBLController.getSingle(inputID.getText());
 			
 			marketerID.setText(marketerVO.userID);
-			password.setText(marketerVO.password);
+	
 
 			marketerInfoPane.setVisible(true);
 		} catch (Exception e) {
@@ -155,5 +157,14 @@ public class MarketerController {
 	@FXML
 	protected void cancel() {
 		pane.setVisible(false);
+	}
+	
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("managerImage/marketerPane/"+path)));	
 	}
 }

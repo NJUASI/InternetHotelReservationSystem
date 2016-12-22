@@ -154,7 +154,7 @@ public class GuestViewController {
 	private void jump(String path){
 		right.getChildren().clear();
 		try {
-			currentParent = FXMLLoader.load(getClass().getClassLoader().getResource(path+".fxml"));
+			currentParent = FXMLLoader.load(getClass().getClassLoader().getResource("fxmlGuest/"+path+".fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

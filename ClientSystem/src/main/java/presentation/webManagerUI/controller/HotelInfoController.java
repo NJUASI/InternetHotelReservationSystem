@@ -43,7 +43,7 @@ public class HotelInfoController {
 	
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+		changePicture(rightImage, "mainHotelAdd.png");
 		String firstCity = sourceBLController.getCities().next();
 		String firstCircle = sourceBLController.getCircles(firstCity).next();
 		cityInput.setValue(firstCity);
@@ -125,5 +125,14 @@ public class HotelInfoController {
 				}	
 			}
 		}
+	}
+	
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("managerImage/hotelInfoPane/"+path)));	
 	}
 }

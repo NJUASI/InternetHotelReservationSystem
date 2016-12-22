@@ -21,32 +21,25 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.webMarketerUI.controller.DatePromotionController">
    <children>
-      <ImageView fx:id="rightImage" fitHeight="601.0" fitWidth="895.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="rightImage" fitHeight="601.0" fitWidth="895.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../png%20(1)/webMarketer/mainCommonPromotion.png" />
+         </image></ImageView>
       <Pane fx:id="promotion" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
          <children>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="601.0" prefWidth="895.0">
+            <AnchorPane blendMode="MULTIPLY" minHeight="0.0" minWidth="0.0" prefHeight="601.0" prefWidth="895.0">
                <children>
-                  <Separator layoutY="60.0" prefHeight="2.0" prefWidth="895.0" />
-                  <Button focusTraversable="false" layoutX="159.0" layoutY="487.0" mnemonicParsing="false" onAction="#modifyOne" text="修改" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="159.0" AnchorPane.rightAnchor="686.0" AnchorPane.topAnchor="487.0" />
-                  <Label layoutX="388.0" layoutY="14.0" prefHeight="39.0" text="网站普通策略" AnchorPane.bottomAnchor="546.0" AnchorPane.leftAnchor="388.0" AnchorPane.topAnchor="14.0">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-                  <GridPane layoutX="525.0" layoutY="169.0" prefHeight="241.0" prefWidth="299.0" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="525.0" AnchorPane.rightAnchor="71.0" AnchorPane.topAnchor="169.0">
+                  <Button alignment="TOP_LEFT" blendMode="MULTIPLY" focusTraversable="false" layoutX="159.0" layoutY="487.0" mnemonicParsing="false" onAction="#modifyOne" text="修改" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="159.0" AnchorPane.rightAnchor="686.0" AnchorPane.topAnchor="487.0" />
+                  <GridPane blendMode="MULTIPLY" layoutX="509.0" layoutY="229.0" prefHeight="204.0" prefWidth="274.0" AnchorPane.bottomAnchor="168.0" AnchorPane.leftAnchor="509.0" AnchorPane.rightAnchor="112.0" AnchorPane.topAnchor="229.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="27.0" prefWidth="128.0" text="策略名称" />
-                        <Label alignment="CENTER" prefHeight="27.0" prefWidth="128.0" text="折扣" GridPane.rowIndex="1" />
-                        <Label alignment="CENTER" prefHeight="27.0" prefWidth="136.0" text="开始时间" GridPane.rowIndex="2" />
-                        <Label alignment="CENTER" prefHeight="27.0" prefWidth="142.0" text="结束时间" GridPane.rowIndex="3" />
                         <TextField fx:id="nameText" alignment="CENTER" focusTraversable="false" GridPane.columnIndex="1" />
                         <TextField fx:id="discountText" alignment="CENTER" focusTraversable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <DatePicker fx:id="startDatePicker" focusTraversable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <DatePicker fx:id="endDatePicker" focusTraversable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="108.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="166.0" minWidth="10.0" prefWidth="166.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -55,9 +48,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <Label alignment="CENTER" layoutX="184.0" layoutY="98.0" prefHeight="28.0" prefWidth="132.0" text="普通折扣查看" />
-                  <Separator layoutX="494.0" layoutY="62.0" orientation="VERTICAL" prefHeight="541.0" prefWidth="3.0" />
-                  <TableView fx:id="table" cacheShape="false" centerShape="false" editable="true" focusTraversable="false" layoutX="36.0" layoutY="161.0" prefHeight="280.0" prefWidth="418.0" scaleShape="false">
+                  <TableView fx:id="table" blendMode="MULTIPLY" cacheShape="false" centerShape="false" editable="true" focusTraversable="false" layoutX="36.0" layoutY="200.0" prefHeight="241.0" prefWidth="380.0" scaleShape="false">
                      <columns>
                         <TableColumn fx:id="nameColumn" prefWidth="75.0" text="名称" />
                         <TableColumn fx:id="discountColumn" minWidth="5.0" prefWidth="77.0" text="折扣" />
@@ -68,9 +59,8 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <Button focusTraversable="false" layoutX="266.0" layoutY="487.0" mnemonicParsing="false" onAction="#deleteOne" text="删除" />
-                  <Label alignment="CENTER" layoutX="617.0" layoutY="106.0" prefHeight="28.0" prefWidth="132.0" text="普通折扣修改" />
-                  <Button fx:id="addBt" focusTraversable="false" layoutX="675.0" layoutY="464.0" mnemonicParsing="false" onAction="#addPromotion" text="添加" />
+                  <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="266.0" layoutY="487.0" mnemonicParsing="false" onAction="#deleteOne" text="删除" />
+                  <Button fx:id="addBt" blendMode="MULTIPLY" focusTraversable="false" layoutX="634.0" layoutY="493.0" mnemonicParsing="false" onAction="#addPromotion" text="添加" />
                   <Pane fx:id="modifyPane" layoutX="614.0" layoutY="450.0" prefHeight="58.0" prefWidth="172.0" visible="false">
                      <children>
                         <Button focusTraversable="false" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#cancelModifyPromotion" text="取消" />

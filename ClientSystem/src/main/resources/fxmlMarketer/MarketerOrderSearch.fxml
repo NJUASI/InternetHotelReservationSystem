@@ -20,7 +20,10 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.webMarketerUI.controller.OrderController">
    <children>
-      <ImageView fx:id="rightImage" fitHeight="601.0" fitWidth="895.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="rightImage" fitHeight="601.0" fitWidth="895.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../png%20(1)/webMarketer/mainOrderCheck.png" />
+         </image></ImageView>
       <AnchorPane fx:id="searchPane" minHeight="0.0" minWidth="0.0" prefHeight="601.0" prefWidth="895.0">
          <children>
             <Label layoutX="404.0" layoutY="14.0" prefHeight="39.0" text="异常订单" AnchorPane.topAnchor="14.0">

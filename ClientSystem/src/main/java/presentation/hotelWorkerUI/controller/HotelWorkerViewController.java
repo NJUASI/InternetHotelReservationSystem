@@ -54,7 +54,7 @@ public class HotelWorkerViewController {
 	private void initialize() {
 		HotelVO hotelVO = hotelBLController.getHotelInfo(hotelID);
 		
-		infoBt.setText(hotelVO.hotelName);
+		infoBt.setText(hotelVO.hotelID);
 		initImage();
 	}
 
@@ -149,7 +149,7 @@ public class HotelWorkerViewController {
 	private void jump(String path){
 		right.getChildren().clear();
 		try {
-			currentParent = FXMLLoader.load(getClass().getClassLoader().getResource(path+".fxml"));
+			currentParent = FXMLLoader.load(getClass().getClassLoader().getResource("fxmlHotel/"+path+".fxml"));
 		} catch (IOException e) {
 		}
 		right.getChildren().add(currentParent);

@@ -37,8 +37,7 @@ public class GuestController {
 
 	@FXML
 	private Pane guestInfoPane, modifyPane;
-	@FXML
-	private Button modifyBt;
+
 	@FXML
 	private TextField inputID;
 	@FXML
@@ -67,7 +66,7 @@ public class GuestController {
 	 */
 	@FXML
 	private void initialize() {	
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+		changePicture(rightImage, "mainGuest.png");
 		userBLController = UserController.getInstance();
 	}
 	/**
@@ -98,6 +97,7 @@ public class GuestController {
 		
 
 		try {	
+			changePicture(rightImage, "mainGuestAfter.png");
 			guestID.setText(guestVO.userID);
 			credit.setText(guestVO.credit + "");
 			nickName.setText(guestVO.nickName);
@@ -111,6 +111,7 @@ public class GuestController {
 				birthday.setText(guestVO.birthday.toString());
 			}
 			guestInfoPane.setVisible(true);
+			modifyPane.setVisible(false);
 		} catch (Exception e) {
 		
 		}
@@ -136,7 +137,7 @@ public class GuestController {
 		birthdayPicker.setValue(guestVO.birthday);
 		}	
 
-		modifyBt.setVisible(false);
+		guestInfoPane.setVisible(false);
 		modifyPane.setVisible(true);
 	}
 	/**
@@ -147,7 +148,7 @@ public class GuestController {
 	 */
 	@FXML
 	protected void cancelModify() {
-		modifyBt.setVisible(true);
+		guestInfoPane.setVisible(true);
 		modifyPane.setVisible(false);
 	}
 	/**
@@ -173,7 +174,7 @@ public class GuestController {
 			
 			new PopUp(message.toString(), "congratulation");	
 			
-			modifyBt.setVisible(true);
+			guestInfoPane.setVisible(true);
 			modifyPane.setVisible(false);
 			
 			search();
@@ -194,6 +195,14 @@ public class GuestController {
 			new PopUp("请检查输入的编号", "sorry");
 		}
 		
+	}
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("managerImage/guestPane/"+path)));	
 	}
 
 }

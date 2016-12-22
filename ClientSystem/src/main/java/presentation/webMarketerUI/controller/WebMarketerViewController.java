@@ -144,7 +144,7 @@ public class WebMarketerViewController {
 	private void jump(String path){
 		right.getChildren().clear();
 		try {
-			currentParent = FXMLLoader.load(getClass().getClassLoader().getResource(path+".fxml"));
+			currentParent = FXMLLoader.load(getClass().getClassLoader().getResource("fxmlMarketer/"+path+".fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

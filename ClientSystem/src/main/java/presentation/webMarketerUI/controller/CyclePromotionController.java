@@ -53,7 +53,7 @@ public class CyclePromotionController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+		changePicture(rightImage, "mainCirclePromotion.png");
 		cityInput.setOnShowing(new CityShowingHandler());
 		cityInput.valueProperty().addListener(new CityChangedListener());
 		cycleInput.valueProperty().addListener(new CycleChangedListener());
@@ -158,6 +158,14 @@ public class CyclePromotionController {
 		//调用promotionController的更新特定商圈策略的方法
 		promotionBLController.updateSpecialCirclePromotions(addressVO);
 		searchInfo();
+	}
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("marketerImage/cyclePromotionPane/"+path)));	
 	}
 }
 

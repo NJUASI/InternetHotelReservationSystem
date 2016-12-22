@@ -114,7 +114,7 @@ public class WebManagerViewController {
 	private void jump(String path){
 		right.getChildren().clear();
 		try {
-			currentParent = FXMLLoader.load(getClass().getClassLoader().getResource(path+".fxml"));
+			currentParent = FXMLLoader.load(getClass().getClassLoader().getResource("fxmlManager/"+path+".fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

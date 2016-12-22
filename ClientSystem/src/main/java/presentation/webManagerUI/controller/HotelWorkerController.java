@@ -34,7 +34,7 @@ public class HotelWorkerController {
 	@FXML
 	private PasswordField password2;
 	@FXML
-	private Label hotelID, hotelName, password, hotelID2;
+	private Label hotelID, hotelName, password;
 	
 	private UserBLService userBLController;
 	@FXML
@@ -43,7 +43,7 @@ public class HotelWorkerController {
 	@FXML
 	private void initialize() {
 		userBLController = UserController.getInstance();
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+		changePicture(rightImage, "mainHotelWorker.png");
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class HotelWorkerController {
 		try {
 			hotelID.setText(hotelWorkerVO.userID);
 			hotelName.setText(hotelWorkerVO.hotelName);
-//			password.setText(hotelWorkerVO.password);
+			changePicture(rightImage, "mainHotelWorkerAfter.png");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -84,7 +84,7 @@ public class HotelWorkerController {
 	@FXML
 	protected void modifyHotel() {
 		if (hotelWorkerVO != null) {
-			hotelID2.setText(hotelWorkerVO.userID);
+			
 			hotelName2.setText(hotelWorkerVO.hotelName);
 			password2.setText(hotelWorkerVO.password);
 
@@ -143,4 +143,15 @@ public class HotelWorkerController {
 		hotelModifyPane.setVisible(false);
 		hotelInfoPane.setVisible(true);
 	}
+	
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("managerImage/hotelWorkerPane/"+path)));	
+	}
+
+	
 }
