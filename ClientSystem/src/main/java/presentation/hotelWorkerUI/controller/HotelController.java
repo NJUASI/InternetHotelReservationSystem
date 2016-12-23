@@ -48,7 +48,7 @@ public class HotelController {
 	@FXML
 	private ComboBox<String> cityText,cycleText,levelText;
 	@FXML
-	private ImageView rightImage;
+	private ImageView rightImage,rightImage1;
 
 
 	HotelBLService hotelBLController;
@@ -81,8 +81,9 @@ public class HotelController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
-
+		changePicture(rightImage, "mainHotelInfo.png");
+		changePicture(rightImage1, "mainHotelInfoEdit.png");
+		
 		//显示酒店详情
 		HotelVO hotelVO = hotelBLController.getHotelInfo(hotelID);
 		initHotelDetail(hotelVO);
@@ -265,5 +266,13 @@ public class HotelController {
 		hotelModifyPane.setVisible(false);
 		initHotelDetail(hotelBLController.getHotelInfo(hotelID));
 		hotelInfoPane.setVisible(true);
+	}
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("hotelImage/hotelPane/"+path)));	
 	}
 }

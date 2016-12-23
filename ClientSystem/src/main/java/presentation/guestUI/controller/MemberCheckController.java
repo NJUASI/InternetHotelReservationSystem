@@ -48,7 +48,7 @@ public class MemberCheckController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+		changePicture(rightImage, "mainMember.png");
 		String levelName = null;
 		try {
 			levelName = marketBLController.getLevelName(IDReserve.getInstance().getUserID());
@@ -165,5 +165,13 @@ public class MemberCheckController {
 	protected void cancer() {
 		memberCheck.setVisible(true);
 		memberModify.setVisible(false);
+	}
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("guestImage/memberPane/"+path)));	
 	}
 }

@@ -39,11 +39,12 @@ public class MarketerController {
 	
 	private UserBLService userBLController;
 	@FXML
-	private ImageView rightImage;
+	private ImageView rightImage,rightImage1;
 	@FXML
 	private void initialize() {
 		userBLController = UserController.getInstance();
-		changePicture(rightImage, "mainWebMarketerAfter.png");
+		changePicture(rightImage, "mainWebMarketerSearch.png");
+		changePicture(rightImage1, "mainWebMarketerAdd.png");
 	}
 
 	/**
@@ -59,7 +60,7 @@ public class MarketerController {
 			
 			marketerID.setText(marketerVO.userID);
 	
-
+			changePicture(rightImage, "mainWebMarketerSearchAfter.png");
 			marketerInfoPane.setVisible(true);
 		} catch (Exception e) {
 			new PopUp("请检查输入的编号", "sorry");
@@ -141,6 +142,7 @@ public class MarketerController {
 			pane.setVisible(true);
 			yourID.setText(webMarketerVO.userID);
 			yourPassword.setText(webMarketerVO.password);
+			changePicture(rightImage1, "mainWebMarketerAddAfter.png");
 		} catch (ParameterInvalidException e) {
 			e.printStackTrace();
 		} catch (UserInexistException e) {
@@ -157,6 +159,7 @@ public class MarketerController {
 	@FXML
 	protected void cancel() {
 		pane.setVisible(false);
+		changePicture(rightImage1, "mainWebMarketerAdd.png");
 	}
 	
 	/**

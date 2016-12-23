@@ -41,8 +41,7 @@ public class CreditCheckController {
 	 */
 	@FXML
 	private void initialize() {
-		
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+		changePicture(rightImage, "mainCreditRecord.png");
 
 		// 调用creditBL的方法，通过guest获得该用户所有的信用变化
 		Iterator<CreditVO> creditChanges = creditBLController.getAllCreditDetail(IDReserve.getInstance().getUserID());
@@ -64,5 +63,12 @@ public class CreditCheckController {
 		table.setItems(data);
 
 	}
-
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("guestImage/creditPane/"+path)));	
+	}
 }

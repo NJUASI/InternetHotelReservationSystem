@@ -80,7 +80,7 @@ public class OrderController {
 	private TableColumn<OrderTable, String> orderIDColumn,nameColumn, hotelNameColumn, addressColumn, priceColumn,
 			checkInTimeColumn, stateColumn,checkOutTimeColumn,guestIDColumn;
 	@FXML
-	private ImageView rightImage;
+	private ImageView rightImage, rightImage1, rightImage2;
 	
 	/**
 	 * @author 61990
@@ -90,7 +90,10 @@ public class OrderController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+		changePicture(rightImage, "mainOrderCheck.png");
+		changePicture(rightImage2, "mainOrderList.png");
+		changePicture(rightImage1, "mainOrderDetail.png");
+
 		orderBLController = OrderBLController.getInstance();
 		searchDate.setValue(LocalDate.now());
 		cancelPercent.setValue("50%");
@@ -347,5 +350,14 @@ public class OrderController {
 		}else {
 			new PopUp("撤销失败", "sorry");	
 		}
+	}
+	
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("marketerImage/orderPane/"+path)));	
 	}
 }

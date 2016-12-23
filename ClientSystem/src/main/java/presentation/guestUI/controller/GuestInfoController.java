@@ -34,7 +34,7 @@ public class GuestInfoController {
 
 	// guestInfo界面内容
 	@FXML
-	private Label guestID, name, nickname, password, credit, phone;
+	private Label guestID,guestID1, name, nickname, password, credit,credit1, phone;
 
 	// modify 界面内容
 	@FXML
@@ -46,7 +46,7 @@ public class GuestInfoController {
 
 	private UserBLService userBLController = UserController.getInstance();
 	@FXML
-	private ImageView rightImage;
+	private ImageView rightImage,rightImage1;
 	
 	/**
 	 * @author 61990
@@ -55,17 +55,20 @@ public class GuestInfoController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+		changePicture(rightImage, "mainGuestInfo.png");	
+		changePicture(rightImage1, "mainGuestInfoEdit.png");
 		try {
 			guestVO = (GuestVO) userBLController.getSingle(userID);
 		} catch (UserInexistException e) {
 			e.printStackTrace();
 		}
 		guestID.setText(guestVO.userID);
+		guestID1.setText(guestVO.userID);
 		name.setText(guestVO.name);
 		nickname.setText(guestVO.nickName);
 		password.setText("******");
 		credit.setText(Double.toString(guestVO.credit));
+		credit1.setText(Double.toString(guestVO.credit));
 		phone.setText(guestVO.phone);
 	}
 
@@ -147,5 +150,14 @@ public class GuestInfoController {
 	protected void cancer() {
 		guestModify.setVisible(false);
 		guestCheck.setVisible(true);
+	}
+	
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("guestImage/guestPane/"+path)));	
 	}
 }

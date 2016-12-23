@@ -67,7 +67,7 @@ public class RoomController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+		changePicture(rightImage, "mainRoomInfo.png");
 		roomType.getItems().clear();
 		//获取该酒店的所有客房信息
 		Iterator<RoomInfoVO> rooms = hotelBLController.getHotelRoomInfo(hotelID);
@@ -209,5 +209,13 @@ public class RoomController {
 		roomType.setDisable(false);
 		addBt.setVisible(true);
 		setModifyText("","","");
+	}
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("hotelImage/roomPane/"+path)));	
 	}
 }

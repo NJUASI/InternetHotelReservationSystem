@@ -128,7 +128,6 @@ public class HotelWorkerViewController {
 	 * @updateTime 2016/12/11
 	 * @注销
 	 */  
-	@SuppressWarnings("restriction")
 	@FXML 
 	protected void logout() throws IOException{
 		Stage stage=StageController.getInstance().getStage();

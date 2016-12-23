@@ -66,7 +66,7 @@ public class PromotionController {
 	 */
 	@FXML
 	private void initialize() {	
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+		changePicture(rightImage, "mainPromotion.png");
 		initDatePromotion();
 		initFixedPromotion();
 	}
@@ -277,7 +277,14 @@ public class PromotionController {
 		 name.setText("");
 		 discountText1.setText("");
 	}
-
-
+	
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("hotelImage/promotionPane/"+path)));	
+	}
 
 }
