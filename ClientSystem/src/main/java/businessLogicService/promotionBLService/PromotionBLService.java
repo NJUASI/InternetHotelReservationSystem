@@ -37,6 +37,6 @@ public interface PromotionBLService {
 	public ResultMessage updateSpecialCirclePromotions(AddressVO addressVO);
 	
 	//得到单个vip会员商圈的专属折扣
-	public double getSpecialCirclePromotion(String city, String newCircle);
+	public double getSpecialCirclePromotion(String city, String circle);
 
 }

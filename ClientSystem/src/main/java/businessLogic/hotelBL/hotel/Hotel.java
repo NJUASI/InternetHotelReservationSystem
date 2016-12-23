@@ -170,19 +170,6 @@ public class Hotel implements HotelInfoOperation{
 	}
 
 	/**
-	 * @Description:委托给room，删除一条客房信息
-	 * @param roomType
-	 * @return
-	 * ResultMessage
-	 * @exception:
-	 * @author: Harvey Gong
-	 * @time:2016年12月4日 下午3:14:25
-	 */
-	public ResultMessage deleteRoomInfo(String hotelID,RoomType roomType){
-		return rooms.deleteRoomInfo(hotelID,roomType);
-	}
-
-	/**
 	 * @Description:委托给room，更新客房信息
 	 * @param roomInfoVOList
 	 * @return

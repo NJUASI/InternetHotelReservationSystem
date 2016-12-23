@@ -20,6 +20,7 @@ import presentation.PopUp.PopUp;
 import presentation.Table.DatePromotionTable;
 import utilities.IDReserve;
 import utilities.enums.PromotionType;
+import utilities.enums.ResultMessage;
 import vo.HotelFixedPromotionVO;
 import vo.SpecialSpanPromotionVO;
 
@@ -158,8 +159,15 @@ public class PromotionController {
 			vo.discount = Double.valueOf(discountText.getText());
 			vo.startDate = startDatePicker.getValue();
 			vo.endDate = endDatePicker.getValue();
-			promotionBLController.addHotelSpecialSpanPromotion(vo);
-			
+			ResultMessage msg = promotionBLController.addHotelSpecialSpanPromotion(vo);
+			if(msg == ResultMessage.SUCCESS)
+			{
+				new PopUp("促销策略添加成功","促销策略添加");
+			}
+			else
+			{
+				new PopUp("促销策略添加失败","促销策略添加");
+			}
 			//更新显示特定期间策略
 			initDatePromotion();
 			setModifyText("","",null,null);

@@ -120,17 +120,6 @@ public interface HotelBLService {
 	public ResultMessage addRoomType(RoomInfoVO roomInfoVO);
 	
 	/**
-	 * @Description:删除房间类型
-	 * @param roomType
-	 * @return
-	 * ResultMessage
-	 * @author: Harvey Gong
-	 * @lastChangedBy: Harvey Gong
-	 * @time:2016年12月14日 下午5:26:08
-	 */
-	public ResultMessage deleteRoomType(String hotelID,RoomType roomType);
-	
-	/**
 	 * @Description:更新客房信息
 	 * @param roomInfoVO
 	 * @return

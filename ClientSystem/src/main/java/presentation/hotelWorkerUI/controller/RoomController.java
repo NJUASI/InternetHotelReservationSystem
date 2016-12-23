@@ -21,8 +21,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import presentation.PopUp.PopUp;
 import presentation.Table.TypeTable;
 import utilities.IDReserve;
+import utilities.enums.ResultMessage;
 import utilities.enums.RoomType;
 import vo.RoomInfoVO;
 /**
@@ -193,7 +195,15 @@ public class RoomController {
 		vo.remainNum=Integer.parseInt(roomNum.getText());
 		vo.price = Integer.valueOf(price.getText());
 
-		hotelBLController.addRoomType(vo);
+		ResultMessage msg = hotelBLController.addRoomType(vo);
+		if(msg == ResultMessage.SUCCESS)
+		{
+			new PopUp("客房添加成功","客房添加");
+		}
+		else
+		{
+			new PopUp("客房类型已存在","客房添加");
+		}
 		initialize();
 	}
 

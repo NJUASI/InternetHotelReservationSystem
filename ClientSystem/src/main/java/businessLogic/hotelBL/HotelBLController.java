@@ -86,12 +86,6 @@ public class HotelBLController implements HotelBLService {
 		return hotel.addRoomInfo(roomInfoVO);
 	}
 	
-	//删
-	@Override
-	public ResultMessage deleteRoomType(String hotelID,RoomType roomType) {
-		return hotel.deleteRoomInfo(hotelID, roomType);
-	}
-	
 	//改
 	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO) {
 		return hotel.updateHotelRoomInfo(roomInfoVO);
@@ -142,15 +136,13 @@ public class HotelBLController implements HotelBLService {
 	public Iterator<HotelVO> getHotels(String city,String circle) {
 		return hotelScan.getHotels(city,circle);
 	}
-	//筛选
+	//排序
 	public Iterator<HotelVO> sortHotels(SortStrategy sortStrategy) {
 		return hotelScan.sortHotels(sortStrategy);
 	}
-	//排序
+	//筛选
 	public Iterator<HotelVO> searchHotels(List<SearchCriteriaType> searchCriteriaTypes,SearchCriteriaVO vo) {
 		return hotelScan.searchHotels(searchCriteriaTypes,vo);
 	}
-
-	
 
 }
