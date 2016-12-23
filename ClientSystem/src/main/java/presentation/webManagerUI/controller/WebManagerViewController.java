@@ -21,7 +21,7 @@ public class WebManagerViewController {
 	@FXML
 	private Pane mainPane;
 	@FXML
-	private ImageView leftImage,rightImage;
+	private ImageView leftImage,rightImage,guestBT,hotelWorkerBT,marketerBT,hotelInfoBT,signUpBT,mainBT;
 	
 	private Parent currentParent;
 
@@ -33,8 +33,7 @@ public class WebManagerViewController {
 			String userID = IDReserve.getInstance().getUserID();
 			ID.setText(userID);
 
-			leftImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("left.png")));
-			rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+			initImage();
 	}
 
 	
@@ -46,7 +45,7 @@ public class WebManagerViewController {
 	 */
 	@FXML
 	protected void openGuest() throws IOException {
-		jump("GuestModify");
+		jump("ModifyGuest");
 	}
 	/**
 	 * @author 61990
@@ -56,7 +55,7 @@ public class WebManagerViewController {
 	 */
 	@FXML
 	protected void openHotel() throws IOException {
-		jump("HotelWorkerModify");
+		jump("ModifyHotelWorker");
 	}
 	/**
 	 * @author 61990
@@ -66,7 +65,7 @@ public class WebManagerViewController {
 	 */
 	@FXML
 	protected void openMarketer() throws IOException {
-		jump("MarketerModify");
+		jump("ModifyMarketer");
 	}
 	/**
 	 * @author 61990
@@ -76,7 +75,7 @@ public class WebManagerViewController {
 	 */
 	@FXML
 	protected void openHotelInfo() throws IOException {
-		jump("HotelInfoModify");
+		jump("ModifyHotelInfo");
 	}
 	/**
 	 * @author 61990
@@ -115,10 +114,88 @@ public class WebManagerViewController {
 	private void jump(String path){
 		right.getChildren().clear();
 		try {
-			currentParent = FXMLLoader.load(getClass().getClassLoader().getResource(path+".fxml"));
+			currentParent = FXMLLoader.load(getClass().getClassLoader().getResource("fxmlManager/"+path+".fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		right.getChildren().add(currentParent);
 	}
+	
+	/**
+	 * @author 61990
+	 * @lastChangedBy  61990
+	 * @updateTime 2016/12/21
+	 * @初始化界面的图标
+	 */  
+	private void initImage() {
+		changePicture(leftImage,"left.png");
+//		changePicture(rightImage,"right.png");
+//		
+		changePicture(guestBT,"guest.png");
+		changePicture(hotelWorkerBT,"hotelWorker.png");
+		changePicture(marketerBT,"webMarketer.png");
+		changePicture(hotelInfoBT,"hotelAdd.png");
+		changePicture(signUpBT,"signOut.png");
+		changePicture(mainBT,"home.png");
+	}
+
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("managerImage/mainPane/"+path)));	
+	}
+
+	@FXML
+	protected void enter2(){
+		changePicture(guestBT,"guestEnter.png");
+	}
+	@FXML
+	protected void exited2(){
+		changePicture(guestBT,"guest.png");
+	}
+	@FXML
+	protected void enter3(){
+		changePicture(hotelWorkerBT,"hotelWorkerEnter.png");
+	}
+	@FXML
+	protected void exited3(){
+		changePicture(hotelWorkerBT,"hotelWorker.png");
+	}
+	@FXML
+	protected void enter4(){
+		changePicture(marketerBT,"webMarketerEnter.png");
+	}
+	@FXML
+	protected void exited4(){
+		changePicture(marketerBT,"webMarketer.png");
+	}
+	@FXML
+	protected void enter5(){
+		changePicture(hotelInfoBT,"hotelAddEnter.png");
+	}
+	@FXML
+	protected void exited5(){
+		changePicture(hotelInfoBT,"hotelAdd.png");
+	}
+	@FXML
+	protected void enter6(){
+		changePicture(signUpBT,"signOutEnter.png");
+	}
+	@FXML
+	protected void exited6(){
+		changePicture(signUpBT,"signOut.png");
+	}
+	@FXML
+	protected void enter7(){
+		changePicture(mainBT,"homeEnter.png");
+	}
+	@FXML
+	protected void exited7(){
+		changePicture(mainBT,"home.png");
+	}
+	
+	
 }

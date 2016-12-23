@@ -59,7 +59,7 @@ public class ChargeController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+		changePicture(rightImage, "mainCharge.png");
 		//TODO 掉需要的接口
 		//	TODO	fjj 这个是谁的上面那句话
 		//TODO 冯俊杰回复：不归我啊，但顺手将其修改为实现
@@ -85,6 +85,7 @@ public class ChargeController {
 				guestID.setText(guestVO.userID);
 				name.setText(guestVO.name);
 				credit.setText(Double.toString(guestVO.credit));
+				changePicture(rightImage, "mainChargeAfter.png");
 			} catch (UserInexistException e) {
 				new PopUp("该用户不存在", "搜索失败");
 			}
@@ -142,5 +143,14 @@ public class ChargeController {
 	protected void cancelCharge() {
 		chargePane.setVisible(false);
 		chargeNum.setText("");
+		changePicture(rightImage, "mainCharge.png");
+	}
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("marketerImage/chargePane/"+path)));	
 	}
 }

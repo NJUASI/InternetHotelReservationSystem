@@ -1,11 +1,16 @@
 package presentation.webManagerUI.controller;
 
+import businessLogic.marketBL.MarketController;
+import businessLogic.memberBL.MemberController;
 import businessLogic.userBL.UserController;
+import businessLogicService.marketBLService.MarketBLService;
+import businessLogicService.memberBLService.MemberBLService;
 import businessLogicService.userBLService.UserBLService;
 import exception.inputException.InvalidInputException;
 import exception.inputException.InvalidLengthInputException;
 import exception.inputException.PasswordInputException;
 import exception.operationFailedException.UpdateFaiedException;
+import exception.verificationException.MemberInexistException;
 import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,8 +21,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import presentation.PopUp.PopUp;
+import utilities.IDReserve;
 import utilities.enums.ResultMessage;
 import vo.GuestVO;
+import vo.MarketVO;
+import vo.MemberVO;
 
 /**
  * @author 61990
@@ -29,14 +37,13 @@ public class GuestController {
 
 	@FXML
 	private Pane guestInfoPane, modifyPane;
-	@FXML
-	private Button modifyBt;
+
 	@FXML
 	private TextField inputID;
 	@FXML
-	private Label guestID, credit, nickName, phone, password, enterprise, name, birthday;
+	private Label guestID, credit, nickName, phone, level, enterprise, name, birthday;
 	@FXML
-	private TextField nickNameText, passwordText, nameText, phoneText, enterpriseText;
+	private TextField nickNameText, nameText, phoneText, enterpriseText;
 
 	@FXML
 	private DatePicker birthdayPicker;
@@ -45,6 +52,13 @@ public class GuestController {
 
 	private UserBLService userBLController;
 
+	private MemberBLService memberBLController = MemberController.getInstance();
+
+	private MarketBLService marketBLController = MarketController.getInstance();
+	
+	MemberVO memberVO;
+	MarketVO marketVO;
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy Byron Dong
@@ -52,7 +66,7 @@ public class GuestController {
 	 */
 	@FXML
 	private void initialize() {	
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+		changePicture(rightImage, "mainGuest.png");
 		userBLController = UserController.getInstance();
 	}
 	/**
@@ -63,9 +77,18 @@ public class GuestController {
 	 */
 	@FXML
 	protected void search() {
-		
+		String levelName = null;
+		try {
+			levelName = marketBLController.getLevelName(inputID.getText());
+			marketVO = new MarketVO(levelName, 0, 0);
+		} catch (MemberInexistException e) {
+			marketVO = new MarketVO("Lv0", 0, 0);
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
 		try {
 			guestVO = (GuestVO) userBLController.getSingle(inputID.getText());
+			memberVO = memberBLController.getMemberInfo(inputID.getText());
 		} catch (UserInexistException e1) {
 			e1.printStackTrace();
 			new PopUp("请检查输入内容", "sorry");
@@ -74,11 +97,12 @@ public class GuestController {
 		
 
 		try {	
+			changePicture(rightImage, "mainGuestAfter.png");
 			guestID.setText(guestVO.userID);
 			credit.setText(guestVO.credit + "");
 			nickName.setText(guestVO.nickName);
 			phone.setText(guestVO.phone);
-			password.setText(guestVO.password);
+			level.setText(marketVO.marketName);
 			if (guestVO.enterprise != null) {
 				enterprise.setText(guestVO.enterprise);
 			}
@@ -87,6 +111,7 @@ public class GuestController {
 				birthday.setText(guestVO.birthday.toString());
 			}
 			guestInfoPane.setVisible(true);
+			modifyPane.setVisible(false);
 		} catch (Exception e) {
 		
 		}
@@ -102,7 +127,6 @@ public class GuestController {
 	protected void modifyGuest() {
 
 		nickNameText.setText(nickName.getText());
-		passwordText.setText(password.getText());
 		nameText.setText(name.getText());
 		phoneText.setText(phone.getText());
 		
@@ -113,7 +137,7 @@ public class GuestController {
 		birthdayPicker.setValue(guestVO.birthday);
 		}	
 
-		modifyBt.setVisible(false);
+		guestInfoPane.setVisible(false);
 		modifyPane.setVisible(true);
 	}
 	/**
@@ -124,7 +148,7 @@ public class GuestController {
 	 */
 	@FXML
 	protected void cancelModify() {
-		modifyBt.setVisible(true);
+		guestInfoPane.setVisible(true);
 		modifyPane.setVisible(false);
 	}
 	/**
@@ -142,7 +166,7 @@ public class GuestController {
 		tempGuestVO.phone=phoneText.getText();
 		tempGuestVO.name=nameText.getText();
 		tempGuestVO.nickName=nickNameText.getText();
-		tempGuestVO.password=passwordText.getText();
+
 		
 		ResultMessage message = null;
 		try {
@@ -150,7 +174,7 @@ public class GuestController {
 			
 			new PopUp(message.toString(), "congratulation");	
 			
-			modifyBt.setVisible(true);
+			guestInfoPane.setVisible(true);
 			modifyPane.setVisible(false);
 			
 			search();
@@ -171,6 +195,14 @@ public class GuestController {
 			new PopUp("请检查输入的编号", "sorry");
 		}
 		
+	}
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("managerImage/guestPane/"+path)));	
 	}
 
 }

@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -35,10 +36,10 @@ public class GuestViewController {
 	private Pane mainPane;
 
 	@FXML
-	private Button nickName;
+	private Label nickName;
 	
 	@FXML
-	private ImageView leftImage,rightImage;
+	private ImageView leftImage,rightImage,guestBT,hotelBT,orderBT,memberBT,creditBT,signUpBT,mainBT;
 	
 	private Parent currentParent ;
 
@@ -56,10 +57,9 @@ public class GuestViewController {
 		GuestVO guestVO = (GuestVO) userBLController.getSingle(userID);
 		nickName.setText(guestVO.nickName);
 		
-		leftImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("left.png")));
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+		initImage();
 	}
-	
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy Harvey
@@ -79,7 +79,7 @@ public class GuestViewController {
 	 */
 	@FXML
 	protected void openHotel() throws IOException {
-		jump("CityChoose");
+		jump("GuestSearchHotel");
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class GuestViewController {
 	 */
 	@FXML
 	protected void openCredit() throws IOException {
-		jump("Credit");
+		jump("GuestCredit");
 	}
 
 	/**
@@ -154,10 +154,93 @@ public class GuestViewController {
 	private void jump(String path){
 		right.getChildren().clear();
 		try {
-			currentParent = FXMLLoader.load(getClass().getClassLoader().getResource(path+".fxml"));
+			currentParent = FXMLLoader.load(getClass().getClassLoader().getResource("fxmlGuest/"+path+".fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		right.getChildren().add(currentParent);
+	}
+	
+	/**
+	 * @author 61990
+	 * @lastChangedBy  61990
+	 * @updateTime 2016/12/21
+	 * @初始化界面的图标
+	 */  
+	private void initImage() {
+		changePicture(leftImage,"left.png");
+//		changePicture(rightImage,"right.png");
+		
+		changePicture(guestBT,"basicInfo.png");
+		changePicture(hotelBT,"hotel.png");
+		changePicture(orderBT,"order.png");
+		changePicture(memberBT,"member.png");
+		changePicture(creditBT,"credit.png");
+		changePicture(signUpBT,"signOut.png");
+		changePicture(mainBT,"home.png");
+	}
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("guestImage/mainPane/"+path)));	
+	}
+	@FXML
+	protected void enter1(){
+		changePicture(guestBT,"basicInfo.png");
+	}
+	@FXML
+	protected void exited1(){
+		changePicture(guestBT,"basicInfoEnter.png");
+	}
+	@FXML
+	protected void enter2(){
+		changePicture(hotelBT,"hotelEnter.png");
+	}
+	@FXML
+	protected void exited2(){
+		changePicture(hotelBT,"hotel.png");
+	}
+	@FXML
+	protected void enter3(){
+		changePicture(orderBT,"orderEnter.png");
+	}
+	@FXML
+	protected void exited3(){
+		changePicture(orderBT,"order.png");
+	}
+	@FXML
+	protected void enter4(){
+		changePicture(memberBT,"memberEnter.png");
+	}
+	@FXML
+	protected void exited4(){
+		changePicture(memberBT,"member.png");
+	}
+	@FXML
+	protected void enter5(){
+		changePicture(creditBT,"creditEnter.png");
+	}
+	@FXML
+	protected void exited5(){
+		changePicture(creditBT,"credit.png");
+	}
+	@FXML
+	protected void enter6(){
+		changePicture(signUpBT,"signOutEnter.png");
+	}
+	@FXML
+	protected void exited6(){
+		changePicture(signUpBT,"signOut.png");
+	}
+	@FXML
+	protected void enter7(){
+		changePicture(mainBT,"homeEnter.png");
+	}
+	@FXML
+	protected void exited7(){
+		changePicture(mainBT,"home.png");
 	}
 }

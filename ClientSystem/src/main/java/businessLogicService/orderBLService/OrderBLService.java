@@ -1,7 +1,5 @@
 package businessLogicService.orderBLService;
 
-import vo.PreOrderVO;
-
 /**
  * 
  * @author cuihua
@@ -12,7 +10,5 @@ import vo.PreOrderVO;
  */
 public interface OrderBLService extends CommonOrderBLService, GuestOrderBLService, HotelWorkerOrderBLService, 
 WebMarketerOrderBLService, OrderForHotelModuleBLService {
-
-	public int getCalculatedPrice(PreOrderVO preOrderVO);
 	
 }

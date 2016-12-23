@@ -6,6 +6,7 @@ import utilities.enums.ResultMessage;
 import vo.GuestEvaluationVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
+import vo.PreOrderVO;
 
 /**
  * 
@@ -15,6 +16,16 @@ import vo.OrderVO;
  *
  */
 public interface GuestOrderBLService {
+	
+	/**
+	 * @Description:通过preOrderVO中的信息计算订单的总价格
+	 * @param preOrderVO
+	 * @return
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 上午12:25:05
+	 */
+	int getCalculatedPrice(PreOrderVO preOrderVO);
 	
 	/**
 	 * 

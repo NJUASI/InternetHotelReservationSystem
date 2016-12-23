@@ -58,7 +58,7 @@ public class DatePromotionController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+		changePicture(rightImage, "mainCommonPromotion.png");
 		table.getItems().clear();
 
 		//调用promotion的方法获取网站的特定期间策略
@@ -242,5 +242,13 @@ public class DatePromotionController {
 		vo.startDate =  startDatePicker.getValue();
 		vo.endDate = endDatePicker.getValue();
 		return vo;
+	}
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("marketerImage/datePromotionPane/"+path)));	
 	}
 }
