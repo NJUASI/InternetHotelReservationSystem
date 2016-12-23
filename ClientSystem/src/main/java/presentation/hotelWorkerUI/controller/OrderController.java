@@ -70,7 +70,7 @@ public class OrderController {
 	@FXML
 	private TableView<OrderTable> table;
 	@FXML
-	private ImageView rightImage;
+	private ImageView rightImage,rightImage1;
 	
 	List<OrderGeneralVO> orderVOlist;
 	/**
@@ -81,7 +81,8 @@ public class OrderController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+		changePicture(rightImage, "mainOrderList.png");
+		changePicture(rightImage1, "mainOrderDetail.png");
 		orderBLController = OrderBLController.getInstance();
 
 		//通过hotelID得到orderGeneralVOs
@@ -480,5 +481,14 @@ public class OrderController {
 			orderScore.setText(Double.toString(orderVO.score));
 			orderComment.setText(orderVO.comment);
 		}
+	}
+	
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("hotelImage/orderPane/"+path)));	
 	}
 }

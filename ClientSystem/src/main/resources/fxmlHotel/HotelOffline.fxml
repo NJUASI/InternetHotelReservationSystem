@@ -23,15 +23,12 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.hotelWorkerUI.controller.OfflineController">
    <children>
-      <ImageView fx:id="rightImage" fitHeight="601.0" fitWidth="895.0" pickOnBounds="true" preserveRatio="true" />
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
+      <ImageView fx:id="rightImage" fitHeight="601.0" fitWidth="895.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../png%20(1)/hotelWorker/mainOffline.png" />
+         </image></ImageView>
+      <AnchorPane blendMode="MULTIPLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
          <children>
-            <Separator layoutY="60.0" prefWidth="895.0" />
-            <Label layoutX="404.0" layoutY="14.0" prefHeight="39.0" text="线下处理">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
             <GridPane layoutX="545.0" layoutY="205.0" prefHeight="211.0" prefWidth="228.0">
                <children>
                   <Label text="退房房型：" />
@@ -90,9 +87,6 @@
                </rowConstraints>
             </GridPane>
             <Button focusTraversable="false" layoutX="230.0" layoutY="458.0" mnemonicParsing="false" onAction="#checkIn" prefHeight="31.0" prefWidth="50.0" text="确认" AnchorPane.bottomAnchor="112.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="615.0" AnchorPane.topAnchor="458.0" />
-            <Separator layoutX="469.0" layoutY="60.0" orientation="VERTICAL" prefHeight="547.0" prefWidth="11.0" />
-            <Label layoutX="225.0" layoutY="134.0" text="线下入住" />
-            <Label layoutX="634.0" layoutY="134.0" text="线下退房" />
          </children>
       </AnchorPane>
    </children>

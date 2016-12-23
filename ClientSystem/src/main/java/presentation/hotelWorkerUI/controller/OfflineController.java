@@ -38,7 +38,7 @@ public class OfflineController {
 
 	@FXML
 	void initialize(){	
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+		changePicture(rightImage, "mainOffline.png");
 		roomType.setOnShowing(new RoomTypeShowingEventHandler());
 		roomType2.setOnShowing(new RoomType2ShowingEventHandler());
 		roomType.valueProperty().addListener(new RoomTypeChangedListener());
@@ -130,5 +130,13 @@ public class OfflineController {
 		{
 			new PopUp("请检查退房房间数量","错误");
 		}
+	}
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("hotelImage/offlinePane/"+path)));	
 	}
 }

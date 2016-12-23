@@ -3,6 +3,7 @@ package businessLogic.creditBL;
 import java.util.Iterator;
 
 import businessLogicService.creditBLService.CreditBLService;
+import exception.operationFailedException.UpdateFaiedException;
 import exception.verificationException.UserInexistException;
 import utilities.enums.ResultMessage;
 import vo.CreditVO;
@@ -75,6 +76,11 @@ public final class CreditController implements CreditBLService {
 	@Override
 	public ResultMessage addCreditRecord(CreditVO creditVO) throws UserInexistException {
 		return credit.addCreditRecord(creditVO);
+	}
+
+	@Override
+	public double charge(String guestID, double creditNum) throws UserInexistException, UpdateFaiedException {
+		return credit.charge(guestID, creditNum);
 	}
 
 }

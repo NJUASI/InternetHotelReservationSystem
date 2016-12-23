@@ -18,122 +18,62 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.guestUI.controller.MemberCheckController">
    <children>
-      <ImageView fx:id="rightImage" fitHeight="601.0" fitWidth="895.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="rightImage" fitHeight="601.0" fitWidth="895.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../png%20(1)/guest/mainMember.png" />
+         </image>
+      </ImageView>
       <Pane fx:id="memberCheck" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
          <children>
             <AnchorPane prefHeight="601.0" prefWidth="895.0">
                <children>
-                  <TitledPane layoutX="234.0" layoutY="144.0" prefHeight="246.0" prefWidth="202.0" text="企业会员">
-                     <content>
-                        <Pane prefHeight="235.0" prefWidth="200.0">
-                           <children>
-                              <Label layoutX="22.0" layoutY="25.0" text="企业名称：">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="22.0" layoutY="135.0" text="会员等级：">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="enterprise" alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="62.0" textAlignment="CENTER" wrapText="true">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="market" layoutX="82.0" layoutY="173.0" textAlignment="CENTER" wrapText="true">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Separator layoutX="12.0" layoutY="106.0" prefHeight="4.0" prefWidth="176.0" />
-                           </children>
-                        </Pane>
-                     </content>
-                  </TitledPane>
-                  <TitledPane layoutX="456.0" layoutY="144.0" prefHeight="246.0" prefWidth="202.0" text="个人会员">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="71.0" prefWidth="200.0">
-                           <children>
-                              <Pane prefHeight="212.0" prefWidth="208.0">
-                                 <children>
-                                    <Label layoutX="22.0" layoutY="25.0" text="生日：">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="birthday" alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="63.0" textAlignment="CENTER" wrapText="true">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Separator layoutX="14.0" layoutY="104.0" prefHeight="4.0" prefWidth="176.0" />
-                                    <Label layoutX="22.0" layoutY="141.0" text="会员等级：">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="market2" layoutX="92.0" layoutY="173.0" textAlignment="CENTER" wrapText="true">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </Pane>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </TitledPane>
-                  <Button focusTraversable="false" layoutX="425.0" layoutY="450.0" mnemonicParsing="false" onMouseClicked="#register" text="注册" />
-                  <Label layoutX="380.0" layoutY="14.0" prefHeight="39.0" prefWidth="132.0" text="会员信息查看">
+                  <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="421.0" layoutY="531.0" mnemonicParsing="false" onMouseClicked="#register" text="注册" />
+                  <Label fx:id="enterprise" alignment="CENTER" contentDisplay="CENTER" layoutX="181.0" layoutY="336.0" textAlignment="CENTER" wrapText="true">
                      <font>
-                        <Font size="22.0" />
+                        <Font size="23.0" />
                      </font>
                   </Label>
-                  <Separator layoutY="60.0" prefHeight="0.0" prefWidth="895.0" />
+                  <Label fx:id="birthday" alignment="CENTER" contentDisplay="CENTER" layoutX="632.0" layoutY="336.0" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="market2" layoutX="489.0" layoutY="131.0" text="123" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="market" layoutX="489.0" layoutY="131.0" text="123" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </children>
       </Pane>
-      <Pane fx:id="memberModify" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" visible="false">
+      <Pane fx:id="memberModify" blendMode="MULTIPLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" visible="false">
          <children>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="601.0" prefWidth="895.0">
                <children>
-                  <TitledPane layoutX="246.0" layoutY="139.0" prefHeight="102.0" prefWidth="399.0" text="企业会员注册">
-                     <content>
-                        <Pane fx:id="enterprisePane" prefHeight="110.0" prefWidth="399.0">
-                           <children>
-                              <Label layoutX="14.0" layoutY="14.0" text="企业名称：" />
-                              <Label layoutX="22.0" layoutY="111.0" />
-                              <Button focusTraversable="false" layoutX="317.0" layoutY="35.0" mnemonicParsing="false" onAction="#registerEnterprise" text="提交" />
-                              <TextField fx:id="enterpriseText" layoutX="44.0" layoutY="35.0" prefHeight="23.0" prefWidth="244.0" />
-                           </children>
-                        </Pane>
-                     </content>
-                  </TitledPane>
-                  <TitledPane layoutX="246.0" layoutY="289.0" prefHeight="102.0" prefWidth="399.0" text="个人会员注册">
-                     <content>
-                        <AnchorPane fx:id="commonPane" minHeight="0.0" minWidth="0.0" prefHeight="110.0" prefWidth="399.0">
-                           <children>
-                              <Pane prefHeight="40.0" prefWidth="55.0">
-                                 <children>
-                                    <Label layoutX="14.0" layoutY="14.0" text="生日：" />
-                                 </children>
-                              </Pane>
-                              <Button focusTraversable="false" layoutX="315.0" layoutY="29.0" mnemonicParsing="false" onAction="#registerCommon" text="提交" />
-                              <DatePicker fx:id="birthdayPicker" editable="false" focusTraversable="false" layoutX="55.0" layoutY="29.0" prefHeight="23.0" prefWidth="226.0" />
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </TitledPane>
-                  <Button focusTraversable="false" layoutX="425.0" layoutY="450.0" mnemonicParsing="false" onAction="#cancer" text="取消" />
-                  <Label layoutX="401.0" layoutY="14.0" prefHeight="39.0" prefWidth="90.0" text="会员注册" textAlignment="CENTER">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-                  <Separator layoutY="60.0" prefHeight="0.0" prefWidth="895.0" />
+                  <Button focusTraversable="false" layoutX="421.0" layoutY="531.0" mnemonicParsing="false" onAction="#cancer" text="取消" />
+                  <Pane fx:id="enterprisePane" layoutX="86.0" layoutY="296.0" prefHeight="221.0" prefWidth="333.0">
+                     <children>
+                        <Button focusTraversable="false" layoutX="116.0" layoutY="141.0" mnemonicParsing="false" onAction="#registerEnterprise" text="提交" />
+                        <TextField fx:id="enterpriseText" layoutX="86.0" layoutY="35.0" prefHeight="30.0" prefWidth="192.0">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </Pane>
+                  <AnchorPane fx:id="commonPane" layoutX="475.0" layoutY="281.0" minHeight="0.0" minWidth="0.0" prefHeight="254.0" prefWidth="368.0">
+                     <children>
+                        <Pane prefHeight="40.0" prefWidth="55.0" />
+                        <Button focusTraversable="false" layoutX="184.0" layoutY="160.0" mnemonicParsing="false" onAction="#registerCommon" text="提交" />
+                        <DatePicker fx:id="birthdayPicker" editable="false" focusTraversable="false" layoutX="154.0" layoutY="52.0" prefHeight="34.0" prefWidth="192.0" />
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
          </children>

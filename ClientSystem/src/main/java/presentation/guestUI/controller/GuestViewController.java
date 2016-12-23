@@ -189,11 +189,11 @@ public class GuestViewController {
 	}
 	@FXML
 	protected void enter1(){
-		changePicture(guestBT,"basicInfo.png");
+		changePicture(guestBT,"basicInfoEnter.png");
 	}
 	@FXML
 	protected void exited1(){
-		changePicture(guestBT,"basicInfoEnter.png");
+		changePicture(guestBT,"basicInfo.png");
 	}
 	@FXML
 	protected void enter2(){

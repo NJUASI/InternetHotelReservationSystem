@@ -24,6 +24,7 @@ import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
@@ -95,7 +96,7 @@ public class HotelSearchController {
 	//用于存储客户入住的天数，当入住日期和退房日期改变时，改变此变量的值
 	private int lastDays;
 	@FXML
-	private ImageView rightImage;
+	private ImageView rightImage,rightImage1,rightImage2,rightImage3;
 	
 
 	//BLcontroller
@@ -127,7 +128,11 @@ public class HotelSearchController {
 	@FXML
 	private void initialize() {
 		initCityAndCircles();
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+		changePicture(rightImage, "mainCircleChoose.png");
+		changePicture(rightImage1, "mainHotelDetail.png");
+		changePicture(rightImage2, "mainHotelList.png");
+		changePicture(rightImage3, "mainOrderCommit.png");
+		
 	}
 
 	private void initCityAndCircles() {
@@ -197,19 +202,43 @@ public class HotelSearchController {
 	TableView<HotelTable> hotelTable;
 	@FXML
 	private TableColumn<HotelTable, String>	hotelIDColumn3,hotelNameColumn3, addressColumn3, cityColumn3, cycleColumn3, minPriceColumn3,hasOrderColumn3, levelColumn3, scoreColumn3;	
-
+	
+	
+	/**
+	 * @查看以往预定的酒店
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @updateTime 2016/12/23
+	 */
+	@FXML
+	protected void openHasOrderedPane(){
+	//TODO gcm 12.23 得到所有酒店
+		Iterator<HotelVO> hotels = hotelBLController.getHotels(cityChoose.getValue(), cycleChoose.getValue());
+		
+		returnBT.setVisible(true);
+		cyclePane.setVisible(false);
+		
+		cityAndCircle.setVisible(false);
+		hotelCheck.setVisible(true);
+		hotelChoose.setVisible(false);
+		
+		initHotelTable(hotels);
+	}
 	/**
 	 * @酒店浏览界面初始化
 	 * @author 61990
-	 * @lastChangedBy Harvey
-	 * @updateTime 2016/12/7
+	 * @lastChangedBy 61990
+	 * @updateTime 2016/12/23
 	 */
 	@FXML
 	protected void openHotelCheck() {
 
 		//通过城市和商圈,调用hotelBL的方法获得所有的酒店
 		Iterator<HotelVO> hotels = hotelBLController.getHotels(cityChoose.getValue(), cycleChoose.getValue());
-
+		
+		returnBT.setVisible(false);
+		cyclePane.setVisible(true);
+		
 		cityAndCircle.setVisible(false);
 		hotelCheck.setVisible(true);
 		hotelChoose.setVisible(false);
@@ -270,8 +299,21 @@ public class HotelSearchController {
 	Iterator<RoomInfoVO> rooms;
 	List<OrderGeneralVO> orderVOlist;
 	HotelVO hotelVO;
-
-
+	@FXML
+	private Pane commentPane, orderPane,roomPane;
+	
+	@FXML
+	protected void openComment() {
+		commentPane.setVisible(true);
+		roomPane.setVisible(false);
+		orderPane.setVisible(false);
+	}
+	@FXML
+	protected void openHotelOrder() {
+		commentPane.setVisible(false);
+		roomPane.setVisible(false);
+		orderPane.setVisible(true);
+	}
 	/**
 	 * @description 初始化酒店详情界面
 	 * @author 61990
@@ -303,7 +345,9 @@ public class HotelSearchController {
 				orderVOlist.add(myOrdersOfThisHotel.next());
 			}
 			initOrderCheck(orderVOlist);
-
+			commentPane.setVisible(false);
+			roomPane.setVisible(true);
+			orderPane.setVisible(false);
 			// 初始化此酒店的评论
 			commentList = new ArrayList<HotelEvaluationVO>();
 			Iterator<HotelEvaluationVO> thisHotelEvaluation = orderBLController.getEvaluations(selectedHotelID);
@@ -390,7 +434,10 @@ public class HotelSearchController {
 		evaluationTable.setItems(data);
 	}
 
-
+	@FXML
+	private Button returnBT;
+	@FXML
+	private Pane cyclePane;
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -914,6 +961,10 @@ public class HotelSearchController {
 	private int calculateOriginPrice(){
 		originPrice = hotelBLController.getOriginPrice(selectedHotelID, RoomType.getEnum(selectedRoomType));
 		return originPrice*lastDays*roomCountInOrder.getValue();
+	}
+	
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("guestImage/hotelPane/"+path)));	
 	}
 }
 

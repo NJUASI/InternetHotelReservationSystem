@@ -35,7 +35,7 @@ public class MemberController {
 	discount1, discount2,discount3, discount4, discount5, discount6, discount7, discount8;
 	@FXML
 	private ImageView rightImage;
-	
+	List<MarketVO> listMarket;
 	
 	//加载维护的输入框
 	@FXML
@@ -52,15 +52,7 @@ public class MemberController {
 	@FXML
 	private void initialize() {
 		changePicture(rightImage, "mainMarket.png");
-		List<MarketVO> listMarket = marketBLController.getMemberFormulation();
-		name1.setText(listMarket.get(0).marketName);
-		name2.setText(listMarket.get(1).marketName);
-		name3.setText(listMarket.get(2).marketName);
-		name4.setText(listMarket.get(3).marketName);
-		name5.setText(listMarket.get(4).marketName);
-		name6.setText(listMarket.get(5).marketName);
-		name7.setText(listMarket.get(6).marketName);
-		name8.setText(listMarket.get(7).marketName);
+		listMarket = marketBLController.getMemberFormulation();
 		credit1.setText(Double.toString(listMarket.get(0).marketCredit));
 		credit2.setText(Double.toString(listMarket.get(1).marketCredit));
 		credit3.setText(Double.toString(listMarket.get(2).marketCredit));
@@ -87,14 +79,7 @@ public class MemberController {
 	 */
 	@FXML
 	protected void modifyMarket() {
-		market1.setText(name1.getText());
-		market2.setText(name2.getText());
-		market3.setText(name3.getText());
-		market4.setText(name4.getText());
-		market5.setText(name5.getText());
-		market6.setText(name6.getText());
-		market7.setText(name7.getText());
-		market8.setText(name8.getText());
+		
 		needCredit1.setText(credit1.getText());
 		needCredit2.setText(credit2.getText());
 		needCredit3.setText(credit3.getText());
@@ -139,14 +124,14 @@ public class MemberController {
 		
 		List<MarketVO> list = new LinkedList<MarketVO>();
 		try {
-			list.add(new MarketVO(market1.getText(), Double.parseDouble(needCredit1.getText()) , Double.parseDouble(modifyDiscount1.getText())));
-			list.add(new MarketVO(market2.getText(), Double.parseDouble(needCredit2.getText()) , Double.parseDouble(modifyDiscount2.getText())));
-			list.add(new MarketVO(market3.getText(), Double.parseDouble(needCredit3.getText()) , Double.parseDouble(modifyDiscount3.getText())));
-			list.add(new MarketVO(market4.getText(), Double.parseDouble(needCredit4.getText()) , Double.parseDouble(modifyDiscount4.getText())));
-			list.add(new MarketVO(market5.getText(), Double.parseDouble(needCredit5.getText()) , Double.parseDouble(modifyDiscount5.getText())));
-			list.add(new MarketVO(market6.getText(), Double.parseDouble(needCredit6.getText()) , Double.parseDouble(modifyDiscount6.getText())));
-			list.add(new MarketVO(market7.getText(), Double.parseDouble(needCredit7.getText()) , Double.parseDouble(modifyDiscount7.getText())));
-			list.add(new MarketVO(market8.getText(), Double.parseDouble(needCredit8.getText()) , Double.parseDouble(modifyDiscount8.getText())));
+			list.add(new MarketVO(listMarket.get(0).marketName, Double.parseDouble(needCredit1.getText()) , Double.parseDouble(modifyDiscount1.getText())));
+			list.add(new MarketVO(listMarket.get(1).marketName, Double.parseDouble(needCredit2.getText()) , Double.parseDouble(modifyDiscount2.getText())));
+			list.add(new MarketVO(listMarket.get(2).marketName, Double.parseDouble(needCredit3.getText()) , Double.parseDouble(modifyDiscount3.getText())));
+			list.add(new MarketVO(listMarket.get(3).marketName, Double.parseDouble(needCredit4.getText()) , Double.parseDouble(modifyDiscount4.getText())));
+			list.add(new MarketVO(listMarket.get(4).marketName, Double.parseDouble(needCredit5.getText()) , Double.parseDouble(modifyDiscount5.getText())));
+			list.add(new MarketVO(listMarket.get(5).marketName, Double.parseDouble(needCredit6.getText()) , Double.parseDouble(modifyDiscount6.getText())));
+			list.add(new MarketVO(listMarket.get(6).marketName, Double.parseDouble(needCredit7.getText()) , Double.parseDouble(modifyDiscount7.getText())));
+			list.add(new MarketVO(listMarket.get(7).marketName, Double.parseDouble(needCredit8.getText()) , Double.parseDouble(modifyDiscount8.getText())));
 		} catch (NumberFormatException e) {
 			new PopUp("修改失败，请确认填写格式", "");
 		}

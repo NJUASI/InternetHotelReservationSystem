@@ -60,12 +60,12 @@ public class OrderCheckController {
 
 	//订单概况
 	@FXML
-	private Pane orderCheck;
+	private Pane orderCheck,detailPane,commentPane;
 
 	@FXML
 	private TableView<OrderTable> table;
 	@FXML
-	private ImageView rightImage;
+	private ImageView rightImage,rightImage1,rightImage2;
 	
 	/**
 	 * @author 61990
@@ -76,7 +76,9 @@ public class OrderCheckController {
 	 */
 	@FXML
 	private void initialize() {
-		rightImage.setImage(new Image(getClass().getClassLoader().getResourceAsStream("right.png")));
+		changePicture(rightImage, "mainOrderList.png");
+		changePicture(rightImage1, "mainOrderDetail.png");
+		changePicture(rightImage2, "mainOrderComment.png");
 		//通过guestID得到orderGeneralVOs list
 		undoBt.setVisible(false);
 		orderBLController = OrderBLController.getInstance();
@@ -279,9 +281,24 @@ public class OrderCheckController {
 
 		orderDetail.setVisible(true);
 		orderCheck.setVisible(false);
-
+		commentPane.setVisible(false);
+		detailPane.setVisible(true);
+		
 		orderVO = orderBLController.getOrderDetail(orderID);
 		initOrderDetail(orderVO);
+	}
+	
+
+	/**
+	 * @author 61990
+	 * @lastChangedBy cahrles
+	 * @updateTime 2016/12/7
+	 * @跳转订单详情界面
+	 */
+	@FXML
+	protected void openComment(){
+		commentPane.setVisible(true);
+		detailPane.setVisible(false);
 	}
 	
 	/**
@@ -385,5 +402,13 @@ public class OrderCheckController {
 			orderScore.setDisable(true);
 			commitBt.setDisable(true);
 		}
+	}
+	/**
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @图片效果
+	 */
+	void changePicture(ImageView image, String path){
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("guestImage/orderPane/"+path)));	
 	}
 }
