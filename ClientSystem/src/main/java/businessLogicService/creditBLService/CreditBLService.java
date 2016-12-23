@@ -2,6 +2,7 @@ package businessLogicService.creditBLService;
 
 import java.util.Iterator;
 
+import exception.operationFailedException.UpdateFaiedException;
 import exception.verificationException.UserInexistException;
 import utilities.enums.ResultMessage;
 import vo.CreditVO;
@@ -14,6 +15,16 @@ import vo.CreditVO;
  */
 public interface CreditBLService {
 
+	/**
+	 * @author Byron Dong
+	 * @lastChangedBy Byron Dong
+	 * @updateTime 2016/12/23
+	 * @param guestID 从登录界面层传下来的ID
+	 * @param creditNum 从登录界面传下来的更改后的信用值额度
+	 * @return 充值后的信用值
+	 */
+	public double charge(String guestID, double creditNum) throws UserInexistException, UpdateFaiedException;
+	
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
