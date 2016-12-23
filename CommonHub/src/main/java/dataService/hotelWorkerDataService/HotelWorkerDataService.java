@@ -17,7 +17,7 @@ public interface HotelWorkerDataService extends Remote{
 
 	public ResultMessage modify(HotelWorkerPO hotelWorkerPO) throws RemoteException;
 	
-	public ResultMessage initHotelWorker(String hotelWorkerID) throws RemoteException;
+//	public ResultMessage initHotelWorker(String hotelWorkerID) throws RemoteException;
 
 
 }

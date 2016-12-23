@@ -84,28 +84,27 @@ public class GuestOrder implements GuestOrderBLService {
 	}
 
 	/**
-	 * 
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/4
-	 * @param orderVO
-	 *            从客户界面层传下来的Order载体
-	 * @return 若客户创建此订单，需要付的款项
+	 * @Description:通过preOrderVO中的信息计算订单的总价格
+	 * @param preOrderVO
+	 * @return
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月14日 上午12:25:05
 	 */
-	public double getTempPrice(OrderVO orderVO) {
-		Iterator<Double> discountsInSpan = null;
+	@Override
+	public int getCalculatedPrice(PreOrderVO preOrderVO) {
+		double total = 0;
+		double originPrice = new Hotel().getOriginPrice(preOrderVO.hotelID, preOrderVO.roomType);
+		Iterator<Double> discounts = null;
 		try {
-			discountsInSpan = discountCalculator.getDiscountInSpan(new PreOrderVO(orderVO));
+			discounts = discountCalculator.getDiscountInSpan(preOrderVO);
 		} catch (UserInexistException e) {
 			e.printStackTrace();
 		}
-		final double prePrice = orderVO.previousPrice;
-		double result = 0;
-
-		while (discountsInSpan.hasNext()) {
-			result += prePrice * discountsInSpan.next();
+		while(discounts.hasNext()){
+			total = total + originPrice*discounts.next()*preOrderVO.roomNum;
 		}
-		return result;
+		return (int)total;
 	}
 
 	/**
