@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogicService.creditBLService.CreditBLService;
+import exception.operationFailedException.UpdateFaiedException;
+import exception.verificationException.UserInexistException;
 import utilities.enums.ResultMessage;
 import vo.BasicInfoVO;
 import vo.CreditVO;
@@ -53,6 +55,13 @@ public class CreditBLService_Stub implements CreditBLService {
 	@Override
 	public Iterator<CreditVO> getCreditOfOneOrder(String orderID) {
 		return null;
+	}
+
+
+	@Override
+	public double charge(String guestID, double creditNum) throws UserInexistException, UpdateFaiedException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

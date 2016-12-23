@@ -1,18 +1,24 @@
 package businessLogic.creditBL;
 
 import java.rmi.RemoteException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import businessLogic.userBL.UserController;
 import businessLogic.userBL.userService.Guest;
 import businessLogic.userBL.userService.service.GuestCreditService;
+import businessLogicService.userBLService.UserBLService;
 import dataService.creditDataService.CreditDataService;
+import exception.operationFailedException.UpdateFaiedException;
 import exception.verificationException.UserInexistException;
 import po.CreditPO;
 import rmi.ClientRemoteHelper;
+import utilities.enums.CreditRecord;
 import utilities.enums.ResultMessage;
 import vo.CreditVO;
+import vo.GuestVO;
 
 /**
  * 
@@ -26,6 +32,8 @@ public class Credit{
 	private GuestCreditService guest;
 	
 	private CreditDataService creditDataService;
+	
+	private UserBLService userController;
 
 	/**
 	 * @author 61990
@@ -34,6 +42,7 @@ public class Credit{
 	 */
 	public Credit() {
 		guest = new Guest();
+		userController = UserController.getInstance();
 		creditDataService = ClientRemoteHelper.getInstance().getCreditDataService();
 	}
 	
@@ -88,6 +97,22 @@ public class Credit{
 		} catch (RemoteException e) {
 			return ResultMessage.FAIL;
 		}
+	}
+	
+	public double charge(String guestID, double creditNum) throws UserInexistException, UpdateFaiedException {
+		GuestVO guestVO = (GuestVO)userController.getSingle(guestID);
+		double preCredit = guestVO.credit;
+		LocalDateTime time = LocalDateTime.now();
+		double afterCredit = preCredit +  creditNum * 100;
+		CreditVO creditVO = new CreditVO(guestID, time, "", preCredit, afterCredit, CreditRecord.CHARGE);
+		
+		ResultMessage msg = this.addCreditRecord(creditVO);
+		
+		if(msg==ResultMessage.FAIL){
+			throw new UpdateFaiedException();
+		}
+		
+		return afterCredit;
 	}
 	
 	private Iterator<CreditVO> convertPOListToItr(List<CreditPO> list){

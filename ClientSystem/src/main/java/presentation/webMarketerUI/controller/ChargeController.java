@@ -1,14 +1,12 @@
 package presentation.webMarketerUI.controller;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 import businessLogic.creditBL.CreditController;
 import businessLogic.userBL.UserController;
-import businessLogic.userBL.userService.Guest;
-import businessLogic.userBL.userService.service.GuestCreditService;
 import businessLogicService.userBLService.UserBLService;
 import exception.inputException.InvalidInputException;
+import exception.operationFailedException.UpdateFaiedException;
 import exception.verificationException.UserInexistException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,8 +17,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import presentation.PopUp.PopUp;
 import utilities.Detector;
-import utilities.enums.CreditRecord;
-import vo.CreditVO;
 import vo.GuestVO;
 
 /**
@@ -60,11 +56,7 @@ public class ChargeController {
 	@FXML
 	private void initialize() {
 		changePicture(rightImage, "mainCharge.png");
-		//TODO 掉需要的接口
-		//	TODO	fjj 这个是谁的上面那句话
-		//TODO 冯俊杰回复：不归我啊，但顺手将其修改为实现
 		userBLService = UserController.getInstance();
-		
 		creditController = CreditController.getInstance();
 	}
 	
@@ -101,25 +93,13 @@ public class ChargeController {
 	 */
 	@FXML
 	protected void saveCharge() throws IOException {
-		//TODO djy/gcm注意：通过guestID保存   guestID.getText()得到ID
-		//我不是很懂
-//		通过得到改变后的信用值 Double.parseDouble(chargeNum.getText()) + Double.parseDouble(credit.getText())
 		
 		if (!chargeNum.getText().equals("")) {
-			/*
-			 * 因为user里的modifyCredit只是单纯的将信用值改变为期望值，crredit里面没有相关接口
-			 * 故此处逻辑暴露，要不就这样，要不还是得新增接口Credit.charge(args)
-			 * TODO @龚尘淼 Charge回复 ，可以啊，但Credit不是我的模块
-			 */
-			LocalDateTime time = LocalDateTime.now();
 			try {
 				new Detector().chargeDetector(chargeNum.getText());
 				
-				final double preCredit = Double.parseDouble(credit.getText());
-				double afterCredit = preCredit +  Double.parseDouble(chargeNum.getText()) * 100;
-				CreditVO creditVO = new CreditVO(guestID.getText(), time, "", preCredit, afterCredit, CreditRecord.CHARGE);
-		
-				creditController.addCreditRecord(creditVO);
+				double afterCredit = creditController.charge(guestID.getText(), Double.parseDouble(chargeNum.getText()));
+				
 				credit.setText(Double.toString(afterCredit));
 				chargeNum.setText("");
 			} catch (InvalidInputException e1) {
@@ -128,6 +108,9 @@ public class ChargeController {
 			} catch (UserInexistException e) {
 				e.printStackTrace();
 				new PopUp("该用户不存在，请检查输入的ID", "充值失败");
+			} catch (UpdateFaiedException e) {
+				e.printStackTrace();
+				new PopUp("充值失败，请重试", "充值失败");
 			}
 		}
 	}
