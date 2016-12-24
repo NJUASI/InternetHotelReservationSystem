@@ -99,6 +99,7 @@
                   <Image url="@../../../../../../../png%20(1)/guest/mainOrderList.png" />
                </image>
             </ImageView>
+            <Button blendMode="MULTIPLY" layoutX="38.0" layoutY="122.0" mnemonicParsing="false" onAction="#searchAllOrder" text="所有订单" />
             <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="773.0" layoutY="122.0" mnemonicParsing="false" onAction="#orderDetail" text="查看详情" />
             <Button blendMode="MULTIPLY" layoutX="593.0" layoutY="122.0" mnemonicParsing="false" onAction="#searchAbnormalOrder" text="异常订单" />
             <TableView fx:id="table" blendMode="MULTIPLY" focusTraversable="false" layoutX="38.0" layoutY="167.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="386.0" prefWidth="815.0" tableMenuButtonVisible="true">
@@ -118,7 +119,6 @@
             <Button blendMode="MULTIPLY" layoutX="498.0" layoutY="122.0" mnemonicParsing="false" onAction="#searchCancelledOrder" text="已撤销订单" />
             <Button blendMode="MULTIPLY" layoutX="213.0" layoutY="122.0" mnemonicParsing="false" onAction="#searchCommentedOrder" text="已评论订单" />
             <Button blendMode="MULTIPLY" layoutX="118.0" layoutY="122.0" mnemonicParsing="false" onAction="#searchExecutedOrder" text="已执行订单" />
-            <Button blendMode="MULTIPLY" layoutX="38.0" layoutY="122.0" mnemonicParsing="false" onAction="#searchAllOrder" text="所有订单" />
          </children>
       </AnchorPane>
    </children>

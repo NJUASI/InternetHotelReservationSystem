@@ -665,10 +665,11 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void openCreateOrder() {
+		try{
 		selectedHotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
 		selectedRoomType = roomTable.getSelectionModel().getSelectedItem().getRoomType();
 		remainNumOfselectedRoomType = roomTable.getSelectionModel().getSelectedItem().getRemainRoomNum();
-
+	
 		remainNumInOrder.setText(remainNumOfselectedRoomType);
 
 		initCreateOrder();
@@ -678,7 +679,9 @@ public class HotelSearchController {
 		
 		//显示原始价格和计算折扣后的价格
 		showPrice();
-
+			}catch (Exception e) {
+			new PopUp( "请选择房型" , "" );
+		}
 	}
 
 	/**
@@ -689,9 +692,16 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void createOrderIncheck(){
+		try{
 		selectedHotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
 		initCreateOrder();
 		initEveryBox();
+		remainNumInOrder.setText("");
+		previousPriceInOrder.setText("");
+		priceOfOrder.setText("");
+	}catch (Exception e) {
+		new PopUp( "请选择酒店" , "" );
+	}
 	}
 
 	private void initCreateOrder(){	

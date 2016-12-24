@@ -326,6 +326,9 @@ public class OrderCheckController {
 				searchUncommentedOrder();
 				if (result == ResultMessage.SUCCESS) {
 					new PopUp("评价成功", "评价");
+					//刷新订单详情界面
+					orderVO = orderBLController.getOrderDetail(orderID);
+					initOrderDetail(orderVO);
 				} else {
 					new PopUp("评价失败", "评价");
 				}
@@ -336,9 +339,7 @@ public class OrderCheckController {
 		} catch (NumberFormatException e) {
 			new PopUp("请输入数字评分（0-5）", "评价");
 		}
-		//刷新订单详情界面
-		orderVO = orderBLController.getOrderDetail(orderID);
-		initOrderDetail(orderVO);
+
 	}
 	
 	/**
@@ -362,7 +363,7 @@ public class OrderCheckController {
 	 */
 	private void initOrderDetail(OrderVO orderVO) {
 		
-		detail_ID.setText(orderVO.orderGeneralVO.hotelID);
+		detail_ID.setText(orderVO.orderGeneralVO.orderID);
 		detail_Hotel.setText(orderVO.orderGeneralVO.hotelName);
 		detail_address.setText(orderVO.orderGeneralVO.hotelAddress);
 		detail_roomType.setText(orderVO.roomType.getChineseRoomType());

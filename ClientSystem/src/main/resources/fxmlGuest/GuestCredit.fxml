@@ -29,12 +29,12 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
                <columns>
-                  <TableColumn fx:id="guestIDColumn" prefWidth="136.0" resizable="false" text="客户编号" />
+                  <TableColumn fx:id="guestIDColumn" prefWidth="136.0" resizable="false" text="客户编号" visible="false" />
                   <TableColumn fx:id="orderIDColumn" prefWidth="171.0" resizable="false" text="订单编号" />
                   <TableColumn fx:id="previousCreditColumn" minWidth="22.0" prefWidth="108.0" resizable="false" text="更改前信用值" />
                   <TableColumn fx:id="afterCreditColumn" minWidth="4.0" prefWidth="106.0" resizable="false" text="更改后信用值" />
-                  <TableColumn fx:id="timeColumn" prefWidth="147.0" resizable="false" text="更改时间" />
-                  <TableColumn fx:id="reasonColumn" prefWidth="144.0" resizable="false" text="更改原因" />
+                  <TableColumn fx:id="timeColumn" prefWidth="204.0" resizable="false" text="更改时间" />
+                  <TableColumn fx:id="reasonColumn" prefWidth="196.0" resizable="false" text="更改原因" />
                </columns>
             </TableView>
          </children>

@@ -51,7 +51,7 @@
             <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="203.0" layoutY="129.0" mnemonicParsing="false" onAction="#searchNotCheckOutOrder" text="未退房订单" />
          </children>
       </AnchorPane>
-      <Pane fx:id="orderDetail" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
+      <Pane fx:id="orderDetail" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" visible="false">
          <children>
             <ImageView fx:id="rightImage1" fitHeight="601.0" fitWidth="895.0" pickOnBounds="true" preserveRatio="true">
                <image>

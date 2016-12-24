@@ -168,7 +168,7 @@
             </ImageView>
             <AnchorPane blendMode="MULTIPLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0">
                <children>
-                  <Label fx:id="hotelNameInDetail" layoutX="77.0" layoutY="105.0" prefHeight="39.0" text="1244">
+                  <Label fx:id="hotelNameInDetail" layoutX="92.0" layoutY="115.0" prefHeight="39.0" text="1244">
                      <font>
                         <Font size="27.0" />
                      </font>
@@ -224,12 +224,12 @@
                         </TableView>
                      </children>
                   </Pane>
-                  <Label fx:id="cityInDetail" layoutX="128.0" layoutY="151.0" text="123">
+                  <Label fx:id="cityInDetail" layoutX="124.0" layoutY="164.0" text="123">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <Label fx:id="cycleInDetail" layoutX="204.0" layoutY="151.0" text="123">
+                  <Label fx:id="cycleInDetail" layoutX="204.0" layoutY="164.0" text="123">
                      <font>
                         <Font size="19.0" />
                      </font>
@@ -250,7 +250,7 @@
                      </font>
                   </Label>
                   <Label fx:id="introductionInDetail" layoutX="244.0" layoutY="323.0" prefWidth="224.0" wrapText="true" />
-                  <Label fx:id="hotelAddressInDetail" layoutX="186.0" layoutY="188.0" text="地址">
+                  <Label fx:id="hotelAddressInDetail" layoutX="320.0" layoutY="165.0" text="地址">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -287,7 +287,7 @@
                   </Pane>
                   <Button blendMode="MULTIPLY" layoutX="650.0" layoutY="131.0" mnemonicParsing="false" onAction="#openHotelDetail" text="查看详情" />
                   <Button blendMode="MULTIPLY" layoutX="753.0" layoutY="131.0" mnemonicParsing="false" onAction="#createOrderIncheck" text="立即预定" />
-                  <Button fx:id="returnBT" layoutX="75.0" layoutY="131.0" mnemonicParsing="false" onMouseClicked="#openSwitchCityCircle" prefHeight="30.0" prefWidth="72.0" text="返回" visible="false" />
+                  <Button fx:id="returnBT" blendMode="MULTIPLY" layoutX="75.0" layoutY="131.0" mnemonicParsing="false" onMouseClicked="#openSwitchCityCircle" prefHeight="30.0" prefWidth="72.0" text="返回" visible="false" />
                   <Pane fx:id="cyclePane" blendMode="MULTIPLY" layoutX="84.0" layoutY="123.0" prefHeight="61.0" prefWidth="200.0">
                      <children>
                         <Button layoutX="-8.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#openSwitchCityCircle" text="切换城市商圈" />
