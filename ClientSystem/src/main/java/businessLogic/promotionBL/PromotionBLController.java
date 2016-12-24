@@ -195,8 +195,8 @@ public class PromotionBLController implements PromotionBLService {
 	 * @time:2016年12月11日 下午6:44:58
 	 */
 	@Override
-	public double getSpecialCirclePromotion(String city, String newCircle) {
-		return specialCirclePromotion.getSpecialCirclePromoiton(city,newCircle);
+	public double getSpecialCirclePromotion(String city, String circle) {
+		return specialCirclePromotion.getSpecialCirclePromoiton(city,circle);
 	}
 
 }

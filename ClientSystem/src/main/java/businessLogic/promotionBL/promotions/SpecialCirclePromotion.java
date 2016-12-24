@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.hotelBL.hotel.Hotel;
+import businessLogic.hotelBL.hotel.HotelInfoOperation;
 import businessLogic.memberBL.Member;
 import dataService.promotionDataService.PromotionDataService;
 import exception.verificationException.UserInexistException;
@@ -70,7 +71,8 @@ public class SpecialCirclePromotion {
 	 */
 	public double getDiscount(String guestID,String hotelID){
 		if(isVIP(guestID)){
-			Address hotelAddress = new Hotel().getHotelAddress(hotelID);
+			HotelInfoOperation hotel = new Hotel();
+			Address hotelAddress = hotel.getHotelAddress(hotelID);
 			String city = hotelAddress.city;
 			String cycle = hotelAddress.circle;
 			try {

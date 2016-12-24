@@ -2,8 +2,8 @@ package businessLogic.hotelBL.hotelScan.searchCriteria.searchCriteriaImpl;
 
 import java.util.List;
 
-import businessLogic.hotelBL.HotelInfoOperation;
 import businessLogic.hotelBL.hotel.Hotel;
+import businessLogic.hotelBL.hotel.HotelInfoOperation;
 import businessLogic.hotelBL.hotelScan.searchCriteria.SearchCriteria;
 import vo.HotelVO;
 

@@ -1,7 +1,6 @@
 package businessLogic.promotionBL.discountCalculation.discountOfPromotions;
 
 import businessLogic.memberBL.Member;
-import businessLogic.memberBL.MockMember;
 import businessLogic.promotionBL.discountCalculation.CalculateDiscount;
 import exception.verificationException.UserInexistException;
 import utilities.enums.MemberType;
@@ -25,7 +24,7 @@ public class EnterpriseMemberDiscount implements CalculateDiscount{
 	}
 	
 	public boolean isEnterpriseMember() throws UserInexistException{
-		Member member = new MockMember();
+		Member member = new Member();
 		return member.isMember(guestID, MemberType.ENTERPRISE);
 	}
 }

@@ -61,7 +61,6 @@ public class HotelWorkerController {
 		} catch (UserInexistException e1) {
 			e1.printStackTrace();
 			new PopUp("请检查输入内容", "sorry");
-			//TODO 龚尘淼 看此处的修改
 		}
 		
 		

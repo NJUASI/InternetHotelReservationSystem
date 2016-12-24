@@ -26,11 +26,11 @@ public interface HotelDataService extends Remote{
 	 */
 	public List<RoomInfoPO> getRoomInfo(String hotelID) throws RemoteException;
 
-	//因为可能会修改名字，为了能够找到数据并修改，必须传入原名字的参数
 	public ResultMessage updateRoomInfo(RoomInfoPO roomInfoPO) throws RemoteException;
 
 	public ResultMessage addRoomInfo(RoomInfoPO roomInfoPO) throws RemoteException;
 
+	//暂时不用
 	public ResultMessage deleteRoomInfo(String hotelID,RoomType roomType) throws RemoteException;
 
 }

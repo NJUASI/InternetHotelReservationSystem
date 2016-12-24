@@ -42,8 +42,6 @@ public class SearchCriteriaVO {
 	// 剩余房间数量
 	public int remainRoomNum;
 
-	// TODO 有空房期间怎么做
-	
 	public SearchCriteriaVO() {
 	}
 

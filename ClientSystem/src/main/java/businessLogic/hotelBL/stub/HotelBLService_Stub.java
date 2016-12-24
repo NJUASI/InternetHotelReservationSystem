@@ -123,10 +123,9 @@ public class HotelBLService_Stub implements HotelBLService{
 	}
 
 	@Override
-	public ResultMessage deleteRoomType(String hotelID, RoomType roomType) {
+	public Iterator<HotelVO> getAllBookedHotels() {
 		// TODO 自动生成的方法存根
 		return null;
 	}
-
 
 }

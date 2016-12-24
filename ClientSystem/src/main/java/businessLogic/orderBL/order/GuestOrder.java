@@ -7,8 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.creditBL.CreditController;
-import businessLogic.hotelBL.HotelInfoOperation;
 import businessLogic.hotelBL.hotel.Hotel;
+import businessLogic.hotelBL.hotel.HotelInfoOperation;
 import businessLogic.promotionBL.DiscountCalculator;
 import businessLogic.promotionBL.DiscountInSpan;
 import businessLogic.userBL.UserController;
@@ -71,16 +71,9 @@ public class GuestOrder implements GuestOrderBLService {
 		commonOrder = new CommonOrder();
 
 		creditBLService = CreditController.getInstance();
-		/*
-		 * new the mock one to test TODO 龚尘淼：promotion没有无参数的初始化方法，不知道自己改初始化啥
-		 */
 		discountCalculator = new DiscountCalculator();
 		userBLService = UserController.getInstance();
 
-		/*
-		 * hotel因为需要hotelID作为参数初始化，故不在此初始化，用到的时候再初始化
-		 */
-		// hotelInterface = new Hotel();
 	}
 
 	/**

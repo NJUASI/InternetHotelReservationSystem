@@ -74,17 +74,11 @@ public class HotelInfoController {
 			newHotel.equipment=equipment.getText();
 			HotelVO hotelVO = userBLController.addHotel(newHotel);
 			
-			//怎么获得被添加酒店的id，你说根据酒店工作人员来，但是我不知道酒店工作人员的id
-			// TODO 龚尘淼 hotelVO此处不是返回了ID吗
-			
 			if(hotelVO == null){
 				new PopUp("添加失败", "congratulation");	
 			}else{
 				new PopUp("添加成功\n你的账号是"+hotelVO.hotelID+"\n你的密码是qwertyuiop123456", "congratulation");	
 			}
-			//然后 hotelVO里有添加成功后的参数,没有密码，我需要的是登录的方式，也就是hotelWorker的账号密码
-			//TODO gcm add不可能失败，一旦失败hotelVO 就不会传过来，在user那里就抛异常了
-			//		new PopUp("撤销成功"+ hotelVO.hotelID+hotelVO.", "congratulation");	
 		} catch (UserInexistException e) {
 			e.printStackTrace();
 			new PopUp("请检查输入的编号", "sorry");
