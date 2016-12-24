@@ -693,6 +693,9 @@ public class HotelSearchController {
 		selectedHotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
 		initCreateOrder();
 		initEveryBox();
+		remainNumInOrder.setText("");
+		previousPriceInOrder.setText("");
+		priceOfOrder.setText("");
 	}
 
 	private void initCreateOrder(){	
