@@ -56,7 +56,7 @@ public class GuestViewController {
 	private void initialize() throws UserInexistException {
 		GuestVO guestVO = (GuestVO) userBLController.getSingle(userID);
 		nickName.setText(guestVO.nickName);
-		
+		changePicture(rightImage,"mainHomeGuest.png");
 		initImage();
 	}
 

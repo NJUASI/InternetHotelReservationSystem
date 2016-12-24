@@ -102,15 +102,15 @@
             <Button blendMode="MULTIPLY" layoutX="38.0" layoutY="122.0" mnemonicParsing="false" onAction="#searchAllOrder" text="所有订单" />
             <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="773.0" layoutY="122.0" mnemonicParsing="false" onAction="#orderDetail" text="查看详情" />
             <Button blendMode="MULTIPLY" layoutX="593.0" layoutY="122.0" mnemonicParsing="false" onAction="#searchAbnormalOrder" text="异常订单" />
-            <TableView fx:id="table" blendMode="MULTIPLY" focusTraversable="false" layoutX="38.0" layoutY="167.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="386.0" prefWidth="815.0" tableMenuButtonVisible="true">
+            <TableView fx:id="table" blendMode="MULTIPLY" focusTraversable="false" layoutX="38.0" layoutY="167.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="386.0" prefWidth="815.0">
                <columns>
-                  <TableColumn fx:id="orderIDColumn" prefWidth="101.0" text="订单编号" />
-                  <TableColumn fx:id="hotelNameColumn" prefWidth="124.0" text="酒店名" />
-                  <TableColumn fx:id="addressColumn" prefWidth="151.0" text="地址" />
-                  <TableColumn fx:id="checkInTimeColumn" prefWidth="128.0" text="预计入住时间" />
-                  <TableColumn fx:id="checkOutTimeColumn" prefWidth="134.0" text="预计离开时间" />
-                  <TableColumn fx:id="priceColumn" resizable="false" sortType="DESCENDING" text="价格" />
-                  <TableColumn fx:id="stateColumn" prefWidth="83.0" text="订单状态" />
+                  <TableColumn fx:id="orderIDColumn" prefWidth="116.0" text="订单编号" />
+                  <TableColumn fx:id="hotelNameColumn" prefWidth="133.0" text="酒店名" />
+                  <TableColumn fx:id="addressColumn" prefWidth="143.0" text="地址" />
+                  <TableColumn fx:id="checkInTimeColumn" prefWidth="143.0" text="预计入住时间" />
+                  <TableColumn fx:id="checkOutTimeColumn" prefWidth="143.0" text="预计离开时间" />
+                  <TableColumn fx:id="priceColumn" prefWidth="55.0" resizable="false" sortType="DESCENDING" text="价格" />
+                  <TableColumn fx:id="stateColumn" text="订单状态" />
                </columns>
             </TableView>
             <Button fx:id="undoBt" blendMode="MULTIPLY" layoutX="698.0" layoutY="122.0" mnemonicParsing="false" onAction="#undoNormalOrder" text="撤销" />

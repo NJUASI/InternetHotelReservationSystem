@@ -96,7 +96,7 @@ public class HotelSearchController {
 	//用于存储客户入住的天数，当入住日期和退房日期改变时，改变此变量的值
 	private int lastDays;
 	@FXML
-	private ImageView rightImage,rightImage1,rightImage2,rightImage3;
+	private ImageView rightImage,rightImage1,rightImage2,rightImage3,rightImage5;
 	
 
 	//BLcontroller
@@ -132,6 +132,7 @@ public class HotelSearchController {
 		changePicture(rightImage1, "mainHotelDetail.png");
 		changePicture(rightImage2, "mainHotelList.png");
 		changePicture(rightImage3, "mainOrderCommit.png");
+		changePicture(rightImage5, "mainHotelFilter.png");
 		
 	}
 
