@@ -32,15 +32,16 @@ import vo.CheckInVO;
 import vo.CheckOutVO;
 import vo.OrderGeneralVO;
 import vo.OrderVO;
+
 /**
  * @description 酒店查看订单的界面
  * @author 61990
  *
- * lastChangeBy charles
- * updateTime 2016/12/8
+ *         lastChangeBy charles updateTime 2016/12/8
  * 
  * 
- * TODO 冯俊杰：checkIn、checkOut后刷新orderGenerals，获取当前焦点位置<异常／未执行>，或者背景虚化了看不出来就不用区分了
+ *         TODO
+ *         冯俊杰：checkIn、checkOut后刷新orderGenerals，获取当前焦点位置<异常／未执行>，或者背景虚化了看不出来就不用区分了
  */
 public class OrderController {
 
@@ -62,45 +63,44 @@ public class OrderController {
 
 	private OrderVO orderVO;
 
-
-	//订单概况
+	// 订单概况
 	@FXML
 	private Pane orderCheck;
 
 	@FXML
 	private TableView<OrderTable> table;
 	@FXML
-	private ImageView rightImage,rightImage1;
-	
+	private ImageView rightImage, rightImage1,rightImage3,rightImage4;
+
 	List<OrderGeneralVO> orderVOlist;
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7 
-	 * 构造函数，初始化成员变量
+	 * @updateTime 2016/12/7 构造函数，初始化成员变量
 	 */
 	@FXML
 	private void initialize() {
 		changePicture(rightImage, "mainOrderList.png");
+		changePicture(rightImage3, "mainCheckIn.png");
+		changePicture(rightImage4, "mainCheckOut.png");
 		changePicture(rightImage1, "mainOrderDetail.png");
 		orderBLController = OrderBLController.getInstance();
 
-		//通过hotelID得到orderGeneralVOs
+		// 通过hotelID得到orderGeneralVOs
 		Iterator<OrderGeneralVO> orderGenerals = orderBLController.getAllOrderGenerals(hotelID, hotelWorker);
 		initOrderCheck(orderGenerals);
-		
+
 		checkInBt1.setVisible(false);
 		checkOutBt1.setVisible(false);
 	}
 
+	@FXML
+	private TableColumn<OrderTable, String> orderIDColumn, guestIDColumn, nameColumn, phoneColumn, priceColumn,
+			checkInTimeColumn, stateColumn, checkOutTimeColumn;
 
 	@FXML
-	private TableColumn<OrderTable, String> orderIDColumn,guestIDColumn, nameColumn, phoneColumn, priceColumn,
-	checkInTimeColumn, stateColumn,checkOutTimeColumn;
-
-	@FXML
-	private Button checkInBt1,checkOutBt1;
-
+	private Button checkInBt1, checkOutBt1;
 
 	/*
 	 * 订单概况界面可分别查看各个类型的订单
@@ -150,6 +150,7 @@ public class OrderController {
 
 		initOrderCheck(orderGenerals);
 	}
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy 619901
@@ -157,7 +158,7 @@ public class OrderController {
 	 * @打开未退房订单概况
 	 */
 	@FXML
-	protected void searchNotCheckOutOrder() {		
+	protected void searchNotCheckOutOrder() {
 		orderGenerals = orderBLController.getAllHotelCheckOutOrderGeneral(hotelID, false);
 
 		checkInBt1.setVisible(false);
@@ -165,6 +166,7 @@ public class OrderController {
 
 		initOrderCheck(orderGenerals);
 	}
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
@@ -181,7 +183,6 @@ public class OrderController {
 
 		initOrderCheck(orderGenerals);
 	}
-
 
 	/**
 	 * @author 61990
@@ -209,13 +210,14 @@ public class OrderController {
 	 */
 	private void initOrderCheck(Iterator<OrderGeneralVO> orderGenerals) {
 		table.getItems().clear();
-		
+
 		ObservableList<OrderTable> data = FXCollections.observableArrayList();
-		
-		while(orderGenerals.hasNext()){
+
+		while (orderGenerals.hasNext()) {
 			OrderGeneralVO vo = orderGenerals.next();
-			OrderTable orderTable = new OrderTable(vo.orderID,vo.guestID, vo.name, vo.phone,
-					vo.expectExecuteTime.toString(),vo.expectLeaveTime.toString(),vo.price + "", vo.state.getChineseOrderState());
+			OrderTable orderTable = new OrderTable(vo.orderID, vo.guestID, vo.name, vo.phone,
+					vo.expectExecuteTime.toString(), vo.expectLeaveTime.toString(), vo.price + "",
+					vo.state.getChineseOrderState());
 			data.add(orderTable);
 		}
 
@@ -231,7 +233,6 @@ public class OrderController {
 		table.setItems(data);
 	}
 
-
 	/*
 	 * 订单详情初始化
 	 */
@@ -243,12 +244,11 @@ public class OrderController {
 	private TextArea orderComment;
 
 	@FXML
-	private Button detail_state,checkInBt,checkOutBt;
+	private Button detail_state, checkInBt, checkOutBt;
 	@FXML
-	private Label detail_ID, detail_Hotel, detail_address, detail_roomType, detail_roomNum, detail_personNum,detail_roomNumber,
-	detail_price, detail_personName, detail_phone, detail_createTime, detail_expectLeaveTime,detail_expectTime,detail_message,detail_checkInTime,detail_checkOutTime;
-
-
+	private Label detail_ID, detail_Hotel, detail_address, detail_roomType, detail_roomNum, detail_personNum,
+			detail_roomNumber, detail_price, detail_personName, detail_phone, detail_createTime, detail_expectLeaveTime,
+			detail_expectTime, detail_message, detail_checkInTime, detail_checkOutTime;
 
 	/**
 	 * @author 61990
@@ -264,44 +264,45 @@ public class OrderController {
 		orderCheck.setVisible(false);
 
 		orderComment.setDisable(true);
-		orderScore.setDisable(true);	
+		orderScore.setDisable(true);
 
 		orderVO = orderBLController.getOrderDetail(orderID);
 		initOrderDetail(orderVO);
 
-		//show 相应的button
-		if(orderVO.orderGeneralVO.state == OrderState.EXECUTED){
+		// show 相应的button
+		if (orderVO.orderGeneralVO.state == OrderState.EXECUTED) {
 			checkOutBt.setVisible(true);
 			checkInBt.setVisible(false);
-			if(orderVO.orderGeneralVO.hasCheckOut){
+			if (orderVO.orderGeneralVO.hasCheckOut) {
 				checkOutBt.setDisable(true);
-			}else{
+			} else {
 				checkOutBt.setDisable(false);
 			}
 		}
-		if(orderVO.orderGeneralVO.state == OrderState.UNEXECUTED 
-				|| orderVO.orderGeneralVO.state == OrderState.ABNORMAL){
+		if (orderVO.orderGeneralVO.state == OrderState.UNEXECUTED
+				|| orderVO.orderGeneralVO.state == OrderState.ABNORMAL) {
 			checkOutBt.setVisible(false);
 			checkInBt.setVisible(true);
 		}
 	}
 
 	@FXML
-	private Label checkInOrderID,checkInName;
+	private Label checkInOrderID, checkInName;
 	@FXML
-	private TextField checkInRoomNum,checkInMinute,checkInHour;
+	private TextField checkInRoomNum, checkInMinute, checkInHour;
 	@FXML
 	private DatePicker checkInLeaveDate;
 	@FXML
 	private Pane checkInPane;
+
 	/**
 	 * @author 61990
-	 * @throws IOException 
+	 * @throws IOException
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/11/27
 	 * @办理入住
 	 */
-	//订单详情执行
+	// 订单详情执行
 	@FXML
 	protected void checkIn() {
 
@@ -314,60 +315,71 @@ public class OrderController {
 				orderVO.orderGeneralVO.expectLeaveTime.getHour() + "",
 				orderVO.orderGeneralVO.expectLeaveTime.getMinute() + "");
 	}
-	void initCheckInWindow(String orderID,String name,LocalDate date,String hour,String minute){
+
+	void initCheckInWindow(String orderID, String name, LocalDate date, String hour, String minute) {
 		checkInOrderID.setText(orderID);
 		checkInName.setText(name);
 		checkInLeaveDate.setValue(date);
 		checkInMinute.setText(minute);
 		checkInHour.setText(hour);
 	}
-	//订单概况执行
+
+	// 订单概况执行
 	@FXML
 	protected void checkIn2() {
-		checkInPane.setVisible(true);
-		orderCheck.setDisable(true);
-		orderCheck.setOpacity(0.2);
+		try {
+			checkInPane.setVisible(true);
+			orderCheck.setDisable(true);
+			orderCheck.setOpacity(0.2);
 
-		initCheckInWindow(table.getSelectionModel().getSelectedItem().getOrderID(), table.getSelectionModel().getSelectedItem().getName(),
-				table.getSelectionModel().getSelectedItem().getCheckOutTime().toLocalDate(),
-				table.getSelectionModel().getSelectedItem().getCheckOutTime().getHour() + "",
-				table.getSelectionModel().getSelectedItem().getCheckOutTime().getMinute() + "");
+			initCheckInWindow(table.getSelectionModel().getSelectedItem().getOrderID(),
+					table.getSelectionModel().getSelectedItem().getName(),
+					table.getSelectionModel().getSelectedItem().getCheckOutTime().toLocalDate(),
+					table.getSelectionModel().getSelectedItem().getCheckOutTime().getHour() + "",
+					table.getSelectionModel().getSelectedItem().getCheckOutTime().getMinute() + "");
+		} catch (Exception e) {
+			new PopUp("请选择订单", "");
+		}
 	}
+
 	/**
 	 * @author 61990
-	 * @throws IOException 
+	 * @throws IOException
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/8
 	 * @确定入住
 	 */
 	@FXML
-	protected void sureCheckIn(){
+	protected void sureCheckIn() {
 		if (checkInLeaveDate != null) {
 			final LocalDateTime checkInTime = LocalDateTime.now();
-			final LocalDateTime expectLeaveTime = LocalDateTime.of(checkInLeaveDate.getValue(), 
+			final LocalDateTime expectLeaveTime = LocalDateTime.of(checkInLeaveDate.getValue(),
 					LocalTime.of(Integer.parseInt(checkInHour.getText()), Integer.parseInt(checkInMinute.getText())));
-			
-			final CheckInVO checkInVO = new CheckInVO(checkInOrderID.getText(), checkInRoomNum.getText(), checkInTime, expectLeaveTime);
+
+			final CheckInVO checkInVO = new CheckInVO(checkInOrderID.getText(), checkInRoomNum.getText(), checkInTime,
+					expectLeaveTime);
 			final ResultMessage result = orderBLController.updateCheckIn(checkInVO);
 			searchUnexecutedOrder();
 			cancel();
 			cancelCheckIn();
 			if (result == ResultMessage.SUCCESS) {
-				new PopUp("入住成功", "congratulation");			
-				
+				new PopUp("入住成功", "congratulation");
+
 				checkInRoomNum.setText("");
 				checkInHour.setText("12");
 				checkInMinute.setText("00");
-			}else {
-				new PopUp("入住失败", "so sorry");	
-				
+			} else {
+				new PopUp("入住失败", "so sorry");
+
 			}
-		}else {
+		} else {
 			new PopUp("请填写相关信息，谢谢！", "so soory");
 		}
+
 	}
+
 	@FXML
-	protected void cancelCheckIn(){
+	protected void cancelCheckIn() {
 		checkInPane.setVisible(false);
 		orderCheck.setDisable(false);
 		orderDetail.setDisable(false);
@@ -377,38 +389,44 @@ public class OrderController {
 		checkInHour.setText("12");
 		checkInMinute.setText("00");
 	}
+
 	@FXML
-	private Label checkOutOrderID,checkOutName;
+	private Label checkOutOrderID, checkOutName;
 	@FXML
 	private Pane checkOutPane;
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
 	 * @updateTime 2016/11/27
 	 * @办理退房
 	 */
-	//订单详情执行
+	// 订单详情执行
 	@FXML
 	protected void checkOut() {
-		checkOutOrderID.setText(orderVO.orderGeneralVO.orderID );
+		checkOutOrderID.setText(orderVO.orderGeneralVO.orderID);
 		checkOutName.setText(orderVO.orderGeneralVO.name);
 		checkOutPane.setVisible(true);
 		orderDetail.setDisable(true);
 		orderDetail.setOpacity(0.2);
 	}
 
-	//订单概况执行
+	// 订单概况执行
 	@FXML
 	protected void checkOut2() {
-		checkOutOrderID.setText(table.getSelectionModel().getSelectedItem().getOrderID() );
-		checkOutName.setText(table.getSelectionModel().getSelectedItem().getName());
-		checkOutPane.setVisible(true);
-		orderCheck.setDisable(true);
-		orderCheck.setOpacity(0.2);
+		try {
+			checkOutOrderID.setText(table.getSelectionModel().getSelectedItem().getOrderID());
+			checkOutName.setText(table.getSelectionModel().getSelectedItem().getName());
+			checkOutPane.setVisible(true);
+			orderCheck.setDisable(true);
+			orderCheck.setOpacity(0.2);
+		} catch (Exception e) {
+			new PopUp("请选择订单", "");
+		}
 	}
 
 	@FXML
-	protected void cancelCheckOut(){
+	protected void cancelCheckOut() {
 		checkOutPane.setVisible(false);
 		orderCheck.setDisable(false);
 		orderDetail.setDisable(false);
@@ -418,6 +436,8 @@ public class OrderController {
 
 	@FXML
 	protected void sureCheckOut(){
+
+		
 		final LocalDateTime checkOutTime = LocalDateTime.now();
 		final CheckOutVO checkOutVO = new CheckOutVO(checkOutOrderID.getText(), checkOutTime);
 		
@@ -428,7 +448,7 @@ public class OrderController {
 		searchNotCheckOutOrder();
 		cancel();
 		cancelCheckOut();
-//	TODO 后期可以把这些放在界面里，不弹框
+			//	TODO 后期可以把这些放在界面里，不弹框
 		if (result == ResultMessage.SUCCESS) {
 			new PopUp("退房成功", "congratulation");	
 						
@@ -449,6 +469,7 @@ public class OrderController {
 		orderDetail.setVisible(false);
 		orderCheck.setVisible(true);
 	}
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
@@ -474,21 +495,21 @@ public class OrderController {
 		detail_price.setText(Double.toString(orderVO.orderGeneralVO.price));
 		detail_state.setText(orderVO.orderGeneralVO.state.getChineseOrderState());
 		detail_message.setText(orderVO.message);
-		
-		if(orderVO.score==-1.0){
+
+		if (orderVO.score == -1.0) {
 			orderScore.setText("订单未评价");
-		}else{
+		} else {
 			orderScore.setText(Double.toString(orderVO.score));
 			orderComment.setText(orderVO.comment);
 		}
 	}
-	
+
 	/**
 	 * @author 61990
 	 * @lastChangedBy 61990
 	 * @图片效果
 	 */
-	void changePicture(ImageView image, String path){
-		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("hotelImage/orderPane/"+path)));	
+	void changePicture(ImageView image, String path) {
+		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("hotelImage/orderPane/" + path)));
 	}
 }

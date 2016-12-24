@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import presentation.signUpUI.controller.StageController;
@@ -34,6 +35,7 @@ public class Main extends Application {
 		stage.setTitle("酒店互联网预定系统");
 		stage.setScene(scene);
 		stage.setResizable(false);
+		stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("logo.png")));	 
 		stage.show();
 		StageController.getInstance().setStage(stage);
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {	
