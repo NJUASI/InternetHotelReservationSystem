@@ -8,6 +8,7 @@ import dataHelper.GuestDataHelper;
 import dataHelper.OrderDataHelper;
 import dataHelperImpl.DataFactoryImpl;
 import po.CreditPO;
+import po.GuestPO;
 import po.OrderPO;
 import utilities.enums.CreditRecord;
 import utilities.enums.OrderState;
@@ -34,7 +35,9 @@ public class CheckThread implements Runnable {
 				//将该order的状态置为异常
 				orderDateHelper.setState(po.getOrderID(), OrderState.ABNORMAL);
 				//添加一条异常信用记录
-				addAbnormalCredit(po.getGuestID(),po.getOrderID(),po.getPrice());
+				double afterCredit = addAbnormalCredit(po.getGuestID(),po.getOrderID(),po.getPrice());
+				//修改客户的信用值
+				modifyClientCredit(po.getGuestID(),afterCredit);
 				
 				System.out.println("有订单异常");
 			}
@@ -48,15 +51,28 @@ public class CheckThread implements Runnable {
 	}
 	
 	/**
-	 * @Description:增加一条异常信用记录
+	 * @Description:修改订单异常的客户的信用值
+	 * @param guestID
 	 * void
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月24日 下午4:55:38
+	 */
+	private void modifyClientCredit(String guestID,double afterCredit) {
+		GuestPO po = guestDataHelper.getSingle(guestID);
+		po.setCredit(afterCredit);
+		guestDataHelper.modify(po);
+	}
+	/**
+	 * @Description:增加一条异常信用记录
+	 * 返回异常之后的总信用值
 	 * @author: Harvey Gong
 	 * @param guestID 
 	 * @param price 
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月14日 下午10:08:13
 	 */
-	private void addAbnormalCredit(String guestID,String orderID,int price) {
+	private double addAbnormalCredit(String guestID,String orderID,int price) {
 		CreditPO po = new CreditPO();
 		po.setCreditRecord(CreditRecord.OVERDUE);
 		po.setGuestID(guestID);
@@ -70,6 +86,8 @@ public class CheckThread implements Runnable {
 		po.setTime(LocalDateTime.now());
 		
 		creditDataHelper.addCredit(po);
+		
+		return afterCredit;
 	}
 	/**
 	 * @Description:判断是否超过预期入住时间

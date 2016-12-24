@@ -7,8 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.creditBL.CreditController;
-import businessLogic.hotelBL.HotelInfoOperation;
 import businessLogic.hotelBL.hotel.Hotel;
+import businessLogic.hotelBL.hotel.HotelInfoOperation;
 import businessLogic.userBL.UserController;
 import businessLogicService.creditBLService.CreditBLService;
 import businessLogicService.orderBLService.HotelWorkerOrderBLService;
@@ -193,7 +193,6 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 
 		//更新酒店剩余房间信息
 		OrderVO thisOrder = commonOrder.getOrderDetail(checkOutVO.orderID);
-		hotelInterface = new Hotel(thisOrder.orderGeneralVO.hotelID);
 		msg2 = hotelInterface.checkOut(thisOrder.orderGeneralVO.hotelID, thisOrder.roomType, thisOrder.roomNumCount);
 		
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {

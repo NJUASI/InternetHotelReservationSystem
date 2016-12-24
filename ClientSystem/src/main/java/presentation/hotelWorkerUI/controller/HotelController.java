@@ -245,7 +245,6 @@ public class HotelController {
 		hotelVO.equipment=equipmentText.getText();
 		hotelVO.introduction=introductionText.getText();
 
-		//TODO gcm注意：调用更新酒店信息的方法,可能会catch到exception，以后加入exception
 		hotelBLController.updateHotelInfo(hotelVO);
 		
 

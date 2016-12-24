@@ -23,7 +23,7 @@ public class VIPBirthdayDiscount implements CalculateDiscount{
 
 	@Override
 	public double getDiscount() throws UserInexistException {
-		Member member = new MockMember();
+		Member member = new Member();
 		if(member.isMember(guestID, MemberType.COMMON)){
 			birthDay = member.getMemberInfo(guestID).birthday;
 			if(date.isEqual(birthDay)){

@@ -70,6 +70,9 @@ public interface SourceDataService extends Remote {
 	 */
 	public int getMaxRoomNumEachOrder()throws RemoteException;
 	
+	
+	
+	//重复登录暂时没有实现，故不在文档里列出来
 	/**
 	 * @Description:客户登录，记录客户登录信息
 	 * @param guestID

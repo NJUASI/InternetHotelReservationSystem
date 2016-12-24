@@ -58,7 +58,6 @@ public class HotelScanTest {
 		assertEquals("12345676",vo3.hotelID);
 		
 		
-		//TODO 按价格排序  由于只能拿到一个价格 做不了测试 
 		
 		//按评分降序排序
 		itr = hotelScan.sortHotels(SortStrategy.DESCSCORE);
@@ -96,7 +95,4 @@ public class HotelScanTest {
 	
 	//TODO testSearchHotelsOfOriginCriteria() 价格相同 无法测试
 	
-	//TODO 评分相同无法测试
-
-	//TODO 都有订单状态 无法测试
 }

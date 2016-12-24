@@ -7,8 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.creditBL.CreditController;
-import businessLogic.hotelBL.HotelInfoOperation;
 import businessLogic.hotelBL.hotel.Hotel;
+import businessLogic.hotelBL.hotel.HotelInfoOperation;
 import businessLogic.promotionBL.DiscountCalculator;
 import businessLogic.promotionBL.DiscountInSpan;
 import businessLogic.userBL.UserController;
@@ -70,17 +70,10 @@ public class GuestOrder implements GuestOrderBLService {
 
 		commonOrder = new CommonOrder();
 
-		creditBLService = CreditController.getInstance();
-		/*
-		 * new the mock one to test TODO 龚尘淼：promotion没有无参数的初始化方法，不知道自己改初始化啥
-		 */
+		creditBLService = CreditController.getInstance();		
+		hotelInterface = new Hotel();
 		discountCalculator = new DiscountCalculator();
 		userBLService = UserController.getInstance();
-
-		/*
-		 * hotel因为需要hotelID作为参数初始化，故不在此初始化，用到的时候再初始化
-		 */
-		// hotelInterface = new Hotel();
 	}
 
 	/**
@@ -145,7 +138,6 @@ public class GuestOrder implements GuestOrderBLService {
 			System.out.println(orderVO.roomType);
 			System.out.println(orderVO.roomNumCount);
 
-			hotelInterface = new Hotel();
 			msg2 = hotelInterface.checkIn(orderVO.orderGeneralVO.hotelID, orderVO.roomType, orderVO.roomNumCount);
 
 			if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
@@ -195,7 +187,6 @@ public class GuestOrder implements GuestOrderBLService {
 		}
 
 		// 更新此订单撤销后的酒店剩余房间数
-		hotelInterface = new Hotel(thisOrder.orderGeneralVO.hotelID);
 		msg2 = hotelInterface.updateRemainRoomNumForUndoOrder(thisOrder.orderGeneralVO.hotelID, thisOrder.roomType,
 				thisOrder.roomNumCount);
 
@@ -222,7 +213,6 @@ public class GuestOrder implements GuestOrderBLService {
 			msg1 = orderDataService.addEvaluation(new GuestEvaluationPO(evaluationVO));
 
 			String hotelID = commonOrder.getOrderDetail(evaluationVO.orderID).orderGeneralVO.hotelID;
-			hotelInterface = new Hotel();
 			msg2 = hotelInterface.scoreUpdate(hotelID, evaluationVO.score);
 		} catch (RemoteException e) {
 			e.printStackTrace();

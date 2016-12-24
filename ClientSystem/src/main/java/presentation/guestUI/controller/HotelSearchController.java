@@ -212,8 +212,7 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void openHasOrderedPane(){
-	//TODO gcm 12.23 得到所有酒店
-		Iterator<HotelVO> hotels = hotelBLController.getHotels(cityChoose.getValue(), cycleChoose.getValue());
+		Iterator<HotelVO> hotels = hotelBLController.getAllBookedHotels();
 		
 		returnBT.setVisible(true);
 		cyclePane.setVisible(false);
@@ -253,7 +252,7 @@ public class HotelSearchController {
 		while(hotels.hasNext()){
 			HotelVO temp = hotels.next();
 			data.add(new HotelTable(temp.hotelID, temp.hotelName,temp.address,
-					cityChoose.getValue(),cycleChoose.getValue(),temp.orderState.getChineseOrderState(),
+					temp.city,temp.circle,temp.orderState.getChineseOrderState(),
 					Double.toString(temp.minPrice),temp.level,Double.toString(temp.score)));
 		}
 

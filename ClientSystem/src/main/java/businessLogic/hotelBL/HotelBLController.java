@@ -86,12 +86,6 @@ public class HotelBLController implements HotelBLService {
 		return hotel.addRoomInfo(roomInfoVO);
 	}
 	
-	//删
-	@Override
-	public ResultMessage deleteRoomType(String hotelID,RoomType roomType) {
-		return hotel.deleteRoomInfo(hotelID, roomType);
-	}
-	
 	//改
 	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO) {
 		return hotel.updateHotelRoomInfo(roomInfoVO);
@@ -135,6 +129,18 @@ public class HotelBLController implements HotelBLService {
 	}
 	
 	/**
+	 * @Description:获取所有的已经预订的酒店，不区分城市、商圈
+	 * @return
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月24日 下午5:00:47
+	 */
+	@Override
+	public Iterator<HotelVO> getAllBookedHotels() {
+		return hotelScan.getAllBookedHotels();
+	}
+	
+	/**
 	 *  浏览概况时的操作
 	 */
 	
@@ -142,15 +148,13 @@ public class HotelBLController implements HotelBLService {
 	public Iterator<HotelVO> getHotels(String city,String circle) {
 		return hotelScan.getHotels(city,circle);
 	}
-	//筛选
+	//排序
 	public Iterator<HotelVO> sortHotels(SortStrategy sortStrategy) {
 		return hotelScan.sortHotels(sortStrategy);
 	}
-	//排序
+	//筛选
 	public Iterator<HotelVO> searchHotels(List<SearchCriteriaType> searchCriteriaTypes,SearchCriteriaVO vo) {
 		return hotelScan.searchHotels(searchCriteriaTypes,vo);
 	}
-
-	
 
 }
