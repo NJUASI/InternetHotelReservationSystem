@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import businessLogic.hotelBL.HotelInfoOperation;
 import businessLogic.hotelBL.hotel.Hotel;
+import businessLogic.hotelBL.hotel.HotelInfoOperation;
 import businessLogic.memberBL.Member;
 import dataService.promotionDataService.PromotionDataService;
 import exception.verificationException.UserInexistException;

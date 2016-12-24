@@ -119,7 +119,6 @@ public class CyclePromotionController {
 		//根据获取到selectedCity，然后调用promotion接口获取特定商圈折扣
 		String selectedCity = cityInput.getValue();
 		Iterator<AddressVO> specialCirclePromotions = null;
-		// TODO gcm注意：为null时可能会抛出异常，异常之后加
 		if(selectedCity!=null){
 			specialCirclePromotions = promotionBLController.getSpecialCirclePromotions(selectedCity);
 		}

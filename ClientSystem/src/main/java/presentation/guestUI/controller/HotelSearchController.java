@@ -212,8 +212,7 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void openHasOrderedPane(){
-	//TODO gcm 12.23 得到所有酒店
-		Iterator<HotelVO> hotels = hotelBLController.getHotels(cityChoose.getValue(), cycleChoose.getValue());
+		Iterator<HotelVO> hotels = hotelBLController.getAllBookedHotels();
 		
 		returnBT.setVisible(true);
 		cyclePane.setVisible(false);

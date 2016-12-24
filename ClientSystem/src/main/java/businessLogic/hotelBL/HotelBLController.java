@@ -129,6 +129,18 @@ public class HotelBLController implements HotelBLService {
 	}
 	
 	/**
+	 * @Description:获取所有的已经预订的酒店，不区分城市、商圈
+	 * @return
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月24日 下午5:00:47
+	 */
+	@Override
+	public Iterator<HotelVO> getAllBookedHotels() {
+		return hotelScan.getAllBookedHotels();
+	}
+	
+	/**
 	 *  浏览概况时的操作
 	 */
 	

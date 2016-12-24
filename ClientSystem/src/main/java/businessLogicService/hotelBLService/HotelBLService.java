@@ -189,4 +189,14 @@ public interface HotelBLService {
 	 */
 	public Iterator<HotelVO> searchHotels(List<SearchCriteriaType> searchCriteriaTypes,SearchCriteriaVO vo);
 
+	
+	/**
+	 * @Description:获取所有已经预订的酒店
+	 * @return
+	 * Iterator<HotelVO>
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月24日 下午4:59:32
+	 */
+	public Iterator<HotelVO> getAllBookedHotels();
 }

@@ -1,7 +1,8 @@
-package businessLogic.hotelBL;
+package businessLogic.hotelBL.hotel;
 
 import java.util.Iterator;
 
+import po.HotelPO;
 import utilities.Address;
 import utilities.enums.ResultMessage;
 import utilities.enums.RoomType;
@@ -14,6 +15,17 @@ import utilities.enums.RoomType;
  */
 public interface HotelInfoOperation {
 
+	/**
+	 * @Description:根据酒店编号返回酒店的编号
+	 * @param hotelID
+	 * @return
+	 * HotelPO
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月24日 下午5:17:51
+	 */
+	public HotelPO getHotelPO(String hotelID);
+	
 	/**
 	 * @Description:更新酒店评分
 	 * @param score

@@ -3,7 +3,6 @@ package businessLogic.hotelBL.hotel;
 import java.rmi.RemoteException;
 import java.util.Iterator;
 
-import businessLogic.hotelBL.HotelInfoOperation;
 import dataService.hotelDataService.HotelDataService;
 import po.HotelPO;
 import rmi.ClientRemoteHelper;
@@ -57,6 +56,20 @@ public class Hotel implements HotelInfoOperation{
 		hotelDataService = ClientRemoteHelper.getInstance().getHotelDataService();
 	}
 
+	/**
+	 * @Description:返回hotelPO
+	 * @param hotelID
+	 * @return
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月24日 下午5:19:23
+	 */
+	@Override
+	public HotelPO getHotelPO(String hotelID) {
+		initHotelPO(hotelID);
+		return hotelPO;
+	}
+	
 	/**
 	 * @Description:根据酒店工作人员id获取酒店的基本信息
 	 * @param hotelWorkerID

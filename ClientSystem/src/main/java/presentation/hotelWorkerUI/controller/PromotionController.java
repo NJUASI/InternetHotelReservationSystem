@@ -204,7 +204,6 @@ public class PromotionController {
 	 */
 	@FXML
 	protected void deleteOne() {
-		//TODO gcm 到底哪些数据库存的和界面的显示不一样。。。 
 		String promotionName = table.getSelectionModel().getSelectedItem().getName(); 
 		promotionBLController.deleteHotelSpecialSpanPromotion(hotelID, promotionName);
 		initDatePromotion();	

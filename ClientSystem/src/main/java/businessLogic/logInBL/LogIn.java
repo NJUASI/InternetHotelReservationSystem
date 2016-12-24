@@ -139,7 +139,7 @@ public class LogIn{
 	}
 	
 	
-	//TODO 查重
+	//TODO 查重,还未做
 	private void guestLogInRecord(String guestID) {
 		try {
 			sourceDataService.guestLogInRecord(guestID);

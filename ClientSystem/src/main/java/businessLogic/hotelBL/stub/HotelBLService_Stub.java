@@ -122,4 +122,10 @@ public class HotelBLService_Stub implements HotelBLService{
 		return null;
 	}
 
+	@Override
+	public Iterator<HotelVO> getAllBookedHotels() {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
 }

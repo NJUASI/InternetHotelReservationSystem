@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import businessLogic.hotelBL.hotel.Hotel;
+import businessLogic.hotelBL.hotel.HotelInfoOperation;
 import businessLogic.hotelBL.hotelScan.searchCriteria.SearchCriteriaFactory;
 import businessLogic.hotelBL.hotelScan.sortComparator.SortComparatorFactory;
 import businessLogic.orderBL.Order;
@@ -54,6 +55,24 @@ public class HotelScan {
 		initHotelDataService();
 	}
 
+	/**
+	 * @Description:获取所有已经预订过的酒店，不区分城市商圈
+	 * @return
+	 * Iterator<HotelVO>
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2016年12月24日 下午5:02:05
+	 */
+	public Iterator<HotelVO> getAllBookedHotels() {
+		List<HotelPO> list = new ArrayList<HotelPO>();
+		HotelInfoOperation hotel = new Hotel();
+		List<String> bookedHotelID = new Order().getBookedHotels(guestID);
+		for(int i = 0;i<bookedHotelID.size();i++){
+			list.add(hotel.getHotelPO(bookedHotelID.get(i)));
+		}
+		return convertPOListToVOList(list).iterator();
+	}
+	
 	/**
 	 * @Description:根据城市商圈的信息查找所有位于该城市商圈的酒店
 	 * @param addressVO
@@ -126,5 +145,5 @@ public class HotelScan {
 		}
 		return hotelPOList;
 	}
-	
+
 }
