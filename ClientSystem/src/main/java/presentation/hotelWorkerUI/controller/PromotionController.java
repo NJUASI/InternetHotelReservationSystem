@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -16,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.util.Callback;
 import presentation.PopUp.PopUp;
 import presentation.Table.DatePromotionTable;
 import utilities.IDReserve;
@@ -47,6 +49,7 @@ public class PromotionController {
 
 	PromotionBLController promotionBLController;
 	String hotelID;
+
 	/**
 	 * @Description:在初始化该controller时，初始化promotionBLController
 	 * @author: Harvey Gong
@@ -65,7 +68,7 @@ public class PromotionController {
 	 * @updateTime 2016/12/6
 	 */
 	@FXML
-	private void initialize() {	
+	private void initialize() {
 		changePicture(rightImage, "mainPromotion.png");
 		initDatePromotion();
 		initFixedPromotion();
@@ -77,7 +80,40 @@ public class PromotionController {
 	 * @updateTime 2016/12/7
 	 */
 	protected void initDatePromotion(){
+		Callback<DatePicker, DateCell> dayCellFactory1 = new Callback<DatePicker, DateCell>() {
+			@Override
+			public DateCell call(final DatePicker datePicker) {
+				return new DateCell() {
+					@Override
+					public void updateItem(LocalDate item, boolean empty) {
+						super.updateItem(item, empty);
 
+						if (item.isBefore(LocalDate.now())) {
+							setDisable(true);
+							setStyle("-fx-background-color: #ffc0cb;");
+						}
+					}
+				};
+			}
+		};
+		startDatePicker.setDayCellFactory(dayCellFactory1);
+		Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
+			@Override
+			public DateCell call(final DatePicker datePicker) {
+				return new DateCell() {
+					@Override
+					public void updateItem(LocalDate item, boolean empty) {
+						super.updateItem(item, empty);
+
+						if (item.isBefore(startDatePicker.getValue().plusDays(1))) {
+							setDisable(true);
+							setStyle("-fx-background-color: #ffc0cb;");
+						}
+					}
+				};
+			}
+		};
+		endDatePicker.setDayCellFactory(dayCellFactory);
 		Iterator<SpecialSpanPromotionVO> spanVOs = promotionBLController.getHotelSpecialSpanPromotions(hotelID);
 
 		table.getItems().clear();
@@ -104,6 +140,7 @@ public class PromotionController {
 	@FXML
 	protected void modifyOne() {
 		try{
+			
 			setModifyText(table.getSelectionModel().getSelectedItem().getName(),
 					table.getSelectionModel().getSelectedItem().getDiscount(),
 					table.getSelectionModel().getSelectedItem().getStartDate(),
