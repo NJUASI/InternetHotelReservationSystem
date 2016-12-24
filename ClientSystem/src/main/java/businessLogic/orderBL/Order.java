@@ -424,31 +424,6 @@ public class Order {
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/11/29
-	 * @return 网站营销人员需要查看的所有的异常订单，按倒序排列
-	 */
-	public List<OrderGeneralVO> getAllAbnormalOrderGeneral() {
-		final List<OrderGeneralVO> result = new ArrayList<OrderGeneralVO>();
-		
-		List<OrderGeneralPO> orderGeneralPOs = null;
-		try {
-			orderGeneralPOs = orderDataService.getAllAbnormalOrderGeneral();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		
-		if (orderGeneralPOs != null) {
-			for (int i = 0; i < orderGeneralPOs.size(); i++) {
-				result.add(new OrderGeneralVO(orderGeneralPOs.get(i)));
-			}
-		}
-		
-		return result;
-	}
-	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/11/29
 	 * @param date 网站营销人员查看未执行订单时输入的指定日期
 	 * @return 网站营销人员需要查看的当天所有的未执行订单
 	 */

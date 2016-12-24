@@ -70,10 +70,10 @@ public class GuestOrder implements GuestOrderBLService {
 
 		commonOrder = new CommonOrder();
 
-		creditBLService = CreditController.getInstance();
+		creditBLService = CreditController.getInstance();		
+		hotelInterface = new Hotel();
 		discountCalculator = new DiscountCalculator();
 		userBLService = UserController.getInstance();
-
 	}
 
 	/**
@@ -138,7 +138,6 @@ public class GuestOrder implements GuestOrderBLService {
 			System.out.println(orderVO.roomType);
 			System.out.println(orderVO.roomNumCount);
 
-			hotelInterface = new Hotel();
 			msg2 = hotelInterface.checkIn(orderVO.orderGeneralVO.hotelID, orderVO.roomType, orderVO.roomNumCount);
 
 			if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
@@ -188,7 +187,6 @@ public class GuestOrder implements GuestOrderBLService {
 		}
 
 		// 更新此订单撤销后的酒店剩余房间数
-		hotelInterface = new Hotel(thisOrder.orderGeneralVO.hotelID);
 		msg2 = hotelInterface.updateRemainRoomNumForUndoOrder(thisOrder.orderGeneralVO.hotelID, thisOrder.roomType,
 				thisOrder.roomNumCount);
 
@@ -215,7 +213,6 @@ public class GuestOrder implements GuestOrderBLService {
 			msg1 = orderDataService.addEvaluation(new GuestEvaluationPO(evaluationVO));
 
 			String hotelID = commonOrder.getOrderDetail(evaluationVO.orderID).orderGeneralVO.hotelID;
-			hotelInterface = new Hotel();
 			msg2 = hotelInterface.scoreUpdate(hotelID, evaluationVO.score);
 		} catch (RemoteException e) {
 			e.printStackTrace();
