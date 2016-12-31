@@ -31,9 +31,9 @@ public class CreditDataService_Stub extends UnicastRemoteObject implements Credi
 		return null;
 	}
 
-	@Override
-	public List<CreditPO> getCreditOfOneOrder(String guestID) throws RemoteException {
-		return null;
-	}
+//	@Override
+//	public List<CreditPO> getCreditOfOneOrder(String guestID) throws RemoteException {
+//		return null;
+//	}
 
 }

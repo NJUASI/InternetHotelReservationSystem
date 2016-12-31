@@ -8,8 +8,8 @@ import utilities.enums.ResultMessage;
 /**
  * 
  * @author 董金玉
- * lastChangedBy 董金玉
- * updateTime 2016/11/29
+ * lastChangedBy charles
+ * updateTime 2017/1/1
  *
  */
 public interface CreditDataHelper {
@@ -18,7 +18,7 @@ public interface CreditDataHelper {
 
 	public ResultMessage addCredit(CreditPO creditPO);
 
-	public List<CreditPO> getCreditOfOneOrder(String guestID);
+//	public List<CreditPO> getCreditOfOneOrder(String guestID);
 	
 	void close();
 	
