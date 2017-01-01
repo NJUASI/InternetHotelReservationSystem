@@ -1,4 +1,4 @@
-package testSuits.orderView;
+package testSuits.orderUndo;
 
 import static org.junit.Assert.*;
 
@@ -6,15 +6,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import businessLogic.orderBL.OrderBLController;
-import businessLogicService.orderBLService.*;
+import businessLogicService.orderBLService.OrderBLService;
 import rmi.ClientRemoteHelper;
 import utilities.IDReserve;
-import utilities.enums.UserType;
-import vo.OrderGeneralVO;
-import vo.OrderVO;
+import utilities.enums.ResultMessage;
 
-public class OrderView1 {
-
+public class OrderUndo1 {
+	
 	OrderBLService orderController;
 	ClientRemoteHelper clientRemoteHelper = ClientRemoteHelper.getInstance();
 	@Before
@@ -23,17 +21,9 @@ public class OrderView1 {
 		orderController = OrderBLController.getInstance();
 		IDReserve.getInstance().setUserID("1234567900");
 	}
-	
 	@Test
 	public void test1() {
-		OrderVO orderVO = orderController.getOrderDetail("101420161218");
-		assertEquals(orderVO.orderGeneralVO.hotelName,"南京天丰大酒店");
-	}
-	
-	@Test
-	public void test2() {
-		OrderGeneralVO orderVO = orderController.getAllOrderGenerals(IDReserve.getInstance().getUserID(), UserType.GUEST).next();
-		assertEquals(orderVO.hotelName,"南京天丰大酒店");
+		assertEquals(ResultMessage.SUCCESS,orderController.undoNormalOrder("950820160302"));
 	}
 
 }
