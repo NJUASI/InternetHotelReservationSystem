@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import dataService.webMarketerDataService.WebMarketerDataService;
 import po.WebMarketerPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class WebMarekterDataServiceImpl_Test {
 
@@ -49,7 +49,7 @@ public class WebMarekterDataServiceImpl_Test {
 			WebMarketerDataService webMarketer = new WebMarketerDataServiceImpl();
 			WebMarketerPO webMarketerPO = new WebMarketerPO("000001", "123456");
 
-			assertEquals(webMarketer.add(webMarketerPO), ResultMessage.SUCCESS);
+			assertEquals(webMarketer.add(webMarketerPO).getWebMarketerID(), "000001");
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -63,18 +63,6 @@ public class WebMarekterDataServiceImpl_Test {
 			WebMarketerPO webMarketerPO = new WebMarketerPO("000001", "123456");
 
 			assertEquals(webMarketer.modify(webMarketerPO), ResultMessage.SUCCESS);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Test
-	public void testDeleteWebMarketer() {
-		// test the method DeleteWebMarketer
-		try {
-			WebMarketerDataService webMarketer = new WebMarketerDataServiceImpl();
-
-			assertEquals(webMarketer.deleteWebMarketer("000001"), ResultMessage.SUCCESS);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

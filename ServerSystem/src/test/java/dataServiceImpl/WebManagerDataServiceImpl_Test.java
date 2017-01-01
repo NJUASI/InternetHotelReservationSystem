@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import dataService.webManagerDataService.WebManagerDataService;
 import po.WebManagerPO;
-import utilities.ResultMessage;
+import utilities.enums.ResultMessage;
 
 public class WebManagerDataServiceImpl_Test {
 
@@ -49,7 +49,7 @@ public class WebManagerDataServiceImpl_Test {
 			WebManagerDataService webManager = new WebManagerDataServiceImpl();
 			WebManagerPO webManagerPO = new WebManagerPO("0001", "123456");
 
-			assertEquals(webManager.add(webManagerPO), ResultMessage.SUCCESS);
+			assertEquals(webManager.add(webManagerPO).getWebManagerID(), "0001");
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
