@@ -63,16 +63,17 @@ import vo.SearchCriteriaVO;
  * 
  * lastChangeBy charles
  * updateTime 2016/12/7
- * 
- * @高源 没找到界面初始化的initialize()函数
- * orderDataService的在界面初始化未实现
  */
 public class HotelSearchController {
 
+	
+	
 	// 加载HotelSearch相关界面
 	@FXML
 	private Pane cityAndCircle, hotelCheck, hotelDetail, hotelChoose, createPane;
 
+	
+	
 	// city and cycle choose 内容
 	@FXML
 	private ComboBox<String> cycleChoose;
@@ -136,6 +137,8 @@ public class HotelSearchController {
 		
 	}
 
+	//TODO 城市商圈选择界面
+	
 	private void initCityAndCircles() {
 		String fistCity = sourceBLController.getCities().next();
 		cityChoose.setValue(fistCity);
@@ -188,7 +191,7 @@ public class HotelSearchController {
 	}
 
 
-	// Hotel概况浏览界面
+	//TODO Hotel概况浏览界面
 
 	/**
 	 * 返回城市商圈的选择
@@ -246,30 +249,7 @@ public class HotelSearchController {
 		initHotelTable(hotels);
 	}
 
-	private void initHotelTable(Iterator<HotelVO> hotels){
-		hotelTable.getItems().clear();
-
-		ObservableList<HotelTable> data = FXCollections.observableArrayList();
-		while(hotels.hasNext()){
-			HotelVO temp = hotels.next();
-			data.add(new HotelTable(temp.hotelID, temp.hotelName,temp.address,
-					temp.city,temp.circle,temp.orderState.getChineseOrderState(),
-					Double.toString(temp.minPrice),temp.level,Double.toString(temp.score)));
-		}
-
-		hotelIDColumn3.setCellValueFactory(cellData -> cellData.getValue().hotelID);
-		hotelNameColumn3.setCellValueFactory(cellData -> cellData.getValue().hotelName);
-		addressColumn3.setCellValueFactory(cellData -> cellData.getValue().address);
-		cityColumn3.setCellValueFactory(cellData -> cellData.getValue().city);
-		cycleColumn3.setCellValueFactory(cellData -> cellData.getValue().cycle);
-		minPriceColumn3.setCellValueFactory(cellData -> cellData.getValue().minPrice);
-		hasOrderColumn3.setCellValueFactory(cellData -> cellData.getValue().hasOrder);
-		levelColumn3.setCellValueFactory(cellData -> cellData.getValue().level);
-		scoreColumn3.setCellValueFactory(cellData -> cellData.getValue().score);
-
-		hotelTable.setItems(data);
-	}
-
+	
 	/**
 	 * @description 返回订单概况
 	 * @author 61990
@@ -285,10 +265,7 @@ public class HotelSearchController {
 	}
 
 
-	/*
-	 * HotelDetail界面
-	 * 
-	 */
+	//TODO HotelDetail界面
 
 	@FXML
 	private Label hotelNameInDetail, hotelIDInDetail, cityInDetail, LevelInDetail, ScoreInDetail, cycleInDetail,
@@ -302,12 +279,25 @@ public class HotelSearchController {
 	@FXML
 	private Pane commentPane, orderPane,roomPane;
 	
+	/**
+	 * @description 打开订单评论
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @updateTime 2016/12/27
+	 */
 	@FXML
 	protected void openComment() {
 		commentPane.setVisible(true);
 		roomPane.setVisible(false);
 		orderPane.setVisible(false);
 	}
+	
+	/**
+	 * @description 打开预定过得订单
+	 * @author 61990
+	 * @lastChangedBy 61990
+	 * @updateTime 2016/12/27
+	 */
 	@FXML
 	protected void openHotelOrder() {
 		commentPane.setVisible(false);
@@ -322,9 +312,6 @@ public class HotelSearchController {
 	 */
 	@FXML
 	protected void openHotelDetail() {
-		//TODO fjj注意： 酒店订单列表 酒店评价列表
-		//TODO 冯俊杰回复高源：酒店订单列表是指此客户在此酒店的所有订单吧？  不是所有酒店订单列表吧？确认一下  and我在fxml里面没找到这个地方
-		//		TODO fjj 是的就是我在这个酒店有过哪些订单,看大作业需求.fxml找那个地方?你把下面的我测试的代码要的东西覆盖掉就行了
 		try{
 
 			selectedHotelID = hotelTable.getSelectionModel().getSelectedItem().getHotelID();
@@ -643,9 +630,8 @@ public class HotelSearchController {
 	}
 
 
-	/*
-	 *  订单生成界面
-	 */
+	//TODO 订单生成界面
+	 
 	@FXML
 	private ComboBox<String> roomTypeInOrder;
 	@FXML
@@ -900,8 +886,6 @@ public class HotelSearchController {
 	 */
 	class RoomTypeChangeListener implements ChangeListener<String>{
 		public void changed(ObservableValue ov, String oldValue, String roomType) {
-
-
 			if(roomType != null){
 				//变更所选的房间类型
 				selectedRoomType = roomType;
@@ -972,6 +956,31 @@ public class HotelSearchController {
 		originPrice = hotelBLController.getOriginPrice(selectedHotelID, RoomType.getEnum(selectedRoomType));
 		return originPrice*lastDays*roomCountInOrder.getValue();
 	}
+	
+	private void initHotelTable(Iterator<HotelVO> hotels){
+		hotelTable.getItems().clear();
+
+		ObservableList<HotelTable> data = FXCollections.observableArrayList();
+		while(hotels.hasNext()){
+			HotelVO temp = hotels.next();
+			data.add(new HotelTable(temp.hotelID, temp.hotelName,temp.address,
+					temp.city,temp.circle,temp.orderState.getChineseOrderState(),
+					Double.toString(temp.minPrice),temp.level,Double.toString(temp.score)));
+		}
+
+		hotelIDColumn3.setCellValueFactory(cellData -> cellData.getValue().hotelID);
+		hotelNameColumn3.setCellValueFactory(cellData -> cellData.getValue().hotelName);
+		addressColumn3.setCellValueFactory(cellData -> cellData.getValue().address);
+		cityColumn3.setCellValueFactory(cellData -> cellData.getValue().city);
+		cycleColumn3.setCellValueFactory(cellData -> cellData.getValue().cycle);
+		minPriceColumn3.setCellValueFactory(cellData -> cellData.getValue().minPrice);
+		hasOrderColumn3.setCellValueFactory(cellData -> cellData.getValue().hasOrder);
+		levelColumn3.setCellValueFactory(cellData -> cellData.getValue().level);
+		scoreColumn3.setCellValueFactory(cellData -> cellData.getValue().score);
+
+		hotelTable.setItems(data);
+	}
+
 	
 	void changePicture(ImageView image, String path){
 		image.setImage(new Image(getClass().getClassLoader().getResourceAsStream("guestImage/hotelPane/"+path)));	
