@@ -171,8 +171,7 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	 * 
 	 * 直接从本层getAllAbnormalOrderGeneral()走
 	 */
-	@Override
-	public List<OrderGeneralPO> getAllAbnormalOrderGeneral(final LocalDate date) throws RemoteException {
+	public List<OrderGeneralPO> getAllAbnormalOrderGeneral(LocalDate date) throws RemoteException {
 		List<OrderGeneralPO> abnormalGenerals = getAllAbnormalOrderGeneral();
 		
 		for (int i = 0; i < abnormalGenerals.size(); i++) {
@@ -375,7 +374,7 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	 * @return 网站营销人员需要查看的所有的异常订单，按倒序排列
 	 * @throws RemoteException RMI
 	 */
-	private List<OrderGeneralPO> getAllAbnormalOrderGeneral() throws RemoteException {
+	private List<OrderGeneralPO> getAllAbnormalOrderGeneral(){
 		return convertPOsToDecodedGenerals(orderDataHelper.getAbnormal());
 	}
 	
