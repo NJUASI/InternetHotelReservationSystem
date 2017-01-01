@@ -141,7 +141,9 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 		if (thisOrderState == OrderState.UNEXECUTED || thisOrderState == OrderState.ABNORMAL) {
 
 			// 检查入住日期的正确
-			if (checkInVO.checkInTime.toLocalDate() != thisOrder.orderGeneralVO.expectExecuteTime.toLocalDate()) {
+			if (!checkInVO.checkInTime.toLocalDate() .equals( thisOrder.orderGeneralVO.expectExecuteTime.toLocalDate())) {
+				System.out.println(checkInVO.checkInTime.toLocalDate());
+				System.out.println(thisOrder.orderGeneralVO.expectExecuteTime.toLocalDate());
 				throw new CheckInException();
 			}
 			
@@ -197,7 +199,7 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 		OrderVO thisOrder = commonOrder.getOrderDetail(checkOutVO.orderID);
 		
 		// 检查入住日期的正确
-		if (checkOutVO.checkOutTime.toLocalDate() != thisOrder.orderGeneralVO.expectLeaveTime.toLocalDate()) {
+		if (!checkOutVO.checkOutTime.toLocalDate() .equals( thisOrder.orderGeneralVO.expectLeaveTime.toLocalDate())) {
 			throw new CheckOutException();
 		}
 
