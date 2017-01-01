@@ -6,7 +6,11 @@ import java.time.LocalDate;
 
 import org.junit.Test;
 
-import utilities.ResultMessage;
+import exception.inputException.InvalidInputException;
+import exception.inputException.InvalidLengthInputException;
+import exception.inputException.PasswordInputException;
+import exception.verificationException.UserInexistException;
+import utilities.enums.UserType;
 import vo.GuestVO;
 
 public class LogIn_tester {
@@ -17,42 +21,18 @@ public class LogIn_tester {
 		//test interface guestLogIn(String guest, String password)
 		LogInController controller = LogInController.getInstance();
 			
-		assertEquals(ResultMessage.SUCCESS, controller.guestLogIn("1234567890", "123456"));
-		assertEquals(ResultMessage.FAIL, controller.guestLogIn("1234567890", "000000"));
+		try {
+			assertEquals(UserType.GUEST, controller.logIn("1234567890", "123456"));
+			assertEquals(UserType.HOTEL_WORKER, controller.logIn("00001111", "123456"));
+			assertEquals(UserType.WEB_MARKETER, controller.logIn("000001", "123456"));
+			assertEquals(UserType.WEB_MANAGER, controller.logIn("0001", "123456"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 	}
 	
 	@Test
 	public void test2() {
-		//test cooperation with class User
-		//test interface hotelWorkerLogIn(String hotelWorker, String password)
-		LogInController controller = LogInController.getInstance();
-			
-		assertEquals(ResultMessage.SUCCESS, controller.hotelWorkerLogIn("12345678", "123456"));
-		assertEquals(ResultMessage.FAIL, controller.hotelWorkerLogIn("12345678", "000000"));
-	}
-	
-	@Test
-	public void test3() {
-		//test cooperation with class User
-		//test interface webMarketerLogIn(String webMarketer, String password)
-		LogInController controller = LogInController.getInstance();
-			
-		assertEquals(ResultMessage.SUCCESS, controller.webMarketerLogIn("123456", "123456"));
-		assertEquals(ResultMessage.FAIL, controller.webMarketerLogIn("123456", "000000"));
-	}
-	
-	@Test
-	public void test4() {
-		//test cooperation with class User
-		//test interface webManagerLogIn(String webManager, String password)
-		LogInController controller = LogInController.getInstance();
-			
-		assertEquals(ResultMessage.SUCCESS, controller.webManagerLogIn("1234", "123456"));
-		assertEquals(ResultMessage.FAIL, controller.webManagerLogIn("1234", "000000"));
-	}
-	
-	@Test
-	public void test5() {
 		//test cooperation with class User
 		//test interface guestSignUp(GuestVO guestVO)
 		LogInController controller = LogInController.getInstance();
@@ -60,7 +40,17 @@ public class LogIn_tester {
 		GuestVO guestVO = new GuestVO("1234567890", LocalDate.of(1995, 4, 1), "school", "zhangsan", 
 				"xiaosan", "000000", "13523456789", 100);
 			
-		assertEquals(ResultMessage.SUCCESS, controller.guestSignUp(guestVO));
+		try {
+			assertEquals("1234567890", controller.guestSignUp(guestVO).userID);
+		} catch (InvalidInputException e) {
+			e.printStackTrace();
+		} catch (PasswordInputException e) {
+			e.printStackTrace();
+		} catch (InvalidLengthInputException e) {
+			e.printStackTrace();
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

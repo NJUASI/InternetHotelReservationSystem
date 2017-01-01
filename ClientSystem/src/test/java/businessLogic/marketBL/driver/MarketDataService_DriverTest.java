@@ -13,10 +13,11 @@ public class MarketDataService_DriverTest {
 
 	@Test
 	public void test() {
-		MarketDataService_Stub stub = new MarketDataService_Stub();
-		MarketDataService_Driver driver = new MarketDataService_Driver(stub);
 		
 		try {
+			MarketDataService_Stub stub = new MarketDataService_Stub();
+			MarketDataService_Driver driver = new MarketDataService_Driver(stub);
+			
 			MarketPO marketPO = driver.marketDataService.getMemberFormulation().get(0);
 			
 			assertEquals("aa", marketPO.getMarketName());
