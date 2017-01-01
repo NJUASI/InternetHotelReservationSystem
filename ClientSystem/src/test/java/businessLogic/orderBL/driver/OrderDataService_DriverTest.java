@@ -88,11 +88,16 @@ public class OrderDataService_DriverTest {
 	 */
 	@Test
 	public void test3() {
-		final OrderDataService_Stub stub = new OrderDataService_Stub();
+		OrderDataService_Stub stub = null;
+		try {
+			stub = new OrderDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		
 		try {
-			assertEquals(ResultMessage.SUCCESS, driver.orderDataService.undoAbnormalOrder("123456789012"));
+			assertEquals(ResultMessage.SUCCESS, driver.orderDataService.undoAbnormalOrder("123456789012", 0.9));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -129,7 +134,12 @@ public class OrderDataService_DriverTest {
 	 */
 	@Test
 	public void test5() {
-		final OrderDataService_Stub stub = new OrderDataService_Stub();
+		OrderDataService_Stub stub = null;
+		try {
+			stub = new OrderDataService_Stub();
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
 		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
 		final OrderPO orderPO;
 		try {
@@ -151,7 +161,7 @@ public class OrderDataService_DriverTest {
 			assertEquals(expectExecuteTime, orderPO.getExpectExecuteTime());
 			assertEquals(expectLeaveTime, orderPO.getExpectLeaveTime());
 			assertEquals(OrderState.EXECUTED, orderPO.getState());
-			assertEquals(RoomType.AMBASSADOR, orderPO.getRoomType());
+			assertEquals(RoomType.DOUBLE_BED, orderPO.getRoomType());
 			assertEquals(2, orderPO.getRoomNumCount());
 			assertEquals("301  302", orderPO.getRoomNumber());
 			assertEquals("zhangsan", orderPO.getName());
@@ -266,42 +276,10 @@ public class OrderDataService_DriverTest {
 	 * @lastChangedBy charles
 	 * @updateTime 2016/11/27
 	 * 
-	 * test interface getAllAbnormalOrderGeneral()
-	 */
-	@Test
-	public void test9() {
-		final OrderDataService_Stub stub = new OrderDataService_Stub();
-		final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
-		
-		final List<OrderGeneralPO> orderGeneralPOs;
-		try {
-			orderGeneralPOs = driver.orderDataService.getAllAbnormalOrderGeneral();
-			final OrderGeneralPO orderGeneralPO = orderGeneralPOs.get(0);	
-			
-			assertEquals("123456789012", orderGeneralPO.getOrderID());
-			assertEquals("1234567890", orderGeneralPO.getGuestID());
-			assertEquals("12345678", orderGeneralPO.getHotelID());
-			assertEquals("thisHotel", orderGeneralPO.getHotelName());
-			assertEquals("address", orderGeneralPO.getHotelAddress());
-			assertEquals(200, orderGeneralPO.getPrice(), 0);
-			assertEquals(LocalDateTime.of(2016, 2, 3, 14, 0), orderGeneralPO.getExpectExecuteTime());
-			assertEquals(LocalDateTime.of(2016, 2, 4, 12, 0), orderGeneralPO.getExpectLeaveTime());
-			assertEquals(OrderState.EXECUTED, orderGeneralPO.getState());
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		
-	}
-	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
-	 * 
 	 * test interface getBookedHotels
 	 */
 	@Test
-	public void test10() {
+	public void test9() {
 		try {
 			final OrderDataService_Stub stub = new OrderDataService_Stub();
 			final OrderDataService_Driver driver = new OrderDataService_Driver(stub);
