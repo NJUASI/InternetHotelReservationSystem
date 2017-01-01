@@ -37,17 +37,17 @@ public class OrderBLService_Stub implements OrderBLService {
 	public OrderBLService_Stub() {
 	}
 	
-	/**
-	 * 
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/4
-	 * @param orderVO 从客户界面层传下来的Order载体
-	 * @return 若客户创建此订单，需要付的款项
-	 */
-	public double getTempPrice(OrderVO orderVO) {
-		return 200;
-	}
+//	/**
+//	 * 
+//	 * @author charles
+//	 * @lastChangedBy charles
+//	 * @updateTime 2016/12/4
+//	 * @param orderVO 从客户界面层传下来的Order载体
+//	 * @return 若客户创建此订单，需要付的款项
+//	 */
+//	public double getTempPrice(OrderVO orderVO) {
+//		return 200;
+//	}
 	
 	/**
 	 * @author charles
@@ -60,16 +60,16 @@ public class OrderBLService_Stub implements OrderBLService {
 		return ResultMessage.SUCCESS;
 	}
 
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
-	 * @param orderID 酒店工作人员当前需要执行订单的订单号
-	 * @return 酒店工作人员成功执行此订单
-	 */
-	public ResultMessage executeOrder(final String orderID) {
-		return ResultMessage.SUCCESS;
-	}
+//	/**
+//	 * @author charles
+//	 * @lastChangedBy charles
+//	 * @updateTime 2016/11/27
+//	 * @param orderID 酒店工作人员当前需要执行订单的订单号
+//	 * @return 酒店工作人员成功执行此订单
+//	 */
+//	public ResultMessage executeOrder(final String orderID) {
+//		return ResultMessage.SUCCESS;
+//	}
 
 	/**
 	 * @author charles
@@ -116,216 +116,216 @@ public class OrderBLService_Stub implements OrderBLService {
 				roomType, 2, "301  302", 2, "zhangsan","13554321234", "no", 4.3, "good");
 	}
 
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/5
-	 * @param guestID 客户要查看个人所有订单时，客户的编号
-	 * @return 客户个人所有订单
-	 */
-	public List<OrderGeneralVO> getAllGuestOrderGeneral(final String guestID) {
-		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
-		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.EXECUTED, false, true, "zhangsan","13554321234"));
-		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.UNEXECUTED, false, false, "zhangsan","13554321234"));
-		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.ABNORMAL, false, false, "zhangsan","13554321234"));
-		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.CANCELLED, false, false, "zhangsan","13554321234"));
-		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.EXECUTED, true, true, "zhangsan","13554321234"));
-		return orderGenerals;
-	}
+//	/**
+//	 * @author charles
+//	 * @lastChangedBy charles
+//	 * @updateTime 2016/12/5
+//	 * @param guestID 客户要查看个人所有订单时，客户的编号
+//	 * @return 客户个人所有订单
+//	 */
+//	public List<OrderGeneralVO> getAllGuestOrderGeneral(final String guestID) {
+//		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+//		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+//				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+//				OrderState.EXECUTED, false, true, "zhangsan","13554321234"));
+//		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+//				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+//				OrderState.UNEXECUTED, false, false, "zhangsan","13554321234"));
+//		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+//				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+//				OrderState.ABNORMAL, false, false, "zhangsan","13554321234"));
+//		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+//				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+//				OrderState.CANCELLED, false, false, "zhangsan","13554321234"));
+//		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+//				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+//				OrderState.EXECUTED, true, true, "zhangsan","13554321234"));
+//		return orderGenerals;
+//	}
 
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
-	 * @param guestID 客户要查看个人<所有未执行>订单时，客户的编号
-	 * @return 客户个人<所有未执行>订单
-	 */
-	public List<OrderGeneralVO> getAllGuestUnexecutedOrderGeneral(final String guestID) {
-		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
-		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.UNEXECUTED, false, false, "zhangsan","13554321234"));
-		return orderGenerals;
-	}
+//	/**
+//	 * @author charles
+//	 * @lastChangedBy charles
+//	 * @updateTime 2016/12/7
+//	 * @param guestID 客户要查看个人<所有未执行>订单时，客户的编号
+//	 * @return 客户个人<所有未执行>订单
+//	 */
+//	public List<OrderGeneralVO> getAllGuestUnexecutedOrderGeneral(final String guestID) {
+//		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+//		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+//				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+//				OrderState.UNEXECUTED, false, false, "zhangsan","13554321234"));
+//		return orderGenerals;
+//	}
+//	
+//	/**
+//	 * @author charles
+//	 * @lastChangedBy charles
+//	 * @updateTime 2016/12/7
+//	 * @param guestID 客户要查看个人<所有已执行>订单时，客户的编号
+//	 * @return 客户个人<所有已执行>订单
+//	 */
+//	public List<OrderGeneralVO> getAllGuestExecutedOrderGeneral(final String guestID) {
+//		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+//		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+//				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+//				OrderState.EXECUTED, false, true, "zhangsan","13554321234"));
+//		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+//				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+//				OrderState.EXECUTED, true, true, "zhangsan","13554321234"));
+//		return orderGenerals;
+//	}
 	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
-	 * @param guestID 客户要查看个人<所有已执行>订单时，客户的编号
-	 * @return 客户个人<所有已执行>订单
-	 */
-	public List<OrderGeneralVO> getAllGuestExecutedOrderGeneral(final String guestID) {
-		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
-		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.EXECUTED, false, true, "zhangsan","13554321234"));
-		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.EXECUTED, true, true, "zhangsan","13554321234"));
-		return orderGenerals;
-	}
+//	/**
+//	 * @author charles
+//	 * @lastChangedBy charles
+//	 * @updateTime 2016/12/7
+//	 * @param guestID 客户要查看个人<所有异常>订单时，客户的编号
+//	 * @return 客户个人<所有异常>订单
+//	 */
+//	public List<OrderGeneralVO> getAllGuestAbnormalOrderGeneral(final String guestID) {
+//		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+//		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+//				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+//				OrderState.ABNORMAL, false, false, "zhangsan","13554321234"));
+//		return orderGenerals;
+//	}
+//	
+//	/**
+//	 * @author charles
+//	 * @lastChangedBy charles
+//	 * @updateTime 2016/12/7
+//	 * @param guestID 客户要查看个人<所有已撤销>订单时，客户的编号
+//	 * @return 客户个人<所有已撤销>订单
+//	 */
+//	public List<OrderGeneralVO> getAllGuestCancelledOrderGeneral(final String guestID) {
+//		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+//		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+//				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+//				OrderState.CANCELLED, false, false, "zhangsan","13554321234"));
+//		return orderGenerals;
+//	}
+//	
+//	/**
+//	 * @author charles
+//	 * @lastChangedBy charles
+//	 * @updateTime 2016/12/7
+//	 * @param guestID 客户要查看个人<所有已评论>订单时，客户的编号
+//	 * @return 客户个人<所有已评论>订单
+//	 */
+//	public List<OrderGeneralVO> getAllGuestCommentedOrderGeneral(final String guestID) {
+//		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+//		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+//				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+//				OrderState.EXECUTED, true, true, "zhangsan","13554321234"));
+//		return orderGenerals;
+//	}
 	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
-	 * @param guestID 客户要查看个人<所有异常>订单时，客户的编号
-	 * @return 客户个人<所有异常>订单
-	 */
-	public List<OrderGeneralVO> getAllGuestAbnormalOrderGeneral(final String guestID) {
-		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
-		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.ABNORMAL, false, false, "zhangsan","13554321234"));
-		return orderGenerals;
-	}
+//	/**
+//	 * @author charles
+//	 * @lastChangedBy charles
+//	 * @updateTime 2016/12/7
+//	 * @param guestID 客户要查看个人<所有未评价>订单时，客户的编号
+//	 * @return 客户个人<所有未评价>订单
+//	 */
+//	public List<OrderGeneralVO> getAllGuestUncommentedOrderGeneral(final String guestID) {
+//		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+//		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+//				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+//				OrderState.EXECUTED, false, true, "zhangsan","13554321234"));
+//		return orderGenerals;
+//	}
 	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
-	 * @param guestID 客户要查看个人<所有已撤销>订单时，客户的编号
-	 * @return 客户个人<所有已撤销>订单
-	 */
-	public List<OrderGeneralVO> getAllGuestCancelledOrderGeneral(final String guestID) {
-		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
-		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.CANCELLED, false, false, "zhangsan","13554321234"));
-		return orderGenerals;
-	}
+//	/**
+//	 * @author charles
+//	 * @lastChangedBy charles
+//	 * @updateTime 2016/12/10
+//	 * @param guestID 客户编号
+//	 * @param hotelID 目标酒店编号
+//	 * @return 客户在目标酒店的所有订单记录
+//	 */
+//	public Iterator<OrderGeneralVO> getMyOrdersOfThisHotel(String guestID, String hotelID) {
+//		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+//		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+//				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+//				OrderState.EXECUTED, false, true, "zhangsan","13554321234"));
+//		return orderGenerals.iterator();
+//	}
 	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
-	 * @param guestID 客户要查看个人<所有已评论>订单时，客户的编号
-	 * @return 客户个人<所有已评论>订单
-	 */
-	public List<OrderGeneralVO> getAllGuestCommentedOrderGeneral(final String guestID) {
-		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
-		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.EXECUTED, true, true, "zhangsan","13554321234"));
-		return orderGenerals;
-	}
+//	/**
+//	 * @author charles
+//	 * @lastChangedBy charles
+//	 * @updateTime 2016/12/5
+//	 * @param hotelID 酒店要查看本酒店所有订单时，酒店的编号
+//	 * @return 此酒店所有的所有订单
+//	 */
+//	public List<OrderGeneralVO> getAllHotelOrderGeneral(final String hotelID) {
+//		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+//		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+//				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+//				OrderState.EXECUTED, false, true, "zhangsan","13554321234"));
+//		return orderGenerals;
+//	}
+//
+//	/**
+//	 * @author charles
+//	 * @lastChangedBy charles
+//	 * @updateTime 2016/12/7
+//	 * @param hotelID 酒店要查看本酒店<所有未执行>订单时，酒店的编号
+//	 * @return 此酒店<所有未执行>的所有订单
+//	 */
+//	public List<OrderGeneralVO> getAllHotelUnexecutedOrderGeneral(final String hotelID) {
+//		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+//		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+//				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+//				OrderState.UNEXECUTED, false, false, "zhangsan","13554321234"));
+//		return orderGenerals;
+//	}
+//	
+//	/**
+//	 * @author charles
+//	 * @lastChangedBy charles
+//	 * @updateTime 2016/12/7
+//	 * @param hotelID 酒店要查看本酒店<所有已执行>订单时，酒店的编号
+//	 * @return 此酒店<所有已执行>订单
+//	 */
+//	public List<OrderGeneralVO> getAllHotelExecutedOrderGeneral(final String hotelID) {
+//		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+//		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+//				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+//				OrderState.EXECUTED, false, true, "zhangsan","13554321234"));
+//		return orderGenerals;
+//	}
+//	
+//	/**
+//	 * @author charles
+//	 * @lastChangedBy charles
+//	 * @updateTime 2016/12/7
+//	 * @param hotelID 酒店要查看本酒店<所有异常>订单时，酒店的编号
+//	 * @return 此酒店所有异常>订单
+//	 */
+//	public List<OrderGeneralVO> getAllHotelAbnormalOrderGeneral(final String hotelID) {
+//		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+//		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+//				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+//				OrderState.ABNORMAL, false, false, "zhangsan","13554321234"));
+//		return orderGenerals;
+//	}
 	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
-	 * @param guestID 客户要查看个人<所有未评价>订单时，客户的编号
-	 * @return 客户个人<所有未评价>订单
-	 */
-	public List<OrderGeneralVO> getAllGuestUncommentedOrderGeneral(final String guestID) {
-		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
-		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.EXECUTED, false, true, "zhangsan","13554321234"));
-		return orderGenerals;
-	}
-	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/10
-	 * @param guestID 客户编号
-	 * @param hotelID 目标酒店编号
-	 * @return 客户在目标酒店的所有订单记录
-	 */
-	public Iterator<OrderGeneralVO> getMyOrdersOfThisHotel(String guestID, String hotelID) {
-		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
-		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.EXECUTED, false, true, "zhangsan","13554321234"));
-		return orderGenerals.iterator();
-	}
-	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/5
-	 * @param hotelID 酒店要查看本酒店所有订单时，酒店的编号
-	 * @return 此酒店所有的所有订单
-	 */
-	public List<OrderGeneralVO> getAllHotelOrderGeneral(final String hotelID) {
-		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
-		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.EXECUTED, false, true, "zhangsan","13554321234"));
-		return orderGenerals;
-	}
-
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
-	 * @param hotelID 酒店要查看本酒店<所有未执行>订单时，酒店的编号
-	 * @return 此酒店<所有未执行>的所有订单
-	 */
-	public List<OrderGeneralVO> getAllHotelUnexecutedOrderGeneral(final String hotelID) {
-		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
-		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.UNEXECUTED, false, false, "zhangsan","13554321234"));
-		return orderGenerals;
-	}
-	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
-	 * @param hotelID 酒店要查看本酒店<所有已执行>订单时，酒店的编号
-	 * @return 此酒店<所有已执行>订单
-	 */
-	public List<OrderGeneralVO> getAllHotelExecutedOrderGeneral(final String hotelID) {
-		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
-		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.EXECUTED, false, true, "zhangsan","13554321234"));
-		return orderGenerals;
-	}
-	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
-	 * @param hotelID 酒店要查看本酒店<所有异常>订单时，酒店的编号
-	 * @return 此酒店所有异常>订单
-	 */
-	public List<OrderGeneralVO> getAllHotelAbnormalOrderGeneral(final String hotelID) {
-		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
-		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.ABNORMAL, false, false, "zhangsan","13554321234"));
-		return orderGenerals;
-	}
-	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/7
-	 * @param hotelID 酒店要查看本酒店<所有已撤销>订单时，酒店的编号
-	 * @return 此酒店<所有已撤销>订单
-	 */
-	public List<OrderGeneralVO> getAllHotelCancelledOrderGeneral(final String hotelID) {
-		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
-		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.CANCELLED, false, false, "zhangsan","13554321234"));
-		return orderGenerals;
-	}
+//	/**
+//	 * @author charles
+//	 * @lastChangedBy charles
+//	 * @updateTime 2016/12/7
+//	 * @param hotelID 酒店要查看本酒店<所有已撤销>订单时，酒店的编号
+//	 * @return 此酒店<所有已撤销>订单
+//	 */
+//	public List<OrderGeneralVO> getAllHotelCancelledOrderGeneral(final String hotelID) {
+//		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+//		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+//				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+//				OrderState.CANCELLED, false, false, "zhangsan","13554321234"));
+//		return orderGenerals;
+//	}
 	
 	/**
 	 * @author charles
@@ -342,19 +342,19 @@ public class OrderBLService_Stub implements OrderBLService {
 		return orderGenerals;
 	}
 	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/5
-	 * @return 网站营销人员需要查看的所有的异常订单，按倒序排列
-	 */
-	public List<OrderGeneralVO> getAllAbnormalOrderGeneral() {
-		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
-		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
-				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
-				OrderState.ABNORMAL, false, false, "zhangsan","13554321234"));
-		return orderGenerals;
-	}
+//	/**
+//	 * @author charles
+//	 * @lastChangedBy charles
+//	 * @updateTime 2016/12/5
+//	 * @return 网站营销人员需要查看的所有的异常订单，按倒序排列
+//	 */
+//	public List<OrderGeneralVO> getAllAbnormalOrderGeneral() {
+//		final List<OrderGeneralVO> orderGenerals = new ArrayList<OrderGeneralVO>();
+//		orderGenerals.add(new OrderGeneralVO("123456789012", "1234567890", "12345678", "thisHotel", "address", 
+//				200, LocalDateTime.of(2016, 2, 3, 14, 0), LocalDateTime.of(2016, 2, 4, 12, 0), 
+//				OrderState.ABNORMAL, false, false, "zhangsan","13554321234"));
+//		return orderGenerals;
+//	}
 
 	/**
 	 * @author charles
@@ -484,12 +484,18 @@ public class OrderBLService_Stub implements OrderBLService {
 
 	@Override
 	public int getCalculatedPrice(PreOrderVO preOrderVO) {
-		// TODO 自动生成的方法存根
+		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public Iterator<OrderGeneralVO> getAllHotelCheckOutOrderGeneral(String hotelID, boolean hasCheckOut) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Iterator<OrderGeneralVO> getMyOrdersOfThisHotel(String guestID, String hotelID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
