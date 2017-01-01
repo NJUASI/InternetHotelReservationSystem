@@ -75,7 +75,7 @@ public class LogIn{
 
 		if (!tempPassword.equals(password)) {
 			throw new WrongPasswordException();
-		} // 密码不正确, 登录失败
+		}
 
 		return userType;
 	}

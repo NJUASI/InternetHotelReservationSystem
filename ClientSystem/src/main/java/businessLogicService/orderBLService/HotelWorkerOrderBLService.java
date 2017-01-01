@@ -2,6 +2,8 @@ package businessLogicService.orderBLService;
 
 import java.util.Iterator;
 
+import exception.verificationException.CheckInException;
+import exception.verificationException.CheckOutException;
 import utilities.enums.ResultMessage;
 import vo.CheckInVO;
 import vo.CheckOutVO;
@@ -31,8 +33,9 @@ public interface HotelWorkerOrderBLService {
 	 * @updateTime 2016/12/4
 	 * @param checkInVO 酒店工作人员更新订单入住信息
 	 * @return 是否成功更新
+	 * @throws CheckInException 
 	 */
-	ResultMessage updateCheckIn(CheckInVO checkInVO);
+	ResultMessage updateCheckIn(CheckInVO checkInVO) throws CheckInException;
 
 	/**
 	 * @author charles
@@ -40,8 +43,9 @@ public interface HotelWorkerOrderBLService {
 	 * @updateTime 2016/12/4
 	 * @param checkOutVO 酒店工作人员更新订单退房信息
 	 * @return 是否成功更新
+	 * @throws CheckOutException 
 	 */
-	ResultMessage updateCheckOut(CheckOutVO checkOutVO);
+	ResultMessage updateCheckOut(CheckOutVO checkOutVO) throws CheckOutException;
 	
 	/**
 	 * @author charles

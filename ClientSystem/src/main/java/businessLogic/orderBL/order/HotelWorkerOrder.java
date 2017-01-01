@@ -14,6 +14,8 @@ import businessLogicService.creditBLService.CreditBLService;
 import businessLogicService.orderBLService.HotelWorkerOrderBLService;
 import businessLogicService.userBLService.UserBLService;
 import dataService.orderDataService.OrderDataService;
+import exception.verificationException.CheckInException;
+import exception.verificationException.CheckOutException;
 import exception.verificationException.UserInexistException;
 import po.CheckInPO;
 import po.CheckOutPO;
@@ -127,15 +129,22 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 	 * @updateTime 2016/12/15
 	 * @param checkInVO 酒店工作人员更新订单入住信息
 	 * @return 是否成功更新
+	 * @throws CheckInException 
 	 */
-	public ResultMessage updateCheckIn (CheckInVO checkInVO) {
+	public ResultMessage updateCheckIn (CheckInVO checkInVO) throws CheckInException {
 		ResultMessage msg1 = ResultMessage.FAIL;
 		ResultMessage msg2 = ResultMessage.FAIL;
 		
 		final OrderVO thisOrder = commonOrder.getOrderDetail(checkInVO.orderID);
-		final OrderState thisOrderState = thisOrder.orderGeneralVO.state;
+		final OrderState thisOrderState = thisOrder.orderGeneralVO.state;	
 		
 		if (thisOrderState == OrderState.UNEXECUTED || thisOrderState == OrderState.ABNORMAL) {
+
+			// 检查入住日期的正确
+			if (checkInVO.checkInTime.toLocalDate() != thisOrder.orderGeneralVO.expectExecuteTime.toLocalDate()) {
+				throw new CheckInException();
+			}
+			
 			try {
 		
 				//更新订单入住信息和状态
@@ -179,11 +188,19 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 	 * @updateTime 2016/12/8
 	 * @param checkInVO 酒店工作人员更新订单退房信息
 	 * @return 是否成功更新
+	 * @throws CheckOutException 
 	 */
-	public ResultMessage updateCheckOut (CheckOutVO checkOutVO) {
+	public ResultMessage updateCheckOut (CheckOutVO checkOutVO) throws CheckOutException {
 		ResultMessage msg1 = ResultMessage.FAIL;
 		ResultMessage msg2 = ResultMessage.FAIL;
 		
+		OrderVO thisOrder = commonOrder.getOrderDetail(checkOutVO.orderID);
+		
+		// 检查入住日期的正确
+		if (checkOutVO.checkOutTime.toLocalDate() != thisOrder.orderGeneralVO.expectLeaveTime.toLocalDate()) {
+			throw new CheckOutException();
+		}
+
 		//更新订单
 		try {
 			msg1 = orderDataService.updateCheckOut((new CheckOutPO(checkOutVO)));
@@ -192,7 +209,6 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 		}
 
 		//更新酒店剩余房间信息
-		OrderVO thisOrder = commonOrder.getOrderDetail(checkOutVO.orderID);
 		msg2 = hotelInterface.checkOut(thisOrder.orderGeneralVO.hotelID, thisOrder.roomType, thisOrder.roomNumCount);
 		
 		if (msg1 == ResultMessage.SUCCESS && msg2 == ResultMessage.SUCCESS) {
@@ -225,4 +241,5 @@ public class HotelWorkerOrder implements HotelWorkerOrderBLService {
 		}
 		return result.iterator();
 	}
+
 }

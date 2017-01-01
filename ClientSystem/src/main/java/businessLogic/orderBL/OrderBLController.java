@@ -13,6 +13,8 @@ import businessLogic.orderBL.order.WebMarketerOrder;
 import businessLogic.promotionBL.DiscountCalculator;
 import businessLogic.promotionBL.DiscountInSpan;
 import businessLogicService.orderBLService.OrderBLService;
+import exception.verificationException.CheckInException;
+import exception.verificationException.CheckOutException;
 import exception.verificationException.UserInexistException;
 import utilities.enums.OrderState;
 import utilities.enums.ResultMessage;
@@ -220,7 +222,7 @@ public final class OrderBLController implements OrderBLService {
 	 * @param checkInVO 酒店工作人员更新订单入住信息
 	 * @return 是否成功更新
 	 */
-	public ResultMessage updateCheckIn (CheckInVO checkInVO) {
+	public ResultMessage updateCheckIn (CheckInVO checkInVO) throws CheckInException {
 		return hotelWorkerOrder.updateCheckIn(checkInVO);
 	}
 
@@ -231,7 +233,7 @@ public final class OrderBLController implements OrderBLService {
 	 * @param checkInVO 酒店工作人员更新订单退房信息
 	 * @return 是否成功更新
 	 */
-	public ResultMessage updateCheckOut (CheckOutVO checkOutVO) {
+	public ResultMessage updateCheckOut (CheckOutVO checkOutVO) throws CheckOutException {
 		return hotelWorkerOrder.updateCheckOut(checkOutVO);
 	}
 
