@@ -55,12 +55,12 @@ public class HotelDataService_Stub extends UnicastRemoteObject implements HotelD
 
 	@Override
 	public ResultMessage addRoomInfo(RoomInfoPO roomInfoPO) throws RemoteException {
-		return null;
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
 	public ResultMessage addHotelInfo(HotelPO hotelPO) throws RemoteException {
-		return null;
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override

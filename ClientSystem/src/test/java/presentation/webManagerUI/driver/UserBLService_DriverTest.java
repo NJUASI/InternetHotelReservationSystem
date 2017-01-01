@@ -7,7 +7,14 @@ import java.time.LocalDate;
 import org.junit.Test;
 
 import businessLogic.userBL.stub.UserBLService_Stub;
-import utilities.ResultMessage;
+import exception.inputException.InvalidInputException;
+import exception.inputException.InvalidLengthInputException;
+import exception.inputException.PasswordInputException;
+import exception.operationFailedException.UpdateFaiedException;
+import exception.verificationException.ParameterInvalidException;
+import exception.verificationException.UserInexistException;
+import utilities.enums.ResultMessage;
+import utilities.enums.UserType;
 import vo.GuestVO;
 import vo.UserVO;
 
@@ -20,7 +27,13 @@ public class UserBLService_DriverTest {
 		UserBLService_Driver driver = new UserBLService_Driver(stub);
 		UserVO guestVO = new GuestVO("1234567890", LocalDate.of(1996, 4, 1), "school", "zhangsan", "xiaosan",
 				"000000", "13523456789", 100);
-		assertEquals(ResultMessage.SUCCESS, driver.userBLService.add(guestVO));
+		try {
+			assertEquals("1234567890", driver.userBLService.add(guestVO,UserType.GUEST).userID);
+		} catch (ParameterInvalidException e) {
+			e.printStackTrace();
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Test
@@ -28,7 +41,19 @@ public class UserBLService_DriverTest {
 		//test interface modify
 		UserBLService_Stub stub = new UserBLService_Stub();
 		UserBLService_Driver driver = new UserBLService_Driver(stub);
-		assertEquals(ResultMessage.SUCCESS, driver.userBLService.modify(new UserVO("1234567890", "000000")));
+		try {
+			assertEquals(ResultMessage.SUCCESS, driver.userBLService.modify(new UserVO("1234567890", "000000")));
+		} catch (InvalidLengthInputException e) {
+			e.printStackTrace();
+		} catch (InvalidInputException e) {
+			e.printStackTrace();
+		} catch (PasswordInputException e) {
+			e.printStackTrace();
+		} catch (UpdateFaiedException e) {
+			e.printStackTrace();
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

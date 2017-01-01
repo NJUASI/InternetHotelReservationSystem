@@ -7,7 +7,8 @@ import java.time.LocalDate;
 import org.junit.Test;
 
 import businessLogic.memberBL.stub.MemberBLService_Stub;
-import utilities.ResultMessage;
+import exception.verificationException.UserInexistException;
+import utilities.enums.ResultMessage;
 import vo.MemberVO;
 
 public class MemberBLService_DriverTest {
@@ -17,8 +18,12 @@ public class MemberBLService_DriverTest {
 		//test interface add
 		MemberBLService_Stub stub = new MemberBLService_Stub();
 		MemberBLService_Driver driver = new MemberBLService_Driver(stub);
-		assertEquals(ResultMessage.SUCCESS, driver.memberBLService.add(new MemberVO("1234567890", 
-				LocalDate.of(1995, 1, 1), "NJU")));
+		try {
+			assertEquals(ResultMessage.SUCCESS, driver.memberBLService.add(new MemberVO("1234567890", 
+					LocalDate.of(1995, 1, 1), "NJU")));
+		} catch (UserInexistException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
