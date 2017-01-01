@@ -65,6 +65,7 @@ public class HotelInfoController {
 	protected void addHotel(){
 		
 		try {
+			 hotelName.setText("");
 			HotelVO newHotel = new HotelVO();
 			newHotel.hotelName = hotelName.getText();
 			newHotel.city = cityInput.getValue();
@@ -72,12 +73,12 @@ public class HotelInfoController {
 			newHotel.level = String.valueOf(levelInput.getValue());
 			newHotel.address = address.getText();
 			newHotel.equipment=equipment.getText();
-			HotelVO hotelVO = userBLController.addHotel(newHotel);
 			
-			if(hotelVO == null){
-				new PopUp("添加失败", "congratulation");	
+			if(hotelName.getText().equals("")||address.getText().equals("")){
+				new PopUp("请填写酒店名和地址", "");	
 			}else{
-				new PopUp("添加成功\n你的账号是"+hotelVO.hotelID+"\n你的密码是qwertyuiop123456", "congratulation");	
+				HotelVO hotelVO = userBLController.addHotel(newHotel);
+				new PopUp("添加成功\n你的账号是"+hotelVO.hotelID+"\n你的密码是qwertyuiop123456", "");	
 			}
 		} catch (UserInexistException e) {
 			e.printStackTrace();
