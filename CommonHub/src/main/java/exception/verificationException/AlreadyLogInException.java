@@ -8,6 +8,11 @@ package exception.verificationException;
  */
 public class AlreadyLogInException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2075971249677613469L;
+
 	@Override
 	public void printStackTrace() {
 		System.out.println("该用户已登录，请勿重复登录");

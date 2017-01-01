@@ -9,6 +9,8 @@ import java.util.List;
 
 import businessLogic.orderBL.OrderBLController;
 import businessLogicService.orderBLService.OrderBLService;
+import exception.verificationException.CheckInException;
+import exception.verificationException.CheckOutException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -358,7 +360,14 @@ public class OrderController {
 
 			final CheckInVO checkInVO = new CheckInVO(checkInOrderID.getText(), checkInRoomNum.getText(), checkInTime,
 					expectLeaveTime);
-			final ResultMessage result = orderBLController.updateCheckIn(checkInVO);
+			
+			ResultMessage result = ResultMessage.FAIL;
+			try {
+				result = orderBLController.updateCheckIn(checkInVO);
+			} catch (CheckInException e) {
+				e.printStackTrace();
+				new PopUp("该客户预计入住日期与当前日期不符合，请检查后重试", "");
+			}
 			searchUnexecutedOrder();
 			cancel();
 			cancelCheckIn();
@@ -444,7 +453,13 @@ public class OrderController {
 		System.out.println(checkOutVO.orderID);
 		System.out.println(checkOutVO.checkOutTime);
 		
-		final ResultMessage result = orderBLController.updateCheckOut(checkOutVO);
+		ResultMessage result = ResultMessage.FAIL;
+		try {
+			result = orderBLController.updateCheckOut(checkOutVO);
+		} catch (CheckOutException e) {
+			e.printStackTrace();
+			new PopUp("该客户预计离开日期与当前日期不符合，请检查后重试", "");
+		}
 		searchNotCheckOutOrder();
 		cancel();
 		cancelCheckOut();
@@ -453,7 +468,7 @@ public class OrderController {
 			new PopUp("退房成功", "congratulation");	
 						
 		}else {
-			new PopUp("退房失败", "congratulation");	
+			new PopUp("退房失败", "");	
 			
 		}
 	}
