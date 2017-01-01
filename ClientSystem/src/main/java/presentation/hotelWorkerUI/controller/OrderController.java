@@ -353,33 +353,34 @@ public class OrderController {
 	 */
 	@FXML
 	protected void sureCheckIn() {
-		if (checkInLeaveDate != null) {
+		if (!checkInRoomNum.getText().equals("")) {
 			final LocalDateTime checkInTime = LocalDateTime.now();
 			final LocalDateTime expectLeaveTime = LocalDateTime.of(checkInLeaveDate.getValue(),
 					LocalTime.of(Integer.parseInt(checkInHour.getText()), Integer.parseInt(checkInMinute.getText())));
 
-			final CheckInVO checkInVO = new CheckInVO(checkInOrderID.getText(), checkInRoomNum.getText(), checkInTime,
-					expectLeaveTime);
+			final CheckInVO checkInVO = new CheckInVO(checkInOrderID.getText(), checkInRoomNum.getText(), 
+					checkInTime, expectLeaveTime);
 			
 			ResultMessage result = ResultMessage.FAIL;
 			try {
 				result = orderBLController.updateCheckIn(checkInVO);
+
+				searchUnexecutedOrder();
+				cancel();
+				cancelCheckIn();
+				if (result == ResultMessage.SUCCESS) {
+					new PopUp("入住成功", "congratulation");
+					
+					checkInRoomNum.setText("");
+					checkInHour.setText("12");
+					checkInMinute.setText("00");
+				} else {
+					new PopUp("入住失败", "so sorry");
+					
+				}
 			} catch (CheckInException e) {
 				e.printStackTrace();
 				new PopUp("该客户预计入住日期与当前日期不符合，请检查后重试", "");
-			}
-			searchUnexecutedOrder();
-			cancel();
-			cancelCheckIn();
-			if (result == ResultMessage.SUCCESS) {
-				new PopUp("入住成功", "congratulation");
-
-				checkInRoomNum.setText("");
-				checkInHour.setText("12");
-				checkInMinute.setText("00");
-			} else {
-				new PopUp("入住失败", "so sorry");
-
 			}
 		} else {
 			new PopUp("请填写相关信息，谢谢！", "so soory");
