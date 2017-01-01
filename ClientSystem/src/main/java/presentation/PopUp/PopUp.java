@@ -36,7 +36,7 @@ public class PopUp {
 	public PopUp(String message, String operation){
 		 immage=new ImageView();
 		Stage stage2=StageController.getInstance().getStage();
-		stage2.setOpacity(1);
+		stage2.setOpacity(0.6);
 		initWindow();
 //		immage.setY(200);
 //		immage.setX(320);
