@@ -81,7 +81,7 @@ public class ClientRemoteHelper {
 			sourceDataService = (SourceDataService)
 					Naming.lookup(url+"SourceDataService");
 
-			new PopUp("连接成功", "rmi连接");
+//			new PopUp("连接成功", "rmi连接");
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();

@@ -7,7 +7,7 @@ import utilities.enums.ResultMessage;
 
 public interface SpecialSpanPromotionDataHelper {
 
-public List<SpecialSpanPromotionPO> getHotelSpecialSpanPromotion(String hotelID);
+	public List<SpecialSpanPromotionPO> getHotelSpecialSpanPromotion(String hotelID);
 	
 	public List<SpecialSpanPromotionPO> getWebSpecialSpanPromotion();
 	
