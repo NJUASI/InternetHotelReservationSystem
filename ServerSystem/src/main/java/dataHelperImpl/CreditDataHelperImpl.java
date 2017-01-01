@@ -16,7 +16,7 @@ import utilities.enums.ResultMessage;
 
 /**
  * 
- * @author 董金玉 lastChangedBy 董金玉 updateTime 2016/11/30
+ * @author 董金玉 lastChangedBy charles updateTime 20167/1/1
  *
  */
 public class CreditDataHelperImpl implements CreditDataHelper {
@@ -116,32 +116,32 @@ public class CreditDataHelperImpl implements CreditDataHelper {
 		return ResultMessage.SUCCESS;
 	}
 
-	@Override
-	public List<CreditPO> getCreditOfOneOrder(String orderID) {
-		sql = "select * from credit where guestID = ?";
-		final List<CreditPO> result = new ArrayList<CreditPO>();
-
-		try {
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, orderID);
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				final CreditPO creditPO = new CreditPO();
-				creditPO.setGuestID(orderID);
-				creditPO.setTime(TimeChange.string2DateTime(rs.getString(2))); //此处硬编码2-6对应表项中元素的位置，已确定
-				creditPO.setOrderID(String.valueOf(rs.getObject(3)));
-				creditPO.setPreCredit(rs.getDouble(4));
-				creditPO.setAfterCredit(rs.getDouble(5));
-				creditPO.setCreditRecord(CreditRecord.getEnum(rs.getString(6)));
-
-				result.add(creditPO);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
+//	@Override
+//	public List<CreditPO> getCreditOfOneOrder(String orderID) {
+//		sql = "select * from credit where guestID = ?";
+//		final List<CreditPO> result = new ArrayList<CreditPO>();
+//
+//		try {
+//			ps = conn.prepareStatement(sql);
+//			ps.setString(1, orderID);
+//			rs = ps.executeQuery();
+//
+//			while (rs.next()) {
+//				final CreditPO creditPO = new CreditPO();
+//				creditPO.setGuestID(orderID);
+//				creditPO.setTime(TimeChange.string2DateTime(rs.getString(2))); //此处硬编码2-6对应表项中元素的位置，已确定
+//				creditPO.setOrderID(String.valueOf(rs.getObject(3)));
+//				creditPO.setPreCredit(rs.getDouble(4));
+//				creditPO.setAfterCredit(rs.getDouble(5));
+//				creditPO.setCreditRecord(CreditRecord.getEnum(rs.getString(6)));
+//
+//				result.add(creditPO);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return result;
+//	}
 
 	/**
 	 * @author 董金玉

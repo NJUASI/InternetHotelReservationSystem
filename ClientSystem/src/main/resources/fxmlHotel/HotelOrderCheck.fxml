@@ -28,27 +28,27 @@
                   <Image url="@../../../../../../../png%20(1)/hotelWorker/mainOrderList.png" />
                </image>
             </ImageView>
-            <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="781.0" layoutY="129.0" mnemonicParsing="false" onAction="#orderDetail" text="查看详情" />
-            <TableView fx:id="table" blendMode="MULTIPLY" focusTraversable="false" layoutX="28.0" layoutY="171.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="402.0" prefWidth="833.0" tableMenuButtonVisible="true">
+            <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="757.0" layoutY="129.0" mnemonicParsing="false" onAction="#orderDetail" text="查看详情" />
+            <TableView fx:id="table" blendMode="MULTIPLY" focusTraversable="false" layoutX="77.0" layoutY="177.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="403.0" prefWidth="741.0" tableMenuButtonVisible="true">
                <columns>
-                  <TableColumn fx:id="orderIDColumn" prefWidth="113.0" sortable="false" text="订单编号" />
+                  <TableColumn fx:id="orderIDColumn" prefWidth="119.0" sortable="false" text="订单编号" />
                   <TableColumn fx:id="guestIDColumn" prefWidth="113.0" text="客户编号" visible="false" />
-                  <TableColumn fx:id="nameColumn" prefWidth="83.0" sortable="false" text="入住人" />
-                  <TableColumn fx:id="phoneColumn" prefWidth="128.0" sortable="false" text="联系方式" />
-                  <TableColumn fx:id="checkInTimeColumn" prefWidth="157.0" text="预计入住时间" />
-                  <TableColumn fx:id="checkOutTimeColumn" prefWidth="159.0" text="预计离开时间" />
-                  <TableColumn fx:id="priceColumn" prefWidth="82.0" resizable="false" sortable="false" text="价格" />
-                  <TableColumn fx:id="stateColumn" prefWidth="93.0" sortable="false" text="订单状态" />
+                  <TableColumn fx:id="nameColumn" prefWidth="57.0" sortable="false" text="入住人" />
+                  <TableColumn fx:id="phoneColumn" prefWidth="119.0" sortable="false" text="联系方式" />
+                  <TableColumn fx:id="checkInTimeColumn" prefWidth="140.0" text="预计入住时间" />
+                  <TableColumn fx:id="checkOutTimeColumn" prefWidth="140.0" text="预计离开时间" />
+                  <TableColumn fx:id="priceColumn" prefWidth="61.0" resizable="false" sortable="false" text="价格" />
+                  <TableColumn fx:id="stateColumn" prefWidth="83.0" sortable="false" text="订单状态" />
                </columns>
             </TableView>
-            <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="28.0" layoutY="129.0" mnemonicParsing="false" onAction="#searchAlldOrder" text="所有订单" />
-            <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="108.0" layoutY="129.0" mnemonicParsing="false" onAction="#searchExecutedOrder" text="已执行订单" />
-            <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="298.0" layoutY="129.0" mnemonicParsing="false" onAction="#searchUnexecutedOrder" text="未执行订单" />
-            <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="488.0" layoutY="129.0" mnemonicParsing="false" onAction="#searchAbnormalOrder" text="异常订单" />
-            <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="393.0" layoutY="129.0" mnemonicParsing="false" onAction="#searchCancelledOrder" text="已撤销订单" />
+            <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="68.0" layoutY="129.0" mnemonicParsing="false" onAction="#searchAlldOrder" text="所有订单" />
+            <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="148.0" layoutY="129.0" mnemonicParsing="false" onAction="#searchExecutedOrder" text="已执行订单" />
+            <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="338.0" layoutY="129.0" mnemonicParsing="false" onAction="#searchUnexecutedOrder" text="未执行订单" />
+            <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="528.0" layoutY="129.0" mnemonicParsing="false" onAction="#searchAbnormalOrder" text="异常订单" />
+            <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="433.0" layoutY="129.0" mnemonicParsing="false" onAction="#searchCancelledOrder" text="已撤销订单" />
             <Button fx:id="checkInBt1" blendMode="MULTIPLY" focusTraversable="false" layoutX="667.0" layoutY="129.0" mnemonicParsing="false" onAction="#checkIn2" text="入住" />
             <Button fx:id="checkOutBt1" blendMode="MULTIPLY" focusTraversable="false" layoutX="667.0" layoutY="129.0" mnemonicParsing="false" onAction="#checkOut2" text="退房" />
-            <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="203.0" layoutY="129.0" mnemonicParsing="false" onAction="#searchNotCheckOutOrder" text="未退房订单" />
+            <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="243.0" layoutY="129.0" mnemonicParsing="false" onAction="#searchNotCheckOutOrder" text="未退房订单" />
          </children>
       </AnchorPane>
       <Pane fx:id="orderDetail" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="895.0" visible="false">
@@ -144,71 +144,55 @@
             </AnchorPane>
          </children>
       </Pane>
-      <Pane fx:id="checkInPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="361.0" prefWidth="500.0" visible="false">
+      <Pane fx:id="checkInPane" blendMode="MULTIPLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="361.0" prefWidth="500.0" visible="false">
          <children>
-            <Button focusTraversable="false" layoutX="354.0" layoutY="166.0" mnemonicParsing="false" onAction="#cancelCheckIn" text="取消入住" />
-            <Label layoutX="55.0" layoutY="259.0" text="预计离开时间：" />
-            <Label layoutX="55.0" layoutY="204.0" text="预计离开日期：" />
-            <DatePicker fx:id="checkInLeaveDate" focusTraversable="false" layoutX="176.0" layoutY="199.0" prefHeight="30.0" prefWidth="158.0" />
-            <GridPane layoutX="55.0" layoutY="57.0" prefHeight="133.0" prefWidth="278.0">
-               <children>
-                  <Label text="订单号：" />
-                  <Label text="客户姓名：" GridPane.rowIndex="1" />
-                  <Label text="房间号：" GridPane.rowIndex="2" />
-                  <Label fx:id="checkInName" text="姓名" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label fx:id="checkInOrderID" text="订单号" GridPane.columnIndex="1" />
-                  <TextField fx:id="checkInRoomNum" focusTraversable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-               </children>
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="128.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="166.0" minWidth="10.0" prefWidth="166.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-            <Button focusTraversable="false" layoutX="353.0" layoutY="101.0" mnemonicParsing="false" onAction="#sureCheckIn" text="确定入住" />
-            <HBox layoutX="176.0" layoutY="254.0" prefHeight="30.0" prefWidth="194.0">
+            <ImageView fx:id="rightImage3" blendMode="MULTIPLY" fitHeight="360.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../1111111/mainCheckIn.png" />
+               </image>
+            </ImageView>
+            <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="142.0" layoutY="310.0" mnemonicParsing="false" onAction="#cancelCheckIn" text="取消入住" />
+            <DatePicker fx:id="checkInLeaveDate" blendMode="MULTIPLY" focusTraversable="false" layoutX="222.0" layoutY="215.0" prefHeight="30.0" prefWidth="158.0" />
+            <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="273.0" layoutY="310.0" mnemonicParsing="false" onAction="#sureCheckIn" text="确定入住" />
+            <HBox blendMode="MULTIPLY" layoutX="222.0" layoutY="246.0" prefHeight="30.0" prefWidth="158.0">
                <children>
                   <TextField fx:id="checkInHour" focusTraversable="false" prefHeight="30.0" prefWidth="46.0" />
                   <Label prefHeight="30.0" prefWidth="22.0" text=" ：" />
-                  <TextField fx:id="checkInMinute" focusTraversable="false" prefHeight="30.0" prefWidth="46.0" />
+                  <TextField fx:id="checkInMinute" focusTraversable="false" prefHeight="30.0" prefWidth="51.0" />
                </children>
             </HBox>
-            <Label layoutX="209.0" layoutY="14.0" text="订单入住">
+            <Label fx:id="checkInOrderID" layoutX="209.0" layoutY="96.0" text="订单号">
                <font>
-                  <Font size="23.0" />
+                  <Font size="19.0" />
                </font>
             </Label>
+            <Label fx:id="checkInName" layoutX="210.0" layoutY="127.0" text="姓名">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <TextField fx:id="checkInRoomNum" blendMode="MULTIPLY" focusTraversable="false" layoutX="207.0" layoutY="157.0" prefHeight="30.0" prefWidth="170.0" />
          </children>
       </Pane>
-      <Pane fx:id="checkOutPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="329.0" prefWidth="500.0" visible="false">
+      <Pane fx:id="checkOutPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="500.0" visible="false">
          <children>
-            <GridPane layoutX="65.0" layoutY="60.0" prefHeight="133.0" prefWidth="278.0">
-               <children>
-                  <Label text="订单号：" />
-                  <Label text="客户姓名：" GridPane.rowIndex="1" />
-                  <Label fx:id="checkOutName" text="姓名" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label fx:id="checkOutOrderID" text="订单号" GridPane.columnIndex="1" />
-               </children>
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="128.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="166.0" minWidth="10.0" prefWidth="166.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-            <Button focusTraversable="false" layoutX="353.0" layoutY="84.0" mnemonicParsing="false" onAction="#sureCheckOut" text="确定退房" />
-            <Label layoutX="204.0" layoutY="-1.0" text="订单退房">
+            <ImageView fx:id="rightImage4" blendMode="MULTIPLY" fitHeight="360.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../1111111/mainCheckOut.png" />
+               </image>
+            </ImageView>
+            <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="272.0" layoutY="290.0" mnemonicParsing="false" onAction="#sureCheckOut" text="确定退房" />
+            <Button blendMode="MULTIPLY" focusTraversable="false" layoutX="135.0" layoutY="290.0" mnemonicParsing="false" onAction="#cancelCheckOut" text="取消退房" />
+            <Label fx:id="checkOutOrderID" layoutX="215.0" layoutY="148.0" text="订单号">
                <font>
-                  <Font size="23.0" />
+                  <Font size="19.0" />
                </font>
             </Label>
-            <Button focusTraversable="false" layoutX="353.0" layoutY="150.0" mnemonicParsing="false" onAction="#cancelCheckOut" text="取消退房" />
+            <Label fx:id="checkOutName" layoutX="215.0" layoutY="207.0" text="姓名">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

@@ -12,7 +12,7 @@ import vo.CreditVO;
  * 
  * @author 61990
  * @lastChangedBy charles
- * @updateTime 2016/12/9
+ * @updateTime 2017/1/1
  */
 public final class CreditController implements CreditBLService {
 
@@ -53,17 +53,17 @@ public final class CreditController implements CreditBLService {
 		return credit.getAllCreditDetail(guestID);
 	}
 	
-	/**
-	 * @author 61990
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/9
-	 * @param orderID 从登录界面层传下来的订单编号
-	 * @return 客户个人此订单的信用记录
-	 */
-	@Override
-	public Iterator<CreditVO> getCreditOfOneOrder(String orderID) {
-		return credit.getCreditOfOneOrder(orderID);
-	}
+//	/**
+//	 * @author 61990
+//	 * @lastChangedBy charles
+//	 * @updateTime 2017/1/1
+//	 * @param orderID 从登录界面层传下来的订单编号
+//	 * @return 客户个人此订单的信用记录
+//	 */
+//	@Override
+//	public Iterator<CreditVO> getCreditOfOneOrder(String orderID) {
+//		return credit.getCreditOfOneOrder(orderID);
+//	}
 
 	/**
 	 * @author 61990

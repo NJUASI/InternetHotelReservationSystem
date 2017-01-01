@@ -32,7 +32,7 @@ public class WebManagerViewController {
 	void initialize(){
 			String userID = IDReserve.getInstance().getUserID();
 			ID.setText(userID);
-
+			changePicture(rightImage,"mainHomeWebManager.png");
 			initImage();
 	}
 

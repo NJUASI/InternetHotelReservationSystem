@@ -107,15 +107,6 @@ public interface OrderDataService extends Remote {
 	/**
 	 * @author charles
 	 * @lastChangedBy charles
-	 * @updateTime 2016/11/27
-	 * @return 网站营销人员需要查看的所有的异常订单，按倒序排列
-	 * @throws RemoteException RMI
-	 */
-	List<OrderGeneralPO> getAllAbnormalOrderGeneral() throws RemoteException;
-	
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
 	 * @updateTime 2016/11/29
 	 * @param date 网站营销人员查看未执行订单时输入的指定日期
 	 * @return 网站营销人员需要查看的当天所有的未执行订单

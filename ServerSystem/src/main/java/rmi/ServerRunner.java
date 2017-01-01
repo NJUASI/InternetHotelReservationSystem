@@ -1,8 +1,10 @@
 package rmi;
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -33,6 +35,7 @@ public class ServerRunner {
 		jFrame.setBounds(((int) dimension.getWidth() - 500) / 2, ((int) dimension.getHeight() - 400) / 2, 500, 400);
 		jFrame.setResizable(false);
 		jFrame.setLayout(null);
+//		jFrame.setIconImage(new ImageIcon(this.getClass().getResource("logo.png")).getImage());
 		JLabel label = new JLabel("welcome");
 		label.setBounds(220, 195, 80, 10);
 		jFrame.add(label);

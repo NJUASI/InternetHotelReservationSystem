@@ -21,11 +21,6 @@
          <children>
             <Pane fx:id="mainPane" prefHeight="601.0" prefWidth="895.0">
                <children>
-                  <Label layoutX="417.0" layoutY="277.0" text="ASI">
-                     <font>
-                        <Font size="41.0" />
-                     </font>
-                  </Label>
                   <ImageView fx:id="rightImage" fitHeight="601.0" fitWidth="895.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>

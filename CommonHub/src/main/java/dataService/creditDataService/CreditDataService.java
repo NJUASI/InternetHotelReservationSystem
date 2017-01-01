@@ -20,5 +20,5 @@ public interface CreditDataService extends Remote{
 
 	public ResultMessage addCredit(CreditPO creditPO) throws RemoteException;
 	
-	public List<CreditPO> getCreditOfOneOrder(String guestID) throws RemoteException;
+//	public List<CreditPO> getCreditOfOneOrder(String guestID) throws RemoteException;
 }

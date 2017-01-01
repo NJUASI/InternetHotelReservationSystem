@@ -265,11 +265,11 @@ public class LogInViewController {
 	}
 	@FXML
 	protected void enter2(){
-		changePicture(rmiBT2,"connect.png");
+		changePicture(rmiBT2,"connectEnter.png");
 	}
 	@FXML
 	protected void excited2(){
-		changePicture(rmiBT2,"connectEnter.png");
+		changePicture(rmiBT2,"connect.png");
 	}
 
 }

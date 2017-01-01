@@ -40,7 +40,7 @@ public class WebMarketerViewController {
 	void initialize(){
 			String userID = IDReserve.getInstance().getUserID();
 			ID.setText(userID);
-
+			changePicture(rightImage,"mainHomeWebMarketer.png");
 			initImage();
 	}
 

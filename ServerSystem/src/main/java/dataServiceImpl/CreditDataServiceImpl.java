@@ -32,9 +32,9 @@ public class CreditDataServiceImpl extends UnicastRemoteObject implements Credit
 		return creditDataHelper.addCredit(creditPO);
 	}
 
-	@Override
-	public List<CreditPO> getCreditOfOneOrder(String guestID) throws RemoteException {
-		return creditDataHelper.getCreditOfOneOrder(guestID);
-	}
+//	@Override
+//	public List<CreditPO> getCreditOfOneOrder(String guestID) throws RemoteException {
+//		return creditDataHelper.getCreditOfOneOrder(guestID);
+//	}
 
 }

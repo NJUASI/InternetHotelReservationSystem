@@ -193,18 +193,6 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 	 * @author charles
 	 * @lastChangedBy charles
 	 * @updateTime 2016/12/5
-	 * @return 网站营销人员需要查看的所有的异常订单，按倒序排列
-	 * @throws RemoteException RMI
-	 */
-	@Override
-	public List<OrderGeneralPO> getAllAbnormalOrderGeneral() throws RemoteException {
-		return convertPOsToDecodedGenerals(orderDataHelper.getAbnormal());
-	}
-
-	/**
-	 * @author charles
-	 * @lastChangedBy charles
-	 * @updateTime 2016/12/5
 	 * @param date 网站营销人员查看未执行订单时输入的指定日期
 	 * @return 网站营销人员需要查看的当天所有的未执行订单
 	 * @throws RemoteException RMI
@@ -380,6 +368,17 @@ public class OrderDataServiceImpl extends UnicastRemoteObject implements OrderDa
 		return temp.substring(0, 4) + temp.substring(5, 7) + temp.substring(8);
 	}
 
+	/**
+	 * @author charles
+	 * @lastChangedBy charles
+	 * @updateTime 2016/12/5
+	 * @return 网站营销人员需要查看的所有的异常订单，按倒序排列
+	 * @throws RemoteException RMI
+	 */
+	private List<OrderGeneralPO> getAllAbnormalOrderGeneral() throws RemoteException {
+		return convertPOsToDecodedGenerals(orderDataHelper.getAbnormal());
+	}
+	
 	/**
 	 * @author charles
 	 * @lastChangedBy charles

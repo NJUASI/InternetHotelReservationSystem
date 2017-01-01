@@ -52,8 +52,9 @@ public class HotelWorkerViewController {
 	 */
 	@FXML
 	private void initialize() {
-		HotelVO hotelVO = hotelBLController.getHotelInfo(hotelID);
 		
+		HotelVO hotelVO = hotelBLController.getHotelInfo(hotelID);
+		changePicture(rightImage,"mainHomeHW.png");
 		infoBt.setText(hotelVO.hotelID);
 		initImage();
 	}

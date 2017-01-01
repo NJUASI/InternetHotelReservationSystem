@@ -52,10 +52,10 @@ public class CreditBLService_Stub implements CreditBLService {
 		return null;
 	}
 
-	@Override
-	public Iterator<CreditVO> getCreditOfOneOrder(String orderID) {
-		return null;
-	}
+//	@Override
+//	public Iterator<CreditVO> getCreditOfOneOrder(String orderID) {
+//		return null;
+//	}
 
 
 	@Override

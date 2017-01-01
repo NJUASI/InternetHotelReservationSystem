@@ -23,16 +23,17 @@ import vo.GuestVO;
 /**
  * 
  * @author 61990
- * lastChangedBy Harvey Gong
- * updateTime 2016/12/5
+ * lastChangedBy charles
+ * updateTime 2017/1/1
  *
  */
 public class Credit{
 
-	private GuestCreditService guest;
 	
 	private CreditDataService creditDataService;
 	
+	private GuestCreditService guest;
+
 	private UserBLService userController;
 
 	/**
@@ -62,23 +63,23 @@ public class Credit{
 		}
 	}
 	
-	/**
-	 * @Description 查看关于某一订单的所有信用变化
-	 * @param guestID
-	 * @param orderID
-	 * @return Iterator<CreditVO>
-	 * @author: Harvey Gong
-	 * @lastChangedBy: Harvey Gong
-	 * @time:2016年12月5日 下午1:37:49
-	 */
-	public Iterator<CreditVO> getCreditOfOneOrder(String orderID){
-		try {
-			return convertPOListToItr(creditDataService.getCreditOfOneOrder(orderID));
-		} catch (RemoteException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+//	/**
+//	 * @Description 查看关于某一订单的所有信用变化
+//	 * @param guestID
+//	 * @param orderID
+//	 * @return Iterator<CreditVO>
+//	 * @author: Harvey Gong
+//	 * @lastChangedBy: Harvey Gong
+//	 * @time:2016年12月5日 下午1:37:49
+//	 */
+//	public Iterator<CreditVO> getCreditOfOneOrder(String orderID){
+//		try {
+//			return convertPOListToItr(creditDataService.getCreditOfOneOrder(orderID));
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
 	
 	/**
 	 * @author Harvey

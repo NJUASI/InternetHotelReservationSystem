@@ -115,6 +115,7 @@ public class PromotionController {
 			}
 		};
 		endDatePicker.setDayCellFactory(dayCellFactory);
+		
 		Iterator<SpecialSpanPromotionVO> spanVOs = promotionBLController.getHotelSpecialSpanPromotions(hotelID);
 
 		table.getItems().clear();

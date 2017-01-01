@@ -12,8 +12,8 @@ import utilities.enums.ResultMessage;
 /**
  * 
  * @author 董金玉 
- * @lastChangedBy Harvey
- * @updateTime 2016/12/5
+ * @lastChangedBy charles
+ * @updateTime 2017/1/1
  *
  */
 public class CreditDataHelperImpl_Stub implements CreditDataHelper {
@@ -48,21 +48,21 @@ public class CreditDataHelperImpl_Stub implements CreditDataHelper {
 		return ResultMessage.SUCCESS;
 	}
 
-	/**
-	 * @Description:获取一个订单的所有信用变化记录
-	 * @param guestID
-	 * @return
-	 * @author: Harvey Gong
-	 * @lastChangedBy: Harvey Gong
-	 * @time:2016年12月6日 上午2:21:22
-	 */
-	@Override
-	public List<CreditPO> getCreditOfOneOrder(String guestID) {
-		List<CreditPO> list = new ArrayList<CreditPO>();
-		list.add(new CreditPO("1234567891", LocalDateTime.of(2016, 10, 2, 18, 12), "123420161002", 100, 0, CreditRecord.OVERDUE));
-		list.add(new CreditPO("1234567891", LocalDateTime.of(2016, 10, 2, 18, 12), "123420161002", 0, 100, CreditRecord.UNDO_ABNORMAL));
-		return list;
-	}
+//	/**
+//	 * @Description:获取一个订单的所有信用变化记录
+//	 * @param guestID
+//	 * @return
+//	 * @author: Harvey Gong
+//	 * @lastChangedBy: Harvey Gong
+//	 * @time:2016年12月6日 上午2:21:22
+//	 */
+//	@Override
+//	public List<CreditPO> getCreditOfOneOrder(String guestID) {
+//		List<CreditPO> list = new ArrayList<CreditPO>();
+//		list.add(new CreditPO("1234567891", LocalDateTime.of(2016, 10, 2, 18, 12), "123420161002", 100, 0, CreditRecord.OVERDUE));
+//		list.add(new CreditPO("1234567891", LocalDateTime.of(2016, 10, 2, 18, 12), "123420161002", 0, 100, CreditRecord.UNDO_ABNORMAL));
+//		return list;
+//	}
 	
 	/**
 	 * @author 董金玉
