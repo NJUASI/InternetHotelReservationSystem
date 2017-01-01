@@ -11,121 +11,110 @@ import utilities.enums.SearchCriteriaType;
 import utilities.enums.SortStrategy;
 import vo.CheckInVO;
 import vo.CheckOutVO;
-import vo.HotelEvaluationVO;
 import vo.HotelVO;
 import vo.RoomInfoVO;
 import vo.SearchCriteriaVO;
 
 public class HotelBLService_Stub implements HotelBLService{
-
+	List<RoomInfoVO> roomList;
+	List<HotelVO> hotelList;
+	
 	public HotelBLService_Stub() {
-
+		roomList = new ArrayList<RoomInfoVO>();
+		roomList.add(new RoomInfoVO("12345678",RoomType.DOUBLE_BED,20,20,100));
+		roomList.add(new RoomInfoVO("12345678",RoomType.SINGLE_BED,20,20,50));
+		
+		hotelList = new ArrayList<HotelVO>();
+		hotelList.add(new HotelVO("12345678","1天", "南京", "center", "address", "4" ,
+				5,123,"good","allEquipment"));
+		hotelList.add(new HotelVO("12345679","2天", "南京", "center", "address", "4" ,
+				5,123,"good","allEquipment"));
 	}
 
 	public HotelVO getHotelInfo(String userID) {
-		return new HotelVO("12345678","thisHotel", "南京", "center", "address", "4" ,
-				5,123,"good","allEquipment");
+		return hotelList.get(0);
 	}
 
 
 	public ResultMessage updateHotelInfo(HotelVO hotelVO) {
-		return null;
+		return ResultMessage.SUCCESS;
 	}
 
 
 	public Iterator<RoomInfoVO> getHotelRoomInfo(String userID) {
-		return null;
+		return roomList.iterator();
 	}
 
 	public ResultMessage updateHotelRoomInfo(RoomInfoVO roomInfoVO) {
-		return null;
+		return ResultMessage.SUCCESS;
 	}
 
 
 	public ResultMessage updateCheckIn(CheckInVO checkInVO) {
-		return null;
+		return ResultMessage.SUCCESS;
 	}
 
 
 	public ResultMessage updateCheckOut(CheckOutVO checkOutVO) {
-		return null;
+		return ResultMessage.SUCCESS;
 	}
 
-	public Iterator<HotelEvaluationVO> getEvaluations(String hotelID) {
-		return null;
-	}
-
-	
-	
 	@Override
 	public Iterator<HotelVO> getHotels(String city,String circle) {
-		List<HotelVO> list = new ArrayList<HotelVO>();
-		list.add(new HotelVO("12345678","thisHotel", "NanJing", "center", "address", "4" ,
-				5,123,"good","allEquipment"));
-		list.add(new HotelVO("12345678","thisHotel", "NanJing", "center", "address", "4" ,
-				5,123,"good","allEquipment"));
-		return list.iterator();
+		return hotelList.iterator();
 	}
 
 	@Override
 	public Iterator<HotelVO> sortHotels(SortStrategy sortStrategy) {
-		return null;
+		return hotelList.iterator();
 	}
 	
 	@Override
 	public Iterator<HotelVO> searchHotels(List<SearchCriteriaType> searchCriteriaTypes, SearchCriteriaVO vo) {
-		return null;
+		return hotelList.iterator();
 	}
 
 	@Override
 	public ResultMessage addHotel(HotelVO hotelVO) {
-		return null;
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
 	public ResultMessage checkInOffline(String hotelID, RoomType RoomName, int roomNum) {
-		// TODO 自动生成的方法存根
-		return null;
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
 	public ResultMessage checkOutOffline(String hotelID, RoomType RoomName, int roomNum) {
-		// TODO 自动生成的方法存根
-		return null;
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
 	public int getRemainRoomNum(String hotelID,RoomType roomType) {
-		return 0;
+		return 10;
 	}
 
 	@Override
 	public int getOriginPrice(String hotelID, RoomType roomType) {
-		// TODO 自动生成的方法存根
-		return 0;
+		return 100;
 	}
 
 	@Override
 	public void setGuestID(String guestID) {
-		// TODO 自动生成的方法存根
-		
 	}
 
 	@Override
 	public void setHotelID(String hotelID) {
-		
 	}
 
 	@Override
 	public ResultMessage addRoomType(RoomInfoVO vo) {
-		// TODO 自动生成的方法存根
-		return null;
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
 	public Iterator<HotelVO> getAllBookedHotels() {
-		// TODO 自动生成的方法存根
-		return null;
+		return hotelList.iterator();
 	}
 
 }

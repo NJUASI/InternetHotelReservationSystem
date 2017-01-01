@@ -19,11 +19,13 @@ public class HotelDataService_Stub extends UnicastRemoteObject implements HotelD
 	@Override
 	public List<HotelPO> getHotels(String city,String circle) {
 		List<HotelPO> list = new ArrayList<HotelPO>();
-		list.add(new HotelPO("12345678", "thisHotel", "NanJing", "center", "address", "5",
+		list.add(new HotelPO("12345678", "1天", "南京", "仙林中心", "1号", "5",
 				3,"good", "allEquipment",5));
-		list.add(new HotelPO("12345677", "thisHotel", "NanJing", "center", "address", "4",
+		list.add(new HotelPO("12345677", "2天", "南京", "仙林中心", "2号", "4",
 				4,"good", "allEquipment",4));
-		list.add(new HotelPO("12345676", "thisHotel", "NanJing", "center", "address", "3",
+		list.add(new HotelPO("12345676", "3天", "南京", "仙林中心", "3号", "3",
+				5,"good", "allEquipment",4));
+		list.add(new HotelPO("12345676", "4天", "北京", "五里屯", "address", "3",
 				5,"good", "allEquipment",4));
 		return list;
 	}
@@ -55,12 +57,12 @@ public class HotelDataService_Stub extends UnicastRemoteObject implements HotelD
 
 	@Override
 	public ResultMessage addRoomInfo(RoomInfoPO roomInfoPO) throws RemoteException {
-		return null;
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
 	public ResultMessage addHotelInfo(HotelPO hotelPO) throws RemoteException {
-		return null;
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
