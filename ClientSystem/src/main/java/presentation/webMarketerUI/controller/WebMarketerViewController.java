@@ -179,59 +179,59 @@ public class WebMarketerViewController {
 	}
 	@FXML
 	protected void enter1(){
-		changePicture(creditBT,"charge.png");
-	}
-	@FXML
-	protected void exited1(){
 		changePicture(creditBT,"chargeEnter.png");
 	}
 	@FXML
-	protected void enter2(){
-		changePicture(commonBT,"commonPromotion.png");
+	protected void exited1(){
+		changePicture(creditBT,"charge.png");
 	}
 	@FXML
-	protected void exited2(){
+	protected void enter2(){
 		changePicture(commonBT,"commonPromotionEnter.png");
 	}
 	@FXML
-	protected void enter3(){
-		changePicture(memberBT,"market.png");
+	protected void exited2(){
+		changePicture(commonBT,"commonPromotion.png");
 	}
 	@FXML
-	protected void exited3(){
+	protected void enter3(){
 		changePicture(memberBT,"marketEnter.png");
 	}
 	@FXML
-	protected void enter4(){
-		changePicture(cycleBT,"circlePromotion.png");
+	protected void exited3(){
+		changePicture(memberBT,"market.png");
 	}
 	@FXML
-	protected void exited4(){
+	protected void enter4(){
 		changePicture(cycleBT,"circlePromotionEnter.png");
 	}
 	@FXML
-	protected void enter5(){
-		changePicture(orderBT,"order.png");
+	protected void exited4(){
+		changePicture(cycleBT,"circlePromotion.png");
 	}
 	@FXML
-	protected void exited5(){
+	protected void enter5(){
 		changePicture(orderBT,"orderEnter.png");
 	}
 	@FXML
-	protected void enter6(){
-		changePicture(signUpBT,"signOut.png");
+	protected void exited5(){
+		changePicture(orderBT,"order.png");
 	}
 	@FXML
-	protected void exited6(){
+	protected void enter6(){
 		changePicture(signUpBT,"signOutEnter.png");
 	}
 	@FXML
+	protected void exited6(){
+		changePicture(signUpBT,"signOut.png");
+	}
+	@FXML
 	protected void enter7(){
-		changePicture(mainBT,"home.png");
+		changePicture(mainBT,"homeEnter.png");
 	}
 	@FXML
 	protected void exited7(){
-		changePicture(mainBT,"homeEnter.png");
+		changePicture(mainBT,"home.png");
 	}
 	
 }
