@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Iterator;
 
 import businessLogic.promotionBL.PromotionBLController;
+import businessLogicService.promotionBLService.PromotionBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -48,7 +49,7 @@ public class PromotionController {
 	@FXML
 	private ImageView rightImage;
 
-	PromotionBLController promotionBLController;
+	PromotionBLService promotionBLController;
 	String hotelID;
 
 	/**

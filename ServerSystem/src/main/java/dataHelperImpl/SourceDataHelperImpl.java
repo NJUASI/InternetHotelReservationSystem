@@ -65,7 +65,7 @@ public class SourceDataHelperImpl implements SourceDataHelper {
 	public int getMaxRoomNumEachOrder(){
 		return getMaxNum().get(1);
 	}
-
+	
 	/**
 	 * @Description:当客户登陆时，记录客户的id，为查重做准备
 	 * @author: Harvey Gong
@@ -118,6 +118,7 @@ public class SourceDataHelperImpl implements SourceDataHelper {
 			e.printStackTrace();
 		}
 	}
+	
 
 	
 	private List<Integer> getMaxNum(){

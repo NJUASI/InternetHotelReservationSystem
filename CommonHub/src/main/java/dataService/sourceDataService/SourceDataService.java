@@ -103,4 +103,5 @@ public interface SourceDataService extends Remote {
 	 * @time:2016年12月16日 下午8:51:59
 	 */
 	public boolean guestHasLogged(String guestID)throws RemoteException;
+	
 }
