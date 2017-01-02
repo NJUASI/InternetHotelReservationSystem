@@ -93,8 +93,9 @@ public class GuestController {
 			e1.printStackTrace();
 			new PopUp("请检查输入内容", "sorry");
 			//TODO 原来是写在里面的
-		}
-		
+		}catch (Exception e) {
+			new PopUp("请检查输入的ID","");
+		} 		
 
 		try {	
 			changePicture(rightImage, "mainGuestAfter.png");
