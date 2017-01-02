@@ -65,7 +65,7 @@ public class HotelInfoController {
 	protected void addHotel(){
 		
 		try {
-			 hotelName.setText("");
+			
 			HotelVO newHotel = new HotelVO();
 			newHotel.hotelName = hotelName.getText();
 			newHotel.city = cityInput.getValue();
