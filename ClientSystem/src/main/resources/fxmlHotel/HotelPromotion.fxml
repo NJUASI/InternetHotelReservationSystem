@@ -49,7 +49,7 @@
                               <Font name="System Bold" size="15.0" />
                            </font></Label>
                         <TextField fx:id="nameText" alignment="CENTER" focusTraversable="false" GridPane.columnIndex="1" />
-                        <TextField fx:id="discountText" alignment="CENTER" focusTraversable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="discountText" alignment="CENTER" focusTraversable="false" promptText="请输入0-1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <DatePicker fx:id="startDatePicker" editable="false" focusTraversable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <DatePicker fx:id="endDatePicker" editable="false" focusTraversable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
