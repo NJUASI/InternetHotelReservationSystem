@@ -70,9 +70,4 @@ public class HotelDataService_Stub extends UnicastRemoteObject implements HotelD
 		return ResultMessage.SUCCESS;
 	}
 
-	@Override
-	public ResultMessage deleteRoomInfo(String hotelID, RoomType roomType) throws RemoteException {
-		return ResultMessage.SUCCESS;
-	}
-
 }

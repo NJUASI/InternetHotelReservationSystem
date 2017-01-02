@@ -40,12 +40,7 @@ public class MockLogIn extends LogIn {
 	 * @throws UserInexistException 
 	 */
 	public ResultMessage guestLogIn(final String guest, final String password,UserType userType) throws UserInexistException {
-		final String realPassword = user.getLogInInfo(guest, userType);
-		if (realPassword.equals(password)) {
-			return ResultMessage.SUCCESS;
-		} else {
-			return ResultMessage.FAIL;
-		}
+		return ResultMessage.SUCCESS;
 	}
 	
 	/**
@@ -60,12 +55,7 @@ public class MockLogIn extends LogIn {
 	 * @throws UserInexistException 
 	 */
 	public ResultMessage hotelWorkerLogIn(final String hotelWorker, final String password,UserType userType) throws UserInexistException {
-		final String realPassword = user.getLogInInfo(hotelWorker,userType);
-		if (realPassword.equals(password)) {
-			return ResultMessage.SUCCESS;
-		} else {
-			return ResultMessage.FAIL;
-		}
+		return ResultMessage.FAIL;
 	}
 
 	/**
@@ -80,12 +70,7 @@ public class MockLogIn extends LogIn {
 	 * @throws UserInexistException 
 	 */
 	public ResultMessage webMarketerLogIn(final String webMarketer, final String password,UserType userType) throws UserInexistException {
-		final String realPassword = user.getLogInInfo(webMarketer,userType);
-		if (realPassword.equals(password)) {
-			return ResultMessage.SUCCESS;
-		} else {
-			return ResultMessage.FAIL;
-		}
+		return ResultMessage.FAIL;
 	}
 	
 	/**
@@ -100,12 +85,7 @@ public class MockLogIn extends LogIn {
 	 * @throws UserInexistException 
 	 */
 	public ResultMessage webManagerLogIn(final String webManager, final String password,UserType userType) throws UserInexistException {
-		final String realPassword = user.getLogInInfo(webManager,userType);
-		if (realPassword.equals(password)) {
-			return ResultMessage.SUCCESS;
-		} else {
-			return ResultMessage.FAIL;
-		}
+		return ResultMessage.SUCCESS;
 	}
 
 	/**

@@ -8,10 +8,12 @@ import java.util.List;
 
 import businessLogic.promotionBL.discountCalculation.CalculateDiscount;
 import businessLogic.promotionBL.discountCalculation.HotelFixedDiscountFactory;
+import businessLogic.sourceBL.SourceBLController;
 import dataService.promotionDataService.PromotionDataService;
 import exception.verificationException.UserInexistException;
 import po.HotelFixedPromotionPO;
 import rmi.ClientRemoteHelper;
+import utilities.enums.PromotionType;
 import utilities.enums.ResultMessage;
 import vo.HotelFixedPromotionVO;
 import vo.PreOrderVO;

@@ -34,14 +34,6 @@ public interface WebMarketerOrderBLService {
 	 */
 	List<OrderGeneralVO> getAllAbnormalOrderGeneral(LocalDate date);
 	
-//	/**
-//	 * @author charles
-//	 * @lastChangedBy charles
-//	 * @updateTime 2016/11/29
-//	 * @return 网站营销人员需要查看的所有的异常订单，按倒序排列
-//	 */
-//	List<OrderGeneralVO> getAllAbnormalOrderGeneral();
-	
 	/**
 	 * @author charles
 	 * @lastChangedBy charles

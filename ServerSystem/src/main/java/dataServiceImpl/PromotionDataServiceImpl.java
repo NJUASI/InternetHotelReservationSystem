@@ -43,7 +43,6 @@ public class PromotionDataServiceImpl extends UnicastRemoteObject implements Pro
 		return hotelFixedPromotionDataHelper.updateHotelFixedPromotion(hotelFixedPromotionPO);
 	}
 
-
 	@Override
 	public List<SpecialSpanPromotionPO> getHotelSpecialSpanPromotion(String hotelID) throws RemoteException {
 		return specialSpanPromotionDataHelper.getHotelSpecialSpanPromotion(hotelID);

@@ -3,6 +3,7 @@ package businessLogic.hotelBL.hotel;
 import java.rmi.RemoteException;
 import java.util.Iterator;
 
+import businessLogic.promotionBL.promotions.HotelFixedPromotion;
 import dataService.hotelDataService.HotelDataService;
 import po.HotelPO;
 import rmi.ClientRemoteHelper;
@@ -132,7 +133,6 @@ public class Hotel implements HotelInfoOperation{
 			roomVO.remainNum = 1;
 			roomVO.roomType = RoomType.SINGLE_BED;
 			addRoomInfo(roomVO);
-			
 			return ResultMessage.SUCCESS;
 		} catch (RemoteException e) {
 			return ResultMessage.FAIL;

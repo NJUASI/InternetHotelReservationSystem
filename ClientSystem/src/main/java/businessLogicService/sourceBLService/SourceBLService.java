@@ -13,7 +13,7 @@ public interface SourceBLService {
 	/**
 	 * @Description:获取所有城市
 	 * @return
-	 * Iterator<String>
+	 * Iterator<String> 所有城市集合
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月7日 下午4:55:09
@@ -23,7 +23,7 @@ public interface SourceBLService {
 	/**
 	 * @Description:获取该城市所有的商圈
 	 * @return
-	 * Iterator<String>
+	 * Iterator<String> 所有商圈集合
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月7日 下午6:44:47
@@ -34,7 +34,7 @@ public interface SourceBLService {
 	/**
 	 * @Description:获取酒店所有的等级
 	 * @return
-	 * Iterator<String>
+	 * Iterator<String> 所有酒店等级集合
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月7日 下午4:55:57
@@ -44,7 +44,7 @@ public interface SourceBLService {
 	/**
 	 * @Description:获取酒店所有的房间类型
 	 * @return
-	 * Iterator<String>
+	 * Iterator<String> 所有房间类型集合
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月7日 下午4:56:34
@@ -53,8 +53,7 @@ public interface SourceBLService {
 
 	/**
 	 * @Description:获取单个订单允许最大客人数
-	 * @return
-	 * int
+	 * @return 订单允许最大客人数
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月13日 下午6:52:29
@@ -63,8 +62,7 @@ public interface SourceBLService {
 
 	/**
 	 * @Description:获取单个订单允许最大房间数
-	 * @return
-	 * int
+	 * @return 订单允许最大房间数
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月13日 下午6:52:41

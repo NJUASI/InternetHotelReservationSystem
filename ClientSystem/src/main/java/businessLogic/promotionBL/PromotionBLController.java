@@ -31,7 +31,7 @@ public class PromotionBLController implements PromotionBLService {
 
 	/**
 	 * @Description:固定策略的获取
-	 * @param hotelWorkerID
+	 * @param hotelWorkerID 
 	 * @return
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong

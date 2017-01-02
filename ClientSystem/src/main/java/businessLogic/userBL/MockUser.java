@@ -27,9 +27,9 @@ public class MockUser extends User{
 	}
 	
 
-	public ResultMessage modify(UserVO userVO) {
-		return ResultMessage.SUCCESS;
-	}
+//	public ResultMessage modify(UserVO userVO) {
+//		return ResultMessage.SUCCESS;
+//	}
 	
 	public UserVO getSingle(String userID, UserType userType) {
 		UserVO guestVO= new GuestVO("1234567890", LocalDate.of(1996, 4, 1), "school", "zhangsan", "xiaosan",

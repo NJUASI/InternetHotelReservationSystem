@@ -93,5 +93,5 @@ public class HotelFixedPromotionDataHelperImpl implements HotelFixedPromotionDat
 		}
 		
 	}
-	
+
 }

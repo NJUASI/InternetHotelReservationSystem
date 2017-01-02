@@ -34,15 +34,6 @@ public interface CreditBLService {
 	 */
 	public Iterator<CreditVO> getAllCreditDetail(String guestID);
 	
-//	/**
-//	 * @author 61990
-//	 * @lastChangedBy charles
-//	 * @updateTime 2017/1/1
-//	 * @param orderID 从登录界面层传下来的订单编号
-//	 * @return 客户个人此订单的信用记录
-//	 */
-//	public Iterator<CreditVO> getCreditOfOneOrder(String orderID);
-	
 	/**
 	 * @author 61990
 	 * @lastChangedBy charles
