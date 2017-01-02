@@ -78,4 +78,12 @@ public class SourceBLController implements SourceBLService {
 			return 0;
 		}
 	}
+	
+	public Iterator<String> getHotelFixedPromoitons(){
+		try {
+			return sourceDataService.getHotelFixedPromotion().iterator();
+		} catch (RemoteException e) {
+			return null;
+		}
+	}
 }

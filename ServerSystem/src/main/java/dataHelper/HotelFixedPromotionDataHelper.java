@@ -10,4 +10,6 @@ public interface HotelFixedPromotionDataHelper {
 	public List<HotelFixedPromotionPO> getHotelFixedPromotion(String hotelWorkerID);
 	
 	public ResultMessage updateHotelFixedPromotion(HotelFixedPromotionPO hotelFixedPromotionPO);
+	
+	public ResultMessage addHotelFixedPromotion(HotelFixedPromotionPO hotelFixedPromotionPO);
 }

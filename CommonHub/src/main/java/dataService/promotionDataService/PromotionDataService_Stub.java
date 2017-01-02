@@ -90,4 +90,10 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		return null;
 	}
 
+	@Override
+	public ResultMessage addHotelFixedPromotion(HotelFixedPromotionPO hotelFixedPromotionPO) throws RemoteException {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
 }

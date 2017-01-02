@@ -93,5 +93,21 @@ public class HotelFixedPromotionDataHelperImpl implements HotelFixedPromotionDat
 		}
 		
 	}
+
+	@Override
+	public ResultMessage addHotelFixedPromotion(HotelFixedPromotionPO hotelFixedPromotionPO) {
+		sql = "insert into hotelfixedpromotion(hotelID,promotionType,discount)"
+				+"values(?,?,?)";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, hotelFixedPromotionPO.getHotelID());
+			ps.setString(2, hotelFixedPromotionPO.getPromotionType().getChinesePromotiontype());
+			ps.setDouble(3, hotelFixedPromotionPO.getDiscount());
+			return ResultMessage.SUCCESS;
+		} catch (SQLException e) {
+			return ResultMessage.FAIL;
+		}
+	}
 	
 }

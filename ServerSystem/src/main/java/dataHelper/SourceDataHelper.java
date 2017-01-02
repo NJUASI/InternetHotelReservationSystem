@@ -23,4 +23,6 @@ public interface SourceDataHelper {
 	public void guestLogOut(String guestID);
 
 	boolean guestHasLogged(String guestID);
+	
+	public List<String> getHotelFixedPromotions();
 }

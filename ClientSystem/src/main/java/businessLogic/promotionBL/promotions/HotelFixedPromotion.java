@@ -8,10 +8,12 @@ import java.util.List;
 
 import businessLogic.promotionBL.discountCalculation.CalculateDiscount;
 import businessLogic.promotionBL.discountCalculation.HotelFixedDiscountFactory;
+import businessLogic.sourceBL.SourceBLController;
 import dataService.promotionDataService.PromotionDataService;
 import exception.verificationException.UserInexistException;
 import po.HotelFixedPromotionPO;
 import rmi.ClientRemoteHelper;
+import utilities.enums.PromotionType;
 import utilities.enums.ResultMessage;
 import vo.HotelFixedPromotionVO;
 import vo.PreOrderVO;
@@ -125,6 +127,46 @@ public class HotelFixedPromotion {
 			hotelFixedPromotionVOList.add(new HotelFixedPromotionVO(hotelFixedPromotion));
 		}
 		return hotelFixedPromotionVOList.iterator();
+	}
+
+	/**
+	 * @Description:添加酒店时，初始化酒店的固定促销策略
+	 * @param hotelID
+	 * @return
+	 * ResultMessage
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2017年1月2日 上午9:52:58
+	 */
+	public ResultMessage initHotelFixedPromotion(String hotelID) {
+		SourceBLController source = SourceBLController.getInstance();
+		Iterator<String> fixedPromotions = source.getHotelFixedPromoitons();
+		HotelFixedPromotionVO vo = new HotelFixedPromotionVO();
+		vo.hotelID = hotelID;
+		while(fixedPromotions.hasNext())
+		{
+			vo.discount = 1;
+			vo.promotionType = PromotionType.getEnum(fixedPromotions.next());
+			addHotelFixedPromotion(vo);
+		}
+		return ResultMessage.SUCCESS;
+	}
+
+	/**
+	 * @Description:添加酒店后给酒店添加促销策略
+	 * @param vo
+	 * void
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2017年1月2日 上午10:00:23
+	 */
+	private void addHotelFixedPromotion(HotelFixedPromotionVO vo) {
+		HotelFixedPromotionPO po = new HotelFixedPromotionPO(vo);
+		try {
+			promotionDataService.addHotelFixedPromotion(po);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -103,4 +103,15 @@ public interface SourceDataService extends Remote {
 	 * @time:2016年12月16日 下午8:51:59
 	 */
 	public boolean guestHasLogged(String guestID)throws RemoteException;
+	
+	/**
+	 * @Description:返回系统支持的酒店固定策略
+	 * @return
+	 * @throws RemoteException
+	 * List<String>
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2017年1月2日 上午9:46:27
+	 */
+	public List<String> getHotelFixedPromotion() throws RemoteException;
 }

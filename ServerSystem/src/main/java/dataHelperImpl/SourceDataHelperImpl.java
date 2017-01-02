@@ -65,6 +65,18 @@ public class SourceDataHelperImpl implements SourceDataHelper {
 	public int getMaxRoomNumEachOrder(){
 		return getMaxNum().get(1);
 	}
+	
+	/**
+	 * @Description:获取系统支持的所有固定酒店策略
+	 * @return
+	 * @author: Harvey Gong
+	 * @lastChangedBy: Harvey Gong
+	 * @time:2017年1月2日 上午9:43:47
+	 */
+	@Override
+	public List<String> getHotelFixedPromotions() {
+		return getSources("hotelFixedPromotion");
+	}
 
 	/**
 	 * @Description:当客户登陆时，记录客户的id，为查重做准备
@@ -118,6 +130,7 @@ public class SourceDataHelperImpl implements SourceDataHelper {
 			e.printStackTrace();
 		}
 	}
+	
 
 	
 	private List<Integer> getMaxNum(){

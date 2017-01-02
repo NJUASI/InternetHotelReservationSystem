@@ -15,6 +15,8 @@ public interface PromotionDataService extends Remote{
 	
 	public ResultMessage updateHotelFixedPromotion(HotelFixedPromotionPO hotelFixedPromotionPO) throws RemoteException;
 
+	public ResultMessage addHotelFixedPromotion(HotelFixedPromotionPO hotelFixedPromotionPO) throws RemoteException;
+	
 	// 对特定期间策略的操作，get、add、update、delete
 
 	public List<SpecialSpanPromotionPO> getHotelSpecialSpanPromotion(String hotelID) throws RemoteException;
