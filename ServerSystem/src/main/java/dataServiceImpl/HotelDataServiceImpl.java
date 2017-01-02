@@ -76,9 +76,4 @@ public class HotelDataServiceImpl extends UnicastRemoteObject implements HotelDa
 		return roomDataHelper.addRoomInfo(roomInfoPO);
 	}
 
-	@Override
-	public ResultMessage deleteRoomInfo(String hotelID, RoomType roomType) throws RemoteException {
-		return roomDataHelper.deleteRoomInfo(hotelID, roomType);
-	}
-
 }

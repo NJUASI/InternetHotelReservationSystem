@@ -89,23 +89,6 @@ class Rooms {
 	}
 
 	/**
-	 * @Description:删除一条客房信息
-	 * @param roomType
-	 * @return ResultMessage
-	 * @exception:
-	 * @author: Harvey Gong
-	 * @time:2016年12月4日 上午11:21:31
-	 */
-	public ResultMessage deleteRoomInfo(String hotelID, RoomType roomType) {
-		try {
-			hotelDataService.deleteRoomInfo(hotelID, roomType);
-			return ResultMessage.SUCCESS;
-		} catch (RemoteException e) {
-			return ResultMessage.FAIL;
-		}
-	}
-
-	/**
 	 * @Description:更新一条hotel的客房信息
 	 * @param roomInfoVO
 	 * @return ResultMessage

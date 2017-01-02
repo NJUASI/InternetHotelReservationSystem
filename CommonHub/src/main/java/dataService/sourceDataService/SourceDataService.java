@@ -9,7 +9,7 @@ public interface SourceDataService extends Remote {
 
 	/**
 	 * @Description:获取该系统覆盖的所有城市
-	 * @return
+	 * @return 城市集合
 	 * Iterator<String>
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
@@ -20,8 +20,8 @@ public interface SourceDataService extends Remote {
 
 	/**
 	 * @Description:根据选中的城市，获取该城市内，系统支持的所有商圈
-	 * @param city
-	 * @return
+	 * @param city 城市
+	 * @return 商圈集合
 	 * Iterator<String>
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
@@ -31,7 +31,7 @@ public interface SourceDataService extends Remote {
 
 	/**
 	 * @Description:获取该系统支持的所有酒店的星级
-	 * @return
+	 * @return 酒店星级集合
 	 * Iterator<String>
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
@@ -42,7 +42,7 @@ public interface SourceDataService extends Remote {
 
 	/**
 	 * @Description:获取该系统支持的所有房间类型
-	 * @return
+	 * @return 房间类型集合
 	 * Iterator<String>
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
@@ -52,7 +52,7 @@ public interface SourceDataService extends Remote {
 
 	/**
 	 * @Description:获取系统允许的每一订单最大人数
-	 * @return
+	 * @return 订单最大人数
 	 * int
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
@@ -62,7 +62,7 @@ public interface SourceDataService extends Remote {
 
 	/**
 	 * @Description:获取系统允许的每一订单最大房间数
-	 * @return
+	 * @return 订单最大房间数
 	 * int
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
@@ -75,7 +75,7 @@ public interface SourceDataService extends Remote {
 	//重复登录暂时没有实现，故不在文档里列出来
 	/**
 	 * @Description:客户登录，记录客户登录信息
-	 * @param guestID
+	 * @param guestID 用户id
 	 * void
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
@@ -85,7 +85,7 @@ public interface SourceDataService extends Remote {
 
 	/**
 	 * @Description:客户注销，移除客户登录信息
-	 * @param guestID
+	 * @param guestID 用户id
 	 * void
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
@@ -95,7 +95,7 @@ public interface SourceDataService extends Remote {
 
 	/**
 	 * @Description:检查客户是否登录
-	 * @param guestID
+	 * @param guestID 用户id
 	 * @return
 	 * boolean
 	 * @author: Harvey Gong

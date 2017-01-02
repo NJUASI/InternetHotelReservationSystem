@@ -22,12 +22,11 @@ public interface LogInBLService {
 	 * @Description： 用户登录
 	 * @param userID 用户编号
 	 * @param password 密码
-	 * @return
+	 * @return 用户类型
 	 * @throws WrongPasswordException 错误密码异常
 	 * @throws SpecialCharacterException 特殊符号异常
 	 * @throws InvalidLengthInputException 
 	 * @throws UserInexistException 用户不存在异常
-	 * UserType
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:46:27
@@ -37,7 +36,7 @@ public interface LogInBLService {
 	/**
 	 * @Description:客户注册
 	 * @param guestVO 客户信息载体
-	 * @return
+	 * @return 客户信息载体
 	 * @throws InvalidInputException 错误输入异常
 	 * @throws PasswordInputException 密码输入异常
 	 * @throws InvalidLengthInputException 错误长度异常
@@ -53,7 +52,6 @@ public interface LogInBLService {
 	/**
 	 * @Description:登出
 	 * @param 用户id
-	 * void
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:46:39

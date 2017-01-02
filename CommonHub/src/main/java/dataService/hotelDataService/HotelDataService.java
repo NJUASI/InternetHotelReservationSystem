@@ -87,7 +87,4 @@ public interface HotelDataService extends Remote {
 	 */
 	public ResultMessage addRoomInfo(RoomInfoPO roomInfoPO) throws RemoteException;
 
-	//暂时不用
-	public ResultMessage deleteRoomInfo(String hotelID,RoomType roomType) throws RemoteException;
-
 }
