@@ -10,19 +10,66 @@ import java.util.List;
  */
 public interface SourceDataHelper {
 	
+	/**
+	 * @author 董金玉
+	 * @lastChangedBy 董金玉
+	 * @updateTime 2016/11/29
+	 * @param 
+	 * @return list<String>  等级信息
+	 */
 	public List<String> getLevels();
 
+	/**
+	 * @author 董金玉
+	 * @lastChangedBy 董金玉
+	 * @updateTime 2016/11/29
+	 * @param 
+	 * @return list<String> 类型信息
+	 */
 	public List<String> getRoomTypes();
 	
+	/**
+	 * @author 董金玉
+	 * @lastChangedBy 董金玉
+	 * @updateTime 2016/11/29
+	 * @param 
+	 * @return int 最大房间数量
+	 */
 	public int getMaxGuestNumEachOrder();
 	
+	/**
+	 * @author 董金玉
+	 * @lastChangedBy 董金玉
+	 * @updateTime 2016/11/29
+	 * @param 
+	 * @return int 最大房间数量
+	 */
 	public int getMaxRoomNumEachOrder();
 	
+	/**
+	 * @author 董金玉
+	 * @lastChangedBy 董金玉
+	 * @updateTime 2016/11/29
+	 * @param guestID ID
+	 * @return 
+	 */
 	public void guestLogInRecord(String guestID);
 	
+	/**
+	 * @author 董金玉
+	 * @lastChangedBy 董金玉
+	 * @updateTime 2016/11/29
+	 * @param roomInfoPO 酒店房间信息载体
+	 * @return ResultMessage  是否成功添加房间信息
+	 */
 	public void guestLogOut(String guestID);
 
+	/**
+	 * @author 董金玉
+	 * @lastChangedBy 董金玉
+	 * @updateTime 2016/11/29
+	 * @param roomInfoPO 酒店房间信息载体
+	 * @return ResultMessage  是否成功添加房间信息
+	 */
 	boolean guestHasLogged(String guestID);
-	
-	public List<String> getHotelFixedPromotions();
 }

@@ -47,6 +47,7 @@ public interface AddressDataHelper {
 	 * @param city 
 	 * @lastChangedBy Harvey Gong
 	 * @updateTime 2016/12/2
+	 * @param city 城市
 	 * @return List<AddressPO> 获取所有商圈和城市
 	 */
 	List<AddressPO> getAll(String city);
@@ -55,6 +56,7 @@ public interface AddressDataHelper {
 	 * @author 董金玉
 	 * @lastChangedBy Harvey Gong
 	 * @updateTime 2016/12/2
+	 * @param addressPO 地址信息载体
 	 * @return ResultMessage 是否成功修改折扣
 	 */
 	ResultMessage modifyDiscout(AddressPO addressPO);

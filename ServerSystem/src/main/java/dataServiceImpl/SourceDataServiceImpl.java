@@ -67,9 +67,4 @@ public class SourceDataServiceImpl extends UnicastRemoteObject implements Source
 		return sourceDataHelper.guestHasLogged(guestID);
 	}
 
-	@Override
-	public List<String> getHotelFixedPromotion() throws RemoteException {
-		return sourceDataHelper.getHotelFixedPromotions();
-	}
-
 }

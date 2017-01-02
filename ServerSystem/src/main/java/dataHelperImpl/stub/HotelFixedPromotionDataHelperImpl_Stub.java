@@ -24,10 +24,4 @@ public class HotelFixedPromotionDataHelperImpl_Stub implements HotelFixedPromoti
 		return ResultMessage.SUCCESS;
 	}
 
-	@Override
-	public ResultMessage addHotelFixedPromotion(HotelFixedPromotionPO hotelFixedPromotionPO) {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-
 }

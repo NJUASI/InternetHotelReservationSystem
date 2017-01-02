@@ -133,10 +133,7 @@ public class Hotel implements HotelInfoOperation{
 			roomVO.remainNum = 1;
 			roomVO.roomType = RoomType.SINGLE_BED;
 			addRoomInfo(roomVO);
-			
-			HotelFixedPromotion promotion = new HotelFixedPromotion();
-			
-			return promotion.initHotelFixedPromotion(hotelVO.hotelID);
+			return ResultMessage.SUCCESS;
 		} catch (RemoteException e) {
 			return ResultMessage.FAIL;
 		}
