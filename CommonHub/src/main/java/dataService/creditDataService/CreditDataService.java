@@ -20,6 +20,7 @@ public interface CreditDataService extends Remote{
 	/**
 	 * @Description:对信用值的操作，获取个人所有的信用值记录，添加一条信用值变化记录
 	 * 可以单独提一个dataService，也可以不用
+	 * @return 信用记录集合
 	 * @throws RemoteException
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
@@ -29,6 +30,7 @@ public interface CreditDataService extends Remote{
 
 	/**
 	 * @Description:添加一条信用记录
+	 * @return 结果信息
 	 * @throws RemoteException
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
@@ -36,5 +38,4 @@ public interface CreditDataService extends Remote{
 	 */
 	public ResultMessage addCredit(CreditPO creditPO) throws RemoteException;
 	
-//	public List<CreditPO> getCreditOfOneOrder(String guestID) throws RemoteException;
 }

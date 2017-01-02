@@ -19,8 +19,8 @@ public interface GuestOrderBLService {
 	
 	/**
 	 * @Description:通过preOrderVO中的信息计算订单的总价格
-	 * @param preOrderVO
-	 * @return
+	 * @param preOrderVO 订单信息载体
+	 * @return 订单价格
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2016年12月14日 上午12:25:05

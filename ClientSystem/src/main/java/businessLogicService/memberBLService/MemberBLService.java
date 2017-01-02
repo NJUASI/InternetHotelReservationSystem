@@ -10,9 +10,8 @@ public interface MemberBLService {
 	/**
 	 * @Description:添加会员
 	 * @param 会员信息载体
-	 * @return
-	 * @throws UserInexistException
-	 * ResultMessage
+	 * @return 结果信息
+	 * @throws UserInexistException 用户不存在异常
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:48:12
@@ -22,9 +21,8 @@ public interface MemberBLService {
 	/**
 	 * @Description:修改会员信息
 	 * @param memberVO 会员信息载体
-	 * @return
-	 * @throws UserInexistException
-	 * ResultMessage
+	 * @return 结果信息
+	 * @throws UserInexistException 用户不存在异常
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:48:14
@@ -34,9 +32,8 @@ public interface MemberBLService {
 	/**
 	 * @Description:获取会员信息
 	 * @param userID 用户id
-	 * @return
-	 * @throws UserInexistException
-	 * MemberVO
+	 * @return 会员信息载体 
+	 * @throws UserInexistException 用户不存在异常
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:48:16
@@ -47,9 +44,8 @@ public interface MemberBLService {
 	 * @Description:判断是否是会员
 	 * @param userID 用户id
 	 * @param memberType 会员类型
-	 * @return
-	 * @throws UserInexistException
-	 * boolean
+	 * @return boolean，用户是否存在
+	 * @throws UserInexistException 用户不存在异常
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:48:18
@@ -59,9 +55,8 @@ public interface MemberBLService {
 	/**
 	 * @Description:获取会员类型
 	 * @param userID 用户id
-	 * @return
-	 * @throws UserInexistException
-	 * MemberType
+	 * @return 用户类型
+	 * @throws UserInexistException 用户不存在异常
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:48:21

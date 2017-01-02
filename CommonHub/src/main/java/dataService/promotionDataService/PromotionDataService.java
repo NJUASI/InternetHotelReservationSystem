@@ -20,7 +20,7 @@ public interface PromotionDataService extends Remote{
 	/**
 	 * @Description:获取数据库中酒店特定策略集合
 	 * @param hotelWorkerID 酒店工作人员id
-	 * @return
+	 * @return 酒店特定策略集合
 	 * @throws RemoteException
 	 * List<HotelFixedPromotionPO>
 	 * @author: Harvey Gong
@@ -32,7 +32,7 @@ public interface PromotionDataService extends Remote{
 	/**
 	 * @Description:更新数据库中一条酒店特定促销策略
 	 * @param hotelFixedPromotionPO 酒店特定促销策略持久化信息载体
-	 * @return
+	 * @return 结果信息
 	 * @throws RemoteException
 	 * ResultMessage
 	 * @author: Harvey Gong
@@ -46,7 +46,7 @@ public interface PromotionDataService extends Remote{
 	/**
 	 * @Description:获取数据库中酒店特定期间策略集合
 	 * @param hotelID 酒店id
-	 * @return
+	 * @return 特定期间策略持久化对象集合
 	 * @throws RemoteException
 	 * List<SpecialSpanPromotionPO>
 	 * @author: Harvey Gong
@@ -57,7 +57,7 @@ public interface PromotionDataService extends Remote{
 	
 	/**
 	 * @Description:获取网站特定期间促销策略集合
-	 * @return
+	 * @return 特定期间策略持久化对象集合
 	 * @throws RemoteException
 	 * List<SpecialSpanPromotionPO>
 	 * @author: Harvey Gong
@@ -69,7 +69,7 @@ public interface PromotionDataService extends Remote{
 	/**
 	 * @Description:添加特定期间策略
 	 * @param specialSpanPromotionPO 特定期间策略持久化载体
-	 * @return
+	 * @return 结果信息
 	 * @throws RemoteException
 	 * ResultMessage
 	 * @author: Harvey Gong
@@ -81,7 +81,7 @@ public interface PromotionDataService extends Remote{
 	/**
 	 * @Description:更新特定期间策略
 	 * @param specialSpanPromotionPO 特定期间策略载体
-	 * @return
+	 * @return 结果信息
 	 * @throws RemoteException
 	 * ResultMessage
 	 * @author: Harvey Gong
@@ -94,7 +94,7 @@ public interface PromotionDataService extends Remote{
 	 * @Description:删除特定期间策略
 	 * @param userID 用户id
 	 * @param promotionName 策略名称
-	 * @return
+	 * @return 结果信息
 	 * @throws RemoteException
 	 * ResultMessage
 	 * @author: Harvey Gong
@@ -108,7 +108,7 @@ public interface PromotionDataService extends Remote{
 	/**
 	 * @Description:获取vip特定商圈策略
 	 * @param city 城市
-	 * @return
+	 * @return 结果信息
 	 * @throws RemoteException
 	 * List<AddressPO>
 	 * @author: Harvey Gong
@@ -120,7 +120,7 @@ public interface PromotionDataService extends Remote{
 	/**
 	 * @Description:更行vip特定商圈策略
 	 * @param addressPO vip特定商圈策略持久化信息载体
-	 * @return
+	 * @return 结果信息
 	 * @throws RemoteException
 	 * ResultMessage
 	 * @author: Harvey Gong
@@ -133,7 +133,7 @@ public interface PromotionDataService extends Remote{
 	 * @Description:获取vip特定商圈折扣
 	 * @param city 城市
 	 * @param cycle 商圈
-	 * @return
+	 * @return vip特定商圈折扣
 	 * @throws RemoteException
 	 * double
 	 * @author: Harvey Gong

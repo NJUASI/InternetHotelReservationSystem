@@ -17,14 +17,14 @@ import utilities.enums.ResultMessage;
 public interface MarketDataService extends Remote{
 	
 	/**
-	 * 
+	 * @Description： 获取会员等级制度
 	 * @return 系统现存的所有会员制度信息
 	 * @throws RemoteException
 	 */
 	public List<MarketPO> getMemberFormulation() throws RemoteException;
 	
 	/**
-	 * 
+	 * @Description 设置会员等级制度
 	 * @param marketPOList 修正的会员制度信息
 	 * @return 是否修改成功
 	 * @throws RemoteException

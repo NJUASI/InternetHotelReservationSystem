@@ -17,9 +17,9 @@ public interface PromotionBLService {
 
 	/**
 	 * @Description:获取酒店固定促销策略
-	 * @param hotelID
+	 * @param hotelID 酒店id
 	 * @return
-	 * Iterator<HotelFixedPromotionVO>
+	 * Iterator<HotelFixedPromotionVO> 酒店固定促销策略集合
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:48:40
@@ -30,7 +30,7 @@ public interface PromotionBLService {
 	 * @Description:更新酒店固定策略
 	 * @param hotelFixedPromotionVO 酒店固定策略载体 
 	 * @return
-	 * ResultMessage
+	 * ResultMessage 结果信息
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:48:42
@@ -42,7 +42,7 @@ public interface PromotionBLService {
 	 * @Description:获取酒店特定期间策略
 	 * @param userID 用户id
 	 * @return
-	 * Iterator<SpecialSpanPromotionVO>
+	 * Iterator<SpecialSpanPromotionVO> 酒店特定期间促销策略集合
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:48:44
@@ -52,7 +52,7 @@ public interface PromotionBLService {
 	/**
 	 * @Description:获取网站特定期间策略
 	 * @return
-	 * Iterator<SpecialSpanPromotionVO>
+	 * Iterator<SpecialSpanPromotionVO> 网站特定期间促销策略集合
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:48:47
@@ -61,9 +61,9 @@ public interface PromotionBLService {
 
 	/**
 	 * @Description:添加酒店特定期间策略
-	 * @param specialSpanPromotionVO
+	 * @param specialSpanPromotionVO 特定期间促销策略载体
 	 * @return
-	 * ResultMessage
+	 * ResultMessage 结果信息
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:48:49
@@ -72,9 +72,9 @@ public interface PromotionBLService {
 	
 	/**
 	 * @Description:添加网站特定期间策略
-	 * @param specialSpanPromotionVO
+	 * @param specialSpanPromotionVO 特定期间促销策略载体
 	 * @return
-	 * ResultMessage
+	 * ResultMessage 结果信息
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:48:52
@@ -83,9 +83,9 @@ public interface PromotionBLService {
 
 	/**
 	 * @Description:更新酒店特定期间策略
-	 * @param specialSpanPromotionVO
+	 * @param specialSpanPromotionVO 特定期间促销策略信息载体
 	 * @return
-	 * ResultMessage
+	 * ResultMessage 结果信息
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:48:54
@@ -94,9 +94,9 @@ public interface PromotionBLService {
 	
 	/**
 	 * @Description:更新网站特定期间策略
-	 * @param specialSpanPromotionVO
+	 * @param specialSpanPromotionVO 特定期间促销策略信息载体
 	 * @return
-	 * ResultMessage
+	 * ResultMessage 结果信息
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:48:56
@@ -105,10 +105,10 @@ public interface PromotionBLService {
 	
 	/**
 	 * @Description:删除酒店特定期间策略
-	 * @param userID
-	 * @param promotionName
+	 * @param userID 酒店id
+	 * @param promotionName 特定期间促销策略名称
 	 * @return
-	 * ResultMessage
+	 * ResultMessage 结果信息
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:48:58
@@ -117,9 +117,9 @@ public interface PromotionBLService {
 	
 	/**
 	 * @Description:删除网站特定期间策略
-	 * @param promotionName 策略姓名
+	 * @param promotionName 策略名称
 	 * @return
-	 * ResultMessage
+	 * ResultMessage 结果信息
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:49:00
@@ -130,7 +130,7 @@ public interface PromotionBLService {
 	 * @Description:获取vip特定商圈策略
 	 * @param city 城市
 	 * @return
-	 * Iterator<AddressVO>
+	 * Iterator<AddressVO> vip特定商圈策略集合
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:49:03
@@ -141,7 +141,7 @@ public interface PromotionBLService {
 	 * @Description:更新vip特定商圈策略
 	 * @param addressVO vip特定商圈策略信息载体
 	 * @return
-	 * ResultMessage
+	 * ResultMessage 结果信息
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:49:06
@@ -152,9 +152,8 @@ public interface PromotionBLService {
 	 * @Description:获取特定商圈策略
 	 * @param city 城市
 	 * @param circle 商圈
-	 * @return
-	 * double
-	 * @author: Harvey Gong
+	 * @return vip特定商圈策略的折扣
+	 * @author: Harvey Gong 
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:49:08
 	 */

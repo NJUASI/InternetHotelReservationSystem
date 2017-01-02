@@ -20,7 +20,7 @@ public interface MarketBLService {
 	/**
 	 * @Description:获取等级制度
 	 * @return
-	 * List<MarketVO>
+	 * List<MarketVO> 等级制度集合
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:47:39
@@ -31,7 +31,7 @@ public interface MarketBLService {
 	 * @Description:设置等级制度
 	 * @param marketVOList 等级制度集合
 	 * @return
-	 * ResultMessage
+	 * ResultMessage 结果信息
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:48:01
@@ -41,10 +41,9 @@ public interface MarketBLService {
 	/**
 	 * @Description:获取等级
 	 * @param guestID 用户id
-	 * @return
-	 * @throws UserInexistException
-	 * @throws MemberInexistException
-	 * int
+	 * @return 等级
+	 * @throws UserInexistException 用户不存在异常
+	 * @throws MemberInexistException 会员信息不存在异常
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:48:03
@@ -54,10 +53,9 @@ public interface MarketBLService {
 	/**
 	 * @Description:获取等级名字
 	 * @param userID 用户
-	 * @return
-	 * @throws UserInexistException
-	 * @throws MemberInexistException
-	 * String
+	 * @return 等级名称 
+	 * @throws UserInexistException 用户不存在异常
+	 * @throws MemberInexistException 会员信息不存在异常
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:48:06
@@ -67,10 +65,9 @@ public interface MarketBLService {
 	/**
 	 * @Description:获取会员折扣
 	 * @param 用户id
-	 * @return
-	 * @throws UserInexistException
-	 * @throws MemberInexistException
-	 * double
+	 * @return 会员折扣
+	 * @throws UserInexistException 用户不存在异常
+	 * @throws MemberInexistException 会员信息不存在异常
 	 * @author: Harvey Gong
 	 * @lastChangedBy: Harvey Gong
 	 * @time:2017年1月2日 上午11:48:08
